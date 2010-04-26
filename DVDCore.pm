@@ -4,6 +4,7 @@
 
 # This module must be symlinked to /etc/perl/DVDCore.pm
 package DVDCore;
+use Cwd;
 
 BEGIN {
     use Exporter ();
@@ -87,6 +88,7 @@ END { }
 # dvd_session serves as a wrapper for the DVD interface (think new_dvd11.pl), providing a
 # single method for specifying all of the needed runtime variables
 sub dvd_session {
+	
 
     #set path for graphviz for the server to use, this is necessary, because
     # PATH variable on polymath does not include /usr
@@ -825,11 +827,12 @@ sub create_output {
     # Initialize client side mapping variables needed for commmand
     # line calls
     my $client_wd = _get_filelocation($clientip);
-    `mkdir $client_wd`;
+    $cwd = getcwd();
+    `mkdir -p $cwd\/$client_wd`;
     `chmod 777 $client_wd`;
-    `mkdir $client_wd/tmp`;
+    `mkdir -p $client_wd/tmp`;
     `chmod 777 $client_wd/tmp`;
-    `mkdir $client_wd/dev`;
+    `mkdir -p $client_wd/dev` ;
     `chmod 777 $client_wd/dev`;
 
     #$pres = `pwd`;
@@ -839,6 +842,8 @@ sub create_output {
     # dot_filename is .dot file
     # count connected components
     my $s = `gc -c $dot_filename`;
+    print "<br><br>s $s\n<br>";
+    print "<br>";
 
     #remove trailing return
     chomp $s;
@@ -858,8 +863,12 @@ sub create_output {
     $Output_array[3] = $fp;
 
     # each connected component is written to a separated file (/tmp/component)
+    my $cwd = getcwd();  
+    print "current dir $cwd\n<br>";
     `ccomps -x -o $client_wd/tmp/component $dot_filename`;
-    print "ccomps -x -o $client_wd/tmp/component $dot_filename\n";
+    print "return value of ccomps: $? \n<br>";
+    print "ccomps -x -o $client_wd/tmp/component $dot_filename\n<br>";
+    print "return value of ccomps: $? \n<br>";
 
  #store the components in files /tmp/component, /tmp/component_1, etc
  #FIXME: parse output of ccomps -v to get #components, then eliminate gc check
@@ -871,7 +880,8 @@ sub create_output {
     #first process ./tmp/component (stupid naming scheme by ccomps)
     #FIXME: this really should be broken into a procedure
     $size = `grep label $client_wd/tmp/component | wc -l`;
-    print "grep label $client_wd/tmp/component | wc -l\n";
+    print "grep label $client_wd/tmp/component | wc -l\n<br>";	
+    print "$size\n<br>";
     $cycle
         = `sccmap $client_wd/tmp/component 2> $client_wd/dev/null | grep label | wc -l`;
         print "sccmap $client_wd/tmp/component 2> $client_wd/dev/null | grep

@@ -7,11 +7,11 @@ use CGI qw( :standard );
 use Fcntl qw( :flock );
 
 #get the clients ip address
-#$clientip = $ENV{'REMOTE_ADDR'};
+$clientip = $ENV{'REMOTE_ADDR'};
 $clientip =~ s/\./\-/g;
 ($sec,$min,$hr) = localtime();
 $clientip = $clientip.'-'.$sec.'-'.$min.'-'.$hr;
-$clientip = 'files'. $clientip;
+$clientip = '../../htdocs/no-ssl/files/'. $clientip;
 
 #$clientip = $sec.'-'.$min.'-'.$hr;
 
@@ -85,10 +85,27 @@ print checkbox_group(-name=>'depgraph', -value=>'Dependency graph',
 -label=>'Dependency graph'), "&nbsp\;&nbsp\;&nbsp\;", popup_menu(-name=>'DGformat',-values=>['*.gif','*.jpg','*.png','*.ps']);
 print"</font></td></tr><tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr></table></td></tr></table></td></tr><tr>";
 print"<td align=\"center\" colspan=\"2\">",submit('button_name','Generate')," <br><font color=\"#006C00\"><br><i>Results will be displayed below.</i></font></td></tr></table></div>"; 
-open(ACCESS, ">>access") or die("Failed to open file for writing");
+
+#Google Analytics, Franzi's Account
+print <<ENDHTML;
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-11219893-5");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+ENDHTML
+
+print end_form;
+
+`touch ../../htdocs/no-ssl/access`;
+open(ACCESS, ">>../../htdocs/no-ssl/access") or die("Failed to open file for writing");
 flock(ACCESS, LOCK_EX) or die ("Could not get exclusive lock $!");
 print ACCESS ($ENV{REMOTE_ADDR});
-system("date >>access");
+system("date >>../../htdocs/no-ssl/access");
 flock(ACCESS, LOCK_UN) or die ("Could not unlock file $!");
 close(ACCESS);
 
@@ -112,14 +129,15 @@ $updsequ_flag= "0";
 my $bytesread = "";
 my $buffer = "";
  
-$DEBUG = 0;
+$DEBUG = 1;
 
 $fileuploaded = 0;
 $SSformat =~ s/\*\.//;
 $DGformat =~ s/\*\.//;
-print "hello<br>" if ($DEBUG);
+print "access was ok <br>" if ($DEBUG);
 if($p_value && $n_nodes)
 {
+    print "hello<br>" if ($DEBUG);
     #if($p_value**$n_nodes >= 7000000000000)
     if($n_nodes > 21 || $p_value**$n_nodes > 2**21)
     {
@@ -128,7 +146,10 @@ if($p_value && $n_nodes)
     }
 
 	create_input_function();
+    print "hello<br>" if ($DEBUG);
 	set_update_type();
+    print "hello<br>" if ($DEBUG);
+    print "hello<br>" if ($DEBUG);
     
     # Set flag for creating the dependency graph and whether to print
     # the probabilities in the phase space
@@ -147,7 +168,7 @@ if($p_value && $n_nodes)
         # Calling the wrapper script dvd_stochastic_runner.pl, which in
         # turn calls DVDCore routines
         print ("perl dvd_stochastic_runner.pl  $n_nodes $p_value 1 $updstoch_flag $clientip $SSformat $depgraph $updsequ_flag $update_schedule $stochastic 1 0 $filename"); 		
-        system("perl dvd_stochastic_runner.pl  -v $n_nodes $p_value 1 $updstoch_flag $clientip $SSformat $depgraph $updsequ_flag $update_schedule $stochastic 1 0 $filename"); 		
+        system("perl dvd_stochastic_runner.pl  $n_nodes $p_value 1 $updstoch_flag $clientip $SSformat $depgraph $updsequ_flag $update_schedule $stochastic 1 0 $filename"); 		
 	}
 	else
 	{
@@ -215,7 +236,12 @@ print end_html();
 # this function reads input functions from file or text area and writes the input functions into $clientip.functionfile.txt
 sub create_input_function()
 {
+    print "Clientip $clientip \n<br>" if ($DEBUG);
+    use Cwd;
+    $cwd = getcwd();
+    `mkdir -p $cwd/../../htdocs/no-ssl/files`; 
     open (OUTFILE, ">$clientip.functionfile.txt");
+    print "open ok \n<br>" if ($DEBUG);
 	if($upload_file)
 	{
 	  $fileuploaded = 1;

@@ -32,7 +32,9 @@
 
 # Need this so I can have access from a different folder - needs to be changed
 # for polymath
-use lib '/Users/fhinkel/Sites';
+#use lib '/Users/fhinkel/Sites';
+use lib './';
+
 use DVDCore qw($Clientip $Function_data $Function_file &error_check @Output_array $Pwd &dvd_session &_log $Stochastic);
 use Cwd;
 use Getopt::Std;
@@ -41,7 +43,7 @@ getopts('vh');
 #set non-zero to get too much information
 $DEBUG=$opt_v;
 
-print "Begin of computation\n";
+print "Begin of computation\n<br>";
 
 die "Usage: dvd_stochasitic_runner.pl [-vh] #nodes #states
 all_trajectories_flag update_stochastic_flag outputfilename graph_format
