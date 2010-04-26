@@ -1,4 +1,4 @@
-#!/usr/bin/perl
+#!/usr/local/bin/perl
 
 ## Franziska Hinkelmann
 
@@ -108,7 +108,8 @@ sub dvd_session {
     $Current_program = "dvd_session";
 
     #print "\$regulatory $regulatory,";
-    _log("all trajectories: $All_trajectories<br>");
+    print "\n<br>";
+    _log("all trajectories: $All_trajectories");
     _log( "Argument length: " . $count );
     _log( "Arguments: " . join( ", ", @_[ 0 .. 13 ] ) );
     @Output_array  = [];
@@ -1293,7 +1294,7 @@ sub regulatory {
     $dot_filename2 = _get_filelocation("$clientip.out2.dot");
     _log("`sort -u $dot_filename > $dot_filename2`");
     _log("Removing double arrows from $dot_filename2");
-    `sort -u $dot_filename > $dot_filename2`;
+    #`sort -u $dot_filename > $dot_filename2`;
     `rm -f $dot_filename`;
     $dot_filename = $dot_filename2;
 
