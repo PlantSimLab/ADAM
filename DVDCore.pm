@@ -1280,7 +1280,8 @@ sub regulatory {
             #print("}<br>");
         }
         else {
-            print "ERROR this should not happen";
+            print "ERROR this should not happen\n<BR>";
+            print "Are you maybe using the wrong perl version? Retry with 5.8\n<BR>";
 
             #print($_);
         }
