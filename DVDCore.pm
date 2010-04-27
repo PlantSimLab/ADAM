@@ -108,7 +108,7 @@ sub dvd_session {
     $Current_program = "dvd_session";
 
     #print "\$regulatory $regulatory,";
-    print "\n<br>";
+    print "\n<br>" if ($DEBUG);
     _log("all trajectories: $All_trajectories");
     _log( "Argument length: " . $count );
     _log( "Arguments: " . join( ", ", @_[ 0 .. 13 ] ) );
@@ -843,8 +843,8 @@ sub create_output {
     # dot_filename is .dot file
     # count connected components
     my $s = `gc -c $dot_filename`;
-    print "<br><br>s $s\n<br>";
-    print "<br>";
+    print "<br><br>s $s\n<br>" if ($DEBUG);
+    print "<br>" if ($DEBUG);
 
     #remove trailing return
     chomp $s;
@@ -947,7 +947,6 @@ sub create_output {
             #$s = `grep label $client_wd/tmp/blah | wc -l`;
             chomp($s);
             $s =~ s/\s+//;
-            _log("\$s: $s");
 
            # convert decimal number $num into array with base p representation
             my @point;
