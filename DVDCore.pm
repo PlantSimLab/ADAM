@@ -865,11 +865,11 @@ sub create_output {
 
     # each connected component is written to a separated file (/tmp/component)
     my $cwd = getcwd();  
-    print "current dir $cwd\n<br>";
+    print "current dir $cwd\n<br>" if ($DEBUG);
     `ccomps -x -o $client_wd/tmp/component $dot_filename`;
-    print "return value of ccomps: $? \n<br>";
-    print "ccomps -x -o $client_wd/tmp/component $dot_filename\n<br>";
-    print "return value of ccomps: $? \n<br>";
+    print "return value of ccomps: $? \n<br>" if ($DEBUG);
+    print "ccomps -x -o $client_wd/tmp/component $dot_filename\n<br>" if ($DEBUG);
+    print "return value of ccomps: $? \n<br>" if ($DEBUG);
 
  #store the components in files /tmp/component, /tmp/component_1, etc
  #FIXME: parse output of ccomps -v to get #components, then eliminate gc check
@@ -881,12 +881,11 @@ sub create_output {
     #first process ./tmp/component (stupid naming scheme by ccomps)
     #FIXME: this really should be broken into a procedure
     $size = `grep label $client_wd/tmp/component | wc -l`;
-    print "grep label $client_wd/tmp/component | wc -l\n<br>";	
-    print "$size\n<br>";
+    print "grep label $client_wd/tmp/component | wc -l\n<br>" if ($DEBUG);	
+    print "$size\n<br>" if ($DEBUG);
     $cycle
         = `sccmap $client_wd/tmp/component 2> $client_wd/dev/null | grep label | wc -l`;
-        print "sccmap $client_wd/tmp/component 2> $client_wd/dev/null | grep
-        label | wc -l\n";
+        print "sccmap $client_wd/tmp/component 2> $client_wd/dev/null | grep label | wc -l\n" if ($DEBUG);
     chomp $size;
     chomp $cycle;
     $size  =~ s/\s+//;
@@ -1294,7 +1293,8 @@ sub regulatory {
     $dot_filename2 = _get_filelocation("$clientip.out2.dot");
     _log("`sort -u $dot_filename > $dot_filename2`");
     _log("Removing double arrows from $dot_filename2");
-    #`sort -u $dot_filename > $dot_filename2`;
+    `sort -u $dot_filename > $dot_filename2`;
+    #`mv $dot_filename $dot_filename2`;
     `rm -f $dot_filename`;
     $dot_filename = $dot_filename2;
 

@@ -43,7 +43,7 @@ getopts('vh');
 #set non-zero to get too much information
 $DEBUG=$opt_v;
 
-print "Begin of computation\n<br>";
+print "Begin of computation\n<br>" if ($DEBUG);
 
 die "Usage: dvd_stochasitic_runner.pl [-vh] #nodes #states
 all_trajectories_flag update_stochastic_flag outputfilename graph_format
