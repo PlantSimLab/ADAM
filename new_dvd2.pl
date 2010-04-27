@@ -6,6 +6,8 @@
 use CGI qw( :standard );
 use Fcntl qw( :flock );
 
+`mkdir -p ../../htdocs/no-ssl`;
+`touch ../../htdocs/no-ssl/access`;
 #get the clients ip address
 $clientip = $ENV{'REMOTE_ADDR'};
 $clientip =~ s/\./\-/g;
@@ -101,7 +103,6 @@ ENDHTML
 
 print end_form;
 
-`touch ../../htdocs/no-ssl/access`;
 open(ACCESS, ">>../../htdocs/no-ssl/access") or die("Failed to open file for writing");
 flock(ACCESS, LOCK_EX) or die ("Could not get exclusive lock $!");
 print ACCESS ($ENV{REMOTE_ADDR});
