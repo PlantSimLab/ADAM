@@ -1,4 +1,4 @@
-#!/usr/bin/perl
+#!/usr/local/bin/perl
 
 ## Hussein Vastani 
 ## Franziska Hinkelmann
@@ -136,6 +136,8 @@ $fileuploaded = 0;
 $SSformat =~ s/\*\.//;
 $DGformat =~ s/\*\.//;
 print "access was ok <br>" if ($DEBUG);
+print `perl -v`;
+print `/usr/local/bin/perl -v`;
 if($p_value && $n_nodes)
 {
     print "hello<br>" if ($DEBUG);
@@ -169,7 +171,7 @@ if($p_value && $n_nodes)
         # Calling the wrapper script dvd_stochastic_runner.pl, which in
         # turn calls DVDCore routines
         print ("perl dvd_stochastic_runner.pl  $n_nodes $p_value 1 $updstoch_flag $clientip $SSformat $depgraph $updsequ_flag $update_schedule $stochastic 1 0 $filename"); 		
-        system("perl dvd_stochastic_runner.pl  $n_nodes $p_value 1 $updstoch_flag $clientip $SSformat $depgraph $updsequ_flag $update_schedule $stochastic 1 0 $filename"); 		
+        system("/usr/local/bin/perl dvd_stochastic_runner.pl -v  $n_nodes $p_value 1 $updstoch_flag $clientip $SSformat $depgraph $updsequ_flag $update_schedule $stochastic 1 0 $filename"); 		
 	}
 	else
 	{
