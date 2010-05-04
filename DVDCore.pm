@@ -1,4 +1,4 @@
-#!/usr/local/bin/perl
+#!/usr/bin/perl
 
 ## Franziska Hinkelmann
 
@@ -373,6 +373,11 @@ sub error_check {
     foreach (@$function_data) {
         $fn  = 0;
         $max = 1;
+        _log("<BR><BR>$_<BR>");
+        $tmp1 = scalar($_);
+        _log("tmp1 $tmp1<BR>");
+        $tmp2 = scalar( @{$_} );
+        _log("tmp2 $tmp2<BR>");
         if ( scalar($_) =~ /ARRAY/ ) {
             $max = scalar( @{$_} );
             _log( "Attempting to read from an array... (matching) 'ARRAY:' "
@@ -381,9 +386,14 @@ sub error_check {
         }
         until ( $fn == $max ) {
             if ( $max > 1 ) {    #function stochastic
-                $line = ${ @{$_} }[$fn];
+                _log("<BR>Function stochastic<BR>");
+                _log("$fn<BR>");
+                $line =  @{$_}[$fn];
+                #$line = ${ @{$_} }[$fn];
                 $n    = ${ @{ $Function_lines[ $fcount - 1 ] } }[$fn];
-                _log("<br><br>Reading fn $fn, function: $line");
+                _log("<br>Reading fn $fn, function: $line");
+                _log("@{$_}[0]");
+                _log("{@{$_}}[0]");
                 _log("<br>This is called when having multiple functions");
             }
             else {               #not function stochastic
