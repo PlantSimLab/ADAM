@@ -14,8 +14,8 @@ $clientip =~ s/\./\-/g;
 $clientip = $clientip.'-'.$sec.'-'.$min.'-'.$hr;
 $clientip = '../../htdocs/no-ssl/files/files'. $clientip;
 
-print header, start_html( -title=>'Discrete Visualizer of Dynamics Web Interface', -script=>{-language=>'JavaScript',-src=>'./fnct.js'});
-#print header, start_html( -title=>'Discrete Visualizer of Dynamics Web Interface', -script=>{-language=>'JavaScript',-src=>'../../htdocs/no-ssl/fnct.js'});
+#print header, start_html( -title=>'Discrete Visualizer of Dynamics Web Interface', -script=>{-language=>'JavaScript',-src=>'./fnct.js'});
+print header, start_html( -title=>'Discrete Visualizer of Dynamics Web Interface', -script=>{-language=>'JavaScript',-src=>'../../htdocs/no-ssl/fnct.js'});
 print start_multipart_form(-name=>'form1', -method =>"POST", -onSubmit=>"return validate()");
 print "<div style=\"font-family:Verdana,Arial\"><div id=\"tipDiv\" style=\"position:absolute\; visibility:hidden\; z-index:100\"></div>";
 print "<table background=\"http://dvd.vbi.vt.edu/gradient.gif\" width=\"100%\"  border=\"0\" cellpadding=\"0\" cellspacing=\"10\">";
