@@ -166,24 +166,21 @@ if($p_value && $n_nodes)
 		}
 		print "] <br>";
 
-        # Calling the wrapper script dvd_stochastic_runner.pl, which in
-        # turn calls DVDCore routines
-        print ("perl dvd_stochastic_runner.pl  $n_nodes $p_value 1 $updstoch_flag $clientip $SSformat $depgraph $updsequ_flag $update_schedule $stochastic 1 0 $filename\n<br> ") if ($DEBUG); 		
-        system("/usr/bin/perl dvd_stochastic_runner.pl  $n_nodes $p_value 1 $updstoch_flag $clientip $SSformat $depgraph $updsequ_flag $update_schedule $stochastic 1 0 $filename"); 		
+    # Calling the wrapper script dvd_stochastic_runner.pl, which in
+    # turn calls DVDCore routines
+    print ("perl dvd_stochastic_runner.pl  $n_nodes $p_value 1 $updstoch_flag $clientip $SSformat $depgraph $updsequ_flag $update_schedule $stochastic 1 0 $filename\n<br> ") if ($DEBUG); 		
+    system("/usr/bin/perl dvd_stochastic_runner.pl  $n_nodes $p_value 1 $updstoch_flag $clientip $SSformat $depgraph $updsequ_flag $update_schedule $stochastic 1 0 $filename"); 		
 	}
 	else
 	{
-	   print "<font color=blue><b>Computing Trajectory of the given
-       initialization</b></font>"." [m = ".$p_value.", n = ".$n_nodes."]
-       <br>";
+	   print "<font color=blue><b>Computing Trajectory of the given initialization</b></font>"." [m = ".$p_value.", n = ".$n_nodes."] <br>";
 	   if( ($trajectory_value ne null) &&( $trajectory_value ne "") )
 	   {
 		    $trajectory_value =~ s/^\s+|\s+$//g;; #remove all leading and trailing white spaces
-			$trajectory_value =~  s/(\d+)\s+/$1 /g; #remove extra white space between the numbers
-			$trajectory_value =~ s/ /_/g;
-
-
-            system("perl dvd_stochastic_runner.pl  $n_nodes $p_value 1 $updstoch_flag $clientip $SSformat $depgraph $updsequ_flag $update_schedule $stochastic 0 $trajectory_value $filename"); 		
+        $trajectory_value =~  s/(\d+)\s+/$1 /g; #remove extra white space between the numbers
+        $trajectory_value =~ s/ /_/g;
+        
+        system("/usr/bin/perl dvd_stochastic_runner.pl  $n_nodes $p_value 1 $updstoch_flag $clientip $SSformat $depgraph $updsequ_flag $update_schedule $stochastic 0 $trajectory_value $filename"); 		
 		}
 		else
 		{
@@ -288,7 +285,7 @@ sub create_input_function()
 sub translate_functions()
 {
 	print "translate_functions<br>" if ($DEBUG);
-	system("perl translator.pl $clientip.functionfile.txt $clientip.trfunctionfile.txt $n_nodes");
+	system("/usr/bin/perl translator.pl $clientip.functionfile.txt $clientip.trfunctionfile.txt $n_nodes");
 	$filename = "$clientip.trfunctionfile.txt";
 	if(-e "$clientip.trfunctionfile.txt")
 	{
