@@ -21,7 +21,7 @@ $clientip = '../../htdocs/no-ssl/files/'. $clientip;
 print header, start_html( -title=>'Discrete Visualizer of Dynamics Web Interface', -script=>{-language=>'JavaScript',-src=>'fnct2.js'});
 print start_multipart_form(-name=>'form1', -method =>"POST", -onSubmit=>"return validate()");
 print "<div style=\"font-family:Verdana,Arial\"><div id=\"tipDiv\" style=\"position:absolute\; visibility:hidden\; z-index:100\"></div>";
-print "<table background=\"gradient.gif\" width=\"100%\"  border=\"0\" cellpadding=\"0\" cellspacing=\"10\">";
+print "<table background=\"http://dvd.vbi.vt.edu/gradient.gif\" width=\"100%\"  border=\"0\" cellpadding=\"0\" cellspacing=\"10\">";
 print "<tr><td align=\"center\" colspan=\"2\"><b><font size=\"5\">Discrete 
 Visualizer of Dynamics (DVD) v2.0 </font></b><p>";
 print "If this is your first time, please read the <a href=\"http://dvd.vbi.vt.edu/tutorial.html\" target=\"_blank\">tutorial</a>. It is important ";
