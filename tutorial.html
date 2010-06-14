@@ -1,0 +1,264 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>DVD Tutorial</title>
+</head>
+
+<body>
+<font face="Verdana, Arial, Helvetica, sans-serif"> 
+<h1> Discrete Visualizer of Dynamics Tutorial</h1>
+<a name="top"></a> 
+<li><a href="#D">Description</a></li>
+<li><a href="#P">What is <i>number of states per node</i> input?</a></li>
+<li><a href="#N">What is the <i>number of nodes</i> input?</a></li>
+<li><a href="#F">Format of the input functions</a></li>
+<li><a href ="#U">What is <i>update schedule</a></i></li>
+<li><a href="#T">Format of input functions</a></li>
+<li><a href="#S">Analysis of the state space</a></li>
+<li><a href="#I">Trajectory of one initialization</a></li>
+<li><a href="#G">Viewing the graphs</a></li>
+<li><a href="#L">Limitations</a></li>
+<li><a href="#C">Credits</a></li>
+<hr>
+<p> 
+<a name="D">
+<h3>Description</h3>
+</a> DVD is a web-based tool for the visualization of the dynamics of multi-state, 
+discrete models of biological networks. Multi-state discrete models are characterized 
+by a collection of functions. For a network of <i>n</i> nodes, the corresponding 
+discrete model will have <i>n</i> functions, where the <i>i</i>-th function describes 
+the state transitions of the <i>i</i>-th node in the network. The user of the 
+software provides the size of the state space, by indicating the number of nodes (n)
+and the number of possible states per node (m), and a text file containing 
+transition (polynomial) functions. DVD computes the transition states from all possible initializations and outputs 
+the analysis results as well as the graph of the state space. 
+<div align="right"><a href="#top"><font size="-1" color="#FF0000">Return to the 
+  top</font></a></div>
+</p>
+<p> 
+<a name="D">
+<h3>What is <i>number of states per node</i> input?</h3>
+</a> We will refer to this field as the <i>m value</i>. It is a number that denotes the cardinality of the state 
+set of the user's discrete network. The software accepts positive integers upto 99.
+This value gives the total number of states that a node in the 
+network can have. For example, if <i>m value</i> = 3, then the possible states 
+for any node are 0, 1, and 2. Currently the software will not display the graph 
+of the state space if <i>m value</i> is very high (see <a href="#L">Limitations</a>).
+<div align="right"><a href="#top"><font size="-1" color="#FF0000">Return to the 
+  top</font></a></div>
+</p>
+<p> 
+<a name="D">
+<h3>What is the <i>number of nodes</i> input?</h3>
+</a> We will refer to this field as the <i>n value</i>. The <i>number of nodes</i> is the number of agents/nodes/constituents in the 
+user's network. Since biological systems are finite in the number of agents/nodes/constituents, 
+then <i>number of nodes</i> is assumed to be finite. 
+<div align="right"><a href="#top"><font size="-1" color="#FF0000">Return to the 
+  top</font></a></div>
+</p>
+<p> 
+<a name="F">
+<h3>Format of the input functions</h3>
+</a> 
+Each node of the user's network is represented by a variable. Variable names are 
+x1, x2, etc. Function names are f1, f2, etc. The convention is that fk is the 
+function which describes the state transitions of the node represented by xk. 
+The user can either upload a function file or edit/type functions in the text box provided.
+DVD wil use the functions from the input text box only when the user DOES NOT select a file to upload
+The functions should follow the following formatting rules:
+<b><ul>The functions should begin with f followed by an integer, example f1, f2, f3.....fn, where n is the number of nodes</ul>
+<ul>Use * for multiplication, + for additions and ^ for exponents.</ul>
+<ul>The variables should begin with x followed by an integer, example x1, x2, x3....xn, where n is the number of nodes</ul></b>
+<br><center>
+  <table border=1 cellpadding=5 cellspacing=0 width=20%>
+    <tr><td><img src="images/inputfunctions.gif"></td></tr>
+  </table>
+<br><b>	 Figure a : Option to input functions by uploading a file or editing the functions in the input box </b>
+</center>
+<div align="right"><a href="#top"><font size="-1" color="#FF0000">Return to the 
+  top</font></a></div>
+</p>
+<p> 
+<a name="U">
+<h3>What is the <i>update schedule</i> input?</h3>
+</a>
+This will determine the order in which to evaluate the functions.<br><li><b>Synchronous</b>: all functions get evaluated at the same time</li><li><b>Sequential</b>: the functions are evaluated in some specified order. The function indices must be entered in the input box provided with each index used exactly once and should be in the
+range 1 to n (number of nodes)</li>
+<div align="right"><a href="#top"><font size="-1" color="#FF0000">Return to the 
+  top</font></a></div>
+</p>
+<p> 
+<a name="T">
+<h3>Format of input functions</h3>
+</a> The software provides the user withs the option to specify how the operations in the function file should be interpreted.
+For example, 'x1*x2' could be interpreted as polynomial multiplication of variables or as the Boolean AND operation.
+If the user provides functions that are in the Boolean format, DVD will convert the Boolean functions to polynomial functions to do the computations.
+The Boolean function file must adhere to the following format: <br>
+<br>
+<center>
+  <table border=1 cellpadding=10 cellspacing=0>
+    <tr>
+      <td><b>Boolean operator</b></td>
+      <td><b>Written as</b></td>
+    </tr>
+    <tr>
+      <td>
+        <center>
+          AND
+        </center>
+      </td>
+      <td>
+        <center>
+          *
+        </center>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <center>
+          OR
+        </center>
+      </td>
+      <td>
+        <center>
+          +
+        </center>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <center>
+          NOT
+        </center>
+      </td>
+      <td>
+        <center>
+          ~
+        </center>
+      </td>
+    </tr>
+  </table>
+</center>
+<br>
+The Boolean functions should also be <u>fully bracketed infix expressions</u>. 
+For example, the Boolean function <br>
+<br>
+<center>
+  x1 OR x3 OR (x2 AND NOT x3)
+</center>
+<br>
+should be entered as <br>
+<br>
+<center>
+  ((x1+x3)+(x2*(~x3))) 
+</center>
+<br>
+or <br>
+<br>
+<center>
+  (x1+(x3+(x2*(~x3))) 
+</center>
+<div align="right"><a href="#top"><font size="-1" color="#FF0000">Return to the 
+  top</font></a></div>
+</p>
+<p>
+<a name="S"> 
+<h3>Analysis of the state space</h3>
+</a> If the user selects the option to view the <i>All trajectories from all possible initial states</i>, the 
+software computes the number of connected components in the state space, as well 
+as some statistics of the components. It displays the number of states in a component 
+and the length of the cycle. (Since these discrete models are finite, each component 
+necessarily has a cycle. Because the models are deterministic - they are characterized 
+by a set of rules, given by functions - there is only one cycle per component.) 
+If there are fixed points (i.e., cycles of length 1), then it prints the state, 
+along with the size of its component. If the user selects the option to view the graphs, 
+the corresponding links will be displayed which will show the graph. Below is a snapshot of the output once the user enters the values
+in the interface and clicks on 'Generate'
+</p>
+<br><center>
+  <table border=1 cellpadding=5 cellspacing=0 width=20%>
+    <tr><td><img src="images/statespacespec.gif"></td></tr>
+  </table>
+  <br><b>	 Figure b : Analysis of the state space generated using example functions from Figure a </b>
+</center>
+<div align="right"><a href="#top"><font size="-1" color="#FF0000">Return to the 
+  top</font></a></div>
+
+<p> 
+<a name="I">
+<h3>Trajectory of one initialization</h3>
+</a>
+<p>The user can view the trajectory of one initialization only, if he selects that option.
+  The input text box next to the option is where the user needs to provide the initialization. The states 
+  in the initialization should be separated by spaces. For example 1 0 0 0 1 , 
+  2 0 3 2 1 or 11 12 10 0 1. It is important to separate the states by spaces 
+  in order for the software to distinguish between the different states. On clicking 
+  Generate, the trajectory will be printed in a vertical fashion (one on each 
+  line) and will stop once it finds a repeated pattern. If the user has selected 
+  the option to view the state space graph, a link will be displayed which will show the graph 
+  and the cycle will be colored. The initial states provided by the user will 
+  be in the box shaped node. Below is a snapshot of the trajectory generated using example  
+  functions from Figure a with initialization 2 0 1</p>
+<center>
+  <table border=1 cellpadding=10 cellspacing=0 width=14%>		
+      <tr><td ><img src="images/trajectoryspec.gif"></td></tr>
+  </table>
+ <br><b> Figure c : Trajectory of a single initialization (2 0 1) generated using example functions from Figure a </b>
+</center>
+<div align="right"><a href="#top"><font size="-1" color="#FF0000">Return to the 
+  top</font></a></div>
+<font face="Verdana, Arial, Helvetica, sans-serif"><p> 
+<a name="G">
+<h3>Viewing the graph</h3>
+</a>The user has an option to view the graph of the entire state space or a single trajectory in the state space, AND the dependency graph of the network
+described by the input functions. The user can also select the format of the image file from the list of formats (gif, jpg, png and ps)
+Based on the users selection, a link to view the selected graph is available
+Fig (d) graph below is an example state space graph, 
+Fig (e) graph below is the trajectory generated using initialization 2 0 1 and Fig (f) graph
+below is an example dependency graph
+</p>
+<center>
+  <table border=1 cellpadding=10 cellspacing=0 width=60%>
+    <tr><td><img src="images/graph-snapshot.gif"></td></tr>
+  </table>
+Fig d
+</center>
+<br>
+<center>
+  <table border=1 cellpadding=10 cellspacing=0 width=14%>
+    <tr><td><img src="images/trajecgraph.gif"></td></tr>
+  </table>
+Fig e
+</center><br>
+<center>
+  <table border=1 cellpadding=10 cellspacing=0 width=14%>
+    <tr><td><img src="images/regulatoryGraph.gif"></td></tr>
+  </table>
+Fig f
+</center>
+<div align="right"><a href="#top"><font size="-1" color="#FF0000">Return to the 
+  top</font></a></div>
+<p> 
+<a name="L">
+<h3>Limitations</h3>
+</a> The drawing of the state space is done by the graphics software <a href="http://www.graphviz.org">GraphViz</a>. 
+Due to limitations in viewing, we restrict the total number of states in the state 
+space to 1000; that is, <i>m</i>^<i>n</i> <= 1000, where <i>m</i> = <i>m value</i> 
+and <i>n</i> = <i>number of nodes</i>. 
+<div align="right"><a href="#top"><font size="-1" color="#FF0000">Return to the 
+  top</font></a></div>
+</p>
+<p> 
+<a name="C">
+<h3>Credits</h3>
+</a> <a href="mailto:hvastani@vbi.vt.edu?subject=Question regarding visualizer on 
+Web">Hussein Vastani (Developer)</a> <br>
+Nick Eriksson (Developer)<br>
+Reinhard Laubenbacher<br>
+Abdul Jarrah<br>
+Brandilyn Stigler<br>
+Franziska Hinkelmann (<a href="mailto:fhinkel@vt.edu">Please email us if you have any problems</a>)<br>
+</font> 
+</body>
+</html>
