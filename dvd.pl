@@ -150,31 +150,30 @@ if($p_value && $n_nodes)
 		die("No function file provided by user");
 	   }
 	}	
-    close(OUTFILE);
+  close(OUTFILE);
 	#remove any ^M characters
-    `perl -pi -e 's/\r//g' "$clientip.functionfile.txt"`;
-    $bytesread = "";
-    $buffer = "";  
+  `perl -pi -e 's/\r//g' "$clientip.functionfile.txt"`;
+  $bytesread = "";
+  $buffer = "";  
 	$filename = "";
-	if($translate_box eq "Boolean")
-    {
+	if($translate_box eq "Boolean") {
 		if($n_nodes > 21  || ($p_value**$n_nodes >= 2**22)) {
-            print "<font color=red><i>Sorry. Unable to compute statistics for very large networks. It is suggested you download the standalone version which has no limitations</i></font><br>";
-                `rm -f $clientip.functionfile.txt`;
-                die("Translation unsuccessful");
-        }
-        else {
-            system("perl translator.pl $clientip.functionfile.txt $clientip.trfunctionfile.txt $n_nodes");
-            $filename = "$clientip.trfunctionfile.txt";
-            if(-e "$clientip.trfunctionfile.txt") {
-                print  "<A href=\"$clientip.trfunctionfile.txt\" target=\"_blank\"><font color=green><i>Translation from Boolean functions to Polynomail was successful.</i></font></A><br><br>";
-            }
-            else {
-                print "<font color=red>Translation from Boolean functions to polynomail was unsuccessful</font><br>";
-                `rm -f $clientip.functionfile.txt`;
-                die("Translation unsuccessful");
-            }
-        }
+      print "<font color=red><i>Sorry. Unable to compute statistics for very large networks. It is suggested you download the standalone version which has no limitations</i></font><br>";
+      `rm -f $clientip.functionfile.txt`;
+      die("Translation unsuccessful");
+    }
+    else {
+      system("perl translator.pl $clientip.functionfile.txt $clientip.trfunctionfile.txt $n_nodes");
+      $filename = "$clientip.trfunctionfile.txt";
+      if(-e "$clientip.trfunctionfile.txt") {
+        print  "<A href=\"$clientip.trfunctionfile.txt\" target=\"_blank\"><font color=green><i>Translation from Boolean functions to Polynomail was successful.</i></font></A><br><br>";
+      }
+      else {
+        print "<font color=red>Translation from Boolean functions to polynomail was unsuccessful</font><br>";
+        `rm -f $clientip.functionfile.txt`;
+        die("Translation unsuccessful");
+      }
+    }
 	}
 	else
 	{
@@ -233,32 +232,32 @@ if($p_value && $n_nodes)
 		}
 	}
 	else {
-  	    print "<font color=blue><b>Computing Trajectory of the given initialization</b></font>"." [m = ".$p_value.", n = ".$n_nodes."] <br>";
+    print "<font color=blue><b>Computing Trajectory of the given initialization</b></font>"." [m = ".$p_value.", n = ".$n_nodes."] <br>";
 		if($n_nodes > 21 || ($p_value**$n_nodes >= 2**22)) {
-			print "<font color=red><i>Sorry. Unable to compute statistics for very large networks. It is suggested you download the standalone version which has no limitations</i></font><br>";
+		  print "<font color=red><i>Sorry. Unable to compute statistics for very large networks. It is suggested you download the standalone version which has no limitations</i></font><br>";
 		}
 		else {
-        if( ($trajectory_value ne null) &&( $trajectory_value ne "") ) {
-                $trajectory_value =~ s/^\s+|\s+$//g;; #remove all leading and trailing white spaces
-                $trajectory_value =~  s/(\d+)\s+/$1 /g; #remove extra white space between the numbers
-                $trajectory_value =~ s/ /_/g;
-                if($statespace eq "State space graph") {
-                    system("perl sim.pl $filename $p_value $n_nodes $trajectory_value $clientip yes $update_box_param $update_value $SSformat");
-                    if(-e "$clientip.graph.$SSformat")
-                    {
-                        print  "<A href=\"$clientip.graph.$SSformat\" target=\"_blank\"><font color=red><i>Click to view the trajectory.</i></font></A><br>";
-                    }
-                }
-                else {
-                    system("perl sim.pl $filename $p_value $n_nodes $trajectory_value $clientip no $update_box_param $update_value $SSformat");
-                }
-            }
-            else {
-                print "<br><font color=red>Sorry. Cannot accept null input for initialization field</font><br>";
-                die("Program quitting. Empty value for initialization field");
-            }
+      if( ($trajectory_value ne null) &&( $trajectory_value ne "") ) {
+        $trajectory_value =~ s/^\s+|\s+$//g;; #remove all leading and trailing white spaces
+        $trajectory_value =~  s/(\d+)\s+/$1 /g; #remove extra white space between the numbers
+        $trajectory_value =~ s/ /_/g;
+
+        if($statespace eq "State space graph") {
+          system("perl sim.pl $filename $p_value $n_nodes $trajectory_value $clientip yes $update_box_param $update_value $SSformat");
+          if(-e "$clientip.graph.$SSformat") {
+            print  "<A href=\"$clientip.graph.$SSformat\" target=\"_blank\"><font color=red><i>Click to view the trajectory.</i></font></A><br>";
+          }
         }
+        else {
+          system("perl sim.pl $filename $p_value $n_nodes $trajectory_value $clientip no $update_box_param $update_value $SSformat");
+        }
+      }
+      else {
+        print "<br><font color=red>Sorry. Cannot accept null input for initialization field</font><br>";
+        die("Program quitting. Empty value for initialization field");
+      }
     }
+  }
 	if($regulatory eq "Dependency graph")
 	{
 		if($n_nodes <= 100)
