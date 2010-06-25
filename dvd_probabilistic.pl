@@ -148,8 +148,10 @@ print "$translate_box <br>" if ($DEBUG);
 print "$largeNetwork<br>" if ($DEBUG);
 
 if ( $largeNetwork eq "Large Network" ) {
-  print "<font color=blue><b>Calculating fixed points for a large network, other analysis of dynamics not possible for now.</b></font>";
-  system("/usr/bin/perl dvd_m2_runner.pl $n_nodes $p_value $filename");
+  print "<font color=blue><b>Calculating fixed points for a large network,
+  other analysis of dynamics not possible for now.</b></font><br>";
+  create_input_function();
+  system("ruby dvd_m2_runner.rb $n_nodes $p_value $filename");
 } elsif ( $p_value && $n_nodes )
 {
     print "hello<br>" if ($DEBUG);
