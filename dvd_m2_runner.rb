@@ -31,9 +31,12 @@ m2_system = m2_system + "};"
 puts "<br>"
 puts m2_system
 puts "<br>"
+puts "running M2 now ...<br>"
 
+m2_result = `/Applications/Macaulay2-1.2/bin/M2 solvebyGB.m2 --stop --no-debug --silent -q -e 'QR = booleanRing 2; ll = gbSolver( { x1, x1+x2}, QR); exit 0'`
 
-
+puts m2_result
+puts "<br>"
 
 
 
@@ -41,4 +44,5 @@ exit 0
 
 ###
 
-M2 solvebyGB.m2 --stop --no-debug --silent -q -e solvebyGB( { a,a+b}, booleanRing 2)
+##M2 solvebyGB.m2 --stop --no-debug --silent -q -e 'QR = booleanRing 2; ll = gbSolver( { a,a+b}, QR); exit 0'
+## M2 --stop --no-debug --silent -q -e 'loadPackage "solvebyGB"; QR = booleanRing 2; ll = gbSolver( { a,a+b}, QR); quit'
