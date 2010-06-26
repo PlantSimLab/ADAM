@@ -171,7 +171,6 @@ if ( $largeNetwork eq "Large Network" ) {
     ($depgraph eq "Dependency graph") ? {$depgraph = 1} : {$depgraph=0};
     ($stochastic eq "Print probabilities") ? {$stochastic = 1} : {$stochastic = 0 };
 
-    print "option_box: ";
     print $option_box if ($DEBUG);
     if($option_box eq "All trajectories from all possible initial states") {
       print "<font color=blue><b>ANALYSIS OF THE STATE SPACE</b></font>"." [m = ".$p_value.", n = ".$n_nodes;
