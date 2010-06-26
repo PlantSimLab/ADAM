@@ -40,7 +40,8 @@ puts "<br>"
 #puts "<br>"
 puts "Running fixed point calculation now ...<br>"
 
-m2_result = `/Applications/Macaulay2-1.2/bin/M2 solvebyGB.m2 --stop --no-debug --silent -q -e 'QR = booleanRing #{n_nodes}; ll = gbSolver( #{m2_system}, QR); exit 0'`
+m2_result = `/usr/bin/M2 solvebyGB.m2 --stop --no-debug --silent -q -e 'QR = booleanRing #{n_nodes}; ll = gbSolver( #{m2_system}, QR); exit 0'`
+#m2_result = `/Applications/Macaulay2-1.2/bin/M2 solvebyGB.m2 --stop --no-debug --silent -q -e 'QR = booleanRing #{n_nodes}; ll = gbSolver( #{m2_system}, QR); exit 0'`
 
 puts m2_result
 puts "<br>"

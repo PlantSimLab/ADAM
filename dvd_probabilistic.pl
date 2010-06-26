@@ -150,6 +150,8 @@ print "$largeNetwork<br>" if ($DEBUG);
 if ( $largeNetwork eq "Large Network" ) {
   print "<font color=blue><b>Calculating fixed points for a large network,
   other analysis of dynamics not possible for now.</b></font><br>";
+  print "<font color=blue><b>This is a very experimental feature, therefore
+  there is no error checking. Use at your own risk.</b></font><br>";
   create_input_function();
   system("ruby dvd_m2_runner.rb $n_nodes $p_value $filename");
 } elsif ( $p_value && $n_nodes )
