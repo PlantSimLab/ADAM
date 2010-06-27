@@ -152,6 +152,8 @@ if ( $largeNetwork eq "Large Network" ) {
   other analysis of dynamics not possible for now.</b></font><br>";
   print "<font color=blue><b>This is a very experimental feature, therefore
   there is no error checking. Use at your own risk.</b></font><br>";
+  print "<font color=blue><b>Please not that states of periodicity m also
+  lists all states of periodicity l if l divides m.  </b></font><br>";
   create_input_function();
   system("ruby dvd_m2_runner.rb $n_nodes $p_value $filename");
 } elsif ( $p_value && $n_nodes )
