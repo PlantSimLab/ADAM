@@ -12,7 +12,7 @@ newPackage(
 
 needsPackage "randfunc"
 
-export{makeStates, nextState, fixedPoints, cycles}
+export{makeStates, nextState, fixedPoints, cycles, createSystemForCycles}
 exportMutable {}
     
 
@@ -45,14 +45,17 @@ makeStates ZZ := List => n -> (
 -- iterates a state by applying a sequence of functions, returns the resulting state
 nextState = method()
 nextState (List, VisibleList) := List => (state, system) -> (
-     G0 := apply(system, p -> sub(p, matrix{state}));
-     G0 = toList apply( G0, i -> lift( i_(ring system_0), ZZ) )
-    ) 
+     G0 := apply(system, p -> if p == 1 or p == 0 then p else sub(p, matrix{state}));
+
+     ourRing := ring system_(position(system, i -> i != 1 and i != 0));
+     G0 = toList apply( G0, i -> lift( i_(ourRing), ZZ))
+    )
 
 -- returns true if x is a fixed point
 isFixedpoint = method()
 isFixedpoint (List , Sequence) := Boolean => (x,G) -> (
      G0 := nextState(x, G);
+--     stdio << "x is: " << x << " and nextState is: " << G0 << endl;
      all (length x,i->G0#i-x#i==0)
      )
 
@@ -61,15 +64,33 @@ isFixedpoint (List , Sequence) := Boolean => (x,G) -> (
 fixedPoints = G -> 
      select(makeStates (length G), x->isFixedpoint(x, G))
 
--- computes limit cycles of length n
-cycles = (n, system) -> (
+--return F^n
+createSystemForCycles = method()
+createSystemForCycles (ZZ, Sequence) := Sequence => (n, system) -> (
      --applies system to itself n times, aka gets f^n
      newSystem := system;
      for i from 1 to n when i != n list
-     	  newSystem = apply(newSystem, p -> sub(p, matrix{toList system}));
+     	 newSystem = apply(newSystem, p -> if p == 1 or zero p then p else sub(p, matrix{toList system}));
+     newSystem
+)
+
+createSystemForCycles (ZZ, List) := Sequence => (n, system) -> 
+    createSystemForCycles( n, toSequence system)
+
+
+-- computes limit cycles of length n
+-- currently does not work if there is a 1 or 0
+cycles = (n, system) -> (
+     newSystem := createSystemForCycles(n, system);
+     --get limit cycles and remove actual fixed points
      cycleList := fixedPoints newSystem;
-     --removes actual fixed points
-     cycleList = select(cycleList, v -> not isFixedpoint(v,system) );
+
+     -- TODO we should remove all divisors, but not fps from cycles of length 1
+     if ( n != 1 ) then (
+       print "remove fixedpoints";
+       cycleList = select(cycleList, v -> not isFixedpoint(v,system) )
+     );
+
      -- group n-cycles together
      -- first make n-tuples of corresponding cycles, then delete duplicate pairs
      unique apply( cycleList,
@@ -84,36 +105,38 @@ document {
         " computes limit cycles and fixed points for dynamical systems of arbitrary size"
 	}
 --document {
-  --   Key =>
---     }
+--     Key => makeStates,
+--     Headline => ""
+--    }
 
 TEST ///
+
     n := 3 -- for now we work with 3 variable
     assert(makeStates n == {{0, 0, 0}, {0, 0, 1}, {0, 1, 0}, {0, 1, 1}, {1, 0, 0}, {1, 0, 1}, {1, 1, 0}, {1, 1, 1}})
-    QR := booleanRing 3;    
 
-    G := (a+c,b+1,a*c) 
+    QR := booleanRing 3;    
+    G := (x1+x3,x2+1,x1*x3) 
     assert(fixedPoints G === {}) 
+    assert(cycles(1, G) === {}) 
     assert(cycles (2, G) === {{{0, 0, 0}, {0, 1, 0}}, {{1, 0, 0}, {1, 1, 0}}} ) 
 
-    G = (a+c+b, 1_QR, a*c)
-    assert( nextState( {0,1,1}, G) == (0, 1, 0) )
+    G = (x1+x3+x2, 1, x1*x3)
+    assert( nextState( {0,1,1}, G) == {0, 1, 0} )
     assert( fixedPoints G == {{1, 1, 1}} )
+    assert( cycles(1, G) == {{{1, 1, 1}}} )
     assert( cycles (2, G) == {{{0, 1, 0}, {1, 1, 0}}} )
 
     QR = booleanRing 4;
-    use QR
-    G = (a+c, b+1, a*c, a*d + c + 1)
+    G = (x1+x3, x2+1, x1*x3, x1*x4 + x3 + 1)
     assert( fixedPoints G == {} ) 
     assert( cycles (2, G) == {{{0, 0, 0, 1}, {0, 1, 0, 1}}, {{1, 0, 0, 0}, {1, 1, 0, 1}}, {{1, 0, 0, 1}, {1, 1, 0, 0}}} )
     
     -- this test takes a little longer, maybe a minute
     QR = booleanRing 10;
     use QR
-    --G = (x1+x3, x2+1, x1*x3, x1*x4 + x3 + 1, x9,x10+x1, x4+x5*x6+x7+1, x1, x5, x8+x1*x9)
+    G = (x1+x3, x2+1, x1*x3, x1*x4 + x3 + 1, x9,x10+x1, x4+x5*x6+x7+1, x1, x5, x8+x1*x9)
     -- 8 2-cycles
     -- 8 4-cycles
-    G = (a+c, b+1, a*c, a*d + c + 1, i,j+a, d+e*f+g+1, a, e, h+a*i)
     assert( fixedPoints G == {} )
     assert( cycles (2, G) == {{{0, 0, 0, 1, 0, 0, 0, 0, 0, 0}, {0, 1, 0, 1, 0, 0, 0, 0, 0, 0}}, 
       {{0, 0, 0, 1, 0, 0, 0, 0, 1, 0}, {0, 1, 0, 1, 1, 0, 0, 0, 0, 0}}, 
@@ -123,6 +146,26 @@ TEST ///
       {{0, 0, 0, 1, 1, 0, 0, 0, 1, 0}, {0, 1, 0, 1, 1, 0, 0, 0, 1, 0}}, 
       {{0, 0, 0, 1, 1, 0, 1, 0, 0, 0}, {0, 1, 0, 1, 0, 0, 1, 0, 1, 0}}, 
       {{0, 0, 0, 1, 1, 0, 1, 0, 1, 0}, {0, 1, 0, 1, 1, 0, 1, 0, 1, 0}}} )
+
+    QR = booleanRing 3;
+    G = (1, x1*x3+x1+x2+x1*x2, 1+x3+x1*x2)
+    assert( fixedPoints G == {{1, 1, 0}} )
+    assert( cycles(1, G) == {{{1, 1, 0}}} )
+    assert( cycles(2, G) == {} )
+    assert( cycles(3, G) ==  {{{1, 0, 0}, {1, 0, 1}, {1, 1, 1}}} )
+    assert( cycles(4, G) == {} )
+
+    G = (x1+x3, x2+1,x1*x3) 
+    assert( fixedPoints G == {} )
+    assert( cycles(2, G) == {{{0, 0, 0}, {0, 1, 0}}, {{1, 0, 0}, {1, 1, 0}}} )
+    assert( cycles(3, G) == {} )
+
+  -- these tests show where the code still needs work
+    -- assert( cycles(4, G) == {} )
+  --  G = (1,1,0)
+  --  assert( fixedPoints G == {{1,1,0}} )
+  --  assert( all ( (2..4), i -> cycles(i, G) == {} ) )
+
 ///     
 
 end
@@ -133,8 +176,22 @@ check "limitcycle"
 installPackage "limitcycle"
 
     QR := booleanRing 3;    
-use QR;
-    G := (a+c,b+1,a*c) 
+    G = (x1+x3, x2+1,x1*x3) 
     cycles(2, G)
     cycles(3, G)
 cycles(4, G)
+
+G = (1, x1*x3+x1+x2+x1*x2, 1+x3+x1*x2)
+fixedPoints G
+cycles(2, G)
+cycles(3, G)
+cycles(4, G)
+
+G = (0, x1+x2, 1+x3+x1*x2)
+fixedPoints G
+cycles(2, G)
+
+restart
+installPackage "limitcycle"
+loadPackage "limitcycle"
+check "limitcycle"
