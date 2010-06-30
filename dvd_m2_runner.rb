@@ -4,6 +4,11 @@
 # Takes input from dvd website and passes it to M2 to compute fixed points
 # returns 0 (no errors) or 1 (errors) 
 
+unless ARGV.size == 3
+  puts "Usage: ruby dvd_m2_runner.rb n_nodes p_value functionFile"
+  exit 0
+end
+
 n_nodes = ARGV[0] 
 p_value = ARGV[1]
 functionFile = ARGV[2] 
@@ -14,7 +19,7 @@ if (p_value.to_i != 2)
   exit 1
 end
 
-m2_system =  "{"
+m2_system =  "{{"
 
 largestI = 0
 File.open( functionFile, 'r').each {|line|
@@ -33,15 +38,15 @@ end
 
 # remove last comma
 m2_system.chop!
-m2_system = m2_system + "}"
+m2_system = m2_system + "}}"
 
 puts "<br>"
 #puts m2_system
 #puts "<br>"
 puts "Running fixed point calculation now ...<br>"
 
-for i in 1..2 do 
-  m2_result = `cd M2; /usr/local/bin/M2 solvebyGB.m2 --stop --no-debug --silent -q -e 'QR = booleanRing #{n_nodes}; ll = gbSolver( #{m2_system}, QR, #{i}); exit 0'`
+for i in 1..5 do 
+  m2_result = `cd M2/M2code/; /usr/local/bin/M2 solvebyGB.m2 --stop --no-debug --silent -q -e 'QR = booleanRing #{n_nodes}; ll = gbSolver( matrix(#{m2_system}), #{i}); exit 0'`
   puts m2_result
   puts "<br>"
 end
