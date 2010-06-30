@@ -46,7 +46,7 @@ puts "<br>"
 puts "Running fixed point calculation now ...<br>"
 
 for i in 1..5 do 
-  m2_result = `cd M2/M2code/; /usr/local/bin/M2 solvebyGB.m2 --stop --no-debug --silent -q -e 'QR = booleanRing #{n_nodes}; ll = gbSolver( matrix(#{m2_system}), #{i}); exit 0'`
+  m2_result = `cd M2/M2code/; /usr/local/bin/M2 solvebyGB.m2 --stop --no-debug --silent -q -e 'QR = booleanRing #{n_nodes}; ll = gbSolver( matrix(QR, #{m2_system}), #{i}); exit 0'`
   puts m2_result
   puts "<br>"
 end
