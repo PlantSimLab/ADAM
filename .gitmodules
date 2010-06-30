@@ -1,0 +1,3 @@
+[submodule "M2"]
+	path = M2
+	url = git@mithril.vbi.vt.edu:~/reu.git
