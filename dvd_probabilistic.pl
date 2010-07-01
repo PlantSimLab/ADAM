@@ -37,7 +37,10 @@ print "<tr valign=\"top\"><td nowrap><font size=\"2\">Enter number of nodes: </f
   textfield(-name=>'n_nodes', -size=>2, -maxlength=>2, -default=>3),
   "&nbsp &nbsp &nbsp";
 print "&nbsp\;<a href=\"http://dvd.vbi.vt.edu/tutorial.html#N\" onmouseover=\"doTooltip(event,0)\" onmouseout=\"hideTip()\"><font size=\"1\">what is this?</font></a>";
+#Bonny
 print checkbox_group(-name=>'largeNetwork', -value=>'Large Network', -label=>'Large Network');
+print checkbox_group(-name=>'conDisNetwork', -value=>'Conjunctive/Disjunctive Network', -label=>'Conjunctive/Disjunctive
+    Network');
 print "</td></tr><tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr><tr valign=\"top\"><td nowrap><font size=\"2\">Enter number of states per node: </font>";
 print textfield(-name=>'p_value',-size=>2,-maxlength=>2, default=>3);
 print "&nbsp\;<a href=\"http://dvd.vbi.vt.edu/tutorial.html#P\" onmouseover=\"doTooltip(event,1)\" onmouseout=\"hideTip()\"><font size=\"1\">what is this?</font></a>";
@@ -127,6 +130,7 @@ $trajectory_box = param('trajectory_box');
 $trajectory_value = param('trajectory_value');
 $statespace = param('statespace');
 $largeNetwork = param('largeNetwork');
+$conDisNetwork = param('conDisNetwork');
 $depgraph = param('depgraph');
 $edit_functions = param('edit_functions');
 $SSformat = param('SSformat');
@@ -146,13 +150,29 @@ print "access was ok <br>" if ($DEBUG);
 print "$option_box <br>" if ($DEBUG);
 print "$translate_box <br>" if ($DEBUG);
 print "$largeNetwork<br>" if ($DEBUG);
+print "$conDisNetwork<br>" if ($DEBUG);
 
-if ( $largeNetwork eq "Large Network" ) {
+if ( $conDisNetwork eq "Conjunctive/Disjunctive Network" ) {
+  print "<font color=blue><b>If your dependency graph is not strongly connected
+  then it will exit at this time, sorry.</b></font><br>"
+  print "<font color=blue><b>Calculating fixed points and limit cycles for
+  conjunctive/disjunctive network.</b></font><br>"
+  create_input_function();
+  #T_T
+  #grafted from that dependency graph stuff below; sure hope it works
+        print  "<A href=\"$clientip.out1.dot\" target=\"_blank\"><font
+        color=red><i>Click to view the dependency graph.</i></font></A><br>";
+        $dpGraph = $clientip.out1.dot;
+  #BLAHBLAH
+  #probs don't need the filename flag
+  system("ruby dvd_conjunctive_runner.rb $n_nodes $p_value $filename $dpGraph");
+}
+elsif ( $largeNetwork eq "Large Network" ) {
   print "<font color=blue><b>Calculating fixed points for a large network,
   other analysis of dynamics not possible for now.</b></font><br>";
   print "<font color=blue><b>This is a very experimental feature, therefore
   there is no error checking. Use at your own risk.</b></font><br>";
-  print "<font color=blue><b>Please not that states of periodicity m also
+  print "<font color=blue><b>Please note that states of periodicity m also
   lists all states of periodicity l if l divides m.  </b></font><br>";
   create_input_function();
   system("ruby dvd_m2_runner.rb $n_nodes $p_value $filename");
