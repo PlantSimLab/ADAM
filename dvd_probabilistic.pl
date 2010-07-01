@@ -153,6 +153,19 @@ print "$largeNetwork<br>" if ($DEBUG);
 print "$conDisNetwork<br>" if ($DEBUG);
 
 if ( $conDisNetwork eq "Conjunctive/Disjunctive Network" ) {
+  if ($p_value != 2 ) { 
+    # TODO
+    print "ERROR";
+  }
+  # conj/disj networks dynamics depend on the dependency graph, we need to
+  # generate it 
+  system("perl regulatory.pl $filename $n_nodes $clientip $DGformat");
+  # dotfile is no in $clientip.out1.dot
+
+#			if(-e "$clientip.out1.$DGformat")
+#			{
+#				print  "<A href=\"$clientip.out1.$DGformat\" target=\"_blank\"><font color=red><i>Click to view the dependency graph.</i></font></A><br>";
+#			}
   print "<font color=blue><b>If your dependency graph is not strongly connected
   then it will exit at this time, sorry.</b></font><br>"
   print "<font color=blue><b>Calculating fixed points and limit cycles for
@@ -165,6 +178,11 @@ if ( $conDisNetwork eq "Conjunctive/Disjunctive Network" ) {
         $dpGraph = $clientip.out1.dot;
   #BLAHBLAH
   #probs don't need the filename flag
+    if(-e "$clientip.out1.$SSformat") {
+        print  "<A href=\"$clientip.out1.$DGformat\" target=\"_blank\"><font
+        color=red><i>Click to view the dependency graph.</i></font></A><br>";
+
+    }
   system("ruby dvd_conjunctive_runner.rb $n_nodes $p_value $filename $dpGraph");
 }
 elsif ( $largeNetwork eq "Large Network" ) {
