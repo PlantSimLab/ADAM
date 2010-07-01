@@ -159,30 +159,23 @@ if ( $conDisNetwork eq "Conjunctive/Disjunctive Network" ) {
   }
   # conj/disj networks dynamics depend on the dependency graph, we need to
   # generate it 
+  create_input_function();
+  print ("perl regulatory.pl $filename $n_nodes $clientip $DGformat");
   system("perl regulatory.pl $filename $n_nodes $clientip $DGformat");
-  # dotfile is no in $clientip.out1.dot
+  $dpGraph = $clientip.out1.dot;
+  print  "<A href=\"$dpGraph\" target=\"_blank\"><font
+  color=red><i>Click to view the dependency graph.</i></font></A><br>";
 
 #			if(-e "$clientip.out1.$DGformat")
 #			{
 #				print  "<A href=\"$clientip.out1.$DGformat\" target=\"_blank\"><font color=red><i>Click to view the dependency graph.</i></font></A><br>";
 #			}
   print "<font color=blue><b>If your dependency graph is not strongly connected
-  then it will exit at this time, sorry.</b></font><br>"
+  then it will exit at this time, sorry.</b></font><br>";
   print "<font color=blue><b>Calculating fixed points and limit cycles for
-  conjunctive/disjunctive network.</b></font><br>"
-  create_input_function();
-  #T_T
-  #grafted from that dependency graph stuff below; sure hope it works
-        print  "<A href=\"$clientip.out1.dot\" target=\"_blank\"><font
-        color=red><i>Click to view the dependency graph.</i></font></A><br>";
-        $dpGraph = $clientip.out1.dot;
+  conjunctive/disjunctive network.</b></font><br>";
   #BLAHBLAH
-  #probs don't need the filename flag
-    if(-e "$clientip.out1.$SSformat") {
-        print  "<A href=\"$clientip.out1.$DGformat\" target=\"_blank\"><font
-        color=red><i>Click to view the dependency graph.</i></font></A><br>";
-
-    }
+  print ("ruby dvd_conjunctive_runner.rb $n_nodes $p_value $filename $dpGraph<br>");
   system("ruby dvd_conjunctive_runner.rb $n_nodes $p_value $filename $dpGraph");
 }
 elsif ( $largeNetwork eq "Large Network" ) {
