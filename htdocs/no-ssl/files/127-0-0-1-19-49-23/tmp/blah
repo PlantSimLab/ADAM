@@ -1,5 +1,0 @@
-digraph test_cc {
-	node20	 [label=" 2 0 2"];
-	node20;
-	node20 -> node20	 [label="1.00"];
-}

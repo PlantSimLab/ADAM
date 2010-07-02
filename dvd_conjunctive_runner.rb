@@ -1,5 +1,5 @@
  
-#dvd_conjunctive_runner $n_nodes $p_value $filename
+#dvd_conjunctive_runner $n_nodes $p_value $dpGraph
 
 # Like 99% of this code is copied over from dvd_m2_runner
 # Takes input from dvd website and passes it to conjuncitveNetwork.m2 to
@@ -32,11 +32,11 @@ end
 #  largestI = ll.first.split(/f/).last.to_i
 #}
 
-if (largestI != n_nodes.to_i ) 
-  puts "There should be #{n_nodes} functions in order in the function
-  input, but the last funtion I read was f#{largestI}. Exiting. <br>"
-  exit 1
-end
+#if (largestI != n_nodes.to_i ) 
+#  puts "There should be #{n_nodes} functions in order in the function
+#  input, but the last funtion I read was f#{largestI}. Exiting. <br>"
+#  exit 1
+#end
 
 # remove last comma
 #m2_system.chop!
@@ -47,13 +47,11 @@ puts "<br>"
 #puts "<br>"
 puts "Running limit cycle calculations now...<br>"
 
-for i in 1..5 do 
-  m2_result = `cd lib/M2code/; /usr/local/bin/M2 conjunctiveNetwork.m2 --stop --no-debug --silent -q -e 'QR = makeRing (#{n_nodes}, #{p_value}); ll = limCycles(#{dpGraph}); exit 0'`
+dpGraph = "../../" + dpGraph
+
+  m2_result = `cd lib/M2code/; /usr/bin/M2 conjunctiveNetwork.m2 --stop --no-debug --silent -q -e 'QR = makeRing (#{n_nodes}, #{p_value}); ll = limCycles("#{dpGraph}"); exit 0'`
   puts m2_result
   puts "<br>"
-end
-
-
 
 exit 0
 

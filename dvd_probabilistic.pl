@@ -38,9 +38,13 @@ print "<tr valign=\"top\"><td nowrap><font size=\"2\">Enter number of nodes: </f
   "&nbsp &nbsp &nbsp";
 print "&nbsp\;<a href=\"http://dvd.vbi.vt.edu/tutorial.html#N\" onmouseover=\"doTooltip(event,0)\" onmouseout=\"hideTip()\"><font size=\"1\">what is this?</font></a>";
 #Bonny
-print checkbox_group(-name=>'largeNetwork', -value=>'Large Network', -label=>'Large Network');
+print "</td></tr><tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr>";
+print "<tr valign=\"top\"><td nowrap><font size=\"2\">", checkbox_group(-name=>'largeNetwork', -value=>'Large Network', -label=>'Large Network'), "&nbsp &nbsp &nbsp";
+print "&nbsp\;<a href=\"http://dvd.vbi.vt.edu/tutorial.html#N\" onmouseover=\"doTooltip(event,7)\" onmouseout=\"hideTip()\"><font size=\"1\">what is this?</font></a>";
 print checkbox_group(-name=>'conDisNetwork', -value=>'Conjunctive/Disjunctive Network', -label=>'Conjunctive/Disjunctive
     Network');
+print "</font>&nbsp\;<a href=\"http://dvd.vbi.vt.edu/tutorial.html#N\" onmouseover=\"doTooltip(event,8)\" onmouseout=\"hideTip()\"><font size=\"1\">what is this?</font></a>";
+#not Bonny
 print "</td></tr><tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr><tr valign=\"top\"><td nowrap><font size=\"2\">Enter number of states per node: </font>";
 print textfield(-name=>'p_value',-size=>2,-maxlength=>2, default=>3);
 print "&nbsp\;<a href=\"http://dvd.vbi.vt.edu/tutorial.html#P\" onmouseover=\"doTooltip(event,1)\" onmouseout=\"hideTip()\"><font size=\"1\">what is this?</font></a>";
@@ -160,9 +164,9 @@ if ( $conDisNetwork eq "Conjunctive/Disjunctive Network" ) {
   # conj/disj networks dynamics depend on the dependency graph, we need to
   # generate it 
   create_input_function();
-  print ("perl regulatory.pl $filename $n_nodes $clientip $DGformat");
+  #print ("perl regulatory.pl $filename $n_nodes $clientip $DGformat");
   system("perl regulatory.pl $filename $n_nodes $clientip $DGformat");
-  $dpGraph = $clientip.out1.dot;
+  $dpGraph = "$clientip.out1.dot";
   print  "<A href=\"$dpGraph\" target=\"_blank\"><font
   color=red><i>Click to view the dependency graph.</i></font></A><br>";
 
@@ -174,9 +178,9 @@ if ( $conDisNetwork eq "Conjunctive/Disjunctive Network" ) {
   then it will exit at this time, sorry.</b></font><br>";
   print "<font color=blue><b>Calculating fixed points and limit cycles for
   conjunctive/disjunctive network.</b></font><br>";
-  #BLAHBLAH
-  print ("ruby dvd_conjunctive_runner.rb $n_nodes $p_value $filename $dpGraph<br>");
-  system("ruby dvd_conjunctive_runner.rb $n_nodes $p_value $filename $dpGraph");
+  #BLAHBLAH i'm sad ._.
+  #print ("ruby dvd_conjunctive_runner.rb $n_nodes $p_value $dpGraph<br>");
+  system("ruby dvd_conjunctive_runner.rb $n_nodes $p_value $dpGraph");
 }
 elsif ( $largeNetwork eq "Large Network" ) {
   print "<font color=blue><b>Calculating fixed points for a large network,
