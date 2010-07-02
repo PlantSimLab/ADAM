@@ -1,0 +1,73 @@
+running getGB on F with option Algorithm => Sugarless
+Groebner basis is: 
+{1}
+Cpu time: .0000038 minutes
+running getGB on F with option Algorithm => Sugarless
+Groebner basis is: 
+{b, a}
+Cpu time: .00000401667 minutes
+running getGB on F with option Algorithm => Sugarless
+Groebner basis is: 
+{1}
+Cpu time: .00000548333 minutes
+running getGB on F with option Algorithm => Sugarless
+Groebner basis is: 
+{1}
+Cpu time: .0000108 minutes
+running getGB on F with option Algorithm => Sugarless
+Groebner basis is: 
+{b}
+Cpu time: .00000476667 minutes
+running getGB on F with option Algorithm => Sugarless
+Groebner basis is: 
+{b}
+Cpu time: .00000946667 minutes
+running getGB on F with option Algorithm => Sugarless
+Groebner basis is: 
+{c + 1, b + 1, a + 1}
+Cpu time: .00000625 minutes
+running getGB on F with option Algorithm => Sugarless
+Groebner basis is: 
+{1}
+Cpu time: .00001165 minutes
+running getGB on F with option Algorithm => Sugarless
+Groebner basis is: 
+{1}
+Cpu time: .00000401667 minutes
+running getGB on F with option Algorithm => Sugarless
+Groebner basis is: 
+{1}
+Cpu time: .0000104167 minutes
+running getGB on F with option Algorithm => Sugarless
+Groebner basis is: 
+{1}
+Cpu time: .00000751667 minutes
+running getGB on F with option Algorithm => Inhomogeneous
+Groebner basis is: 
+{1}
+Cpu time: .00000403333 minutes
+running getGB on F with option null
+running getGBBoolean on F
+Groebner basis is: 
+ideal 1
+Cpu time: .00000476667 minutes
+running getGB on F with option Algorithm => Sugarless
+Groebner basis is: 
+{1}
+Cpu time: .0000111167 minutes
+running getGB on F with option Algorithm => Sugarless
+Groebner basis is: 
+{1}
+Cpu time: .00000786667 minutes
+running getGB on F with option Algorithm => Inhomogeneous
+Groebner basis is: 
+{1}
+Cpu time: .00000401667 minutes
+running getGB on F with option Algorithm => Sugarless
+Groebner basis is: 
+{1}
+Cpu time: .0000073 minutes
+running getGB on F with option Algorithm => Inhomogeneous
+Groebner basis is: 
+{1}
+Cpu time: .00000475 minutes

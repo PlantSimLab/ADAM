@@ -1,0 +1,5 @@
+digraph test_component_0 {
+	node0	 [label=" 0 0 0"];
+	node0;
+	node0 -> node0	 [label="1.00"];
+}

@@ -1,0 +1,8 @@
+digraph test {
+node1 -> node2;
+node1 [label="x1", shape="box"];
+node2 -> node3;
+node2 [label="x2", shape="box"];
+node3 -> node1;
+node3 [label="x3", shape="box"];
+}
