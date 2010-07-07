@@ -21,30 +21,7 @@ if (p_value.to_i != 2)
   exit 1
 end
 
-#m2_system =  "{{"
-
-#largestI = 0
-#File.open( functionFile, 'r').each {|line|
-  # puts "#{line}<br>"
-#  ll = line.split(/=/)
-#  m2_system = m2_system + ll.last 
-#  m2_system =  m2_system + ","
-#  largestI = ll.first.split(/f/).last.to_i
-#}
-
-#if (largestI != n_nodes.to_i ) 
-#  puts "There should be #{n_nodes} functions in order in the function
-#  input, but the last funtion I read was f#{largestI}. Exiting. <br>"
-#  exit 1
-#end
-
-# remove last comma
-#m2_system.chop!
-#m2_system = m2_system + "}}"
-
 puts "<br>"
-#puts m2_system
-#puts "<br>"
 puts "Running limit cycle calculations now...<br>"
 
 dpGraph = "../../" + dpGraph

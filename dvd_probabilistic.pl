@@ -2,9 +2,11 @@
 
 ## Hussein Vastani 
 ## Franziska Hinkelmann
+## Bonbons
 ## June 2010
 
-## DVD 3 with support for large networks using M2 instead of perl enumeration
+## DVD 3 with support for large networks and conjunctive 
+## networks using M2 instead of perl enumeration
 
 use CGI qw( :standard );
 use Fcntl qw( :flock );
@@ -37,14 +39,14 @@ print "<tr valign=\"top\"><td nowrap><font size=\"2\">Enter number of nodes: </f
   textfield(-name=>'n_nodes', -size=>2, -maxlength=>2, -default=>3),
   "&nbsp &nbsp &nbsp";
 print "&nbsp\;<a href=\"http://dvd.vbi.vt.edu/tutorial.html#N\" onmouseover=\"doTooltip(event,0)\" onmouseout=\"hideTip()\"><font size=\"1\">what is this?</font></a>";
-#Bonny
+#Bonbons!
 print "</td></tr><tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr>";
 print "<tr valign=\"top\"><td nowrap><font size=\"2\">", checkbox_group(-name=>'largeNetwork', -value=>'Large Network', -label=>'Large Network'), "&nbsp &nbsp &nbsp";
 print "&nbsp\;<a href=\"http://dvd.vbi.vt.edu/tutorial.html#N\" onmouseover=\"doTooltip(event,7)\" onmouseout=\"hideTip()\"><font size=\"1\">what is this?</font></a>";
 print checkbox_group(-name=>'conDisNetwork', -value=>'Conjunctive/Disjunctive Network', -label=>'Conjunctive/Disjunctive
     Network');
 print "</font>&nbsp\;<a href=\"http://dvd.vbi.vt.edu/tutorial.html#N\" onmouseover=\"doTooltip(event,8)\" onmouseout=\"hideTip()\"><font size=\"1\">what is this?</font></a>";
-#not Bonny
+#not Bonbons
 print "</td></tr><tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr><tr valign=\"top\"><td nowrap><font size=\"2\">Enter number of states per node: </font>";
 print textfield(-name=>'p_value',-size=>2,-maxlength=>2, default=>3);
 print "&nbsp\;<a href=\"http://dvd.vbi.vt.edu/tutorial.html#P\" onmouseover=\"doTooltip(event,1)\" onmouseout=\"hideTip()\"><font size=\"1\">what is this?</font></a>";
@@ -59,10 +61,15 @@ print radio_group(-name=>'update_box', -values=>['Synchronous',
 print "&nbsp\;&nbsp\;&nbsp\;&nbsp\;- Enter update schedule separated by spaces: ",textfield(-name=>'update_schedule', -size=>24);
 print "</font></td></tr><tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr></table></td></tr></table></td>";
 print "<td><table cellSpacing=\"0\" cellPadding=\"1\" align=\"center\" bgColor=\"#ababab\" border=\"0\"><tr><td><table cellSpacing=\"0\" cellPadding=\"1\" width=\"100%\" bgColor=\"#ffffcc\" border=\"0\">";
+
+# Input Functions Block
 print "<tr vAlign=top><TD nowrap bgColor=\"#ff8000\"><strong><font
 color=\"#ffffff\">(Stochastic) Input Functions</font></strong></td></tr><tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr>";
 print "<tr valign=\"top\"><td nowrap><font size=\"2\">Select function file: </font>",filefield(-name=>'upload_file');
 print "&nbsp\;<a href=\"http://dvd.vbi.vt.edu/tutorial.html#F\" onmouseover=\"doTooltip(event,2)\" onmouseout=\"hideTip()\"><font size=\"1\">what is this?</font></a>";
+print "</td></tr><tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr>";
+print "<tr valign=\"top\"><td nowrap><font size=\"2\">", checkbox_group(-name=>'ginSim', -value=>'GINsim File', -label=>'GINsim File'), "&nbsp &nbsp &nbsp";
+print "&nbsp\;<a href=\"http://dvd.vbi.vt.edu/tutorial.html#N\" onmouseover=\"doTooltip(event,9)\" onmouseout=\"hideTip()\"><font size=\"1\">what is this?</font></a>";
 print "</td></tr><tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr>";
 print "<tr><td><div align=\"center\"><b>OR</b> <font size=\"2\" color=\"#006C00\">(Edit functions below)</font></div></td></tr>";
 print "<tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr><tr valign=\"top\"><td nowrap><div align=\"center\">";
@@ -135,6 +142,7 @@ $trajectory_value = param('trajectory_value');
 $statespace = param('statespace');
 $largeNetwork = param('largeNetwork');
 $conDisNetwork = param('conDisNetwork');
+$ginSim = param('ginSim');
 $depgraph = param('depgraph');
 $edit_functions = param('edit_functions');
 $SSformat = param('SSformat');
@@ -179,7 +187,6 @@ if ( $conDisNetwork eq "Conjunctive/Disjunctive Network" ) {
   print "<font color=blue><b>Calculating fixed points and limit cycles for
   conjunctive/disjunctive network.</b></font><br>";
   #BLAHBLAH i'm sad ._.
-  #print ("ruby dvd_conjunctive_runner.rb $n_nodes $p_value $dpGraph<br>");
   system("ruby dvd_conjunctive_runner.rb $n_nodes $p_value $dpGraph");
 }
 elsif ( $largeNetwork eq "Large Network" ) {
@@ -199,7 +206,7 @@ elsif ( $largeNetwork eq "Large Network" ) {
         print "<font color=red><i>Sorry. Unable to compute statistics for very large networks. It is suggested you download the standalone version which has no limitations</i></font><br>";
         die("Program quitting. Too many nodes");
     }
-
+   
     create_input_function();
     set_update_type();
     
@@ -213,6 +220,10 @@ elsif ( $largeNetwork eq "Large Network" ) {
       print "<font color=blue><b>ANALYSIS OF THE STATE SPACE</b></font>"." [m = ".$p_value.", n = ".$n_nodes;
       if($fileuploaded == 1) {
         print ", file path = ". $upload_file;
+	if($ginSim eq "GINsim File"){
+	    system("ruby ginSim-converter.rb $upload_file");
+	    print "Yay there's a button";
+	}
       }
       print "] <br>";
 
