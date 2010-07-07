@@ -13,8 +13,8 @@ end
 #p_value = ARGV[1]
 functionFile = ARGV[0] 
 
-m2_result = `cd lib/M2code/; M2 convertToPDS.m2 --stop --no-debug --silent -q -e 'll = converter("functionFile"); exit 0'`
-puts m2_result;
+m2_result = `cd lib/M2code/; M2 convertToPDS.m2 --stop --no-debug --silent -q -e 'll = toString converter("functionFile"); exit 0'`
+puts m2_result
 
 #puts "<br>"
 #if (p_value.to_i != 2)

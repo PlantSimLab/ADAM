@@ -220,10 +220,6 @@ elsif ( $largeNetwork eq "Large Network" ) {
       print "<font color=blue><b>ANALYSIS OF THE STATE SPACE</b></font>"." [m = ".$p_value.", n = ".$n_nodes;
       if($fileuploaded == 1) {
         print ", file path = ". $upload_file;
-	if($ginSim eq "GINsim File"){
-	    system("ruby ginSim-converter.rb $upload_file");
-	    print "Yay there's a button";
-	}
       }
       print "] <br>";
 
@@ -292,9 +288,14 @@ sub create_input_function() {
     print "open ok \n<br>" if ($DEBUG);
     if($upload_file) {
       $fileuploaded = 1;
+      if($ginSim eq "GINsim File"){
+	    system("ruby ginSim-converter.rb $upload_file");
+	    print "Yay there's a button";
+      } else {
       flock(OUTFILE, LOCK_EX) or die ("Could not get exclusive lock $!");
       while($bytesread=read($upload_file, $buffer, 1024)) {
             print OUTFILE $buffer;
+      }
       }
       flock(OUTFILE, LOCK_UN) or die ("Could not unlock file $!");
       close $upload_file;
