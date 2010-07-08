@@ -289,8 +289,7 @@ sub create_input_function() {
     if($upload_file) {
       $fileuploaded = 1;
       if($ginSim eq "GINsim File"){
-	    system("ruby ginSim-converter.rb $upload_file");
-	    print "Yay there's a button";
+	    print OUTFILE system("ruby ginSim-converter.rb $upload_file");
       } else {
       flock(OUTFILE, LOCK_EX) or die ("Could not get exclusive lock $!");
       while($bytesread=read($upload_file, $buffer, 1024)) {
