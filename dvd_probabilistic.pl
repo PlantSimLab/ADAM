@@ -286,16 +286,17 @@ sub create_input_function() {
     `mkdir -p $cwd/../../htdocs/no-ssl/files`; 
     open (OUTFILE, ">$clientip.functionfile.txt");
     print "open ok \n<br>" if ($DEBUG);
+    $filename = "$clientip.functionfile.txt";
     if($upload_file) {
       $fileuploaded = 1;
       if($ginSim eq "GINsim File"){
-	    print OUTFILE system("ruby ginSim-converter.rb $upload_file");
+	  print "The logical model was converted to: <br>";
+	  system("ruby ginSim-converter.rb $upload_file $filename");
       } else {
       flock(OUTFILE, LOCK_EX) or die ("Could not get exclusive lock $!");
       while($bytesread=read($upload_file, $buffer, 1024)) {
             print OUTFILE $buffer;
-      }
-      }
+      }}
       flock(OUTFILE, LOCK_UN) or die ("Could not unlock file $!");
       close $upload_file;
     } else { # user has not uploaded any file. so use the textarea value
@@ -316,7 +317,6 @@ sub create_input_function() {
     #remove any ^M characters
     `perl -pi -e 's/\r//g' "$clientip.functionfile.txt"`;
     $buffer = "";  
-    $filename = "$clientip.functionfile.txt";
 
     if($translate_box eq "Boolean") {
       translate_functions();
