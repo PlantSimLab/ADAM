@@ -1,58 +1,34 @@
  
-# ginSim-converter $n_nodes $p_value $filename
+# ginSim-converter $filename
 
-# Takes input from dvd website and passes it to M2 to compute fixed points
+# Takes GINsim file and converts it to a PDS so DVD can run calculations
 # returns 0 (no errors) or 1 (errors) 
 
 unless ARGV.size == 1
-  puts "Usage: ruby ginSim-converter.rb n_nodes p_value functionFile"
+  puts "Usage: ruby ginSim-converter.rb functionFile"
   exit 0
 end
 
-#n_nodes = ARGV[0] 
-#p_value = ARGV[1]
 functionFile = ARGV[0] 
 
 m2_result = `cd lib/M2code/; M2 convertToPDS.m2 --stop --no-debug --silent -q -e 'toString converter("#{functionFile}"); exit 0'`
-puts m2_result
 
-#get functions
-functions = m2_result.split("{").fetch(1)
-functions.chop!
+#get functions into array
+functions = m2_result.split("{")
+functions = functions.fetch(1).chop!
+functions = functions.split(",")
 
-puts functions
+#make empty string for formatted functions
+formatFuncts = String.new(str="")
+
+#format functions into f_i = ...
+for i in 0..(functions.length-1) do
+  f = "f" + (i+1).to_s + " =" + functions.fetch(i)
+  formatFuncts = formatFuncts + " " + f
+end
+
+puts formatFuncts
 puts "<br>"
-
-#m2_system =  "{{"
-
-#largestI = 0
-#File.open( functionFile, 'r').each {|line|
-  # puts "#{line}<br>"
-#  ll = line.split(/=/)
-#  m2_system = m2_system + ll.last 
-#  m2_system =  m2_system + ","
-#  largestI = ll.first.split(/f/).last.to_i
-#}
-
-#if (largestI != n_nodes.to_i ) 
-#  puts "There should be #{n_nodes} functions in order in the function
-#  input, but the last funtion I read was f#{largestI}. Exiting. <br>"
-#  exit 1
-#end
-
-# remove last comma
-#m2_system.chop!
-#m2_system = m2_system + "}}"
-
-#puts "<br>"
-#puts m2_system
-#puts "<br>"
-#puts "Running fixed point calculation now ...<br>"
-
-
-#end
-
-
 
 exit 0
 
