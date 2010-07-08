@@ -290,8 +290,15 @@ sub create_input_function() {
     if($upload_file) {
       $fileuploaded = 1;
       if($ginSim eq "GINsim File"){
-	  print "The logical model was converted to: <br>";
-	  system("ruby ginSim-converter.rb $upload_file $filename");
+        open (GINOUTFILE, ">$clientip.ginsim.ginml");
+        flock(GINOUTFILE, LOCK_EX) or die ("Could not get exclusive lock $!");
+        while($bytesread=read($upload_file, $buffer, 1024)) {
+            print GINOUTFILE $buffer;
+        }
+        flock(GINOUTFILE, LOCK_UN) or die ("Could not unlock file $!");
+        close $upload_file;
+        print "The logical model was converted to: <br>";
+        system("ruby ginSim-converter.rb $clientip.ginSim.ginml $filename");
       } else {
       flock(OUTFILE, LOCK_EX) or die ("Could not get exclusive lock $!");
       while($bytesread=read($upload_file, $buffer, 1024)) {
