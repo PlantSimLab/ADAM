@@ -13,14 +13,15 @@ end
 #p_value = ARGV[1]
 functionFile = ARGV[0] 
 
-m2_result = `cd lib/M2code/; M2 convertToPDS.m2 --stop --no-debug --silent -q -e 'll = toString converter("functionFile"); exit 0'`
+m2_result = `cd lib/M2code/; M2 convertToPDS.m2 --stop --no-debug --silent -q -e 'toString converter("#{functionFile}"); exit 0'`
 puts m2_result
 
-#puts "<br>"
-#if (p_value.to_i != 2)
-#  puts "This feature is only available for 2 states per node, not #{p_value}.<br>"
-#  exit 1
-#end
+#get functions
+functions = m2_result.split("{").fetch(1)
+functions.chop!
+
+puts functions
+puts "<br>"
 
 #m2_system =  "{{"
 
