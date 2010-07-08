@@ -298,7 +298,7 @@ sub create_input_function() {
         flock(GINOUTFILE, LOCK_UN) or die ("Could not unlock file $!");
         close $upload_file;
         print "The logical model was converted to: <br>";
-        system("ruby ginSim-converter.rb $clientip.ginSim.ginml $filename");
+        system("ruby ginSim-converter.rb $clientip.ginsim.ginml $filename");
       } else {
       flock(OUTFILE, LOCK_EX) or die ("Could not get exclusive lock $!");
       while($bytesread=read($upload_file, $buffer, 1024)) {

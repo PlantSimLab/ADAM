@@ -26,7 +26,7 @@ puts "Running limit cycle calculations now...<br>"
 
 dpGraph = "../../" + dpGraph
 
-  m2_result = `cd lib/M2code/; /usr/bin/M2 conjunctiveNetwork.m2 --stop --no-debug --silent -q -e 'QR = makeRing (#{n_nodes}, #{p_value}); ll = limCycles("#{dpGraph}"); exit 0'`
+  m2_result = `cd lib/M2code/; /usr/local/bin/M2 conjunctiveNetwork.m2 --stop --no-debug --silent -q -e 'QR = makeRing (#{n_nodes}, #{p_value}); ll = limCycles("#{dpGraph}"); exit 0'`
   puts m2_result
   puts "<br>"
 
