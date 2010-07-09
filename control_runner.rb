@@ -60,8 +60,10 @@ m2_result = `cd controlM2/; /usr/local/bin/M2 Visualizer.m2 --stop --no-debug --
 tmpFile = "#{filePrefix}dot"
 File.open( tmpFile, 'w') {|f| f.write m2_result}
 
-#puts "/usr/local/bin/dot -Tgif #{tmpFile} -o #{file}"
-`/usr/bin/dot -Tgif #{tmpFile} -o #{file}`
+dotPath = `which dot`
+dotPath.chop!
+#puts "#{dotPath} -Tgif #{tmpFile} -o #{file}"
+`#{dotPath} -Tgif #{tmpFile} -o #{file}`
 
 exit 0
 
