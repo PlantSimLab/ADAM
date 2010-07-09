@@ -29,7 +29,9 @@ print "<table background=\"http://dvd.vbi.vt.edu/gradient.gif\" width=\"100%\"  
 print "<tr><td align=\"center\" colspan=\"2\"><b><font size=\"5\">Visualizer of Controlled Polynomial Dynamical Systems v0.9
 </font></b><p>";
 print "You can visualize a controlled Polynomial dynamical system. This is experimental, please be patient with us. Thank you for trying it out! If you have any questions or comments, <a href=\"mailto:fhinkel@vt.edu\">feel free to email us</a>.</td></tr>";
-print "<tr><td><table align=\"center\" border=\"0\" bgcolor=\"#ABABAB\"  cellpadding=\"1\" cellspacing=\"0\"><tr><td>";
+
+## This is the box around Network Description
+print "<tr><td><table width=\"90%\" align=\"center\" border=\"0\" bgcolor=\"#ABABAB\"  cellpadding=\"1\" cellspacing=\"0\"><tr><td>";
 ##
 print "<table border=\"0\" bgcolor=\"#FFFFCC\" width=\"100%\" cellspacing=\"0\" cellpadding=\"1\"><tr valign=\"top\"><td bgcolor=\"#FF8000\" nowrap>";
 print "<strong><font color=\"#FFFFFF\">Network Description</font></strong></td></tr><tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr>";
@@ -65,10 +67,11 @@ print radio_group(-name=>'update_box', -values=>['Synchronous',
 'Update_stochastic', 'Sequential'], -default=>'Synchronous', -linebreak=>'true');
 print "&nbsp\;&nbsp\;&nbsp\;&nbsp\;- Enter update schedule separated by spaces: ",textfield(-name=>'update_schedule', -size=>24);
 print "</font></td></tr><tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr></table></td></tr></table></td>";
-print "<td><table cellSpacing=\"0\" cellPadding=\"1\" align=\"center\" bgColor=\"#ababab\" border=\"0\"><tr><td><table cellSpacing=\"0\" cellPadding=\"1\" width=\"100%\" bgColor=\"#ffffcc\" border=\"0\">";
+
+print "<td><table width=\"90%\" cellSpacing=\"0\" cellPadding=\"1\" align=\"center\" bgColor=\"#ababab\" border=\"0\"><tr><td><table cellSpacing=\"0\" cellPadding=\"1\" width=\"100%\" bgColor=\"#ffffcc\" border=\"0\">";
 
 # Input Functions Block
-print "<tr vAlign=top><TD nowrap bgColor=\"#ff8000\"><strong><font
+print "<tr valign=\"top\"><TD nowrap bgColor=\"#ff8000\"><strong><font
 color=\"#ffffff\">Input Functions</font></strong></td></tr><tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr>";
 print "<tr valign=\"top\"><td nowrap><font size=\"2\">Select function file (not functional!): </font>",filefield(-name=>'upload_file');
 print "&nbsp\;<a href=\"http://dvd.vbi.vt.edu/tutorial.html#F\" onmouseover=\"doTooltip(event,2)\" onmouseout=\"hideTip()\"><font size=\"1\">what is this?</font></a>";
@@ -89,7 +92,7 @@ f4 = x1 + u1 + u2
 print "</div></td></tr><tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr></table></td></tr></table></td></tr>";
 
 # State Space Specification
-print"<tr><td><table align=\"center\" border=\"0\" bgcolor=\"#ABABAB\"  cellpadding=\"1\" cellspacing=\"0\"><tr><td>";
+print"<tr><td><table width=\"90%\" align=\"center\" border=\"0\" bgcolor=\"#ABABAB\"  cellpadding=\"1\" cellspacing=\"0\"><tr><td>";
 print"<table border=\"0\" bgcolor=\"#FFFFCC\" width=\"100%\" cellspacing=\"0\" cellpadding=\"1\"><tr valign=\"top\"><td bgcolor=\"#FF8000\" nowrap>";
 print"<strong><font color=\"#FFFFFF\">State Space Specification (not functional)</font></strong></td></tr><tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr>";
 print"<tr valign=\"top\"><td nowrap><font size=\"2\">Generate state space of";
@@ -99,7 +102,7 @@ print "&nbsp\;&nbsp\;&nbsp\;&nbsp\;- Enter initialization separated by spaces: "
 print"</font></td></tr><tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr></table></td></tr></table></td><td>";
 
 ## Additional Output Specification
-print"<table align=\"center\" border=\"0\" bgcolor=\"#ABABAB\" cellpadding=\"1\" cellspacing=\"0\"><tr><td>";
+print"<table width=\"90%\" align=\"center\" border=\"0\" bgcolor=\"#ABABAB\" cellpadding=\"1\" cellspacing=\"0\"><tr><td>";
 print"<table border=\"0\" bgcolor=\"#FFFFCC\" width=\"100%\" cellspacing=\"0\" cellpadding=\"1\"><tr valign=\"top\">";
 print"<td bgcolor=\"#FF8000\" nowrap><b><font color=\"#FFFFFF\">Additional Output Specification (not functional) &nbsp\;<span style=\"background-color:#808080\">(optional)</span></font></b>";
 print"&nbsp\;&nbsp\;&nbsp\;</td>";
@@ -156,7 +159,7 @@ $ret = system("ruby control_runner.rb $n_nodes $u_nodes $p_value \"$functions\" 
 
 if ( 1 || !$ret ) {
   print "everything ok" if ($DEBUG);
-  print  "<A href=\"$clientip.out.gif\" target=\"_blank\"> <font color=red><i>Click to view the state space graph of your controlled polynomail dynamical system.</i></font></A><br>";
+  print  "<A href=\"$clientip.out.gif\" target=\"_blank\"> <font color=red><i>Click to view the state space graph of your controlled polynomial dynamical system.</i></font></A><br>";
 } else {
   print "<br><font color=red>Sorry. Something went wrong.</font><br>";
   die("Program quitting. Unknown error");
