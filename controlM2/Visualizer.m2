@@ -14,17 +14,8 @@ newPackage(
 
 needsPackage "Controller"
 
-export {generateTransitions, makeDotFile, sub01, visualizeControl, makeGifFile}
+export {generateTransitions, makeDotFile, sub01, visualizeControl }
 
-makeGifFile = method()
-makeGifFile (Matrix, ZZ) := (F, u) -> (
-  --F := matrix{ {x1+x2+u1, u2+ x1*x3, x2*u1, x1+u1+u2} };
-  uu := sub01 u; 
-  transitions = generateTransitions(F,uu);
-  s = makeDotFile (transitions, {} );
-  print s;
-  s
-)
 
 -- generate the dotfile representing the phase space
 generateTransitions = method()
@@ -54,10 +45,17 @@ generateTransitions (Matrix, List) := MutableHashTable =>  (F, u) -> (
 -- u all possible controls
 -- initial and final state
 visualizeControl = method()
-visualizeControl( Matrix, List, List, List)  := (F, u, initialState, finalState)   -> (
-  trans := generateTransitions(F, u); 
-  l := findControl(F, initialState, finalState, u);
-  s = makeDotFile( trans, l)
+visualizeControl( Matrix, ZZ, List)  := (F, u, traj)   -> (
+  uu := sub01 u;
+  if ( traj != {} ) then (
+    assert( #traj == 2 );
+    initialState := first traj;
+    finalState := last traj;
+    traj = findControl(F, initialState, finalState, uu);
+  ); 
+  transitions := generateTransitions(F, uu);
+  s = makeDotFile( transitions, traj);
+  print s
 )
 
 
@@ -121,30 +119,29 @@ SeeAlso
 
 doc ///
 Key
-  (visualizeControl, Matrix, List, List, List)
+  (visualizeControl, Matrix, ZZ, List)
   visualizeControl
 Headline
   Simulate the phase space and highlight the control
 Usage
-  visualizeControl(F, u, initialState, finalState)
+  visualizeControl(F, u, traj)
 Inputs
   F:Matrix
     the PDS
-  u:List
-    control
-  initialState:List
-    the initial state
-  finalState:List
-    the admissible final state
+  u:ZZ
+    number of control variables 
+  traj:List
+    list of an initial and a final state
 Outputs
-  l:List
-    A list of the found trajectory and applied control
+  l:String
+    string of the content of a dot file with the phase space and highlighted control
 Consequences
 Description
   Text
     This function calls findControl to find a good control sequence that drives the system
     from the initial state to the final state. A graph of the complete phase space is generated. 
     Since this function visualizes the whole ($2^p$ states) phase space, it is only feseable for small systems. 
+    If traj is the empty list, then the phase space of the controlled PDS is generated without any highlighted trajectory. 
   Example
     2+2;
     R = makeControlRing( 3, 1, 2)
@@ -152,7 +149,7 @@ Description
     initialState := {1_R,1_R,1_R}
     finalState := {0_R,0_R,0_R}
     u := {{0_R},{1_R}}; -- list of possible controls
-    s := visualizeControl(F, u, initialState, finalState)
+    s := visualizeControl(F, 1, {initialState, finalState})
   Code
   Pre
 Caveat
@@ -185,7 +182,7 @@ F := matrix{ {x1+x2+u1, x1*x3, x2*u1} }
 u := {{0_R},{1_R}}; -- list of possible controls
 initialState := {1_R,1_R,1_R}
 finalState := {0_R,0_R,0_R}
-s = visualizeControl(F, u, initialState, finalState)
+s = visualizeControl(F, 1, {initialState, finalState})
 g = openOut "testfile.dot"
 g << s;
 close g;
@@ -226,7 +223,7 @@ F := matrix{ {x1+x2+u1, x1*x3, x2*u1} }
 initialState := {1_R,1_R,1_R}
 finalState := {0_R,0_R,0_R}
 u := {{0_R},{1_R}}; -- list of possible controls
-s = visualizeControl(F, u, initialState, finalState)
+s = visualizeControl(F, 1,{ initialState, finalState})
 g = openOut "testfile.dot"
 g << s;
 close g;
@@ -240,7 +237,7 @@ initialState := {1_R,1_R,1_R}
 finalState := {0_R,0_R,0_R}
 u := {{0_R},{1_R}}; -- list of possible controls
 controlSequence = findControl(F, initialState, finalState, u)
-s = visualizeControl(F, u, initialState, finalState)
+s = visualizeControl(F, 1, {initialState, finalState})
 g = openOut "testfile.dot"
 g << s;
 close g;
@@ -255,7 +252,7 @@ TEST ///
   finalState := {1,0,1,0};
   u := sub01 2; 
   findControl(F, initialState, finalState, u);
-  s = visualizeControl(F, u, initialState, finalState);
+  s = visualizeControl(F, 2, {initialState, finalState});
   g = openOut ("testfile"|i|".dot");
   g << s;
   close g;
@@ -275,6 +272,5 @@ restart
 installPackage ("Visualizer", DebuggingMode => true)
   R = makeControlRing( 4, 2, 2);
   F := matrix{ {x1+x2+u1, u2+ x1*x3, x2*u1, x1+u1+u2} };
-  makeGifFile( F, 2)
-
-
+  visualizeControl( F, 2, {})
+  visualizeControl( F, 2, {{1,1,1,1},{0,1,1,1}})

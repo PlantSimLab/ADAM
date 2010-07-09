@@ -72,7 +72,7 @@ findControl (Matrix, List, List, List)  :=  List => (F, initialState, finalState
     x1 = apply( u, ui ->  flatten entries sub( F, matrix(R, { flatten append( x, ui)})));
     apply( u , x1, (ui,x) -> H#ui = distance( finalState, x) );
     bestControl = first minInHash H;
-    print ("Trying control ", bestControl, " to ", x ); 
+    --print ("Trying control ", bestControl, " to ", x ); 
     while ( potentialNewState := flatten entries sub( F, matrix( R, {flatten append(x, bestControl)})); any( VS, i -> i == potentialNewState )  ) do (
       remove( H, bestControl );
       if ( #H == 0 ) then ( -- the last element has been removed
@@ -80,10 +80,10 @@ findControl (Matrix, List, List, List)  :=  List => (F, initialState, finalState
         return {}
       );
       bestControl = first minInHash H;
-      print ("Trying control ", bestControl, " to ", x )
+      --print ("Trying control ", bestControl, " to ", x )
     );
     x = potentialNewState;
-    print( "## add state ", x, " to trajectory with control ", bestControl);
+    --print( "## add state ", x, " to trajectory with control ", bestControl);
     VS = VS | {x} ; -- add state x to list of visited states
     U = U | {bestControl}
   );

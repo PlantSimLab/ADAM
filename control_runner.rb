@@ -10,8 +10,9 @@
 require 'fileutils'
 
 
-unless ARGV.size == 5
-  puts "Usage: ruby control_runner.rb n_nodes u_nodes p_value functions<br>" 
+unless (ARGV.size == 5 or ARGV.size == 7 )
+  puts "Usage: ruby control_runner.rb n_nodes u_nodes p_value functions initialState finalState<br>" 
+  puts "Initial and final state are optional"
   exit 1
 end
 
@@ -20,6 +21,15 @@ u_nodes = ARGV[1].to_i
 p_value = ARGV[2].to_i
 function = ARGV[3] 
 file = ARGV[4]
+
+traj = "{}" # this is the initial and final state, if heuristic control is desired, otherwise just an empty list
+if (ARGV.size == 7 )
+  initialState = ARGV[5]
+  finalState = ARGV[6]
+  traj = "{{#{initialState.gsub(/_/, ",")}}, {#{finalState.gsub(/_/, ",")}}}"
+end
+
+#  puts traj
 
 filePrefix = file.split(/gif/).first
 #puts "<br>"
@@ -52,8 +62,8 @@ m2_system = m2_system + "}}"
 
 puts "Generating the phase space ...<br>"
 
-m2_result = `cd controlM2/; /usr/local/bin/M2 Visualizer.m2 --stop --no-debug --silent -q -e 'QR = makeControlRing(#{n_nodes}, #{u_nodes}, #{p_value}); makeGifFile( matrix(QR, #{m2_system}), #{u_nodes}); exit 0'`
-#puts "cd controlM2/; /usr/local/bin/M2 Visualizer.m2 --stop --no-debug --silent -q -e 'QR = makeControlRing(#{n_nodes}, #{u_nodes}, #{p_value}); makeGifFile( matrix(QR, #{m2_system}), #{u_nodes}); exit 0'"
+#puts "cd controlM2/; /usr/local/bin/M2 Visualizer.m2 --stop --no-debug --silent -q -e 'QR = makeControlRing(#{n_nodes}, #{u_nodes}, #{p_value}); visualizeControl( matrix(QR, #{m2_system}), #{u_nodes}, #{traj}); exit 0'"
+m2_result = `cd controlM2/; /usr/local/bin/M2 Visualizer.m2 --stop --no-debug --silent -q -e 'QR = makeControlRing(#{n_nodes}, #{u_nodes}, #{p_value}); visualizeControl( matrix(QR, #{m2_system}), #{u_nodes}, #{traj}); exit 0'`
 
 # puts m2_result 
 
