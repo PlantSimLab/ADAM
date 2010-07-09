@@ -21,6 +21,7 @@ p_value = ARGV[2].to_i
 function = ARGV[3] 
 file = ARGV[4]
 
+filePrefix = file.split(/gif/).first
 #puts "<br>"
 #puts function
 #puts "<br>"
@@ -56,12 +57,13 @@ m2_result = `cd controlM2/; /usr/local/bin/M2 Visualizer.m2 --stop --no-debug --
 
 # puts m2_result 
 
-tmpFile = "#{Dir.getwd}/../../htdocs/no-ssl/files/tmp1.dot"
+tmpFile = "#{filePrefix}dot"
 File.open( tmpFile, 'w') {|f| f.write m2_result}
 
 #puts "/usr/local/bin/dot -Tgif #{tmpFile} -o #{file}"
 `/usr/local/bin/dot -Tgif #{tmpFile} -o #{file}`
 
+exit 0
 
 puts "<br>"
 puts tmpFile
@@ -69,7 +71,6 @@ puts "<br>"
 puts file
 puts "<br>"
 
-exit 0
 
 
 puts "Running fixed point calculation now ...<br>"
