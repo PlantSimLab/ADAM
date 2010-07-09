@@ -200,7 +200,7 @@ if ($heuristicControl eq "1") {
   if ($finalState ne null) {
     $finalState = &cleanUpState( $finalState );
   }
-  print "Finding heuristic controller from $initialState to $finalState <br>";
+  print "<font color=blue><b>Finding heuristic controller from $initialState to $finalState:</b></font><br>";
 } else {
   $initialState = "";
   $finalState = "";
@@ -213,9 +213,12 @@ $DEBUG = 0;
 
 $ret = system("ruby control_runner.rb $n_nodes $u_nodes $p_value \"$functions\" $clientip.out.gif $initialState $finalState");
 
-if ( 1 || !$ret ) {
+
+if ( $ret == 0 ) {
   print "everything ok" if ($DEBUG);
-  print  "<A href=\"$clientip.out.gif\" target=\"_blank\"> <font color=red><i>Click to view the state space graph of your controlled polynomial dynamical system.</i></font></A><br>";
+  if (-e "$clientip.out.gif") {
+    print  "<A href=\"$clientip.out.gif\" target=\"_blank\"> <font color=red><i>Click to view the state space graph of your controlled polynomial dynamical system.</i></font></A><br>";
+  }
 } else {
   print "<br><font color=red>Sorry. Something went wrong.</font><br>";
   die("Program quitting. Unknown error");
