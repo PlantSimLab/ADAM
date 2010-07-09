@@ -61,7 +61,7 @@ tmpFile = "#{filePrefix}dot"
 File.open( tmpFile, 'w') {|f| f.write m2_result}
 
 #puts "/usr/local/bin/dot -Tgif #{tmpFile} -o #{file}"
-`/usr/local/bin/dot -Tgif #{tmpFile} -o #{file}`
+`/usr/bin/dot -Tgif #{tmpFile} -o #{file}`
 
 exit 0
 
