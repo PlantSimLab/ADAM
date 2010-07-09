@@ -68,9 +68,9 @@ print radio_group(-name=>'update_box', -values=>['Synchronous',
 print "&nbsp\;&nbsp\;&nbsp\;&nbsp\;- Enter update schedule separated by spaces: ",textfield(-name=>'update_schedule', -size=>24);
 print "</font></td></tr><tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr></table></td></tr></table></td>";
 
+# Input Functions Block
 print "<td><table width=\"90%\" cellSpacing=\"0\" cellPadding=\"1\" align=\"center\" bgColor=\"#ababab\" border=\"0\"><tr><td><table cellSpacing=\"0\" cellPadding=\"1\" width=\"100%\" bgColor=\"#ffffcc\" border=\"0\">";
 
-# Input Functions Block
 print "<tr valign=\"top\"><TD nowrap bgColor=\"#ff8000\"><strong><font
 color=\"#ffffff\">Input Functions</font></strong></td></tr><tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr>";
 print "<tr valign=\"top\"><td nowrap><font size=\"2\">Select function file (not functional!): </font>",filefield(-name=>'upload_file');
@@ -89,7 +89,19 @@ f4 = x1 + u1 + u2
 ',
 			   -rows=>8,
 			   -columns=>50);
-print "</div></td></tr><tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr></table></td></tr></table></td></tr>";
+print "</div></td></tr><tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr>";
+
+# Initial and final states
+print "<tr valign=\"top\"><td nowrap><font size=\"2\">";
+print checkbox(-name =>'findControl', -value=>'1', -label=>'Use heuristic controller to find control sequence');
+print "<br>";
+print "Enter initial state, separated by spaces: ", textfield( -name=>'initialState', -size=>20);
+print "<br>";
+print "Enter final state, separated by spaces: &nbsp   ", textfield( -name=>'finalState', -size=>20);
+
+
+print "</div></td></tr><tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr>";
+print "</table></td></tr></table></td></tr>";
 
 # State Space Specification
 print"<tr><td><table width=\"90%\" align=\"center\" border=\"0\" bgcolor=\"#ABABAB\"  cellpadding=\"1\" cellspacing=\"0\"><tr><td>";
@@ -143,6 +155,10 @@ $n_nodes = param('n_nodes');
 $u_nodes = param('u_nodes');
 $functions = param('edit_functions');
 
+$control = param('findControl');
+$initialState = param( 'initialState');
+$finalState = param( 'finalState');
+
 
 
 $DEBUG = 0;
@@ -153,7 +169,13 @@ print "$n_nodes<br>" if ($DEBUG);
 print "$u_nodes<br>" if ($DEBUG);
 print "$p_value<br>" if ($DEBUG);
 print "$functions<br>" if ($DEBUG);
+$DEBUG = 1;
+print "$initialState<br>" if ($DEBUG);
+print "$finalState<br>" if ($DEBUG);
+print "$control<br>" if ($DEBUG);
 
+
+$DEBUG = 0;
 
 $ret = system("ruby control_runner.rb $n_nodes $u_nodes $p_value \"$functions\" $clientip.out.gif");
 
