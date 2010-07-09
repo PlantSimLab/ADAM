@@ -1,3 +1,6 @@
 [submodule "lib"]
 	path = lib
 	url = git@mithril.vbi.vt.edu:~/reu.git
+[submodule "controlM2"]
+	path = controlM2
+	url = git@mithril.vbi.vt.edu:~/control.git
