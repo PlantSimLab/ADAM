@@ -28,7 +28,7 @@ print "<div style=\"font-family:Verdana,Arial\"><div id=\"tipDiv\" style=\"posit
 print "<table background=\"http://dvd.vbi.vt.edu/gradient.gif\" width=\"100%\"  border=\"0\" cellpadding=\"0\" cellspacing=\"10\">";
 print "<tr><td align=\"center\" colspan=\"2\"><b><font size=\"5\">Visualizer of Controlled Polynomial Dynamical Systems v0.9
 </font></b><p>";
-print "You can visualize a controlled Polynomial dynamical system. This is experimental, please be patient with us. Thank you for trying it out! If you have any questions or comments, <a href=\"mailto:fhinkel@vt.edu\">feel free to email us</a>.</td></tr>";
+print "You can visualize a controlled Polynomial dynamical system. This is experimental, please be patient with us. Thank you for trying it out! If you have any questions or comments, <a href=\"mailto:fhinkel@vt.edu\">please email us</a>!</td></tr>";
 
 ## This is the box around Network Description
 print "<tr><td><table width=\"90%\" align=\"center\" border=\"0\" bgcolor=\"#ABABAB\"  cellpadding=\"1\" cellspacing=\"0\"><tr><td>";
@@ -100,12 +100,12 @@ print "</div></td></tr><tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr>";
 
 # Initial and final states
 print "<tr valign=\"top\"><td nowrap><font size=\"2\">";
-print checkbox(-name =>'findControl', -value=>'1', -label=>'Use heuristic controller to find control sequence');
+print checkbox(-name =>'findControl', -value=>'1', -label=>'Use heuristic controller to find control sequence', -checked=>1 );
 print "<br>";
-print "Enter initial state, separated by spaces: ", textfield( -name=>'initialState', -size=>20);
+print "Enter initial state, separated by spaces: ", textfield( -name=>'initialState', -size=>20, -default=>'1 0 1 1');
 print "<br>";
 print "<br>";
-print "Enter final state, separated by spaces: &nbsp   ", textfield( -name=>'finalState', -size=>20);
+print "Enter final state, separated by spaces: &nbsp   ", textfield( -name=>'finalState', -size=>20, -default=>'0 0 1 1');
 print "<br>";
 print "<br>";
 print "A heuristic algorithm will try to find the cheapest trajectory from the initial to the <br>";
