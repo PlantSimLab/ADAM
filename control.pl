@@ -23,11 +23,12 @@ $clientip = '../../htdocs/no-ssl/files/'. $clientip;
 
 
 print header, start_html( -title=>'Visualizer of Controlled Polynomial Dynamical Systems Web Interface', -script=>{-language=>'JavaScript',-src=>'/fnct2.js'});
+print "<center><img src=\"vbi-logo.png\"></center>";
 print start_multipart_form(-name=>'form1', -method =>"POST", -onSubmit=>"return validate()");
 print "<div style=\"font-family:Verdana,Arial\"><div id=\"tipDiv\" style=\"position:absolute\; visibility:hidden\; z-index:100\"></div>";
 print "<table background=\"http://dvd.vbi.vt.edu/gradient.gif\" width=\"100%\"  border=\"0\" cellpadding=\"0\" cellspacing=\"10\">";
-print "<tr><td align=\"center\" colspan=\"2\"><b><font size=\"5\">Visualizer of Controlled Polynomial Dynamical Systems v0.9
-</font></b><p>";
+print "<tr><td align=\"center\" colspan=\"2\"><b><font size=\"5\">Visualizer of Controlled Polynomial Dynamical Systems v0.9 </font></b><br>";
+print "<font size=2><a href=\"http://www.math.vt.edu/people/fhinkel/\">Franziska Hinkelmann</a></font><p>";
 print "You can visualize a controlled Polynomial dynamical system. This is experimental, please be patient with us. Thank you for trying it out! If you have any questions or comments, <a href=\"mailto:fhinkel@vt.edu\">please email us</a>!</td></tr>";
 
 ## This is the box around Network Description
@@ -40,21 +41,21 @@ print "<strong><font color=\"#FFFFFF\">Network Description</font></strong></td><
 print "<tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr>";
 print "<tr valign=\"top\"><td nowrap><font size=\"2\"><br>Enter number of state variables: </font>",
   textfield(-name=>'n_nodes', -size=>2, -maxlength=>2, -default=>4),
-  "&nbsp &nbsp &nbsp";
+  "<font size=2> (For more than 10 variables, no graph is generated)</font>";
 print "<br>";
 print "<br>";
 
 ## number of control variables
 print "</td></tr><tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr>";
 print "<tr valign=\"top\"><td nowrap><font size=\"2\"><br>Enter number of control variables: </font>",
-  textfield(-name=>'u_nodes', -size=>2, -maxlength=>2, -default=>2),
-  "&nbsp &nbsp &nbsp";
+  textfield(-name=>'u_nodes', -size=>2, -maxlength=>2, -default=>2);
 print "<br>";
 print "<br>";
 
 ## p value
 print "</td></tr><tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr><tr valign=\"top\"><td nowrap><font size=\"2\"><br>Enter number of states per node: </font>";
-print textfield(-name=>'p_value',-size=>2,-maxlength=>2, default=>2);
+print textfield(-name=>'p_value',-size=>2,-maxlength=>2, default=>2),
+  "<font size=2> (Experimental, must be boolean)</font>";
 print "<br>";
 print "<br>";
 
