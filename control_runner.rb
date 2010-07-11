@@ -82,7 +82,7 @@ if ( n_nodes < 11 )
 
   results = m2_result.split("digraph")
   if results.size == 2 and u_nodes > 0 
-    puts "<font color=blue>The following control was applied: </font><br>"
+    puts "<font color=\"#226677\">The following control was applied: </font><br>"
     puts (results.first).gsub(/\n/, "<br>") 
   end
 

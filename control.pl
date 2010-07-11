@@ -1,5 +1,9 @@
 #!/usr/bin/perl
 
+## Colors are extracted from VBI logo: 
+# #009977 green
+# #226677 blue
+
 ## Hussein Vastani 
 ## Franziska Hinkelmann
 ## Bonbons
@@ -22,8 +26,10 @@ $clientip = '../../htdocs/no-ssl/files/'. $clientip;
 #$clientip = $sec.'-'.$min.'-'.$hr;
 
 
-print header, start_html( -title=>'Visualizer of Controlled Polynomial Dynamical Systems Web Interface', -script=>{-language=>'JavaScript',-src=>'/fnct2.js'});
-print "<body background=\"gradient.gif\">";
+print header, start_html( -title=>'Visualizer of Controlled Polynomial Dynamical Systems Web Interface', 
+                -script=>{-language=>'JavaScript',-src=>'/fnct2.js'},
+                -head=>[Link({-rel=>'icon',-type=>'image/png',-href=>'https://www.vbi.vt.edu/images/favicon.ico'}),]);
+print "<body background=\"gradient.gif\" link=\"#009977\" vlink=\"#226677\">";
 print "<center><img src=\"vbi-logo.png\"></center>";
 print start_multipart_form(-name=>'form1', -method =>"POST", -onSubmit=>"return validate()");
 print "<div style=\"font-family:Verdana,Arial\"><div id=\"tipDiv\" style=\"position:absolute\; visibility:hidden\; z-index:100\"></div>";
@@ -88,7 +94,7 @@ color=\"#ffffff\">Input Functions</font></strong></td></tr><tr><td BGCOLOR=\"#DC
 #
 
 #print "</td></tr><tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr>";
-#print "<tr><td><div align=\"center\"><b>OR</b> <font size=\"2\" color=\"#006C00\">(Edit functions below)</font></div></td></tr>";
+#print "<tr><td><div align=\"center\"><b>OR</b> <font size=\"2\" color=\"#009977\">(Edit functions below)</font></div></td></tr>";
 print "<tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr><tr valign=\"top\"><td nowrap><div align=\"center\">";
 print textarea(-name=>'edit_functions',
                -default=>
@@ -139,7 +145,7 @@ print "</table></td></tr></table></td></tr>";
 #print"&nbsp\;&nbsp\;&nbsp\;</td>";
 #print"</tr><tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr><tr valign=\"top\"><td nowrap><font size=\"2\">View";
 #print"&nbsp\;<a href=\"http://dvd.vbi.vt.edu/tutorial.html#G\" onmouseover=\"doTooltip(event,6)\" onmouseout=\"hideTip()\"><font size=\"1\">what is this?</font></a><br>";
-#print"<font color=\"#006C00\"><i>Select graph(s) to view and image 
+#print"<font color=\"#009977\"><i>Select graph(s) to view and image 
 #format.</i></font><br>";
 #print checkbox_group(-name=>'statespace', -value=>'State space graph', -label=>'State space graph'),"&nbsp\;&nbsp\;&nbsp\;", popup_menu(-name=>'SSformat',-values=>['*.gif','*.jpg','*.png','*.ps']), "&nbsp\;&nbsp\;&nbsp\;", checkbox_group(-name =>'stochastic', -value=>'Print probabilities', -label=>'Print probabilities', -checked),"<br>";
 #print checkbox_group(-name=>'depgraph', -value=>'Dependency graph',
@@ -147,7 +153,7 @@ print "</table></td></tr></table></td></tr>";
 #print"</font></td></tr><tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr></table></td></tr></table></td></tr>";
 print "<tr>";
 print "<br>";
-print"<td align=\"center\" colspan=\"2\">",submit('button_name','Generate')," <br><font color=\"#006C00\"><br><i>Results will be displayed below.</i></font></td></tr></table></div>"; 
+print"<td align=\"center\" colspan=\"2\">",submit('button_name','Generate')," <br><font color=\"#009977\"><br><i>Results will be displayed below.</i></font></td></tr></table></div>"; 
 
 ##Google Analytics, Franzi's Account
 #print <<ENDHTML;
@@ -203,7 +209,7 @@ if ($heuristicControl eq "1") {
   if ($finalState ne null) {
     $finalState = &cleanUpState( $finalState );
   }
-  print "<font color=blue><b>Finding heuristic controller from $initialState to $finalState:</b></font><br>";
+  print "<font color=\"#226677\"><b>Finding heuristic controller from $initialState to $finalState:</b></font><br>";
 } else {
   $initialState = "";
   $finalState = "";
@@ -220,7 +226,7 @@ $ret = system("ruby control_runner.rb $n_nodes $u_nodes $p_value \"$functions\" 
 if ( $ret == 0 ) {
   print "everything ok" if ($DEBUG);
   if (-e "$clientip.out.gif") {
-    print  "<A href=\"$clientip.out.gif\" target=\"_blank\"> <font color=red><i>Click to view the state space graph of your controlled polynomial dynamical system.</i></font></A><br>";
+    print  "<A href=\"$clientip.out.gif\" target=\"_blank\"> <font color=\"#226677\"><i>Click to view the state space graph of your controlled polynomial dynamical system.</i></font></A><br>";
   }
 } else {
   print "<br><font color=red>Sorry. Something went wrong.</font><br>";
