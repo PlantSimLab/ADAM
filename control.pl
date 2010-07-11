@@ -55,7 +55,7 @@ print "<br>";
 ## p value
 print "</td></tr><tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr><tr valign=\"top\"><td nowrap><font size=\"2\"><br>Enter number of states per node: </font>";
 print textfield(-name=>'p_value',-size=>2,-maxlength=>2, default=>2),
-  "<font size=2> (Experimental, must be boolean)</font>";
+  "<font size=2> (Must be a prime number)</font>";
 print "<br>";
 print "<br>";
 
