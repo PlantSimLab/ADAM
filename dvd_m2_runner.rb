@@ -9,15 +9,15 @@ unless ARGV.size == 3
   exit 0
 end
 
-n_nodes = ARGV[0] 
+n_nodes = ARGV[0]
 p_value = ARGV[1]
 functionFile = ARGV[2] 
 
 puts "<br>"
-if (p_value.to_i != 2)
-  puts "This feature is only available for 2 states per node, not #{p_value}.<br>"
-  exit 1
-end
+#if (p_value.to_i != 2)
+#  puts "This feature is only available for 2 states per node, not #{p_value}.<br>"
+#  exit 1
+#end
 
 m2_system =  "{{"
 
@@ -32,7 +32,7 @@ File.open( functionFile, 'r').each {|line|
 
 if (largestI != n_nodes.to_i ) 
   puts "There should be #{n_nodes} functions in order in the function
-  input, but the last funtion I read was f#{largestI}. Exiting. <br>"
+  input, but the last function I read was f#{largestI}. Exiting. <br>"
   exit 1
 end
 
@@ -46,7 +46,9 @@ puts "<br>"
 puts "Running fixed point calculation now ...<br>"
 
 for i in 1..5 do 
-  m2_result = `cd lib/M2code/; /usr/local/bin/M2 solvebyGB.m2 --stop --no-debug --silent -q -e 'QR = makeRing(#{n_nodes}, #{p_value}); ll = gbSolver( matrix(QR, #{m2_system}), #{i}); exit 0'`
+#one line is for my machine, one line is for the server b/c M2 is in different paths
+  m2_result = `cd lib/M2code/; M2 solvebyGB.m2 --stop --no-debug --silent -q -e 'QR = makeRing(#{n_nodes}, #{p_value}); ll = gbSolver( matrix(QR, #{m2_system}), #{i}); exit 0'`
+#  m2_result = `cd lib/M2code/; /usr/local/bin/M2 solvebyGB.m2 --stop --no-debug --silent -q -e 'QR = makeRing(#{n_nodes}, #{p_value}); ll = gbSolver( matrix(QR, #{m2_system}), #{i}); exit 0'`
   puts m2_result
   puts "<br>"
 end
