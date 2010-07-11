@@ -29,13 +29,13 @@ $clientip = '../../htdocs/no-ssl/files/'. $clientip;
 print header, start_html( -title=>'Visualizer of Controlled Polynomial Dynamical Systems Web Interface', 
                 -script=>{-language=>'JavaScript',-src=>'/fnct2.js'},
                 -head=>[Link({-rel=>'icon',-type=>'image/png',-href=>'https://www.vbi.vt.edu/images/favicon.ico'}),]);
-#print "<body background=\"https://www.vbi.vt.edu/templates/vbi/images/background-body-vbi.png\" link=\"#009977\" vlink=\"#226677\">";
-print "<body background=\"gradient.gif\" link=\"#009977\" vlink=\"#226677\">";
+print "<body background=\"https://www.vbi.vt.edu/templates/vbi/images/background-body-vbi.png\" link=\"#009977\" vlink=\"#226677\">";
+print "<body background=\"http://dvd.vbi.vt.edu/gradient.gif\" link=\"#009977\" vlink=\"#226677\">";
 print start_multipart_form(-name=>'form1', -method =>"POST", -onSubmit=>"return validate()");
 print "<div style=\"font-family:Verdana,Arial\"><div id=\"tipDiv\" style=\"position:absolute\; visibility:hidden\; z-index:100\"></div><br>";
 
 print "<table width=\"100%\"  border=\"0\" cellpadding=\"10\" cellspacing=\"5\">";
-print "<tr><td width=\"7%\"></td> <td align=right><img src=\"vbi-logo.png\"></td> <td align=left> <b><font size=\"5\">Visualizer of Controlled Polynomial Dynamical Systems v0.9 </font></b><br>";
+print "<tr><td width=\"7%\"></td> <td align=right><img src=\"http://dvd.vbi.vt.edu/vbi-logo.png\"></td> <td align=left> <b><font size=\"5\">Visualizer of Controlled Polynomial Dynamical Systems v0.9 </font></b><br>";
 #print "<font size=2><a href=\"http://www.math.vt.edu/people/fhinkel/\">Franziska Hinkelmann</a></font><p> 
 print "</td></tr>";
 print "<tr><td colspan=3 align=center>";
