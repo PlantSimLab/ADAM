@@ -29,20 +29,26 @@ $clientip = '../../htdocs/no-ssl/files/'. $clientip;
 print header, start_html( -title=>'Visualizer of Controlled Polynomial Dynamical Systems Web Interface', 
                 -script=>{-language=>'JavaScript',-src=>'/fnct2.js'},
                 -head=>[Link({-rel=>'icon',-type=>'image/png',-href=>'https://www.vbi.vt.edu/images/favicon.ico'}),]);
-print "<body background=\"gradient.gif\" link=\"#009977\" vlink=\"#226677\">";
-print "<center><img src=\"vbi-logo.png\"></center>";
+print "<body background=\"https://www.vbi.vt.edu/templates/vbi/images/background-body-vbi.png\" link=\"#009977\" vlink=\"#226677\">";
+#print "<body background=\"gradient.gif\" link=\"#009977\" vlink=\"#226677\">";
 print start_multipart_form(-name=>'form1', -method =>"POST", -onSubmit=>"return validate()");
-print "<div style=\"font-family:Verdana,Arial\"><div id=\"tipDiv\" style=\"position:absolute\; visibility:hidden\; z-index:100\"></div>";
-print "<table width=\"100%\"  border=\"0\" cellpadding=\"0\" cellspacing=\"10\">";
+print "<div style=\"font-family:Verdana,Arial\"><div id=\"tipDiv\" style=\"position:absolute\; visibility:hidden\; z-index:100\"></div><br>";
+
+print "<table width=\"100%\"  border=\"0\" cellpadding=\"10\" cellspacing=\"5\">";
+print "<tr><td width=\"7%\"></td> <td align=right><img src=\"vbi-logo.png\"></td> <td align=left> <b><font size=\"5\">Visualizer of Controlled Polynomial Dynamical Systems v0.9 </font></b><br>";
+#print "<font size=2><a href=\"http://www.math.vt.edu/people/fhinkel/\">Franziska Hinkelmann</a></font><p> 
+print "</td></tr>";
+print "<tr><td colspan=3 align=center>";
+print "You can visualize a controlled Polynomial dynamical system. This is experimental, please be patient with us. Thank you for trying it out! <br>
+If you have any questions or comments, <a href=\"mailto:fhinkel@vt.edu\">please email Franziska Hinkelmann</a>! </td></tr></table>";
 #print "<table background=\"http://dvd.vbi.vt.edu/gradient.gif\" width=\"100%\"  border=\"0\" cellpadding=\"0\" cellspacing=\"10\">";
-print "<tr><td align=\"center\" colspan=\"2\"><b><font size=\"5\">Visualizer of Controlled Polynomial Dynamical Systems v0.9 </font></b><br>";
-print "<font size=2><a href=\"http://www.math.vt.edu/people/fhinkel/\">Franziska Hinkelmann</a></font><p>";
-print "You can visualize a controlled Polynomial dynamical system. This is experimental, please be patient with us. Thank you for trying it out! If you have any questions or comments, <a href=\"mailto:fhinkel@vt.edu\">please email us</a>!</td></tr>";
+
+print "<table width=\"100%\"  border=\"0\" cellpadding=\"30\" cellspacing=\"10\">";
 
 ## This is the box around Network Description
-print "<tr><td><table width=\"90%\" align=\"center\" border=\"0\" bgcolor=\"#ABABAB\"  cellpadding=\"1\" cellspacing=\"0\"><tr><td>";
-##
-print "<table border=\"0\" bgcolor=\"#FFFFCC\" width=\"100%\" cellspacing=\"0\" cellpadding=\"1\"><tr valign=\"top\"><td bgcolor=\"#666666\" nowrap>";
+print "<tr valign=top><td width=50%>";
+print "<table width=\"100%\" cellSpacing=\"0\" cellPadding=\"1\" align=\"center\" bgColor=\"#ababab\" border=\"0\"><tr><td>";
+print "<table border=\"0\" bgcolor=\"#FFFFCC\" width=\"100%\" cellspacing=\"0\" cellpadding=\"1\"><tr><td bgcolor=\"#666666\" nowrap>";
 print "<strong><font color=\"#FFFFFF\">Network Description</font></strong></td></tr><tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr>";
 
 ## number of state variables
@@ -79,14 +85,14 @@ print "labeled with the control that has been applied at this transition. <br>";
 print "<br>";
 
 print "</td></tr>";
+print "<tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr></table>";
+print "</td></tr>";
 print "</table>";
-print "<tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr>";
-print "</td></tr></table>";
 
 # Input Functions Block
-print "<td><table width=\"90%\" cellSpacing=\"0\" cellPadding=\"1\" align=\"center\" bgColor=\"#ababab\" border=\"0\"><tr><td><table cellSpacing=\"0\" cellPadding=\"1\" width=\"100%\" bgColor=\"#ffffcc\" border=\"0\">";
+print "<td width=50%><table width=\"100%\" cellSpacing=\"0\" cellPadding=\"1\" align=\"center\" bgColor=\"#ababab\" border=\"0\"><tr><td><table cellSpacing=\"0\" cellPadding=\"1\" width=\"100%\" bgColor=\"#ffffcc\" border=\"0\">";
 
-print "<tr valign=\"top\"><TD nowrap bgColor=\"#666666\"><strong><font
+print "<tr><TD nowrap bgColor=\"#666666\"><strong><font
 color=\"#ffffff\">Input Functions</font></strong></td></tr><tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr>";
 
 #print "<tr valign=\"top\"><td nowrap><font size=\"2\">Select function file (not functional!): </font>",filefield(-name=>'upload_file');
@@ -153,7 +159,9 @@ print "</table></td></tr></table></td></tr>";
 #print"</font></td></tr><tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr></table></td></tr></table></td></tr>";
 print "<tr>";
 print "<br>";
-print"<td align=\"center\" colspan=\"2\">",submit('button_name','Generate')," <br><font color=\"#009977\"><br><i>Results will be displayed below.</i></font></td></tr></table></div>"; 
+print "<td align=\"center\" colspan=\"2\">", 
+  submit('generateButton', 'Generate'),
+  "<br><font style=bold color=\"#009977\"><br><i>Results will be displayed below.</i></font></td></tr>";
 
 ##Google Analytics, Franzi's Account
 #print <<ENDHTML;
@@ -168,7 +176,6 @@ print"<td align=\"center\" colspan=\"2\">",submit('button_name','Generate')," <b
 #} catch(err) {}</script>
 #ENDHTML
 
-print end_form;
 
 open(ACCESS, ">>../../htdocs/no-ssl/accessControl") or die("Failed to open file for writing");
 flock(ACCESS, LOCK_EX) or die ("Could not get exclusive lock $!");
@@ -186,10 +193,15 @@ $heuristicControl = param('findControl');
 $initialState = param( 'initialState');
 $finalState = param( 'finalState');
 
+$generateButton = param('generateButton');
+
+
+print "<tr>";
+print "<br>";
+print "<td align=\"left\" colspan=\"2\">";
 
 
 $DEBUG = 0;
-
 print "access was ok <br>" if ($DEBUG);
 print "client ip is $clientip <br>" if ($DEBUG);
 print "$n_nodes<br>" if ($DEBUG);
@@ -216,23 +228,23 @@ if ($heuristicControl eq "1") {
 }
 
 
-$DEBUG = 1;
+print "generate button $generateButton" if $DEBUG;
+if ($generateButton) {
+  $ret = system("ruby control_runner.rb $n_nodes $u_nodes $p_value \"$functions\" $clientip.out.gif $initialState $finalState");
 
-$DEBUG = 0;
-
-$ret = system("ruby control_runner.rb $n_nodes $u_nodes $p_value \"$functions\" $clientip.out.gif $initialState $finalState");
-
-
-if ( $ret == 0 ) {
-  print "everything ok" if ($DEBUG);
-  if (-e "$clientip.out.gif") {
-    print  "<A href=\"$clientip.out.gif\" target=\"_blank\"> <font color=\"#226677\"><i>Click to view the state space graph of your controlled polynomial dynamical system.</i></font></A><br>";
+  if ( $ret == 0 ) {
+    print "everything ok" if ($DEBUG);
+    if (-e "$clientip.out.gif") {
+      print  "<A href=\"$clientip.out.gif\" target=\"_blank\"> <font color=\"#226677\"><i>Click to view the state space graph of your controlled polynomial dynamical system.</i></font></A><br>";
+    }
+  } else {
+    print "<br><font color=red>Sorry. Something went wrong.</font><br>";
+    die("Program quitting. Unknown error");
   }
-} else {
-  print "<br><font color=red>Sorry. Something went wrong.</font><br>";
-  die("Program quitting. Unknown error");
 }
 
+print "</td></tr>";
+print "</table></div>"; 
 
 print end_html();
 
