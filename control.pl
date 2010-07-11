@@ -29,8 +29,8 @@ $clientip = '../../htdocs/no-ssl/files/'. $clientip;
 print header, start_html( -title=>'Visualizer of Controlled Polynomial Dynamical Systems Web Interface', 
                 -script=>{-language=>'JavaScript',-src=>'/fnct2.js'},
                 -head=>[Link({-rel=>'icon',-type=>'image/png',-href=>'https://www.vbi.vt.edu/images/favicon.ico'}),]);
-print "<body background=\"https://www.vbi.vt.edu/templates/vbi/images/background-body-vbi.png\" link=\"#009977\" vlink=\"#226677\">";
-#print "<body background=\"gradient.gif\" link=\"#009977\" vlink=\"#226677\">";
+#print "<body background=\"https://www.vbi.vt.edu/templates/vbi/images/background-body-vbi.png\" link=\"#009977\" vlink=\"#226677\">";
+print "<body background=\"gradient.gif\" link=\"#009977\" vlink=\"#226677\">";
 print start_multipart_form(-name=>'form1', -method =>"POST", -onSubmit=>"return validate()");
 print "<div style=\"font-family:Verdana,Arial\"><div id=\"tipDiv\" style=\"position:absolute\; visibility:hidden\; z-index:100\"></div><br>";
 
