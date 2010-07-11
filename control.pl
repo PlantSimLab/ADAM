@@ -34,7 +34,7 @@ print "You can visualize a controlled Polynomial dynamical system. This is exper
 ## This is the box around Network Description
 print "<tr><td><table width=\"90%\" align=\"center\" border=\"0\" bgcolor=\"#ABABAB\"  cellpadding=\"1\" cellspacing=\"0\"><tr><td>";
 ##
-print "<table border=\"0\" bgcolor=\"#FFFFCC\" width=\"100%\" cellspacing=\"0\" cellpadding=\"1\"><tr valign=\"top\"><td bgcolor=\"#FF8000\" nowrap>";
+print "<table border=\"0\" bgcolor=\"#FFFFCC\" width=\"100%\" cellspacing=\"0\" cellpadding=\"1\"><tr valign=\"top\"><td bgcolor=\"#666666\" nowrap>";
 print "<strong><font color=\"#FFFFFF\">Network Description</font></strong></td></tr><tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr>";
 
 ## number of state variables
@@ -78,7 +78,7 @@ print "</td></tr></table>";
 # Input Functions Block
 print "<td><table width=\"90%\" cellSpacing=\"0\" cellPadding=\"1\" align=\"center\" bgColor=\"#ababab\" border=\"0\"><tr><td><table cellSpacing=\"0\" cellPadding=\"1\" width=\"100%\" bgColor=\"#ffffcc\" border=\"0\">";
 
-print "<tr valign=\"top\"><TD nowrap bgColor=\"#ff8000\"><strong><font
+print "<tr valign=\"top\"><TD nowrap bgColor=\"#666666\"><strong><font
 color=\"#ffffff\">Input Functions</font></strong></td></tr><tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr>";
 
 #print "<tr valign=\"top\"><td nowrap><font size=\"2\">Select function file (not functional!): </font>",filefield(-name=>'upload_file');
@@ -122,7 +122,7 @@ print "</table></td></tr></table></td></tr>";
 
 ## State Space Specification
 #print"<tr><td><table width=\"90%\" align=\"center\" border=\"0\" bgcolor=\"#ABABAB\"  cellpadding=\"1\" cellspacing=\"0\"><tr><td>";
-#print"<table border=\"0\" bgcolor=\"#FFFFCC\" width=\"100%\" cellspacing=\"0\" cellpadding=\"1\"><tr valign=\"top\"><td bgcolor=\"#FF8000\" nowrap>";
+#print"<table border=\"0\" bgcolor=\"#FFFFCC\" width=\"100%\" cellspacing=\"0\" cellpadding=\"1\"><tr valign=\"top\"><td bgcolor=\"#666666\" nowrap>";
 #print"<strong><font color=\"#FFFFFF\">State Space Specification (not functional)</font></strong></td></tr><tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr>";
 #print"<tr valign=\"top\"><td nowrap><font size=\"2\">Generate state space of";
 #print"&nbsp\;<a href=\"http://dvd.vbi.vt.edu/tutorial.html#S\" onmouseover=\"doTooltip(event,5)\" onmouseout=\"hideTip()\"><font size=\"1\">what is this?</font></a><br>";
@@ -133,7 +133,7 @@ print "</table></td></tr></table></td></tr>";
 ### Additional Output Specification
 #print"<table width=\"90%\" align=\"center\" border=\"0\" bgcolor=\"#ABABAB\" cellpadding=\"1\" cellspacing=\"0\"><tr><td>";
 #print"<table border=\"0\" bgcolor=\"#FFFFCC\" width=\"100%\" cellspacing=\"0\" cellpadding=\"1\"><tr valign=\"top\">";
-#print"<td bgcolor=\"#FF8000\" nowrap><b><font color=\"#FFFFFF\">Additional Output Specification (not functional) &nbsp\;<span style=\"background-color:#808080\">(optional)</span></font></b>";
+#print"<td bgcolor=\"#666666\" nowrap><b><font color=\"#FFFFFF\">Additional Output Specification (not functional) &nbsp\;<span style=\"background-color:#808080\">(optional)</span></font></b>";
 #print"&nbsp\;&nbsp\;&nbsp\;</td>";
 #print"</tr><tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr><tr valign=\"top\"><td nowrap><font size=\"2\">View";
 #print"&nbsp\;<a href=\"http://dvd.vbi.vt.edu/tutorial.html#G\" onmouseover=\"doTooltip(event,6)\" onmouseout=\"hideTip()\"><font size=\"1\">what is this?</font></a><br>";
