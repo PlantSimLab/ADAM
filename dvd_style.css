@@ -8,16 +8,17 @@ style: position:absolute;
 table.box
 {
 background-color: #ABABAB;
-padding: 1;
+padding: 1px;
 align: center;
+border-width: 0px;
+border-spacing: 0px;
 }
 td.bigBox
 {
 background-color: #666666;
 white-space: nowrap;
 }
-td.lines
-{
+tr.lines td {
 background-color: #DCDCDC;
 height: 1px;
 }
