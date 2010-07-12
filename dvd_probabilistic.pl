@@ -28,7 +28,6 @@ print start_multipart_form(-name=>'form1', -method =>"POST", -onSubmit=>"return 
 #print "<div style=\"font-family:Verdana,Arial\"><div id=\"tipDiv\" style=\"position:absolute\; visibility:hidden\; z-index:100\"></div>";
 #print "<table background=\"http://dvd.vbi.vt.edu/gradient.gif\" width=\"100%\"  border=\"0\" cellpadding=\"0\" cellspacing=\"10\">";
 print "<div id=\"wrap\">";
-
 #Div Box: VADD Title :: Header
 print "<div id=\"header\">";
 print "<table><tr>";
