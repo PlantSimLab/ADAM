@@ -6,7 +6,11 @@ html {
 }
 #wrap {
     margin:0 auto;
-    background-image: url('http://dvd.vbi.vt.edu/gradient.gif');
+    background-image: url('dna_pale_blue.png');
+    background-size: 100%;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+/*    background-image: url('http://dvd.vbi.vt.edu/gradient.gif');*/
 /* this stuff was originally in the dvd code... not sure if it's still necessary */
 /*    padding: 0px;
     spacing: 10px;
@@ -45,6 +49,8 @@ style: position:absolute;
 /* Controls main color and size of boxes. Currently pale gray-ish */
 #main table
 {
+    margin-left: auto;
+    margin-right: auto;
     border: 1px solid #ABABAB;
     background-color: #F1F1F1;
     width: 90%;
