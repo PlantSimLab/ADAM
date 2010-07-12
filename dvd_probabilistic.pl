@@ -26,12 +26,18 @@ $clientip = '../../htdocs/no-ssl/files/'. $clientip;
 print header, start_html( -title=>'Discrete Visualizer of Dynamics Web Interface', -script=>{-language=>'JavaScript',-src=>'/fnct2.js'}, -style=>{-src=>'dvd_style.css'});
 print start_multipart_form(-name=>'form1', -method =>"POST", -onSubmit=>"return validate()");
 #print "<div style=\"font-family:Verdana,Arial\"><div id=\"tipDiv\" style=\"position:absolute\; visibility:hidden\; z-index:100\"></div>";
-print "<table background=\"http://dvd.vbi.vt.edu/gradient.gif\" width=\"100%\"  border=\"0\" cellpadding=\"0\" cellspacing=\"10\">";
+#print "<table background=\"http://dvd.vbi.vt.edu/gradient.gif\" width=\"100%\"  border=\"0\" cellpadding=\"0\" cellspacing=\"10\">";
+print "<div id=\"wrap\">";
 
-#Table Box 1: DVD Title & Text
-print "<tr>";
+#Table Box 1: DVD Title :: Header
+print "<div id=\"header\">";
+print "<table><tr>";
 print "<td align=\"right\"><img src=\"http://dvd.vbi.vt.edu/vbi-logo.png\"></td>";
-print "<td align=\"left\"><b><font size=\"5\">Visualization and Analysis of Discrete Dynamics (VADD) v0.1 </font></b></td></tr>";
+print "<td align=\"left\"><b><font size=\"5\">Visualization and Analysis of Discrete Dynamics (VADD) v0.1 </font></b></td></tr></table>";
+print "</div>";
+
+#Box 2: Text Explanation :: Nav
+print "<div>";
 print "<tr><td align=\"center\" colspan=\"2\"><p>";
 print "If this is your first time, please read the <a href=\"http://dvd.vbi.vt.edu/tutorial.html\" target=\"_blank\">tutorial</a>. It is important ";
 print "that you follow the format specified in the tutorial.<br>Make your selections and provide inputs (if any) in the form below and click ";
@@ -39,50 +45,31 @@ print "Generate to run the software.<br> Note: The computation may take some tim
 
 print "<p>";
 print "VADD uses a combination of simulation and algorithms to solve for ";
-print "discrete systems. It is currently still under development; if you ";
+print "discrete systems.";
+print "</div>";
+
+#Box: Comments/Questions/Bugs Link :: Footer
+print "<div id=\"footer\">";
+print "VADD is currently still under development; if you ";
 print "spot any bugs or have any questions/comments, please e-mail us. ";
 print "[TODO: get a vt email] (Bonny Guang, Madison Brandon, Rustin McNeill)";
 print "</td></tr>";
+print "</div>";
 
-#Table Box 2: Network Description
-print "<tr><td><table class=\"box\"><tr><td>";
-#print "<tr><td><table align=\"center\" border=\"0\" bgcolor=\"#ABABAB\"  cellpadding=\"1\" cellspacing=\"0\"><tr><td>";
+#Box: Input Functions, Number of Nodes, Number of States :: Main
+print "<div id = \"main\">";
+
+#Table Box 1: Network Description
+print "<table class=\"box\"><tr><td>";
+#print "<tr><td><table class=\"box\"><tr><td>";
 print "<table border=\"0\" bgcolor=\"#FFFFCC\" width=\"100%\" cellspacing=\"0\" cellpadding=\"1\"><tr valign=\"top\">";
-print "<td class = \"bigBox\">";
-print "<tr valign=\"top\"><td class=\"bigBox\">";
+print "<td class = \"bigBox\"><tr valign=\"top\"><td class=\"bigBox\">";
 print "<strong><font color=\"#FFFFFF\">Network Description</font></strong></td></tr>";
 print "<tr class=\"lines\"><td></td></tr>";
 print "<tr valign=\"top\"><td nowrap><font size=\"2\">Enter number of nodes: </font>",
   textfield(-name=>'n_nodes', -size=>2, -maxlength=>2, -default=>3),
   "&nbsp &nbsp &nbsp";
-print "&nbsp\;<a href=\"http://dvd.vbi.vt.edu/tutorial.html#N\" onmouseover=\"doTooltip(event,0)\" onmouseout=\"hideTip()\"><font size=\"1\">what is this?</font></a>";
-#Bonbons!
-print "</td></tr><tr><td class=\"lines\"></td></tr>";
-#print "<tr valign=\"top\"><td nowrap><font size=\"2\">If you have a special network:";
-#print radio_group(-name=>'special_networks', -values=>['Normal', 'Large Network','Conjunctive/Disjunctive']);
-print "<tr valign=\"top\"><td nowrap><font size=\"2\">", checkbox_group(-name=>'largeNetwork', -value=>'Large Network', -label=>'Large Network'), "&nbsp &nbsp &nbsp";
-print "&nbsp\;<a href=\"http://dvd.vbi.vt.edu/tutorial.html#N\" onmouseover=\"doTooltip(event,7)\" onmouseout=\"hideTip()\"><font size=\"1\">what is this?</font></a><br>";
-print checkbox_group(-name=>'conDisNetwork', -value=>'Conjunctive/Disjunctive Network', -label=>'Conjunctive/Disjunctive
-#    Network');
-print "</font>&nbsp\;<a href=\"http://dvd.vbi.vt.edu/tutorial.html#N\" onmouseover=\"doTooltip(event,8)\" onmouseout=\"hideTip()\"><font size=\"1\">what is this?</font></a>";
-#not Bonbons
-print "</td></tr>";
-print "<tr class=\"lines\"><td></td></tr>";
-print "<tr valign=\"top\"><td nowrap><font size=\"2\">Enter number of states per node: </font>";
-print textfield(-name=>'p_value',-size=>2,-maxlength=>2, default=>3);
-print "&nbsp\;<a href=\"http://dvd.vbi.vt.edu/tutorial.html#P\" onmouseover=\"doTooltip(event,1)\" onmouseout=\"hideTip()\"><font size=\"1\">what is this?</font></a>";
-print "</td></tr><tr class=\"lines\"><td></td></tr>";
-print "<tr valign=\"top\"><td nowrap><font size=\"2\">Select format of input functions:";
-print "&nbsp\;<a href=\"http://dvd.vbi.vt.edu/tutorial.html#F\" onmouseover=\"doTooltip(event,3)\" onmouseout=\"hideTip()\"><font size=\"1\">what is this?</font></a><br>";
-print radio_group(-name=>'translate_box', -values=>['Polynomial','Boolean'], -default=>'Polynomial', -linebreak=>'true');
-print "</font></td></tr><tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr><tr valign=\"top\"><td nowrap><font size=\"2\">Select the updating scheme for the functions:";
-print "&nbsp\;<a href=\"http://dvd.vbi.vt.edu/tutorial.html#U\" onmouseover=\"doTooltip(event,4)\" onmouseout=\"hideTip()\"><font size=\"1\">what is this?</font></a><br>";
-print radio_group(-name=>'update_box', -values=>['Synchronous',
-'Update_stochastic', 'Sequential'], -default=>'Synchronous', -linebreak=>'true');
-print "&nbsp\;&nbsp\;&nbsp\;&nbsp\;- Enter update schedule separated by spaces: ",textfield(-name=>'update_schedule', -size=>24);
-print "</font></td></tr><tr class=\"lines\"><td></td></tr></table></td></tr></table></td>";
-print "<td><table cellSpacing=\"0\" cellPadding=\"1\" align=\"center\" bgColor=\"#ababab\" border=\"0\"><tr><td><table cellSpacing=\"0\" cellPadding=\"1\" width=\"100%\" bgColor=\"#ffffcc\" border=\"0\">";
-
+print "&nbsp\;<a href=\"http://dvd.vbi.vt.edu/tutorial.html#N\" onmouseover=\"doTooltip(event,0)\" onmouseout=\"hideTip()\"><font size=\"1\">what is this?</font></a></td></tr>";
 # Input Functions Block
 print "<tr vAlign=top><td class=\"bigBox\"><strong><font
 color=\"#ffffff\">(Stochastic) Input Functions</font></strong></td></tr>";
@@ -109,6 +96,41 @@ x2
 			   -columns=>50);
 print "</div></td></tr>";
 print "<tr class = \"lines\"><td></td></tr></table></td></tr></table></td></tr>";
+print "</table>";
+print "</div>";
+
+print "<div id=\"sidebar\">";
+#Bonbons!
+#print "</td></tr><tr class=\"lines\"><td></td></tr>";
+#print "<tr valign=\"top\"><td nowrap><font size=\"2\">If you have a special network:";
+#print radio_group(-name=>'special_networks', -values=>['Normal', 'Large Network','Conjunctive/Disjunctive']);
+print "<table>";
+print "<tr valign=\"top\"><td nowrap><font size=\"2\">", checkbox_group(-name=>'largeNetwork', -value=>'Large Network', -label=>'Large Network'), "&nbsp &nbsp &nbsp";
+print "&nbsp\;<a href=\"http://dvd.vbi.vt.edu/tutorial.html#N\" onmouseover=\"doTooltip(event,7)\" onmouseout=\"hideTip()\"><font size=\"1\">what is this?</font></a><br>";
+print checkbox_group(-name=>'conDisNetwork', -value=>'Conjunctive/Disjunctive Network', -label=>'Conjunctive/Disjunctive
+#    Network');
+print "</font>&nbsp\;<a href=\"http://dvd.vbi.vt.edu/tutorial.html#N\" onmouseover=\"doTooltip(event,8)\" onmouseout=\"hideTip()\"><font size=\"1\">what is this?</font></a>";
+#not Bonbons
+print "</td></tr>";
+print "<tr class=\"lines\"><td></td></tr>";
+print "</table>";
+print "</div>";
+
+print "<table>";
+print "<tr valign=\"top\"><td nowrap><font size=\"2\">Enter number of states per node: </font>";
+print textfield(-name=>'p_value',-size=>2,-maxlength=>2, default=>3);
+print "&nbsp\;<a href=\"http://dvd.vbi.vt.edu/tutorial.html#P\" onmouseover=\"doTooltip(event,1)\" onmouseout=\"hideTip()\"><font size=\"1\">what is this?</font></a>";
+print "</td></tr><tr class=\"lines\"><td></td></tr>";
+print "<tr valign=\"top\"><td nowrap><font size=\"2\">Select format of input functions:";
+print "&nbsp\;<a href=\"http://dvd.vbi.vt.edu/tutorial.html#F\" onmouseover=\"doTooltip(event,3)\" onmouseout=\"hideTip()\"><font size=\"1\">what is this?</font></a><br>";
+print radio_group(-name=>'translate_box', -values=>['Polynomial','Boolean'], -default=>'Polynomial', -linebreak=>'true');
+print "</font></td></tr><tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr><tr valign=\"top\"><td nowrap><font size=\"2\">Select the updating scheme for the functions:";
+print "&nbsp\;<a href=\"http://dvd.vbi.vt.edu/tutorial.html#U\" onmouseover=\"doTooltip(event,4)\" onmouseout=\"hideTip()\"><font size=\"1\">what is this?</font></a><br>";
+print radio_group(-name=>'update_box', -values=>['Synchronous',
+'Update_stochastic', 'Sequential'], -default=>'Synchronous', -linebreak=>'true');
+print "&nbsp\;&nbsp\;&nbsp\;&nbsp\;- Enter update schedule separated by spaces: ",textfield(-name=>'update_schedule', -size=>24);
+print "</font></td></tr><tr class=\"lines\"><td></td></tr></table></td></tr></table></td>";
+print "<td><table cellSpacing=\"0\" cellPadding=\"1\" align=\"center\" bgColor=\"#ababab\" border=\"0\"><tr><td><table cellSpacing=\"0\" cellPadding=\"1\" width=\"100%\" bgColor=\"#ffffcc\" border=\"0\">";
 
 #Table Box 4: State Space Specifications
 print "<tr><td><table class=\"box\"><tr><td>";
@@ -136,7 +158,9 @@ print checkbox_group(-name=>'statespace', -value=>'State space graph', -label=>'
 print checkbox_group(-name=>'depgraph', -value=>'Dependency graph',
 -label=>'Dependency graph'), "&nbsp\;&nbsp\;&nbsp\;", popup_menu(-name=>'DGformat',-values=>['*.gif','*.jpg','*.png','*.ps']);
 print"</font></td></tr><tr class=\"lines\"><td></td></tr></table></td></tr></table></td></tr><tr>";
-print"<td align=\"center\" colspan=\"2\">",submit('button_name','Generate')," <br><font color=\"#006C00\"><br><i>Results will be displayed below.</i></font></td></tr></table></div>"; 
+print"<td align=\"center\" colspan=\"2\">",submit('button_name','Generate')," <br><font color=\"#006C00\"><br><i>Results will be displayed below.</i></font></td></tr>";
+#</table></div>"; 
+print "</div>";
 
 #Google Analytics, Franzi's Account
 print <<ENDHTML;

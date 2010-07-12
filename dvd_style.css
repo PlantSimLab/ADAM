@@ -1,7 +1,33 @@
+body,
+html {
+    margin:0;
+    padding:0;
+    color:#000;
+}
+#wrap {
+   /* width:750px;*/
+    margin:0 auto;
+    background: #99c;
+}
+#header {
+    width:80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+#main {
+    float:left;
+    width:60%;
+    background:#9c9;
+}
+#sidebar {
+    float:right;
+    width:40%;
+    background:#c9c;
+}
+#footer { clear:both; }
 div
 {
 font-family: Verdana, Arial;
-id: tipDiv;
 style: position:absolute;
 /*visibility: hidden;*/
 }
