@@ -3,7 +3,7 @@ div
 font-family: Verdana, Arial;
 id: tipDiv;
 style: position:absolute;
-visibility: hidden;
+/*visibility: hidden;*/
 }
 table.box
 {

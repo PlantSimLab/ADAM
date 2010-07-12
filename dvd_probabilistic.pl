@@ -29,19 +29,24 @@ print start_multipart_form(-name=>'form1', -method =>"POST", -onSubmit=>"return 
 print "<table background=\"http://dvd.vbi.vt.edu/gradient.gif\" width=\"100%\"  border=\"0\" cellpadding=\"0\" cellspacing=\"10\">";
 
 #Table Box 1: DVD Title & Text
-print "<tr><td align=\"center\" colspan=\"2\"><b><font size=\"5\">Visualization and Analysis of Discrete Dynamics (VADD) v3.1 </font></b><p>";
+print "<tr><td align=\"center\" colspan=\"2\"><b><font size=\"5\">Visualization and Analysis of Discrete Dynamics (VADD) v0.1 </font></b><p>";
 print "If this is your first time, please read the <a href=\"http://dvd.vbi.vt.edu/tutorial.html\" target=\"_blank\">tutorial</a>. It is important ";
 print "that you follow the format specified in the tutorial.<br>Make your selections and provide inputs (if any) in the form below and click ";
-print "Generate to run the software.<br> Note: The computation may take some time depending on your internet connection.</td></tr>";
+print "Generate to run the software.<br> Note: The computation may take some time depending on your internet connection.";
+
+print "<p>";
+print "VADD uses a combination of simulation and algorithms to solve for ";
+print "discrete systems. It is currently still under development; if you ";
+print "spot any bugs or have any questions/comments, please e-mail us. ";
+print "[TODO: get a vt email] (Bonny Guang, Madison Brandon, Rustin McNeill)";
+print "</td></tr>";
 
 #Table Box 2: Network Description
 print "<tr><td><table align=\"center\" border=\"0\" bgcolor=\"#ABABAB\"  cellpadding=\"1\" cellspacing=\"0\"><tr><td>";
 print "<table border=\"0\" bgcolor=\"#FFFFCC\" width=\"100%\" cellspacing=\"0\" cellpadding=\"1\"><tr valign=\"top\">";
 print "<td class = \"bigBox\">";
-#<td bgcolor=\"#666666\" nowrap>";
 print "<tr valign=\"top\"><td class=\"bigBox\">";
 print "<strong><font color=\"#FFFFFF\">Network Description</font></strong></td></tr><tr>";
-#<td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td>"
 print "<td class=\"lines\"></td></tr>";
 print "<tr valign=\"top\"><td nowrap><font size=\"2\">Enter number of nodes: </font>",
   textfield(-name=>'n_nodes', -size=>2, -maxlength=>2, -default=>3),
@@ -49,7 +54,6 @@ print "<tr valign=\"top\"><td nowrap><font size=\"2\">Enter number of nodes: </f
 print "&nbsp\;<a href=\"http://dvd.vbi.vt.edu/tutorial.html#N\" onmouseover=\"doTooltip(event,0)\" onmouseout=\"hideTip()\"><font size=\"1\">what is this?</font></a>";
 #Bonbons!
 print "</td></tr><tr><td class=\"lines\"></td></tr>";
-#print "</td></tr><tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr>";
 #print "<tr valign=\"top\"><td nowrap><font size=\"2\">If you have a special network:";
 #print radio_group(-name=>'special_networks', -values=>['Normal', 'Large Network','Conjunctive/Disjunctive']);
 print "<tr valign=\"top\"><td nowrap><font size=\"2\">", checkbox_group(-name=>'largeNetwork', -value=>'Large Network', -label=>'Large Network'), "&nbsp &nbsp &nbsp";
