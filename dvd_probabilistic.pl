@@ -41,10 +41,12 @@ print "<tr valign=\"top\"><td nowrap><font size=\"2\">Enter number of nodes: </f
 print "&nbsp\;<a href=\"http://dvd.vbi.vt.edu/tutorial.html#N\" onmouseover=\"doTooltip(event,0)\" onmouseout=\"hideTip()\"><font size=\"1\">what is this?</font></a>";
 #Bonbons!
 print "</td></tr><tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr>";
+#print "<tr valign=\"top\"><td nowrap><font size=\"2\">If you have a special network:";
+#print radio_group(-name=>'special_networks', -values=>['Normal', 'Large Network','Conjunctive/Disjunctive']);
 print "<tr valign=\"top\"><td nowrap><font size=\"2\">", checkbox_group(-name=>'largeNetwork', -value=>'Large Network', -label=>'Large Network'), "&nbsp &nbsp &nbsp";
-print "&nbsp\;<a href=\"http://dvd.vbi.vt.edu/tutorial.html#N\" onmouseover=\"doTooltip(event,7)\" onmouseout=\"hideTip()\"><font size=\"1\">what is this?</font></a>";
+print "&nbsp\;<a href=\"http://dvd.vbi.vt.edu/tutorial.html#N\" onmouseover=\"doTooltip(event,7)\" onmouseout=\"hideTip()\"><font size=\"1\">what is this?</font></a><br>";
 print checkbox_group(-name=>'conDisNetwork', -value=>'Conjunctive/Disjunctive Network', -label=>'Conjunctive/Disjunctive
-    Network');
+#    Network');
 print "</font>&nbsp\;<a href=\"http://dvd.vbi.vt.edu/tutorial.html#N\" onmouseover=\"doTooltip(event,8)\" onmouseout=\"hideTip()\"><font size=\"1\">what is this?</font></a>";
 #not Bonbons
 print "</td></tr><tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr><tr valign=\"top\"><td nowrap><font size=\"2\">Enter number of states per node: </font>";
