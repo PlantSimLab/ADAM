@@ -5,45 +5,69 @@ html {
     color:#000;
 }
 #wrap {
-   /* width:750px;*/
     margin:0 auto;
-    background: #99c;
+    background-image: url('http://dvd.vbi.vt.edu/gradient.gif');
+/*    background: #99c;*/
+/*    padding: 0px;
+    spacing: 10px;
+    border: 0px;*/
 }
+/* VBI Logo and Title */
 #header {
     width:80%;
     margin-left: auto;
     margin-right: auto;
 }
+/* Text Explanation */
+#nav { text-align: center; }
+/* Main Block: Input Functions and State/Node Number; Also Output */
 #main {
     float:left;
     width:60%;
-    background:#9c9;
+/*    background:#9c9;*/
 }
 #sidebar {
     float:right;
     width:40%;
-    background:#c9c;
+/*    background:#c9c;*/
 }
-#footer { clear:both; }
+#footer {
+    clear:both;
+    font-size: .8em;
+    text-align: center;
+}
 div
 {
 font-family: Verdana, Arial;
 style: position:absolute;
 /*visibility: hidden;*/
 }
-table.box
+/* Controls main color and size of boxes. Currently pale orange-ish */
+#main table
 {
-background-color: #ABABAB;
-padding: 1px;
-align: center;
-border-width: 0px;
-border-spacing: 0px;
+    border: 1px solid #ABABAB;
+    background-color: #F1F1F1;
+    width: 90%;
+    border-spacing: 0px;
+    padding: 1px;
 }
-td.bigBox
+/* Controls sidebar color and size of boxes. Currently pale orange-ish */
+#sidebar table
 {
-background-color: #666666;
+    border: 1px solid #ABABAB;
+    background-color: #F1F1F1;
+    width: 100%;
+    border-spacing: 0px;
+    padding: 1px;
+
+}
+/* Controls color of the title boxes. Currently some kind of gray. */
+td.titleBox
+{
+background-color: #99C9FF;
 white-space: nowrap;
 }
+/* Creates those little gray lines dividing each section */
 tr.lines td {
 background-color: #DCDCDC;
 height: 1px;
