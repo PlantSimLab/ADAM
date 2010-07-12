@@ -3,7 +3,7 @@
 ## Hussein Vastani 
 ## Franziska Hinkelmann
 ## Bonbons
-## June 2010
+## July 2010
 
 ## DVD 3 with support for large networks and conjunctive 
 ## networks using M2 instead of perl enumeration
@@ -96,19 +96,16 @@ print "</div>";
 #Div Box: Network Options/Other Options :: Sidebar
 print "<div id=\"sidebar\">";
 
-#Bonbons! Network Options
+#Network Options
 #print "<tr valign=\"top\"><td nowrap><font size=\"2\">If you have a special network:";
-#print radio_group(-name=>'special_networks', -values=>['Normal', 'Large Network','Conjunctive/Disjunctive']);
 print "<table>";
 print "<tr valign=\"top\"><td class=\"titleBox\">";
 print "<strong><font color=\"#black\">Network Options</font></strong></td></tr>";
 print "<tr class=\"lines\"><td></td></tr>";
-print "<tr valign=\"top\"><td nowrap><font size=\"2\">", checkbox_group(-name=>'largeNetwork', -value=>'Large Network', -label=>'Large Network'), "&nbsp &nbsp &nbsp";
+print "<tr valign=\"top\"><td nowrap><font size=\"2\">";
+print "Select the type of network:";
 print "&nbsp\;<a href=\"http://dvd.vbi.vt.edu/tutorial.html#N\" onmouseover=\"doTooltip(event,7)\" onmouseout=\"hideTip()\"><font size=\"1\">what is this?</font></a><br>";
-print checkbox_group(-name=>'conDisNetwork', -value=>'Conjunctive/Disjunctive Network', -label=>'Conjunctive/Disjunctive
-#    Network');
-print "</font>&nbsp\;<a href=\"http://dvd.vbi.vt.edu/tutorial.html#N\" onmouseover=\"doTooltip(event,8)\" onmouseout=\"hideTip()\"><font size=\"1\">what is this?</font></a>";
-#not Bonbons
+print radio_group(-name=>'special_networks', -values=>['Small Network (nodes <= 10)', 'Large Network (nodes > 10)','Conjunctive/Disjunctive'], -default=>'Small Network (nodes <= 10)', -linebreak=>'true');
 print "</td></tr>";
 print "</table>";
 
@@ -138,7 +135,7 @@ print "<tr class=\"lines\"><td></td></tr>";
 print"<tr valign=\"top\"><td nowrap><font size=\"2\">Generate state space of";
 print"&nbsp\;<a href=\"http://dvd.vbi.vt.edu/tutorial.html#S\" onmouseover=\"doTooltip(event,5)\" onmouseout=\"hideTip()\"><font size=\"1\">what is this?</font></a><br>";
 print radio_group(-name=>'option_box', -values=>['All trajectories from all possible initial states', 'One trajectory starting at an initial state'], -default=>'All trajectories from all possible initial states', -linebreak=>'true',); 
-print "&nbsp\;&nbsp\;&nbsp\;&nbsp\;- Enter initialization separated by spaces: ",textfield(-name=>'trajectory_value', -size=>20);
+print "&nbsp\;&nbsp\;&nbsp\;&nbsp\;- Enter initialization separated by spaces: <br><center>",textfield(-name=>'trajectory_value', -size=>20), "</center>";
 print"</font></td></tr>";
 print "</table>";
 
@@ -194,13 +191,14 @@ $n_nodes = param('n_nodes');
 $upload_file = upload('upload_file');
 $option_box = param('option_box');
 $translate_box = param('translate_box');
+$special_networks = param('special_networks');
 $update_box = param('update_box');
 $update_schedule = param('update_schedule');
 $trajectory_box = param('trajectory_box');
 $trajectory_value = param('trajectory_value');
 $statespace = param('statespace');
-$largeNetwork = param('largeNetwork');
-$conDisNetwork = param('conDisNetwork');
+#$largeNetwork = param('largeNetwork');
+#$conDisNetwork = param('conDisNetwork');
 $ginSim = param('ginSim');
 $depgraph = param('depgraph');
 $edit_functions = param('edit_functions');
@@ -220,10 +218,10 @@ $DGformat =~ s/\*\.//;
 print "access was ok <br>" if ($DEBUG);
 print "$option_box <br>" if ($DEBUG);
 print "$translate_box <br>" if ($DEBUG);
-print "$largeNetwork<br>" if ($DEBUG);
-print "$conDisNetwork<br>" if ($DEBUG);
+print "$special_networks <br>" if ($DEBUG);
 
-if ( $conDisNetwork eq "Conjunctive/Disjunctive Network" ) {
+
+if ( $special_networks eq "Conjunctive/Disjunctive Network" ) {
   if ($p_value != 2 ) { 
     # TODO
     print "ERROR";
@@ -248,7 +246,7 @@ if ( $conDisNetwork eq "Conjunctive/Disjunctive Network" ) {
   #BLAHBLAH i'm sad ._.
   system("ruby dvd_conjunctive_runner.rb $n_nodes $p_value $dpGraph");
 }
-elsif ( $largeNetwork eq "Large Network" ) {
+elsif ( $special_networks eq "Large Network" ) {
   print "<font color=blue><b>Calculating fixed points for a large network,
   other analysis of dynamics not possible for now.</b></font><br>";
   print "<font color=blue><b>This is a very experimental feature, therefore
