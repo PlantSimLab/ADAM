@@ -7,7 +7,7 @@ html {
 #wrap {
     margin:0 auto;
     background-image: url('http://dvd.vbi.vt.edu/gradient.gif');
-/*    background: #99c;*/
+/* this stuff was originally in the dvd code... not sure if it's still necessary */
 /*    padding: 0px;
     spacing: 10px;
     border: 0px;*/
@@ -24,12 +24,12 @@ html {
 #main {
     float:left;
     width:60%;
-/*    background:#9c9;*/
+/*    background:#9c9;*/ /*will be green for debugging purposes*/
 }
 #sidebar {
     float:right;
     width:40%;
-/*    background:#c9c;*/
+/*    background:#c9c;*/ /*will be purple for debuggin purposes*/
 }
 #footer {
     clear:both;
@@ -42,7 +42,7 @@ font-family: Verdana, Arial;
 style: position:absolute;
 /*visibility: hidden;*/
 }
-/* Controls main color and size of boxes. Currently pale orange-ish */
+/* Controls main color and size of boxes. Currently pale gray-ish */
 #main table
 {
     border: 1px solid #ABABAB;
@@ -51,7 +51,7 @@ style: position:absolute;
     border-spacing: 0px;
     padding: 1px;
 }
-/* Controls sidebar color and size of boxes. Currently pale orange-ish */
+/* Controls sidebar color and size of boxes. Currently pale gray-ish */
 #sidebar table
 {
     border: 1px solid #ABABAB;
@@ -61,7 +61,7 @@ style: position:absolute;
     padding: 1px;
 
 }
-/* Controls color of the title boxes. Currently some kind of gray. */
+/* Controls color of the title boxes. Currently some kind of pale blue. */
 td.titleBox
 {
 background-color: #99C9FF;
