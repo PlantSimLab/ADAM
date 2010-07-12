@@ -23,24 +23,33 @@ $clientip = '../../htdocs/no-ssl/files/'. $clientip;
 #$clientip = $sec.'-'.$min.'-'.$hr;
 
 
-print header, start_html( -title=>'Discrete Visualizer of Dynamics Web Interface', -script=>{-language=>'JavaScript',-src=>'/fnct2.js'});
+print header, start_html( -title=>'Discrete Visualizer of Dynamics Web Interface', -script=>{-language=>'JavaScript',-src=>'/fnct2.js'}, -style=>{-src=>'dvd_style.css'});
 print start_multipart_form(-name=>'form1', -method =>"POST", -onSubmit=>"return validate()");
-print "<div style=\"font-family:Verdana,Arial\"><div id=\"tipDiv\" style=\"position:absolute\; visibility:hidden\; z-index:100\"></div>";
+#print "<div style=\"font-family:Verdana,Arial\"><div id=\"tipDiv\" style=\"position:absolute\; visibility:hidden\; z-index:100\"></div>";
 print "<table background=\"http://dvd.vbi.vt.edu/gradient.gif\" width=\"100%\"  border=\"0\" cellpadding=\"0\" cellspacing=\"10\">";
-print "<tr><td align=\"center\" colspan=\"2\"><b><font size=\"5\">Discrete 
-Visualizer of Dynamics (DVD) v3.0 </font></b><p>";
+
+#Table Box 1: DVD Title & Text
+print "<tr><td align=\"center\" colspan=\"2\"><b><font size=\"5\">Visualization and Analysis of Discrete Dynamics (VADD) v3.1 </font></b><p>";
 print "If this is your first time, please read the <a href=\"http://dvd.vbi.vt.edu/tutorial.html\" target=\"_blank\">tutorial</a>. It is important ";
 print "that you follow the format specified in the tutorial.<br>Make your selections and provide inputs (if any) in the form below and click ";
 print "Generate to run the software.<br> Note: The computation may take some time depending on your internet connection.</td></tr>";
+
+#Table Box 2: Network Description
 print "<tr><td><table align=\"center\" border=\"0\" bgcolor=\"#ABABAB\"  cellpadding=\"1\" cellspacing=\"0\"><tr><td>";
-print "<table border=\"0\" bgcolor=\"#FFFFCC\" width=\"100%\" cellspacing=\"0\" cellpadding=\"1\"><tr valign=\"top\"><td bgcolor=\"#666666\" nowrap>";
-print "<strong><font color=\"#FFFFFF\">Network Description</font></strong></td></tr><tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr>";
+print "<table border=\"0\" bgcolor=\"#FFFFCC\" width=\"100%\" cellspacing=\"0\" cellpadding=\"1\"><tr valign=\"top\">";
+print "<td class = \"bigBox\">";
+#<td bgcolor=\"#666666\" nowrap>";
+print "<tr valign=\"top\"><td class=\"bigBox\">";
+print "<strong><font color=\"#FFFFFF\">Network Description</font></strong></td></tr><tr>";
+#<td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td>"
+print "<td class=\"lines\"></td></tr>";
 print "<tr valign=\"top\"><td nowrap><font size=\"2\">Enter number of nodes: </font>",
   textfield(-name=>'n_nodes', -size=>2, -maxlength=>2, -default=>3),
   "&nbsp &nbsp &nbsp";
 print "&nbsp\;<a href=\"http://dvd.vbi.vt.edu/tutorial.html#N\" onmouseover=\"doTooltip(event,0)\" onmouseout=\"hideTip()\"><font size=\"1\">what is this?</font></a>";
 #Bonbons!
-print "</td></tr><tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr>";
+print "</td></tr><tr><td class=\"lines\"></td></tr>";
+#print "</td></tr><tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr>";
 #print "<tr valign=\"top\"><td nowrap><font size=\"2\">If you have a special network:";
 #print radio_group(-name=>'special_networks', -values=>['Normal', 'Large Network','Conjunctive/Disjunctive']);
 print "<tr valign=\"top\"><td nowrap><font size=\"2\">", checkbox_group(-name=>'largeNetwork', -value=>'Large Network', -label=>'Large Network'), "&nbsp &nbsp &nbsp";

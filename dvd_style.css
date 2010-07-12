@@ -1,0 +1,23 @@
+div
+{
+font-family: Verdana, Arial;
+id: tipDiv;
+style: position:absolute;
+visibility: hidden;
+}
+table.box
+{
+background-color: #ABABAB;
+padding: 1;
+align: center;
+}
+td.bigBox
+{
+background-color: #666666;
+white-space: nowrap;
+}
+td.lines
+{
+background-color: #DCDCDC;
+height: 1px;
+}
