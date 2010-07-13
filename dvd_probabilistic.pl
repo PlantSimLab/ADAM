@@ -23,7 +23,7 @@ $clientip = '../../htdocs/no-ssl/files/'. $clientip;
 #$clientip = $sec.'-'.$min.'-'.$hr;
 
 
-print header, start_html( -title=>'Discrete Visualizer of Dynamics Web Interface', -script=>{-language=>'JavaScript',-src=>'/fnct2.js'}, -style=>{-src=>'dvd_style.css'});
+print header, start_html( -title=>'Visualization and Analysis of Discrete Dynamics Web Interface', -script=>{-language=>'JavaScript',-src=>'/fnct2.js'}, -style=>{-src=>'dvd_style.css'});
 print start_multipart_form(-name=>'form1', -method =>"POST", -onSubmit=>"return validate()");
 print "<div id=\"wrap\">";
 print "<div id=\"tipDiv\" style=\"position:absolute\; visibility:hidden\; z-index:100\"></div>";
