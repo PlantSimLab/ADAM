@@ -198,8 +198,6 @@ $update_schedule = param('update_schedule');
 $trajectory_box = param('trajectory_box');
 $trajectory_value = param('trajectory_value');
 $statespace = param('statespace');
-#$largeNetwork = param('largeNetwork');
-#$conDisNetwork = param('conDisNetwork');
 $ginSim = param('ginSim');
 $depgraph = param('depgraph');
 $edit_functions = param('edit_functions');
@@ -221,8 +219,7 @@ print "$option_box <br>" if ($DEBUG);
 print "$translate_box <br>" if ($DEBUG);
 print "$special_networks <br>" if ($DEBUG);
 
-
-if ( $special_networks eq "Conjunctive/Disjunctive Network" ) {
+if ( $special_networks eq "Conjunctive/Disjunctive" ) {
   if ($p_value != 2 ) { 
     # TODO
     print "ERROR";
@@ -247,7 +244,7 @@ if ( $special_networks eq "Conjunctive/Disjunctive Network" ) {
   #BLAHBLAH i'm sad ._.
   system("ruby dvd_conjunctive_runner.rb $n_nodes $p_value $dpGraph");
 }
-elsif ( $special_networks eq "Large Network" ) {
+elsif ( $special_networks eq "Large Network (nodes > 10)" ) {
   print "<font color=blue><b>Calculating fixed points for a large network,
   other analysis of dynamics not possible for now.</b></font><br>";
   print "<font color=blue><b>This is a very experimental feature, therefore
