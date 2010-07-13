@@ -45,7 +45,7 @@ the user.
 <a name="D">
 <h3>What is <i>number of states per node</i> input?</h3>
 </a> We will refer to this field as the <i>m value</i>. It is a number that denotes the cardinality of the state 
-set of the user's discrete network. The software accepts positive integers upto 99.
+set of the user's discrete network. The software accepts positive integers up to 99.
 This value gives the total number of states that a node in the 
 network can have. For example, if <i>m value</i> = 3, then the possible states 
 for any node are 0, 1, and 2. Currently the software will not display the graph 
@@ -103,12 +103,13 @@ meaning it computes the transition states from all possible initializations.
 When simulating, VADD will output the analysis results as well as the graph 
 of the state space.  For <i> Large Networks </i> VADD uses algebra to solve 
 for fixed points and limit cycles up to length 5.  VADD uses a separate
-algorithm to compute dynamcis in the case of <i>Conjunctive/Disjunctive</i>
+algorithm to compute dynamics in the case of <i>Conjunctive/Disjunctive</i>
 Networks. Conjunctive Boolean networks consist of functions containing only
 one monomial term, i.e. the functions use only the AND operator.  Conversely,
 Disjunctive Boolean networks consist of functions which use only the OR
 operator.  Note that the <i>Conjunctive/Disjunctive</i> option only works for
-functions defined in a Boolean ring, i.e. there can be only two states per node.
+functions defined in a Boolean ring, i.e. there can be only two states per
+node. (see <a href="#L">What is the <i>number of states per node</i> input?</a>)
 When input is a large network or a conjunctive/disjunctive network, VADD
 diplays the results as a list. Note that <i>Large Networks</i>
 and <i>Conjunctive/Disjunctive</i> do not work in conjunction with <i>Options for Small Networks</i>.
@@ -119,7 +120,8 @@ and <i>Conjunctive/Disjunctive</i> do not work in conjunction with <i>Options fo
 <a name="U">
 <h3>What is the <i>update schedule</i> input?</h3>
 </a>
-This will determine the order in which to evaluate the functions.<br><li><b>Synchronous</b>: all functions get evaluated at the same time</li><li><b>Sequential</b>: the functions are evaluated in some specified order. The function indices must be entered in the input box provided with each index used exactly once and should be in the
+This will determine the order in which to evaluate the
+functions.<br><li><b>Synchronous</b>: all functions get evaluated at the same time </li><li><b>Sequential</b>: the functions are evaluated in some specified order. The function indices must be entered in the input box provided with each index used exactly once and should be in the
 range 1 to n (number of nodes)</li>
 Note that this option applies only to <i>Small Networks</i>.
 <div align="right"><a href="#top"><font size="-1" color="#FF0000">Return to the 
@@ -260,7 +262,7 @@ Note the this options applies only to <i>Small Networks</i>.
 <a name="G">
 <h3>Viewing the graph</h3>
 </a>The user has an option to view the graph of the entire state space or a single trajectory in the state space, AND the dependency graph of the network
-described by the input functions. The user can also select the format of the image file from the list of formats (gif, jpg, png and ps)
+described by the input functions. The user can also select the format of the image file from the list of formats (gif, jpg, png and ps).
 Based on the users selection, a link to view the selected graph is available
 Fig (d) graph below is an example state space graph, 
 Fig (e) graph below is the trajectory generated using initialization 2 0 1 and Fig (f) graph
@@ -295,7 +297,8 @@ Note that graphics are produced only with the <i>Small Networks</i> option.
 Due to limitations in viewing, we restrict the total number of states in the state 
 space to 1000; that is, <i>m</i>^<i>n</i> &lt;= 1000, where <i>m</i> = <i>m value</i> 
 and <i>n</i> = <i>number of nodes</i>.  Hence, we produce graphics only
-for <i>Small Networks</i>.  Further, due to the increasing computational complexity of
+for <i>Small Networks</i>.(see <a href="#L">What is <i>Network Options</i>?</a>)  
+Further, due to the increasing computational complexity of
 computing limit cycles as the length of the cycles increases we only allow
 computation of limit cycles up to length 5 for the <i>Large Networks</i> option. 
 <div align="right"><a href="#top"><font size="-1" color="#FF0000">Return to the 
@@ -313,6 +316,7 @@ Brandilyn Stigler<br>
 Franziska Hinkelmann (<a href="mailto:fhinkel@vt.edu">Please email us if you have any problems</a>)<br>
 Madison Brandon<br>
 Bonny Guang<br>
+<a href="http://img10.imageshack.us/img10/9024/p7080016crop.png">Chuck</a><br>
 Rustin McNeill<br>
 </font> 
 </body>

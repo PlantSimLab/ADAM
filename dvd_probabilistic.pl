@@ -111,7 +111,7 @@ print "<tr class=\"lines\"><td></td></tr>";
 print "<tr valign=\"top\"><td nowrap><font size=\"2\">";
 print "Select the type of network:";
 print "&nbsp\;<a href=\"http://dvd.vbi.vt.edu/tutorial.html#N\" onmouseover=\"doTooltip(event,7)\" onmouseout=\"hideTip()\"><font size=\"1\">what is this?</font></a><br>";
-print radio_group(-name=>'special_networks', -values=>['Small Network (nodes <= 10)', 'Large Network (nodes > 10)','Conjunctive/Disjunctive'], -default=>'Small Network (nodes <= 10)', -linebreak=>'true');
+print radio_group(-name=>'special_networks', -values=>['Small Network (nodes <= 10)', 'Large Network (nodes > 10)','Conjunctive/Disjunctive (Boolean rings only)'], -default=>'Small Network (nodes <= 10)', -linebreak=>'true');
 print "</td></tr>";
 print "</table>";
 
@@ -159,7 +159,6 @@ print checkbox_group(-name=>'depgraph', -value=>'Dependency graph',
 print"</font></td></tr><tr class=\"lines\"><td></td></tr></table></td></tr></table></td></tr>";
 print "</table>";
 print "</div>";
-
 
 print "<div id =\"computation\">";
 #Google Analytics, Franzi's Account
@@ -216,24 +215,18 @@ print "$option_box <br>" if ($DEBUG);
 print "$translate_box <br>" if ($DEBUG);
 print "$special_networks <br>" if ($DEBUG);
 
-if ( $special_networks eq "Conjunctive/Disjunctive" ) {
+if ( $special_networks eq "Conjunctive/Disjunctive (Boolean rings only)" ) {
   if ($p_value != 2 ) { 
-    # TODO
-    print "ERROR";
+    print "<font color=\"red\">ERROR: Option works only for Boolean rings</font>";
+    die("Program quitting. Not 2 states given for conjunctive/disjunctive network");
   }
   # conj/disj networks dynamics depend on the dependency graph, we need to
   # generate it 
   create_input_function();
-  #print ("perl regulatory.pl $filename $n_nodes $clientip $DGformat");
   system("perl regulatory.pl $filename $n_nodes $clientip $DGformat");
   $dpGraph = "$clientip.out1.dot";
   print  "<A href=\"$dpGraph\" target=\"_blank\"><font
   color=red><i>Click to view the dependency graph.</i></font></A><br>";
-
-#			if(-e "$clientip.out1.$DGformat")
-#			{
-#				print  "<A href=\"$clientip.out1.$DGformat\" target=\"_blank\"><font color=red><i>Click to view the dependency graph.</i></font></A><br>";
-#			}
   print "<font color=blue><b>If your dependency graph is not strongly connected
   then it will exit at this time, sorry.</b></font><br>";
   print "<font color=blue><b>Calculating fixed points and limit cycles for
@@ -332,6 +325,8 @@ print "[TODO: get a vt email] (Bonny Guang, Madison Brandon, Rustin McNeill)";
 print "</td></tr>";
 print "</div>";
 
+print "</div>";
+
 print end_html();
 
 
@@ -358,7 +353,6 @@ sub create_input_function() {
         }
         flock(GINOUTFILE, LOCK_UN) or die ("Could not unlock file $!");
         close $upload_file;
-        print "The logical model was converted to: <br>";
         system("ruby ginSim-converter.rb $clientip.ginsim.ginml $filename");
       } else {
       flock(OUTFILE, LOCK_EX) or die ("Could not get exclusive lock $!");
