@@ -5,7 +5,7 @@
 ## Bonbons
 ## July 2010
 
-## DVD 3 with support for large networks and conjunctive 
+## VADD0.1 with support for large networks and conjunctive 
 ## networks using M2 instead of perl enumeration
 
 use CGI qw( :standard );
@@ -161,14 +161,7 @@ print "</table>";
 print "</div>";
 
 
-#Box: Comments/Questions/Bugs Link :: Footer
-print "<div id=\"footer\">";
-print "VADD is currently still under development; if you ";
-print "spot any bugs or have any questions/comments, please e-mail us. ";
-print "[TODO: get a vt email] (Bonny Guang, Madison Brandon, Rustin McNeill)";
-print "</td></tr>";
-print "</div>";
-
+print "<div id =\"computation\">";
 #Google Analytics, Franzi's Account
 print <<ENDHTML;
 <script type="text/javascript">
@@ -329,6 +322,15 @@ elsif ( $special_networks eq "Large Network (nodes > 10)" ) {
 #    `rm -f $clientip.trfunctionfile.txt`;
 
 }
+print "</div>";
+
+#Box: Comments/Questions/Bugs Link :: Footer
+print "<div id=\"footer\">";
+print "VADD is currently still under development; if you ";
+print "spot any bugs or have any questions/comments, please e-mail us. ";
+print "[TODO: get a vt email] (Bonny Guang, Madison Brandon, Rustin McNeill)";
+print "</td></tr>";
+print "</div>";
 
 print end_html();
 

@@ -37,6 +37,7 @@ html {
     width:40%;
 /*    background:#c9c;*/ /*will be purple for debuggin purposes*/
 }
+#computation { clear: both; }
 #footer {
     clear:both;
     font-size: .8em;
