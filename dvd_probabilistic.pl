@@ -68,12 +68,17 @@ print "<table>";
 print "<tr vAlign=top><td class=\"titleBox\"><strong><font
 color=\"black\">(Stochastic) Input Functions</font></strong></td></tr>";
 print "<tr class = \"lines\"><td></td></tr>";
+print "<tr valign=\"top\"><td nowrap><font size=\"2\">Select format of input functions:";
+print "&nbsp\;<a href=\"http://dvd.vbi.vt.edu/tutorial.html#F\" onmouseover=\"doTooltip(event,3)\" onmouseout=\"hideTip()\"><font size=\"1\">what is this?</font></a><br>";
+print radio_group(-name=>'translate_box', -values=>['Polynomial','Boolean'], -default=>'Polynomial', -linebreak=>'true');
+print "</font></td></tr>";
+print "</td></tr><tr class=\"lines\"><td></td></tr>";
 print "<tr valign=\"top\"><td nowrap><font size=\"2\">Select function file: </font>",filefield(-name=>'upload_file');
 print "&nbsp\;<a href=\"http://dvd.vbi.vt.edu/tutorial.html#F\" onmouseover=\"doTooltip(event,2)\" onmouseout=\"hideTip()\"><font size=\"1\">what is this?</font></a>";
 print "</td></tr><tr class=\"lines\"><td></td></tr>";
 print "<tr valign=\"top\"><td nowrap><font size=\"2\">", checkbox_group(-name=>'ginSim', -value=>'GINsim File', -label=>'GINsim File'), "&nbsp &nbsp &nbsp";
 print "&nbsp\;<a href=\"http://dvd.vbi.vt.edu/tutorial.html#N\" onmouseover=\"doTooltip(event,9)\" onmouseout=\"hideTip()\"><font size=\"1\">what is this?</font></a>";
-print "</td></tr><tr class=\"lines\"><td></td></tr>";
+print "<tr class=\"lines\"><td></td></tr>";
 print "<tr><td><div align=\"center\"><b>OR</b> <font size=\"2\" color=\"#006C00\">(Edit functions below)</font></div></td></tr>";
 print "<tr class=\"lines\"><td></td></tr><tr valign=\"top\"><td nowrap><div align=\"center\">";
 print textarea(-name=>'edit_functions',
@@ -110,16 +115,12 @@ print radio_group(-name=>'special_networks', -values=>['Small Network (nodes <= 
 print "</td></tr>";
 print "</table>";
 
+#Small Network Options
 #Input Functions
 print "<table>";
 print "<tr valign=\"top\"><td class=\"titleBox\">";
-print "<strong><font color=\"black\">Input Functions Options</font></strong>";
+print "<strong><font color=\"black\">Options for Small Networks</font></strong>";
 print "</td></tr>";
-print "<tr class=\"lines\"><td></td></tr>";
-print "<tr valign=\"top\"><td nowrap><font size=\"2\">Select format of input functions:";
-print "&nbsp\;<a href=\"http://dvd.vbi.vt.edu/tutorial.html#F\" onmouseover=\"doTooltip(event,3)\" onmouseout=\"hideTip()\"><font size=\"1\">what is this?</font></a><br>";
-print radio_group(-name=>'translate_box', -values=>['Polynomial','Boolean'], -default=>'Polynomial', -linebreak=>'true');
-print "</font></td></tr>";
 print "<tr class=\"lines\"><td></td></tr>";
 print "<tr valign=\"top\"><td nowrap><font size=\"2\">Select the updating scheme for the functions:";
 print "&nbsp\;<a href=\"http://dvd.vbi.vt.edu/tutorial.html#U\" onmouseover=\"doTooltip(event,4)\" onmouseout=\"hideTip()\"><font size=\"1\">what is this?</font></a><br>";
@@ -127,25 +128,28 @@ print radio_group(-name=>'update_box', -values=>['Synchronous',
 'Update_stochastic', 'Sequential'], -default=>'Synchronous', -linebreak=>'true');
 print "&nbsp\;&nbsp\;&nbsp\;&nbsp\;- Enter update schedule separated by spaces: <br>";
 print "<center>", textfield(-name=>'update_schedule', -size=>24), "</center>";
-print "</font></td></tr></table>";
+print "</font></td></tr>";
+#print "</table>";
 
 #State Space Specifications
-print "<table>";
-print "<tr><td class=\"titleBox\"><strong><font color=\"black\">State Space Specification</font></strong></td></tr>";
+#print "<table>";
+#print "<tr><td class=\"titleBox\"><strong><font color=\"black\">State Space Specification</font></strong></td></tr>";
 print "<tr class=\"lines\"><td></td></tr>";
 print"<tr valign=\"top\"><td nowrap><font size=\"2\">Generate state space of";
 print"&nbsp\;<a href=\"http://dvd.vbi.vt.edu/tutorial.html#S\" onmouseover=\"doTooltip(event,5)\" onmouseout=\"hideTip()\"><font size=\"1\">what is this?</font></a><br>";
 print radio_group(-name=>'option_box', -values=>['All trajectories from all possible initial states', 'One trajectory starting at an initial state'], -default=>'All trajectories from all possible initial states', -linebreak=>'true',); 
 print "&nbsp\;&nbsp\;&nbsp\;&nbsp\;- Enter initialization separated by spaces: <br><center>",textfield(-name=>'trajectory_value', -size=>20), "</center>";
 print"</font></td></tr>";
-print "</table>";
+#print "</table>";
 
 #BLOCK 3: Additional Output Specifications
-print "<table><tr><td>";
-print "<tr valign=\"top\">";
-print"<td class=\"titleBox\"><strong><font color=\"black\">Additional Output Specification &nbsp\;<span style=\"background-color:#808080\">(optional)</span></font></strong>";
-print"&nbsp\;&nbsp\;&nbsp\;</td>";
-print"</tr><tr class=\"lines\"><td></td></tr><tr valign=\"top\"><td nowrap><font size=\"2\">View";
+#print "<table>";
+print "<tr><td>";
+#print "<tr valign=\"top\">";
+#print"<td class=\"titleBox\"><strong><font color=\"black\">Additional Output Specification &nbsp\;(optional)</font></strong>";
+#"<span style=\"background-color:#808080\">(optional)</span></font></strong>";
+#print"&nbsp\;&nbsp\;&nbsp\;</td></tr>";
+print"<tr class=\"lines\"><td></td></tr><tr valign=\"top\"><td nowrap><font size=\"2\">View";
 print"&nbsp\;<a href=\"http://dvd.vbi.vt.edu/tutorial.html#G\" onmouseover=\"doTooltip(event,6)\" onmouseout=\"hideTip()\"><font size=\"1\">what is this?</font></a><br>";
 print"<font color=\"#006C00\"><i>Select graph(s) to view and image 
 format.</i></font><br>";
