@@ -10,6 +10,7 @@ html {
     margin:0 auto;
     background-image: url('dna_pale_blue.png');
     background-size: 100%;
+    -moz-background-size: 100%;
     background-attachment: fixed;
     background-repeat: no-repeat;
 /*    background-image: url('http://dvd.vbi.vt.edu/gradient.gif');*/
@@ -37,6 +38,7 @@ html {
     width:40%;
 /*    background:#c9c;*/ /*will be purple for debuggin purposes*/
 }
+#computation { clear: both; }
 #footer {
     clear:both;
     font-size: .8em;
