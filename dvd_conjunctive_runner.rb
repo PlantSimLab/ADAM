@@ -21,12 +21,16 @@ if (p_value.to_i != 2)
 end
 
 puts "<br>"
-puts "Running limit cycle calculations now...<br>"
+puts "<font color=blue><b>If your dependency graph is not strongly connected
+  then it will exit at this time, sorry.</b></font><br>";
+puts "<font color=blue><b>Calculating fixed points and limit cycles for
+  conjunctive/disjunctive network now...</b></font><br>";
 
 dpGraph = "../../" + dpGraph
 
 #  m2_result = `cd lib/M2code/; M2 conjunctiveNetwork.m2 --stop --no-debug --silent -q -e 'QR = makeRing (#{n_nodes}, #{p_value}); ll = limCycles("#{dpGraph}"); exit 0'`
   m2_result = `cd lib/M2code/; /usr/local/bin/M2 conjunctiveNetwork.m2 --stop --no-debug --silent -q -e 'QR = makeRing (#{n_nodes}, #{p_value}); ll = limCycles("#{dpGraph}"); exit 0'`
+m2_result = m2_result.gsub(/\n/, "<br>")
   puts m2_result
   puts "<br>"
 

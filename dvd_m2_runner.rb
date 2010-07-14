@@ -14,10 +14,6 @@ p_value = ARGV[1]
 functionFile = ARGV[2] 
 
 puts "<br>"
-#if (p_value.to_i != 2)
-#  puts "This feature is only available for 2 states per node, not #{p_value}.<br>"
-#  exit 1
-#end
 
 m2_system =  "{{"
 
@@ -47,8 +43,8 @@ puts "Running fixed point calculation now ...<br>"
 
 for i in 1..5 do 
 #one line is for my machine, one line is for the server b/c M2 is in different paths
-#  m2_result = `cd lib/M2code/; M2 solvebyGB.m2 --stop --no-debug --silent -q -e 'QR = makeRing(#{n_nodes}, #{p_value}); ll = gbSolver( matrix(QR, #{m2_system}), #{i}); exit 0'`
-  m2_result = `cd lib/M2code/; /usr/local/bin/M2 solvebyGB.m2 --stop --no-debug --silent -q -e 'QR = makeRing(#{n_nodes}, #{p_value}); ll = gbSolver( matrix(QR, #{m2_system}), #{i}); exit 0'`
+#  m2_result = `cd lib/M2code/; M2 solvebyGB.m2 --stop --no-debug --silent -q -e 'QR = makeRing(#{n_nodes}, #{p_value}); ll = gbSolver( matrix(QR, #{m2_system}), #{p_value}, #{i}); exit 0'`
+  m2_result = `cd lib/M2code/; /usr/local/bin/M2 solvebyGB.m2 --stop --no-debug --silent -q -e 'QR = makeRing(#{n_nodes}, #{p_value}); ll = gbSolver( matrix(QR, #{m2_system}), #{p_value}, #{i}); exit 0'`
   puts m2_result
   puts "<br>"
 end

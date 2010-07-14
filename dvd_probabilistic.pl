@@ -39,7 +39,7 @@ print "<div id=\"nav\"><p>";
 print "AVDD uses a combination of simulation and algorithms to analyze the dynamics of ";
 print "discrete systems. <br>If this is your first time, please read the <a href=\"http://dvd.vbi.vt.edu/VADD_tut.html\" target=\"_blank\">tutorial</a>. It is important ";
 print "that you follow the format specified in the tutorial.<br>Make your selections and provide inputs (if any) in the form below and click ";
-print "Generate to run the software.<br> Note: The computation may take some time depending on your internet connection.";
+print "Generate to run the software.<br> Note: The computation may take some time.";
 print "</div>";
 
 #Div Box: Input Functions, Number of Nodes, Number of States :: Main
@@ -218,24 +218,19 @@ if ( $special_networks eq "Conjunctive/Disjunctive (Boolean rings only)" ) {
   # conj/disj networks dynamics depend on the dependency graph, we need to
   # generate it 
   create_input_function();
-  system("perl regulatory.pl $filename $n_nodes $clientip $DGformat");
-  $dpGraph = "$clientip.out1.dot";
-  print  "<A href=\"$dpGraph\" target=\"_blank\"><font
+  system("perl regulatory.pl $filename $n_nodes $clientip $DGformat") == 0
+      or die("regulatory.pl died");
+  $dpGraph = "$clientip.out1";
+  print  "<br><A href=\"$dpGraph.$DGformat\" target=\"_blank\"><font
   color=red><i>Click to view the dependency graph.</i></font></A><br>";
-  print "<font color=blue><b>If your dependency graph is not strongly connected
-  then it will exit at this time, sorry.</b></font><br>";
-  print "<font color=blue><b>Calculating fixed points and limit cycles for
-  conjunctive/disjunctive network.</b></font><br>";
   #BLAHBLAH i'm sad ._.
-  system("ruby dvd_conjunctive_runner.rb $n_nodes $p_value $dpGraph");
+  system("ruby dvd_conjunctive_runner.rb $n_nodes $p_value $dpGraph.dot");
 }
 elsif ( $special_networks eq "Large Network (nodes > 10)" ) {
   print "<font color=blue><b>Calculating fixed points for a large network,
   other analysis of dynamics not possible for now.</b></font><br>";
   print "<font color=blue><b>This is a very experimental feature, therefore
   there is no error checking. Use at your own risk.</b></font><br>";
-  print "<font color=blue><b>Please note that states of periodicity m also
-  lists all states of periodicity l if l divides m.  </b></font><br>";
   create_input_function();
   system("ruby dvd_m2_runner.rb $n_nodes $p_value $filename");
 } elsif ( $p_value && $n_nodes )

@@ -12,8 +12,6 @@ end
 ginSimFile = ARGV[0]
 functionFile = ARGV[1]
 
-#puts "cd lib/M2code/; M2 convertToPDS.m2 --stop --no-debug --silent -q -e 'print toString converter(#{ginSimFile});"
-#varList = `cd lib/M2code/; M2 convertToPDS.m2 --stop --no-debug --silent -q -e 'print toString first converter("../../#{ginSimFile}"); exit 0'`
 #m2_result = `cd lib/M2code/; M2 convertToPDS.m2 --stop --no-debug --silent -q -e 'print toString last converter("../../#{ginSimFile}"); exit 0'`
 varList = `cd lib/M2code/; /usr/local/bin/M2 convertToPDS.m2 --stop --no-debug --silent -q -e 'print toString first converter("../../#{ginSimFile}"); exit 0'`
 m2_result = `cd lib/M2code/; /usr/local/bin/M2 convertToPDS.m2 --stop --no-debug --silent -q -e 'print toString converter("../../#{ginSimFile}"); exit 0'`
