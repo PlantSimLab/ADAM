@@ -238,7 +238,7 @@ elsif ( $special_networks eq "Large Network (nodes > 10)" ) {
     print "hello<br>" if ($DEBUG);
     #if($p_value**$n_nodes >= 7000000000000)
     if($n_nodes > 21 || $p_value**$n_nodes > 2**21) {
-        print "<font color=red><i>Sorry. Unable to compute statistics for very large networks. It is suggested you use the large networks option.</i></font><br>";
+        print "<font color=red><i>Sorry. Unable to compute statistics for very large networks. It is suggested you download the standalone version which has no limitations</i></font><br>";
         die("Program quitting. Too many nodes");
     }
    
