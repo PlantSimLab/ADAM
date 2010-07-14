@@ -22,7 +22,7 @@ $clientip = '../../htdocs/no-ssl/files/'. $clientip;
 
 #$clientip = $sec.'-'.$min.'-'.$hr;
 
-print header, start_html( -title=>'Discrete Visualizer of Dynamics Web Interface', -script=>{-language=>'JavaScript',-src=>'/fnct2.js'}, -style=>{-src=>'/dvd_style.css'});
+print header, start_html( -title=>'Visualization and Analysis of Discrete Dynamics', -script=>{-language=>'JavaScript',-src=>'/fnct2.js'}, -style=>{-src=>'/dvd_style.css'});
 print start_multipart_form(-name=>'form1', -method =>"POST", -onSubmit=>"return validate()");
 print "<div id=\"wrap\">";
 print "<div id=\"tipDiv\" style=\"position:absolute\; visibility:hidden\; z-index:100\"></div>";
@@ -36,7 +36,7 @@ print "</div>";
 
 #Div Box: Text Explanation :: Nav
 print "<div id=\"nav\"><p>";
-print "VADD uses a combination of simulation and algorithms to solve for ";
+print "VADD uses a combination of simulation and algorithms to analyze the dynamics of ";
 print "discrete systems. <br>If this is your first time, please read the <a href=\"http://dvd.vbi.vt.edu/VADD_tut.html\" target=\"_blank\">tutorial</a>. It is important ";
 print "that you follow the format specified in the tutorial.<br>Make your selections and provide inputs (if any) in the form below and click ";
 print "Generate to run the software.<br> Note: The computation may take some time depending on your internet connection.";
