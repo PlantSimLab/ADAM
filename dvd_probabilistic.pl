@@ -5,7 +5,7 @@
 ## Bonbons
 ## July 2010
 
-## VADD0.1 with support for large networks and conjunctive 
+## AVDD0.1 with support for large networks and conjunctive 
 ## networks using M2 instead of perl enumeration
 
 use CGI qw( :standard );
@@ -22,21 +22,21 @@ $clientip = '../../htdocs/no-ssl/files/'. $clientip;
 
 #$clientip = $sec.'-'.$min.'-'.$hr;
 
-print header, start_html( -title=>'Discrete Visualizer of Dynamics Web Interface', -script=>{-language=>'JavaScript',-src=>'/fnct2.js'}, -style=>{-src=>'/dvd_style.css'});
+print header, start_html( -title=>'Analysis and Visualization of Discrete Dynamics', -script=>{-language=>'JavaScript',-src=>'/fnct2.js'}, -style=>{-src=>'/dvd_style.css'});
 print start_multipart_form(-name=>'form1', -method =>"POST", -onSubmit=>"return validate()");
 print "<div id=\"wrap\">";
 print "<div id=\"tipDiv\" style=\"position:absolute\; visibility:hidden\; z-index:100\"></div>";
 
-#Div Box: VADD Title :: Header
+#Div Box: AVDD Title :: Header
 print "<div id=\"header\">";
 print "<table><tr>";
 print "<td align=\"right\"><img src=\"http://dvd.vbi.vt.edu/vbi-logo.png\"></td>";
-print "<td align=\"left\"><b><font size=\"5\">Visualization and Analysis of Discrete Dynamics (VADD) v0.1 </font></b></td></tr></table>";
+print "<td align=\"left\"><b><font size=\"5\">Analysis and Visualization of Discrete Dynamics (AVDD) v0.1 </font></b></td></tr></table>";
 print "</div>";
 
 #Div Box: Text Explanation :: Nav
 print "<div id=\"nav\"><p>";
-print "VADD uses a combination of simulation and algorithms to solve for ";
+print "AVDD uses a combination of simulation and algorithms to solve for ";
 print "discrete systems. <br>If this is your first time, please read the <a href=\"http://dvd.vbi.vt.edu/VADD_tut.html\" target=\"_blank\">tutorial</a>. It is important ";
 print "that you follow the format specified in the tutorial.<br>Make your selections and provide inputs (if any) in the form below and click ";
 print "Generate to run the software.<br> Note: The computation may take some time depending on your internet connection.";
@@ -215,10 +215,6 @@ print "$translate_box <br>" if ($DEBUG);
 print "$special_networks <br>" if ($DEBUG);
 
 if ( $special_networks eq "Conjunctive/Disjunctive (Boolean rings only)" ) {
-  if ($p_value != 2 ) { 
-    print "<font color=\"red\">ERROR: Option works only for Boolean rings</font>";
-    die("Program quitting. Not 2 states given for conjunctive/disjunctive network");
-  }
   # conj/disj networks dynamics depend on the dependency graph, we need to
   # generate it 
   create_input_function();
@@ -318,7 +314,7 @@ print "</div>";
 
 #Box: Comments/Questions/Bugs Link :: Footer
 print "<div id=\"footer\">";
-print "VADD is currently still under development; if you ";
+print "AVDD is currently still under development; if you ";
 print "spot any bugs or have any questions/comments, please e-mail us. ";
 print "[TODO: get a vt email] (Bonny Guang, Madison Brandon, Rustin McNeill)";
 print "</td></tr>";
@@ -345,6 +341,11 @@ sub create_input_function() {
     if($upload_file) {
       $fileuploaded = 1;
       if($ginSim eq "GINsim File"){
+	  $extension = substr $upload_file, -5;
+	  if($extension ne "ginml"){
+	      print "<font color=red>Error: Must give GINsim file</font>";
+	      die("Program quitting. Extension not ginml");
+	  }
         open (GINOUTFILE, ">$clientip.ginsim.ginml");
         flock(GINOUTFILE, LOCK_EX) or die ("Could not get exclusive lock $!");
         while($bytesread=read($upload_file, $buffer, 1024)) {

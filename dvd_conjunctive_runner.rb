@@ -1,9 +1,8 @@
  
 #dvd_conjunctive_runner $n_nodes $p_value $dpGraph
 
-# Like 99% of this code is copied over from dvd_m2_runner
-# Takes input from dvd website and passes it to conjuncitveNetwork.m2 to
-# compute fixed points
+# Takes input from dvd website and passes it to conjunctiveNetwork.m2 to
+# compute fixed points/limit cycles
 # returns 0 (no errors) or 1 (errors) 
 
 unless ARGV.size == 3
@@ -26,13 +25,9 @@ puts "Running limit cycle calculations now...<br>"
 
 dpGraph = "../../" + dpGraph
 
+#  m2_result = `cd lib/M2code/; M2 conjunctiveNetwork.m2 --stop --no-debug --silent -q -e 'QR = makeRing (#{n_nodes}, #{p_value}); ll = limCycles("#{dpGraph}"); exit 0'`
   m2_result = `cd lib/M2code/; /usr/local/bin/M2 conjunctiveNetwork.m2 --stop --no-debug --silent -q -e 'QR = makeRing (#{n_nodes}, #{p_value}); ll = limCycles("#{dpGraph}"); exit 0'`
   puts m2_result
   puts "<br>"
 
 exit 0
-
-###
-
-##M2 solvebyGB.m2 --stop --no-debug --silent -q -e 'QR = booleanRing 2; ll = gbSolver( { a,a+b}, QR); exit 0'
-## M2 --stop --no-debug --silent -q -e 'loadPackage "solvebyGB"; QR = booleanRing 2; ll = gbSolver( { a,a+b}, QR); quit'
