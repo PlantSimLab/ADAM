@@ -3,12 +3,12 @@
 
 <html>
 <head>
-	<title>VADD Tutorial</title>
+	<title>AVDD Tutorial</title>
 </head>
 
 <body>
 <font face="Verdana, Arial, Helvetica, sans-serif"> 
-<h1> Visualization and Analysis of Discrete Dynamics Tutorial</h1>
+<h1> Analysis and Visualization of Discrete Dynamics Tutorial</h1>
 <a name="top"></a> 
 <li><a href="#D">Description</a></li>
 <li><a href="#P">What is the <i>number of states per node</i> input?</a></li>
@@ -27,14 +27,14 @@
 <p> 
 <a name="D">
 <h3>Description</h3>
-</a> VADD is a web-based tool for the visualization and analysis of the dynamics of multi-state, 
+</a> AVDD is a web-based tool for the visualization and analysis of the dynamics of multi-state, 
 discrete models of biological networks. Multi-state discrete models are characterized 
 by a collection of functions. For a network of <i>n</i> nodes, the corresponding 
 discrete model will have <i>n</i> functions, where the <i>i</i>-th function describes 
 the state transitions of the <i>i</i>-th node in the network. The user of the 
 software provides the size of the state space, by indicating the number of nodes (n)
 and the number of possible states per node (m), and a text file containing 
-transition (polynomial) functions. VADD analyzes dynamcis using a combination
+transition (polynomial) functions. AVDD analyzes dynamcis using a combination
 of simulation and abstract algebra techniques.  The method of computation and
 the output will depend on the size and type of the network as well as other options selected by
 the user. 
@@ -98,11 +98,11 @@ that allows a user to build a logical model based on some biological system.
 <a name="F">
 <h3>What is <i>Network Options</i>?</h3>
 </a> 
-VADD will simulate dynamics for <i> Small Networks </i> (10 nodes or less),
+AVDD will simulate dynamics for <i> Small Networks </i> (10 nodes or less),
 meaning it computes the transition states from all possible initializations.
-When simulating, VADD will output the analysis results as well as the graph 
-of the state space.  For <i> Large Networks </i> VADD uses algebra to solve 
-for fixed points and limit cycles up to length 5.  VADD uses a separate
+When simulating, AVDD will output the analysis results as well as the graph 
+of the state space.  For <i> Large Networks </i> AVDD uses algebra to solve 
+for fixed points and limit cycles up to length 5.  AVDD uses a separate
 algorithm to compute dynamics in the case of <i>Conjunctive/Disjunctive</i>
 Networks. Conjunctive Boolean networks consist of functions containing only
 one monomial term, i.e. the functions use only the AND operator.  Conversely,
