@@ -44,8 +44,10 @@ the user.
 <p> 
 <a name="D">
 <h3>What is <i>number of states per node</i> input?</h3>
-</a> We will refer to this field as the <i>m value</i>. It is a number that denotes the cardinality of the state 
-set of the user's discrete network. The software accepts positive integers up to 99.
+</a> We will refer to this field as the <i>m value</i>. It is a number that
+denotes the cardinality of the state set of the user's discrete network. 
+Note that <i>m</i> must be a prime number.
+The software accepts positive prime integers up to 99.
 This value gives the total number of states that a node in the 
 network can have. For example, if <i>m value</i> = 3, then the possible states 
 for any node are 0, 1, and 2. Currently the software will not display the graph 
@@ -56,8 +58,10 @@ of the state space if <i>m value</i> is very high (see <a href="#L">Limitations<
 <p> 
 <a name="D">
 <h3>What is the <i>number of nodes</i> input?</h3>
-</a> We will refer to this field as the <i>n value</i>. The <i>number of nodes</i> is the number of agents/nodes/constituents in the 
-user's network. Since biological systems are finite in the number of agents/nodes/constituents, 
+</a> We will refer to this field as the <i>n value</i>. The <i>number of nodes</i> 
+is the number of agents/nodes/constituents in the user's network. 
+For instance, a node may represent a gene in a gene regualtory network.
+Since biological systems are finite in the number of agents/nodes/constituents, 
 then <i>number of nodes</i> is assumed to be finite. 
 <div align="right"><a href="#top"><font size="-1" color="#FF0000">Return to the 
   top</font></a></div>
@@ -90,7 +94,30 @@ The functions should follow the following formatting rules:
 </a> 
 The GINsim File option allows the user to upload a GINsim file to be analyzed
 by our software. <a href="http://gin.univ-mrs.fr/">GINsim</a> is a program
-that allows a user to build a logical model based on some biological system.    
+that allows a user to build a logical model based on some biological system. 
+Our software first converts a GINsim File to a polynomial dynamical system
+(PDS) via the method described in Veliz-Cuba et al., 2010<sup>1</sup> and then
+use algebra techniques to solve the PDS for key dynamics.
+<b><ul>As an example consider a model of lysis-lysogeny decision in the phage
+lambda, a small gene regulatory network modeled in GINsim.</ul>
+<ul>Nodes are CI, Cro, CII, and N</ul></b>
+<br><center>
+  <table border=1 cellpadding=5 cellspacing=0 width=20%>
+    <tr><td><img src="images/phageWD.jpg"></td></tr>
+  </table>
+<br><b>	 Figure b : Example GINsim File </b>
+</center>
+<b><ul>Upon inputing this file, AVDD converts the network to a PDS and then
+solves the PDS for dynamic features</ul></b>
+<br><center>
+  <table border=1 cellpadding=5 cellspacing=0 width=20%>
+    <tr><td><img src="images/phage4Screenshot.png"></td></tr>
+  </table>
+<br><b>	 Figure c : Output produced using the <i>Small Networks</i> option.</b>
+</center>
+</a>
+<sup>1</sup>Veliz-Cube A., Salam Jarrah A., Laubenbacher R., (2010) Polynomial
+Algebra of Discrete Models in Systems Biology.   
 <div align="right"><a href="#top"><font size="-1" color="#FF0000">Return to the 
   top</font></a></div>
 </p>
@@ -316,8 +343,8 @@ Brandilyn Stigler<br>
 Franziska Hinkelmann (<a href="mailto:fhinkel@vt.edu">Please email us if you have any problems</a>)<br>
 Madison Brandon<br>
 Bonny Guang<br>
-<a href="http://img10.imageshack.us/img10/9024/p7080016crop.png">Chuck</a><br>
 Rustin McNeill<br>
+<a href="http://img10.imageshack.us/img10/9024/p7080016crop.png">Chuck</a><br>
 </font> 
 </body>
 </html>
