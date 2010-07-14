@@ -5,7 +5,7 @@
 ## Bonbons
 ## July 2010
 
-## DVD 3 with support for large networks and conjunctive 
+## VADD0.1 with support for large networks and conjunctive 
 ## networks using M2 instead of perl enumeration
 
 use CGI qw( :standard );
@@ -21,7 +21,6 @@ $clientip = $clientip.'-'.$sec.'-'.$min.'-'.$hr;
 $clientip = '../../htdocs/no-ssl/files/'. $clientip;
 
 #$clientip = $sec.'-'.$min.'-'.$hr;
-
 
 print header, start_html( -title=>'Discrete Visualizer of Dynamics Web Interface', -script=>{-language=>'JavaScript',-src=>'/fnct2.js'}, -style=>{-src=>'/dvd_style.css'});
 print start_multipart_form(-name=>'form1', -method =>"POST", -onSubmit=>"return validate()");
@@ -68,12 +67,17 @@ print "<table>";
 print "<tr vAlign=top><td class=\"titleBox\"><strong><font
 color=\"black\">(Stochastic) Input Functions</font></strong></td></tr>";
 print "<tr class = \"lines\"><td></td></tr>";
+print "<tr valign=\"top\"><td nowrap><font size=\"2\">Select format of input functions:";
+print "&nbsp\;<a href=\"http://dvd.vbi.vt.edu/tutorial.html#F\" onmouseover=\"doTooltip(event,3)\" onmouseout=\"hideTip()\"><font size=\"1\">what is this?</font></a><br>";
+print radio_group(-name=>'translate_box', -values=>['Polynomial','Boolean'], -default=>'Polynomial', -linebreak=>'true');
+print "</font></td></tr>";
+print "</td></tr><tr class=\"lines\"><td></td></tr>";
 print "<tr valign=\"top\"><td nowrap><font size=\"2\">Select function file: </font>",filefield(-name=>'upload_file');
 print "&nbsp\;<a href=\"http://dvd.vbi.vt.edu/tutorial.html#F\" onmouseover=\"doTooltip(event,2)\" onmouseout=\"hideTip()\"><font size=\"1\">what is this?</font></a>";
 print "</td></tr><tr class=\"lines\"><td></td></tr>";
 print "<tr valign=\"top\"><td nowrap><font size=\"2\">", checkbox_group(-name=>'ginSim', -value=>'GINsim File', -label=>'GINsim File'), "&nbsp &nbsp &nbsp";
 print "&nbsp\;<a href=\"http://dvd.vbi.vt.edu/tutorial.html#N\" onmouseover=\"doTooltip(event,9)\" onmouseout=\"hideTip()\"><font size=\"1\">what is this?</font></a>";
-print "</td></tr><tr class=\"lines\"><td></td></tr>";
+print "<tr class=\"lines\"><td></td></tr>";
 print "<tr><td><div align=\"center\"><b>OR</b> <font size=\"2\" color=\"#006C00\">(Edit functions below)</font></div></td></tr>";
 print "<tr class=\"lines\"><td></td></tr><tr valign=\"top\"><td nowrap><div align=\"center\">";
 print textarea(-name=>'edit_functions',
@@ -106,20 +110,16 @@ print "<tr class=\"lines\"><td></td></tr>";
 print "<tr valign=\"top\"><td nowrap><font size=\"2\">";
 print "Select the type of network:";
 print "&nbsp\;<a href=\"http://dvd.vbi.vt.edu/tutorial.html#N\" onmouseover=\"doTooltip(event,7)\" onmouseout=\"hideTip()\"><font size=\"1\">what is this?</font></a><br>";
-print radio_group(-name=>'special_networks', -values=>['Small Network (nodes <= 10)', 'Large Network (nodes > 10)','Conjunctive/Disjunctive'], -default=>'Small Network (nodes <= 10)', -linebreak=>'true');
+print radio_group(-name=>'special_networks', -values=>['Small Network (nodes <= 10)', 'Large Network (nodes > 10)','Conjunctive/Disjunctive (Boolean rings only)'], -default=>'Small Network (nodes <= 10)', -linebreak=>'true');
 print "</td></tr>";
 print "</table>";
 
+#Small Network Options
 #Input Functions
 print "<table>";
 print "<tr valign=\"top\"><td class=\"titleBox\">";
-print "<strong><font color=\"black\">Input Functions Options</font></strong>";
+print "<strong><font color=\"black\">Options for Small Networks</font></strong>";
 print "</td></tr>";
-print "<tr class=\"lines\"><td></td></tr>";
-print "<tr valign=\"top\"><td nowrap><font size=\"2\">Select format of input functions:";
-print "&nbsp\;<a href=\"http://dvd.vbi.vt.edu/tutorial.html#F\" onmouseover=\"doTooltip(event,3)\" onmouseout=\"hideTip()\"><font size=\"1\">what is this?</font></a><br>";
-print radio_group(-name=>'translate_box', -values=>['Polynomial','Boolean'], -default=>'Polynomial', -linebreak=>'true');
-print "</font></td></tr>";
 print "<tr class=\"lines\"><td></td></tr>";
 print "<tr valign=\"top\"><td nowrap><font size=\"2\">Select the updating scheme for the functions:";
 print "&nbsp\;<a href=\"http://dvd.vbi.vt.edu/tutorial.html#U\" onmouseover=\"doTooltip(event,4)\" onmouseout=\"hideTip()\"><font size=\"1\">what is this?</font></a><br>";
@@ -127,25 +127,28 @@ print radio_group(-name=>'update_box', -values=>['Synchronous',
 'Update_stochastic', 'Sequential'], -default=>'Synchronous', -linebreak=>'true');
 print "&nbsp\;&nbsp\;&nbsp\;&nbsp\;- Enter update schedule separated by spaces: <br>";
 print "<center>", textfield(-name=>'update_schedule', -size=>24), "</center>";
-print "</font></td></tr></table>";
+print "</font></td></tr>";
+#print "</table>";
 
 #State Space Specifications
-print "<table>";
-print "<tr><td class=\"titleBox\"><strong><font color=\"black\">State Space Specification</font></strong></td></tr>";
+#print "<table>";
+#print "<tr><td class=\"titleBox\"><strong><font color=\"black\">State Space Specification</font></strong></td></tr>";
 print "<tr class=\"lines\"><td></td></tr>";
 print"<tr valign=\"top\"><td nowrap><font size=\"2\">Generate state space of";
 print"&nbsp\;<a href=\"http://dvd.vbi.vt.edu/tutorial.html#S\" onmouseover=\"doTooltip(event,5)\" onmouseout=\"hideTip()\"><font size=\"1\">what is this?</font></a><br>";
 print radio_group(-name=>'option_box', -values=>['All trajectories from all possible initial states', 'One trajectory starting at an initial state'], -default=>'All trajectories from all possible initial states', -linebreak=>'true',); 
 print "&nbsp\;&nbsp\;&nbsp\;&nbsp\;- Enter initialization separated by spaces: <br><center>",textfield(-name=>'trajectory_value', -size=>20), "</center>";
 print"</font></td></tr>";
-print "</table>";
+#print "</table>";
 
 #BLOCK 3: Additional Output Specifications
-print "<table><tr><td>";
-print "<tr valign=\"top\">";
-print"<td class=\"titleBox\"><strong><font color=\"black\">Additional Output Specification &nbsp\;<span style=\"background-color:#808080\">(optional)</span></font></strong>";
-print"&nbsp\;&nbsp\;&nbsp\;</td>";
-print"</tr><tr class=\"lines\"><td></td></tr><tr valign=\"top\"><td nowrap><font size=\"2\">View";
+#print "<table>";
+print "<tr><td>";
+#print "<tr valign=\"top\">";
+#print"<td class=\"titleBox\"><strong><font color=\"black\">Additional Output Specification &nbsp\;(optional)</font></strong>";
+#"<span style=\"background-color:#808080\">(optional)</span></font></strong>";
+#print"&nbsp\;&nbsp\;&nbsp\;</td></tr>";
+print"<tr class=\"lines\"><td></td></tr><tr valign=\"top\"><td nowrap><font size=\"2\">View";
 print"&nbsp\;<a href=\"http://dvd.vbi.vt.edu/tutorial.html#G\" onmouseover=\"doTooltip(event,6)\" onmouseout=\"hideTip()\"><font size=\"1\">what is this?</font></a><br>";
 print"<font color=\"#006C00\"><i>Select graph(s) to view and image 
 format.</i></font><br>";
@@ -156,15 +159,7 @@ print"</font></td></tr><tr class=\"lines\"><td></td></tr></table></td></tr></tab
 print "</table>";
 print "</div>";
 
-
-#Box: Comments/Questions/Bugs Link :: Footer
-print "<div id=\"footer\">";
-print "VADD is currently still under development; if you ";
-print "spot any bugs or have any questions/comments, please e-mail us. ";
-print "[TODO: get a vt email] (Bonny Guang, Madison Brandon, Rustin McNeill)";
-print "</td></tr>";
-print "</div>";
-
+print "<div id =\"computation\">";
 #Google Analytics, Franzi's Account
 print <<ENDHTML;
 <script type="text/javascript">
@@ -219,24 +214,18 @@ print "$option_box <br>" if ($DEBUG);
 print "$translate_box <br>" if ($DEBUG);
 print "$special_networks <br>" if ($DEBUG);
 
-if ( $special_networks eq "Conjunctive/Disjunctive" ) {
+if ( $special_networks eq "Conjunctive/Disjunctive (Boolean rings only)" ) {
   if ($p_value != 2 ) { 
-    # TODO
-    print "ERROR";
+    print "<font color=\"red\">ERROR: Option works only for Boolean rings</font>";
+    die("Program quitting. Not 2 states given for conjunctive/disjunctive network");
   }
   # conj/disj networks dynamics depend on the dependency graph, we need to
   # generate it 
   create_input_function();
-  #print ("perl regulatory.pl $filename $n_nodes $clientip $DGformat");
   system("perl regulatory.pl $filename $n_nodes $clientip $DGformat");
   $dpGraph = "$clientip.out1.dot";
   print  "<A href=\"$dpGraph\" target=\"_blank\"><font
   color=red><i>Click to view the dependency graph.</i></font></A><br>";
-
-#			if(-e "$clientip.out1.$DGformat")
-#			{
-#				print  "<A href=\"$clientip.out1.$DGformat\" target=\"_blank\"><font color=red><i>Click to view the dependency graph.</i></font></A><br>";
-#			}
   print "<font color=blue><b>If your dependency graph is not strongly connected
   then it will exit at this time, sorry.</b></font><br>";
   print "<font color=blue><b>Calculating fixed points and limit cycles for
@@ -325,6 +314,17 @@ elsif ( $special_networks eq "Large Network (nodes > 10)" ) {
 #    `rm -f $clientip.trfunctionfile.txt`;
 
 }
+print "</div>";
+
+#Box: Comments/Questions/Bugs Link :: Footer
+print "<div id=\"footer\">";
+print "VADD is currently still under development; if you ";
+print "spot any bugs or have any questions/comments, please e-mail us. ";
+print "[TODO: get a vt email] (Bonny Guang, Madison Brandon, Rustin McNeill)";
+print "</td></tr>";
+print "</div>";
+
+print "</div>";
 
 print end_html();
 
@@ -352,7 +352,6 @@ sub create_input_function() {
         }
         flock(GINOUTFILE, LOCK_UN) or die ("Could not unlock file $!");
         close $upload_file;
-        print "The logical model was converted to: <br>";
         system("ruby ginSim-converter.rb $clientip.ginsim.ginml $filename");
       } else {
       flock(OUTFILE, LOCK_EX) or die ("Could not get exclusive lock $!");

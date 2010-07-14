@@ -1,18 +1,21 @@
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 
 <html>
 <head>
-	<title>DVD Tutorial</title>
+	<title>VADD Tutorial</title>
 </head>
 
 <body>
 <font face="Verdana, Arial, Helvetica, sans-serif"> 
-<h1> Discrete Visualizer of Dynamics Tutorial</h1>
+<h1> Visualization and Analysis of Discrete Dynamics Tutorial</h1>
 <a name="top"></a> 
 <li><a href="#D">Description</a></li>
-<li><a href="#P">What is <i>number of states per node</i> input?</a></li>
+<li><a href="#P">What is the <i>number of states per node</i> input?</a></li>
 <li><a href="#N">What is the <i>number of nodes</i> input?</a></li>
 <li><a href="#F">Format of the input functions</a></li>
+<li><a href="#F">What is the <i>GINsim File</i> option?</a></li>
+<li><a href="#F">What is <i>Network Options</i>?</a></li>
 <li><a href ="#U">What is <i>update schedule</a></i></li>
 <li><a href="#T">Format of input functions</a></li>
 <li><a href="#S">Analysis of the state space</a></li>
@@ -24,15 +27,17 @@
 <p> 
 <a name="D">
 <h3>Description</h3>
-</a> DVD is a web-based tool for the visualization of the dynamics of multi-state, 
+</a> VADD is a web-based tool for the visualization and analysis of the dynamics of multi-state, 
 discrete models of biological networks. Multi-state discrete models are characterized 
 by a collection of functions. For a network of <i>n</i> nodes, the corresponding 
 discrete model will have <i>n</i> functions, where the <i>i</i>-th function describes 
 the state transitions of the <i>i</i>-th node in the network. The user of the 
 software provides the size of the state space, by indicating the number of nodes (n)
 and the number of possible states per node (m), and a text file containing 
-transition (polynomial) functions. DVD computes the transition states from all possible initializations and outputs 
-the analysis results as well as the graph of the state space. 
+transition (polynomial) functions. VADD analyzes dynamcis using a combination
+of simulation and abstract algebra techniques.  The method of computation and
+the output will depend on the size and type of the network as well as other options selected by
+the user. 
 <div align="right"><a href="#top"><font size="-1" color="#FF0000">Return to the 
   top</font></a></div>
 </p>
@@ -40,7 +45,7 @@ the analysis results as well as the graph of the state space.
 <a name="D">
 <h3>What is <i>number of states per node</i> input?</h3>
 </a> We will refer to this field as the <i>m value</i>. It is a number that denotes the cardinality of the state 
-set of the user's discrete network. The software accepts positive integers upto 99.
+set of the user's discrete network. The software accepts positive integers up to 99.
 This value gives the total number of states that a node in the 
 network can have. For example, if <i>m value</i> = 3, then the possible states 
 for any node are 0, 1, and 2. Currently the software will not display the graph 
@@ -80,11 +85,45 @@ The functions should follow the following formatting rules:
   top</font></a></div>
 </p>
 <p> 
+<a name="F">
+<h3>What is the <i>GINsim File</i> option?</h3>
+</a> 
+The GINsim File option allows the user to upload a GINsim file to be analyzed
+by our software. <a href="http://gin.univ-mrs.fr/">GINsim</a> is a program
+that allows a user to build a logical model based on some biological system.    
+<div align="right"><a href="#top"><font size="-1" color="#FF0000">Return to the 
+  top</font></a></div>
+</p>
+<p> 
+<a name="F">
+<h3>What is <i>Network Options</i>?</h3>
+</a> 
+VADD will simulate dynamics for <i> Small Networks </i> (10 nodes or less),
+meaning it computes the transition states from all possible initializations.
+When simulating, VADD will output the analysis results as well as the graph 
+of the state space.  For <i> Large Networks </i> VADD uses algebra to solve 
+for fixed points and limit cycles up to length 5.  VADD uses a separate
+algorithm to compute dynamics in the case of <i>Conjunctive/Disjunctive</i>
+Networks. Conjunctive Boolean networks consist of functions containing only
+one monomial term, i.e. the functions use only the AND operator.  Conversely,
+Disjunctive Boolean networks consist of functions which use only the OR
+operator.  Note that the <i>Conjunctive/Disjunctive</i> option only works for
+functions defined in a Boolean ring, i.e. there can be only two states per
+node. (see <a href="#L">What is the <i>number of states per node</i> input?</a>)
+When input is a large network or a conjunctive/disjunctive network, VADD
+diplays the results as a list. Note that <i>Large Networks</i>
+and <i>Conjunctive/Disjunctive</i> do not work in conjunction with <i>Options for Small Networks</i>.
+<div align="right"><a href="#top"><font size="-1" color="#FF0000">Return to the 
+  top</font></a></div>
+</p>
+<p> 
 <a name="U">
 <h3>What is the <i>update schedule</i> input?</h3>
 </a>
-This will determine the order in which to evaluate the functions.<br><li><b>Synchronous</b>: all functions get evaluated at the same time</li><li><b>Sequential</b>: the functions are evaluated in some specified order. The function indices must be entered in the input box provided with each index used exactly once and should be in the
+This will determine the order in which to evaluate the
+functions.<br><li><b>Synchronous</b>: all functions get evaluated at the same time </li><li><b>Sequential</b>: the functions are evaluated in some specified order. The function indices must be entered in the input box provided with each index used exactly once and should be in the
 range 1 to n (number of nodes)</li>
+Note that this option applies only to <i>Small Networks</i>.
 <div align="right"><a href="#top"><font size="-1" color="#FF0000">Return to the 
   top</font></a></div>
 </p>
@@ -191,6 +230,7 @@ in the interface and clicks on 'Generate'
   </table>
   <br><b>	 Figure b : Analysis of the state space generated using example functions from Figure a </b>
 </center>
+Note that this option applies only to <i>Small Networks</i>.
 <div align="right"><a href="#top"><font size="-1" color="#FF0000">Return to the 
   top</font></a></div>
 
@@ -215,13 +255,14 @@ in the interface and clicks on 'Generate'
   </table>
  <br><b> Figure c : Trajectory of a single initialization (2 0 1) generated using example functions from Figure a </b>
 </center>
+Note the this options applies only to <i>Small Networks</i>.
 <div align="right"><a href="#top"><font size="-1" color="#FF0000">Return to the 
   top</font></a></div>
 <font face="Verdana, Arial, Helvetica, sans-serif"><p> 
 <a name="G">
 <h3>Viewing the graph</h3>
 </a>The user has an option to view the graph of the entire state space or a single trajectory in the state space, AND the dependency graph of the network
-described by the input functions. The user can also select the format of the image file from the list of formats (gif, jpg, png and ps)
+described by the input functions. The user can also select the format of the image file from the list of formats (gif, jpg, png and ps).
 Based on the users selection, a link to view the selected graph is available
 Fig (d) graph below is an example state space graph, 
 Fig (e) graph below is the trajectory generated using initialization 2 0 1 and Fig (f) graph
@@ -246,6 +287,7 @@ Fig e
   </table>
 Fig f
 </center>
+Note that graphics are produced only with the <i>Small Networks</i> option.
 <div align="right"><a href="#top"><font size="-1" color="#FF0000">Return to the 
   top</font></a></div>
 <p> 
@@ -253,8 +295,12 @@ Fig f
 <h3>Limitations</h3>
 </a> The drawing of the state space is done by the graphics software <a href="http://www.graphviz.org">GraphViz</a>. 
 Due to limitations in viewing, we restrict the total number of states in the state 
-space to 1000; that is, <i>m</i>^<i>n</i> <= 1000, where <i>m</i> = <i>m value</i> 
-and <i>n</i> = <i>number of nodes</i>. 
+space to 1000; that is, <i>m</i>^<i>n</i> &lt;= 1000, where <i>m</i> = <i>m value</i> 
+and <i>n</i> = <i>number of nodes</i>.  Hence, we produce graphics only
+for <i>Small Networks</i>.(see <a href="#L">What is <i>Network Options</i>?</a>)  
+Further, due to the increasing computational complexity of
+computing limit cycles as the length of the cycles increases we only allow
+computation of limit cycles up to length 5 for the <i>Large Networks</i> option. 
 <div align="right"><a href="#top"><font size="-1" color="#FF0000">Return to the 
   top</font></a></div>
 </p>
@@ -268,6 +314,10 @@ Reinhard Laubenbacher<br>
 Abdul Jarrah<br>
 Brandilyn Stigler<br>
 Franziska Hinkelmann (<a href="mailto:fhinkel@vt.edu">Please email us if you have any problems</a>)<br>
+Madison Brandon<br>
+Bonny Guang<br>
+<a href="http://img10.imageshack.us/img10/9024/p7080016crop.png">Chuck</a><br>
+Rustin McNeill<br>
 </font> 
 </body>
 </html>
