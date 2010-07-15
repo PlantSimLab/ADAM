@@ -76,7 +76,7 @@ print "<tr valign=\"top\"><td nowrap><font size=\"2\">Select function file: </fo
 print "&nbsp\;<a href=\"http://dvd.vbi.vt.edu/tutorial.html#F\" onmouseover=\"doTooltip(event,2)\" onmouseout=\"hideTip()\"><font size=\"1\">what is this?</font></a>";
 print "</td></tr><tr class=\"lines\"><td></td></tr>";
 print "<tr valign=\"top\"><td nowrap><font size=\"2\">", checkbox_group(-name=>'ginSim', -value=>'GINsim File', -label=>'GINsim File'), "&nbsp &nbsp &nbsp";
-print "&nbsp\;<a href=\"http://dvd.vbi.vt.edu/tutorial.html#N\" onmouseover=\"doTooltip(event,9)\" onmouseout=\"hideTip()\"><font size=\"1\">what is this?</font></a>";
+print "&nbsp\;<a href=\"http://dvd.vbi.vt.edu/tutorial.html#N\" onmouseover=\"doTooltip(event,8)\" onmouseout=\"hideTip()\"><font size=\"1\">what is this?</font></a>";
 print "<tr class=\"lines\"><td></td></tr>";
 print "<tr><td><div align=\"center\"><b>OR</b> <font size=\"2\" color=\"#006C00\">(Edit functions below)</font></div></td></tr>";
 print "<tr class=\"lines\"><td></td></tr><tr valign=\"top\"><td nowrap><div align=\"center\">";
@@ -102,7 +102,6 @@ print "</div>";
 print "<div id=\"sidebar\">";
 
 #Network Options
-#print "<tr valign=\"top\"><td nowrap><font size=\"2\">If you have a special network:";
 print "<table>";
 print "<tr valign=\"top\"><td class=\"titleBox\">";
 print "<strong><font color=\"#black\">Network Options</font></strong></td></tr>";
@@ -128,26 +127,17 @@ print radio_group(-name=>'update_box', -values=>['Synchronous',
 print "&nbsp\;&nbsp\;&nbsp\;&nbsp\;- Enter update schedule separated by spaces: <br>";
 print "<center>", textfield(-name=>'update_schedule', -size=>24), "</center>";
 print "</font></td></tr>";
-#print "</table>";
 
 #State Space Specifications
-#print "<table>";
-#print "<tr><td class=\"titleBox\"><strong><font color=\"black\">State Space Specification</font></strong></td></tr>";
 print "<tr class=\"lines\"><td></td></tr>";
 print"<tr valign=\"top\"><td nowrap><font size=\"2\">Generate state space of";
 print"&nbsp\;<a href=\"http://dvd.vbi.vt.edu/tutorial.html#S\" onmouseover=\"doTooltip(event,5)\" onmouseout=\"hideTip()\"><font size=\"1\">what is this?</font></a><br>";
 print radio_group(-name=>'option_box', -values=>['All trajectories from all possible initial states', 'One trajectory starting at an initial state'], -default=>'All trajectories from all possible initial states', -linebreak=>'true',); 
 print "&nbsp\;&nbsp\;&nbsp\;&nbsp\;- Enter initialization separated by spaces: <br><center>",textfield(-name=>'trajectory_value', -size=>20), "</center>";
 print"</font></td></tr>";
-#print "</table>";
 
 #BLOCK 3: Additional Output Specifications
-#print "<table>";
 print "<tr><td>";
-#print "<tr valign=\"top\">";
-#print"<td class=\"titleBox\"><strong><font color=\"black\">Additional Output Specification &nbsp\;(optional)</font></strong>";
-#"<span style=\"background-color:#808080\">(optional)</span></font></strong>";
-#print"&nbsp\;&nbsp\;&nbsp\;</td></tr>";
 print"<tr class=\"lines\"><td></td></tr><tr valign=\"top\"><td nowrap><font size=\"2\">View";
 print"&nbsp\;<a href=\"http://dvd.vbi.vt.edu/tutorial.html#G\" onmouseover=\"doTooltip(event,6)\" onmouseout=\"hideTip()\"><font size=\"1\">what is this?</font></a><br>";
 print"<font color=\"#006C00\"><i>Select graph(s) to view and image 
@@ -386,9 +376,9 @@ sub translate_functions() {
     system("/usr/bin/perl translator.pl $clientip.functionfile.txt $clientip.trfunctionfile.txt $n_nodes");
     $filename = "$clientip.trfunctionfile.txt";
     if(-e "$clientip.trfunctionfile.txt") {
-      print  "<A href=\"$clientip.trfunctionfile.txt\" target=\"_blank\"><font color=green><i>Translation from Boolean functions to Polynomail was successful.</i></font></A><br><br>";
+      print  "<A href=\"$clientip.trfunctionfile.txt\" target=\"_blank\"><font color=green><i>Translation from Boolean functions to Polynomial was successful.</i></font></A><br><br>";
     } else {
-      print "<font color=red>Translation from Boolean functions to polynomail was unsuccessful</font><br>";
+      print "<font color=red>Translation from Boolean functions to polynomial was unsuccessful</font><br>";
       `rm -f $clientip.functionfile.txt`;
       die("Translation unsuccessful");
     }
