@@ -1,17 +1,18 @@
  
-#dvd_m2_runner $n_nodes $p_value $filename
+#dvd_m2_runner $n_nodes $p_value $filename $limCyc_length
 
 # Takes input from dvd website and passes it to M2 to compute fixed points
 # returns 0 (no errors) or 1 (errors) 
 
-unless ARGV.size == 3
-  puts "Usage: ruby dvd_m2_runner.rb n_nodes p_value functionFile"
+unless ARGV.size == 4
+  puts "Usage: ruby dvd_m2_runner.rb n_nodes p_value functionFile limCyc_length"
   exit 0
 end
 
 n_nodes = ARGV[0]
 p_value = ARGV[1]
 functionFile = ARGV[2] 
+limCyc_length = ARGV[3]
 
 puts "<br>"
 
@@ -40,14 +41,12 @@ puts "<br>"
 #puts m2_system
 #puts "<br>"
 puts "Running fixed point calculation now ...<br>"
-
-for i in 1..5 do 
+ 
 #one line is for my machine, one line is for the server b/c M2 is in different paths
-#  m2_result = `cd lib/M2code/; M2 solvebyGB.m2 --stop --no-debug --silent -q -e 'QR = makeRing(#{n_nodes}, #{p_value}); ll = gbSolver( matrix(QR, #{m2_system}), #{p_value}, #{i}); exit 0'`
-  m2_result = `cd lib/M2code/; /usr/local/bin/M2 solvebyGB.m2 --stop --no-debug --silent -q -e 'QR = makeRing(#{n_nodes}, #{p_value}); ll = gbSolver( matrix(QR, #{m2_system}), #{p_value}, #{i}); exit 0'`
+#  m2_result = `cd lib/M2code/; M2 solvebyGB.m2 --stop --no-debug --silent -q -e 'QR = makeRing(#{n_nodes}, #{p_value}); ll = gbSolver( matrix(QR, #{m2_system}), #{p_value}, #{limCyc_length}); exit 0'`
+  m2_result = `cd lib/M2code/; /usr/local/bin/M2 solvebyGB.m2 --stop --no-debug --silent -q -e 'QR = makeRing(#{n_nodes}, #{p_value}); ll = gbSolver( matrix(QR, #{m2_system}), #{p_value}, #{limCyc_length}); exit 0'`
   puts m2_result
   puts "<br>"
-end
 
 
 

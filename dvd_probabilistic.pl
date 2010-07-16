@@ -109,7 +109,9 @@ print "<tr class=\"lines\"><td></td></tr>";
 print "<tr valign=\"top\"><td nowrap><font size=\"2\">";
 print "Select the type of network:";
 print "&nbsp\;<a href=\"http://dvd.vbi.vt.edu/tutorial.html#N\" onmouseover=\"doTooltip(event,7)\" onmouseout=\"hideTip()\"><font size=\"1\">what is this?</font></a><br>";
-print radio_group(-name=>'special_networks', -values=>['Small Network (nodes <= 10)', 'Large Network (nodes > 10)','Conjunctive/Disjunctive (Boolean rings only)'], -default=>'Small Network (nodes <= 10)', -linebreak=>'true');
+print radio_group(-name=>'special_networks', -values=>['Conjunctive/Disjunctive (Boolean rings only)', 'Small Network (nodes <= 10)', 'Large Network (nodes > 10)'], -default=>'Small Network (nodes <= 10)', -linebreak=>'true');
+print "&nbsp\;&nbsp\;&nbsp\;&nbsp\;- Limit cycle length to search for: <br>";
+print "<center>", textfield(-name=>'limCyc_length', -size=>2), "</center></font>";
 print "</td></tr>";
 print "</table>";
 
@@ -178,6 +180,7 @@ $upload_file = upload('upload_file');
 $option_box = param('option_box');
 $translate_box = param('translate_box');
 $special_networks = param('special_networks');
+$limCyc_length = param('limCyc_length');
 $update_box = param('update_box');
 $update_schedule = param('update_schedule');
 $trajectory_box = param('trajectory_box');
@@ -217,12 +220,16 @@ if ( $special_networks eq "Conjunctive/Disjunctive (Boolean rings only)" ) {
   system("ruby dvd_conjunctive_runner.rb $n_nodes $p_value $dpGraph.dot");
 }
 elsif ( $special_networks eq "Large Network (nodes > 10)" ) {
+  if(($limCyc_length eq null) || ($limCyc_length eq "")){
+      print "<font color=red>Sorry. Can't accept null input for limit cycle length.</font>";
+      die("Program quitting. Empty field entered for limit cycle length in large networks.");
+  }
   print "<font color=blue><b>Calculating fixed points for a large network,
   other analysis of dynamics not possible for now.</b></font><br>";
   print "<font color=blue><b>This is a very experimental feature, therefore
   there is no error checking. Use at your own risk.</b></font><br>";
   create_input_function();
-  system("ruby dvd_m2_runner.rb $n_nodes $p_value $filename");
+  system("ruby dvd_m2_runner.rb $n_nodes $p_value $filename $limCyc_length");
 } elsif ( $p_value && $n_nodes )
 {
     print "hello<br>" if ($DEBUG);
