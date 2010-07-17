@@ -5,7 +5,7 @@
 ## Bonbons
 ## July 2010
 
-## VADD0.1 with support for large networks and conjunctive 
+## AVDD0.1 with support for large networks and conjunctive 
 ## networks using M2 instead of perl enumeration
 
 use CGI qw( :standard );
@@ -22,24 +22,24 @@ $clientip = '../../htdocs/no-ssl/files/'. $clientip;
 
 #$clientip = $sec.'-'.$min.'-'.$hr;
 
-print header, start_html( -title=>'Visualization and Analysis of Discrete Dynamics', -script=>{-language=>'JavaScript',-src=>'/fnct2.js'}, -style=>{-src=>'/dvd_style.css'});
+print header, start_html( -title=>'Analysis and Visualization of Discrete Dynamics', -script=>{-language=>'JavaScript',-src=>'/fnct2.js'}, -style=>{-src=>'/dvd_style.css'});
 print start_multipart_form(-name=>'form1', -method =>"POST", -onSubmit=>"return validate()");
 print "<div id=\"wrap\">";
 print "<div id=\"tipDiv\" style=\"position:absolute\; visibility:hidden\; z-index:100\"></div>";
 
-#Div Box: VADD Title :: Header
+#Div Box: AVDD Title :: Header
 print "<div id=\"header\">";
 print "<table><tr>";
 print "<td align=\"right\"><img src=\"http://dvd.vbi.vt.edu/vbi-logo.png\"></td>";
-print "<td align=\"left\"><b><font size=\"5\">Visualization and Analysis of Discrete Dynamics (VADD) v0.1 </font></b></td></tr></table>";
+print "<td align=\"left\"><b><font size=\"5\">Analysis and Visualization of Discrete Dynamics (AVDD) v0.1 </font></b></td></tr></table>";
 print "</div>";
 
 #Div Box: Text Explanation :: Nav
 print "<div id=\"nav\"><p>";
-print "VADD uses a combination of simulation and algorithms to analyze the dynamics of ";
+print "AVDD uses a combination of simulation and algorithms to analyze the dynamics of ";
 print "discrete systems. <br>If this is your first time, please read the <a href=\"http://dvd.vbi.vt.edu/VADD_tut.html\" target=\"_blank\">tutorial</a>. It is important ";
 print "that you follow the format specified in the tutorial.<br>Make your selections and provide inputs (if any) in the form below and click ";
-print "Generate to run the software.<br> Note: The computation may take some time depending on your internet connection.";
+print "Generate to run the software.<br> Note: The computation may take some time.";
 print "</div>";
 
 #Div Box: Input Functions, Number of Nodes, Number of States :: Main
@@ -76,7 +76,7 @@ print "<tr valign=\"top\"><td nowrap><font size=\"2\">Select function file: </fo
 print "&nbsp\;<a href=\"http://dvd.vbi.vt.edu/tutorial.html#F\" onmouseover=\"doTooltip(event,2)\" onmouseout=\"hideTip()\"><font size=\"1\">what is this?</font></a>";
 print "</td></tr><tr class=\"lines\"><td></td></tr>";
 print "<tr valign=\"top\"><td nowrap><font size=\"2\">", checkbox_group(-name=>'ginSim', -value=>'GINsim File', -label=>'GINsim File'), "&nbsp &nbsp &nbsp";
-print "&nbsp\;<a href=\"http://dvd.vbi.vt.edu/tutorial.html#N\" onmouseover=\"doTooltip(event,9)\" onmouseout=\"hideTip()\"><font size=\"1\">what is this?</font></a>";
+print "&nbsp\;<a href=\"http://dvd.vbi.vt.edu/tutorial.html#N\" onmouseover=\"doTooltip(event,8)\" onmouseout=\"hideTip()\"><font size=\"1\">what is this?</font></a>";
 print "<tr class=\"lines\"><td></td></tr>";
 print "<tr><td><div align=\"center\"><b>OR</b> <font size=\"2\" color=\"#006C00\">(Edit functions below)</font></div></td></tr>";
 print "<tr class=\"lines\"><td></td></tr><tr valign=\"top\"><td nowrap><div align=\"center\">";
@@ -102,7 +102,6 @@ print "</div>";
 print "<div id=\"sidebar\">";
 
 #Network Options
-#print "<tr valign=\"top\"><td nowrap><font size=\"2\">If you have a special network:";
 print "<table>";
 print "<tr valign=\"top\"><td class=\"titleBox\">";
 print "<strong><font color=\"#black\">Network Options</font></strong></td></tr>";
@@ -110,7 +109,9 @@ print "<tr class=\"lines\"><td></td></tr>";
 print "<tr valign=\"top\"><td nowrap><font size=\"2\">";
 print "Select the type of network:";
 print "&nbsp\;<a href=\"http://dvd.vbi.vt.edu/tutorial.html#N\" onmouseover=\"doTooltip(event,7)\" onmouseout=\"hideTip()\"><font size=\"1\">what is this?</font></a><br>";
-print radio_group(-name=>'special_networks', -values=>['Small Network (nodes <= 10)', 'Large Network (nodes > 10)','Conjunctive/Disjunctive (Boolean rings only)'], -default=>'Small Network (nodes <= 10)', -linebreak=>'true');
+print radio_group(-name=>'special_networks', -values=>['Conjunctive/Disjunctive (Boolean rings only)', 'Small Network (nodes <= 10)', 'Large Network (nodes > 10)'], -default=>'Small Network (nodes <= 10)', -linebreak=>'true');
+print "&nbsp\;&nbsp\;&nbsp\;&nbsp\;- Limit cycle length to search for: <br>";
+print "<center>", textfield(-name=>'limCyc_length', -size=>2), "</center></font>";
 print "</td></tr>";
 print "</table>";
 
@@ -128,26 +129,17 @@ print radio_group(-name=>'update_box', -values=>['Synchronous',
 print "&nbsp\;&nbsp\;&nbsp\;&nbsp\;- Enter update schedule separated by spaces: <br>";
 print "<center>", textfield(-name=>'update_schedule', -size=>24), "</center>";
 print "</font></td></tr>";
-#print "</table>";
 
 #State Space Specifications
-#print "<table>";
-#print "<tr><td class=\"titleBox\"><strong><font color=\"black\">State Space Specification</font></strong></td></tr>";
 print "<tr class=\"lines\"><td></td></tr>";
 print"<tr valign=\"top\"><td nowrap><font size=\"2\">Generate state space of";
 print"&nbsp\;<a href=\"http://dvd.vbi.vt.edu/tutorial.html#S\" onmouseover=\"doTooltip(event,5)\" onmouseout=\"hideTip()\"><font size=\"1\">what is this?</font></a><br>";
 print radio_group(-name=>'option_box', -values=>['All trajectories from all possible initial states', 'One trajectory starting at an initial state'], -default=>'All trajectories from all possible initial states', -linebreak=>'true',); 
 print "&nbsp\;&nbsp\;&nbsp\;&nbsp\;- Enter initialization separated by spaces: <br><center>",textfield(-name=>'trajectory_value', -size=>20), "</center>";
 print"</font></td></tr>";
-#print "</table>";
 
 #BLOCK 3: Additional Output Specifications
-#print "<table>";
 print "<tr><td>";
-#print "<tr valign=\"top\">";
-#print"<td class=\"titleBox\"><strong><font color=\"black\">Additional Output Specification &nbsp\;(optional)</font></strong>";
-#"<span style=\"background-color:#808080\">(optional)</span></font></strong>";
-#print"&nbsp\;&nbsp\;&nbsp\;</td></tr>";
 print"<tr class=\"lines\"><td></td></tr><tr valign=\"top\"><td nowrap><font size=\"2\">View";
 print"&nbsp\;<a href=\"http://dvd.vbi.vt.edu/tutorial.html#G\" onmouseover=\"doTooltip(event,6)\" onmouseout=\"hideTip()\"><font size=\"1\">what is this?</font></a><br>";
 print"<font color=\"#006C00\"><i>Select graph(s) to view and image 
@@ -188,6 +180,7 @@ $upload_file = upload('upload_file');
 $option_box = param('option_box');
 $translate_box = param('translate_box');
 $special_networks = param('special_networks');
+$limCyc_length = param('limCyc_length');
 $update_box = param('update_box');
 $update_schedule = param('update_schedule');
 $trajectory_box = param('trajectory_box');
@@ -215,39 +208,34 @@ print "$translate_box <br>" if ($DEBUG);
 print "$special_networks <br>" if ($DEBUG);
 
 if ( $special_networks eq "Conjunctive/Disjunctive (Boolean rings only)" ) {
-  if ($p_value != 2 ) { 
-    print "<font color=\"red\">ERROR: Option works only for Boolean rings</font>";
-    die("Program quitting. Not 2 states given for conjunctive/disjunctive network");
-  }
   # conj/disj networks dynamics depend on the dependency graph, we need to
   # generate it 
   create_input_function();
-  system("perl regulatory.pl $filename $n_nodes $clientip $DGformat");
-  $dpGraph = "$clientip.out1.dot";
-  print  "<A href=\"$dpGraph\" target=\"_blank\"><font
+  system("perl regulatory.pl $filename $n_nodes $clientip $DGformat") == 0
+      or die("regulatory.pl died");
+  $dpGraph = "$clientip.out1";
+  print  "<br><A href=\"$dpGraph.$DGformat\" target=\"_blank\"><font
   color=red><i>Click to view the dependency graph.</i></font></A><br>";
-  print "<font color=blue><b>If your dependency graph is not strongly connected
-  then it will exit at this time, sorry.</b></font><br>";
-  print "<font color=blue><b>Calculating fixed points and limit cycles for
-  conjunctive/disjunctive network.</b></font><br>";
   #BLAHBLAH i'm sad ._.
-  system("ruby dvd_conjunctive_runner.rb $n_nodes $p_value $dpGraph");
+  system("ruby dvd_conjunctive_runner.rb $n_nodes $p_value $dpGraph.dot");
 }
 elsif ( $special_networks eq "Large Network (nodes > 10)" ) {
+  if(($limCyc_length eq null) || ($limCyc_length eq "")){
+      print "<font color=red>Sorry. Can't accept null input for limit cycle length.</font>";
+      die("Program quitting. Empty field entered for limit cycle length in large networks.");
+  }
   print "<font color=blue><b>Calculating fixed points for a large network,
   other analysis of dynamics not possible for now.</b></font><br>";
   print "<font color=blue><b>This is a very experimental feature, therefore
   there is no error checking. Use at your own risk.</b></font><br>";
-  print "<font color=blue><b>Please note that states of periodicity m also
-  lists all states of periodicity l if l divides m.  </b></font><br>";
   create_input_function();
-  system("ruby dvd_m2_runner.rb $n_nodes $p_value $filename");
+  system("ruby dvd_m2_runner.rb $n_nodes $p_value $filename $limCyc_length");
 } elsif ( $p_value && $n_nodes )
 {
     print "hello<br>" if ($DEBUG);
     #if($p_value**$n_nodes >= 7000000000000)
     if($n_nodes > 21 || $p_value**$n_nodes > 2**21) {
-        print "<font color=red><i>Sorry. Unable to compute statistics for very large networks. It is suggested you download the standalone version which has no limitations</i></font><br>";
+        print "<font color=red><i>Sorry. Unable to compute statistics for very large networks. It is suggested you use the large networks option.</i></font><br>";
         die("Program quitting. Too many nodes");
     }
    
@@ -318,7 +306,7 @@ print "</div>";
 
 #Box: Comments/Questions/Bugs Link :: Footer
 print "<div id=\"footer\">";
-print "VADD is currently still under development; if you ";
+print "AVDD is currently still under development; if you ";
 print "spot any bugs or have any questions/comments, please e-mail us. ";
 print "[TODO: get a vt email] (Bonny Guang, Madison Brandon, Rustin McNeill)";
 print "</td></tr>";
@@ -345,6 +333,11 @@ sub create_input_function() {
     if($upload_file) {
       $fileuploaded = 1;
       if($ginSim eq "GINsim File"){
+	  $extension = substr $upload_file, -5;
+	  if($extension ne "ginml"){
+	      print "<font color=red>Error: Must give GINsim file</font>";
+	      die("Program quitting. Extension not ginml");
+	  }
         open (GINOUTFILE, ">$clientip.ginsim.ginml");
         flock(GINOUTFILE, LOCK_EX) or die ("Could not get exclusive lock $!");
         while($bytesread=read($upload_file, $buffer, 1024)) {
@@ -390,9 +383,9 @@ sub translate_functions() {
     system("/usr/bin/perl translator.pl $clientip.functionfile.txt $clientip.trfunctionfile.txt $n_nodes");
     $filename = "$clientip.trfunctionfile.txt";
     if(-e "$clientip.trfunctionfile.txt") {
-      print  "<A href=\"$clientip.trfunctionfile.txt\" target=\"_blank\"><font color=green><i>Translation from Boolean functions to Polynomail was successful.</i></font></A><br><br>";
+      print  "<A href=\"$clientip.trfunctionfile.txt\" target=\"_blank\"><font color=green><i>Translation from Boolean functions to Polynomial was successful.</i></font></A><br><br>";
     } else {
-      print "<font color=red>Translation from Boolean functions to polynomail was unsuccessful</font><br>";
+      print "<font color=red>Translation from Boolean functions to polynomial was unsuccessful</font><br>";
       `rm -f $clientip.functionfile.txt`;
       die("Translation unsuccessful");
     }
