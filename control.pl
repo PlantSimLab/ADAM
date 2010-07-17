@@ -29,8 +29,8 @@ $clientip = '../../htdocs/no-ssl/files/'. $clientip;
 print header, start_html( -title=>'Visualizer of Controlled Polynomial Dynamical Systems Web Interface', 
                 -script=>{-language=>'JavaScript',-src=>'/fnct2.js'},
                 -head=>[Link({-rel=>'icon',-type=>'image/png',-href=>'https://www.vbi.vt.edu/images/favicon.ico'}),]);
-print "<body background=\"https://www.vbi.vt.edu/templates/vbi/images/background-body-vbi.png\" link=\"#009977\" vlink=\"#226677\">";
-print "<body background=\"http://dvd.vbi.vt.edu/gradient.gif\" link=\"#009977\" vlink=\"#226677\">";
+#print "<body background=\"https://www.vbi.vt.edu/templates/vbi/images/background-body-vbi.png\" link=\"#009977\" vlink=\"#226677\">";
+#print "<body background=\"http://dvd.vbi.vt.edu/gradient.gif\" link=\"#009977\" vlink=\"#226677\">";
 print start_multipart_form(-name=>'form1', -method =>"POST", -onSubmit=>"return validate()");
 print "<div style=\"font-family:Verdana,Arial\"><div id=\"tipDiv\" style=\"position:absolute\; visibility:hidden\; z-index:100\"></div><br>";
 
@@ -67,7 +67,8 @@ print "<br>";
 print "<br>";
 
 ## p value
-print "</td></tr><tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr><tr valign=\"top\"><td nowrap><font size=\"2\"><br>Enter number of states per node: </font>";
+print "</td></tr><tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"> </td></tr>
+<tr valign=\"top\"><td nowrap><font size=\"2\"><br>Enter number of states per node: </font>";
 print textfield(-name=>'p_value',-size=>2,-maxlength=>2, default=>2),
   "<font size=2> (Must be a prime number)</font>";
 print "<br>";
@@ -85,22 +86,12 @@ print "labeled with the control that has been applied at this transition. <br>";
 print "<br>";
 
 print "</td></tr>";
-print "<tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr></table>";
-print "</td></tr>";
-print "</table>";
 
 # Input Functions Block
-print "<td width=50%><table width=\"100%\" cellSpacing=\"0\" cellPadding=\"1\" align=\"center\" bgColor=\"#ababab\" border=\"0\"><tr><td><table cellSpacing=\"0\" cellPadding=\"1\" width=\"100%\" bgColor=\"#ffffcc\" border=\"0\">";
+print "<tr><td nowrap bgColor=\"#666666\"><strong><font
+color=\"#ffffff\">Input Functions</font></strong></td></tr>
+<tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr>";
 
-print "<tr><TD nowrap bgColor=\"#666666\"><strong><font
-color=\"#ffffff\">Input Functions</font></strong></td></tr><tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr>";
-
-#print "<tr valign=\"top\"><td nowrap><font size=\"2\">Select function file (not functional!): </font>",filefield(-name=>'upload_file');
-#print "&nbsp\;<a href=\"http://dvd.vbi.vt.edu/tutorial.html#F\" onmouseover=\"doTooltip(event,2)\" onmouseout=\"hideTip()\"><font size=\"1\">what is this?</font></a>";
-#
-
-#print "</td></tr><tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr>";
-#print "<tr><td><div align=\"center\"><b>OR</b> <font size=\"2\" color=\"#009977\">(Edit functions below)</font></div></td></tr>";
 print "<tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr><tr valign=\"top\"><td nowrap><div align=\"center\">";
 print textarea(-name=>'edit_functions',
                -default=>
@@ -112,56 +103,143 @@ f4 = x1 + u1 + u2
 			   -rows=>8,
 			   -columns=>50);
 print "</div></td></tr><tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr>";
+print "</table>";
+print "</td></tr>";
+print "</table>";
 
-# Initial and final states
-print "<tr valign=\"top\"><td nowrap><font size=\"2\">";
-print checkbox(-name =>'findControl', -value=>'1', -label=>'Use heuristic controller to find control sequence', -checked=>1 );
-print "<br>";
-print "Enter initial state, separated by spaces: ", textfield( -name=>'initialState', -size=>20, -default=>'1 0 1 1');
-print "<br>";
-print "<br>";
-print "Enter final state, separated by spaces: &nbsp   ", textfield( -name=>'finalState', -size=>20, -default=>'0 0 1 1');
-print "<br>";
-print "<br>";
-print "A heuristic algorithm will try to find the cheapest trajectory from the initial to the <br>";
-print "final state. Cheap means with the cheapest possible control. As this is an experimental <br>";
-print "version, we consider uniform cost for every control variable that is set, i.e., not 0.<br>";
-print "If a sequence of control inputs is found, that drives the system from the initial state <br>";
-print "to the final state, this trajectory is highlighted in the state space graph in green. If <br>";
-print "no sequence can be found, no trajectory will be highlighted in the phase space. <br>";
-print "<br>";
+# control Options
+# controlGroup  
+#  - nothing
+#  - given
+#  - heuristic
+#  - best
+
+print "
+<td width=50%>
+<table width=\"100%\" cellSpacing=\"0\" cellPadding=\"1\" align=\"center\" bgColor=\"#ababab\" border=\"0\">
+<tr>
+  <td>
+    <table cellSpacing=\"0\" cellPadding=\"1\" width=\"100%\" bgColor=\"#ffffcc\" border=\"0\">
+      <tr><td nowrap bgColor=\"#666666\"><strong><font color=\"#ffffff\">
+        Controller</font></strong></td>
+      </tr>
+      <tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr>
+<tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr><tr valign=\"top\"><td nowrap><div align=\"center\">
+
+<tr valign=\"top\"><td nowrap><font size=\"2\">
+<table width=100% border=0>
+<tr>
+  <td colspan=3>
+    <label>
+      <input type=\"radio\" name=\"controlGroup\" value=\"nothing\" checked=\"checked\" >
+      Do not search for a control sequence, just compute the complete phase space.
+    </label>
+  </td>
+</tr>
+<tr><td colspan=3 BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\" width=100%></td></tr>
+<tr>
+  <td colspan=3>
+    Enter initial state, separated by spaces: ", textfield( -name=>'initialState', -size=>20, -default=>'1 0 1 1'), "
+  </td>
+</tr>
+<tr>
+  <td width5%>
+  </td>
+  <td colspan=2>
+    <label>
+      <input type=\"radio\" name=\"controlGroup\" value=\"given\">
+      Apply a given control sequence repeatedly
+    </label>
+  </td>
+</tr>
+<tr>
+  <td width=5%>
+  </td>
+  <td colspan=2>
+    Enter a control sequence, the sequence will be repeatedly applied until a repeated node is found.<br>",
+      textarea(-name=>'given_control',
+               -default=>
+'0 0
+1 0
+',
+               -rows=>6,
+               -columns=>15), "
+  </td>
+</tr>
+<tr>
+  <td>
+  </td>
+  <td colspan=2 BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\" width=100%>
+  </td>
+</tr>
+<tr>
+  <td>
+  </td>
+  <td colspan=2>
+     Enter final state, separated by spaces: &nbsp   ", textfield( -name=>'finalState', -size=>20, -default=>'0 0 1 1'),"
+  </td>
+</tr>
+<tr>
+  <td width=5%>
+  </td>
+  <td width=5%>
+  </td>
+  <td>
+    <label>
+      <input type=\"radio\" name=\"controlGroup\" value=\"heuristic\">
+      Use heuristic controller to find control sequence
+    </label>
+  </td>
+</tr>
+<tr>
+  <td>
+  </td>
+  <td>
+  </td>
+  <td>
+   A heuristic algorithm will try to find the cheapest trajectory from the initial to the <br>
+   final state. Cheap means with the cheapest possible control. As this is an experimental <br>
+   version, we consider uniform cost for every control variable that is set, i.e., not 0.<br>
+   If a sequence of control inputs is found, that drives the system from the initial state <br>
+   to the final state, this trajectory is highlighted in the state space graph in green. If <br>
+   no sequence can be found, no trajectory will be highlighted in the phase space. <br>
+   <br>
+  </td>
+</tr>
+<tr>
+  <td>
+  </td>
+  <td>
+  </td>
+  <td>
+    <label>
+      <input type=\"radio\" name=\"controlGroup\" value=\"best\">
+      Find the true optimal controller
+    </label>
+  </td>
+</tr>
+<tr>
+  <td>
+  </td>
+  <td>
+  </td>
+  <td>
+   Find a truely optimal controller from the inital to the final state. <br> 
+   This is done by enumeration. <br><br>
+  </td>
+</tr>
+</table> ";
+
 
 print "</div></td></tr><tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr>";
 print "</table></td></tr></table></td></tr>";
 
-## State Space Specification
-#print"<tr><td><table width=\"90%\" align=\"center\" border=\"0\" bgcolor=\"#ABABAB\"  cellpadding=\"1\" cellspacing=\"0\"><tr><td>";
-#print"<table border=\"0\" bgcolor=\"#FFFFCC\" width=\"100%\" cellspacing=\"0\" cellpadding=\"1\"><tr valign=\"top\"><td bgcolor=\"#666666\" nowrap>";
-#print"<strong><font color=\"#FFFFFF\">State Space Specification (not functional)</font></strong></td></tr><tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr>";
-#print"<tr valign=\"top\"><td nowrap><font size=\"2\">Generate state space of";
-#print"&nbsp\;<a href=\"http://dvd.vbi.vt.edu/tutorial.html#S\" onmouseover=\"doTooltip(event,5)\" onmouseout=\"hideTip()\"><font size=\"1\">what is this?</font></a><br>";
-#print radio_group(-name=>'option_box', -values=>['All trajectories from all possible initial states', 'One trajectory starting at an initial state'], -default=>'All trajectories from all possible initial states', -linebreak=>'true',); 
-#print "&nbsp\;&nbsp\;&nbsp\;&nbsp\;- Enter initialization separated by spaces: ",textfield(-name=>'trajectory_value', -size=>20);
-#print"</font></td></tr><tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr></table></td></tr></table></td><td>";
-
-### Additional Output Specification
-#print"<table width=\"90%\" align=\"center\" border=\"0\" bgcolor=\"#ABABAB\" cellpadding=\"1\" cellspacing=\"0\"><tr><td>";
-#print"<table border=\"0\" bgcolor=\"#FFFFCC\" width=\"100%\" cellspacing=\"0\" cellpadding=\"1\"><tr valign=\"top\">";
-#print"<td bgcolor=\"#666666\" nowrap><b><font color=\"#FFFFFF\">Additional Output Specification (not functional) &nbsp\;<span style=\"background-color:#808080\">(optional)</span></font></b>";
-#print"&nbsp\;&nbsp\;&nbsp\;</td>";
-#print"</tr><tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr><tr valign=\"top\"><td nowrap><font size=\"2\">View";
-#print"&nbsp\;<a href=\"http://dvd.vbi.vt.edu/tutorial.html#G\" onmouseover=\"doTooltip(event,6)\" onmouseout=\"hideTip()\"><font size=\"1\">what is this?</font></a><br>";
-#print"<font color=\"#009977\"><i>Select graph(s) to view and image 
-#format.</i></font><br>";
-#print checkbox_group(-name=>'statespace', -value=>'State space graph', -label=>'State space graph'),"&nbsp\;&nbsp\;&nbsp\;", popup_menu(-name=>'SSformat',-values=>['*.gif','*.jpg','*.png','*.ps']), "&nbsp\;&nbsp\;&nbsp\;", checkbox_group(-name =>'stochastic', -value=>'Print probabilities', -label=>'Print probabilities', -checked),"<br>";
-#print checkbox_group(-name=>'depgraph', -value=>'Dependency graph',
-#-label=>'Dependency graph'), "&nbsp\;&nbsp\;&nbsp\;", popup_menu(-name=>'DGformat',-values=>['*.gif','*.jpg','*.png','*.ps']);
-#print"</font></td></tr><tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr></table></td></tr></table></td></tr>";
 print "<tr>";
 print "<br>";
 print "<td align=\"center\" colspan=\"2\">", 
   submit('generateButton', 'Generate'),
   "<br><font style=bold color=\"#009977\"><br><i>Results will be displayed below.</i></font></td></tr>";
+print end_form;
 
 ##Google Analytics, Franzi's Account
 #print <<ENDHTML;
@@ -189,9 +267,10 @@ $n_nodes = param('n_nodes');
 $u_nodes = param('u_nodes');
 $functions = param('edit_functions');
 
-$heuristicControl = param('findControl');
-$initialState = param( 'initialState');
+$controlType = param( 'controlGroup' );
+$initialState = param( 'initialState' );
 $finalState = param( 'finalState');
+$givenControl = param( 'given_control');
 
 $generateButton = param('generateButton');
 
@@ -212,28 +291,48 @@ print "$functions<br>" if ($DEBUG);
 
 print "$initialState<br>" if ($DEBUG);
 print "$finalState<br>" if ($DEBUG);
-print "$heuristicControl<br>" if ($DEBUG);
+print "generate button: $generateButton<br>" if $DEBUG;
+print "controlType is $controlType, <br>
+  initialState $initialState, <br>
+  finalState $finalState<br>" if $DEBUG;
 
-if ($heuristicControl eq "1") {
+if (param) {
   if ($initialState ne null) {
     $initialState = &cleanUpState( $initialState );
   }
   if ($finalState ne null) {
     $finalState = &cleanUpState( $finalState );
   }
-  print "<font color=\"#226677\"><b>Finding heuristic controller from $initialState to $finalState:</b></font><br>";
-} else {
-  $initialState = "";
-  $finalState = "";
-}
 
+  if ($controlType eq "nothing") {
+    print "No control<br>" if $DEBUG;
+    $ret = system("ruby control_runner.rb $n_nodes $u_nodes $p_value \"$functions\" $clientip.out.gif $controlType ");
+  } elsif ($controlType eq "given") {
+    print "given control <br>" if $DEBUG;
+    print "<font color=\"#226677\"><b>Finding trajectory from $initialState
+    for given control $givenControl:</b></font><br>";
+    if ($givenControl ne null) {
+      $givenControl = &cleanUpState( $givenControl );
+    } else {
+      print "<br><font color=red>Sorry. You have to specify a control sequence if you want chose given control.</font><br>";
+      die("Program quitting.");
+    }
+    print ("ruby control_runner.rb $n_nodes $u_nodes $p_value \"$functions\"
+    $clientip.out.gif $controlType $initialState $givenControl <br>") if $DEBUG;
+    $ret = system("ruby control_runner.rb $n_nodes $u_nodes $p_value \"$functions\" $clientip.out.gif $controlType $initialState $givenControl");
+  } elsif ($controlType eq "heuristic") {
+    print "heuristic<br>" if $DEBUG;
+    print "<font color=\"#226677\"><b>Finding heuristic controller from $initialState to $finalState:</b></font><br>";
+    print ("ruby control_runner.rb $n_nodes $u_nodes $p_value \"$functions\" $clientip.out.gif $controlType $initialState $finalState") if $DEBUG;
+    $ret = system("ruby control_runner.rb $n_nodes $u_nodes $p_value \"$functions\" $clientip.out.gif $controlType $initialState $finalState");
+  } elsif ($controlType eq "best") {
+    print "best <br>" if $DEBUG;
+    print "<font color=\"#226677\"><b>Finding best controller from $initialState to $finalState:</b></font><br>";
+  }
 
-print "generate button $generateButton" if $DEBUG;
-if ($generateButton) {
-  $ret = system("ruby control_runner.rb $n_nodes $u_nodes $p_value \"$functions\" $clientip.out.gif $initialState $finalState");
 
   if ( $ret == 0 ) {
-    print "everything ok" if ($DEBUG);
+    print "everything ok<br>" if ($DEBUG);
     if (-e "$clientip.out.gif") {
       print  "<A href=\"$clientip.out.gif\" target=\"_blank\"> <font color=\"#226677\"><i>Click to view the state space graph of your controlled polynomial dynamical system.</i></font></A><br>";
     }
@@ -246,14 +345,28 @@ if ($generateButton) {
 print "</td></tr>";
 print "</table></div>"; 
 
-print end_html();
+print end_html;
 
 sub cleanUpState() {
   ($s) = @_;
-  $s =~ s/^\s+|\s+$//g; #remove all leading and trailing white spaces
-  $s =~  s/(\d+)(\s+|,+)+/$1 /g; # remove extra spaces in between the numbers
-  $s =~ s/ /_/g;
-  $s;
+  #print "In clean up state<br>";
+  #print $s;
+  #print "<br>";
+  @lines = split(/\n/, $s);
+  $ret = "";
+  foreach (@lines) {
+    $l = $_;
+    $l =~ s/^\s+|\s+$//g; #remove all leading and trailing white spaces
+    $l =~  s/(\d+)(\s+|,+)+/$1 /g; # remove extra spaces in between the numbers
+    $l =~ s/ /_/g;
+    #print $l;
+    #print "<br>";
+    $ret = $ret . $l;
+    $ret = $ret . "-";
+  }
+  chop($ret);
+  #print $ret;
+  $ret;
 }
 
 
