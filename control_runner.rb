@@ -9,9 +9,9 @@
 
 require 'fileutils'
 
-#puts ARGV.size
-unless (6..8) === ARGV.size
-  puts "Usage: ruby control_runner.rb n_nodes u_nodes p_value functions giffile controlType initialState finalState<br>" 
+
+unless (ARGV.size == 5 or ARGV.size == 7 )
+  puts "Usage: ruby control_runner.rb n_nodes u_nodes p_value functions giffile initialState finalState<br>" 
   puts "Initial and final state are optional"
   exit 1
 end
@@ -22,36 +22,13 @@ p_value = ARGV[2].to_i
 function = ARGV[3] 
 file = ARGV[4]
 
-controlType = ARGV[5]
-#  - nothing
-#  - given
-#  - heuristic
-#  - best
-
-if controlType == "nothing" 
-  traj = "{}" # this is the initial and final state, if heuristic control is desired, otherwise just an empty list
-elsif controlType == "given" and (7..8) === ARGV.size 
-  initialState = ARGV[6]
-  controlSequence = ARGV[7]
-  arr = controlSequence.split(/-/)
-  controlSequence = "{"
-  arr.each{ |a| 
-    controlSequence = controlSequence + "{"
-    a.gsub!(/_/, ",")
-    controlSequence = controlSequence + a
-    controlSequence = controlSequence + "},"
-  }
-  controlSequence.chop!
-  controlSequence = controlSequence + "}"
-  initialState = "{#{initialState.gsub(/_/, ",")}}"
-elsif (controlType == "heuristic" or controlType == "best") and ARGV.size == 8 
-  initialState = ARGV[6]
-  finalState = ARGV[7]
-  initialState = "{#{initialState.gsub(/_/, ",")}}"
-  finalState = "{#{finalState.gsub(/_/, ",")}}"
-else 
-  puts "Sorry, something was wrong with your input. Did you enter correct initial and final states?"
-  exit 1
+traj = "{}" # this is the initial and final state, if heuristic control is desired, otherwise just an empty list
+if (ARGV.size == 7 )
+  initialState = ARGV[5]
+  finalState = ARGV[6]
+  initialState = initialState.gsub(/_/, ",")
+  finalState = finalState.gsub(/_/, ",")
+  traj = "{{#{initialState}}, {#{finalState}}}"
 end
 
 #  puts traj
@@ -86,31 +63,13 @@ m2_system = m2_system + "}}"
 #puts "<br>"
 
 if ( n_nodes < 11 ) 
-  #puts controlType
-  if controlType == "nothing"
-    puts "Generating the phase space of the #{if u_nodes>0 then "controlled " end}PDS.<br>"
-    m2_result = `cd controlM2/; /usr/local/bin/M2 Visualizer.m2 --stop --no-debug --silent -q -e 'QR = makeControlRing(#{n_nodes}, #{u_nodes}, #{p_value}); F = matrix(QR, #{m2_system}); visualizePhaseSpace( F, #{u_nodes}); exit 0'`
-    #puts "cd controlM2/; /usr/local/bin/M2 Visualizer.m2 --stop --no-debug
-    #--silent -q -e 'QR = makeControlRing(#{n_nodes}, #{u_nodes}, #{p_value});
-    #F = matrix(QR, #{m2_system}); visualizePhaseSpace( F, #{u_nodes}); exit
-    #0'"
-
-  elsif controlType == "given"
-
-    m2_result = `cd controlM2/; /usr/local/bin/M2 Visualizer.m2 --stop --no-debug --silent -q -e 'QR = makeControlRing(#{n_nodes}, #{u_nodes}, #{p_value}); visualizeTrajectory( matrix(QR, #{m2_system}), #{initialState},  #{controlSequence}); exit 0'`
-
-  elsif controlType == "heuristic"
-    puts "Generating the phase space and finding control heuristically.<br>"
-    m2_result = `cd controlM2/; /usr/local/bin/M2 Visualizer.m2 --stop --no-debug --silent -q -e 'QR = makeControlRing(#{n_nodes}, #{u_nodes}, #{p_value}); F = matrix(QR, #{m2_system}); traj = first findControl(F, #{initialState}, #{finalState}, #{u_nodes}); visualizePhaseSpace( F, #{u_nodes}, traj); exit 0'`
-
-  elsif controlType == "best"
-    puts "Generating the phase space and finding best control.<br>"
-    m2_result = `cd controlM2/; /usr/local/bin/M2 Visualizer.m2 --stop --no-debug --silent -q -e 'QR = makeControlRing(#{n_nodes}, #{u_nodes}, #{p_value}); F = matrix(QR, #{m2_system}); traj = first findOptimalControl(F, #{initialState}, #{finalState}, #{u_nodes}); visualizePhaseSpace( F, #{u_nodes}, traj); exit 0'`
-
-  else 
-    puts "I don't understand this control type #{controlType}<br>"
-    exit 1
+  if traj != "{}" 
+    puts "Finding control heuristicly<br>"
   end
+  puts "Generating the phase space ...<br><br>"
+
+  #puts "cd controlM2/; /usr/local/bin/M2 Visualizer.m2 --stop --no-debug --silent -q -e 'QR = makeControlRing(#{n_nodes}, #{u_nodes}, #{p_value}); visualizeControl( matrix(QR, #{m2_system}), #{u_nodes}, #{traj}); exit 0'"
+  m2_result = `cd controlM2/; /usr/local/bin/M2 Visualizer.m2 --stop --no-debug --silent -q -e 'QR = makeControlRing(#{n_nodes}, #{u_nodes}, #{p_value}); visualizeControl( matrix(QR, #{m2_system}), #{u_nodes}, #{traj}); exit 0'`
 
 #puts "here"
 #puts "<br>"

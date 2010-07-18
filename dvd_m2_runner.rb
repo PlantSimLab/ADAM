@@ -1,4 +1,3 @@
- 
 #dvd_m2_runner $n_nodes $p_value $filename $limCyc_length
 
 # Takes input from dvd website and passes it to M2 to compute fixed points
@@ -43,11 +42,18 @@ puts "<br>"
 puts "Running fixed point calculation now ...<br>"
  
 #one line is for my machine, one line is for the server b/c M2 is in different paths
-#  m2_result = `cd lib/M2code/; M2 solvebyGB.m2 --stop --no-debug --silent -q -e 'QR = makeRing(#{n_nodes}, #{p_value}); ll = gbSolver( matrix(QR, #{m2_system}), #{p_value}, #{limCyc_length}); exit 0'`
-  m2_result = `cd lib/M2code/; /usr/local/bin/M2 solvebyGB.m2 --stop --no-debug --silent -q -e 'QR = makeRing(#{n_nodes}, #{p_value}); ll = gbSolver( matrix(QR, #{m2_system}), #{p_value}, #{limCyc_length}); exit 0'`
+#  m2_result = `cd lib/M2code/; M2 solvebyGB.m2 --stop --no-debug --silent -q -e 'QR = makeRing(#{n_nodes}, #{p_value}); ll = gbSolver( matrix(QR, #{m2_system}), #{p_value}, #{limCyc_length}); print ll; exit 0'`
+#  numCycles = `cd lib/M2code/; M2 solvebyGB.m2 --stop --no-debug --silent -q -e 'QR = makeRing(#{n_nodes}, #{p_value}); ll = gbSolver( matrix(QR, #{m2_system}), #{p_value}, #{limCyc_length}); print length ll; exit 0'`
+  m2_result = `cd lib/M2code/; /usr/local/bin/M2 solvebyGB.m2 --stop --no-debug --silent -q -e 'QR = makeRing(#{n_nodes}, #{p_value}); ll = gbSolver( matrix(QR, #{m2_system}), #{p_value}, #{limCyc_length}); print ll; exit 0'`
+  numCycles = `cd lib/M2code/; /usr/local/bin/M2 solvebyGB.m2 --stop --no-debug --silent -q -e 'QR = makeRing(#{n_nodes}, #{p_value}); ll = gbSolver( matrix(QR, #{m2_system}), #{p_value}, #{limCyc_length}); print length ll; exit 0'`
+if numCycles.chomp == "0"
+  puts "There are no limit cycles of length #{limCyc_length}."
+else
+  puts "There are " + numCycles + " limit cycles of length #{limCyc_length}"
+  puts " and they are: <br>"
   puts m2_result
   puts "<br>"
-
+end
 
 
 exit 0
