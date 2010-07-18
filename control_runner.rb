@@ -116,18 +116,48 @@ if ( n_nodes < 11 )
 #puts "<br>"
 #puts m2_result 
 
-  if m2_result == "" # empty only if M2 errored out  
-    puts "There was a problem with the calculation. Sorry<br>"
+else 
+  unless controlType == "given"
+    puts "Too many variables to generate the phase space.<br>"
+  end
+  if controlType == "nothing"
+    puts "Nothing to do, good bye. <br>"
+    exit 0
+
+  elsif controlType == "given"
+    m2_result = `cd controlM2/; /usr/local/bin/M2 Visualizer.m2 --stop --no-debug --silent -q -e 'QR = makeControlRing(#{n_nodes}, #{u_nodes}, #{p_value}); visualizeTrajectory( matrix(QR, #{m2_system}), #{initialState},  #{controlSequence}); exit 0'`
+
+  elsif controlType == "heuristic"
+    puts "Finding control heuristically.<br>"
+    m2_result = `cd controlM2/; /usr/local/bin/M2 Visualizer.m2 --stop --no-debug --silent -q -e 'QR = makeControlRing(#{n_nodes}, #{u_nodes}, #{p_value}); F = matrix(QR, #{m2_system}); traj = first findControl(F, #{initialState}, #{finalState}, #{u_nodes}); exit 0'`
+
+  elsif controlType == "best"
+    puts "Finding optimal control.<br>"
+    m2_result = `cd controlM2/; /usr/local/bin/M2 Visualizer.m2 --stop --no-debug --silent -q -e 'QR = makeControlRing(#{n_nodes}, #{u_nodes}, #{p_value}); F = matrix(QR, #{m2_system}); traj = first findOptimalControl(F, #{initialState}, #{finalState}, #{u_nodes});  exit 0'`
+    puts "cd controlM2/; /usr/local/bin/M2 Visualizer.m2 --stop --no-debug
+    --silent -q -e 'QR = makeControlRing(#{n_nodes}, #{u_nodes}, #{p_value});
+    F = matrix(QR, #{m2_system}); traj = first findOptimalControl(F,
+    #{initialState}, #{finalState}, #{u_nodes});  exit 0'"
+
+  else 
+    puts "I don't understand this control type #{controlType}<br>"
     exit 1
   end
+end
+  
+  
+if m2_result == "" # empty only if M2 errored out  
+  puts "There was a problem with the calculation. Sorry<br>"
+  exit 1
+end
 
-  results = m2_result.split("digraph")
-  #if results.size == 2 and u_nodes > 0 
-  if controlType == "heuristic" or controlType== "best"  
-    puts "<font color=\"#226677\">The following control was applied: </font><br>"
-    puts (results.first).gsub(/\n/, "<br>") 
-  end
+results = m2_result.split("digraph")
+if controlType == "heuristic" or controlType== "best"  
+  puts "<font color=\"#226677\">The following control was applied: </font><br>"
+  puts (results.first).gsub(/\n/, "<br>") 
+end
 
+if results.size == 2 
   tmpFile = "#{filePrefix}dot"
   File.open( tmpFile, 'w') {|f| f.write "digraph #{results.last}"}
 
@@ -135,26 +165,8 @@ if ( n_nodes < 11 )
   dotPath.chop!
   #puts "#{dotPath} -Tgif #{tmpFile} -o #{file}"
   `#{dotPath} -Tgif #{tmpFile} -o #{file}`
-else 
-  puts "Too many variables to generate the phase space.<br>"
-  if traj !="{}" 
-    puts "Compute control sequence<br>"
-    #puts "cd controlM2/; /usr/local/bin/M2 Controller.m2 --stop --no-debug --silent -q -e 'QR = makeControlRing(#{n_nodes}, #{u_nodes}, #{p_value}); findControl( matrix(QR, #{m2_system}),  {#{initialState}}, {#{finalState}}, #{u_nodes}); exit 0'"
-    m2_result = `cd controlM2/; /usr/local/bin/M2 Controller.m2 --stop --no-debug --silent -q -e 'QR = makeControlRing(#{n_nodes}, #{u_nodes}, #{p_value}); findControl( matrix(QR, #{m2_system}),  {#{initialState}}, {#{finalState}}, #{u_nodes}); exit 0'`
-    puts m2_result.gsub(/\n/, "<br>") 
-  else
-    puts "Nothing to do, good bye. <br>"
-  end
 end
 
 exit 0
 
-puts "<br>"
-puts tmpFile
-puts "<br>"
-puts file
-puts "<br>"
-
-
-exit 0
 
