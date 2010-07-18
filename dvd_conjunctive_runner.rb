@@ -1,4 +1,3 @@
- 
 #dvd_conjunctive_runner $n_nodes $p_value $dpGraph
 
 # Takes input from dvd website and passes it to conjunctiveNetwork.m2 to
