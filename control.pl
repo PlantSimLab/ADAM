@@ -320,14 +320,15 @@ if (param) {
     print ("ruby control_runner.rb $n_nodes $u_nodes $p_value \"$functions\"
     $clientip.out.gif $controlType $initialState $givenControl <br>") if $DEBUG;
     $ret = system("ruby control_runner.rb $n_nodes $u_nodes $p_value \"$functions\" $clientip.out.gif $controlType $initialState $givenControl");
-  } elsif ($controlType eq "heuristic") {
-    print "heuristic<br>" if $DEBUG;
-    print "<font color=\"#226677\"><b>Finding heuristic controller from $initialState to $finalState:</b></font><br>";
+  } elsif ($controlType eq "heuristic" or $controlType eq "best") {
+    print "heuristic or best <br>" if $DEBUG;
+    print "<font color=\"#226677\"><b>Finding $controlType controller from $initialState to $finalState:</b></font><br>";
     print ("ruby control_runner.rb $n_nodes $u_nodes $p_value \"$functions\" $clientip.out.gif $controlType $initialState $finalState") if $DEBUG;
     $ret = system("ruby control_runner.rb $n_nodes $u_nodes $p_value \"$functions\" $clientip.out.gif $controlType $initialState $finalState");
-  } elsif ($controlType eq "best") {
-    print "best <br>" if $DEBUG;
-    print "<font color=\"#226677\"><b>Finding best controller from $initialState to $finalState:</b></font><br>";
+  } else {
+    print "<br><font color=red>Sorry. Something went wrong.</font><br>";
+    die("Program quitting. Unknown error");
+    exit 1;
   }
 
 

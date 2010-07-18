@@ -43,14 +43,12 @@ elsif controlType == "given" and (7..8) === ARGV.size
   }
   controlSequence.chop!
   controlSequence = controlSequence + "}"
-  initialState = initialState.gsub(/_/, ",")
-  traj = "{{#{initialState}}}" 
+  initialState = "{#{initialState.gsub(/_/, ",")}}"
 elsif (controlType == "heuristic" or controlType == "best") and ARGV.size == 8 
   initialState = ARGV[6]
   finalState = ARGV[7]
-  initialState = initialState.gsub(/_/, ",")
-  finalState = finalState.gsub(/_/, ",")
-  traj = "{{#{initialState}}, {#{finalState}}}"
+  initialState = "{#{initialState.gsub(/_/, ",")}}"
+  finalState = "{#{finalState.gsub(/_/, ",")}}"
 else 
   puts "Sorry, something was wrong with your input. Did you enter correct initial and final states?"
   exit 1
@@ -90,23 +88,24 @@ m2_system = m2_system + "}}"
 if ( n_nodes < 11 ) 
   #puts controlType
   if controlType == "nothing"
-    puts "Generating the phase space<br>"
-    #puts "cd controlM2/; /usr/local/bin/M2 Visualizer.m2 --stop --no-debug --silent -q -e 'QR = makeControlRing(#{n_nodes}, #{u_nodes}, #{p_value}); visualizeControl( matrix(QR, #{m2_system}), #{u_nodes}, {}); exit 0'<br>"
-    m2_result = `cd controlM2/; /usr/local/bin/M2 Visualizer.m2 --stop --no-debug --silent -q -e 'QR = makeControlRing(#{n_nodes}, #{u_nodes}, #{p_value}); visualizeControl( matrix(QR, #{m2_system}), #{u_nodes}, {}); exit 0'`
+    puts "Generating the phase space of the #{if u_nodes>0 then "controlled " end}PDS.<br>"
+    m2_result = `cd controlM2/; /usr/local/bin/M2 Visualizer.m2 --stop --no-debug --silent -q -e 'QR = makeControlRing(#{n_nodes}, #{u_nodes}, #{p_value}); F = matrix(QR, #{m2_system}); visualizePhaseSpace( F, #{u_nodes}); exit 0'`
+    #puts "cd controlM2/; /usr/local/bin/M2 Visualizer.m2 --stop --no-debug
+    #--silent -q -e 'QR = makeControlRing(#{n_nodes}, #{u_nodes}, #{p_value});
+    #F = matrix(QR, #{m2_system}); visualizePhaseSpace( F, #{u_nodes}); exit
+    #0'"
 
   elsif controlType == "given"
 
-    m2_result = `cd controlM2/; /usr/local/bin/M2 Visualizer.m2 --stop --no-debug --silent -q -e 'QR = makeControlRing(#{n_nodes}, #{u_nodes}, #{p_value}); visualizeTrajectory( matrix(QR, #{m2_system}), {#{initialState}},  #{controlSequence}); exit 0'`
-    #puts "cd controlM2/; /usr/local/bin/M2 Visualizer.m2 --stop --no-debug --silent -q -e 'QR = makeControlRing(#{n_nodes}, #{u_nodes}, #{p_value}); visualizeTrajectory( matrix(QR, #{m2_system}), {#{initialState}},  #{controlSequence}); exit 0'"
+    m2_result = `cd controlM2/; /usr/local/bin/M2 Visualizer.m2 --stop --no-debug --silent -q -e 'QR = makeControlRing(#{n_nodes}, #{u_nodes}, #{p_value}); visualizeTrajectory( matrix(QR, #{m2_system}), #{initialState},  #{controlSequence}); exit 0'`
 
   elsif controlType == "heuristic"
-    puts "Generating the phase space and finding control heuristically<br>"
-    #puts "cd controlM2/; /usr/local/bin/M2 Visualizer.m2 --stop --no-debug --silent -q -e 'QR = makeControlRing(#{n_nodes}, #{u_nodes}, #{p_value}); visualizeControl( matrix(QR, #{m2_system}), #{u_nodes}, #{traj}); exit 0'"
-    m2_result = `cd controlM2/; /usr/local/bin/M2 Visualizer.m2 --stop --no-debug --silent -q -e 'QR = makeControlRing(#{n_nodes}, #{u_nodes}, #{p_value}); visualizeControl( matrix(QR, #{m2_system}), #{u_nodes}, #{traj}); exit 0'`
+    puts "Generating the phase space and finding control heuristically.<br>"
+    m2_result = `cd controlM2/; /usr/local/bin/M2 Visualizer.m2 --stop --no-debug --silent -q -e 'QR = makeControlRing(#{n_nodes}, #{u_nodes}, #{p_value}); F = matrix(QR, #{m2_system}); traj = first findControl(F, #{initialState}, #{finalState}, #{u_nodes}); visualizePhaseSpace( F, #{u_nodes}, traj); exit 0'`
 
   elsif controlType == "best"
-    puts "Generating the phase space and finding best controli<br>"
-    puts "sorry, this is not implemented yet :( "
+    puts "Generating the phase space and finding best control.<br>"
+    m2_result = `cd controlM2/; /usr/local/bin/M2 Visualizer.m2 --stop --no-debug --silent -q -e 'QR = makeControlRing(#{n_nodes}, #{u_nodes}, #{p_value}); F = matrix(QR, #{m2_system}); traj = first findOptimalControl(F, #{initialState}, #{finalState}, #{u_nodes}); visualizePhaseSpace( F, #{u_nodes}, traj); exit 0'`
 
   else 
     puts "I don't understand this control type #{controlType}<br>"
