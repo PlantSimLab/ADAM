@@ -123,9 +123,16 @@ print "
       <tr><td nowrap bgColor=\"#666666\"><strong><font color=\"#ffffff\">
         Controller</font></strong></td>
       </tr>
-      <tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr>
-<tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr><tr valign=\"top\"><td nowrap><div align=\"center\">
-
+      <tr>
+        <td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\">
+        </td>
+      </tr>
+      <tr>
+        <td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\">
+        </td>
+      </tr>
+      <tr valign=\"top\">
+        <td nowrap><div align=\"center\">
 <tr valign=\"top\"><td nowrap><font size=\"2\">
 <table width=100% border=0>
 <tr>
@@ -228,10 +235,29 @@ print "
    This is done by enumeration. <br><br>
   </td>
 </tr>
-</table> ";
 
+<tr>
+  <td colspan=3 nowrap bgColor=\"#666666\"><strong><font color=\"#ffffff\" size=3>
+    Cost Function</font></strong>
+  </td>
+</tr>
+<tr valign=\"top\"><td></td><td></td>
+  <td wrap><font size=2>
+    The algorithms find a control sequence that is best with respect to a cost<br>
+    function. Please enter your cost function here:
+    ",
+    textfield(-name=>'costFunction', -size=>20, -default=>'u1+u2'),
+    "<br>The control variables are referred to as u = {u1, u2, ...,  um},<br>
+    where m is the number of control variables. The total cost for a<br>
+    trajectory is the sum of the cost of the controls applied. For example, if<br>
+    you applied the controls {0,1}, {2,1}, {0,0}, {1,1}, then the cost is<br>
+    c({0,1}) + c({2,1}) + c({0,0}) + c({1,1}).  <b>Please note, for now, only the<br>
+    default cost is possible, changing this field is not working yet</b>.</font>
+  </td>
+</tr> ";
 
-print "</div></td></tr><tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr>";
+print "</table></div></td></tr><tr><td colspan=3 BGCOLOR=\"#DCDCDC\"
+HEIGHT=\"1\"></td></tr>";
 print "</table></td></tr></table></td></tr>";
 
 print "<tr>";
