@@ -231,7 +231,7 @@ print "
   <td>
   </td>
   <td>
-   Find a truely optimal controller from the inital to the final state. <br> 
+   Find a truly optimal controller from the inital to the final state. <br> 
    This is done by enumeration. <br><br>
   </td>
 </tr>
