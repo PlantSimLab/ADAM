@@ -40,7 +40,7 @@ print "<tr><td width=\"7%\"></td> <td align=right><img src=\"http://dvd.vbi.vt.e
 print "</td></tr>";
 print "<tr><td colspan=3 align=center>";
 print "You can visualize a controlled Polynomial dynamical system. This is experimental, please be patient with us. Thank you for trying it out! <br>
-If you have any questions or comments, <a href=\"mailto:fhinkel@vt.edu\">please email Franziska Hinkelmann</a>! </td></tr></table>";
+If you have any questions or comments, <a href=\"mailto:fhinkel\@vt.edu\">please email Franziska Hinkelmann</a>! </td></tr></table>";
 #print "<table background=\"http://dvd.vbi.vt.edu/gradient.gif\" width=\"100%\"  border=\"0\" cellpadding=\"0\" cellspacing=\"10\">";
 
 print "<table width=\"100%\"  border=\"0\" cellpadding=\"30\" cellspacing=\"10\">";
