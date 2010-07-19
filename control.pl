@@ -336,16 +336,13 @@ if (param) {
   } elsif ($controlType eq "given") {
     print "given control <br>" if $DEBUG;
     print "<font color=\"#226677\"><b>Finding trajectory from $initialState
-    for given control $givenControl:</b></font><br>";
-    if ($givenControl ne null) {
-      $givenControl = &cleanUpState( $givenControl );
-    } else {
+    for given control $givenControl:</b></font><br>" if $DEBUG;
+    if ($givenControl eq null) {
       print "<br><font color=red>Sorry. You have to specify a control sequence if you want chose given control.</font><br>";
       die("Program quitting.");
     }
-    print ("ruby control_runner.rb $n_nodes $u_nodes $p_value \"$functions\"
-    $clientip.out.gif $controlType $initialState $givenControl <br>") if $DEBUG;
-    $ret = system("ruby control_runner.rb $n_nodes $u_nodes $p_value \"$functions\" $clientip.out.gif $controlType $initialState $givenControl");
+    print ("ruby control_runner.rb $n_nodes $u_nodes $p_value \"$functions\" $clientip.out.gif $controlType $initialState \"$givenControl\" <br>") if $DEBUG;
+    $ret = system("ruby control_runner.rb $n_nodes $u_nodes $p_value \"$functions\" $clientip.out.gif $controlType $initialState \"$givenControl\"");
   } elsif ($controlType eq "heuristic" or $controlType eq "best") {
     print "heuristic or best <br>" if $DEBUG;
     print "<font color=\"#226677\"><b>Finding $controlType controller from $initialState to $finalState:</b></font><br>";
@@ -376,24 +373,10 @@ print end_html;
 
 sub cleanUpState() {
   ($s) = @_;
-  #print "In clean up state<br>";
-  #print $s;
-  #print "<br>";
-  @lines = split(/\n/, $s);
-  $ret = "";
-  foreach (@lines) {
-    $l = $_;
-    $l =~ s/^\s+|\s+$//g; #remove all leading and trailing white spaces
-    $l =~  s/(\d+)(\s+|,+)+/$1 /g; # remove extra spaces in between the numbers
-    $l =~ s/ /_/g;
-    #print $l;
-    #print "<br>";
-    $ret = $ret . $l;
-    $ret = $ret . "-";
-  }
-  chop($ret);
-  #print $ret;
-  $ret;
+  $s =~ s/^\s+|\s+$//g; #remove all leading and trailing white spaces
+  $s =~  s/(\d+)(\s+|,+)+/$1 /g; # remove extra spaces in between the numbers
+  $s =~ s/ /_/g;
+  $s;
 }
 
 

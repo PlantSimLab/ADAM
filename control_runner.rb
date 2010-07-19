@@ -32,16 +32,19 @@ if controlType == "nothing"
 elsif controlType == "given" and (7..8) === ARGV.size 
   initialState = ARGV[6]
   controlSequence = ARGV[7]
-  arr = controlSequence.split(/-/)
+  controlSequenceArr = controlSequence.strip.split(/\n/)
+  if controlSequenceArr.size == 0 
+    puts "There should be a least one control if you want to apply given
+    control.<br>"
+    exit 1
+  end
   controlSequence = "{"
-  arr.each{ |a| 
-    controlSequence = controlSequence + "{"
-    a.gsub!(/_/, ",")
-    controlSequence = controlSequence + a
-    controlSequence = controlSequence + "},"
+  controlSequenceArr.each{ |u|
+    controlSequence = controlSequence + "{#{u.strip.gsub(/\s+/, ",")}},"
   }
   controlSequence.chop!
   controlSequence = controlSequence + "}"
+
   initialState = "{#{initialState.gsub(/_/, ",")}}"
 elsif (controlType == "heuristic" or controlType == "best") and ARGV.size == 8 
   initialState = ARGV[6]
