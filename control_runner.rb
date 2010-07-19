@@ -2,7 +2,6 @@
 # Franziska Hinkelmann
 # July 2010
 
-#$ret = system("ruby control_runner.rb $n_nodes $u_nodes $p_value $functions");
 
 # Takes input from dvd website and passes it to M2 to generate controlled PDS
 # returns 0 (no errors) or 1 (errors) 
@@ -63,7 +62,7 @@ filePrefix = file.split(/gif/).first
 #puts file 
 #puts "<br>"
 
-functionArr = function.split(/\n/)
+functionArr = function.strip.split(/\n/)
 
 unless functionArr.size == n_nodes 
   puts "There should be #{n_nodes} functions, but I encountered #{functionArr.size}.<br>"
