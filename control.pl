@@ -78,9 +78,10 @@ print "<br>";
 print "</td></tr><tr><td BGCOLOR=\"#DCDCDC\" HEIGHT=\"1\"></td></tr><tr valign=\"top\"><td wrap><font size=\"2\">";
 print "<br>";
 print "A controlled polynomial dynamical system has a number of state variables x1, ... xn <br>"; 
-print "and a number of control variables u1, ..., um. The idea is, that the system evoles according <br>";
+print "and a number of control variables u1, ..., um. The idea is, that the
+system evolves according <br>";
 print "to certain rules, this corresponds to a regular PDS, but the control variables can be <br> externally controlled. Therefore ";
-print "the state space of a controlled PDS looks slighlty different <br>than that of a regular PDS: ";
+print "the state space of a controlled PDS looks slightly different <br>than that of a regular PDS: ";
 print "There are p^n states where each state has out-degree at <br>most 2^u. Every edge in the graph is ";
 print "labeled with the control that has been applied at this transition. <br>";
 print "<br>";
@@ -231,7 +232,7 @@ print "
   <td>
   </td>
   <td>
-   Find a truly optimal controller from the inital to the final state. <br> 
+   Find a truly optimal controller from the initial to the final state. <br> 
    This is done by enumeration. <br><br>
   </td>
 </tr>
