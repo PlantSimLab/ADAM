@@ -12,10 +12,12 @@ end
 ginSimFile = ARGV[0]
 functionFile = ARGV[1]
 
-#m2_result = `cd lib/M2code/; M2 convertToPDS.m2 --stop --no-debug --silent -q -e 'print toString last converter("../../#{ginSimFile}"); exit 0'`
-#varList = `cd lib/M2code/; M2 convertToPDS.m2 --stop --no-debug --silent -q -e 'print toString first converter("../../#{ginSimFile}"); exit 0'`
-varList = `cd lib/M2code/; /usr/local/bin/M2 convertToPDS.m2 --stop --no-debug --silent -q -e 'print toString first converter("../../#{ginSimFile}"); exit 0'`
-m2_result = `cd lib/M2code/; /usr/local/bin/M2 convertToPDS.m2 --stop --no-debug --silent -q -e 'print toString last converter("../../#{ginSimFile}"); exit 0'`
+result = `cd lib/M2code/; M2 convertToPDS.m2 --stop --no-debug --silent -q -e 'cF = converter("../../#{ginSimFile}"); stdio << toString first cF << "?" << toString last cF; exit 0'`
+#result = `cd lib/M2code/; /usr/local/bin/M2 convertToPDS.m2 --stop --no-debug --silent -q -e 'cF = converter("../../#{ginSimFile}"); stdio << toString first cF << "?" << toString last cF; exit 0'`
+
+result = result.split("?")
+varList = result.fetch(0)
+m2_result = result.fetch(1)
 
 #Converts varList to readable output
 vars = varList.split("{")
@@ -34,7 +36,7 @@ puts formatVars
 #get functions into array
 #puts m2_result
 functions = m2_result.split("{")
-functions = functions.fetch(1).chop!.chop!
+functions = functions.fetch(1).chop!
 functions = functions.split(",")
 
 #make empty string for formatted functions
