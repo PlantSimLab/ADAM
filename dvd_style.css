@@ -10,7 +10,11 @@ html {
     margin:0 auto;
     background-image: url('dna_pale_blue.png');
     background-size: 100%;
+    /* b/c Firefox3.6 and Safari3 don't have background-size implemented */
+    /* Might as well include Konquerer too */
     -moz-background-size: 100%;
+    -webkit-background-size: 100%;
+    -khtml-background-size: 100%;
     background-attachment: fixed;
     background-repeat: no-repeat;
 /*    background-image: url('http://dvd.vbi.vt.edu/gradient.gif');*/
