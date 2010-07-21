@@ -217,7 +217,7 @@ if ( $special_networks eq "Conjunctive/Disjunctive (Boolean rings only)" ) {
   print  "<br><A href=\"$dpGraph.$DGformat\" target=\"_blank\"><font
   color=red><i>Click to view the dependency graph.</i></font></A><br>";
   #BLAHBLAH i'm sad ._.
-  system("ruby dvd_conjunctive_runner.rb $n_nodes $p_value $dpGraph.dot");
+  system("ruby adam_conjunctive.rb $n_nodes $p_value $dpGraph.dot");
 }
 elsif ( $special_networks eq "Large Network (nodes > 10)" ) {
   if(($limCyc_length eq null) || ($limCyc_length eq "")){
@@ -229,7 +229,7 @@ elsif ( $special_networks eq "Large Network (nodes > 10)" ) {
   print "<font color=blue><b>This is a very experimental feature, therefore
   there is no error checking. Use at your own risk.</b></font><br>";
   create_input_function();
-  system("ruby dvd_m2_runner.rb $n_nodes $p_value $filename $limCyc_length");
+  system("ruby adam_largeNetwork.rb $n_nodes $p_value $filename $limCyc_length");
 } elsif ( $p_value && $n_nodes )
 {
     print "hello<br>" if ($DEBUG);

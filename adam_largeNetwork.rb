@@ -1,10 +1,10 @@
-#dvd_m2_runner $n_nodes $p_value $filename $limCyc_length
+#adam_largeNetwork $n_nodes $p_value $filename $limCyc_length
 
 # Takes input from dvd website and passes it to M2 to compute fixed points
 # returns 0 (no errors) or 1 (errors) 
 
 unless ARGV.size == 4
-  puts "Usage: ruby dvd_m2_runner.rb n_nodes p_value functionFile limCyc_length"
+  puts "Usage: ruby adam_largeNetwork.rb n_nodes p_value functionFile limCyc_length"
   exit 0
 end
 
