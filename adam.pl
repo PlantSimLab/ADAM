@@ -37,7 +37,7 @@ print "</div>";
 #Div Box: Text Explanation :: Nav
 print "<div id=\"nav\"><p>";
 print "ADAM uses a combination of simulation and algorithms to analyze the dynamics of ";
-print "discrete systems. <br>If this is your first time, please read the <a href=\"http://dvd.vbi.vt.edu/VADD_tut.html\" target=\"_blank\">tutorial</a>. It is important ";
+print "discrete systems. <br>If this is your first time, please read the <a href=\"http://dvd.vbi.vt.edu/ADAM_tut.html\" target=\"_blank\">tutorial</a>. It is important ";
 print "that you follow the format specified in the tutorial.<br>Make your selections and provide inputs (if any) in the form below and click ";
 print "Generate to run the software.<br> Note: The computation may take some time.";
 print "</div>";
