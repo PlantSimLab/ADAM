@@ -12,8 +12,8 @@ end
 ginSimFile = ARGV[0]
 functionFile = ARGV[1]
 
-#result = `cd lib/M2code/; M2 convertToPDS.m2 --stop --no-debug --silent -q -e 'cF = converter("../../#{ginSimFile}"); stdio << toString first cF << "?" << toString last cF; exit 0'`
-result = `cd lib/M2code/; /usr/local/bin/M2 convertToPDS.m2 --stop --no-debug --silent -q -e 'cF = converter("../../#{ginSimFile}"); stdio << toString first cF << "?" << toString last cF; exit 0'`
+result = `cd lib/M2code/; M2 convertToPDS.m2 --stop --no-debug --silent -q -e 'cF = converter("../../#{ginSimFile}"); stdio << toString first cF << "?" << toString last cF; exit 0'`
+#result = `cd lib/M2code/; /usr/local/bin/M2 convertToPDS.m2 --stop --no-debug --silent -q -e 'cF = converter("../../#{ginSimFile}"); stdio << toString first cF << "?" << toString last cF; exit 0'`
 
 result = result.split("?")
 varList = result.fetch(0)
@@ -35,8 +35,8 @@ puts formatVars
 #Converts functions in m2_result to something VADD can read
 #get functions into array
 #puts m2_result
-functions = m2_result.split("{")
-functions = functions.fetch(1).chop!
+functions = m2_result.split("{{")
+functions = functions.fetch(1).chop!.chop!
 functions = functions.split(",")
 
 #make empty string for formatted functions
