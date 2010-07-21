@@ -5,7 +5,7 @@
 ## Bonbons
 ## July 2010
 
-## AVDD0.1 with support for large networks and conjunctive 
+## ADAM0.1 with support for large networks and conjunctive 
 ## networks using M2 instead of perl enumeration
 
 use CGI qw( :standard );
@@ -22,21 +22,21 @@ $clientip = '../../htdocs/no-ssl/files/'. $clientip;
 
 #$clientip = $sec.'-'.$min.'-'.$hr;
 
-print header, start_html( -title=>'Analysis and Visualization of Discrete Dynamics', -script=>{-language=>'JavaScript',-src=>'/fnct2.js'}, -style=>{-src=>'/dvd_style.css'});
+print header, start_html( -title=>'Analysis of Discrete Algebraic Models', -script=>{-language=>'JavaScript',-src=>'/fnct2.js'}, -style=>{-src=>'/adam_style.css'});
 print start_multipart_form(-name=>'form1', -method =>"POST", -onSubmit=>"return validate()");
 print "<div id=\"wrap\">";
 print "<div id=\"tipDiv\" style=\"position:absolute\; visibility:hidden\; z-index:100\"></div>";
 
-#Div Box: AVDD Title :: Header
+#Div Box: ADAM Title :: Header
 print "<div id=\"header\">";
 print "<table><tr>";
 print "<td align=\"right\"><img src=\"http://dvd.vbi.vt.edu/vbi-logo.png\"></td>";
-print "<td align=\"left\"><b><font size=\"5\">Analysis and Visualization of Discrete Dynamics (AVDD) v0.1 </font></b></td></tr></table>";
+print "<td align=\"left\"><b><font size=\"5\">Analysis of Discrete Algebraic Models (ADAM) v0.1 </font></b></td></tr></table>";
 print "</div>";
 
 #Div Box: Text Explanation :: Nav
 print "<div id=\"nav\"><p>";
-print "AVDD uses a combination of simulation and algorithms to analyze the dynamics of ";
+print "ADAM uses a combination of simulation and algorithms to analyze the dynamics of ";
 print "discrete systems. <br>If this is your first time, please read the <a href=\"http://dvd.vbi.vt.edu/VADD_tut.html\" target=\"_blank\">tutorial</a>. It is important ";
 print "that you follow the format specified in the tutorial.<br>Make your selections and provide inputs (if any) in the form below and click ";
 print "Generate to run the software.<br> Note: The computation may take some time.";
@@ -306,9 +306,10 @@ print "</div>";
 
 #Box: Comments/Questions/Bugs Link :: Footer
 print "<div id=\"footer\">";
-print "AVDD is currently still under development; if you ";
-print "spot any bugs or have any questions/comments, please e-mail us. ";
-print "[TODO: get a vt email] (Bonny Guang, Madison Brandon, Rustin McNeill)";
+print "ADAM is currently still under development; if you ";
+print "spot any bugs or have any questions/comments, please <a href=\"mailto:mbrando1@utk.edu\">";
+print "e-mail us</a>. ";
+print "(Bonny Guang, Madison Brandon, Rustin McNeill)";
 print "</td></tr>";
 print "</div>";
 
