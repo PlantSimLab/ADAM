@@ -103,7 +103,7 @@ if ( n_nodes < 11 )
 
   elsif controlType == "heuristic"
     puts "Generating the phase space and finding control heuristically.<br>"
-    m2_result = `cd controlM2/; /usr/local/bin/M2 Visualizer.m2 --stop --no-debug --silent -q -e 'QR = makeControlRing(#{n_nodes}, #{u_nodes}, #{p_value}); F = matrix(QR, #{m2_system}); traj = first findControl(F, #{initialState}, #{finalState}, #{u_nodes}); visualizePhaseSpace( F, #{u_nodes}, traj); exit 0'`
+    m2_result = `cd controlM2/; /usr/local/bin/M2 Visualizer.m2 --stop --no-debug --silent -q -e 'QR = makeControlRing(#{n_nodes}, #{u_nodes}, #{p_value}); F = matrix(QR, #{m2_system}); traj = first findControl(F, #{initialState}, #{finalState}); visualizePhaseSpace( F, #{u_nodes}, traj); exit 0'`
 
   elsif controlType == "best"
     puts "Generating the phase space and finding best control.<br>"
