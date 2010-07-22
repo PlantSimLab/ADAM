@@ -107,7 +107,7 @@ if ( n_nodes < 11 )
 
   elsif controlType == "best"
     puts "Generating the phase space and finding best control.<br>"
-    m2_result = `cd controlM2/; /usr/local/bin/M2 Visualizer.m2 --stop --no-debug --silent -q -e 'QR = makeControlRing(#{n_nodes}, #{u_nodes}, #{p_value}); F = matrix(QR, #{m2_system}); traj = first findOptimalControl(F, #{initialState}, #{finalState}, #{u_nodes}); visualizePhaseSpace( F, #{u_nodes}, traj); exit 0'`
+    m2_result = `cd controlM2/; /usr/local/bin/M2 Visualizer.m2 --stop --no-debug --silent -q -e 'QR = makeControlRing(#{n_nodes}, #{u_nodes}, #{p_value}); F = matrix(QR, #{m2_system}); traj = first findOptimalControl(F, #{initialState}, #{finalState}); visualizePhaseSpace( F, #{u_nodes}, traj); exit 0'`
 
   else 
     puts "I don't understand this control type #{controlType}<br>"
