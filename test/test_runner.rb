@@ -34,29 +34,35 @@ class TestRunner < Test::Unit::TestCase
     assert $?.exitstatus == 0
     assert File.exists? tmpfilename
 
+    tmpfilename = get_tmp_filename
     `ruby control_runner.rb 2 2 2 "f1 = x1+x2*u1
-    f2 = x2+u1" test.gif nothing `
+    f2 = x2+u1" #{tmpfilename} nothing `
     assert $?.exitstatus == 0
+    assert File.exists? tmpfilename
   end
 
   def test_given
+    tmpfilename = get_tmp_filename
     `ruby control_runner.rb 2 2 2 "f1 = x1+x2*u1
-    f2 = x2+u1" test.gif given 0_0 "1 1"`
-    ret = $?.exitstatus
-    #puts "This should be 0 #{$?}"
-    assert ret == 0
+    f2 = x2+u1" #{tmpfilename} given 0_0 "1 1"`
+    assert $?.exitstatus == 0 
+    assert File.exists? tmpfilename
   end
   
   def test_heuristic
+    tmpfilename = get_tmp_filename
     `ruby control_runner.rb 2 2 2 "f1 = x1+x2*u1
-    f2 = x2+u1" test-heuristic.gif heuristic 0_0 1_1`
+    f2 = x2+u1" #{tmpfilename} heuristic 0_0 1_1`
     assert $?.exitstatus == 0
+    assert File.exists? tmpfilename
   end
   
   def test_optimal
+    tmpfilename = get_tmp_filename
     `ruby control_runner.rb 2 2 2 "f1 = x1+x2*u1
-    f2 = x2+u1" test-best.gif best 0_0 1_1`
+    f2 = x2+u1" #{tmpfilename} best 0_0 1_1`
     assert $?.exitstatus == 0
+    assert File.exists? tmpfilename
   end
 
 end
