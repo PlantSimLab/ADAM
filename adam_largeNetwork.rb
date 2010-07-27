@@ -24,6 +24,14 @@ File.open( functionFile, 'r').each {|line|
   m2_system = m2_system + ll.last 
   m2_system =  m2_system + ","
   largestI = ll.first.split(/f/).last.to_i
+  varIndices = ll.last.scan(/x+[0-9]+/)
+  varIndices = varIndices.collect{ |x| x.slice(1, x.length-1) }
+  for i in varIndices
+    if (i.to_i > n_nodes.to_i)
+      puts "Error. Index of x out of range in line #{largestI}. Exiting. <br>"
+      exit 1
+    end
+  end
 }
 
 if (largestI != n_nodes.to_i ) 
@@ -42,8 +50,8 @@ puts "<br>"
 puts "Running fixed point calculation now ...<br>"
 
 #one line is for my machine, one line is for the server b/c M2 is in different paths
-#  m2_result = `cd lib/M2code/; M2 solvebyGB.m2 --stop --no-debug --silent -q -e 'QR = makeRing(#{n_nodes}, #{p_value}); ll = gbSolver( matrix(QR, #{m2_system}), #{limCyc_length}); stdio << length ll << "?" << gbTable ll; exit 0'`
-  m2_result = `cd lib/M2code/; /usr/local/bin/M2 solvebyGB.m2 --stop --no-debug --silent -q -e 'QR = makeRing(#{n_nodes}, #{p_value}); ll = gbSolver( matrix(QR, #{m2_system}), #{limCyc_length}); stdio << length ll << "?" << gbTable ll; exit 0'`
+  m2_result = `cd lib/M2code/; M2 solvebyGB.m2 --stop --no-debug --silent -q -e 'QR = makeRing(#{n_nodes}, #{p_value}); ll = gbSolver( matrix(QR, #{m2_system}), #{limCyc_length}); stdio << length ll << "?" << gbTable ll; exit 0'`
+#  m2_result = `cd lib/M2code/; /usr/local/bin/M2 solvebyGB.m2 --stop --no-debug --silent -q -e 'QR = makeRing(#{n_nodes}, #{p_value}); ll = gbSolver( matrix(QR, #{m2_system}), #{limCyc_length}); stdio << length ll << "?" << gbTable ll; exit 0'`
   temp = m2_result.split('?')
   numCycles = temp.fetch(0)
   table = temp.fetch(1)
