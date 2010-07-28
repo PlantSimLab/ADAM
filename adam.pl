@@ -5,7 +5,7 @@
 ## Bonbons
 ## July 2010
 
-## ADAM0.1 with support for large networks and conjunctive 
+## ADAM0.2 with support for large networks and conjunctive 
 ## networks using M2 instead of perl enumeration
 
 use CGI qw( :standard );
@@ -31,7 +31,7 @@ print "<div id=\"tipDiv\" style=\"position:absolute\; visibility:hidden\; z-inde
 print "<div id=\"header\">";
 print "<table><tr>";
 print "<td align=\"right\"><img src=\"http://dvd.vbi.vt.edu/vbi-logo.png\"></td>";
-print "<td align=\"left\"><b><font size=\"5\">Analysis of Discrete Algebraic Models (ADAM) v0.1 </font></b></td></tr></table>";
+print "<td align=\"left\"><b><font size=\"5\">Analysis of Discrete Algebraic Models (ADAM) v0.2 </font></b></td></tr></table>";
 print "</div>";
 
 #Div Box: Text Explanation :: Nav
@@ -144,9 +144,9 @@ print"<tr class=\"lines\"><td></td></tr><tr valign=\"top\"><td nowrap><font size
 print"&nbsp\;<a href=\"http://dvd.vbi.vt.edu/tutorial.html#G\" onmouseover=\"doTooltip(event,6)\" onmouseout=\"hideTip()\"><font size=\"1\">what is this?</font></a><br>";
 print"<font color=\"#006C00\"><i>Select graph(s) to view and image 
 format.</i></font><br>";
-print checkbox_group(-name=>'statespace', -value=>'State space graph', -label=>'State space graph'),"&nbsp\;&nbsp\;&nbsp\;", popup_menu(-name=>'SSformat',-values=>['*.gif','*.jpg','*.png','*.ps']), "&nbsp\;&nbsp\;&nbsp\;", checkbox_group(-name =>'stochastic', -value=>'Print probabilities', -label=>'Print probabilities', -checked),"<br>";
+print checkbox_group(-name=>'statespace', -value=>'State space graph', -label=>'State space graph', -checked),"&nbsp\;&nbsp\;&nbsp\;", popup_menu(-name=>'SSformat',-values=>['*.gif','*.jpg','*.png','*.ps']), "&nbsp\;&nbsp\;&nbsp\;", checkbox_group(-name =>'stochastic', -value=>'Print probabilities', -label=>'Print probabilities', -checked),"<br>";
 print checkbox_group(-name=>'depgraph', -value=>'Dependency graph',
--label=>'Dependency graph'), "&nbsp\;&nbsp\;&nbsp\;", popup_menu(-name=>'DGformat',-values=>['*.gif','*.jpg','*.png','*.ps']);
+-label=>'Dependency graph', -checked), "&nbsp\;&nbsp\;&nbsp\;", popup_menu(-name=>'DGformat',-values=>['*.gif','*.jpg','*.png','*.ps']);
 print"</font></td></tr><tr class=\"lines\"><td></td></tr></table></td></tr></table></td></tr>";
 print "</table>";
 print "</div>";
