@@ -1,5 +1,7 @@
 #adam_largeNetwork $n_nodes $p_value $filename $limCyc_length
 
+require 'partial_input'
+
 # Takes input from dvd website and passes it to M2 to compute fixed points
 # returns 0 (no errors) or 1 (errors) 
 
@@ -15,48 +17,75 @@ limCyc_length = ARGV[3]
 
 puts "<br>"
 
-m2_system =  "{{"
+# read the complete input file
+s = IO.readlines(functionFile,'').to_s
 
-largestI = 0
-File.open( functionFile, 'r').each {|line|
-  # puts "#{line}<br>"
-  ll = line.split(/=/)
-  m2_system = m2_system + ll.last 
-  m2_system =  m2_system + ","
-  largestI = ll.first.split(/f/).last.to_i
-  varIndices = ll.last.scan(/x+[0-9]+/)
-  varIndices = varIndices.collect{ |x| x.slice(1, x.length-1) }
-  for i in varIndices
-    if (i.to_i > n_nodes.to_i)
-      puts "Error. Index of x out of range in line #{largestI}. Exiting. <br>"
-      exit 1
-    end
+# take the input functions and put the in a hash, for example
+# {1=>["x1+x2"], 2=>["x2"], 3=>["x3", "x2", "x1"]}
+functionHash = PartialInput.parse_into_hash s
+ 
+# this is the list that give the number of functions per variable
+# if one variable has more than 1 function, the system is probabilistic
+numFunctions = functionHash.values.collect { |f| f.size }
+if  numFunctions.max != 1 
+  if limCyc_length.to_i != 1
+    puts "Error, for a large probabilistic network, only fixed points can be calculated, no limit cycles of longer length. Exiting. <br>"
+    exit 1
   end
-}
+end
 
-if (largestI != n_nodes.to_i ) 
-  puts "There should be #{n_nodes} functions in order in the function
-  input, but the last function I read was f#{largestI}. Exiting. <br>"
+# make M2 list numFunctions 
+m2_numFunctions = "{"
+numFunctions.each { |i| 
+  m2_numFunctions = m2_numFunctions + i.to_s
+  m2_numFunctions = m2_numFunctions + ","
+}
+m2_numFunctions.chop!
+m2_numFunctions = m2_numFunctions + "}"
+
+# some error checking on fi
+if  functionHash.keys != (1..n_nodes.to_i).to_a 
+  puts "Error. There should be #{n_nodes} functions in order in the function input and functions should be called f1, ..., f#{n_nodes}. <br>"
   exit 1
 end
 
+
+# making a list in M2 format of equations
+m2_system =  "{{"
+functionHash.each{ |index,functions|
+  functions.each{ |f|
+    m2_system = m2_system + f
+    m2_system =  m2_system + ","
+
+    varIndices = f.scan(/x+[0-9]+/)
+    varIndices = varIndices.collect{ |x| x.slice(1, x.length-1) }
+    for i in varIndices
+      if (i.to_i > n_nodes.to_i)
+        puts "Error. Index of x out of range in function f#{index}. Exiting. <br>"
+        exit 1
+      end
+    end
+  }
+}
 # remove last comma
 m2_system.chop!
 m2_system = m2_system + "}}"
 
-puts "<br>"
+#puts "<br>"
 #puts m2_system
 #puts "<br>"
 puts "Running fixed point calculation now ...<br>"
 
 #one line is for my machine, one line is for the server b/c M2 is in different paths
-  m2_result = `cd lib/M2code/; M2 solvebyGB.m2 --stop --no-debug --silent -q -e 'QR = makeRing(#{n_nodes}, #{p_value}); ll = gbSolver( matrix(QR, #{m2_system}), #{limCyc_length}); stdio << length ll << "?" << gbTable ll; exit 0'`
+  m2_result = `cd lib/M2code/; M2 solvebyGB.m2 --stop --no-debug --silent -q -e 'QR = makeRing(#{n_nodes}, #{p_value}); ll = gbSolver( matrix(QR, #{m2_system}), #{limCyc_length}, #{m2_numFunctions}); stdio << length ll << "?" << gbTable ll; exit 0'`
 #  m2_result = `cd lib/M2code/; /usr/local/bin/M2 solvebyGB.m2 --stop --no-debug --silent -q -e 'QR = makeRing(#{n_nodes}, #{p_value}); ll = gbSolver( matrix(QR, #{m2_system}), #{limCyc_length}); stdio << length ll << "?" << gbTable ll; exit 0'`
   temp = m2_result.split('?')
   numCycles = temp.fetch(0)
   table = temp.fetch(1)
 if numCycles.chomp == "0"
   puts "There are no limit cycles of length #{limCyc_length}."
+  puts "<br>"
+  puts "<br>"
 else
   puts "There are " + numCycles + " limit cycles of length #{limCyc_length}"
   puts " and they are: <br>"
