@@ -77,8 +77,8 @@ m2_system = m2_system + "}}"
 puts "Running fixed point calculation now ...<br>"
 
 #one line is for my machine, one line is for the server b/c M2 is in different paths
-  m2_result = `cd lib/M2code/; M2 solvebyGB.m2 --stop --no-debug --silent -q -e 'QR = makeRing(#{n_nodes}, #{p_value}); ll = gbSolver( matrix(QR, #{m2_system}), #{limCyc_length}, #{m2_numFunctions}); stdio << length ll << "?" << gbTable ll; exit 0'`
-  #m2_result = `cd lib/M2code/; /usr/local/bin/M2 solvebyGB.m2 --stop --no-debug --silent -q -e 'QR = makeRing(#{n_nodes}, #{p_value}); ll = gbSolver( matrix(QR, #{m2_system}), #{limCyc_length}, #{m2_numFunctions}); stdio << length ll << "?" << gbTable ll; exit 0'`
+#  m2_result = `cd lib/M2code/; M2 solvebyGB.m2 --stop --no-debug --silent -q -e 'QR = makeRing(#{n_nodes}, #{p_value}); ll = gbSolver( matrix(QR, #{m2_system}), #{limCyc_length}, #{m2_numFunctions}); stdio << length ll << "?" << gbTable ll; exit 0'`
+  m2_result = `cd lib/M2code/; /usr/local/bin/M2 solvebyGB.m2 --stop --no-debug --silent -q -e 'QR = makeRing(#{n_nodes}, #{p_value}); ll = gbSolver( matrix(QR, #{m2_system}), #{limCyc_length}, #{m2_numFunctions}); stdio << length ll << "?" << gbTable ll; exit 0'`
   temp = m2_result.split('?')
   numCycles = temp.fetch(0)
   table = temp.fetch(1)
