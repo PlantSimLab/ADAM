@@ -12,12 +12,13 @@ end
 ginSimFile = ARGV[0]
 functionFile = ARGV[1]
 
-#result = `cd lib/M2code/; M2 convertToPDS.m2 --stop --no-debug --silent -q -e 'cF = converter("../../#{ginSimFile}"); stdio << toString first cF << "?" << toString last cF; exit 0'`
-result = `cd lib/M2code/; /usr/local/bin/M2 convertToPDS.m2 --stop --no-debug --silent -q -e 'cF = converter("../../#{ginSimFile}"); stdio << toString first cF << "?" << toString last cF; exit 0'`
+result = `cd lib/M2code/; M2 convertToPDS.m2 --stop --no-debug --silent -q -e 'cF = converter("../../#{ginSimFile}"); stdio << toString first cF << "?" << toString last cF << "?" << char ring last cF; exit 0'`
+#result = `cd lib/M2code/; /usr/local/bin/M2 convertToPDS.m2 --stop --no-debug --silent -q -e 'cF = converter("../../#{ginSimFile}"); stdio << toString first cF << "?" << toString last cF; exit 0'`
 
 result = result.split("?")
 varList = result.fetch(0)
 m2_result = result.fetch(1)
+p_value = result.fetch(2)
 
 #Converts varList to readable output
 vars = varList.split("{")
@@ -32,7 +33,7 @@ end
 
 puts formatVars
 
-#Converts functions in m2_result to something VADD can read
+#Converts functions in m2_result to something ADAM can read
 #get functions into array
 #puts m2_result
 functions = m2_result.split("{{")

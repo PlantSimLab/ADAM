@@ -16,17 +16,18 @@ formatExp[2] = '<b>PBN</b>: Probabilistic Boolean (or Multistate) Networks. Blah
 // input format (GINsim, PDS, PBN). Also changes text explanation of options.
 function formatChange() {
     var input = document.getElementById('explainInput');
-    if (document.form1.format_box[0].checked == true) {
+    if (document.form1.format_box[0].checked == true) { //if GINsim is checked
     	document.form1.p_value.disabled = true;
 	document.form1.translate_box.disabled = true;
+	document.form1.edit_functions.disabled = true;
 	input.innerHTML = formatExp[0];
     }
     else {
 	document.form1.p_value.disabled = false;
 	document.form1.translate_box.disabled = false;
-	if (document.form1.format_box[1].checked == true)
+	if (document.form1.format_box[1].checked == true) //if PDS is checked
 	    input.innerHTML = formatExp[1];
-	else
+	else //else must be PBN
 	    input.innerHTML = formatExp[2];
     }
 }

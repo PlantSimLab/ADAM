@@ -226,8 +226,12 @@ elsif ( $special_networks eq "Algorithms (suggested for nodes > 11)" ) {
   there is no error checking. Use at your own risk.</b></font><br>";
   create_input_function();
   system("ruby adam_largeNetwork.rb $n_nodes $p_value $filename $limCyc_length");
-} elsif ( $p_value && $n_nodes )
+} else
+#elsif ( $p_value && $n_nodes )
 {
+    print "<font color=red>Simulation is running <br></font>";
+    $n_nodes = 8;
+    print "<font color=red>For debugging purposes n_nodes is $n_nodes</font><br>";
     print "hello<br>" if ($DEBUG);
     #if($p_value**$n_nodes >= 7000000000000)
     if($n_nodes > 21 || $p_value**$n_nodes > 2**21) {
@@ -330,6 +334,7 @@ sub create_input_function() {
     if($upload_file) {
       $fileuploaded = 1;
       if($format_box eq "GINsim"){
+	  print "GINsim option was selected<br>";
 	  $extension = substr $upload_file, -5;
 	  if($extension ne "ginml"){
 	      print "<font color=red>Error: Must give GINsim file</font>";
@@ -342,7 +347,9 @@ sub create_input_function() {
         }
         flock(GINOUTFILE, LOCK_UN) or die ("Could not unlock file $!");
         close $upload_file;
-        system("ruby ginSim-converter.rb $clientip.ginsim.ginml $filename");
+	  $p_value=`grep [0-9] ruby ginSim-converter.rb $clientip.ginsim.ginml $filename`;
+	  print "$p_value<br>";
+        #system("ruby ginSim-converter.rb $clientip.ginsim.ginml $filename");
       } else {
       flock(OUTFILE, LOCK_EX) or die ("Could not get exclusive lock $!");
       while($bytesread=read($upload_file, $buffer, 1024)) {
