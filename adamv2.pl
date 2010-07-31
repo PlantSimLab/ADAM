@@ -48,7 +48,7 @@ ADAM uses a Markov Chain simulation to generate the phase space. For larger
 probabilistic networks, deadlocks (fixedpoints) are calculated. 
 You can follow our step by step tutorial or read the <a href=\"http://dvd.vbi.vt.edu/ADAM_tut.html\" target=\"_blank\">manual</a>. It is important 
 that you follow the format specified in the tutorial.Make your selections and provide inputs (if any) in the form below and click 
-<i>Analyze</i> to run the software. Note: The computation may take some time.";
+<i>Analyze</i> to run the software. To generate a model from experimental time course data, you can use <a href=\"polymath.vbi.vt.edu/polynome\">Polynome</a>.";
 print "</div>";
 
 
