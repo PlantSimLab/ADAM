@@ -67,7 +67,7 @@ print "</tr>";
 print "<tr class=\"lines\"><td colspan=\"2\"></td></tr>";
 
 print "<tr valign=\"top\"><td colspan=\"2\"><font size=\"2\">Enter number of states per node: </font>";
-print textfield(-name=>'p_value',-size=>2, -maxlength=>2);
+print textfield(-name=>'p_value',-size=>2, -maxlength=>2, -default=>3);
 print "&nbsp\;&nbsp\;&nbsp\;", popup_menu(-name=>'translate_box',-values=>['Polynomial','Boolean']), "<br>";
 print "</td></tr>";
 
@@ -85,15 +85,9 @@ print "<tr><td nowrap><div align=\"center\"><b>OR</b> <font size=\"2\" color=\"#
 print "<tr class=\"lines\"><td></td></tr>";
 print "<tr valign=\"top\"><td><div align=\"center\">";
 print textarea(-name=>'edit_functions',
-               -default=>'f1 = {
-x1+x2   #.9
-x1      #.1
-}
+               -default=>'f1 = x1+x2
 f2 = x1*x2*x3
-f3 = {
-x1*x2+x3^2
-x2
-}' ,
+f3 = x1*x2+x3^2' ,
 			   -rows=>8,
 			   -columns=>50);
 print "</div></td></tr>";
@@ -111,7 +105,7 @@ print "Select the type of network: <br>";
 print radio_group(-name=>'special_networks', -values=>['Conjunctive/Disjunctive (Boolean rings only)', 'Simulation (suggested for nodes <=11)', 'Algorithms (suggested for nodes > 11)'], -default=>'Simulation (suggested for nodes <=11)', -linebreak=>'true', -onchange=>'networkChange()');
 print "</td>";
 print "<td id=\"explainNetwork\" class=\"explain\">";
-print "<b>Small Networks</b>: For n < 10. Enumerates all possible states. Outputs at minimum fixed points and number of components. See \'Small Networks Options\' for other output options.";
+print "<b>Simulation</b>: For n < 12. Enumerates all possible states. Outputs at minimum fixed points and number of components. See \'Additional Options\' for other output options.";
 print "</td>";
 print "</tr>";
 print "</table>";
@@ -213,7 +207,7 @@ if ( $special_networks eq "Conjunctive/Disjunctive (Boolean rings only)" ) {
   # conj/disj networks dynamics depend on the dependency graph, we need to
   # generate it 
   create_input_function();
-  system("perl regulatory.pl $filename $n_nodes $clientip $DGformat") == 0
+  system("perl regulatory.pl $filename $n_nodes $clientip $DGformat $p_value") == 0
       or die("regulatory.pl died");
   $dpGraph = "$clientip.out1";
   print  "<br><A href=\"$dpGraph.$DGformat\" target=\"_blank\"><font
@@ -221,7 +215,7 @@ if ( $special_networks eq "Conjunctive/Disjunctive (Boolean rings only)" ) {
   #BLAHBLAH i'm sad ._.
   system("ruby adam_conjunctive.rb $n_nodes $p_value $dpGraph.dot");
 }
-elsif ( $special_networks eq "Large Network (nodes > 10)" ) {
+elsif ( $special_networks eq "Algorithms (suggested for nodes > 11)" ) {
   if(($limCyc_length eq null) || ($limCyc_length eq "")){
       print "<font color=red>Sorry. Can't accept null input for limit cycle length.</font>";
       die("Program quitting. Empty field entered for limit cycle length in large networks.");
@@ -311,7 +305,7 @@ print "<div id=\"footer\">";
 print "ADAM is currently still under development; if you ";
 print "spot any bugs or have any questions/comments, please <a href=\"mailto:mbrando1@utk.edu\">";
 print "e-mail us</a>. ";
-print "(Bonny Guang, Madison Brandon, Rustin McNeill)";
+print "(Bonny Guang, Madison Brandon, Rustin McNeill, Franziska Hinkelmann)";
 print "</td></tr>";
 print "</div>";
 
