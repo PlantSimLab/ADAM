@@ -34,19 +34,23 @@ print "<td align=\"right\"><img src=\"http://dvd.vbi.vt.edu/vbi-logo.png\"></td>
 print "<td align=\"left\"><b><font size=\"5\">Analysis of Discrete Algebraic Models (ADAM) v0.2 </font></b></td></tr></table>";
 print "</div>";
 
-#Div Box: Text Explanation :: Nav
-print "<div id=\"nav\"><p>";
-print "ADAM uses a combination of simulation and algorithms to analyze the dynamics of ";
-print "discrete biological systems. <br>";
-print "It can calculate fixed points and limit cycles for GINsim files, Polynomial Dynamical ";
-print "Systems, and Probabilistic Boolean Networks. <br>";
-print "If this is your first time, please read the <a href=\"http://dvd.vbi.vt.edu/ADAM_tut.html\" target=\"_blank\">tutorial</a>. It is important ";
-print "that you follow the format specified in the tutorial.<br>Make your selections and provide inputs (if any) in the form below and click ";
-print "Generate to run the software.<br> Note: The computation may take some time.";
-print "</div>";
-
 #Div Box :: Main
 print "<div id = \"main\">";
+
+#Div Box: Text Explanation :: Nav
+print "<div id=\"nav\"><p>";
+print "ADAM uses a combination of simulation and algorithms to analyze the dynamics of
+discrete biological systems. It can analyze <b>Logical Models</b> (in <a href= \"http://gin.univ-mrs.fr/\">GINSim</a> format), <b>Polynomial Dynamical 
+Systems</b>, and <b>Probabilistic Boolean (or multistate) Networks</b>. For small enough networks, ADAM simulates the 
+complete phase space of the model and finds all attractors (steady states and limit cycles) together with statistics about the size of components. For larger networks, 
+ADAM computes fixed points or limit cycle of the length specified by the user. For small probabilistic networks, 
+ADAM uses a Markov Chain simulation to generate the phase space. For larger 
+probabilistic networks, deadlocks (fixedpoints) are calculated. 
+You can follow our step by step tutorial or read the <a href=\"http://dvd.vbi.vt.edu/ADAM_tut.html\" target=\"_blank\">manual</a>. It is important 
+that you follow the format specified in the tutorial.Make your selections and provide inputs (if any) in the form below and click 
+<i>Analyze</i> to run the software. Note: The computation may take some time.";
+print "</div>";
+
 
 #Table Box 1: Input Functions Network Description
 print "<table>";

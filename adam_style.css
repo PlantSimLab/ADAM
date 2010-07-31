@@ -30,7 +30,7 @@ html {
     margin-right: auto;
 }
 /* Text Explanation */
-#nav { text-align: center; }
+#nav { text-align: left; }
 /* Main Block: Input Functions and State/Node Number; Also Output */
 #main {
     float:left;
