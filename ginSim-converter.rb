@@ -3,25 +3,30 @@
 # Takes GINsim file and converts it to a PDS so DVD can run calculations
 # returns 0 (no errors) or 1 (errors) 
 
-unless ARGV.size == 3
-  puts "Usage: ruby ginSim-converter.rb ginSimFile functionFile valuesFile"
+unless ARGV.size == 1
+  puts "Usage: ruby ginSim-converter.rb clientip"
   exit 0
 end
 
-ginSimFile = ARGV[0]
-functionFile = ARGV[1]
-valuesFile = ARGV[2]
+clientip = ARGV[0]
+#functionFile = ARGV[1]
+#valuesFile = ARGV[2]
 
-result = `cd lib/M2code/; M2 convertToPDS.m2 --stop --no-debug --silent -q -e 'cF = converter("../../#{ginSimFile}"); stdio << toString first cF << "?" << toString last cF << "?" << char ring last cF << numgens ring last cF; exit 0'`
-#result = `cd lib/M2code/; /usr/local/bin/M2 convertToPDS.m2 --stop --no-debug --silent -q -e 'cF = converter("../../#{ginSimFile}"); stdio << toString first cF << "?" << toString last cF; exit 0'`
+result = `cd lib/M2code/; M2 convertToPDS.m2 --stop --no-debug --silent -q -e 'cF = converter("../../#{clientip}.ginsim.ginml"); stdio << toString first cF << "?" << toString last cF << "?" << char ring last cF << "?" << numgens ring last cF; exit 0'`
+#result = `cd lib/M2code/; /usr/local/bin/M2 convertToPDS.m2 --stop --no-debug --silent -q -e 'cF = converter("../../#{clientip}.ginsim.ginml"); stdio << toString first cF << "?" << toString last cF; exit 0'`
 
 result = result.split("?")
 varList = result.fetch(0)
 m2_result = result.fetch(1)
 
 # get p_value and n_nodes
-pn = result.fetch(2)
-File.open(valuesFile, "w"){|f| f.write(pn)}
+p = result.fetch(2)
+puts p
+puts "<br>"
+File.open("#{clientip}.pVal.txt", "w"){|f| f.write(p)}
+n = result.fetch(3)
+puts n
+File.open("#{clientip}.nVal.txt", "w"){|f| f.write(n)}
 
 #Converts varList to readable output
 vars = varList.split("{")
@@ -55,7 +60,7 @@ end
 puts "The logical model was converted to:<br>"
 puts formatFuncts
 formatFuncts = formatFuncts.gsub(/<br>/, "\n")
-File.open(functionFile, "w"){|f| f.write(formatFuncts)}
+File.open("#{clientip}.functionfile.txt", "w"){|f| f.write(formatFuncts)}
 
 exit 0
 

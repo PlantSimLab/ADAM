@@ -209,7 +209,6 @@ create_input_function();
 if ( $special_networks eq "Conjunctive/Disjunctive (Boolean rings only)" ) {
   # conj/disj networks dynamics depend on the dependency graph, we need to
   # generate it 
-  create_input_function();
   system("perl regulatory.pl $filename $n_nodes $clientip $DGformat $p_value") == 0
       or die("regulatory.pl died");
   $dpGraph = "$clientip.out1";
@@ -226,11 +225,9 @@ elsif ( $special_networks eq "Algorithms (suggested for nodes > 11)" ) {
   other analysis of dynamics not possible for now.</b></font><br>";
   print "<font color=blue><b>This is a very experimental feature, therefore
   there is no error checking. Use at your own risk.</b></font><br>";
-  create_input_function();
   system("ruby adam_largeNetwork.rb $n_nodes $p_value $filename $limCyc_length");
 } elsif ( $p_value && $n_nodes )
 {
-    print "<font color=red>Simulation is running <br></font>";
     print "hello<br>" if ($DEBUG);
     #if($p_value**$n_nodes >= 7000000000000)
     if($n_nodes > 21 || $p_value**$n_nodes > 2**21) {
@@ -346,11 +343,15 @@ sub create_input_function() {
 	  flock(GINOUTFILE, LOCK_UN) or die ("Could not unlock file $!");
 	  close $upload_file;
 
+	  $pFile = "$clientip.pVal.txt";
+	  $nFile = "$clientip.nVal.txt";
 	  # Convert GINsim file and get p_value and n_nodes
-	  $valuesFile = "$clientip.valuesFile.txt";
-	  system("ruby ginSim-converter.rb $clientip.ginsim.ginml $filename $valuesFile");
-	  read($valuesFile, $p_value, 1);
-	  read($valuesFile, $n_nodes, 1);
+	  system("ruby ginSim-converter.rb $clientip");
+	  close GINOUTFILE;
+	  # TODO: figure out why this doesn't work. I looked at $valuesFile, it's in no-ssl and it reads a number, so
+	  # why doesn't it work?
+	  read ($pFile, $p_value, 1024);
+	  read ($nFile, $n_nodes, 1024);
 	  print "<font color=red>p_value is: $p_value and n_nodes is: $n_nodes</font>";
       } else {
 	  flock(OUTFILE, LOCK_EX) or die ("Could not get exclusive lock $!");
@@ -358,18 +359,22 @@ sub create_input_function() {
       }
       flock(OUTFILE, LOCK_UN) or die ("Could not unlock file $!");
       close $upload_file;
-    } else { # user has not uploaded any file. so use the textarea value
-      if($edit_functions) {
-        #read value from editfunctions and print it to outfile
-        print OUTFILE $edit_functions;
-        flock(OUTFILE, LOCK_UN) or die ("Could not unlock file $!");
-      } else { # no functions provided
-        print "<font color=\"red\">Error: No functions provided. Please upload a
-        function file or type in your functions in the edit box</font><br>";
-        close(OUTFILE);
-        die("No function file provided by user");
-	    }
-    }	
+    } elsif ($edit_functions) {
+	print OUTFILE $edit_functions;
+	flock(OUTFILE, LOCK_UN) or die("Could not unlock file $!");
+    }
+#else { # user has not uploaded any file. so use the textarea value
+#	if($edit_functions) {
+            #read value from editfunctions and print it to outfile
+#	    print OUTFILE $edit_functions;
+#	    flock(OUTFILE, LOCK_UN) or die ("Could not unlock file $!");
+#	} #else { # no functions provided
+	  #  print "<font color=\"red\">Error: No functions provided. Please upload a
+        #function file or type in your functions in the edit box</font><br>";
+	 #   close(OUTFILE);
+	 #   die("No function file provided by user");
+#	}
+#    }	
     close(OUTFILE);
 
     #remove any ^M characters
