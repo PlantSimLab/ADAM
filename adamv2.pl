@@ -31,7 +31,7 @@ print "<div id=\"tipDiv\" style=\"position:absolute\; visibility:hidden\; z-inde
 print "<div id=\"header\">";
 print "<table><tr>";
 print "<td align=\"right\"><img src=\"http://dvd.vbi.vt.edu/vbi-logo.png\"></td>";
-print "<td align=\"left\"><b><font size=\"5\">Analysis of Discrete Algebraic Models (ADAM) v0.2 </font></b></td></tr></table>";
+print "<td align=\"left\"><b><font size=\"5\">Analysis of Discrete Algebraic Models (ADAM) v0.3 </font></b></td></tr></table>";
 print "</div>";
 
 #Div Box: Text Explanation :: Nav
@@ -203,6 +203,9 @@ print "$format_box <br>" if ($DEBUG);
 print "$translate_box <br>" if ($DEBUG);
 print "$special_networks <br>" if ($DEBUG);
 
+#TODO: set up site in such a way that nothing is at the bottom to begin with, then create input function
+create_input_function();
+
 if ( $special_networks eq "Conjunctive/Disjunctive (Boolean rings only)" ) {
   # conj/disj networks dynamics depend on the dependency graph, we need to
   # generate it 
@@ -210,8 +213,7 @@ if ( $special_networks eq "Conjunctive/Disjunctive (Boolean rings only)" ) {
   system("perl regulatory.pl $filename $n_nodes $clientip $DGformat $p_value") == 0
       or die("regulatory.pl died");
   $dpGraph = "$clientip.out1";
-  print  "<br><A href=\"$dpGraph.$DGformat\" target=\"_blank\"><font
-  color=red><i>Click to view the dependency graph.</i></font></A><br>";
+  print  "<br><A href=\"$dpGraph.$DGformat\" target=\"_blank\"><font color=red><i>Click to view the dependency graph.</i></font></A><br>";
   #BLAHBLAH i'm sad ._.
   system("ruby adam_conjunctive.rb $n_nodes $p_value $dpGraph.dot");
 }
@@ -226,12 +228,9 @@ elsif ( $special_networks eq "Algorithms (suggested for nodes > 11)" ) {
   there is no error checking. Use at your own risk.</b></font><br>";
   create_input_function();
   system("ruby adam_largeNetwork.rb $n_nodes $p_value $filename $limCyc_length");
-} else
-#elsif ( $p_value && $n_nodes )
+} elsif ( $p_value && $n_nodes )
 {
     print "<font color=red>Simulation is running <br></font>";
-    $n_nodes = 8;
-    print "<font color=red>For debugging purposes n_nodes is $n_nodes</font><br>";
     print "hello<br>" if ($DEBUG);
     #if($p_value**$n_nodes >= 7000000000000)
     if($n_nodes > 21 || $p_value**$n_nodes > 2**21) {
@@ -239,7 +238,6 @@ elsif ( $special_networks eq "Algorithms (suggested for nodes > 11)" ) {
         die("Program quitting. Too many nodes");
     }
    
-    create_input_function();
     set_update_type();
     
     # Set flag for creating the dependency graph and whether to print
@@ -335,32 +333,34 @@ sub create_input_function() {
       $fileuploaded = 1;
       if($format_box eq "GINsim"){
 	  print "GINsim option was selected<br>";
+	  # Make sure extension is correct
 	  $extension = substr $upload_file, -5;
 	  if($extension ne "ginml"){
 	      print "<font color=red>Error: Must give GINsim file</font>";
 	      die("Program quitting. Extension not ginml");
 	  }
-        open (GINOUTFILE, ">$clientip.ginsim.ginml");
-        flock(GINOUTFILE, LOCK_EX) or die ("Could not get exclusive lock $!");
-        while($bytesread=read($upload_file, $buffer, 1024)) {
-            print GINOUTFILE $buffer;
-        }
-        flock(GINOUTFILE, LOCK_UN) or die ("Could not unlock file $!");
-        close $upload_file;
-	  $p_value=`grep [0-9] ruby ginSim-converter.rb $clientip.ginsim.ginml $filename`;
-	  print "$p_value<br>";
-        #system("ruby ginSim-converter.rb $clientip.ginsim.ginml $filename");
+	  # Write functions to ginml file on server for ruby script
+	  open (GINOUTFILE, ">$clientip.ginsim.ginml");
+	  flock(GINOUTFILE, LOCK_EX) or die ("Could not get exclusive lock $!");
+	  while($bytesread=read($upload_file, $buffer, 1024)) { print GINOUTFILE $buffer; }
+	  flock(GINOUTFILE, LOCK_UN) or die ("Could not unlock file $!");
+	  close $upload_file;
+
+	  # Convert GINsim file and get p_value and n_nodes
+	  $valuesFile = "$clientip.valuesFile.txt";
+	  system("ruby ginSim-converter.rb $clientip.ginsim.ginml $filename $valuesFile");
+	  read($valuesFile, $p_value, 1);
+	  read($valuesFile, $n_nodes, 1);
+	  print "<font color=red>p_value is: $p_value and n_nodes is: $n_nodes</font>";
       } else {
-      flock(OUTFILE, LOCK_EX) or die ("Could not get exclusive lock $!");
-      while($bytesread=read($upload_file, $buffer, 1024)) {
-            print OUTFILE $buffer;
-      }}
+	  flock(OUTFILE, LOCK_EX) or die ("Could not get exclusive lock $!");
+	  while($bytesread=read($upload_file, $buffer, 1024)) { print OUTFILE $buffer; }
+      }
       flock(OUTFILE, LOCK_UN) or die ("Could not unlock file $!");
       close $upload_file;
     } else { # user has not uploaded any file. so use the textarea value
       if($edit_functions) {
         #read value from editfunctions and print it to outfile
-        #flock(OUTFILE, LOCK_EX) or die ("Could not get exclusive lock $!");
         print OUTFILE $edit_functions;
         flock(OUTFILE, LOCK_UN) or die ("Could not unlock file $!");
       } else { # no functions provided
