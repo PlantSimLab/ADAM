@@ -1,7 +1,7 @@
 /*
 July, 2010
 Bonny Guang
-Javascript file for ADAM site. A lot ported over from fnct2.js
+Javascript file for ADAM site.
 */
 
 /* 1) Input Functions and Network Descriptions */
@@ -10,23 +10,24 @@ Javascript file for ADAM site. A lot ported over from fnct2.js
 var formatExp = new Array();
 formatExp[0] = '<b>GINsim File</b>: Converts GINsim file to a polynomial system that ADAM will then proceed to analyze. Also outputs the variables and the converted system.';
 formatExp[1] = '<b>PDS</b>: Polynomial Dynamical System. Operations are interpreted as polynomial addition and multiplication.';
-formatExp[2] = '<b>PBN</b>: Probabilistic Boolean Networks. Blahblahblah';
+formatExp[2] = '<b>PBN</b>: Probabilistic Boolean (or Multistate) Networks. Blahblahblah';
 
 // formatChange(): disables and enables options based on which radio button is checked for
 // input format (GINsim, PDS, PBN). Also changes text explanation of options.
 function formatChange() {
     var input = document.getElementById('explainInput');
-    if (document.form1.format_box[0].checked == true) {
+    if (document.form1.format_box[0].checked == true) { //if GINsim is checked
     	document.form1.p_value.disabled = true;
 	document.form1.translate_box.disabled = true;
+	document.form1.edit_functions.disabled = true;
 	input.innerHTML = formatExp[0];
     }
     else {
 	document.form1.p_value.disabled = false;
 	document.form1.translate_box.disabled = false;
-	if (document.form1.format_box[1].checked == true)
+	if (document.form1.format_box[1].checked == true) //if PDS is checked
 	    input.innerHTML = formatExp[1];
-	else
+	else //else must be PBN
 	    input.innerHTML = formatExp[2];
     }
 }
@@ -47,7 +48,7 @@ networkOpt[0] = '';
 //TODO: this is really since it's all on one line, should figure out how to get it so it can be
 //  formatted (required to be one line right now)
 networkOpt[1] = 'Select the updating scheme for the functions:<br><form><input type="radio" name="update_box" value="Synchronous" checked> Synchronous<br/><input type="radio" name="update_box" value="Update_stochastic"> Update Stochastically<br><input type="radio" name="update_box" value="Sequential"> Sequential<br></form>&nbsp\;&nbsp\;&nbsp\;&nbsp\;- Enter update schedule separated by spaces: <br><center><form><input type="text" name="update_schedule" size="24"></form></center></font><hr>Generate state space of<br><form><input type="radio" name="option_box" value="All trajectories from all possible initial states" checked>All trajectories from all possible initial states<br><input type="radio" name="option_box" value="One trajectory starting at an initial state">One trajectory starting at an initial state<br></form>&nbsp\;&nbsp\;&nbsp\;&nbsp\;- Enter initialization separated by spaces: <br><center><form><input type="text" name="trajectory_value" size="20"></form></center>';
-networkOpt[2] = 'Limit cycle length to search for: <br><center><form><input type="text" name="limCyc_length" size="2"></form></center>';
+networkOpt[2] = 'Limit cycle length to search for: <br><center><form><input type="text" name="limCyc_length" size="2" value="1"></form></center>';
 
 // networkChange(): changes menu of options based on which radio button is checked for
 // type of network (Conjunctive/Disjunctive, Simulation, Algorithm). Also changes text
