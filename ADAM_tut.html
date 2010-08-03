@@ -36,7 +36,7 @@
 				<a href="#D"><font face="Verdana, Arial, Helvetica, sans-serif">Description</font></a>
 			</li>
 			<li>
-				<a href="#I"><font face="Verdana, Arial, Helvetica, sans-serif">Input Functions and Network Description</font></a>
+				<a href="#I"><font face="Verdana, Arial, Helvetica, sans-serif">Discrete System Description</font></a>
 			</li>
 			<li>
 				<a href="#P"><font face="Verdana, Arial, Helvetica, sans-serif">What is the <i>number of states per node</i> input?</font></a>
@@ -89,7 +89,7 @@
 			<a href="#top"><font size="-1" color="#FF0000">Return to the top</font></a>
 		</div>
 		<h3>
-			<a name="I" id="I">Input Functions and Network Description</a>
+			<a name="I" id="I">Discrete System Description</a>
 		</h3>
 		<p>
 			The user may choose to input a GINsim file (see <a href="#L">What is the <i>GINsim File</i> option?</a>), a PDS (polynomial dynamical system), or a PBN (probabilistic Boolean network). If inputting a PDS or PBN, the user may uplaod a text file or enter functions into the text box. For proper format of PDS or PBN input see <a href="#L">Format of the input functions</a>.
@@ -101,7 +101,7 @@
 			<a name="P" id="P">What is <i>number of states per node</i> input?</a>
 		</h3>
 		<p>
-			The number of states denotes the cardinality of the state set of the user's discrete network. Note that this must be a prime number. The software accepts positive prime integers up to 99. This value gives the total number of states that a node in the network can have. For example, if <i>number of states per node</i> = 3, then the possible states for any node are 0, 1, and 2.
+			The number of states denotes the cardinality of the state set of the user's discrete network. Note that this must be a prime number. The software accepts positive prime integers up to 99. This value gives the total number of states that a node in the network can have. For example, if <i>number of states per node</i> = 3, then the possible states for any node are 0, 1, and 2. If the system is <b>Boolean</b>, the number of states per node is 2. For logical models entered in GINSim Model format, ADAM will determine the number of states from the model description, for PDS or probabilistic networks, the number of states is mandatory. 
 		</p>
 		<div align="right">
 			<a href="#top"><font size="-1" color="#FF0000">Return to the top</font></a>
@@ -110,7 +110,7 @@
 			<a name="F" id="F">Format of the input functions</a>
 		</h3>
 		<p>
-			Each node of the user's network is represented by a variable. Variable names are x1, x2, etc. Function names are f1, f2, etc. The convention is that fk is the function which describes the state transitions of the node represented by xk. The user can either upload a function file or edit/type functions in the text box provided. DVD wil use the functions from the input text box only when the user DOES NOT select a file to upload The functions should follow the following formatting rules:
+			Each node of the user's network is represented by a variable. Variable names are x1, x2, etc. Function names are f1, f2, etc. The convention is that fk is the function which describes the state transitions of the node represented by xk. The user can either upload a function file or edit/type functions in the text box provided. ADAM wil use the functions from the input text box only when the user DOES NOT select a file to upload. The functions should follow the following formatting rules:
 		</p>
 		<div style="margin-left: 2em">
 			<b>The functions should begin with f followed by an integer, example f1, f2, f3.....fn, where n is the number of nodes</b>
@@ -138,10 +138,10 @@
 			<a href="#top"><font size="-1" color="#FF0000">Return to the top</font></a>
 		</div>
 		<h3>
-			<a name="G" id="G">What is the <i>GINsim File</i> option?</a>
+			<a name="G" id="G">What is the <i>Model File</i>?</a>
 		</h3>
 		<p>
-			The GINsim File option allows the user to upload a GINsim file to be analyzed by our software. <a href="http://gin.univ-mrs.fr/">GINsim</a> is a program that allows a user to build a logical model based on some biological system. Our software first converts a GINsim file to a polynomial dynamical system (PDS) via the method described in Veliz-Cuba et al., 2010<sup>1</sup> and then use algebra techniques to solve the PDS for key dynamics. Note: Currently our software is only compatible with GINsim 2.3. Thus we recommend that the user save all GINsim files in version 2.3 in order to run the files on ADAM.
+			ADAM allows the user to upload a text file with functions (PDS or PBN) or a GINsim model to be analyzed by our software. <a href="http://gin.univ-mrs.fr/">GINsim</a> is a program that allows a user to build a logical model based on some biological system. Our software first converts a GINsim file to a polynomial dynamical system (PDS) via the method described in Veliz-Cuba et al., 2010<sup>1</sup> and then use algebra techniques to solve the PDS for key dynamics. Note: Currently our software is only compatible with GINsim 2.3. Thus we recommend that the user save all GINsim files in version 2.3 in order to run the files on ADAM.
 		</p>
 		<div style="margin-left: 2em">
 			<b>As an example consider a model of lysis-lysogeny decision in the phage lambda, a small gene regulatory network modeled in GINsim.</b>
@@ -160,10 +160,10 @@
 					</td>
 				</tr>
 			</table><br>
-			<b>Figure b : Example GINsim File</b>
+			<b>Figure b : Example GINsim Model</b>
 		</center>
 		<div style="margin-left: 2em">
-			<b>Upon inputing this file, AVDD converts the network to a PDS and then solves the PDS for dynamic features</b>
+			<b>Upon inputing this file, ADAM converts the network to a PDS and then solves the PDS for dynamic features</b>
 		</div>
 		<p>
 			<br>
@@ -185,7 +185,7 @@
 			<a href="#top"><font size="-1" color="#FF0000">Return to the top</font></a>
 		</div>
 		<h3>
-			<a name="N" id="N">What is <i>Network Options</i>?</a>
+			<a name="N" id="N">What is <i>Analysis Options</i>?</a>
 		</h3>
 		<p>
 			ADAM will simulate dynamics for the <i>Simulation</i> option (11 nodes or less), meaning it computes the transition states from all possible initializations. When simulating, ADAM will output the analysis results as well as the graph of the state space. For <i>Algorithms</i> ADAM uses algebra to solve for fixed points and limit cycles of a specified length. ADAM uses a separate algorithm to compute dynamics in the case of <i>Conjunctive/Disjunctive</i> Networks. Conjunctive Boolean networks consist of functions containing only one monomial term, i.e. the functions use only the AND operator. Conversely, Disjunctive Boolean networks consist of functions which use only the OR operator. Note that the <i>Conjunctive/Disjunctive</i> option only works for functions defined in a Boolean ring, i.e. there can be only two states per node. (see <a href="#L">What is the <i>number of states per node</i> input?</a>) Furthermore, <i>Conjunctive/Disjunctive</i> networks currently works only for strongly connected graphs. When input is analyzed with either the <i>Algorihms</i> or <i>Conjunctive/Disjunctive network</i> option, ADAM diplays the fixed points and limit cycles in a table.
@@ -216,7 +216,7 @@
 			<a name="J" id="J">Format of input functions</a>
 		</h3>
 		<p>
-			The software provides the user withs the option to specify how the operations in the function file should be interpreted. For example, 'x1*x2' could be interpreted as polynomial multiplication of variables or as the Boolean AND operation. If the user provides functions that are in the Boolean format, DVD will convert the Boolean functions to polynomial functions to do the computations. The Boolean function file must adhere to the following format:<br>
+			The software provides the user withs the option to specify how the operations in the function file should be interpreted. For example, 'x1*x2' could be interpreted as polynomial multiplication of variables or as the Boolean AND operation. If the user provides functions that are in the Boolean format, ADAM will convert the Boolean functions to polynomial functions to do the computations. The Boolean function file must adhere to the following format:<br>
 			<br>
 		</p>
 		<center>
@@ -425,16 +425,17 @@
 		<h3>
 			<a name="C" id="C"><font face="Verdana, Arial, Helvetica, sans-serif">Credits</font></a>
 		</h3>
-		<p>
-			<font face="Verdana, Arial, Helvetica, sans-serif"><a href="mailto:hvastani@vbi.vt.edu?subject=Question%20regarding%20visualizer%20on%20Web">Hussein Vastani (Developer)</a><br>
-			Nick Eriksson (Developer)<br>
-			Reinhard Laubenbacher<br>
-			Abdul Jarrah<br>
-			Brandilyn Stigler<br>
-			Franziska Hinkelmann (<a href="mailto:fhinkel@vt.edu">Please email us if you have any problems</a>)<br>
+		<p> <a href="mailto:fhinkel@vt.edu">Please email us if you have any problems!</a><br>
+			<font face="Verdana, Arial, Helvetica, sans-serif">
 			Madison Brandon<br>
+			Nick Eriksson (Developer)<br>
 			Bonny Guang<br>
+			Abdul Jarrah<br>
+			Franziska Hinkelmann<br>
+			Reinhard Laubenbacher<br>
 			Rustin McNeill<br>
+			Brandilyn Stigler<br>
+			Hussein Vastani<br>
 			<a href="http://img10.imageshack.us/img10/9024/p7080016crop.png">Chuck</a><br></font>
 		</p>
 	</body>

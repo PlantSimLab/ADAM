@@ -56,7 +56,7 @@ print "</div>";
 print "<table>";
 # Header
 print "<tr valign=\"top\"><td class=\"titleBox\" colspan=\"3\">";
-print "<strong><font color=\"black\">1) Input Functions and Network Description</font></strong>";
+print "<strong><font color=\"black\">1) Discrete System Description </font></strong>";
 print "</td></tr>";
 
 print "<tr class=\"lines\"><td colspan=\"2\"></td></tr>";
@@ -78,7 +78,7 @@ print "</td></tr>";
 print "<tr class=\"lines\"><td colspan=\"2\"></td></tr>";
 
 print "<tr valign=\"top\"><td>";
-print "<font size=\"2\">Select function file: <br><font color=blue size =\"1\">Text(.txt) or GINsim(.ginml)</font></font>";
+print "<font size=\"2\">Select model file: <br><font color=blue size =\"1\">PDS or PBN (.txt) or GINsim model (.ginml)</font></font>";
 print "</td><td>", filefield(-name=>'upload_file');
 print "</td></tr>";
 print "</table>";
@@ -102,7 +102,7 @@ print "<br>";
 #Network Options
 print "<table>";
 print "<tr valign=\"top\"><td class=\"titleBox\" colspan=\"2\">";
-print "<strong><font color=\"#black\">2) Network Options</font></strong></td></tr>";
+print "<strong><font color=\"#black\">2) Analysis Options</font></strong></td></tr>";
 print "<tr class=\"lines\"><td colspan=\"2\"></td></tr>";
 print "<tr valign=\"top\"><td nowrap><font size=\"2\">";
 print "Select the type of network: <br>";
@@ -240,6 +240,7 @@ if ( $special_networks eq "Conjunctive/Disjunctive (Boolean rings only)" ) {
     # Analysis
     print "<font color=blue><b>Calculating fixed points for a large network, other analysis of dynamics not possible for now.</b></font><br>";
     print "<font color=blue><b>This is a very experimental feature, therefore there is no error checking. Use at your own risk.</b></font><br>";
+    set_update_type();
     system("ruby adam_largeNetwork.rb $n_nodes $p_value $filename $limCyc_length");
 } elsif ( $p_value && $n_nodes ) {
     print "executing simulation";
@@ -250,6 +251,7 @@ if ( $special_networks eq "Conjunctive/Disjunctive (Boolean rings only)" ) {
         die("Program quitting. Too many nodes");
     }
    
+    print "hello set_update_type<br>" if ($DEBUG);
     set_update_type();
 
     print $option_box if ($DEBUG);
