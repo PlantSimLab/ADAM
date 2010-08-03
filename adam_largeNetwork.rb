@@ -44,7 +44,9 @@ m2_numFunctions.chop!
 m2_numFunctions = m2_numFunctions + "}"
 
 # some error checking on fi
-if  functionHash.keys != (1..n_nodes.to_i).to_a 
+if  functionHash.keys.sort != (1..n_nodes.to_i).to_a 
+  #puts "functionHash: #{functionHash}<br>"
+  #puts "functionHash.keys: #{functionHash.keys.sort}<br>"
   puts "Error. There should be #{n_nodes} functions in order in the function input and functions should be called f1, ..., f#{n_nodes}. <br>"
   exit 1
 end
