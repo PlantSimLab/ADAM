@@ -354,8 +354,23 @@ sub create_input_function() {
 	  close GINOUTFILE;
 	  # TODO: figure out why this doesn't work. I looked at $valuesFile, it's in no-ssl and it reads a number, so
 	  # why doesn't it work?
-	  read ($pFile, $p_value, 1024);
-	  read ($nFile, $n_nodes, 1024);
+
+    open (MYFILE, $pFile) || die("Could not open file!");
+    while (<MYFILE>) {
+      chomp;
+      $p_value = $_;
+    }
+    close (MYFILE); 
+
+    open (MYFILE, $nFile) || die("Could not open file!");
+    while (<MYFILE>) {
+      chomp;
+      $n_nodes = $_;
+    }
+    close (MYFILE); 
+
+	  #read ($pFile, $p_value, 1024);
+	  #read ($nFile, $n_nodes, 1024);
 	  print "<font color=red>p_value is: $p_value and n_nodes is: $n_nodes</font>";
       } else {
 	  flock(OUTFILE, LOCK_EX) or die ("Could not get exclusive lock $!");
