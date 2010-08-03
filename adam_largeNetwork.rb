@@ -24,7 +24,7 @@ s = IO.readlines(functionFile,'').to_s
 # {1=>["x1+x2"], 2=>["x2"], 3=>["x3", "x2", "x1"]}
 functionHash = PartialInput.parse_into_hash s
  
-# this is the list that give the number of functions per variable
+# this is the list that gives the number of functions per variable
 # if one variable has more than 1 function, the system is probabilistic
 numFunctions = functionHash.values.collect { |f| f.size }
 if false # numFunctions.max != 1 
@@ -54,7 +54,7 @@ end
 
 # making a list in M2 format of equations
 m2_system =  "{{"
-functionHash.each{ |index,functions|
+functionHash.sort.each{ |index,functions|
   functions.each{ |f|
     m2_system = m2_system + f
     m2_system =  m2_system + ","
@@ -81,6 +81,7 @@ puts "Running fixed point calculation now ...<br>"
 #one line is for my machine, one line is for the server b/c M2 is in different paths
 #  m2_result = `cd lib/M2code/; M2 solvebyGB.m2 --stop --no-debug --silent -q -e 'QR = makeRing(#{n_nodes}, #{p_value}); ll = gbSolver( matrix(QR, #{m2_system}), #{limCyc_length}, #{m2_numFunctions}); stdio << length ll << "?" << gbTable ll; exit 0'`
   m2_result = `cd lib/M2code/; /usr/local/bin/M2 solvebyGB.m2 --stop --no-debug --silent -q -e 'QR = makeRing(#{n_nodes}, #{p_value}); ll = gbSolver( matrix(QR, #{m2_system}), #{limCyc_length}, #{m2_numFunctions}); stdio << length ll << "?" << gbTable ll; exit 0'`
+  #puts "cd lib/M2code/; /usr/local/bin/M2 solvebyGB.m2 --stop --no-debug --silent -q -e 'QR = makeRing(#{n_nodes}, #{p_value}); ll = gbSolver( matrix(QR, #{m2_system}), #{limCyc_length}, #{m2_numFunctions}); stdio << length ll << \"?\" << gbTable ll; exit 0'<br>"
   temp = m2_result.split('?')
   numCycles = temp.fetch(0)
   table = temp.fetch(1)
