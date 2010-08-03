@@ -213,7 +213,7 @@ create_input_function();
 if ( $special_networks eq "Conjunctive/Disjunctive (Boolean rings only)" ) {
   # conj/disj networks dynamics depend on the dependency graph, we need to
   # generate it 
-  system("perl regulatory.pl $filename $n_nodes $clientip") == 0
+  system("perl regulatory.pl $filename $n_nodes $clientip $DGformat") == 0
       or die("regulatory.pl died");
   $dpGraph = "$clientip.out1";
   print  "<br><A href=\"$dpGraph.$DGformat\" target=\"_blank\"><font color=red><i>Click to view the dependency graph.</i></font></A><br>";

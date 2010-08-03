@@ -1,11 +1,8 @@
 #!/usr/bin/perl
 
 ##Hussein Vastani##
-# Bonny Guang
-# July 2010
 
-die "Usage: regulatory.pl functionfile #nodes ip" if ($#ARGV != 3);
-#die "Usage: regulatory.pl functionfile #nodes ip fileformat p_value" if ($#ARGV != 3);
+die "Usage: regulatory.pl functionfile #nodes ip " if ($#ARGV != 3);
 
 #set path for graphviz for the server to use
 $ENV{'PATH'}='/usr/local/bin:/bin:/etc:/usr/bin';                           
@@ -13,8 +10,7 @@ $ENV{'LD_LIBRARY_PATH'}='/usr/local/lib/graphviz';
 
 $num_nodes = $ARGV[1];
 $clientip = $ARGV[2];
-#$fileformat = $ARGV[3];
-#$p_value = $ARGV[4];
+$fileformat = $ARGV[3];
 
 open (INFILE,$ARGV[0]) or die("Failed to open input file");
 $n = 1;
@@ -110,16 +106,8 @@ while(<INFILE>){
        if($found == 0)
        {
 		 $func =~ s/\^/\*\*/g; # replace carret with double stars
-#		 print "func gives $func <br>";
-#		 push(@functions2, $func);
-#		 print "These are the functions for signed edges: <br>";
-#		 print @functions2;
-#		 print "<br>";
 		 $func =~ s/x(\d+)/\$x\[$1\]/g; #for evaluation
          push(@functions, $func);
-#		 print "These are the functions for debugging purposes: <br>";
-#		 print @functions;
-#		 print "<br>";
 		 $fcount++;
        }
     }
@@ -151,9 +139,6 @@ if(($fcount-1) < $num_nodes)
 	@functions = ();
     die("Errors with input file..ending program");
 }
-
-#system("cd lib/M2code/; M2 functionalCircuits.m2 --stop --no-debug --silent -q -e 'QR = makeRing($num_nodes, $p_value); stdio << \"running M2\" << endl; exit 0");
-#print "edgeSigns is: $edgeSigns <br>";
 
 open (OUTDOT,">$clientip.out1.dot") or die("failed to create out1.dot file");
 print OUTDOT "digraph test {\n";
