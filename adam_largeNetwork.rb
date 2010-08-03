@@ -27,7 +27,7 @@ functionHash = PartialInput.parse_into_hash s
 # this is the list that give the number of functions per variable
 # if one variable has more than 1 function, the system is probabilistic
 numFunctions = functionHash.values.collect { |f| f.size }
-if  numFunctions.max != 1 
+if false # numFunctions.max != 1 
   if limCyc_length.to_i != 1
     puts "Error, for a large probabilistic network, only fixed points can be calculated, no limit cycles of longer length. Exiting. <br>"
     exit 1
