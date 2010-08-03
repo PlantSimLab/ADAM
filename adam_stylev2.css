@@ -32,6 +32,7 @@ html {
 }
 /* Text Explanation */
 #nav { text-align: justify; }
+
 /* Main Block: Input Functions and State/Node Number; Also Output */
 #main {
     float:center;
