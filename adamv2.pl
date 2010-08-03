@@ -5,7 +5,7 @@
 ## Bonbons
 ## July 2010
 
-## ADAM0.2 with support for large networks and conjunctive 
+## ADAM0.3 with support for large networks and conjunctive 
 ## networks using M2 instead of perl enumeration
 
 use CGI qw( :standard );
@@ -22,7 +22,7 @@ $clientip = '../../htdocs/no-ssl/files/'. $clientip;
 
 #$clientip = $sec.'-'.$min.'-'.$hr;
 
-print header, start_html( -title=>'Analysis of Discrete Algebraic Models', -script=>{-language=>'JavaScript',-src=>'/adamv2.js'}, -style=>{-src=>'/adam_stylev2.css'});
+print header, start_html( -title=>'Analysis of Discrete Algebraic Models', -script=>{-language=>'JavaScript',-src=>'/adamv2.js'}, ,-onLoad=>'change()', -style=>{-src=>'/adam_stylev2.css'});
 print start_multipart_form(-name=>'form1', -method =>"POST", -onSubmit=>"return validate()");
 print "<div id=\"wrap\">";
 print "<div id=\"tipDiv\" style=\"position:absolute\; visibility:hidden\; z-index:100\"></div>";
@@ -62,10 +62,10 @@ print "</td></tr>";
 print "<tr class=\"lines\"><td colspan=\"2\"></td></tr>";
 # Input Functions
 print "<tr valign=\"top\"><td colspan=\"2\"><font size=\"2\">Select format of input functions:";
-print radio_group(-name=>'format_box', -values=>['GINsim', 'PDS', 'PBN'], -default=>'PDS', -onchange=>'formatChange()');
+print radio_group(-name=>'format_box', -values=>['GINsim', 'PDS', 'PBN'], -default=>'PDS', -onChange=>'formatChange()');
 print "</font></td>";
 # Explanatory Text
-print "<td rowspan=\"5\" id=\"explainInput\" class=\"explain\"><b>PDS</b>: Polynomial Dynamical System. Operations are interpreted as polynomial addition and multiplication.</td>";
+print "<td rowspan=\"5\" id=\"explainInput\" class=\"explain\"></td>";
 print "</tr>";
 
 print "<tr class=\"lines\"><td colspan=\"2\"></td></tr>";
@@ -106,11 +106,9 @@ print "<strong><font color=\"#black\">2) Analysis Options</font></strong></td></
 print "<tr class=\"lines\"><td colspan=\"2\"></td></tr>";
 print "<tr valign=\"top\"><td nowrap><font size=\"2\">";
 print "Select the type of network: <br>";
-print radio_group(-name=>'special_networks', -values=>['Conjunctive/Disjunctive (Boolean rings only)', 'Simulation (suggested for nodes <=11)', 'Algorithms (suggested for nodes > 11)'], -default=>'Simulation (suggested for nodes <=11)', -linebreak=>'true', -onchange=>'networkChange()');
+print radio_group(-name=>'special_networks', -values=>['Conjunctive/Disjunctive (Boolean rings only)', 'Simulation (suggested for nodes <=11)', 'Algorithms (suggested for nodes > 11)'], -default=>'Simulation (suggested for nodes <=11)', -linebreak=>'true', -onChange=>'networkChange()');
 print "</td>";
-print "<td id=\"explainNetwork\" class=\"explain\">";
-print "<b>Simulation</b>: For n < 12. Enumerates all possible states. Outputs at minimum fixed points and number of components. See \'Additional Options\' for other output options.";
-print "</td>";
+print "<td id=\"explainNetwork\" class=\"explain\"></td>";
 print "</tr>";
 print "</table>";
 
@@ -207,33 +205,45 @@ print "$format_box <br>" if ($DEBUG);
 print "$translate_box <br>" if ($DEBUG);
 print "$special_networks <br>" if ($DEBUG);
 
-#TODO: set up site in such a way that nothing is at the bottom to begin with, then create input function
+#make input functions - gives p_value and n_nodes
 create_input_function();
 
+# Set flag for creating the dependency graph
+($depgraph eq "Dependency graph") ? {$depgraph = 1} : {$depgraph = 0};
+
 if ( $special_networks eq "Conjunctive/Disjunctive (Boolean rings only)" ) {
-  # conj/disj networks dynamics depend on the dependency graph, we need to
-  # generate it 
-  system("perl regulatory.pl $filename $n_nodes $clientip $DGformat") == 0
+    # dynamics depend on the dependency graph, need to generate it 
+    system("perl regulatory.pl $filename $n_nodes $clientip $DGformat") == 0
       or die("regulatory.pl died");
-  $dpGraph = "$clientip.out1";
-  print  "<br><A href=\"$dpGraph.$DGformat\" target=\"_blank\"><font color=red><i>Click to view the dependency graph.</i></font></A><br>";
-  #BLAHBLAH i'm sad ._.
-  system("ruby adam_conjunctive.rb $n_nodes $p_value $dpGraph.dot");
-}
-elsif ( $special_networks eq "Algorithms (suggested for nodes > 11)" ) {
-  if(($limCyc_length eq null) || ($limCyc_length eq "")){
-      print "<font color=red>Sorry. Can't accept null input for limit cycle length.</font>";
-      die("Program quitting. Empty field entered for limit cycle length in large networks.");
-  }
-  print "<font color=blue><b>Calculating fixed points for a large network,
-  other analysis of dynamics not possible for now.</b></font><br>";
-  print "<font color=blue><b>This is a very experimental feature, therefore
-  there is no error checking. Use at your own risk.</b></font><br>";
-  print "hello set_update_type<br>" if ($DEBUG);
-  set_update_type();
-  system("ruby adam_largeNetwork.rb $n_nodes $p_value $filename $limCyc_length");
-} elsif ( $p_value && $n_nodes )
-{
+    $dpGraph = "$clientip.out1";
+
+    # Give link to dependency graph if checked
+    if ($depgraph = 1) {
+	print  "<br><A href=\"$dpGraph.$DGformat\" target=\"_blank\"><font color=red><i>Click to view the dependency graph.</i></font></A><br>";
+    }
+
+    #BLAHBLAH i'm sad ._.
+    system("ruby adam_conjunctive.rb $n_nodes $p_value $dpGraph.dot");
+} elsif ( $special_networks eq "Algorithms (suggested for nodes > 11)" ) {
+    if(($limCyc_length eq null) || ($limCyc_length eq "")){
+	print "<font color=red>Sorry. Can't accept null input for limit cycle length.</font>";
+	die("Program quitting. Empty field entered for limit cycle length in large networks.");
+    }
+
+    # Give link to dependency graph if checked
+    if ($depgraph = 1) {
+	system("perl regulatory.pl $filename $n_nodes $clientip $DGformat") == 0
+	    or die("regulatory.pl died");
+	print  "<br><A href=\"$clientip.out1.$DGformat\" target=\"_blank\"><font color=red><i>Click to view the dependency graph.</i></font></A><br>";
+    }
+
+    # Analysis
+    print "<font color=blue><b>Calculating fixed points for a large network, other analysis of dynamics not possible for now.</b></font><br>";
+    print "<font color=blue><b>This is a very experimental feature, therefore there is no error checking. Use at your own risk.</b></font><br>";
+    set_update_type();
+    system("ruby adam_largeNetwork.rb $n_nodes $p_value $filename $limCyc_length");
+} elsif ( $p_value && $n_nodes ) {
+    print "executing simulation";
     print "hello<br>" if ($DEBUG);
     #if($p_value**$n_nodes >= 7000000000000)
     if($n_nodes > 21 || $p_value**$n_nodes > 2**21) {
@@ -243,11 +253,6 @@ elsif ( $special_networks eq "Algorithms (suggested for nodes > 11)" ) {
    
     print "hello set_update_type<br>" if ($DEBUG);
     set_update_type();
-    
-    # Set flag for creating the dependency graph and whether to print
-    # the probabilities in the phase space
-    ($depgraph eq "Dependency graph") ? {$depgraph = 1} : {$depgraph=0};
-    ($stochastic eq "Print probabilities") ? {$stochastic = 1} : {$stochastic = 0 };
 
     print $option_box if ($DEBUG);
     if($option_box eq "All trajectories from all possible initial states") {
@@ -259,6 +264,10 @@ elsif ( $special_networks eq "Algorithms (suggested for nodes > 11)" ) {
 
       # Calling the wrapper script dvd_stochastic_runner.pl, which in
       # turn calls DVDCore routines
+
+      # Set flag for whether to print probabilities in phase space
+      ($stochastic eq "Print probabilities") ? {$stochastic = 1} : {$stochastic = 0 };
+
       print ("perl dvd_stochastic_runner.pl  $n_nodes $p_value 1 $updstoch_flag $clientip $SSformat $depgraph $updsequ_flag $update_schedule $stochastic 1 0 $filename\n<br> ") if ($DEBUG); 		
       system("/usr/bin/perl dvd_stochastic_runner.pl  $n_nodes $p_value 1 $updstoch_flag $clientip $SSformat $depgraph $updsequ_flag $update_schedule $stochastic 1 0 $filename"); 		
     } else {
