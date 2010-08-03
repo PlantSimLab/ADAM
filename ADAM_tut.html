@@ -48,7 +48,7 @@
 				<a href="#G"><font face="Verdana, Arial, Helvetica, sans-serif">What is the <i>Model File</i>?</font></a>
 			</li>
 			<li>
-				<a href="#N"><font face="Verdana, Arial, Helvetica, sans-serif">What is <i>Network Options</i>?</font></a>
+				<a href="#N"><font face="Verdana, Arial, Helvetica, sans-serif">What is <i>Analysis Options</i>?</font></a>
 			</li>
 			<li>
 				<a href="#U"><font face="Verdana, Arial, Helvetica, sans-serif">What is <i>update schedule</i></font></a>
@@ -83,7 +83,7 @@
 			<a name="D" id="D">Description</a>
 		</h3>
 		<p>
-			ADAM is a web-based tool for the analysis and visualization of the dynamics of multi-state, discrete models of biological networks. Multi-state discrete models are characterized by a collection of functions. For a network of <i>n</i> nodes, the corresponding discrete model will have <i>n</i> functions, where the <i>i</i>-th function describes the state transitions of the <i>i</i>-th node in the network. The user may select one of three inputs: a GINsim file, a PDS (polynomial dynamical system), or a PBN (probabilistic Boolean network). The user may upload a file or enter functions into the text box. Based upon which input type the user selects, other input options may appear. The user is guided through additional input/output options. ADAM can calculate fixed points and limit cycles of a specified length, produce the dependency graph for all networks and the state space for networks which are simulated, and return functional circuits along with their signed edges. ADAM analyzes dynamcis using a combination of simulation and abstract algebra techniques. The method of computation and the output will depend on options selected by the user.
+			ADAM is a web-based tool for the analysis and visualization of the dynamics of multi-state, discrete models of biological networks. Multi-state discrete models are characterized by a collection of functions. For a network of <i>n</i> nodes, the corresponding discrete model will have <i>n</i> functions, where the <i>i</i>-th function describes the state transitions of the <i>i</i>-th node in the network. The user may select one of three inputs: a GINsim file, a PDS (polynomial dynamical system), or a PBN (probabilistic Boolean network). The user may upload a file or enter functions into the text box. Based upon which input type the user selects, other input options may appear. The user is guided through additional input/output options. ADAM can calculate fixed points and limit cycles of a specified length, produce the dependency graph for all networks and the state space for networks which are simulated, and return functional circuits along with their signed edges. ADAM analyzes dynamics using a combination of simulation and abstract algebra techniques. The method of computation and the output will depend on options selected by the user.
 		</p>
 		<div align="right">
 			<a href="#top"><font size="-1" color="#FF0000">Return to the top</font></a>
@@ -92,7 +92,7 @@
 			<a name="I" id="I">Discrete System Description</a>
 		</h3>
 		<p>
-			The user may choose to input a GINsim file (see <a href="#L">What is the <i>Model File</i>?</a>), a PDS (polynomial dynamical system), or a PBN (probabilistic Boolean network). If inputting a PDS or PBN, the user may uplaod a text file or enter functions into the text box. For proper format of PDS or PBN input see <a href="#L">Format of the input functions</a>.
+			The user may choose to input a GINsim file (see <a href="#L">What is the <i>Model File</i>?</a>), a PDS (polynomial dynamical system), or a PBN (probabilistic Boolean network). If inputting a PDS or PBN, the user may upload a text file or enter functions into the text box. For proper format of PDS or PBN input see <a href="#L">Format of the input functions</a>.
 		</p>
 		<div align="right">
 			<a href="#top"><font size="-1" color="#FF0000">Return to the top</font></a>
@@ -163,7 +163,7 @@
 			<b>Figure b : Example GINsim Model</b>
 		</center>
 		<div style="margin-left: 2em">
-			<b>Upon inputing this file, ADAM converts the network to a PDS and then solves the PDS for dynamic features</b>
+			<b>Upon inputing this file, ADAM converts the logical model to a PDS and then solves the PDS for dynamic features</b>
 		</div>
 		<p>
 			<br>
@@ -176,7 +176,7 @@
 					</td>
 				</tr>
 			</table><br>
-			<b>Figure c : Output produced using the <i>Small Networks</i> option.</b>
+			<b>Figure c : Output produced using the <i>Small Models</i> option.</b>
 		</center>
 		<p>
 			<sup>1</sup>Veliz-Cube A., Salam Jarrah A., Laubenbacher R., (2010) Polynomial Algebra of Discrete Models in Systems Biology.
@@ -188,7 +188,7 @@
 			<a name="N" id="N">What is <i>Analysis Options</i>?</a>
 		</h3>
 		<p>
-			ADAM will simulate dynamics for the <i>Simulation</i> option (11 nodes or less), meaning it computes the transition states from all possible initializations. When simulating, ADAM will output the analysis results as well as the graph of the state space. For <i>Algorithms</i> ADAM uses algebra to solve for fixed points and limit cycles of a specified length. ADAM uses a separate algorithm to compute dynamics in the case of <i>Conjunctive/Disjunctive</i> Networks. Conjunctive Boolean networks consist of functions containing only one monomial term, i.e. the functions use only the AND operator. Conversely, Disjunctive Boolean networks consist of functions which use only the OR operator. Note that the <i>Conjunctive/Disjunctive</i> option only works for functions defined in a Boolean ring, i.e. there can be only two states per node. (see <a href="#L">What is the <i>number of states per node</i> input?</a>) Furthermore, <i>Conjunctive/Disjunctive</i> networks currently works only for strongly connected graphs. When input is analyzed with either the <i>Algorihms</i> or <i>Conjunctive/Disjunctive network</i> option, ADAM diplays the fixed points and limit cycles in a table.
+			ADAM will simulate dynamics for the <i>Simulation</i> option (11 nodes or less), meaning it computes the transition states from all possible initializations. When simulating, ADAM will output the analysis results as well as the graph of the state space. For <i>Algorithms</i> ADAM uses algebra to solve for fixed points and limit cycles of a specified length. ADAM uses a separate algorithm to compute dynamics in the case of <i>Conjunctive/Disjunctive</i> Networks. Conjunctive Boolean networks consist of functions containing only one monomial term, i.e. the functions use only the AND operator. Conversely, Disjunctive Boolean networks consist of functions which use only the OR operator. Note that the <i>Conjunctive/Disjunctive</i> option only works for functions defined in a Boolean ring, i.e. there can be only two states per node. (see <a href="#L">What is the <i>number of states per node</i> input?</a>) Furthermore, <i>Conjunctive/Disjunctive</i> networks currently works only for strongly connected graphs. When input is analyzed with either the <i>Algorithms</i> or <i>Conjunctive/Disjunctive network</i> option, ADAM displays the fixed points and limit cycles in a table.
 		</p>
 		<div align="right">
 			<a href="#top"><font size="-1" color="#FF0000">Return to the top</font></a>
@@ -353,7 +353,7 @@
 			<a name="V" id="V"><font face="Verdana, Arial, Helvetica, sans-serif">Viewing the graph</font></a>
 		</h3>
 		<p>
-			<font face="Verdana, Arial, Helvetica, sans-serif">The user has an option to view the graph of the entire state space or a single trajectory in the state space, AND the dependency graph of the network described by the input functions. The user can also select the format of the image file from the list of formats (gif, jpg, png and ps). Based on the users selection, a link to view the selected graph is available Fig (d) graph below is an example state space graph, Fig (e) graph below is the trajectory generated using initialization 2 0 1 and Fig (f) graph below is an example dependency graph<br>
+			<font face="Verdana, Arial, Helvetica, sans-serif">The user has an option to view the graph of the entire state space or a single trajectory in the state space, AND the dependency graph of the model described by the input functions. The user can also select the format of the image file from the list of formats (gif, jpg, png and ps). Based on the users selection, a link to view the selected graph is available Fig (d) graph below is an example state space graph, Fig (e) graph below is the trajectory generated using initialization 2 0 1 and Fig (f) graph below is an example dependency graph<br>
 			<br></font>
 		</p>
 		<center>
@@ -417,7 +417,7 @@
 			<a name="L" id="L"><font face="Verdana, Arial, Helvetica, sans-serif">Limitations</font></a>
 		</h3>
 		<p>
-			<font face="Verdana, Arial, Helvetica, sans-serif">Drawing of the state space is done by the graphics software <a href="http://www.graphviz.org">GraphViz</a>. Due to limitations in viewing, we restrict the total number of states in the state space to 1000; that is, <i>m</i>^<i>n</i> &lt;= 1000, where <i>m</i> = <i>m value</i> and <i>n</i> = <i>number of nodes</i>. Hence, we state space graphics only for the <i>Simulation</i> option.(see <a href="#L">What is <i>Network Options</i>?</a>) Further, due to the increasing computational complexity of computing limit cycles as the length of the cycles increases, computation of long limit cycles may be slow.</font>
+			<font face="Verdana, Arial, Helvetica, sans-serif">Drawing of the state space is done by the graphics software <a href="http://www.graphviz.org">GraphViz</a>. Due to limitations in viewing, we restrict the total number of states in the state space to 1000; that is, <i>m</i>^<i>n</i> &lt;= 1000, where <i>m</i> = <i>m value</i> and <i>n</i> = <i>number of nodes</i>. Hence, we state space graphics only for the <i>Simulation</i> option.(see <a href="#L">What is <i>Analysis Options</i>?</a>) Further, due to the increasing computational complexity of computing limit cycles as the length of the cycles increases, computation of long limit cycles may be slow.</font>
 		</p>
 		<div align="right">
 			<a href="#top"><font face="Verdana, Arial, Helvetica, sans-serif"><font size="-1" color="#FF0000">Return to the top</font></font></a>
