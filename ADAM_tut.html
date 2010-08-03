@@ -138,10 +138,10 @@
 			<a href="#top"><font size="-1" color="#FF0000">Return to the top</font></a>
 		</div>
 		<h3>
-			<a name="G" id="G">What is the <i>GINsim File</i> option?</a>
+			<a name="G" id="G">What is the <i>Model File</i>?</a>
 		</h3>
 		<p>
-			The GINsim File option allows the user to upload a GINsim file to be analyzed by our software. <a href="http://gin.univ-mrs.fr/">GINsim</a> is a program that allows a user to build a logical model based on some biological system. Our software first converts a GINsim file to a polynomial dynamical system (PDS) via the method described in Veliz-Cuba et al., 2010<sup>1</sup> and then use algebra techniques to solve the PDS for key dynamics. Note: Currently our software is only compatible with GINsim 2.3. Thus we recommend that the user save all GINsim files in version 2.3 in order to run the files on ADAM.
+			ADAM allows the user to upload a text file with functions (PDS or PBN) or a GINsim model to be analyzed by our software. <a href="http://gin.univ-mrs.fr/">GINsim</a> is a program that allows a user to build a logical model based on some biological system. Our software first converts a GINsim file to a polynomial dynamical system (PDS) via the method described in Veliz-Cuba et al., 2010<sup>1</sup> and then use algebra techniques to solve the PDS for key dynamics. Note: Currently our software is only compatible with GINsim 2.3. Thus we recommend that the user save all GINsim files in version 2.3 in order to run the files on ADAM.
 		</p>
 		<div style="margin-left: 2em">
 			<b>As an example consider a model of lysis-lysogeny decision in the phage lambda, a small gene regulatory network modeled in GINsim.</b>
@@ -160,7 +160,7 @@
 					</td>
 				</tr>
 			</table><br>
-			<b>Figure b : Example GINsim File</b>
+			<b>Figure b : Example GINsim Model</b>
 		</center>
 		<div style="margin-left: 2em">
 			<b>Upon inputing this file, ADAM converts the network to a PDS and then solves the PDS for dynamic features</b>
@@ -185,7 +185,7 @@
 			<a href="#top"><font size="-1" color="#FF0000">Return to the top</font></a>
 		</div>
 		<h3>
-			<a name="N" id="N">What is <i>Network Options</i>?</a>
+			<a name="N" id="N">What is <i>Analysis Options</i>?</a>
 		</h3>
 		<p>
 			ADAM will simulate dynamics for the <i>Simulation</i> option (11 nodes or less), meaning it computes the transition states from all possible initializations. When simulating, ADAM will output the analysis results as well as the graph of the state space. For <i>Algorithms</i> ADAM uses algebra to solve for fixed points and limit cycles of a specified length. ADAM uses a separate algorithm to compute dynamics in the case of <i>Conjunctive/Disjunctive</i> Networks. Conjunctive Boolean networks consist of functions containing only one monomial term, i.e. the functions use only the AND operator. Conversely, Disjunctive Boolean networks consist of functions which use only the OR operator. Note that the <i>Conjunctive/Disjunctive</i> option only works for functions defined in a Boolean ring, i.e. there can be only two states per node. (see <a href="#L">What is the <i>number of states per node</i> input?</a>) Furthermore, <i>Conjunctive/Disjunctive</i> networks currently works only for strongly connected graphs. When input is analyzed with either the <i>Algorihms</i> or <i>Conjunctive/Disjunctive network</i> option, ADAM diplays the fixed points and limit cycles in a table.
