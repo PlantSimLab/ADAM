@@ -213,7 +213,7 @@ create_input_function();
 if ( $special_networks eq "Conjunctive/Disjunctive (Boolean rings only)" ) {
   # conj/disj networks dynamics depend on the dependency graph, we need to
   # generate it 
-  system("perl regulatory.pl $filename $n_nodes $clientip $DGformat $p_value") == 0
+  system("perl regulatory.pl $filename $n_nodes $clientip") == 0
       or die("regulatory.pl died");
   $dpGraph = "$clientip.out1";
   print  "<br><A href=\"$dpGraph.$DGformat\" target=\"_blank\"><font color=red><i>Click to view the dependency graph.</i></font></A><br>";
@@ -366,51 +366,27 @@ sub create_input_function() {
 	      print "<font color=red>Error: Must give .txt file</font>";
 	      die("Program quitting. Extension not txt");
 	  }
-	  
-  	  # Write functions to file on server for below use
-	  # TODO: This is kind of a hack... There's probably an easier way to deal with files but I don't know enough
-	  # perl
-	  open (MYFILE, ">$clientip.function.txt");
-	  flock(MYFILE, LOCK_EX) or die ("Could not get exclusive lock $!");
-	  while($bytesread=read($upload_file, $buffer, 1024)) { print MYFILE $buffer; }
-	  flock(MYFILE, LOCK_UN) or die ("Could not unlock file $!");
-	  close $upload_file;
 
-	  flock(OUTFILE, LOCK_EX) or die ("Could not get exclusive lock $!");
-	  open (MYFILE, "$clientip.function.txt") || die("Could not open file! File is: $clientip.function.txt");
+	  # Get contents of file and n_nodes
+	  flock(OUTFILE, LOCK_EX) or die ("Could not get exclusive lock $!");	  
 	  $n_nodes = 0;
-	  while (<MYFILE>) {
-	      print OUTFILE $_;
-	      if (m/(\d+)/ && $1 > $n_nodes) { $n_nodes = $1; }
+	  while($bytesread=read($upload_file, $buffer, 1024)) {
+	      print OUTFILE $buffer;
+	      while($buffer =~ m/f(\d+)/g) {
+		  if ($1 > $n_nodes) { print "$1<br>";$n_nodes = $1; }
+	      }
 	  }
-	  close (MYFILE);
       }
       flock(OUTFILE, LOCK_UN) or die ("Could not unlock file $!");
       close $upload_file;
-    } elsif ($edit_functions) {
+    } elsif ($edit_functions) { # Otherwise parse functions from textarea value (no file uploaded)
 	print OUTFILE $edit_functions;
-	
-	  $n_nodes = 0;
-	  while (<MYFILE>) {
-	      print $_;
-	      print OUTFILE $_;
-	      if (m/(\d+)/ && $1 > $n_nodes) { $n_nodes = $1; }
-	  }
-	  close (MYFILE);
+	$n_nodes = 0;
+	while($edit_functions =~ m/f(\d+)/g) {
+	    if ($1 > $n_nodes) { $n_nodes = $1; }
+	}
 	flock(OUTFILE, LOCK_UN) or die("Could not unlock file $!");
     }
-#else { # user has not uploaded any file. so use the textarea value
-#	if($edit_functions) {
-            #read value from editfunctions and print it to outfile
-#	    print OUTFILE $edit_functions;
-#	    flock(OUTFILE, LOCK_UN) or die ("Could not unlock file $!");
-#	} #else { # no functions provided
-	  #  print "<font color=\"red\">Error: No functions provided. Please upload a
-        #function file or type in your functions in the edit box</font><br>";
-	 #   close(OUTFILE);
-	 #   die("No function file provided by user");
-#	}
-#    }	
     close(OUTFILE);
 
     #remove any ^M characters
