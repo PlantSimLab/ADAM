@@ -333,7 +333,6 @@ sub create_input_function() {
     if($upload_file) {
       $fileuploaded = 1;
       if($format_box eq "GINsim"){
-	  print "GINsim option was selected<br>";
 	  # Make sure extension is correct
 	  $extension = substr $upload_file, -5;
 	  if($extension ne "ginml"){
@@ -352,34 +351,52 @@ sub create_input_function() {
 	  # Convert GINsim file and get p_value and n_nodes
 	  system("ruby ginSim-converter.rb $clientip");
 	  close GINOUTFILE;
-	  # TODO: figure out why this doesn't work. I looked at $valuesFile, it's in no-ssl and it reads a number, so
-	  # why doesn't it work?
-
-    open (MYFILE, $pFile) || die("Could not open file!");
-    while (<MYFILE>) {
-      chomp;
-      $p_value = $_;
-    }
-    close (MYFILE); 
-
-    open (MYFILE, $nFile) || die("Could not open file!");
-    while (<MYFILE>) {
-      chomp;
-      $n_nodes = $_;
-    }
-    close (MYFILE); 
-
-	  #read ($pFile, $p_value, 1024);
-	  #read ($nFile, $n_nodes, 1024);
-	  print "<font color=red>p_value is: $p_value and n_nodes is: $n_nodes</font>";
+	  
+          # Set p_value and n_nodes
+	  open (MYFILE, $pFile) || die("Could not open file!");
+	  while (<MYFILE>) { chomp; $p_value = $_; }
+	  close (MYFILE); 
+	  open (MYFILE, $nFile) || die("Could not open file!");
+	  while (<MYFILE>) { chomp; $n_nodes = $_; }
+	  close (MYFILE); 
       } else {
+          # Make sure extension is correct
+	  $extension = substr $upload_file, -3;
+	  if($extension ne "txt"){
+	      print "<font color=red>Error: Must give .txt file</font>";
+	      die("Program quitting. Extension not txt");
+	  }
+	  
+  	  # Write functions to file on server for below use
+	  # TODO: This is kind of a hack... There's probably an easier way to deal with files but I don't know enough
+	  # perl
+	  open (MYFILE, ">$clientip.function.txt");
+	  flock(MYFILE, LOCK_EX) or die ("Could not get exclusive lock $!");
+	  while($bytesread=read($upload_file, $buffer, 1024)) { print MYFILE $buffer; }
+	  flock(MYFILE, LOCK_UN) or die ("Could not unlock file $!");
+	  close $upload_file;
+
 	  flock(OUTFILE, LOCK_EX) or die ("Could not get exclusive lock $!");
-	  while($bytesread=read($upload_file, $buffer, 1024)) { print OUTFILE $buffer; }
+	  open (MYFILE, "$clientip.function.txt") || die("Could not open file! File is: $clientip.function.txt");
+	  $n_nodes = 0;
+	  while (<MYFILE>) {
+	      print OUTFILE $_;
+	      if (m/(\d+)/ && $1 > $n_nodes) { $n_nodes = $1; }
+	  }
+	  close (MYFILE);
       }
       flock(OUTFILE, LOCK_UN) or die ("Could not unlock file $!");
       close $upload_file;
     } elsif ($edit_functions) {
 	print OUTFILE $edit_functions;
+	
+	  $n_nodes = 0;
+	  while (<MYFILE>) {
+	      print $_;
+	      print OUTFILE $_;
+	      if (m/(\d+)/ && $1 > $n_nodes) { $n_nodes = $1; }
+	  }
+	  close (MYFILE);
 	flock(OUTFILE, LOCK_UN) or die("Could not unlock file $!");
     }
 #else { # user has not uploaded any file. so use the textarea value
