@@ -213,7 +213,7 @@ create_input_function();
 if ( $special_networks eq "Conjunctive/Disjunctive (Boolean rings only)" ) {
   # conj/disj networks dynamics depend on the dependency graph, we need to
   # generate it 
-  system("perl regulatory.pl $filename $n_nodes $clientip $DGformat $p_value") == 0
+  system("perl regulatory.pl $filename $n_nodes $clientip $DGformat") == 0
       or die("regulatory.pl died");
   $dpGraph = "$clientip.out1";
   print  "<br><A href=\"$dpGraph.$DGformat\" target=\"_blank\"><font color=red><i>Click to view the dependency graph.</i></font></A><br>";
@@ -333,7 +333,6 @@ sub create_input_function() {
     if($upload_file) {
       $fileuploaded = 1;
       if($format_box eq "GINsim"){
-	  print "GINsim option was selected<br>";
 	  # Make sure extension is correct
 	  $extension = substr $upload_file, -5;
 	  if($extension ne "ginml"){
@@ -352,48 +351,42 @@ sub create_input_function() {
 	  # Convert GINsim file and get p_value and n_nodes
 	  system("ruby ginSim-converter.rb $clientip");
 	  close GINOUTFILE;
-	  # TODO: figure out why this doesn't work. I looked at $valuesFile, it's in no-ssl and it reads a number, so
-	  # why doesn't it work?
-
-    open (MYFILE, $pFile) || die("Could not open file!");
-    while (<MYFILE>) {
-      chomp;
-      $p_value = $_;
-    }
-    close (MYFILE); 
-
-    open (MYFILE, $nFile) || die("Could not open file!");
-    while (<MYFILE>) {
-      chomp;
-      $n_nodes = $_;
-    }
-    close (MYFILE); 
-
-	  #read ($pFile, $p_value, 1024);
-	  #read ($nFile, $n_nodes, 1024);
-	  print "<font color=red>p_value is: $p_value and n_nodes is: $n_nodes</font>";
+	  
+          # Set p_value and n_nodes
+	  open (MYFILE, $pFile) || die("Could not open file!");
+	  while (<MYFILE>) { chomp; $p_value = $_; }
+	  close (MYFILE); 
+	  open (MYFILE, $nFile) || die("Could not open file!");
+	  while (<MYFILE>) { chomp; $n_nodes = $_; }
+	  close (MYFILE); 
       } else {
-	  flock(OUTFILE, LOCK_EX) or die ("Could not get exclusive lock $!");
-	  while($bytesread=read($upload_file, $buffer, 1024)) { print OUTFILE $buffer; }
+          # Make sure extension is correct
+	  $extension = substr $upload_file, -3;
+	  if($extension ne "txt"){
+	      print "<font color=red>Error: Must give .txt file</font>";
+	      die("Program quitting. Extension not txt");
+	  }
+
+	  # Get contents of file and n_nodes
+	  flock(OUTFILE, LOCK_EX) or die ("Could not get exclusive lock $!");	  
+	  $n_nodes = 0;
+	  while($bytesread=read($upload_file, $buffer, 1024)) {
+	      print OUTFILE $buffer;
+	      while($buffer =~ m/f(\d+)/g) {
+		  if ($1 > $n_nodes) { print "$1<br>";$n_nodes = $1; }
+	      }
+	  }
       }
       flock(OUTFILE, LOCK_UN) or die ("Could not unlock file $!");
       close $upload_file;
-    } elsif ($edit_functions) {
+    } elsif ($edit_functions) { # Otherwise parse functions from textarea value (no file uploaded)
 	print OUTFILE $edit_functions;
+	$n_nodes = 0;
+	while($edit_functions =~ m/f(\d+)/g) {
+	    if ($1 > $n_nodes) { $n_nodes = $1; }
+	}
 	flock(OUTFILE, LOCK_UN) or die("Could not unlock file $!");
     }
-#else { # user has not uploaded any file. so use the textarea value
-#	if($edit_functions) {
-            #read value from editfunctions and print it to outfile
-#	    print OUTFILE $edit_functions;
-#	    flock(OUTFILE, LOCK_UN) or die ("Could not unlock file $!");
-#	} #else { # no functions provided
-	  #  print "<font color=\"red\">Error: No functions provided. Please upload a
-        #function file or type in your functions in the edit box</font><br>";
-	 #   close(OUTFILE);
-	 #   die("No function file provided by user");
-#	}
-#    }	
     close(OUTFILE);
 
     #remove any ^M characters
