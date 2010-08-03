@@ -307,7 +307,7 @@ print "</div>";
 #Box: Comments/Questions/Bugs Link :: Footer
 print "<div id=\"footer\">";
 print "ADAM is currently still under development; if you ";
-print "spot any bugs or have any questions/comments, please <a href=\"mailto:mbrando1@utk.edu\">";
+print "spot any bugs or have any questions/comments, please <a href=\"mailto:mbrando1\@utk.edu\">";
 print "e-mail us</a>. ";
 print "(Bonny Guang, Madison Brandon, Rustin McNeill)";
 print "</td></tr>";
