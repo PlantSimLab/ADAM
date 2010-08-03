@@ -45,8 +45,8 @@ Systems</b>, and <b>Probabilistic Boolean (or multistate) Networks</b>. For smal
 complete phase space of the model and finds all attractors (steady states and limit cycles) together with statistics about the size of components. For larger networks, 
 ADAM computes fixed points or limit cycle of the length specified by the user. For small probabilistic networks, 
 ADAM uses a Markov Chain simulation to generate the phase space. For larger 
-probabilistic networks, deadlocks (fixedpoints) are calculated. 
-You can follow our step-by-step tutorial or read the <a href=\"http://dvd.vbi.vt.edu/ADAM_tut.html\" target=\"_blank\">manual</a>. It is important 
+probabilistic networks, deadlocks (fixed points) are calculated. 
+You can follow our <a href=\"/steptutorial.htm\">step-by-step tutorial</a> or read the <a hrnk\"ef=\"http://dvd.vbi.vt.edu/ADAM_tut.html\" target=\"_blank\">User Guide</a>. It is important 
 that you follow the format specified in the tutorial. Make your selections and provide inputs (if any) in the form below and click 
 <i>Analyze</i> to run the software. To generate a model from experimental time course data, you can use <a href=\"http://polymath.vbi.vt.edu/polynome\">Polynome</a>.";
 print "</div>";
