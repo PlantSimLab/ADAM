@@ -101,7 +101,7 @@
 			<a name="P" id="P">What is <i>number of states per node</i> input?</a>
 		</h3>
 		<p>
-			The number of states denotes the cardinality of the state set of the user's discrete network. Note that this must be a prime number. The software accepts positive prime integers up to 99. This value gives the total number of states that a node in the network can have. For example, if <i>number of states per node</i> = 3, then the possible states for any node are 0, 1, and 2. For logical models entered in GINSim Model format, ADAM will determine the number of states from the model description, for PDS or probabilistic networks, the number of states is mandatory. 
+			The number of states denotes the cardinality of the state set of the user's discrete network. Note that this must be a prime number. The software accepts positive prime integers up to 99. This value gives the total number of states that a node in the network can have. For example, if <i>number of states per node</i> = 3, then the possible states for any node are 0, 1, and 2. If the system is <b>Boolean</b>, the number of states per node is 2. For logical models entered in GINSim Model format, ADAM will determine the number of states from the model description, for PDS or probabilistic networks, the number of states is mandatory. 
 		</p>
 		<div align="right">
 			<a href="#top"><font size="-1" color="#FF0000">Return to the top</font></a>
@@ -110,7 +110,7 @@
 			<a name="F" id="F">Format of the input functions</a>
 		</h3>
 		<p>
-			Each node of the user's network is represented by a variable. Variable names are x1, x2, etc. Function names are f1, f2, etc. The convention is that fk is the function which describes the state transitions of the node represented by xk. The user can either upload a function file or edit/type functions in the text box provided. ADAM wil use the functions from the input text box only when the user DOES NOT select a file to upload The functions should follow the following formatting rules:
+			Each node of the user's network is represented by a variable. Variable names are x1, x2, etc. Function names are f1, f2, etc. The convention is that fk is the function which describes the state transitions of the node represented by xk. The user can either upload a function file or edit/type functions in the text box provided. ADAM wil use the functions from the input text box only when the user DOES NOT select a file to upload. The functions should follow the following formatting rules:
 		</p>
 		<div style="margin-left: 2em">
 			<b>The functions should begin with f followed by an integer, example f1, f2, f3.....fn, where n is the number of nodes</b>
@@ -163,7 +163,7 @@
 			<b>Figure b : Example GINsim File</b>
 		</center>
 		<div style="margin-left: 2em">
-			<b>Upon inputing this file, AVDD converts the network to a PDS and then solves the PDS for dynamic features</b>
+			<b>Upon inputing this file, ADAM converts the network to a PDS and then solves the PDS for dynamic features</b>
 		</div>
 		<p>
 			<br>
