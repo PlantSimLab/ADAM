@@ -22,7 +22,7 @@ p_value = result.fetch(2)
 
 #Converts varList to readable output
 vars = varList.split("{")
-vars = vars.fetch(1).chop!.chop!
+vars = vars.fetch(1).chop!
 vars = vars.split(",")
 
 formatVars = String.new(str="Variables:<br>")
