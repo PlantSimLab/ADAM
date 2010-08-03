@@ -9,11 +9,9 @@ unless ARGV.size == 1
 end
 
 clientip = ARGV[0]
-#functionFile = ARGV[1]
-#valuesFile = ARGV[2]
 
-#result = `cd lib/M2code/; M2 convertToPDS.m2 --stop --no-debug --silent -q -e 'cF = converter("../../#{ginSimFile}"); stdio << toString first cF << "?" << toString last cF << "?" << char ring last cF; exit 0'`
-result = `cd lib/M2code/; /usr/local/bin/M2 convertToPDS.m2 --stop --no-debug --silent -q -e 'cF = converter("../../#{ginSimFile}"); stdio << toString first cF << "?" << toString last cF << "?" << char ring last cF; exit 0'`
+#result = `cd lib/M2code/; M2 convertToPDS.m2 --stop --no-debug --silent -q -e 'cF = converter("../../#{clientip}.ginsim.ginml"); stdio << toString first cF << "?" << toString last cF << "?" << char ring last cF << "?" << numgens ring last cF; exit 0'`
+result = `cd lib/M2code/; /usr/local/bin/M2 convertToPDS.m2 --stop --no-debug --silent -q -e 'cF = converter("../../#{clientip}.ginsim.ginml"); stdio << toString first cF << "?" << toString last cF << "?" << char ring last cF << "?" << numgens ring last cF; exit 0'`
 
 result = result.split("?")
 varList = result.fetch(0)
@@ -21,11 +19,8 @@ m2_result = result.fetch(1)
 
 # get p_value and n_nodes
 p = result.fetch(2)
-puts p
-puts "<br>"
 File.open("#{clientip}.pVal.txt", "w"){|f| f.write(p)}
 n = result.fetch(3)
-puts n
 File.open("#{clientip}.nVal.txt", "w"){|f| f.write(n)}
 
 #Converts varList to readable output
