@@ -206,7 +206,7 @@
 			<li>
 				<b>Sequential</b>: the functions are evaluated in some specified order. The function indices must be entered in the input box provided with each index used exactly once and should be in the range 1 to n (number of nodes)
 			</li>
-			<li style="list-style: none">For all polynomial dynamical systems asynchronous/synchronous updating yeilds the same fixed points. This is particularly helpful for the logical modeling community because most of their updating is done asynchronously. Note that this option applies only to <i>Small Networks</i>.
+			<li style="list-style: none">For all polynomial dynamical systems asynchronous/synchronous updating yields the same fixed points. This is particularly helpful for the logical modeling community because most of their updating is done asynchronously. Note that this option applies only to <i>PDS</i>.
 			</li>
 		</ul>
 		<div align="right">
@@ -216,7 +216,7 @@
 			<a name="J" id="J">Format of input functions</a>
 		</h3>
 		<p>
-			The software provides the user withs the option to specify how the operations in the function file should be interpreted. For example, 'x1*x2' could be interpreted as polynomial multiplication of variables or as the Boolean AND operation. If the user provides functions that are in the Boolean format, ADAM will convert the Boolean functions to polynomial functions to do the computations. The Boolean function file must adhere to the following format:<br>
+			The software provides the user withs the option to specify how the operations in the function file should be interpreted. For example, 'x1*x2' could be interpreted as polynomial multiplication of variables or as the Boolean AND operation. If the user provides functions that are in the Boolean format, ADAM will convert the Boolean functions to polynomial functions to do the computations. This only works, when <i>number of states per node</i> is 2. The Boolean function file must adhere to the following format:<br>
 			<br>
 		</p>
 		<center>
