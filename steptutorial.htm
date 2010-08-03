@@ -1,0 +1,123 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+	<head>
+		<title>
+			ADAM Step-by-step tutorial
+		</title>
+		<link rel="stylesheet" type="text/css" href="/adam_stylev2.css">
+	</head>
+	<body>
+		<div id=nav>
+			<p><h2><a href="/adam.pl">Back to ADAM</a>&nbsp;&nbsp;&nbsp; <a href="/ADAM_tut.html">Manual</a><h2>
+			</p>
+		</div>	
+		<div class="Section1">
+			<h1>
+				Detailed examples of how to use ADAM
+			</h1>
+			<p>
+				<a href="#GS">GINsim</a>&nbsp;&nbsp;&nbsp; <a href="#PDS">Polynomial Dynamical System</a>&nbsp;&nbsp;&nbsp; <a href="#PBN">Probabilistic Boolean Network</a>
+			</p>
+			<h2>
+				<a name="GS" id="GS">How to use a GINsim file as an input</a>
+			</h2>
+			<p>
+				Select GINsim as the format of the input functions
+			</p>
+			<p>
+				Note that input for number of states per node is not allowed as it is not needed. Adam pulls this information from the GINsim file.
+			</p>
+			<p>
+				Upload the 4 node Lambda Phage model named regulatoryGraph.ginml (inside the zipped folder phage4.zginml available <a href="http://gin.univ-mrs.fr/GINsim/model_repository/MICROBIOLOGICAL%20REGULATORY%20NETWORKS/Phage%20Lambda/PhageLambda/description.html">here</a>)
+			</p>
+			<p>
+				Select Simulation (as the model has only four nodes)
+			</p>
+			<p>
+				<img border="0" width="434" height="347" src="steptutorial_files/image002.png">
+			</p>
+			<p>
+				Click <i>Analyze</i> to view the outputs
+			</p>
+			<p>
+				<img border="0" width="434" height="111" src="steptutorial_files/image004.png">
+			</p>
+			<h2>
+				<a name="PDS" id="PDS">How to enter a Polynomial Dynamical System</a>
+			</h2>
+			<p>
+				Select PDS as the format for input functions
+			</p>
+			<p>
+				Enter the number of states each node may have. For this example, enter 3. This indicates each node may be 0, 1 or 2
+			</p>
+			<p>
+				Enter the functions in the text box below. For this example we will have 2 functions. Enter
+			</p>
+			<p>
+				f1 = x1*x2
+			</p>
+			<p>
+				f2 = x1+x2
+			</p>
+			<p>
+				Under network options, select simulation, as there are only 2 nodes. Leave synchronous selected for the updating scheme to have the states updated synchronously, and leave all trajectories selected to view the entire state space.
+			</p>
+			<p>
+				<img border="0" width="434" height="183" src="steptutorial_files/image006.png">
+			</p>
+			<p>
+				<img border="0" width="434" height="181" src="steptutorial_files/image008.png">
+			</p>
+			<p>
+				Click analyze to view the results.
+			</p>
+			<p>
+				<img border="0" width="314" height="128" src="steptutorial_files/image010.png">
+			</p>
+			<h2>
+				<a name="PBN" id="PBN">How to Enter a Probabilistic Boolean Network</a>
+			</h2>
+			<p>
+				Select PBN as the format for function input.
+			</p>
+			<p>
+				The number of states per node must now be set to 2 and the dropbox to the right must be changed from polynomial to boolean.
+			</p>
+			<p>
+				For this example, enter the following for the functions:
+			</p>
+			<p>
+				f1 = (x1*x2)
+			</p>
+			<p>
+				f2 = (x1+x3)
+			</p>
+			<p>
+				f3 = (~(x1+x2))
+			</p>
+			<p>
+				This is read as f1 equals x1 AND x2, f2 equals x1 OR x3, f3 equals NOT (x1 OR x2). Note that each operation must have a set of parenthesis that correspond to it. It is important not to place extra sets of parenthesis in any of the equations. Note that changing f3 to (~((x1)+x2)) gives a different, incorrect output as there is an unnecessary set of parenthesis around x1.
+			</p>
+			<p>
+				Under network options, select simulation, as there are only 3 nodes. Leave synchronous selected for the updating scheme to have the states updated synchronously, and leave all trajectories selected to view the entire state space.
+			</p>
+			<p>
+				<img border="0" width="434" height="128" src="steptutorial_files/image012.png">
+			</p>
+			<p>
+				<img border="0" width="434" height="171" src="steptutorial_files/image014.png">
+			</p>
+			<p>
+				Click Analyze to view the ouput, which should be as follows:
+			</p>
+			<p>
+				<img border="0" width="414" height="130" src="steptutorial_files/image016.png">
+			</p>
+		</div>
+		<div id=nav>
+			<p><h2><a href="/adam.pl">Back to ADAM</a>&nbsp;&nbsp;&nbsp; <a href="/ADAM_tut.html">Manual</a><h2>
+			</p>
+		</div>
+	</body>
+</html>
