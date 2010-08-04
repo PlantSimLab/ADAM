@@ -131,8 +131,7 @@ print "<tr class=\"lines\"><td></td></tr>";
 print "<tr><td id=\"netOpts\" style=\"font-size:12px\">";
 print "</table><br>";
 
-print "<center>", submit('button_name','Analyze')," <br><font color=\"#006C00\"><br><i>Results will be displayed below.</i></font></td></tr>";
-print "</center>";
+print "<center>", submit('button_name','Analyze'),"</center><br><br>";
 
 print "</div>";
 
@@ -305,7 +304,7 @@ print "</div>";
 #Box: Comments/Questions/Bugs Link :: Footer
 print "<div id=\"footer\">";
 print "ADAM is currently still under development; if you ";
-print "spot any bugs or have any questions/comments, please <a href=\"mailto:mbrando1@utk.edu\">";
+print "spot any bugs or have any questions/comments, please <a href=\"mailto:mbrando1\@utk.edu\">";
 print "e-mail us</a>. ";
 print "(Bonny Guang, Madison Brandon, Rustin McNeill, Franziska Hinkelmann)";
 print "</td></tr>";
