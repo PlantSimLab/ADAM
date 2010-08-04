@@ -68,6 +68,14 @@ style: position:absolute;
 z-index: 100;*/
 }
 /* Controls main color and size of boxes. Currently pale gray-ish */
+#header table
+{
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    border-spacing: 0px;
+    padding: 1px;
+}
 #main table
 {
     margin-left: auto;
