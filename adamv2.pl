@@ -87,11 +87,9 @@ print "</div></td></tr>";
 print "<tr valign=\"top\"><td><div align=\"center\"><font size=\"2\">or</font></div></td></tr>";
 print "<tr valign=\"top\"><td><div align=\"center\">";
 print textarea(-name=>'edit_functions',
-               -default=>'f1 = x1+x2
-f2 = x1*x2*x3
-f3 = x1*x2+x3^2' ,
-			   -rows=>8,
-			   -columns=>50);
+               -default=>'',
+               -rows=>8,
+               -columns=>50);
 print "</div></td></tr>";
 print "</table>";
 
@@ -241,7 +239,7 @@ if ( $special_networks eq "Conjunctive/Disjunctive (Boolean rings only)" ) {
     set_update_type();
     system("ruby adam_largeNetwork.rb $n_nodes $p_value $filename $limCyc_length");
 } elsif ( $p_value && $n_nodes ) {
-    print "executing simulation";
+    print "Executing simulation<br>";
     print "hello<br>" if ($DEBUG);
     #if($p_value**$n_nodes >= 7000000000000)
     if($n_nodes > 21 || $p_value**$n_nodes > 2**21) {

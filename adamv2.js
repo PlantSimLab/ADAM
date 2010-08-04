@@ -15,28 +15,32 @@ formatExp[2] = '<b>PBN</b>: Probabilistic Boolean (or Multistate) Networks. Blah
 // formatChange(): disables and enables options based on which radio button is checked for
 // input format (GINsim, PDS, PBN). Also changes text explanation of options.
 function formatChange() {
-    var input = document.getElementById('explainInput');
-    var state = document.getElementById('stateInput');
-    if (document.form1.format_box[0].checked == true) { //if GINsim is checked
-    	document.form1.p_value.disabled = true;
-	document.form1.translate_box.disabled = true;
-	document.form1.edit_functions.disabled = true;
-	document.form1.stochastic.disabled = true;
-	state.innerHTML = '<font color="#666666" size="2">Enter number of states per node: </font>';
-	input.innerHTML = formatExp[0];
-    }
-    else {
-	document.form1.p_value.disabled = false;
-	document.form1.edit_functions.disabled = false;
-	state.innerHTML = '<font size="2">Enter number of states per node: </font>';	
+  var input = document.getElementById('explainInput');
+  var state = document.getElementById('stateInput');
+  if (document.form1.format_box[0].checked == true) { //if GINsim is checked
+    document.form1.p_value.disabled = true;
+    document.form1.translate_box.disabled = true;
+    document.form1.edit_functions.value = '';
+    document.form1.edit_functions.disabled = true;
+    document.form1.stochastic.disabled = true;
+    state.innerHTML = '<font color="#666666" size="2">Enter number of states per node: </font>';
+    input.innerHTML = formatExp[0];
+  }
+  else {
+    document.form1.p_value.disabled = false;
+    document.form1.edit_functions.disabled = false;
+    state.innerHTML = '<font size="2">Enter number of states per node: </font>';	
 
-	if (document.form1.format_box[1].checked == true) { //if PDS is checked
-	    input.innerHTML = formatExp[1];
-	    document.form1.stochastic.disabled = true;
-	}
-	else //else must be PBN
-	    input.innerHTML = formatExp[2];
+    if (document.form1.format_box[1].checked == true) { //if PDS is checked
+      input.innerHTML = formatExp[1];
+      document.form1.edit_functions.value = 'f1 = x1+x2\nf2 = x1*x2*x3\nf3 = x1*x2+x3^2';
+      document.form1.stochastic.disabled = true;
     }
+    else { //else must be PBN
+      input.innerHTML = formatExp[2];
+      document.form1.edit_functions.value = 'f1 = { \nx1+x2   #.9 \nx1      #.1\n }\nf2 = x1*x2*x3 \nf3 = { \nx1*x2+x3^2 \nx2 \n}';
+    }
+  }
 }
 
 // Allows drop-down Polynomial/Boolean only if p_value is 2
