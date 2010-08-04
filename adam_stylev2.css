@@ -40,7 +40,6 @@ html {
     padding: 1px;
 }
 
-
 #computation { 
     width:1024px;
     text-align: justify;
@@ -60,7 +59,6 @@ style: position:absolute;
 /*visibility: hidden;
 z-index: 100;*/
 }
-
 
 /* Controls color of the title boxes. Currently some kind of pale blue. */
 td.titleBox
