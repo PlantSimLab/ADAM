@@ -25,7 +25,7 @@ html {
 }
 /* VBI Logo and Title */
 #header {
-    width:80%;
+    width:1024px;
     margin-left: auto;
     margin-right: auto;
     padding: 5px;
@@ -36,7 +36,7 @@ html {
 /* Main Block: Input Functions and State/Node Number; Also Output */
 #main {
     float:center;
-    width:70%;
+    width:1024px;
     margin-left: auto;
     margin-right: auto;
 /*    background:#9c9;*/ /*will be green for debugging purposes*/
