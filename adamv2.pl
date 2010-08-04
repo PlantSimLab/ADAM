@@ -22,7 +22,7 @@ $clientip = '../../htdocs/no-ssl/files/'. $clientip;
 
 #$clientip = $sec.'-'.$min.'-'.$hr;
 
-print header, start_html( -title=>'Analysis of Discrete Algebraic Models', -script=>{-language=>'JavaScript',-src=>'/adamv2.js'}, ,-onLoad=>'change()', -style=>{-src=>'/adam_stylev2.css'});
+print header, start_html( -title=>'ADAM - Analysis of Discrete Algebraic Models', -script=>{-language=>'JavaScript',-src=>'/adamv2.js'}, ,-onLoad=>'change()', -style=>{-src=>'/adam_stylev2.css'});
 print start_multipart_form(-name=>'form1', -method =>"POST", -onSubmit=>"return validate()");
 print "<div id=\"wrap\">";
 print "<div id=\"tipDiv\" style=\"position:absolute\; visibility:hidden\; z-index:100\"></div>";
