@@ -74,9 +74,14 @@ print "<tr valign=\"top\"><td><font size=\"2\" id=\"stateInput\">Enter number of
 print textfield(-name=>'p_value',-size=>2, -maxlength=>2, -default=>3, -onChange=>'pChange()');
 print "&nbsp\;&nbsp\;&nbsp\;", popup_menu(-name=>'translate_box',-values=>['Polynomial','Boolean'], -disabled), "<br>";
 print "</td></tr>";
-print "</table>";
 
-print "<table>";
+print "<tr><td></td></tr>";
+print "<tr><td></td></tr>";
+print "<tr><td></td></tr>";
+print "<tr><td></td></tr>";
+
+
+print "<tr class=\"lines\"><td colspan=\"2\"></td></tr>";
 print "<tr valign=\"top\"><td>";
 print "<font size=\"2\"><strong>Model Input: </strong><br></font>";
 print "</td></tr>";
@@ -95,7 +100,7 @@ print "</table>";
 
 print "<br>";
 
-#Network Options
+#Analysis
 print "<table>";
 print "<tr valign=\"top\"><td class=\"titleBox\" colspan=\"2\">";
 print "<strong><font color=\"#black\">2) Analysis </font></strong></td></tr>";
@@ -108,7 +113,9 @@ print "<td id=\"explainNetwork\" class=\"explain\"></td>";
 print "</tr>";
 print "</table>";
 
-#Additional Options
+print "<br>";
+
+#Options
 print "<table>";
 print "<tr valign=\"top\"><td class=\"titleBox\">";
 print "<strong><font color=\"black\">3) Options</font></strong>";
