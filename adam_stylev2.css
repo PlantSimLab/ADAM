@@ -46,7 +46,12 @@ html {
     width:20%;
     background:#c9c; /*will be purple for debugging purposes*/
 }
-#computation { clear: both; }
+#computation { 
+    float:center;
+    width:1024px;
+    margin-left: auto;
+    margin-right: auto;
+}
 #footer {
     float:center;
     width:1024px;
