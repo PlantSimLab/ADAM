@@ -41,11 +41,9 @@ print "<div id = \"main\">";
 print "<div id=\"nav\"><p>";
 print "ADAM uses a combination of simulation and algorithms to analyze the dynamics of
 discrete biological systems. It can analyze <b>Logical Models</b> (in <a href= \"http://gin.univ-mrs.fr/\">GINSim</a> format), <b>Polynomial Dynamical 
-Systems</b>, and <b>Probabilistic Boolean (or multistate) Networks</b>. For small enough networks, ADAM simulates the 
-complete phase space of the model and finds all attractors (steady states and limit cycles) together with statistics about the size of components. For larger networks, 
-ADAM computes fixed points or limit cycle of the length specified by the user. For small probabilistic networks, 
-ADAM uses a Markov Chain simulation to generate the phase space. For larger 
-probabilistic networks, deadlocks (fixedpoints) are calculated. 
+Systems (PDS)</b>, and <b>Probabilistic Boolean (or multistate) Networks</b>. For small enough networks (deterministic or probabilistic), ADAM simulates the 
+complete state space of the model and finds all attractors (steady states and limit cycles) together with statistics about the size of components. For larger networks, 
+ADAM computes fixed points for both deterministic and probabilistic networks, and limit cycle of the length specified by the user for deterministic networks. 
 You can follow our <a href=\"/steptutorial.htm\">step-by-step tutorial</a> or read the <a href=\"/ADAM_tut.html\" target=\"_blank\">user guide</a>. It is important 
 that you follow the format specified in the guide. Make your selections and provide inputs (if any) in the form below and click 
 <i>Analyze</i> to run the software. To generate a model from experimental time course data, you can use <a href=\"http://polymath.vbi.vt.edu/polynome\">Polynome</a>.";
@@ -56,13 +54,16 @@ print "</div>";
 print "<table>";
 # Header
 print "<tr valign=\"top\"><td class=\"titleBox\" colspan=\"3\">";
-print "<strong><font color=\"black\">1) Discrete System Description </font></strong>";
+print "<strong><font color=\"black\">1) Discrete System Options</font></strong>";
 print "</td></tr>";
 
 print "<tr class=\"lines\"><td colspan=\"2\"></td></tr>";
 # Input Functions
-print "<tr valign=\"top\"><td colspan=\"2\"><font size=\"2\">Select format of input functions:";
-print radio_group(-name=>'format_box', -values=>['GINsim', 'PDS', 'PBN'], -default=>'PDS', -onChange=>'formatChange()');
+print "<tr valign=\"top\"><td colspan=\"2\"><font size=\"2\">Select model type:";
+%labels = ('GINsim'=>'Logical Model (GINsim file)',
+'PDS'=>'PDS',
+'PBN'=>'Probabilistic Network');
+print radio_group(-name=>'format_box', -values=>['GINsim', 'PDS', 'PBN'], -labels=>\%labels, -default=>'PDS', -onChange=>'formatChange()');
 print "</font></td>";
 # Explanatory Text
 print "<td rowspan=\"5\" id=\"explainInput\" class=\"explain\"></td>";
@@ -265,7 +266,7 @@ if ( $special_networks eq "Conjunctive/Disjunctive (Boolean rings only)" ) {
       # Calling the wrapper script dvd_stochastic_runner.pl, which in
       # turn calls DVDCore routines
 
-      # Set flag for whether to print probabilities in phase space
+      # Set flag for whether to print probabilities in state space
       ($stochastic eq "Print probabilities") ? {$stochastic = 1} : {$stochastic = 0 };
 
       print ("perl dvd_stochastic_runner.pl  $n_nodes $p_value 1 $updstoch_flag $clientip $SSformat $depgraph $updsequ_flag $update_schedule $stochastic 1 0 $filename\n<br> ") if ($DEBUG); 		
