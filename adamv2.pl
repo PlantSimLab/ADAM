@@ -54,7 +54,7 @@ print "</div>";
 print "<table>";
 # Header
 print "<tr valign=\"top\"><td class=\"titleBox\" colspan=\"2\">";
-print "<strong><font color=\"black\">1)</font></strong>";
+print "<strong><font color=\"black\">1) Model</font></strong>";
 print "</td></tr>";
 
 print "<tr class=\"lines\"><td colspan=\"2\"></td></tr>";
@@ -98,7 +98,7 @@ print "<br>";
 #Network Options
 print "<table>";
 print "<tr valign=\"top\"><td class=\"titleBox\" colspan=\"2\">";
-print "<strong><font color=\"#black\">2) Analysis Options</font></strong></td></tr>";
+print "<strong><font color=\"#black\">2) Analysis </font></strong></td></tr>";
 print "<tr class=\"lines\"><td colspan=\"2\"></td></tr>";
 print "<tr valign=\"top\"><td nowrap><font size=\"2\">";
 print "Select the type of network: <br>";
@@ -111,7 +111,7 @@ print "</table>";
 #Additional Options
 print "<table>";
 print "<tr valign=\"top\"><td class=\"titleBox\">";
-print "<strong><font color=\"black\">Additional Options</font></strong>";
+print "<strong><font color=\"black\">3) Options</font></strong>";
 print "</td></tr>";
 
 print "<tr class=\"lines\"><td></td></tr>";
