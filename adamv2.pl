@@ -257,11 +257,12 @@ if ( $special_networks eq "Conjunctive/Disjunctive (Boolean rings only)" ) {
       print ("perl dvd_stochastic_runner.pl  $n_nodes $p_value 1 $updstoch_flag $clientip $SSformat $depgraph $updsequ_flag $update_schedule $stochastic 1 0 $filename\n<br> ") if ($DEBUG); 		
       system("/usr/bin/perl dvd_stochastic_runner.pl  $n_nodes $p_value 1 $updstoch_flag $clientip $SSformat $depgraph $updsequ_flag $update_schedule $stochastic 1 0 $filename"); 		
     } else {
-       print "<font color=blue><b>Computing Trajectory of the given initialization</b></font>"." [m = ".$p_value.", n = ".$n_nodes."] <br>";
-       if( ($trajectory_value ne null) &&( $trajectory_value ne "") ) {
+       print "<font color=blue><b>Computing Trajectory of the given initialization</b></font> <br>";
+       if( ($trajectory_value ne null) && ( $trajectory_value ne "") ) {
           $trajectory_value =~ s/^\s+|\s+$//g;; #remove all leading and trailing white spaces
           $trajectory_value =~  s/(\d+)\s+/$1 /g; #remove extra white space between the numbers
           $trajectory_value =~ s/ /_/g;
+          print "trajectory_value: $trajectory_value<br>" if $DEBUG;
           
           system("/usr/bin/perl dvd_stochastic_runner.pl  $n_nodes $p_value 1 $updstoch_flag $clientip $SSformat $depgraph $updsequ_flag $update_schedule $stochastic 0 $trajectory_value $filename"); 		
       } else {
