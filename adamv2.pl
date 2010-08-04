@@ -241,20 +241,18 @@ if ( $special_networks eq "Conjunctive/Disjunctive (Boolean rings only)" ) {
     set_update_type();
 
     print $option_box if ($DEBUG);
+    # Set flag for whether to print probabilities in state space
+    ($stochastic eq "Print probabilities") ? {$stochastic = 1} : {$stochastic = 0 };
     if($option_box eq "All trajectories from all possible initial states") {
-      print "<font color=blue><b>ANALYSIS OF THE STATE SPACE</b></font>"." [m = ".$p_value.", n = ".$n_nodes;
-      if($fileuploaded == 1) {
-        print ", file path = ". $upload_file;
-      }
-      print "] <br>";
+      print "<font color=blue><b>Analysis of the state space</b></font> <br>";
 
       # Calling the wrapper script dvd_stochastic_runner.pl, which in
       # turn calls DVDCore routines
 
-      # Set flag for whether to print probabilities in state space
-      ($stochastic eq "Print probabilities") ? {$stochastic = 1} : {$stochastic = 0 };
 
       print ("perl dvd_stochastic_runner.pl  $n_nodes $p_value 1 $updstoch_flag $clientip $SSformat $depgraph $updsequ_flag $update_schedule $stochastic 1 0 $filename\n<br> ") if ($DEBUG); 		
+
+
       system("/usr/bin/perl dvd_stochastic_runner.pl  $n_nodes $p_value 1 $updstoch_flag $clientip $SSformat $depgraph $updsequ_flag $update_schedule $stochastic 1 0 $filename"); 		
     } else {
        print "<font color=blue><b>Computing Trajectory of the given initialization</b></font> <br>";
@@ -265,6 +263,7 @@ if ( $special_networks eq "Conjunctive/Disjunctive (Boolean rings only)" ) {
           print "trajectory_value: $trajectory_value<br>" if $DEBUG;
           
           system("/usr/bin/perl dvd_stochastic_runner.pl  $n_nodes $p_value 1 $updstoch_flag $clientip $SSformat $depgraph $updsequ_flag $update_schedule $stochastic 0 $trajectory_value $filename"); 		
+          print "/usr/bin/perl dvd_stochastic_runner.pl  $n_nodes $p_value 1 $updstoch_flag $clientip $SSformat $depgraph $updsequ_flag $update_schedule $stochastic 0 $trajectory_value $filename<br>" if $DEBUG; 		
       } else {
         print "<br><font color=red>Sorry. Cannot accept null input for initialization field iii</font><br>";
         die("Program quitting. Empty value for initialization field");
