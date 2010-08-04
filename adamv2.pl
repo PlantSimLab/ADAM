@@ -57,7 +57,8 @@ print "<tr valign=\"top\"><td class=\"titleBox\" colspan=\"2\">";
 print "<strong><font color=\"black\">1)</font></strong>";
 print "</td></tr>";
 
-print "<tr class=\"lines\"><td></td></tr>";
+print "<tr class=\"lines\"><td colspan=\"2\"></td></tr>";
+
 # Input Functions
 print "<tr valign=\"top\"><td><font size=\"2\"><b>Model Type:</b>";
 %labels = ('GINsim'=>'Logical Model (GINsim file)',
@@ -66,10 +67,8 @@ print "<tr valign=\"top\"><td><font size=\"2\"><b>Model Type:</b>";
 print radio_group(-name=>'format_box', -values=>['GINsim', 'PDS', 'PBN'], -labels=>\%labels, -default=>'PDS', -onChange=>'formatChange()');
 print "</font></td>";
 # Explanatory Text
-print "<td rowspan=\"5\" id=\"explainInput\" class=\"explain\"></td>";
+print "<td rowspan=\"3\" id=\"explainInput\" class=\"explain\"></td>";
 print "</tr>";
-
-print "<tr class=\"lines\"><td></td></tr>";
 
 print "<tr valign=\"top\"><td><font size=\"2\" id=\"stateInput\">Enter number of states per node: </font>";
 print textfield(-name=>'p_value',-size=>2, -maxlength=>2, -default=>3, -onChange=>'pChange()');
@@ -114,6 +113,9 @@ print "<table>";
 print "<tr valign=\"top\"><td class=\"titleBox\">";
 print "<strong><font color=\"black\">Additional Options</font></strong>";
 print "</td></tr>";
+
+print "<tr class=\"lines\"><td></td></tr>";
+
 print "<tr valign=\"top\"><td nowrap>";
 print "<font size=\"2\">";
 print checkbox_group(-name=>'depgraph', -value=>'Dependency graph',
@@ -129,15 +131,14 @@ print "<tr><td id=\"netOpts\" style=\"font-size:12px\">";
 #Small Network Options
 #Input Functions
 print "Select the updating scheme for the functions:<br>";
-print radio_group(-name=>'update_box', -values=>['Synchronous', 'Update_stochastic', 'Sequential'], -default=>'Synchronous', -linebreak=>'true');
+print radio_group(-name=>'update_box', -values=>['Synchronous', 'Sequential'], -default=>'Synchronous', -linebreak=>'true');
 print "&nbsp\;&nbsp\;&nbsp\;&nbsp\;- Enter update schedule separated by spaces: <br>";
-print "<center>", textfield(-name=>'update_schedule', -size=>24), "</center>";
+print textfield(-name=>'update_schedule', -size=>24);
 
 #State Space Specifications
-print "<hr>";
 print "Generate state space of <br>";
 print radio_group(-name=>'option_box', -values=>['All trajectories from all possible initial states', 'One trajectory starting at an initial state'], -default=>'All trajectories from all possible initial states', -linebreak=>'true',); 
-print "&nbsp\;&nbsp\;&nbsp\;&nbsp\;- Enter initialization separated by spaces: <br><center>",textfield(-name=>'trajectory_value', -size=>20), "</center>";
+print "&nbsp\;&nbsp\;&nbsp\;&nbsp\;- Enter initialization separated by spaces: <br>",textfield(-name=>'trajectory_value', -size=>20);
 print "</td></tr>";
 print "</table>";
 
