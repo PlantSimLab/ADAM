@@ -53,13 +53,13 @@ print "</div>";
 #Table Box 1: Input Functions Network Description
 print "<table>";
 # Header
-print "<tr valign=\"top\"><td class=\"titleBox\" colspan=\"3\">";
+print "<tr valign=\"top\"><td class=\"titleBox\" colspan=\"2\">";
 print "<strong><font color=\"black\">1)</font></strong>";
 print "</td></tr>";
 
 print "<tr class=\"lines\"><td></td></tr>";
 # Input Functions
-print "<tr valign=\"top\"><td><font size=\"2\">Model Type:";
+print "<tr valign=\"top\"><td><font size=\"2\"><b>Model Type:</b>";
 %labels = ('GINsim'=>'Logical Model (GINsim file)',
 'PDS'=>'PDS',
 'PBN'=>'Probabilistic Network');
@@ -79,10 +79,11 @@ print "</table>";
 
 print "<table>";
 print "<tr valign=\"top\"><td>";
-print "<font size=\"2\">Model Input: <br><font color=blue size =\"1\">PDS or PBN (.txt) or GINsim model (.ginml)</font></font>";
+print "<font size=\"2\"><strong>Model Input: </strong><br></font>";
 print "</td></tr>";
 
 print "<tr><td><div align=\"center\">", filefield(-name=>'upload_file');
+print "<font id=\"fileInput\"></font>";
 print "</div></td></tr>";
 print "<tr valign=\"top\"><td><div align=\"center\"><font size=\"2\">or</font></div></td></tr>";
 print "<tr valign=\"top\"><td><div align=\"center\">";

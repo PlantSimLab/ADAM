@@ -12,11 +12,17 @@ formatExp[0] = '<b>GINsim File</b>: Converts GINsim file to a polynomial system 
 formatExp[1] = '<b>PDS</b>: Polynomial Dynamical System. Operations are interpreted as polynomial addition and multiplication.';
 formatExp[2] = '<b>PBN</b>: Probabilistic Boolean (or Multistate) Networks. Blahblahblah';
 
+// uploadType: Array of upload types for different input options on the site
+var uploadType = new Array();
+uploadType[0] = '<font color=blue size =\"1\">(.ginml)</font>';
+uploadType[1] = '<font color=blue size=\"1\">(.txt)</font>';
+
 // formatChange(): disables and enables options based on which radio button is checked for
 // input format (GINsim, PDS, PBN). Also changes text explanation of options.
 function formatChange() {
     var input = document.getElementById('explainInput');
     var state = document.getElementById('stateInput');
+    var file = document.getElementById('fileInput');
     if (document.form1.format_box[0].checked == true) { //if GINsim is checked
     	document.form1.p_value.disabled = true;
 	document.form1.translate_box.disabled = true;
@@ -24,11 +30,13 @@ function formatChange() {
 	document.form1.stochastic.disabled = true;
 	state.innerHTML = '<font color="#666666" size="2">Enter number of states per node: </font>';
 	input.innerHTML = formatExp[0];
+	file.innerHTML = uploadType[0];
     }
     else {
 	document.form1.p_value.disabled = false;
 	document.form1.edit_functions.disabled = false;
 	state.innerHTML = '<font size="2">Enter number of states per node: </font>';	
+	file.innerHTML = uploadType[1];
 
 	if (document.form1.format_box[1].checked == true) { //if PDS is checked
 	    input.innerHTML = formatExp[1];
