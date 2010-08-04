@@ -73,7 +73,16 @@ networkOpt[0] = '';
 // Small Network Options
 //TODO: this is really since it's all on one line, should figure out how to get it so it can be
 //  formatted (required to be one line right now)
-networkOpt[1] = 'Select the updating scheme for the functions (only for Logical Model or PDS):<br><input type="radio" name="update_box" value="Synchronous" checked> Synchronous<br/><input type="radio" name="update_box" value="Sequential"> Sequential<br>&nbsp\;&nbsp\;&nbsp\;&nbsp\;- Enter update schedule separated by spaces: <br>&nbsp\;&nbsp\;&nbsp\;&nbsp\;<input type="text" name="update_schedule" size="24" value="2 3 1"></font><br><br><tr class="lines"><td></td></tr>Generate<br><input type="radio" name="option_box" value="All trajectories from all possible initial states" checked>Complete State Space<br><input type="radio" name="option_box" value="One trajectory starting at an initial state">One trajectory starting at an initial state<br>&nbsp\;&nbsp\;&nbsp\;&nbsp\;- Enter initialization separated by spaces: <br>&nbsp\;&nbsp\;&nbsp\;&nbsp\;<input type="text" name="trajectory_value" size="20" value="1 0 2">';
+networkOpt[1] = 'Select the updating scheme for the functions (only for Logical Model or PDS):<br>' +
+'<input type="radio" name="update_box" value="Synchronous" checked onclick="document.form1.update_schedule.disabled=true"> Synchronous<br/>' +
+'<input type="radio" name="update_box" value="Sequential" onclick="document.form1.update_schedule.disabled=false"> Sequential<br>' +
+'&nbsp\;&nbsp\;&nbsp\;&nbsp\;- Enter update schedule separated by spaces: <br>' +
+'&nbsp\;&nbsp\;&nbsp\;&nbsp\;<input type="text" name="update_schedule" size="24" value="2 3 1" disabled>' +
+'<br><br>' +
+'Generate<br>' +
+'<input type="radio" name="option_box" value="All trajectories from all possible initial states" checked onclick="document.form1.trajectory_value.disabled=true">Complete State Space<br>' +
+'<input type="radio" name="option_box" value="One trajectory starting at an initial state" onclick="document.form1.trajectory_value.disabled=false">One trajectory starting at an initial state<br>' +
+'&nbsp\;&nbsp\;&nbsp\;&nbsp\;- Enter initialization separated by spaces: <br>&nbsp\;&nbsp\;&nbsp\;&nbsp\;<input type="text" name="trajectory_value" size="20" value="1 0 2" disabled>';
 networkOpt[2] = 'Limit cycle length to search for: <br>&nbsp\;&nbsp\;&nbsp\;&nbsp\;<input type="text" name="limCyc_length" size="2" value="1"><tr class="lines"><td></td></tr>Select the updating scheme for the functions (only for Logical Model or PDS):<br><input type="radio" name="update_box" value="Synchronous" checked> Synchronous<br/><input type="radio" name="update_box" value="Sequential"> Sequential<br>&nbsp\;&nbsp\;&nbsp\;&nbsp\;- Enter update schedule separated by spaces: <br>&nbsp\;&nbsp\;&nbsp\;&nbsp\;<input type="text" name="update_schedule" size="24" value="2 3 1"></font>';
 
 // networkChange(): changes menu of options based on which radio button is checked for
