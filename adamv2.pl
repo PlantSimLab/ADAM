@@ -129,18 +129,6 @@ print "</td></tr>";
 print "<tr class=\"lines\"><td></td></tr>";
 
 print "<tr><td id=\"netOpts\" style=\"font-size:12px\">";
-#Small Network Options
-#Input Functions
-print "Select the updating scheme for the functions:<br>";
-print radio_group(-name=>'update_box', -values=>['Synchronous', 'Sequential'], -default=>'Synchronous', -linebreak=>'true');
-print "&nbsp\;&nbsp\;&nbsp\;&nbsp\;- Enter update schedule separated by spaces: <br>";
-print textfield(-name=>'update_schedule', -size=>24);
-
-#State Space Specifications
-print "Generate state space of <br>";
-print radio_group(-name=>'option_box', -values=>['All trajectories from all possible initial states', 'One trajectory starting at an initial state'], -default=>'All trajectories from all possible initial states', -linebreak=>'true',); 
-print "&nbsp\;&nbsp\;&nbsp\;&nbsp\;- Enter initialization separated by spaces: <br>",textfield(-name=>'trajectory_value', -size=>20);
-print "</td></tr>";
 print "</table><br>";
 
 print "<center>", submit('button_name','Analyze')," <br><font color=\"#006C00\"><br><i>Results will be displayed below.</i></font></td></tr>";
