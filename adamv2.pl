@@ -54,12 +54,12 @@ print "</div>";
 print "<table>";
 # Header
 print "<tr valign=\"top\"><td class=\"titleBox\" colspan=\"3\">";
-print "<strong><font color=\"black\">1) Discrete System Options</font></strong>";
+print "<strong><font color=\"black\">1)</font></strong>";
 print "</td></tr>";
 
-print "<tr class=\"lines\"><td colspan=\"2\"></td></tr>";
+print "<tr class=\"lines\"><td></td></tr>";
 # Input Functions
-print "<tr valign=\"top\"><td colspan=\"2\"><font size=\"2\">Select model type:";
+print "<tr valign=\"top\"><td><font size=\"2\">Model Type:";
 %labels = ('GINsim'=>'Logical Model (GINsim file)',
 'PDS'=>'PDS',
 'PBN'=>'Probabilistic Network');
@@ -69,25 +69,22 @@ print "</font></td>";
 print "<td rowspan=\"5\" id=\"explainInput\" class=\"explain\"></td>";
 print "</tr>";
 
-print "<tr class=\"lines\"><td colspan=\"2\"></td></tr>";
+print "<tr class=\"lines\"><td></td></tr>";
 
-print "<tr valign=\"top\"><td colspan=\"2\"><font size=\"2\">Enter number of states per node: </font>";
-print textfield(-name=>'p_value',-size=>2, -maxlength=>2, -default=>3);
-print "&nbsp\;&nbsp\;&nbsp\;", popup_menu(-name=>'translate_box',-values=>['Polynomial','Boolean']), "<br>";
-print "</td></tr>";
-
-print "<tr class=\"lines\"><td colspan=\"2\"></td></tr>";
-
-print "<tr valign=\"top\"><td>";
-print "<font size=\"2\">Select model file: <br><font color=blue size =\"1\">PDS or PBN (.txt) or GINsim model (.ginml)</font></font>";
-print "</td><td>", filefield(-name=>'upload_file');
+print "<tr valign=\"top\"><td><font size=\"2\" id=\"stateInput\">Enter number of states per node: </font>";
+print textfield(-name=>'p_value',-size=>2, -maxlength=>2, -default=>3, -onChange=>'pChange()');
+print "&nbsp\;&nbsp\;&nbsp\;", popup_menu(-name=>'translate_box',-values=>['Polynomial','Boolean'], -disabled), "<br>";
 print "</td></tr>";
 print "</table>";
 
 print "<table>";
-print "<tr><td nowrap><div align=\"center\"><b>OR</b> <font size=\"2\" color=\"#006C00\">(Edit functions below)</font></div></td></tr>";
+print "<tr valign=\"top\"><td>";
+print "<font size=\"2\">Model Input: <br><font color=blue size =\"1\">PDS or PBN (.txt) or GINsim model (.ginml)</font></font>";
+print "</td></tr>";
 
-print "<tr class=\"lines\"><td></td></tr>";
+print "<tr><td><div align=\"center\">", filefield(-name=>'upload_file');
+print "</div></td></tr>";
+print "<tr valign=\"top\"><td><div align=\"center\"><font size=\"2\">or</font></div></td></tr>";
 print "<tr valign=\"top\"><td><div align=\"center\">";
 print textarea(-name=>'edit_functions',
                -default=>'f1 = x1+x2

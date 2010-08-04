@@ -16,17 +16,20 @@ formatExp[2] = '<b>PBN</b>: Probabilistic Boolean (or Multistate) Networks. Blah
 // input format (GINsim, PDS, PBN). Also changes text explanation of options.
 function formatChange() {
     var input = document.getElementById('explainInput');
+    var state = document.getElementById('stateInput');
     if (document.form1.format_box[0].checked == true) { //if GINsim is checked
     	document.form1.p_value.disabled = true;
 	document.form1.translate_box.disabled = true;
 	document.form1.edit_functions.disabled = true;
 	document.form1.stochastic.disabled = true;
+	state.innerHTML = '<font color="#666666" size="2">Enter number of states per node: </font>';
 	input.innerHTML = formatExp[0];
     }
     else {
 	document.form1.p_value.disabled = false;
-	document.form1.translate_box.disabled = false;
 	document.form1.edit_functions.disabled = false;
+	state.innerHTML = '<font size="2">Enter number of states per node: </font>';	
+
 	if (document.form1.format_box[1].checked == true) { //if PDS is checked
 	    input.innerHTML = formatExp[1];
 	    document.form1.stochastic.disabled = true;
@@ -34,6 +37,12 @@ function formatChange() {
 	else //else must be PBN
 	    input.innerHTML = formatExp[2];
     }
+}
+
+// Allows drop-down Polynomial/Boolean only if p_value is 2
+function pChange() {
+    if (document.form1.p_value.value == 2) { document.form1.translate_box.disabled = false; }
+    else { document.form1.translate_box.disabled = true; }
 }
 
 /*2) Network Options*/
@@ -51,7 +60,7 @@ networkOpt[0] = '';
 // Small Network Options
 //TODO: this is really since it's all on one line, should figure out how to get it so it can be
 //  formatted (required to be one line right now)
-networkOpt[1] = 'Select the updating scheme for the functions:<br><input type="radio" name="update_box" value="Synchronous" checked> Synchronous<br/><input type="radio" name="update_box" value="Sequential"> Sequential<br>&nbsp\;&nbsp\;&nbsp\;&nbsp\;- Enter update schedule separated by spaces: <br><center><input type="text" name="update_schedule" size="24"></center></font><hr>Generate state space of<br><input type="radio" name="option_box" value="All trajectories from all possible initial states" checked>All trajectories from all possible initial states, i.e., the complete state space<br><input type="radio" name="option_box" value="One trajectory starting at an initial state">One trajectory starting at an initial state<br>&nbsp\;&nbsp\;&nbsp\;&nbsp\;- Enter initialization separated by spaces: <br><center><input type="text" name="trajectory_value" size="20"></center>';
+networkOpt[1] = 'Select the updating scheme for the functions:<br><input type="radio" name="update_box" value="Synchronous" checked> Synchronous<br/><input type="radio" name="update_box" value="Update_stochastic"> Update Stochastically<br><input type="radio" name="update_box" value="Sequential"> Sequential<br>&nbsp\;&nbsp\;&nbsp\;&nbsp\;- Enter update schedule separated by spaces: <br><center><input type="text" name="update_schedule" size="24"></center></font><hr>Generate state space of<br><input type="radio" name="option_box" value="All trajectories from all possible initial states" checked>All trajectories from all possible initial states<br><input type="radio" name="option_box" value="One trajectory starting at an initial state">One trajectory starting at an initial state<br>&nbsp\;&nbsp\;&nbsp\;&nbsp\;- Enter initialization separated by spaces: <br><center><input type="text" name="trajectory_value" size="20"></center>';
 networkOpt[2] = 'Limit cycle length to search for: <br><center><input type="text" name="limCyc_length" size="2" value="1"></center><hr>Select the updating scheme for the functions:<br><input type="radio" name="update_box" value="Synchronous" checked> Synchronous<br/><input type="radio" name="update_box" value="Sequential"> Sequential<br>&nbsp\;&nbsp\;&nbsp\;&nbsp\;- Enter update schedule separated by spaces: <br><center><input type="text" name="update_schedule" size="24"></center></font>';
 
 // networkChange(): changes menu of options based on which radio button is checked for
@@ -197,7 +206,7 @@ messages[3] = new Array('This will specify how the operations in the function fi
 //(or variable) indices must be entered, separated by spaces, with each index
 //used exactly once.<br><br>For a 3-node network in which the functions are
 //evaluated in the order f2 first, then f3, and f1 last, the ordering entered is \'2 3 1\'.',"#DDECFF");
-messages[4] = new Array('This will determine the order in which to evaluate the functions.<br><br><b>Synchronous</b>: all functions get evaluated at the same time. The input can be a deterministic system, or a set of update functions for each variable<br><b>Sequential</b>: the functions are evaluated in some specified order. The function indices must be entered with each index used exactly once.  Input must be deterministic',"#DDECFF"); 
+messages[4] = new Array('This will determine the order in which to evaluate the functions.<br><br><b>Synchronous</b>: all functions get evaluated at the same time. The input can be a deterministic system, or a set of update functions for each variable<br><b>Update Stochastic</b>: this uses a random sequential update order. That is implemented by randomly delaying most variables and only updateing a few. The input has to be a deterministic system<br><b>Sequential</b>: the functions are evaluated in some specified order. The function indices must be entered with each index used exactly once.  Input must be deterministic',"#DDECFF"); 
 messages[5] = new Array('Displays information about the structure of the trajectory graph generated using all possible states or a single user-provided initial state.',"#DDECFF");
 messages[6] = new Array('<b>State space graph</b>: draws the graph of all trajectories or a single trajectory as requested by the user, probabilities on each edge can be included.<br><br><b>Dependency graph</b>: draws the dependency graph of the network described by the input functions.',"#DDECFF");
 messages[7] = new Array('A rundown of the options: <br><br><b>Conjunctive/Disjunctive Networks</b>: For systems with only AND functions or only OR functions. All fixed points and limit cycles will be calculated.<b>Small Networks</b>: For n < 10. Enumerates all possible states. Outputs at minimum fixed points and number of components. See \'Small Networks Options\' for other output options.<br><b>Large Networks</b>: For n > 10. Calculates limit cycles of a length that the user specifies.<br>', "#DDECFF");
