@@ -48,7 +48,10 @@ html {
 }
 #computation { clear: both; }
 #footer {
-    clear:both;
+    float:center;
+    width:1024px;
+    margin-left: auto;
+    margin-right: auto;
     font-size: .8em;
     text-align: center;
 }

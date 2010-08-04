@@ -121,6 +121,7 @@ print "<font size=\"2\">";
 print checkbox_group(-name=>'depgraph', -value=>'Dependency graph',
 -label=>'Dependency graph', -checked), "&nbsp\;&nbsp\;&nbsp\;", popup_menu(-name=>'DGformat',-values=>['*.gif','*.jpg','*.png','*.ps']);
 print "&nbsp\;&nbsp\;&nbsp\;", checkbox_group(-name =>'stochastic', -value=>'Print probabilities', -label=>'Print probabilities', -checked);
+print "&nbsp\;&nbsp\;&nbsp\;";
 print checkbox_group(-name=>'statespace', -value=>'State space graph', -label=>'State space graph', -checked),"&nbsp\;&nbsp\;&nbsp\;", popup_menu(-name=>'SSformat',-values=>['*.gif','*.jpg','*.png','*.ps']), "<br>";
 print "</font>";
 print "</td></tr>";
@@ -128,22 +129,9 @@ print "</td></tr>";
 print "<tr class=\"lines\"><td></td></tr>";
 
 print "<tr><td id=\"netOpts\" style=\"font-size:12px\">";
-#Small Network Options
-#Input Functions
-print "Select the updating scheme for the functions:<br>";
-print radio_group(-name=>'update_box', -values=>['Synchronous', 'Sequential'], -default=>'Synchronous', -linebreak=>'true');
-print "&nbsp\;&nbsp\;&nbsp\;&nbsp\;- Enter update schedule separated by spaces: <br>";
-print textfield(-name=>'update_schedule', -size=>24);
+print "</table><br>";
 
-#State Space Specifications
-print "Generate state space of <br>";
-print radio_group(-name=>'option_box', -values=>['All trajectories from all possible initial states', 'One trajectory starting at an initial state'], -default=>'All trajectories from all possible initial states', -linebreak=>'true',); 
-print "&nbsp\;&nbsp\;&nbsp\;&nbsp\;- Enter initialization separated by spaces: <br>",textfield(-name=>'trajectory_value', -size=>20);
-print "</td></tr>";
-print "</table>";
-
-print "<center>", submit('button_name','Analyze')," <br><font color=\"#006C00\"><br><i>Results will be displayed below.</i></font></td></tr>";
-print "</center>";
+print "<center>", submit('button_name','Analyze'),"</center><br><br>";
 
 print "</div>";
 
@@ -316,7 +304,7 @@ print "</div>";
 #Box: Comments/Questions/Bugs Link :: Footer
 print "<div id=\"footer\">";
 print "ADAM is currently still under development; if you ";
-print "spot any bugs or have any questions/comments, please <a href=\"mailto:mbrando1@utk.edu\">";
+print "spot any bugs or have any questions/comments, please <a href=\"mailto:mbrando1\@utk.edu\">";
 print "e-mail us</a>. ";
 print "(Bonny Guang, Madison Brandon, Rustin McNeill, Franziska Hinkelmann)";
 print "</td></tr>";
