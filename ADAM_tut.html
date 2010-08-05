@@ -9,13 +9,13 @@
 	</head>
 	<body>
 		<div id="header">
-			<table>
+			<table summary="Logos">
 				<tr>
 					<td align="left">
-						<img src="http://dvd.vbi.vt.edu/vbi-logo.png">
+						<img src="http://dvd.vbi.vt.edu/vbi-logo.png" alt="vbi logo">
 					</td>
 					<td align="right">
-						<img src="http://dvd.vbi.vt.edu/vt_logo.jpg">
+						<img src="http://dvd.vbi.vt.edu/vt_logo.jpg" alt="vt logo">
 					</td>
 				</tr>
 				<tr>
@@ -95,12 +95,15 @@
 						<a href="#length"><font face="Verdana, Arial, Helvetica, sans-serif">Where can I get the source code?</font></a>
 					</li>
 					<li>
-						<a href="#C">Who is involved in ADAM?</a>
+						<a href="#authors">Who contributes to ADAM?</a>
+					</li>
+					<li>
+						<a href="#Ref">References</a>
 					</li>
 				</ul>
 				<hr>
 				<h3>
-					<a name="overview" id="Overview">Overview</a>
+					<a name="Overview" id="Overview">Overview</a>
 				</h3>
 				<p>
 					ADAM is a web-based tool for the analysis and visualization of the dynamics of multi-state, discrete models of biological networks. Multi-state discrete models are characterized by a collection of functions. For a network of <i>n</i> nodes, the corresponding discrete model will have <i>n</i> functions, where the <i>i</i>-th function describes the state transitions of the <i>i</i>-th node in the network. The user may select one of three inputs: a GINsim file, a PDS (polynomial dynamical system), or a PBN (probabilistic Boolean network). The user may upload a file or enter functions into the text box. Based upon which input type the user selects, other input options may appear. The user is guided through additional input/output options. ADAM can calculate fixed points and limit cycles of a specified length, produce the dependency graph for all networks and the state space for networks which are simulated, the graph of trajectories starting from a given initial state, and identify functional circuits along with their signed edges. ADAM analyzes dynamics using a combination of simulation and abstract algebra techniques. The method of computation and the output will depend on options selected by the user.
@@ -150,7 +153,7 @@
 					<a name="PBN" id="PBN">How to Analyze a Probabilistic Network</a>
 				</h3>
 				<p>
-					<img src="UserGuide_files/PBN_SS.gif" width="350px" alt="sample probabilistic network" align="left">ADAM can visualize the state space of a (small) probabilistic network. In the state space of a probabilistic network, all possible transitions from one state to the next are drawn, together with their probability, if <i>Print Probabilities</i> is checked. The <i>number of states per node</i> must be specified. It denotes the cardinality of the state set of the user's discrete network. Note that this must be a prime number. The software accepts positive prime integers up to 99. This value gives the total number of states that a node in the network can have. For example, if <i>number of states per node</i> = 3, then the possible states for any node are 0, 1, and 2. If the system is Boolean, i.e., the number of states per node is 2, then ADAM accepts functions in polynomial form, or in Boolean form (see <a href="boolean">Boolean Input Format</a>).<br>
+					<img src="UserGuide_files/PBN_SS.gif" width="350" alt="sample probabilistic network" align="left">ADAM can visualize the state space of a (small) probabilistic network. In the state space of a probabilistic network, all possible transitions from one state to the next are drawn, together with their probability, if <i>Print Probabilities</i> is checked. The <i>number of states per node</i> must be specified. It denotes the cardinality of the state set of the user's discrete network. Note that this must be a prime number. The software accepts positive prime integers up to 99. This value gives the total number of states that a node in the network can have. For example, if <i>number of states per node</i> = 3, then the possible states for any node are 0, 1, and 2. If the system is Boolean, i.e., the number of states per node is 2, then ADAM accepts functions in polynomial form, or in Boolean form (see <a href="boolean">Boolean Input Format</a>).<br>
 					<br>
 					Probabilistic Networks can be entered by using <b>{</b> and <b>}</b> around several possible functions for one variable. If not specified, the functions have uniform probability, if the user wants to impose a distribution on the functions, the probability can be specified behind the function, separated with the pound symbol, <b>#</b>.<br>
 				</p>
@@ -240,7 +243,11 @@
 					<a name="sim" id="sim">What is the <i>Simulation Option</i>?</a>
 				</h3>
 				<p>
-					The state space is a graph where the nodes are the states of the system, and the arrows indicate, how the state dynamically change with each iteration.
+					If the user selects the option to view the <i>Complete State Space</i>, the software computes the number of connected components in the state space, as well as some statistics of the components. It displays the number of states in a component and the length of the cycle. (Since these discrete models are finite, each component necessarily has a cycle. Because the models are deterministic - they are characterized by a set of rules, given by functions - there is only one cycle per component.) If there are fixed points (i.e., cycles of length 1), then it prints the state, along with the size of its component. If the user selects the option to view the graphs, the corresponding links will be displayed which will show the graph.
+				</p>
+				<p>
+					<img src="UserGuide_files/traj.gif" align="left" alt="Visualization of a trajectory"> The user can view the trajectory of one initialization only, if he selects that option. The input text box next to the option is where the user needs to provide the initialization. The states in the initialization should be separated by spaces. For example 1 0 0 0 1 , 2 0 3 2 1 or 11 12 10 0 1. It is important to separate the states by spaces in order for the software to distinguish between the different states. On clicking <i>Analyze</i>, the trajectory will be printed in a vertical fashion (one on each line) and will stop once it finds a repeated pattern. If the user has selected the option to view the state space graph, a link will be displayed which will show the graph and the cycle will be colored. The initial states provided by the user will be in the box shaped node. Below is a snapshot of the trajectory generated using example functions from Figure a with initialization 2 0 1. Single trajectories can be computed and visualized, when the network is too complex to generate the complete state space.<br>
+					<br>
 				</p>
 				<div align="right">
 					<a href="#top"><font size="-1" color="#FF0000">Return to the top</font></a>
@@ -249,7 +256,7 @@
 					<a name="length" id="length">What is <i>Limit Cycle Length</i>?</a>
 				</h3>
 				<p>
-					The state space is a graph where the nodes are the states of the system, and the arrows indicate, how the state dynamically change with each iteration.
+					For large networks, the user has to specify the length of limit cycles that ADAM is computing. Limit cycles of length 1 are the same as fixed points.
 				</p>
 				<div align="right">
 					<a href="#top"><font size="-1" color="#FF0000">Return to the top</font></a>
@@ -258,7 +265,7 @@
 					<a name="circ" id="circ">What is <i>Functional Circuits</i> output option?</a>
 				</h3>
 				<p>
-						TODO Bonny
+					TODO Bonny
 				</p>
 				<div align="right">
 					<a href="#top"><font size="-1" color="#FF0000">Return to the top</font></a>
@@ -272,8 +279,6 @@
 				<div align="right">
 					<a href="#top"><font size="-1" color="#FF0000">Return to the top</font></a>
 				</div>
-		
-			
 				<h3>
 					<a name="boolean" id="boolean">What is Boolean Input Format?</a>
 				</h3>
@@ -282,7 +287,7 @@
 					<br>
 				</p>
 				<center>
-					<table border="1" cellpadding="10" cellspacing="0">
+					<table border="1" cellpadding="10" cellspacing="0" summary="Boolean input">
 						<tr>
 							<td>
 								<b>Boolean operator</b>
@@ -365,124 +370,7 @@
 					<a href="#top"><font size="-1" color="#FF0000">Return to the top</font></a>
 				</div>
 				<h3>
-					<a name="A" id="A">Analysis of the state space</a>
-				</h3>
-				<p>
-					If the user selects the option to view the <i>All trajectories from all possible initial states</i>, the software computes the number of connected components in the state space, as well as some statistics of the components. It displays the number of states in a component and the length of the cycle. (Since these discrete models are finite, each component necessarily has a cycle. Because the models are deterministic - they are characterized by a set of rules, given by functions - there is only one cycle per component.) If there are fixed points (i.e., cycles of length 1), then it prints the state, along with the size of its component. If the user selects the option to view the graphs, the corresponding links will be displayed which will show the graph. Below is a snapshot of the output once the user enters the values in the interface and clicks on 'Submit'<br>
-				</p>
-				<center>
-					<table border="1" cellpadding="5" cellspacing="0" width="20%">
-						<tr>
-							<td>
-								<img src="/images/statespacespec.gif">
-							</td>
-						</tr>
-					</table><br>
-					<b>Figure b : Analysis of the state space generated using example functions from Figure a</b>
-				</center>
-				<p>
-					Note that this option applies only to <i>Simulation</i>.
-				</p>
-				<div align="right">
-					<a href="#top"><font size="-1" color="#FF0000">Return to the top</font></a>
-				</div>
-				<h3>
-					<a name="T" id="T">Trajectory of one initialization</a>
-				</h3>
-				<p>
-					The user can view the trajectory of one initialization only, if he selects that option. The input text box next to the option is where the user needs to provide the initialization. The states in the initialization should be separated by spaces. For example 1 0 0 0 1 , 2 0 3 2 1 or 11 12 10 0 1. It is important to separate the states by spaces in order for the software to distinguish between the different states. On clicking Generate, the trajectory will be printed in a vertical fashion (one on each line) and will stop once it finds a repeated pattern. If the user has selected the option to view the state space graph, a link will be displayed which will show the graph and the cycle will be colored. The initial states provided by the user will be in the box shaped node. Below is a snapshot of the trajectory generated using example functions from Figure a with initialization 2 0 1
-				</p>
-				<center>
-					<table border="1" cellpadding="10" cellspacing="0" width="14%">
-						<tr>
-							<td>
-								<img src="/images/trajectoryspec.gif">
-							</td>
-						</tr>
-					</table><br>
-					<b>Figure c : Trajectory of a single initialization (2 0 1) generated using example functions from Figure a</b>
-				</center>
-				<p>
-					Note the this options applies only to <i>Simulation</i>.
-				</p>
-				<div align="right">
-					<a href="#top"><font size="-1" color="#FF0000">Return to the top</font></a>
-				</div>
-				<h3>
-					<a name="V" id="V"><font face="Verdana, Arial, Helvetica, sans-serif">Viewing the graph</font></a>
-				</h3>
-				<p>
-					<font face="Verdana, Arial, Helvetica, sans-serif">The user has an option to view the graph of the entire state space or a single trajectory in the state space, AND the dependency graph of the model described by the input functions. The user can also select the format of the image file from the list of formats (gif, jpg, png and ps). Based on the users selection, a link to view the selected graph is available Fig (d) graph below is an example state space graph, Fig (e) graph below is the trajectory generated using initialization 2 0 1 and Fig (f) graph below is an example dependency graph<br>
-					<br></font>
-				</p>
-				<center>
-					<table border="1" cellpadding="10" cellspacing="0" width="60%">
-						<tr>
-							<td>
-								<img src="/images/graph-snapshot.gif">
-							</td>
-						</tr>
-					</table><font face="Verdana, Arial, Helvetica, sans-serif">Fig d</font>
-				</center>
-				<p>
-					<font face="Verdana, Arial, Helvetica, sans-serif"><br></font>
-				</p>
-				<center>
-					<table border="1" cellpadding="10" cellspacing="0" width="14%">
-						<tr>
-							<td>
-								<img src="/images/trajecgraph.gif">
-							</td>
-						</tr>
-					</table><font face="Verdana, Arial, Helvetica, sans-serif">Fig e</font>
-				</center>
-				<p>
-					<font face="Verdana, Arial, Helvetica, sans-serif"><br></font>
-				</p>
-				<center>
-					<table border="1" cellpadding="10" cellspacing="0" width="14%">
-						<tr>
-							<td>
-								<img src="/images/regulatoryGraph.gif">
-							</td>
-						</tr>
-					</table><font face="Verdana, Arial, Helvetica, sans-serif">Fig f</font>
-				</center>
-				<p>
-					<font face="Verdana, Arial, Helvetica, sans-serif">Note that some graphics are produced only with the <i>Simulation</i> option.</font>
-				</p>
-				<div align="right">
-					<a href="#top"><font face="Verdana, Arial, Helvetica, sans-serif"><font size="-1" color="#FF0000">Return to the top</font></font></a>
-				</div>
-				<h3>
-					<a name="M" id="M"><font face="Verdana, Arial, Helvetica, sans-serif">What is <i>Functional Circuits</i> output option?</font></a>
-				</h3>
-				<p>
-					<font face="Verdana, Arial, Helvetica, sans-serif">...</font>
-				</p>
-				<div align="right">
-					<a href="#top"><font face="Verdana, Arial, Helvetica, sans-serif"><font size="-1" color="#FF0000">Return to the top</font></font></a>
-				</div>
-				<h3>
-					<a name="O" id="O"><font face="Verdana, Arial, Helvetica, sans-serif">What is <i>Signed Edges</i> output option?</font></a>
-				</h3>
-				<p>
-					<font face="Verdana, Arial, Helvetica, sans-serif">...</font>
-				</p>
-				<div align="right">
-					<a href="#top"><font face="Verdana, Arial, Helvetica, sans-serif"><font size="-1" color="#FF0000">Return to the top</font></font></a>
-				</div>
-				<h3>
-					<a name="L" id="L"><font face="Verdana, Arial, Helvetica, sans-serif">Limitations</font></a>
-				</h3>
-				<p>
-					<font face="Verdana, Arial, Helvetica, sans-serif">Drawing of the state space is done by the graphics software <a href="http://www.graphviz.org">GraphViz</a>. Due to limitations in viewing, we restrict the total number of states in the state space to 1000; that is, <i>m</i>^<i>n</i> &lt;= 1000, where <i>m</i> = <i>m value</i> and <i>n</i> = <i>number of nodes</i>. Hence, we state space graphics only for the <i>Simulation</i> option.(see <a href="#L">What is <i>Analysis Options</i>?</a>) Further, due to the increasing computational complexity of computing limit cycles as the length of the cycles increases, computation of long limit cycles may be slow.</font>
-				</p>
-				<div align="right">
-					<a href="#top"><font face="Verdana, Arial, Helvetica, sans-serif"><font size="-1" color="#FF0000">Return to the top</font></font></a>
-				</div>
-				<h3>
-					<a name="C" id="C"><font face="Verdana, Arial, Helvetica, sans-serif">Credits</font></a>
+					<a name="credits" id="credits"><font face="Verdana, Arial, Helvetica, sans-serif">Who contributes to ADAM?</font></a>
 				</h3>
 				<p>
 					<a href="mailto:fhinkel@vt.edu">Please email us if you have any problems!</a><br>
@@ -497,9 +385,18 @@
 					Hussein Vastani<br>
 					<a href="http://img10.imageshack.us/img10/9024/p7080016crop.png">Chuck</a><br></font>
 				</p>
+				<div align="right">
+					<a href="#top"><font size="-1" color="#FF0000">Return to the top</font></a>
+				</div>
+				<h3>
+					<a name="Ref" id="Ref"><font face="Verdana, Arial, Helvetica, sans-serif">References</font></a>
+				</h3>
 				<p>
 					<sup>1</sup>Veliz-Cube A., Salam Jarrah A., Laubenbacher R., (2010) Polynomial Algebra of Discrete Models in Systems Biology.
 				</p>
+				<div align="right">
+					<a href="#top"><font size="-1" color="#FF0000">Return to the top</font></a>
+				</div>
 				<h2>
 					<a href="/cgi-bin/git/adam.pl">Back to ADAM</a>&nbsp;&nbsp;&nbsp; <a href="/steptutorial.htm">Step-by-step tutorial</a>
 				</h2>
