@@ -60,7 +60,7 @@
 						<a href="#Analysis"><font face="Verdana, Arial, Helvetica, sans-serif">What are the different <i>Analysis</i> Options?</font></a>
 					</li>
 					<li>
-						<a href="#DG"><font face="Verdana, Arial, Helvetica, sans-serif">What is the <i>number of states per node</i>?</font></a>
+						<a href="#numStates"><font face="Verdana, Arial, Helvetica, sans-serif">What is the <i>number of states per node</i>?</font></a>
 					</li>
 					<li>
 						<a href="#DG"><font face="Verdana, Arial, Helvetica, sans-serif">What is the <i>Dependency Graph</i>?</font></a>
@@ -81,9 +81,8 @@
 						<a href="#length"><font face="Verdana, Arial, Helvetica, sans-serif">What is <i>Limit Cycle Length</i></font></a>
 					</li>
 					<li>
-						<a href="#M"><font face="Verdana, Arial, Helvetica, sans-serif">What is <i>Feedback Circuit</i> output option?</font></a>
-					</li>
-					<!-- <li>
+						<a href="#circ"><font face="Verdana, Arial, Helvetica, sans-serif">What is <i>Feedback Circuit</i> output option?</font></a>
+					</li><!-- <li>
 						<a href="#O"><font face="Verdana, Arial, Helvetica, sans-serif">What is <i>Signed Edges</i> output option?</font></a>
 					</li> -->
 					<li>
@@ -167,7 +166,6 @@
 				<div align="right">
 					<a href="#top"><font size="-1" color="#FF0000">Return to the top</font></a>
 				</div>
-
 				<h3>
 					<a name="ModelType" id="ModelType">What is the <i>Model Type</i>?</a>
 				</h3>
@@ -199,7 +197,7 @@
 					<a name="numStates" id="numStates">What is the <i>number of states per node</i>?</a>
 				</h3>
 				<p>
-					What?
+					TODO
 				</p>
 				<div align="right">
 					<a href="#top"><font size="-1" color="#FF0000">Return to the top</font></a>
@@ -276,12 +274,11 @@
 					<a name="circ" id="circ">What is <i>Feedback Circuit</i> output option?</a>
 				</h3>
 				<p>
-					ADAM can analyze the model for feedback circuits. It will list all functional circuits. 
+					ADAM can analyze the model for feedback circuits. It will list all functional circuits.
 				</p>
 				<div align="right">
 					<a href="#top"><font size="-1" color="#FF0000">Return to the top</font></a>
-				</div>
-				<!-- <h3>
+				</div><!-- <h3>
 									<a name="signed" id="signed">What is <i>Signed Edges</i> output option?</a>
 								</h3>
 								<p>
@@ -289,8 +286,8 @@
 								</p>
 								<div align="right">
 									<a href="#top"><font size="-1" color="#FF0000">Return to the top</font></a>
-								</div>
-								<h3> -->
+								</div> -->
+				<h3>
 					<a name="boolean" id="boolean">What is Boolean Input Format?</a>
 				</h3>
 				<p>
@@ -362,7 +359,7 @@
 					((x1+x3)+(x2*(~x3)))
 				</center>
 				<p>
-				<br>
+					<br>
 					or<br>
 					<br>
 				</p>
@@ -379,14 +376,12 @@
 				</center>
 				<div align="right">
 					<a href="#top"><font size="-1" color="#FF0000">Return to the top</font></a>
-				</div>
-<a href="#how"><font face="Verdana, Arial, Helvetica, sans-serif">How is the Analysis without Simulation implemented?</font></a>
-<h3>
-<a name="how" id="how">How is the Analysis without Simulation implemented?</a>
+				</div><a href="#how"><font face="Verdana, Arial, Helvetica, sans-serif">How is the Analysis without Simulation implemented?</font></a>
+				<h3>
+					<a name="how" id="how">How is the Analysis without Simulation implemented?</a>
 				</h3>
 				<p>
-There are two options for analysis without simulation. The first is conjunctive/disjunctive networks. It is for Boolean networks only. If the user has a network consisting solely of AND operators or solely of OR operators, then according to 
-					ADAM provides the user withs the option to specify how the operations in the function file should be interpreted. For example, 'x1*x2' could be interpreted as polynomial multiplication of variables or as the Boolean AND operation. If the user provides functions that are in the Boolean format, ADAM will convert the Boolean functions to polynomial functions to do the computations. This only works, when <i>number of states per node</i> is 2. The Boolean function file must adhere to the following format:<br>
+					There are two options for analysis without simulation. The first is conjunctive/disjunctive networks. It is for Boolean networks only. If the user has a network consisting solely of AND operators or solely of OR operators, then according to ADAM provides the user withs the option to specify how the operations in the function file should be interpreted. For example, 'x1*x2' could be interpreted as polynomial multiplication of variables or as the Boolean AND operation. If the user provides functions that are in the Boolean format, ADAM will convert the Boolean functions to polynomial functions to do the computations. This only works, when <i>number of states per node</i> is 2. The Boolean function file must adhere to the following format:<br>
 					<br>
 				</p>
 				<center>
@@ -471,42 +466,43 @@ There are two options for analysis without simulation. The first is conjunctive/
 				</center>
 				<div align="right">
 					<a href="#top"><font size="-1" color="#FF0000">Return to the top</font></a>
-				</div>
-						<a href="#slow"><font face="Verdana, Arial, Helvetica, sans-serif">What if the Analysis is too Slow?</font></a>
-					</li>
+				</div><a href="#slow"><font face="Verdana, Arial, Helvetica, sans-serif">What if the Analysis is too Slow?</font></a>
+				<ul>
 					<li>
 						<a href="#length"><font face="Verdana, Arial, Helvetica, sans-serif">Where can I get the source code?</font></a>
-				<h3>
-					<a name="credits" id="credits"><font face="Verdana, Arial, Helvetica, sans-serif">Who contributes to ADAM?</font></a>
-				</h3>
-				<p>
-					<a href="mailto:fhinkel@vt.edu">Please email us if you have any problems!</a><br>
-					<font face="Verdana, Arial, Helvetica, sans-serif">Madison Brandon<br>
-					Nick Eriksson<br>
-					Bonny Guang<br>
-					Abdul Jarrah<br>
-					Franziska Hinkelmann<br>
-					Reinhard Laubenbacher<br>
-					Rustin McNeill<br>
-					Brandilyn Stigler<br>
-					Hussein Vastani<br>
-					<a href="http://img10.imageshack.us/img10/9024/p7080016crop.png">Chuck</a><br></font>
-				</p>
-				<div align="right">
-					<a href="#top"><font size="-1" color="#FF0000">Return to the top</font></a>
-				</div>
-				<h3>
-					<a name="Ref" id="Ref"><font face="Verdana, Arial, Helvetica, sans-serif">References</font></a>
-				</h3>
-				<p>
-					<sup>1</sup>Veliz-Cube A., Salam Jarrah A., Laubenbacher R., (2010) Polynomial Algebra of Discrete Models in Systems Biology.
-				</p>
-				<div align="right">
-					<a href="#top"><font size="-1" color="#FF0000">Return to the top</font></a>
-				</div>
-				<h2>
-					<a href="/cgi-bin/git/adam.pl">Back to ADAM</a>&nbsp;&nbsp;&nbsp; <a href="/steptutorial.htm">Step-by-step tutorial</a>
-				</h2>
+						<h3>
+							<a name="authors" id="authors"><font face="Verdana, Arial, Helvetica, sans-serif">Who contributes to ADAM?</font></a>
+						</h3>
+						<p>
+							<a href="mailto:fhinkel@vt.edu">Please email us if you have any problems!</a><br>
+							<font face="Verdana, Arial, Helvetica, sans-serif">Madison Brandon<br>
+							Nick Eriksson<br>
+							Bonny Guang<br>
+							Abdul Jarrah<br>
+							Franziska Hinkelmann<br>
+							Reinhard Laubenbacher<br>
+							Rustin McNeill<br>
+							Brandilyn Stigler<br>
+							Hussein Vastani<br>
+							<a href="http://img10.imageshack.us/img10/9024/p7080016crop.png">Chuck</a><br></font>
+						</p>
+						<div align="right">
+							<a href="#top"><font size="-1" color="#FF0000">Return to the top</font></a>
+						</div>
+						<h3>
+							<a name="Ref" id="Ref"><font face="Verdana, Arial, Helvetica, sans-serif">References</font></a>
+						</h3>
+						<p>
+							<sup>1</sup>Veliz-Cube A., Salam Jarrah A., Laubenbacher R., (2010) Polynomial Algebra of Discrete Models in Systems Biology.
+						</p>
+						<div align="right">
+							<a href="#top"><font size="-1" color="#FF0000">Return to the top</font></a>
+						</div>
+						<h2>
+							<a href="/cgi-bin/git/adam.pl">Back to ADAM</a>&nbsp;&nbsp;&nbsp; <a href="/steptutorial.htm">Step-by-step tutorial</a>
+						</h2>
+					</li>
+				</ul>
 			</div>
 		</div>
 	</body>
