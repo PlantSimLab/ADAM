@@ -128,6 +128,7 @@ print "<tr valign=\"top\"><td nowrap>";
 print "<font size=\"2\">";
 print checkbox_group(-name=>'depgraph', -value=>'Dependency graph',
 -label=>'Dependency graph', -checked), "&nbsp\;&nbsp\;&nbsp\;", popup_menu(-name=>'DGformat',-values=>['*.gif','*.jpg','*.png','*.ps']);
+print checkbox_group(-name=>'feedback', -value=>'Feedback Circuit');
 print "&nbsp\;&nbsp\;&nbsp\;", checkbox_group(-name =>'stochastic', -value=>'Print probabilities', -label=>'Print probabilities', -checked);
 print "&nbsp\;&nbsp\;&nbsp\;";
 print checkbox_group(-name=>'statespace', -value=>'State space graph', -label=>'State space graph', -checked),"&nbsp\;&nbsp\;&nbsp\;", popup_menu(-name=>'SSformat',-values=>['*.gif','*.jpg','*.png','*.ps']), "<br>";
@@ -179,6 +180,7 @@ $trajectory_box = param('trajectory_box');
 $trajectory_value = param('trajectory_value');
 $statespace = param('statespace');
 $depgraph = param('depgraph');
+$feedback = param('feedback');
 $edit_functions = param('edit_functions');
 $SSformat = param('SSformat');
 $DGformat = param('DGformat');
@@ -204,6 +206,7 @@ create_input_function();
 
 # Set flag for creating the dependency graph
 ($depgraph eq "Dependency graph") ? {$depgraph = 1} : {$depgraph = 0};
+($feedback eq "Feedback Circuit") ? {$feedback = 1} : {$feedback = 0};
 
 if ( $special_networks eq "Conjunctive/Disjunctive (Boolean rings only)" ) {
     # dynamics depend on the dependency graph, need to generate it 
@@ -214,6 +217,12 @@ if ( $special_networks eq "Conjunctive/Disjunctive (Boolean rings only)" ) {
     # Give link to dependency graph if checked
     if ($depgraph = 1) {
 	print  "<br><A href=\"$dpGraph.$DGformat\" target=\"_blank\"><font color=red><i>Click to view the dependency graph.</i></font></A><br>";
+    }
+    
+    # Give link to functional circuits if checked
+    if ($feedback = 1) {
+	system("ruby circuits.rb");
+	print "<br><a href=\"";
     }
 
     #BLAHBLAH i'm sad ._.
