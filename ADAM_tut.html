@@ -82,7 +82,6 @@
 					<li>
 						<a href="#length"><font face="Verdana, Arial, Helvetica, sans-serif">What is <i>Limit Cycle Length</i></font></a>
 					</li>
-
 					<li>
 						<a href="#M">What is <i>Functional Circuits</i> output option?</a>
 					</li>
@@ -90,7 +89,7 @@
 						<a href="#O">What is <i>Signed Edges</i> output option?</a>
 					</li>
 					<li>
-						<a href="#length"><font face="Verdana, Arial, Helvetica, sans-serif">Where can I get the source code?</i></font></a>
+						<a href="#length"><font face="Verdana, Arial, Helvetica, sans-serif">Where can I get the source code?</font></a>
 					</li>
 					<li>
 						<a href="#C">Who is involved in ADAM?</a>
@@ -110,9 +109,10 @@
 					<a name="LM" id="LM">How to Analyze a Logical Model (generated with GINsim)</a>
 				</h3>
 				<p>
-					ADAM can analyze Logical Models generated with <a href="http://gin.univ-mrs.fr/">GINsim</a>. GINsim is a program to build a logical model for a biological system such as a gene regulatory network. Internally, ADAM converts a logical model to a polynomial dynamical system (PDS) via the method described in Veliz-Cuba et al., 2010<sup>1</sup> and then uses techniques from abstract algebra to analyze the PDS for key dynamics. ADAM will assign <i>x1</i> to <i>xn</i> to the variables used in the logical model, states of the systems are represented as vectors, where the first entry corresponds to the variable assigned to x1, and so on. 
-					
-						Note: Currently ADAM is only compatible with GINsim 2.3. Please use GINsim version 2.3 to generate your models in order to analyze them with ADAM. 
+					<img src="UserGuide_files/phageLambda.png" alt="Logical Model of Phage Lambda" align="left">ADAM can analyze Logical Models generated with <a href="http://gin.univ-mrs.fr/">GINsim</a>. GINsim is a program to build a logical model for a biological system such as a gene regulatory network. Internally, ADAM converts a logical model to a polynomial dynamical system (PDS) via the method described in Veliz-Cuba et al., 2010<sup>1</sup> and then uses techniques from abstract algebra to analyze the PDS for key dynamics. ADAM will assign <i>x1</i> to <i>xn</i> to the variables used in the logical model, and states of the dynamic model are represented as vectors, where the first entry corresponds to the variable assigned to x1, and so on. For example, the logical model of <a href="http://gin.univ-mrs.fr/GINsim/model_repository/MICROBIOLOGICAL%20REGULATORY%20NETWORKS/Phage%20Lambda/PhageLambda/description.html">Phage Lambda</a> (left) is converted to the following PDS. ADAM determines the number of states per variable from the logical model, in this example, there are 5 different states per variable.<br>
+					<img src="UserGuide_files/phageLambdaPDS.png" alt="PDS of Phage Lambda" style="border:1px solid black;" align="center"><br><br>
+					The Logical Model can be analyzed (using <i>Algorithms</i> or <i>Simulation</i>). This Phage Lambda model has one fixed point or steady state, represented as <i>(2 0 0 0)</i>. This means, that C1 is 2, a medium concentration, because the first (<i>x<b>1</b></i> = C1) entry is 2, and the other three variables are 0, i.e., not expressed at all.<br><br>
+					Note: Currently ADAM is only compatible with GINsim 2.3. Please use GINsim version 2.3 to generate your models in order to analyze them with ADAM.
 				</p>
 				<div align="right">
 					<a href="#top"><font size="-1" color="#FF0000">Return to the top</font></a>
