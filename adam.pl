@@ -5,7 +5,7 @@
 ## Bonbons
 ## July 2010
 
-## ADAM0.2 with support for large networks and conjunctive 
+## ADAM0.3 with support for large networks and conjunctive 
 ## networks using M2 instead of perl enumeration
 
 use CGI qw( :standard );
@@ -22,7 +22,7 @@ $clientip = '../../htdocs/no-ssl/files/'. $clientip;
 
 #$clientip = $sec.'-'.$min.'-'.$hr;
 
-print header, start_html( -title=>'Analysis of Discrete Algebraic Models', -script=>{-language=>'JavaScript',-src=>'/fnct2.js'}, -style=>{-src=>'/adam_style.css'});
+print header, start_html( -title=>'ADAM - Analysis of Discrete Algebraic Models', -script=>{-language=>'JavaScript',-src=>'/adamv2.js'}, ,-onLoad=>'change()', -style=>{-src=>'/adam_stylev2.css'});
 print start_multipart_form(-name=>'form1', -method =>"POST", -onSubmit=>"return validate()");
 print "<div id=\"wrap\">";
 print "<div id=\"tipDiv\" style=\"position:absolute\; visibility:hidden\; z-index:100\"></div>";
@@ -30,125 +30,119 @@ print "<div id=\"tipDiv\" style=\"position:absolute\; visibility:hidden\; z-inde
 #Div Box: ADAM Title :: Header
 print "<div id=\"header\">";
 print "<table><tr>";
-print "<td align=\"right\"><img src=\"http://dvd.vbi.vt.edu/vbi-logo.png\"></td>";
-print "<td align=\"left\"><b><font size=\"5\">Analysis of Discrete Algebraic Models (ADAM) v0.2 </font></b></td></tr></table>";
+print "<td align=\"left\"><img src=\"http://dvd.vbi.vt.edu/vbi-logo.png\"></td>";
+print "<td align=\"right\"><img src=\"http://dvd.vbi.vt.edu/vt_logo.jpg\"></td></tr>";
+print "<tr><td colspan=\"2\" align=\"center\"><font size=\"5\">Analysis of Discrete Algebraic Models (ADAM) v0.3 </font></b></td></tr></table>";
 print "</div>";
+
+#Div Box :: Main
+print "<div id = \"main\">";
 
 #Div Box: Text Explanation :: Nav
 print "<div id=\"nav\"><p>";
-print "ADAM uses a combination of simulation and algorithms to analyze the dynamics of ";
-print "discrete systems. <br>If this is your first time, please read the <a href=\"http://dvd.vbi.vt.edu/ADAM_tut.html\" target=\"_blank\">tutorial</a>. It is important ";
-print "that you follow the format specified in the tutorial.<br>Make your selections and provide inputs (if any) in the form below and click ";
-print "Generate to run the software.<br> Note: The computation may take some time.";
+print "ADAM uses a combination of simulation and algorithms to analyze the dynamics of
+discrete biological systems. It can analyze <b>Logical Models</b> (in <a href= \"http://gin.univ-mrs.fr/\">GINSim</a> format), <b>Polynomial Dynamical 
+Systems (PDS)</b>, and <b>Probabilistic Boolean (or multistate) Networks</b>. For small enough networks (deterministic or probabilistic), ADAM simulates the 
+complete state space of the model and finds all attractors (steady states and limit cycles) together with statistics about the size of components. For larger networks, 
+ADAM computes fixed points for both deterministic and probabilistic networks, and limit cycle of the length specified by the user for deterministic networks. 
+You can follow our <a href=\"/steptutorial.htm\">step-by-step tutorial</a> or read the <a href=\"/ADAM_tut.html\" target=\"_blank\">user guide</a>. It is important 
+that you follow the format specified in the guide. Make your selections and provide inputs (if any) in the form below and click 
+<i>Analyze</i> to run the software. To generate a model from experimental time course data, you can use <a href=\"http://polymath.vbi.vt.edu/polynome\">Polynome</a>.";
 print "</div>";
 
-#Div Box: Input Functions, Number of Nodes, Number of States :: Main
-print "<div id = \"main\">";
 
-#Table Box 1: Network Description
+#Table Box 1: Input Functions Network Description
 print "<table>";
-print "<tr valign=\"top\"><td class=\"titleBox\">";
-print "<strong><font color=\"black\">Network Description</font></strong>";
+# Header
+print "<tr valign=\"top\"><td class=\"titleBox\" colspan=\"2\">";
+print "<strong><font color=\"black\">1) Model</font></strong>";
 print "</td></tr>";
-print "<tr class=\"lines\"><td></td></tr>";
-print "<tr valign=\"top\"><td nowrap><font size=\"2\">Enter number of nodes: </font>",
-  textfield(-name=>'n_nodes', -size=>2, -maxlength=>2, -default=>3),
-  "&nbsp &nbsp &nbsp";
-print "&nbsp\;<a href=\"http://dvd.vbi.vt.edu/tutorial.html#N\" onmouseover=\"doTooltip(event,0)\" onmouseout=\"hideTip()\"><font size=\"1\">what is this?</font></a></td></tr>";
-print "<tr class=\"lines\"><td></td></tr>";
-print "<tr valign=\"top\"><td nowrap><font size=\"2\">Enter number of states per node: </font>";
-print textfield(-name=>'p_value',-size=>2,-maxlength=>2, default=>3);
-print "&nbsp\;<a href=\"http://dvd.vbi.vt.edu/tutorial.html#P\" onmouseover=\"doTooltip(event,1)\" onmouseout=\"hideTip()\"><font size=\"1\">what is this?</font></a>";
-print "</td></tr>";
-print "</table>";
 
-# Input Functions Block
-print "<table>";
-print "<tr vAlign=top><td class=\"titleBox\"><strong><font
-color=\"black\">(Stochastic) Input Functions</font></strong></td></tr>";
-print "<tr class = \"lines\"><td></td></tr>";
-print "<tr valign=\"top\"><td nowrap><font size=\"2\">Select format of input functions:";
-print "&nbsp\;<a href=\"http://dvd.vbi.vt.edu/tutorial.html#F\" onmouseover=\"doTooltip(event,3)\" onmouseout=\"hideTip()\"><font size=\"1\">what is this?</font></a><br>";
-print radio_group(-name=>'translate_box', -values=>['Polynomial','Boolean'], -default=>'Polynomial', -linebreak=>'true');
-print "</font></td></tr>";
-print "</td></tr><tr class=\"lines\"><td></td></tr>";
-print "<tr valign=\"top\"><td nowrap><font size=\"2\">Select function file: </font>",filefield(-name=>'upload_file');
-print "&nbsp\;<a href=\"http://dvd.vbi.vt.edu/tutorial.html#F\" onmouseover=\"doTooltip(event,2)\" onmouseout=\"hideTip()\"><font size=\"1\">what is this?</font></a>";
-print "</td></tr><tr class=\"lines\"><td></td></tr>";
-print "<tr valign=\"top\"><td nowrap><font size=\"2\">", checkbox_group(-name=>'ginSim', -value=>'GINsim File', -label=>'GINsim File'), "&nbsp &nbsp &nbsp";
-print "&nbsp\;<a href=\"http://dvd.vbi.vt.edu/tutorial.html#N\" onmouseover=\"doTooltip(event,8)\" onmouseout=\"hideTip()\"><font size=\"1\">what is this?</font></a>";
-print "<tr class=\"lines\"><td></td></tr>";
-print "<tr><td><div align=\"center\"><b>OR</b> <font size=\"2\" color=\"#006C00\">(Edit functions below)</font></div></td></tr>";
-print "<tr class=\"lines\"><td></td></tr><tr valign=\"top\"><td nowrap><div align=\"center\">";
-print textarea(-name=>'edit_functions',
-               -default=>'f1 = {
-x1+x2   #.9
-x1      #.1
-}
-f2 = x1*x2*x3
-f3 = {
-x1*x2+x3^2
-x2
-}' ,
-			   -rows=>8,
-			   -columns=>50);
+print "<tr class=\"lines\"><td colspan=\"2\"></td></tr>";
+
+# Input Functions
+print "<tr valign=\"top\"><td><font size=\"2\"><b>Model Type:</b>";
+%labels = ('GINsim'=>'Logical Model (GINsim file)',
+'PDS'=>'PDS',
+'PBN'=>'Probabilistic Network');
+print radio_group(-name=>'format_box', -values=>['GINsim', 'PDS', 'PBN'], -labels=>\%labels, -default=>'PDS', -onChange=>'formatChange()');
+print "</font></td>";
+# Explanatory Text
+print "<td rowspan=\"3\" id=\"explainInput\" class=\"explain\"></td>";
+print "</tr>";
+
+print "<tr valign=\"top\"><td><font size=\"2\" id=\"stateInput\">Enter number of states per node: </font>";
+print textfield(-name=>'p_value',-size=>2, -maxlength=>2, -default=>3, -onChange=>'pChange()');
+print "&nbsp\;&nbsp\;&nbsp\;", popup_menu(-name=>'translate_box',-values=>['Polynomial','Boolean'], -disabled), "<br>";
+print "</td></tr>";
+
+print "<tr><td></td></tr>";
+print "<tr><td></td></tr>";
+print "<tr><td></td></tr>";
+print "<tr><td></td></tr>";
+
+
+print "<tr class=\"lines\"><td colspan=\"2\"></td></tr>";
+print "<tr valign=\"top\"><td>";
+print "<font size=\"2\"><strong>Model Input: </strong><br></font>";
+print "</td></tr>";
+
+print "<tr><td><div align=\"center\">", filefield(-name=>'upload_file');
+print "<font id=\"fileInput\"></font>";
 print "</div></td></tr>";
-print "<tr class = \"lines\"><td></td></tr>";
-print "<tr><td align=\"center\" colspan=\"2\">",submit('button_name','Generate')," <br><font color=\"#006C00\"><br><i>Results will be displayed below.</i></font></td></tr>";
+print "<tr valign=\"top\"><td><div align=\"center\"><font size=\"2\">or</font></div></td></tr>";
+print "<tr valign=\"top\"><td><div align=\"center\">";
+print textarea(-name=>'edit_functions',
+               -default=>'',
+               -rows=>8,
+               -columns=>50);
+print "</div></td></tr>";
 print "</table>";
-print "</div>";
 
-#Div Box: Network Options/Other Options :: Sidebar
-print "<div id=\"sidebar\">";
+print "<br>";
 
-#Network Options
+#Analysis
 print "<table>";
-print "<tr valign=\"top\"><td class=\"titleBox\">";
-print "<strong><font color=\"#black\">Network Options</font></strong></td></tr>";
-print "<tr class=\"lines\"><td></td></tr>";
+print "<tr valign=\"top\"><td class=\"titleBox\" colspan=\"2\">";
+print "<strong><font color=\"#black\">2) Analysis </font></strong></td></tr>";
+print "<tr class=\"lines\"><td colspan=\"2\"></td></tr>";
 print "<tr valign=\"top\"><td nowrap><font size=\"2\">";
-print "Select the type of network:";
-print "&nbsp\;<a href=\"http://dvd.vbi.vt.edu/tutorial.html#N\" onmouseover=\"doTooltip(event,7)\" onmouseout=\"hideTip()\"><font size=\"1\">what is this?</font></a><br>";
-print radio_group(-name=>'special_networks', -values=>['Conjunctive/Disjunctive (Boolean rings only)', 'Small Network (nodes <= 10)', 'Large Network (nodes > 10)'], -default=>'Small Network (nodes <= 10)', -linebreak=>'true');
-print "&nbsp\;&nbsp\;&nbsp\;&nbsp\;- Limit cycle length to search for: <br>";
-print "<center>", textfield(-name=>'limCyc_length', -size=>2), "</center></font>";
-print "</td></tr>";
+print "Select the type of network: <br>";
+print radio_group(-name=>'special_networks', -values=>['Conjunctive/Disjunctive (Boolean rings only)', 'Simulation (suggested for nodes <=11)', 'Algorithms (suggested for nodes > 11)'], -default=>'Simulation (suggested for nodes <=11)', -linebreak=>'true', -onChange=>'networkChange()');
+print "</td>";
+print "<td id=\"explainNetwork\" class=\"explain\"></td>";
+print "</tr>";
 print "</table>";
 
-#Small Network Options
-#Input Functions
+print "<br>";
+
+#Options
 print "<table>";
 print "<tr valign=\"top\"><td class=\"titleBox\">";
-print "<strong><font color=\"black\">Options for Small Networks</font></strong>";
+print "<strong><font color=\"black\">3) Options</font></strong>";
 print "</td></tr>";
-print "<tr class=\"lines\"><td></td></tr>";
-print "<tr valign=\"top\"><td nowrap><font size=\"2\">Select the updating scheme for the functions:";
-print "&nbsp\;<a href=\"http://dvd.vbi.vt.edu/tutorial.html#U\" onmouseover=\"doTooltip(event,4)\" onmouseout=\"hideTip()\"><font size=\"1\">what is this?</font></a><br>";
-print radio_group(-name=>'update_box', -values=>['Synchronous',
-'Update_stochastic', 'Sequential'], -default=>'Synchronous', -linebreak=>'true');
-print "&nbsp\;&nbsp\;&nbsp\;&nbsp\;- Enter update schedule separated by spaces: <br>";
-print "<center>", textfield(-name=>'update_schedule', -size=>24), "</center>";
-print "</font></td></tr>";
 
-#State Space Specifications
 print "<tr class=\"lines\"><td></td></tr>";
-print"<tr valign=\"top\"><td nowrap><font size=\"2\">Generate state space of";
-print"&nbsp\;<a href=\"http://dvd.vbi.vt.edu/tutorial.html#S\" onmouseover=\"doTooltip(event,5)\" onmouseout=\"hideTip()\"><font size=\"1\">what is this?</font></a><br>";
-print radio_group(-name=>'option_box', -values=>['All trajectories from all possible initial states', 'One trajectory starting at an initial state'], -default=>'All trajectories from all possible initial states', -linebreak=>'true',); 
-print "&nbsp\;&nbsp\;&nbsp\;&nbsp\;- Enter initialization separated by spaces: <br><center>",textfield(-name=>'trajectory_value', -size=>20), "</center>";
-print"</font></td></tr>";
 
-#BLOCK 3: Additional Output Specifications
-print "<tr><td>";
-print"<tr class=\"lines\"><td></td></tr><tr valign=\"top\"><td nowrap><font size=\"2\">View";
-print"&nbsp\;<a href=\"http://dvd.vbi.vt.edu/tutorial.html#G\" onmouseover=\"doTooltip(event,6)\" onmouseout=\"hideTip()\"><font size=\"1\">what is this?</font></a><br>";
-print"<font color=\"#006C00\"><i>Select graph(s) to view and image 
-format.</i></font><br>";
-print checkbox_group(-name=>'statespace', -value=>'State space graph', -label=>'State space graph', -checked),"&nbsp\;&nbsp\;&nbsp\;", popup_menu(-name=>'SSformat',-values=>['*.gif','*.jpg','*.png','*.ps']), "&nbsp\;&nbsp\;&nbsp\;", checkbox_group(-name =>'stochastic', -value=>'Print probabilities', -label=>'Print probabilities', -checked),"<br>";
+print "<tr valign=\"top\"><td nowrap>";
+print "<font size=\"2\">";
 print checkbox_group(-name=>'depgraph', -value=>'Dependency graph',
 -label=>'Dependency graph', -checked), "&nbsp\;&nbsp\;&nbsp\;", popup_menu(-name=>'DGformat',-values=>['*.gif','*.jpg','*.png','*.ps']);
-print"</font></td></tr><tr class=\"lines\"><td></td></tr></table></td></tr></table></td></tr>";
-print "</table>";
+print "&nbsp\;&nbsp\;&nbsp\;";
+print checkbox_group(-name=>'feedback', -value=>'Feedback Circuit');
+print "&nbsp\;&nbsp\;&nbsp\;", checkbox_group(-name =>'stochastic', -value=>'Print probabilities', -label=>'Print probabilities', -checked);
+print "&nbsp\;&nbsp\;&nbsp\;";
+print checkbox_group(-name=>'statespace', -value=>'State space graph', -label=>'State space graph', -checked),"&nbsp\;&nbsp\;&nbsp\;", popup_menu(-name=>'SSformat',-values=>['*.gif','*.jpg','*.png','*.ps']), "<br>";
+print "</font>";
+print "</td></tr>";
+
+print "<tr class=\"lines\"><td></td></tr>";
+
+print "<tr><td id=\"netOpts\" style=\"font-size:12px\">";
+print "</table><br>";
+
+print "<center>", submit('button_name','Analyze'),"</center><br><br>";
+
 print "</div>";
 
 print "<div id =\"computation\">";
@@ -175,9 +169,9 @@ flock(ACCESS, LOCK_UN) or die ("Could not unlock file $!");
 close(ACCESS);
 
 $p_value = param('p_value');
-$n_nodes = param('n_nodes');
 $upload_file = upload('upload_file');
 $option_box = param('option_box');
+$format_box = param('format_box');
 $translate_box = param('translate_box');
 $special_networks = param('special_networks');
 $limCyc_length = param('limCyc_length');
@@ -186,8 +180,8 @@ $update_schedule = param('update_schedule');
 $trajectory_box = param('trajectory_box');
 $trajectory_value = param('trajectory_value');
 $statespace = param('statespace');
-$ginSim = param('ginSim');
 $depgraph = param('depgraph');
+$feedback = param('feedback');
 $edit_functions = param('edit_functions');
 $SSformat = param('SSformat');
 $DGformat = param('DGformat');
@@ -204,34 +198,67 @@ $SSformat =~ s/\*\.//;
 $DGformat =~ s/\*\.//;
 print "access was ok <br>" if ($DEBUG);
 print "$option_box <br>" if ($DEBUG);
+print "$format_box <br>" if ($DEBUG);
 print "$translate_box <br>" if ($DEBUG);
 print "$special_networks <br>" if ($DEBUG);
 
-if ( $special_networks eq "Conjunctive/Disjunctive (Boolean rings only)" ) {
-  # conj/disj networks dynamics depend on the dependency graph, we need to
-  # generate it 
-  create_input_function();
-  system("perl regulatory.pl $filename $n_nodes $clientip $DGformat") == 0
-      or die("regulatory.pl died");
-  $dpGraph = "$clientip.out1";
-  print  "<br><A href=\"$dpGraph.$DGformat\" target=\"_blank\"><font
-  color=red><i>Click to view the dependency graph.</i></font></A><br>";
-  #BLAHBLAH i'm sad ._.
-  system("ruby adam_conjunctive.rb $n_nodes $p_value $dpGraph.dot");
+#make input functions - gives p_value and n_nodes
+create_input_function();
+
+# Set flag for creating the dependency graph
+($depgraph eq "Dependency graph") ? {$depgraph = 1} : {$depgraph = 0};
+($feedback eq "Feedback Circuit") ? {$feedback = 1} : {$feedback = 0};
+
+# Give link to functional circuits if checked
+if ($feedback == 1) {
+    $circuits = "$clientip.circuits.html";
+    open FILE, ">$circuits" or die $!;
+    print FILE "<html><body>";
+    close FILE;
+    system("ruby circuits.rb $n_nodes $filename $circuits");
+    open FILE, ">>$circuits" or die $!;
+    print FILE "</body></html>";
+    close FILE;
+    print "<a href=\"$circuits\" target=\"_blank\"><font color=red><i>Click to view the functional circuits.</i></font></a><br>";
 }
-elsif ( $special_networks eq "Large Network (nodes > 10)" ) {
-  if(($limCyc_length eq null) || ($limCyc_length eq "")){
-      print "<font color=red>Sorry. Can't accept null input for limit cycle length.</font>";
-      die("Program quitting. Empty field entered for limit cycle length in large networks.");
-  }
-  print "<font color=blue><b>Calculating fixed points for a large network,
-  other analysis of dynamics not possible for now.</b></font><br>";
-  print "<font color=blue><b>This is a very experimental feature, therefore
-  there is no error checking. Use at your own risk.</b></font><br>";
-  create_input_function();
-  system("ruby adam_largeNetwork.rb $n_nodes $p_value $filename $limCyc_length");
-} elsif ( $p_value && $n_nodes )
-{
+
+#if ($sign = 1) {
+#    @signs = `ruby sign`
+#}
+
+if ( $special_networks eq "Conjunctive/Disjunctive (Boolean rings only)" ) {
+    # dynamics depend on the dependency graph, need to generate it 
+    system("perl regulatory.pl $filename $n_nodes $clientip $DGformat") == 0
+      or die("regulatory.pl died");
+    $dpGraph = "$clientip.out1";
+
+    # Give link to dependency graph if checked
+    if ($depgraph = 1) {
+	print  "<br><A href=\"$dpGraph.$DGformat\" target=\"_blank\"><font color=red><i>Click to view the dependency graph.</i></font></A><br>";
+    }
+    
+    #BLAHBLAH i'm sad ._.
+    system("ruby adam_conjunctive.rb $n_nodes $p_value $dpGraph.dot");
+} elsif ( $special_networks eq "Algorithms (suggested for nodes > 11)" ) {
+    if(($limCyc_length eq null) || ($limCyc_length eq "")){
+	print "<font color=red>Sorry. Can't accept null input for limit cycle length.</font>";
+	die("Program quitting. Empty field entered for limit cycle length in large networks.");
+    }
+
+    # Give link to dependency graph if checked
+    if ($depgraph = 1) {
+	system("perl regulatory.pl $filename $n_nodes $clientip $DGformat") == 0
+	    or die("regulatory.pl died");
+	print  "<br><A href=\"$clientip.out1.$DGformat\" target=\"_blank\"><font color=red><i>Click to view the dependency graph.</i></font></A><br>";
+    }
+
+    # Analysis
+    print "<font color=blue><b>Calculating fixed points for a large network, other analysis of dynamics not possible for now.</b></font><br>";
+    print "<font color=blue><b>This is a very experimental feature, therefore there is no error checking. Use at your own risk.</b></font><br>";
+    set_update_type();
+    system("ruby adam_largeNetwork.rb $n_nodes $p_value $filename $limCyc_length");
+} elsif ( $p_value && $n_nodes ) {
+    print "Executing simulation<br>";
     print "hello<br>" if ($DEBUG);
     #if($p_value**$n_nodes >= 7000000000000)
     if($n_nodes > 21 || $p_value**$n_nodes > 2**21) {
@@ -239,34 +266,34 @@ elsif ( $special_networks eq "Large Network (nodes > 10)" ) {
         die("Program quitting. Too many nodes");
     }
    
-    create_input_function();
+    print "hello set_update_type<br>" if ($DEBUG);
     set_update_type();
-    
-    # Set flag for creating the dependency graph and whether to print
-    # the probabilities in the phase space
-    ($depgraph eq "Dependency graph") ? {$depgraph = 1} : {$depgraph=0};
-    ($stochastic eq "Print probabilities") ? {$stochastic = 1} : {$stochastic = 0 };
 
     print $option_box if ($DEBUG);
+
+    # Set flag for whether to print probabilities in state space
+    ($stochastic eq "Print probabilities") ? {$stochastic = 1} : {$stochastic = 0 };
     if($option_box eq "All trajectories from all possible initial states") {
-      print "<font color=blue><b>ANALYSIS OF THE STATE SPACE</b></font>"." [m = ".$p_value.", n = ".$n_nodes;
-      if($fileuploaded == 1) {
-        print ", file path = ". $upload_file;
-      }
-      print "] <br>";
+      print "<font color=blue><b>Analysis of the state space</b></font> <br>";
 
       # Calling the wrapper script dvd_stochastic_runner.pl, which in
       # turn calls DVDCore routines
+
+
       print ("perl dvd_stochastic_runner.pl  $n_nodes $p_value 1 $updstoch_flag $clientip $SSformat $depgraph $updsequ_flag $update_schedule $stochastic 1 0 $filename\n<br> ") if ($DEBUG); 		
+
+
       system("/usr/bin/perl dvd_stochastic_runner.pl  $n_nodes $p_value 1 $updstoch_flag $clientip $SSformat $depgraph $updsequ_flag $update_schedule $stochastic 1 0 $filename"); 		
     } else {
-       print "<font color=blue><b>Computing Trajectory of the given initialization</b></font>"." [m = ".$p_value.", n = ".$n_nodes."] <br>";
-       if( ($trajectory_value ne null) &&( $trajectory_value ne "") ) {
+       print "<font color=blue><b>Computing Trajectory of the given initialization</b></font> <br>";
+       if( ($trajectory_value ne null) && ( $trajectory_value ne "") ) {
           $trajectory_value =~ s/^\s+|\s+$//g;; #remove all leading and trailing white spaces
           $trajectory_value =~  s/(\d+)\s+/$1 /g; #remove extra white space between the numbers
           $trajectory_value =~ s/ /_/g;
+          print "trajectory_value: $trajectory_value<br>" if $DEBUG;
           
           system("/usr/bin/perl dvd_stochastic_runner.pl  $n_nodes $p_value 1 $updstoch_flag $clientip $SSformat $depgraph $updsequ_flag $update_schedule $stochastic 0 $trajectory_value $filename"); 		
+          print "/usr/bin/perl dvd_stochastic_runner.pl  $n_nodes $p_value 1 $updstoch_flag $clientip $SSformat $depgraph $updsequ_flag $update_schedule $stochastic 0 $trajectory_value $filename<br>" if $DEBUG; 		
       } else {
         print "<br><font color=red>Sorry. Cannot accept null input for initialization field iii</font><br>";
         die("Program quitting. Empty value for initialization field");
@@ -309,7 +336,7 @@ print "<div id=\"footer\">";
 print "ADAM is currently still under development; if you ";
 print "spot any bugs or have any questions/comments, please <a href=\"mailto:mbrando1\@utk.edu\">";
 print "e-mail us</a>. ";
-print "(Bonny Guang, Madison Brandon, Rustin McNeill)";
+print "(Bonny Guang, Madison Brandon, Rustin McNeill, Franziska Hinkelmann)";
 print "</td></tr>";
 print "</div>";
 
@@ -333,40 +360,61 @@ sub create_input_function() {
     $filename = "$clientip.functionfile.txt";
     if($upload_file) {
       $fileuploaded = 1;
-      if($ginSim eq "GINsim File"){
+      if($format_box eq "GINsim"){
+	  # Make sure extension is correct
 	  $extension = substr $upload_file, -5;
 	  if($extension ne "ginml"){
 	      print "<font color=red>Error: Must give GINsim file</font>";
 	      die("Program quitting. Extension not ginml");
 	  }
-        open (GINOUTFILE, ">$clientip.ginsim.ginml");
-        flock(GINOUTFILE, LOCK_EX) or die ("Could not get exclusive lock $!");
-        while($bytesread=read($upload_file, $buffer, 1024)) {
-            print GINOUTFILE $buffer;
-        }
-        flock(GINOUTFILE, LOCK_UN) or die ("Could not unlock file $!");
-        close $upload_file;
-        system("ruby ginSim-converter.rb $clientip.ginsim.ginml $filename");
+	  # Write functions to ginml file on server for ruby script
+	  open (GINOUTFILE, ">$clientip.ginsim.ginml");
+	  flock(GINOUTFILE, LOCK_EX) or die ("Could not get exclusive lock $!");
+	  while($bytesread=read($upload_file, $buffer, 1024)) { print GINOUTFILE $buffer; }
+	  flock(GINOUTFILE, LOCK_UN) or die ("Could not unlock file $!");
+	  close $upload_file;
+
+	  $pFile = "$clientip.pVal.txt";
+	  $nFile = "$clientip.nVal.txt";
+	  # Convert GINsim file and get p_value and n_nodes
+	  system("ruby ginSim-converter.rb $clientip");
+	  close GINOUTFILE;
+	  
+          # Set p_value and n_nodes
+	  open (MYFILE, $pFile) || die("Could not open file!");
+	  while (<MYFILE>) { chomp; $p_value = $_; }
+	  close (MYFILE); 
+	  open (MYFILE, $nFile) || die("Could not open file!");
+	  while (<MYFILE>) { chomp; $n_nodes = $_; }
+	  close (MYFILE); 
       } else {
-      flock(OUTFILE, LOCK_EX) or die ("Could not get exclusive lock $!");
-      while($bytesread=read($upload_file, $buffer, 1024)) {
-            print OUTFILE $buffer;
-      }}
+          # Make sure extension is correct
+	  $extension = substr $upload_file, -3;
+	  if($extension ne "txt"){
+	      print "<font color=red>Error: Must give .txt file</font>";
+	      die("Program quitting. Extension not txt");
+	  }
+
+	  # Get contents of file and n_nodes
+	  flock(OUTFILE, LOCK_EX) or die ("Could not get exclusive lock $!");	  
+	  $n_nodes = 0;
+	  while($bytesread=read($upload_file, $buffer, 1024)) {
+	      print OUTFILE $buffer;
+	      while($buffer =~ m/f(\d+)/g) {
+		  if ($1 > $n_nodes) { print "$1<br>";$n_nodes = $1; }
+	      }
+	  }
+      }
       flock(OUTFILE, LOCK_UN) or die ("Could not unlock file $!");
       close $upload_file;
-    } else { # user has not uploaded any file. so use the textarea value
-      if($edit_functions) {
-        #read value from editfunctions and print it to outfile
-        #flock(OUTFILE, LOCK_EX) or die ("Could not get exclusive lock $!");
-        print OUTFILE $edit_functions;
-        flock(OUTFILE, LOCK_UN) or die ("Could not unlock file $!");
-      } else { # no functions provided
-        print "<font color=\"red\">Error: No functions provided. Please upload a
-        function file or type in your functions in the edit box</font><br>";
-        close(OUTFILE);
-        die("No function file provided by user");
-	    }
-    }	
+    } elsif ($edit_functions) { # Otherwise parse functions from textarea value (no file uploaded)
+	print OUTFILE $edit_functions;
+	$n_nodes = 0;
+	while($edit_functions =~ m/f(\d+)/g) {
+	    if ($1 > $n_nodes) { $n_nodes = $1; }
+	}
+	flock(OUTFILE, LOCK_UN) or die("Could not unlock file $!");
+    }
     close(OUTFILE);
 
     #remove any ^M characters

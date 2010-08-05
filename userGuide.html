@@ -362,6 +362,98 @@
 					((x1+x3)+(x2*(~x3)))
 				</center>
 				<p>
+				<br>
+					or<br>
+					<br>
+				</p>
+				<center>
+					(x1+(x3+(x2*(~x3))).
+				</center>
+				<p>
+					<br>
+					In particular, please do <b>not</b> use unnecessary parenthesis. For example, the following is interpreted wrongly because of the extra parenthesis around x1:<br>
+					<br>
+				</p>
+				<center>
+					(x1*((x1)+x2)).
+				</center>
+				<div align="right">
+					<a href="#top"><font size="-1" color="#FF0000">Return to the top</font></a>
+				</div>
+<a href="#how"><font face="Verdana, Arial, Helvetica, sans-serif">How is the Analysis without Simulation implemented?</font></a>
+<h3>
+<a name="how" id="how">How is the Analysis without Simulation implemented?</a>
+				</h3>
+				<p>
+There are two options for analysis without simulation. The first is conjunctive/disjunctive networks. It is for Boolean networks only. If the user has a network consisting solely of AND operators or solely of OR operators, then according to 
+					ADAM provides the user withs the option to specify how the operations in the function file should be interpreted. For example, 'x1*x2' could be interpreted as polynomial multiplication of variables or as the Boolean AND operation. If the user provides functions that are in the Boolean format, ADAM will convert the Boolean functions to polynomial functions to do the computations. This only works, when <i>number of states per node</i> is 2. The Boolean function file must adhere to the following format:<br>
+					<br>
+				</p>
+				<center>
+					<table border="1" cellpadding="10" cellspacing="0" summary="Boolean input">
+						<tr>
+							<td>
+								<b>Boolean operator</b>
+							</td>
+							<td>
+								<b>Written as</b>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<center>
+									AND
+								</center>
+							</td>
+							<td>
+								<center>
+									*
+								</center>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<center>
+									OR
+								</center>
+							</td>
+							<td>
+								<center>
+									+
+								</center>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<center>
+									NOT
+								</center>
+							</td>
+							<td>
+								<center>
+									~
+								</center>
+							</td>
+						</tr>
+					</table>
+				</center>
+				<p>
+					<br>
+					The Boolean functions should also be <u>fully bracketed infix expressions</u>. For example, the Boolean function<br>
+					<br>
+				</p>
+				<center>
+					x1 OR x3 OR (x2 AND NOT x3)
+				</center>
+				<p>
+					<br>
+					should be entered as<br>
+					<br>
+				</p>
+				<center>
+					((x1+x3)+(x2*(~x3)))
+				</center>
+				<p>
 					<br>
 					or<br>
 					<br>
@@ -380,6 +472,10 @@
 				<div align="right">
 					<a href="#top"><font size="-1" color="#FF0000">Return to the top</font></a>
 				</div>
+						<a href="#slow"><font face="Verdana, Arial, Helvetica, sans-serif">What if the Analysis is too Slow?</font></a>
+					</li>
+					<li>
+						<a href="#length"><font face="Verdana, Arial, Helvetica, sans-serif">Where can I get the source code?</font></a>
 				<h3>
 					<a name="credits" id="credits"><font face="Verdana, Arial, Helvetica, sans-serif">Who contributes to ADAM?</font></a>
 				</h3>
