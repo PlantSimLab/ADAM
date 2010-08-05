@@ -60,7 +60,7 @@
 						<a href="#Analysis"><font face="Verdana, Arial, Helvetica, sans-serif">What are the different <i>Analysis</i> Options?</font></a>
 					</li>
 					<li>
-						<a href="#DG"><font face="Verdana, Arial, Helvetica, sans-serif">What is the <i>number of states per node</i>?</font></a>
+						<a href="#numStates"><font face="Verdana, Arial, Helvetica, sans-serif">What is the <i>number of states per node</i>?</font></a>
 					</li>
 					<li>
 						<a href="#DG"><font face="Verdana, Arial, Helvetica, sans-serif">What is the <i>Dependency Graph</i>?</font></a>
@@ -81,9 +81,8 @@
 						<a href="#length"><font face="Verdana, Arial, Helvetica, sans-serif">What is <i>Limit Cycle Length</i></font></a>
 					</li>
 					<li>
-						<a href="#M"><font face="Verdana, Arial, Helvetica, sans-serif">What is <i>Feedback Circuit</i> output option?</font></a>
-					</li>
-					<!-- <li>
+						<a href="#circ"><font face="Verdana, Arial, Helvetica, sans-serif">What is <i>Feedback Circuit</i> output option?</font></a>
+					</li><!-- <li>
 						<a href="#O"><font face="Verdana, Arial, Helvetica, sans-serif">What is <i>Signed Edges</i> output option?</font></a>
 					</li> -->
 					<li>
@@ -134,7 +133,7 @@
 					<a name="PDS" id="PDS">How to Analyze a Polynomial Dynamical System (PDS)</a>
 				</h3>
 				<p>
-					The user can upload a text file (.txt) or directly enter the functions of a PDS. The <i>number of states per node</i> must be specified. It denotes the cardinality of the state set of the user's discrete network. Note that this must be a prime number. The software accepts positive prime integers up to 99. This value gives the total number of states that a node in the network can have. For example, if <i>number of states per node</i> = 3, then the possible states for any node are 0, 1, and 2. If the system is <b>Boolean</b>, i.e., the number of states per node is 2, then ADAM accepts functions in polynomial form, or in Boolean form (see <a href="boolean">Boolean Input Format</a>).
+					The user can upload a text file (.txt) or directly enter the functions of a PDS. The <i>number of states per node</i> must be specified. It denotes the cardinality of the state set of the user's discrete network. Note that this must be a prime number. The software accepts positive prime integers up to 99. This value gives the total number of states that a node in the network can have. For example, if <i>number of states per node</i> = 3, then the possible states for any node are 0, 1, and 2. If the system is <b>Boolean</b>, i.e., the number of states per node is 2, then ADAM accepts functions in polynomial form, or in Boolean form (see <a href="#boolean">Boolean Input Format</a>).
 				</p>
 				<p>
 					Each node of the user's network is represented by a variable. Variable names are <i>x1</i>, <i>x2</i>, etc. Function names are <i>f1</i>, <i>f2</i>, etc. The convention is that <i>fk</i> is the function which describes the state transitions of the node represented by <i>xk</i>. ADAM will use the functions from the input text box only when the user DOES NOT select a file to upload. The functions should follow the following formatting rules:
@@ -167,7 +166,6 @@
 				<div align="right">
 					<a href="#top"><font size="-1" color="#FF0000">Return to the top</font></a>
 				</div>
-
 				<h3>
 					<a name="ModelType" id="ModelType">What is the <i>Model Type</i>?</a>
 				</h3>
@@ -199,7 +197,7 @@
 					<a name="numStates" id="numStates">What is the <i>number of states per node</i>?</a>
 				</h3>
 				<p>
-					What?
+					TODO
 				</p>
 				<div align="right">
 					<a href="#top"><font size="-1" color="#FF0000">Return to the top</font></a>
@@ -276,12 +274,11 @@
 					<a name="circ" id="circ">What is <i>Feedback Circuit</i> output option?</a>
 				</h3>
 				<p>
-					ADAM can analyze the model for feedback circuits. It will list all functional circuits. 
+					ADAM can analyze the model for feedback circuits. It will list all functional circuits.
 				</p>
 				<div align="right">
 					<a href="#top"><font size="-1" color="#FF0000">Return to the top</font></a>
-				</div>
-				<!-- <h3>
+				</div><!-- <h3>
 									<a name="signed" id="signed">What is <i>Signed Edges</i> output option?</a>
 								</h3>
 								<p>
@@ -289,8 +286,8 @@
 								</p>
 								<div align="right">
 									<a href="#top"><font size="-1" color="#FF0000">Return to the top</font></a>
-								</div>
-								<h3> -->
+								</div> -->
+				<h3>
 					<a name="boolean" id="boolean">What is Boolean Input Format?</a>
 				</h3>
 				<p>
@@ -362,7 +359,7 @@
 					((x1+x3)+(x2*(~x3)))
 				</center>
 				<p>
-				<br>
+					<br>
 					or<br>
 					<br>
 				</p>
@@ -472,11 +469,11 @@ In the worst case, computing Gr\"obner bases for a polynomial system has a compl
 				</center>
 				<div align="right">
 					<a href="#top"><font size="-1" color="#FF0000">Return to the top</font></a>
-				</div>
-						<a href="#slow"><font face="Verdana, Arial, Helvetica, sans-serif">What if the Analysis is too Slow?</font></a>
-					</li>
+				</div><a href="#slow"><font face="Verdana, Arial, Helvetica, sans-serif">What if the Analysis is too Slow?</font></a>
+				<ul>
 					<li>
 						<a href="#length"><font face="Verdana, Arial, Helvetica, sans-serif">Where can I get the source code?</font></a>
+<<<<<<< HEAD
 				<h3>
 					<a name="credits" id="credits"><font face="Verdana, Arial, Helvetica, sans-serif">Who contributes to ADAM?</font></a>
 				</h3>
@@ -509,6 +506,41 @@ In the worst case, computing Gr\"obner bases for a polynomial system has a compl
 				<h2>
 					<a href="/cgi-bin/git/adam.pl">Back to ADAM</a>&nbsp;&nbsp;&nbsp; <a href="/steptutorial.htm">Step-by-step tutorial</a>
 				</h2>
+=======
+						<h3>
+							<a name="authors" id="authors"><font face="Verdana, Arial, Helvetica, sans-serif">Who contributes to ADAM?</font></a>
+						</h3>
+						<p>
+							<a href="mailto:fhinkel@vt.edu">Please email us if you have any problems!</a><br>
+							<font face="Verdana, Arial, Helvetica, sans-serif">Madison Brandon<br>
+							Nick Eriksson<br>
+							Bonny Guang<br>
+							Abdul Jarrah<br>
+							Franziska Hinkelmann<br>
+							Reinhard Laubenbacher<br>
+							Rustin McNeill<br>
+							Brandilyn Stigler<br>
+							Hussein Vastani<br>
+							<a href="http://img10.imageshack.us/img10/9024/p7080016crop.png">Chuck</a><br></font>
+						</p>
+						<div align="right">
+							<a href="#top"><font size="-1" color="#FF0000">Return to the top</font></a>
+						</div>
+						<h3>
+							<a name="Ref" id="Ref"><font face="Verdana, Arial, Helvetica, sans-serif">References</font></a>
+						</h3>
+						<p>
+							<sup>1</sup>Veliz-Cube A., Salam Jarrah A., Laubenbacher R., (2010) Polynomial Algebra of Discrete Models in Systems Biology.
+						</p>
+						<div align="right">
+							<a href="#top"><font size="-1" color="#FF0000">Return to the top</font></a>
+						</div>
+						<h2>
+							<a href="/cgi-bin/git/adam.pl">Back to ADAM</a>&nbsp;&nbsp;&nbsp; <a href="/steptutorial.htm">Step-by-step tutorial</a>
+						</h2>
+					</li>
+				</ul>
+>>>>>>> 6043514410ca588207355faade727f7a1a2bfc75
 			</div>
 		</div>
 	</body>
