@@ -126,28 +126,36 @@
 					<a name="PDS" id="PDS">How to Analyze a Polynomial Dynamical System (PDS)</a>
 				</h3>
 				<p>
-					The user can upload a text file (.txt) or directly enter the functions of a PDS. The <i>number of states per node</i> must be specified. It denotes the cardinality of the state set of the user's discrete network. Note that this must be a prime number. The software accepts positive prime integers up to 99. This value gives the total number of states that a node in the network can have. For example, if <i>number of states per node</i> = 3, then the possible states for any node are 0, 1, and 2. If the system is <b>Boolean</b>, the number of states per node is 2, and ADAM accepts functions in polynomial form, or in Boolean form (see <a href="boolean">Boolean Input Format</a>).
+					The user can upload a text file (.txt) or directly enter the functions of a PDS. The <i>number of states per node</i> must be specified. It denotes the cardinality of the state set of the user's discrete network. Note that this must be a prime number. The software accepts positive prime integers up to 99. This value gives the total number of states that a node in the network can have. For example, if <i>number of states per node</i> = 3, then the possible states for any node are 0, 1, and 2. If the system is <b>Boolean</b>, i.e., the number of states per node is 2, then ADAM accepts functions in polynomial form, or in Boolean form (see <a href="boolean">Boolean Input Format</a>).
 				</p>
 				<p>
 					Each node of the user's network is represented by a variable. Variable names are <i>x1</i>, <i>x2</i>, etc. Function names are <i>f1</i>, <i>f2</i>, etc. The convention is that <i>fk</i> is the function which describes the state transitions of the node represented by <i>xk</i>. ADAM will use the functions from the input text box only when the user DOES NOT select a file to upload. The functions should follow the following formatting rules:
 				</p>
 				<ul>
-					<li>The functions should begin with <i>f<i> followed by an integer, example <i>f1</i>, <i>f2</i>, <i>f3</i>,...,<i>fn</i>, where <i>n</i> is the number of variables
+					<li>The functions should begin with <i>f</i> followed by an integer, example <i>f1</i>, <i>f2</i>, <i>f3</i>,...,<i>fn</i>, where <i>n</i> is the number of variables
 					</li>
 					<li>Use * for multiplication, + for additions and ^ for exponents.
 					</li>
 					<li>The variables should begin with <i>x</i> followed by an integer, example <i>x1</i>, <i>x2</i>, <i>x3</i>,...,<i>xn</i>, where <i>n</i> is the number of states
 					</li>
 				</ul>
-				The PDS can be analyzed (using <i>Algorithms</i> or <i>Simulation</i>). For small networks (less than 10 nodes), the complete state space can be simulated and all attractors (fixed points and limit cycles) are found. In addition to that, the size of each component, i.e., the basin of attraction, are determined. For larger networks, a simulation of the complete state space is not possible. Instead, ADAM uses tools from computational algebra, to find all fixed points or limit cycles of a given length. The algorithms that ADAM uses are fast for sparse systems, a structure maintained by most biological systems. ADAM can easily compute fixed points for systems with 50 or 100 nodes, as long as every node has only a few neighbors in the wiring diagram, i.e., only a few variables appear in each function. 
-				 
-			</div>
+				<p>
+					The PDS can be analyzed (using <i>Algorithms</i> or <i>Simulation</i>). For small networks (less than 10 nodes), the complete state space can be simulated and all attractors (fixed points and limit cycles) are found. In addition to that, the size of each component, i.e., the basin of attraction, are determined. For larger networks, a simulation of the complete state space is not possible. Instead, ADAM uses tools from computational algebra, to find all fixed points or limit cycles of a given length. The algorithms that ADAM uses are fast for sparse systems, a structure maintained by most biological systems. ADAM can easily compute fixed points for systems with 50 or 100 nodes, as long as every node has only a few neighbors in the wiring diagram, i.e., only a few variables appear in each function.
+				</p>
+	
 			<div align="right">
 				<a href="#top"><font size="-1" color="#FF0000">Return to the top</font></a>
 			</div>
 			<h3>
-				<a name="P" id="P">What is <i>number of states per node</i> input?</a>
+				<a name="PBN" id="PBN">How to Analyze a Probabilistic Network</a>
 			</h3>
+			<p>
+				<img src="UserGuide_files/PBN_SS.gif" width="350px" alt="sample probabilistic network" align="left">ADAM can visualize the state space of a (small) probabilistic network. In the state space of a probabilistic network, all possible transitions from one state to the next are drawn, together with their probability, if <i>Print Probabilities</i> is checked. The <i>number of states per node</i> must be specified. It denotes the cardinality of the state set of the user's discrete network. Note that this must be a prime number. The software accepts positive prime integers up to 99. This value gives the total number of states that a node in the network can have. For example, if <i>number of states per node</i> = 3, then the possible states for any node are 0, 1, and 2. If the system is Boolean, i.e., the number of states per node is 2, then ADAM accepts functions in polynomial form, or in Boolean form (see <a href="boolean">Boolean Input Format</a>).<br>
+				<br>
+				Probabilistic Networks can be entered by using <b>{</b> and <b>}</b> around several possible functions for one variable. If not specified, the functions have uniform probability, if the user wants to impose a distribution on the functions, the probability can be specified behind the function, separated with the pound symbol, <b>#</b>.<br>
+				<img src="UserGuide_files/PBN.png" alt="sample probabilistic network" align="center"><br>
+				In probabilistic networks, fixed points are defined as state that <i>could</i> remain the same when updated. The <i>stability</i> of a fixed point is its probability to not change in the next iteration. Fixed points with stability 1 are <b>true fixed points</b>, as they can never transition to another state. ADAM determines true fixed points of probabilistic networks by simulation for smaller networks, or by using algorithms from computational algebra for systems too complex for simulation. Bounded Petri Nets can be represented as probabilistic networks<sup>1</sup>. In the terminology of petri nets, fixed points with stability one are <b>deadlocks</b>.
+			</p>
 			<div align="right">
 				<a href="#top"><font size="-1" color="#FF0000">Return to the top</font></a>
 			</div>
