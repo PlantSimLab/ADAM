@@ -98,10 +98,21 @@
 				</ul>
 				<hr>
 				<h3>
-					<a name="overview" id="overview">Overview</a>
+					<a name="overview" id="Overview">Overview</a>
 				</h3>
 				<p>
-					ADAM is a web-based tool for the analysis and visualization of the dynamics of multi-state, discrete models of biological networks. Multi-state discrete models are characterized by a collection of functions. For a network of <i>n</i> nodes, the corresponding discrete model will have <i>n</i> functions, where the <i>i</i>-th function describes the state transitions of the <i>i</i>-th node in the network. The user may select one of three inputs: a GINsim file, a PDS (polynomial dynamical system), or a PBN (probabilistic Boolean network). The user may upload a file or enter functions into the text box. Based upon which input type the user selects, other input options may appear. The user is guided through additional input/output options. ADAM can calculate fixed points and limit cycles of a specified length, produce the dependency graph for all networks and the state space for networks which are simulated, and return functional circuits along with their signed edges. ADAM analyzes dynamics using a combination of simulation and abstract algebra techniques. The method of computation and the output will depend on options selected by the user.
+					ADAM is a web-based tool for the analysis and visualization of the dynamics of multi-state, discrete models of biological networks. Multi-state discrete models are characterized by a collection of functions. For a network of <i>n</i> nodes, the corresponding discrete model will have <i>n</i> functions, where the <i>i</i>-th function describes the state transitions of the <i>i</i>-th node in the network. The user may select one of three inputs: a GINsim file, a PDS (polynomial dynamical system), or a PBN (probabilistic Boolean network). The user may upload a file or enter functions into the text box. Based upon which input type the user selects, other input options may appear. The user is guided through additional input/output options. ADAM can calculate fixed points and limit cycles of a specified length, produce the dependency graph for all networks and the state space for networks which are simulated, the graph of trajectories starting from a given initial state, and identify functional circuits along with their signed edges. ADAM analyzes dynamics using a combination of simulation and abstract algebra techniques. The method of computation and the output will depend on options selected by the user.
+				</p>
+				<div align="right">
+					<a href="#top"><font size="-1" color="#FF0000">Return to the top</font></a>
+				</div>
+				<h3>
+					<a name="LM" id="LM">How to Analyze a Logical Model (generated with GINsim)</a>
+				</h3>
+				<p>
+					ADAM can analyze Logical Models generated with <a href="http://gin.univ-mrs.fr/">GINsim</a>. GINsim is a program to build a logical model for a biological system such as a gene regulatory network. Internally, ADAM converts a logical model to a polynomial dynamical system (PDS) via the method described in Veliz-Cuba et al., 2010<sup>1</sup> and then uses techniques from abstract algebra to analyze the PDS for key dynamics. ADAM will assign <i>x1</i> to <i>xn</i> to the variables used in the logical model, states of the systems are represented as vectors, where the first entry corresponds to the variable assigned to x1, and so on. 
+					
+						Note: Currently ADAM is only compatible with GINsim 2.3. Please use GINsim version 2.3 to generate your models in order to analyze them with ADAM. 
 				</p>
 				<div align="right">
 					<a href="#top"><font size="-1" color="#FF0000">Return to the top</font></a>
