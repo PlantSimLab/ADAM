@@ -59,6 +59,9 @@
 						<a href="#Analysis"><font face="Verdana, Arial, Helvetica, sans-serif">What are the different <i>Analysis</i> Options?</font></a>
 					</li>
 					<li>
+						<a href="#DG"><font face="Verdana, Arial, Helvetica, sans-serif">What is the <i>number of states per node</i>?</font></a>
+					</li>
+					<li>
 						<a href="#DG"><font face="Verdana, Arial, Helvetica, sans-serif">What is the <i>Dependency Graph</i>?</font></a>
 					</li>
 					<li>
@@ -153,7 +156,7 @@
 					<a name="PBN" id="PBN">How to Analyze a Probabilistic Network</a>
 				</h3>
 				<p>
-					<img src="UserGuide_files/PBN_SS.gif" width="350" alt="sample probabilistic network" align="left">ADAM can visualize the state space of a (small) probabilistic network. In the state space of a probabilistic network, all possible transitions from one state to the next are drawn, together with their probability, if <i>Print Probabilities</i> is checked. The <i>number of states per node</i> must be specified. It denotes the cardinality of the state set of the user's discrete network. Note that this must be a prime number. The software accepts positive prime integers up to 99. This value gives the total number of states that a node in the network can have. For example, if <i>number of states per node</i> = 3, then the possible states for any node are 0, 1, and 2. If the system is Boolean, i.e., the number of states per node is 2, then ADAM accepts functions in polynomial form, or in Boolean form (see <a href="boolean">Boolean Input Format</a>).<br>
+					<img src="UserGuide_files/PBN_SS.gif" width="350" alt="sample probabilistic network" align="left">ADAM can visualize the state space of a (small) probabilistic network. In the state space of a probabilistic network, all possible transitions from one state to the next are drawn, together with their probability, if <i>Print Probabilities</i> is checked. The <i>number of states per node</i> must be specified. It denotes the cardinality of the state set of the user's discrete network. Note that this must be a prime number. The software accepts positive prime integers up to 99. This value gives the total number of states that a node in the network can have. For example, if <i>number of states per node</i> = 3, then the possible states for any node are 0, 1, and 2. If the system is Boolean, i.e., the number of states per node is 2, then ADAM accepts functions in polynomial form, or in Boolean form (see <a href="#boolean">Boolean Input Format</a>).<br>
 					<br>
 					Probabilistic Networks can be entered by using <b>{</b> and <b>}</b> around several possible functions for one variable. If not specified, the functions have uniform probability, if the user wants to impose a distribution on the functions, the probability can be specified behind the function, separated with the pound symbol, <b>#</b>.<br>
 				</p>
@@ -188,7 +191,16 @@
 					<a name="Analysis" id="Analysis">What are the different <i>Analysis</i> Options?</a>
 				</h3>
 				<p>
-					ADAM will simulate dynamics for the <i>Simulation</i> option (11 nodes or less), meaning it computes the transition states from all possible initializations. When simulating, ADAM will output the analysis results as well as the graph of the state space. For <i>Algorithms</i> ADAM uses algebra to solve for fixed points and limit cycles of a specified length. ADAM uses a separate algorithm to compute dynamics in the case of <i>Conjunctive/Disjunctive</i> Networks. Conjunctive Boolean networks consist of functions containing only one monomial term, i.e. the functions use only the AND operator. Conversely, Disjunctive Boolean networks consist of functions which use only the OR operator. Note that the <i>Conjunctive/Disjunctive</i> option only works for functions defined in a Boolean ring, i.e. there can be only two states per node. (see <a href="#L">What is the <i>number of states per node</i> input?</a>) Furthermore, <i>Conjunctive/Disjunctive</i> networks currently works only for strongly connected graphs. When input is analyzed with either the <i>Algorithms</i> or <i>Conjunctive/Disjunctive network</i> option, ADAM displays the fixed points and limit cycles in a table.
+					ADAM will simulate dynamics for the <i>Simulation</i> option (11 nodes or less), meaning it computes the transition states from all possible initializations. When simulating, ADAM will output the analysis results as well as the graph of the state space. For <i>Algorithms</i> ADAM uses algebra to solve for fixed points and limit cycles of a specified length. ADAM uses a separate algorithm to compute dynamics in the case of <i>Conjunctive/Disjunctive</i> Networks. Conjunctive Boolean networks consist of functions containing only one monomial term, i.e. the functions use only the AND operator. Conversely, Disjunctive Boolean networks consist of functions which use only the OR operator. Note that the <i>Conjunctive/Disjunctive</i> option only works for functions defined in a Boolean ring, i.e. there can be only two states per node. (see <a href="#numStates">What is the <i>number of states per node</i>?</a>) Furthermore, <i>Conjunctive/Disjunctive</i> networks currently works only for strongly connected graphs. When input is analyzed with either the <i>Algorithms</i> or <i>Conjunctive/Disjunctive network</i> option, ADAM displays the fixed points and limit cycles in a table.
+				</p>
+				<div align="right">
+					<a href="#top"><font size="-1" color="#FF0000">Return to the top</font></a>
+				</div>
+				<h3>
+					<a name="numStates" id="numStates">What is the <i>number of states per node</i>?</a>
+				</h3>
+				<p>
+					What?
 				</p>
 				<div align="right">
 					<a href="#top"><font size="-1" color="#FF0000">Return to the top</font></a>
@@ -375,7 +387,7 @@
 				<p>
 					<a href="mailto:fhinkel@vt.edu">Please email us if you have any problems!</a><br>
 					<font face="Verdana, Arial, Helvetica, sans-serif">Madison Brandon<br>
-					Nick Eriksson (Developer)<br>
+					Nick Eriksson<br>
 					Bonny Guang<br>
 					Abdul Jarrah<br>
 					Franziska Hinkelmann<br>
