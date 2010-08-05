@@ -45,7 +45,7 @@ discrete biological systems. It can analyze <b>Logical Models</b> (in <a href= \
 Systems (PDS)</b>, and <b>Probabilistic Boolean (or multistate) Networks</b>. For small enough networks (deterministic or probabilistic), ADAM simulates the 
 complete state space of the model and finds all attractors (steady states and limit cycles) together with statistics about the size of components. For larger networks, 
 ADAM computes fixed points for both deterministic and probabilistic networks, and limit cycle of the length specified by the user for deterministic networks. 
-You can follow our <a href=\"/steptutorial.htm\">step-by-step tutorial</a> or read the <a href=\"/ADAM_tut.html\" target=\"_blank\">user guide</a>. It is important 
+You can follow our <a href=\"/steptutorial.htm\">step-by-step tutorial</a> or read the <a href=\"/userGuide.html\" target=\"_blank\">user guide</a>. It is important 
 that you follow the format specified in the guide. Make your selections and provide inputs (if any) in the form below and click 
 <i>Analyze</i> to run the software. To generate a model from experimental time course data, you can use <a href=\"http://polymath.vbi.vt.edu/polynome\">Polynome</a>.";
 print "</div>";
