@@ -29,10 +29,10 @@ print "<div id=\"tipDiv\" style=\"position:absolute\; visibility:hidden\; z-inde
 
 #Div Box: ADAM Title :: Header
 print "<div id=\"header\">";
-print "<table><tr>";
-print "<td align=\"left\"><img src=\"http://dvd.vbi.vt.edu/vbi-logo.png\"></td>";
-print "<td align=\"right\"><img src=\"http://dvd.vbi.vt.edu/vt_logo.jpg\"></td></tr>";
-print "<tr><td colspan=\"2\" align=\"center\"><font size=\"5\">Analysis of Discrete Algebraic Models (ADAM) v0.3 </font></b></td></tr></table>";
+print "<a href=\"http://admg.vbi.vt.edu/\"><table><tr>";
+print "<td align=\"left\"><img style=\"border:0px solid white;\" src=\"http://dvd.vbi.vt.edu/vbi-logo.png\"></td>";
+print "<td align=\"right\"><img style=\"border:0px solid white;\" src=\"http://dvd.vbi.vt.edu/vt_logo.jpg\"></td></tr>";
+print "<tr><td colspan=\"2\" align=\"center\"><font size=\"5\">Analysis of Discrete Algebraic Models (ADAM) 1.0 </font></b></td></tr></table></a>";
 print "</div>";
 
 #Div Box :: Main
