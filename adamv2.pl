@@ -219,7 +219,7 @@ if ($feedback == 1) {
     open FILE, ">>$circuits" or die $!;
     print FILE "</body></html>";
     close FILE;
-    print "<a href=\"$circuits\" target=\"_blank\"><font color=red><i>Click to view the functional circuits.</i></font></a><br>";
+    print "<a href=\"$circuits\" target=\"_blank\"><font color=\"#226677\"<i>Click to view the functional circuits.</i></font></a><br>";
 }
 
 #if ($sign = 1) {
@@ -234,14 +234,14 @@ if ( $special_networks eq "Conjunctive/Disjunctive (Boolean rings only)" ) {
 
     # Give link to dependency graph if checked
     if ($depgraph = 1) {
-	print  "<br><A href=\"$dpGraph.$DGformat\" target=\"_blank\"><font color=red><i>Click to view the dependency graph.</i></font></A><br>";
+	print  "<br><A href=\"$dpGraph.$DGformat\" target=\"_blank\"><font color=\"#226677\"><i>Click to view the dependency graph.</i></font></A><br>";
     }
     
     #BLAHBLAH i'm sad ._.
     system("ruby adam_conjunctive.rb $n_nodes $p_value $dpGraph.dot");
 } elsif ( $special_networks eq "Algorithms (suggested for nodes > 11)" ) {
     if(($limCyc_length eq null) || ($limCyc_length eq "")){
-	print "<font color=red>Sorry. Can't accept null input for limit cycle length.</font>";
+	print "<font color=red>Please enter a length of the limit cycle you wish to compute. Enter 1 for fixed points</font>";
 	die("Program quitting. Empty field entered for limit cycle length in large networks.");
     }
 
@@ -249,7 +249,7 @@ if ( $special_networks eq "Conjunctive/Disjunctive (Boolean rings only)" ) {
     if ($depgraph = 1) {
 	system("perl regulatory.pl $filename $n_nodes $clientip $DGformat") == 0
 	    or die("regulatory.pl died");
-	print  "<br><A href=\"$clientip.out1.$DGformat\" target=\"_blank\"><font color=red><i>Click to view the dependency graph.</i></font></A><br>";
+	print  "<br><A href=\"$clientip.out1.$DGformat\" target=\"_blank\"><font color=\"#226677\"><i>Click to view the dependency graph.</i></font></A><br>";
     }
 
     # Analysis
@@ -262,7 +262,7 @@ if ( $special_networks eq "Conjunctive/Disjunctive (Boolean rings only)" ) {
     print "hello<br>" if ($DEBUG);
     #if($p_value**$n_nodes >= 7000000000000)
     if($n_nodes > 21 || $p_value**$n_nodes > 2**21) {
-        print "<font color=red><i>Sorry. Unable to compute statistics for very large networks. It is suggested you use the large networks option.</i></font><br>";
+        print "<font color=red>Simulation for large networks is not possible. Please chose <i>Algorithms</i> as <b>Analysis</b> option. </font><br>";
         die("Program quitting. Too many nodes");
     }
    
@@ -295,26 +295,26 @@ if ( $special_networks eq "Conjunctive/Disjunctive (Boolean rings only)" ) {
           system("/usr/bin/perl dvd_stochastic_runner.pl  $n_nodes $p_value 1 $updstoch_flag $clientip $SSformat $depgraph $updsequ_flag $update_schedule $stochastic 0 $trajectory_value $filename"); 		
           print "/usr/bin/perl dvd_stochastic_runner.pl  $n_nodes $p_value 1 $updstoch_flag $clientip $SSformat $depgraph $updsequ_flag $update_schedule $stochastic 0 $trajectory_value $filename<br>" if $DEBUG; 		
       } else {
-        print "<br><font color=red>Sorry. Cannot accept null input for initialization field iii</font><br>";
+        print "<br><font color=red>Please enter an initial state or select <i>Complete State Space</i></font><br>";
         die("Program quitting. Empty value for initialization field");
       }
     }
     if($statespace eq "State space graph" && $option_box eq "All trajectories from all possible initial states") {
         if(-e "$clientip.out.$SSformat") {
             print  "<A href=\"$clientip.out.$SSformat\"
-            target=\"_blank\"><font color=red><i>Click to view the state space
+            target=\"_blank\"><font color=\"#226677\"><i>Click to view the state space
             graph.</i></font></A><br>"
         }
     } else {
         if(-e "$clientip.graph.$SSformat") {
             print  "<A href=\"$clientip.graph.$SSformat\" target=\"_blank\"><font
-            color=red><i>Click to view the trajectory.</i></font></A><br>"
+            color=\"#226677\"><i>Click to view the trajectory.</i></font></A><br>"
         }
     }
     #if(-e "$clientip.out1.$DGformat")
     if(-e "$clientip.out1.$SSformat") {
         print  "<A href=\"$clientip.out1.$DGformat\" target=\"_blank\"><font
-        color=red><i>Click to view the dependency graph.</i></font></A><br>";
+        color=\"#226677\"><i>Click to view the dependency graph.</i></font></A><br>";
 
     }
     
@@ -364,7 +364,7 @@ sub create_input_function() {
 	  # Make sure extension is correct
 	  $extension = substr $upload_file, -5;
 	  if($extension ne "ginml"){
-	      print "<font color=red>Error: Must give GINsim file</font>";
+	      print "<font color=red>Error: Must upload a Logical Model generated with GINsim, i.e., a <i>.ginml</i> file.</font>";
 	      die("Program quitting. Extension not ginml");
 	  }
 	  # Write functions to ginml file on server for ruby script
@@ -391,7 +391,7 @@ sub create_input_function() {
           # Make sure extension is correct
 	  $extension = substr $upload_file, -3;
 	  if($extension ne "txt"){
-	      print "<font color=red>Error: Must give .txt file</font>";
+	      print "<font color=red>Error: Must upload a text file, i.e,. <i>.txt</i>.</font>";
 	      die("Program quitting. Extension not txt");
 	  }
 
@@ -458,7 +458,7 @@ sub set_update_type() {
 		   $update_schedule =~ s/ /_/g;
 		   #print "$update_schedule";
 	   } else {
-       print "<br><font color=red>Sorry. Cannot accept null input for update schedule field</font><br>";
+       print "<br><font color=red>Please enter an update schedule or select <i>Synchronous</i>.</font><br>";
        die("Program quitting. Empty value for update schedule field");
 	   }
 	} else {
