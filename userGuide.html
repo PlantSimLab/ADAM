@@ -380,12 +380,13 @@
 				<div align="right">
 					<a href="#top"><font size="-1" color="#FF0000">Return to the top</font></a>
 				</div>
-<a href="#how"><font face="Verdana, Arial, Helvetica, sans-serif">How is the Analysis without Simulation implemented?</font></a>
 <h3>
 <a name="how" id="how">How is the Analysis without Simulation implemented?</a>
 				</h3>
 				<p>
-There are two options for analysis without simulation. The first is conjunctive/disjunctive networks. It is for Boolean networks only. If the user has a network consisting solely of AND operators or solely of OR operators, then according to 
+There are two options for analysis without simulation. The first is specifically for conjunctive/disjunctive networks. If the user has a Boolean network consisting solely of AND operators (conjunctive) or solely of OR operators (disjunctive), then ADAM will compute the number of fixed points and limit cycles according to algorithms from Salam Jarrah et al.<sup>2</sup>. It will also output what the fixed points and limit cycles are using Grobner basis computations.
+
+In the worst case, computing Gr\"obner bases for a polynomial system has a complexity of doubly exponential in the number of solutions to the system. However, in practice Gr\"obner bases are computable in a reasonable time.  Furthermore, for sparse systems in a finite field it is actually fairly quick. It has been shown that computing Gr\"obner bases in modular form is much faster in general. \cite{Brown:1971} In addition, sparse polynomials mean that simpler S-polynomials, usually of comparable length, will be added to the basis, which means less computation is involved.  In short, the sparse structure of biological systems is preserved by Gr\"obner bases, causing our algorithms to be both efficient and fast. See the Applications section for benchmark tests results for Gr\"obner bases computations.
 					ADAM provides the user withs the option to specify how the operations in the function file should be interpreted. For example, 'x1*x2' could be interpreted as polynomial multiplication of variables or as the Boolean AND operation. If the user provides functions that are in the Boolean format, ADAM will convert the Boolean functions to polynomial functions to do the computations. This only works, when <i>number of states per node</i> is 2. The Boolean function file must adhere to the following format:<br>
 					<br>
 				</p>
@@ -500,6 +501,7 @@ There are two options for analysis without simulation. The first is conjunctive/
 				</h3>
 				<p>
 					<sup>1</sup>Veliz-Cube A., Salam Jarrah A., Laubenbacher R., (2010) Polynomial Algebra of Discrete Models in Systems Biology.
+	<sup>2</sup>Salam Jarrah A., Laubenbacher R., Veliz-Cuba A., (2008) The Dynamics of Conjunctive and Disjunctive Boolean Network Models. <i>Bioinformatics</i>
 				</p>
 				<div align="right">
 					<a href="#top"><font size="-1" color="#FF0000">Return to the top</font></a>
