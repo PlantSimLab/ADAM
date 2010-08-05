@@ -5,7 +5,7 @@
 ## Bonbons
 ## July 2010
 
-## ADAM0.3 with support for large networks and conjunctive 
+## ADAM1.0 with support for large networks and conjunctive 
 ## networks using M2 instead of perl enumeration
 
 use CGI qw( :standard );
@@ -22,7 +22,7 @@ $clientip = '../../htdocs/no-ssl/files/'. $clientip;
 
 #$clientip = $sec.'-'.$min.'-'.$hr;
 
-print header, start_html( -title=>'ADAM - Analysis of Discrete Algebraic Models', -script=>{-language=>'JavaScript',-src=>'/adamv2.js'}, ,-onLoad=>'change()', -style=>{-src=>'/adam_stylev2.css'});
+print header, start_html( -title=>'ADAM - Analysis of Discrete Algebraic Models', -script=>{-language=>'JavaScript',-src=>'/adam.js'}, ,-onLoad=>'change()', -style=>{-src=>'/adam_style.css'});
 print start_multipart_form(-name=>'form1', -method =>"POST", -onSubmit=>"return validate()");
 print "<div id=\"wrap\">";
 print "<div id=\"tipDiv\" style=\"position:absolute\; visibility:hidden\; z-index:100\"></div>";
@@ -32,7 +32,7 @@ print "<div id=\"header\">";
 print "<table><tr>";
 print "<td align=\"left\"><img src=\"http://dvd.vbi.vt.edu/vbi-logo.png\"></td>";
 print "<td align=\"right\"><img src=\"http://dvd.vbi.vt.edu/vt_logo.jpg\"></td></tr>";
-print "<tr><td colspan=\"2\" align=\"center\"><font size=\"5\">Analysis of Discrete Algebraic Models (ADAM) v0.3 </font></b></td></tr></table>";
+print "<tr><td colspan=\"2\" align=\"center\"><font size=\"5\">Analysis of Discrete Algebraic Models (ADAM) v1.0 </font></b></td></tr></table>";
 print "</div>";
 
 #Div Box :: Main
