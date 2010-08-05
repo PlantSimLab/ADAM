@@ -10,13 +10,13 @@
 	<body>
 		<div id="header">
 			<a href="http://admg.vbi.vt.edu/"></a>
-			<table>
+			<table summary="Logos">
 				<tr>
 					<td align="left">
-						<img style="border:0px solid white;" src="http://dvd.vbi.vt.edu/vbi-logo.png">
+						<img style="border:0px solid white;" src="http://dvd.vbi.vt.edu/vbi-logo.png" alt="VBI logo">
 					</td>
 					<td align="right">
-						<img style="border:0px solid white;" src="http://dvd.vbi.vt.edu/vt_logo.jpg">
+						<img style="border:0px solid white;" src="http://dvd.vbi.vt.edu/vt_logo.jpg" alt="VT logo">
 					</td>
 				</tr>
 				<tr>
@@ -95,13 +95,13 @@
 						<a href="#slow"><font face="Verdana, Arial, Helvetica, sans-serif">What if the Analysis is too Slow?</font></a>
 					</li>
 					<li>
-						<a href="#length"><font face="Verdana, Arial, Helvetica, sans-serif">Where can I get the source code?</font></a>
+						<a href="#src"><font face="Verdana, Arial, Helvetica, sans-serif">Where can I get the source code?</font></a>
 					</li>
 					<li>
-						<a href="#authors">Who contributes to ADAM?</a>
+						<a href="#authors"><font face="Verdana, Arial, Helvetica, sans-serif">Who contributes to ADAM?</font></a>
 					</li>
 					<li>
-						<a href="#Ref">References</a>
+						<a href="#Ref"><font face="Verdana, Arial, Helvetica, sans-serif">References</font></a>
 					</li>
 				</ul>
 				<hr>
@@ -377,36 +377,41 @@
 				<div align="right">
 					<a href="#top"><font size="-1" color="#FF0000">Return to the top</font></a>
 				</div>
-<h3>
-<a name="how" id="how">How is the Analysis without Simulation implemented?</a>
+				<h3>
+					<a name="how" id="how">How is the Analysis without Simulation implemented?</a>
 				</h3>
 				<p>
-There are two options for analysis without simulation. The first is specifically for conjunctive/disjunctive networks. If the user has a Boolean network consisting solely of AND operators (conjunctive) or solely of OR operators (disjunctive), then ADAM will compute the number of fixed points and limit cycles according to algorithms from Salam Jarrah et al.<sup>2</sup>. It will also output what the fixed points and limit cycles are using Gr&ouml;bner basis computations.
-</p><p>
-The second option is for general networks. For networks that are too large to analyze with simulation, we use Gr&ouml;bner bases. The user specifies a limit cycle length they would like to find, and our algorithm finds all limit cycles of that length.
-</p><p>
-In the worst case, computing Gr&ouml;bner bases for a polynomial system has a complexity of doubly exponential in the number of solutions to the system. However, in practice Gr&ouml;bner bases are computable in a reasonable time.  Furthermore, for sparse systems in a finite field it is actually fairly quick. It has been shown that computing Gr&ouml;bner bases in modular form is much faster in general. <sup>3</sup> In addition, sparse polynomials mean that simpler S-polynomials, usually of comparable length, will be added to the basis, which means less computation is involved.  In short, the sparse structure of biological systems is preserved by Gr&ouml;bner bases, causing our algorithms to be both efficient and fast.</p>
-				<div align="right">
-					<a href="#top"><font size="-1" color="#FF0000">Return to the top</font></a>
-				</div>
-<h3>
-<a name="slow" id="slow">What if the Analysis is too Slow?</a>
-				</h3>
+					There are two options for analysis without simulation. The first is specifically for conjunctive/disjunctive networks. If the user has a Boolean network consisting solely of AND operators (conjunctive) or solely of OR operators (disjunctive), then ADAM will compute the number of fixed points and limit cycles according to algorithms from Salam Jarrah et al.<sup>2</sup>. It will also output what the fixed points and limit cycles are using Gröbner basis computations.
+				</p>
 				<p>
-If the analysis is too slow, it is probably due to a combination of: having too many nodes in the network, having functions that are too dense, and searching for limit cycle lengths that are too long. Finding a limit cycle of length <i>n</i> involves composing the system of equations <i>n</i> times - this means functions become more dense as <i>n</i> increases. As explained in <a href="#how">How is the Analysis without Simulation implemented?</a>, the Gr&ouml;bner basis algorithm is faster for sparse polynomials.
-				<div align="right">
-					<a href="#top"><font size="-1" color="#FF0000">Return to the top</font></a>
-				</div>
-<h3>
-<a name="slow" id="slow">Where can I get the source code?</a>
-				</h3>
+					The second option is for general networks. For networks that are too large to analyze with simulation, we use Gröbner bases. The user specifies a limit cycle length they would like to find, and our algorithm finds all limit cycles of that length.
+				</p>
 				<p>
-The source code is not on a public repository at the moment. If you would like a copy of it, please e-mail <a href="mailto:fhinkel@vt.edu">Franziska Hinkelmann</a> for now.
+					In the worst case, computing Gröbner bases for a polynomial system has a complexity of doubly exponential in the number of solutions to the system. However, in practice Gröbner bases are computable in a reasonable time. Furthermore, for sparse systems in a finite field it is actually fairly quick. It has been shown that computing Gröbner bases in modular form is much faster in general. <sup>3</sup> In addition, sparse polynomials mean that simpler S-polynomials, usually of comparable length, will be added to the basis, which means less computation is involved. In short, the sparse structure of biological systems is preserved by Gröbner bases, causing our algorithms to be both efficient and fast.
+				</p>
 				<div align="right">
 					<a href="#top"><font size="-1" color="#FF0000">Return to the top</font></a>
 				</div>
 				<h3>
-					<a name="credits" id="credits"><font face="Verdana, Arial, Helvetica, sans-serif">Who contributes to ADAM?</font></a>
+					<a name="slow" id="slow">What if the Analysis is too Slow?</a>
+				</h3>
+				<p>
+					If the analysis is too slow, it is probably due to a combination of: having too many nodes in the network, having functions that are too dense, and searching for limit cycle lengths that are too long. Finding a limit cycle of length <i>n</i> involves composing the system of equations <i>n</i> times - this means functions become more dense as <i>n</i> increases. As explained in <a href="#how">How is the Analysis without Simulation implemented?</a>, the Gröbner basis algorithm is faster for sparse polynomials.
+				</p>
+				<div align="right">
+					<a href="#top"><font size="-1" color="#FF0000">Return to the top</font></a>
+				</div>
+				<h3>
+					<a name="src" id="src">Where can I get the source code?</a>
+				</h3>
+				<p>
+					The source code is not on a public repository at the moment. If you would like a copy of it, please e-mail <a href="mailto:fhinkel@vt.edu">Franziska Hinkelmann</a> for now.
+				</p>
+				<div align="right">
+					<a href="#top"><font size="-1" color="#FF0000">Return to the top</font></a>
+				</div>
+				<h3>
+					<a name="authors" id="authors">Who contributes to ADAM?</a>
 				</h3>
 				<p>
 					<a href="mailto:fhinkel@vt.edu">Please email us if you have any problems!</a><br>
@@ -425,12 +430,12 @@ The source code is not on a public repository at the moment. If you would like a
 					<a href="#top"><font size="-1" color="#FF0000">Return to the top</font></a>
 				</div>
 				<h3>
-					<a name="Ref" id="Ref"><font face="Verdana, Arial, Helvetica, sans-serif">References</font></a>
+					<a name="Ref" id="Ref">References</a>
 				</h3>
 				<p>
 					<sup>1</sup>Veliz-Cube A., Salam Jarrah A., Laubenbacher R., (2010) Polynomial Algebra of Discrete Models in Systems Biology.<br>
-	<sup>2</sup>Salam Jarrah A., Laubenbacher R., Veliz-Cuba A., (2008) The Dynamics of Conjunctive and Disjunctive Boolean Network Models. <i>Bioinformatics</i><br>
-	<sup>3</sup>Brown W.S. (1971) On Euclid's Algorithm and the Computation of Polynomial Greatest Common Divisors. <i>Journal of the ACM</i>.
+					<sup>2</sup>Salam Jarrah A., Laubenbacher R., Veliz-Cuba A., (2008) The Dynamics of Conjunctive and Disjunctive Boolean Network Models. <i>Bioinformatics</i><br>
+					<sup>3</sup>Brown W.S. (1971) On Euclid's Algorithm and the Computation of Polynomial Greatest Common Divisors. <i>Journal of the ACM</i>.
 				</p>
 				<div align="right">
 					<a href="#top"><font size="-1" color="#FF0000">Return to the top</font></a>
