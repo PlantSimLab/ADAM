@@ -35,6 +35,10 @@ for i in 0..(vars.length-1) do
 end
 
 puts formatVars
+
+#Outputs p value to user
+puts "<br>The number of states in this model is: " + p + "<br><br>"
+
 #Converts functions in m2_result to something ADAM can read
 #get functions into array
 #puts m2_result

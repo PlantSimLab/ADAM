@@ -210,7 +210,7 @@ create_input_function();
 ($feedback eq "Feedback Circuit") ? {$feedback = 1} : {$feedback = 0};
 
 # Give link to functional circuits if checked
-if ($feedback = 1) {
+if ($feedback == 1) {
     $circuits = "$clientip.circuits.html";
     open FILE, ">$circuits" or die $!;
     print FILE "<html><body>";
@@ -220,7 +220,11 @@ if ($feedback = 1) {
     print FILE "</body></html>";
     close FILE;
     print "<a href=\"$circuits\" target=\"_blank\"><font color=red><i>Click to view the functional circuits.</i></font></a><br>";
-    }
+}
+
+#if ($sign = 1) {
+#    @signs = `ruby sign`
+#}
 
 if ( $special_networks eq "Conjunctive/Disjunctive (Boolean rings only)" ) {
     # dynamics depend on the dependency graph, need to generate it 
