@@ -1,15 +1,17 @@
-#circuits $n_nodes $p_value $filename
+#circuits $n_nodes $filename $circuitFile
+
+require 'partial_input'
 
 # Outputs functional circuits from dependency graphs
 
 unless ARGV.size == 3
-  puts "Usage: ruby adam_largeNetwork.rb n_nodes p_value functionFile"
+  puts "Usage: ruby circuits.rb n_nodes functionFile circuitFile"
   exit 0
 end
 
 n_nodes = ARGV[0]
-p_value = ARGV[1]
-functionFile = ARGV[2]
+functionFile = ARGV[1]
+circuitFile = ARGV[2]
 
 puts "<br>"
 
@@ -45,7 +47,7 @@ end
 m2_system =  "{"
 functionHash.sort.each{ |index,functions|
   functions.each{ |f|
-    m2_system = m2_system + f
+    m2_system = m2_system + "\"" + f + "\""
     m2_system =  m2_system + ","
 
     varIndices = f.scan(/x+[0-9]+/)
@@ -65,24 +67,21 @@ m2_system = m2_system + "}"
 #puts "<br>"
 #puts m2_system
 #puts "<br>"
-puts "Running fixed point calculation now ...<br>"
 
 #one line is for my machine, one line is for the server b/c M2 is in different paths
 #  m2_result = `cd lib/M2code/; M2 solvebyGB.m2 --stop --no-debug --silent -q -e 'QR = makeRing(#{n_nodes}, #{p_value}); ll = gbSolver( matrix(QR, #{m2_system}), #{limCyc_length}, #{m2_numFunctions}); stdio << length ll << "?" << gbTable ll; exit 0'`
 m2_result = `cd lib/M2code/; M2 functionalCircuits.m2 --stop --no-debug --silent -q -e 'll = circuits edgeMatrix #{m2_system}; stdio << length ll << "?" << circuitTable ll; exit 0'`
-  temp = m2_result.split('?')
-  numCircuits = temp.fetch(0)
-  table = temp.fetch(1)
-if numCycles.chomp == "0"
-  puts "There are no circuits in your dependency graph!"
-  puts "<br>"
-  puts "<br>"
+temp = m2_result.split('?')
+numCircuits = temp.fetch(0)
+table = temp.fetch(1)
+f = ""
+if numCircuits.chomp == "0"
+  f = "There are no circuits in your dependency graph!<br><br>"
 else
-  puts "There are " + numCircuits + " circuits"
-  puts " and they are: <br>"
-  puts table
-  puts "<br>"
+  f = "There are " + numCircuits + " circuits and they are: <br>" + table + "<br>"
 end
+
+File.open(circuitFile, "a"){|g| g.write(f)}
 
 
 exit 0
