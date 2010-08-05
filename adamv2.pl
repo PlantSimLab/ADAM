@@ -208,6 +208,19 @@ create_input_function();
 ($depgraph eq "Dependency graph") ? {$depgraph = 1} : {$depgraph = 0};
 ($feedback eq "Feedback Circuit") ? {$feedback = 1} : {$feedback = 0};
 
+# Give link to functional circuits if checked
+if ($feedback = 1) {
+    $circuits = "$clientip.circuits.html";
+    open FILE, ">$circuits" or die $!;
+    print FILE "<html><body>";
+    close FILE;
+    system("ruby circuits.rb $n_nodes $filename $circuits");
+    open FILE, ">>$circuits" or die $!;
+    print FILE "</body></html>";
+    close FILE;
+    print "<a href=\"$circuits\" target=\"_blank\"><font color=red><i>Click to view the functional circuits.</i></font></a><br>";
+    }
+
 if ( $special_networks eq "Conjunctive/Disjunctive (Boolean rings only)" ) {
     # dynamics depend on the dependency graph, need to generate it 
     system("perl regulatory.pl $filename $n_nodes $clientip $DGformat") == 0
@@ -219,12 +232,6 @@ if ( $special_networks eq "Conjunctive/Disjunctive (Boolean rings only)" ) {
 	print  "<br><A href=\"$dpGraph.$DGformat\" target=\"_blank\"><font color=red><i>Click to view the dependency graph.</i></font></A><br>";
     }
     
-    # Give link to functional circuits if checked
-    if ($feedback = 1) {
-	system("ruby circuits.rb");
-	print "<br><a href=\"";
-    }
-
     #BLAHBLAH i'm sad ._.
     system("ruby adam_conjunctive.rb $n_nodes $p_value $dpGraph.dot");
 } elsif ( $special_networks eq "Algorithms (suggested for nodes > 11)" ) {
@@ -258,6 +265,7 @@ if ( $special_networks eq "Conjunctive/Disjunctive (Boolean rings only)" ) {
     set_update_type();
 
     print $option_box if ($DEBUG);
+
     # Set flag for whether to print probabilities in state space
     ($stochastic eq "Print probabilities") ? {$stochastic = 1} : {$stochastic = 0 };
     if($option_box eq "All trajectories from all possible initial states") {
