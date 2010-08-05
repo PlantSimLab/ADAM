@@ -186,6 +186,7 @@ $edit_functions = param('edit_functions');
 $SSformat = param('SSformat');
 $DGformat = param('DGformat');
 $stochastic =param('stochastic'); 	# if set, probabilities are drawn in state space
+$button_name = param('button_name');
 $updstoch_flag = "0";
 $updsequ_flag= "0";
 my $bytesread = "";
@@ -201,6 +202,8 @@ print "$option_box <br>" if ($DEBUG);
 print "$format_box <br>" if ($DEBUG);
 print "$translate_box <br>" if ($DEBUG);
 print "$special_networks <br>" if ($DEBUG);
+
+if ($button_name eq "Analyze") {
 
 #make input functions - gives p_value and n_nodes
 create_input_function();
@@ -328,7 +331,7 @@ if ( $special_networks eq "Conjunctive/Disjunctive (Boolean rings only)" ) {
 #    `rm -f $clientip.functionfile.txt`;
 #    `rm -f $clientip.trfunctionfile.txt`;
 
-}
+}}
 print "</div>";
 
 #Box: Comments/Questions/Bugs Link :: Footer
@@ -414,6 +417,9 @@ sub create_input_function() {
 	    if ($1 > $n_nodes) { $n_nodes = $1; }
 	}
 	flock(OUTFILE, LOCK_UN) or die("Could not unlock file $!");
+    } else {
+	print "<font color=red>No input functions! Poop.</font>";
+	die("Program quitting. No input functions");
     }
     close(OUTFILE);
 
