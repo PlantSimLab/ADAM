@@ -22,7 +22,7 @@ $clientip = '../../htdocs/no-ssl/files/'. $clientip;
 
 #$clientip = $sec.'-'.$min.'-'.$hr;
 
-print header, start_html( -title=>'ADAM - Analysis of Discrete Algebraic Models', -script=>{-language=>'JavaScript',-src=>'/adam.js'}, ,-onLoad=>'change()', -style=>{-src=>'/adam_style.css'});
+print header, start_html( -title=>'ADAM - Analysis of Dynamic Algebraic Models', -script=>{-language=>'JavaScript',-src=>'/adam.js'}, ,-onLoad=>'change()', -style=>{-src=>'/adam_style.css'});
 print start_multipart_form(-name=>'form1', -method =>"POST", -onSubmit=>"return validate()");
 print "<div id=\"wrap\">";
 print "<div id=\"tipDiv\" style=\"position:absolute\; visibility:hidden\; z-index:100\"></div>";
@@ -32,7 +32,8 @@ print "<div id=\"header\">";
 print "<a href=\"http://admg.vbi.vt.edu/\"><table><tr>";
 print "<td align=\"left\"><img style=\"border:0px solid white;\" src=\"http://dvd.vbi.vt.edu/vbi-logo.png\"></td>";
 print "<td align=\"right\"><img style=\"border:0px solid white;\" src=\"http://dvd.vbi.vt.edu/vt_logo.jpg\"></td></tr>";
-print "<tr><td colspan=\"2\" align=\"center\"><font size=\"5\">Analysis of Discrete Algebraic Models (ADAM) 1.0 </font></b></td></tr></table></a>";
+print "<tr><td colspan=\"2\" align=\"center\"><font size=\"5\">Analysis of
+Dynamic Algebraic Models (ADAM) 1.0 </font></b></td></tr></table></a>";
 print "</div>";
 
 #Div Box :: Main
