@@ -147,14 +147,14 @@ if(($fcount-1) < $num_nodes)
 }
 
 if ($p_value == 2) {
-print "functions2 is: @functions2";
-$funcStr = join(",", @functions2);
-open (OUTDOT, ">$clientip.out1.dot") or die("failed to create out1.dot file");
-print OUTDOT "nonsense"; #maybe this will stop giving the error that it can't openOut the file cause it doesn't exist?
-close OUTDOT;
-system("cd lib/M2code; M2 functionalCircuits.m2 --stop --no-debug --silent -q -e 'QR = makeRing($num_nodes, $p_value);
+    print "functions2 is: @functions2";
+    $funcStr = join(",", @functions2);
+    open (OUTDOT, ">$clientip.out1.dot") or die("failed to create out1.dot file");
+    system("cd lib/M2code; M2 functionalCircuits.m2 --stop --no-debug --silent -q -e 'QR = makeRing($num_nodes, $p_value);
   F = matrix(QR, {{$funcStr}}); M = edgeSigns F; makeDepGraph(M, \"$clientip.out1.dot\"); exit 0'");
+    close OUTDOT;
 }
+
 else {
 open (OUTDOT,">$clientip.out1.dot") or die("failed to create out1.dot file");
 print OUTDOT "digraph test {\n";
