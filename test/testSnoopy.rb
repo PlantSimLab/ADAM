@@ -10,14 +10,15 @@ require 'fileutils'
 
 
 class TestSnoopyNotStandard < Test::Unit::TestCase
-  def testdummy
+  def testNotSupportedFile
     assert_raise(SystemExit) {
       @pn = Snoopy.new("extended.spept", 3)
     }
   end
 end
 
-class TestSnoopy2Trans < Test::Unit::TestCase
+
+class TestSnoopy2Transitions < Test::Unit::TestCase
   def setup
     @pn = Snoopy.new("2trans.spped", 3)
   end
@@ -28,6 +29,7 @@ class TestSnoopy2Trans < Test::Unit::TestCase
   
   def testFullFunctions
     @pn.makeNetworks()
+    assert_equal(2, @pn.networks.size)
     f = @pn.networks.first
     assert_equal( 5, f.size )
     assert_equal( 'x1', f[0] )
@@ -141,6 +143,7 @@ class TestSnoopy < Test::Unit::TestCase
     assert_equal( '0', @pn.simplifyFunction( '3*x1') ) 
   end
 
+  # I manually tested the state space of these functions
   def testFullFunctions
     @pn.makeNetworks()
     f = @pn.networks.first
