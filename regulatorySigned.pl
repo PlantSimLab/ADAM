@@ -146,44 +146,45 @@ if(($fcount-1) < $num_nodes)
     die("Errors with input file..ending program");
 }
 
-print "functions2 is: @functions2";
-$funcStr = join(",", @functions2);
-open (OUTDOT, ">$clientip.out1.dot") or die("failed to create out1.dot file");
-print OUTDOT "nonsense"; #maybe this will stop giving the error that it can't openOut the file cause it doesn't exist?
-close OUTDOT;
-system("cd lib/M2code; M2 functionalCircuits.m2 --stop --no-debug --silent -q -e 'QR = makeRing($num_nodes, $p_value);
+if ($p_value == 2) {
+    print "functions2 is: @functions2";
+    $funcStr = join(",", @functions2);
+    open (OUTDOT, ">$clientip.out1.dot") or die("failed to create out1.dot file");
+    system("cd lib/M2code; M2 functionalCircuits.m2 --stop --no-debug --silent -q -e 'QR = makeRing($num_nodes, $p_value);
   F = matrix(QR, {{$funcStr}}); M = edgeSigns F; makeDepGraph(M, \"$clientip.out1.dot\"); exit 0'");
+    close OUTDOT;
+}
 
-##presumably all the code below up to the comment "make the graph" would become irrelevant
-#open (OUTDOT,">$clientip.out1.dot") or die("failed to create out1.dot file");
-#print OUTDOT "digraph test {\n";
+else {
+open (OUTDOT,">$clientip.out1.dot") or die("failed to create out1.dot file");
+print OUTDOT "digraph test {\n";
 
-#for($ind = 1; $ind <= scalar(@functions); $ind++)
-#{
-#   print OUTDOT "node$ind [label=\"x$ind\", shape=\"box\"];\n";
-#}
-#for($h = 1; $h <= scalar(@functions); $h++)
-#{
-#  $node = $functions[$h-1];
-#  @vars = ();
-#  while( $node =~ m/x\[(\d+)\]/g )
-#  {
-#     $vars[$1] = $1;
-#  }
-#  if(scalar(@vars > 0))
-#  {
-#     for($j = 0; $j < scalar(@vars); $j++)
-#     {
-#       if(defined($vars[$j]) )
-#       {
-#           $from = $vars[$j];
-#           print OUTDOT "node$from -> node$h;\n";
-#       }
-#     }
-#  }
-#}
-#print OUTDOT "}";
-#close(OUTDOT);
+for($ind = 1; $ind <= scalar(@functions); $ind++)
+{
+   print OUTDOT "node$ind [label=\"x$ind\", shape=\"box\"];\n";
+}
+for($h = 1; $h <= scalar(@functions); $h++)
+{
+  $node = $functions[$h-1];
+  @vars = ();
+  while( $node =~ m/x\[(\d+)\]/g )
+  {
+     $vars[$1] = $1;
+  }
+  if(scalar(@vars > 0))
+  {
+     for($j = 0; $j < scalar(@vars); $j++)
+     {
+       if(defined($vars[$j]) )
+       {
+           $from = $vars[$j];
+           print OUTDOT "node$from -> node$h;\n";
+       }
+     }
+  }
+}
+print OUTDOT "}";
+close(OUTDOT);
 
 ##make the graph
 if(-e "$clientip.out1.dot")
