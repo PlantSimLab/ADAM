@@ -62,11 +62,12 @@ print "</td></tr>";
 print "<tr class=\"lines\"><td colspan=\"2\"></td></tr>";
 
 # Input Functions
-print "<tr valign=\"top\"><td><font size=\"2\"><b>Model Type:</b>";
+print "<tr valign=\"top\"><td><font size=\"2\"><b>Model Type:</b><br>";
 %labels = ('GINsim'=>'Logical Model (GINsim file)',
 'PDS'=>'PDS',
-'PBN'=>'Probabilistic Network');
-print radio_group(-name=>'format_box', -values=>['GINsim', 'PDS', 'PBN'], -labels=>\%labels, -default=>'PDS', -onChange=>'formatChange()');
+'PBN'=>'Probabilistic Network',
+'PetriNet'=>'Petri Net');
+print radio_group(-name=>'format_box', -values=>['GINsim', 'PDS', 'PBN', 'PetriNet'], -labels=>\%labels, -default=>'PDS', -onChange=>'formatChange()');
 print "</font></td>";
 # Explanatory Text
 print "<td rowspan=\"3\" id=\"explainInput\" class=\"explain\"></td>";
@@ -355,74 +356,102 @@ print end_html();
 
 # this function reads input functions from file or text area and writes the input functions into $clientip.functionfile.txt
 sub create_input_function() {
-    print "Clientip $clientip \n<br>" if ($DEBUG);
-    use Cwd;
-    $cwd = getcwd();
-    `mkdir -p $cwd/../../htdocs/no-ssl/files`; 
-    open (OUTFILE, ">$clientip.functionfile.txt");
-    print "open ok \n<br>" if ($DEBUG);
-    $filename = "$clientip.functionfile.txt";
-    if($upload_file) {
-      $fileuploaded = 1;
-      if($format_box eq "GINsim"){
-	  # Make sure extension is correct
-	  $extension = substr $upload_file, -5;
-	  if($extension ne "ginml"){
-	      print "<font color=red>Error: Must upload a Logical Model generated with GINsim, i.e., a <i>.ginml</i> file.</font>";
-	      die("Program quitting. Extension not ginml");
-	  }
-	  # Write functions to ginml file on server for ruby script
-	  open (GINOUTFILE, ">$clientip.ginsim.ginml");
-	  flock(GINOUTFILE, LOCK_EX) or die ("Could not get exclusive lock $!");
-	  while($bytesread=read($upload_file, $buffer, 1024)) { print GINOUTFILE $buffer; }
-	  flock(GINOUTFILE, LOCK_UN) or die ("Could not unlock file $!");
-	  close $upload_file;
-
-	  $pFile = "$clientip.pVal.txt";
-	  $nFile = "$clientip.nVal.txt";
-	  # Convert GINsim file and get p_value and n_nodes
-	  system("ruby ginSim-converter.rb $clientip");
-	  close GINOUTFILE;
-	  
-          # Set p_value and n_nodes
-	  open (MYFILE, $pFile) || die("Could not open file!");
-	  while (<MYFILE>) { chomp; $p_value = $_; }
-	  close (MYFILE); 
-	  open (MYFILE, $nFile) || die("Could not open file!");
-	  while (<MYFILE>) { chomp; $n_nodes = $_; }
-	  close (MYFILE); 
-      } else {
-          # Make sure extension is correct
-	  $extension = substr $upload_file, -3;
-	  if($extension ne "txt"){
-	      print "<font color=red>Error: Must upload a text file, i.e,. <i>.txt</i>.</font>";
-	      die("Program quitting. Extension not txt");
-	  }
-
-	  # Get contents of file and n_nodes
-	  flock(OUTFILE, LOCK_EX) or die ("Could not get exclusive lock $!");	  
-	  $n_nodes = 0;
-	  while($bytesread=read($upload_file, $buffer, 1024)) {
-	      print OUTFILE $buffer;
-	      while($buffer =~ m/f(\d+)/g) {
-		  if ($1 > $n_nodes) { print "$1<br>";$n_nodes = $1; }
-	      }
-	  }
+  print "Clientip $clientip \n<br>" if ($DEBUG);
+  use Cwd;
+  $cwd = getcwd();
+  `mkdir -p $cwd/../../htdocs/no-ssl/files`; 
+  open (OUTFILE, ">$clientip.functionfile.txt");
+  print "open ok \n<br>" if ($DEBUG);
+  $filename = "$clientip.functionfile.txt";
+  if($upload_file) {
+    $fileuploaded = 1;
+    if($format_box eq "GINsim"){
+# Make sure extension is correct
+      $extension = substr $upload_file, -5;
+      if($extension ne "ginml"){
+        print "<font color=red>Error: Must upload a Logical Model generated with GINsim, i.e., a <i>.ginml</i> file.</font>";
+        die("Program quitting. Extension not ginml");
       }
-      flock(OUTFILE, LOCK_UN) or die ("Could not unlock file $!");
+# Write functions to ginml file on server for ruby script
+      open (GINOUTFILE, ">$clientip.ginsim.ginml");
+      flock(GINOUTFILE, LOCK_EX) or die ("Could not get exclusive lock $!");
+      while($bytesread=read($upload_file, $buffer, 1024)) { print GINOUTFILE $buffer; }
+      flock(GINOUTFILE, LOCK_UN) or die ("Could not unlock file $!");
       close $upload_file;
-    } elsif ($edit_functions) { # Otherwise parse functions from textarea value (no file uploaded)
-	print OUTFILE $edit_functions;
-	$n_nodes = 0;
-	while($edit_functions =~ m/f(\d+)/g) {
-	    if ($1 > $n_nodes) { $n_nodes = $1; }
-	}
-	flock(OUTFILE, LOCK_UN) or die("Could not unlock file $!");
+
+      $pFile = "$clientip.pVal.txt";
+      $nFile = "$clientip.nVal.txt";
+# Convert GINsim file and get p_value and n_nodes
+      system("ruby ginSim-converter.rb $clientip");
+      close GINOUTFILE;
+
+# Set p_value and n_nodes
+      open (MYFILE, $pFile) || die("Could not open file!");
+      while (<MYFILE>) { chomp; $p_value = $_; }
+      close (MYFILE); 
+      open (MYFILE, $nFile) || die("Could not open file!");
+      while (<MYFILE>) { chomp; $n_nodes = $_; }
+      close (MYFILE); 
+    } elsif ($format_box eq "PetriNet"){
+# Make sure extension is correct
+      $extension = substr $upload_file, -5;
+      if($extension ne "spped"){
+        print "<font color=red>Error: Must upload a Petri Net generated with Snoopy, i.e., a <i>.spped</i> file.</font>";
+        die("Program quitting. Extension not spped");
+      }
+# Write functions to ginml file on server for ruby script
+      open (PETRIOUTFILE, ">$clientip.spped");
+      flock(PETRIOUTFILE, LOCK_EX) or die ("Could not get exclusive lock $!");
+      while($bytesread=read($upload_file, $buffer, 1024)) { print PETRIOUTFILE $buffer; }
+      flock(PETRIOUTFILE, LOCK_UN) or die ("Could not unlock file $!");
+      close $upload_file;
+
+      $pFile = "$clientip.pVal.txt";
+      $nFile = "$clientip.nVal.txt";
+# Convert Petri net file and get p_value and n_nodes
+      system("ruby petri-converter.rb $clientip $p_value");
+      close PETRIOUTFILE;
+
+# Set p_value and n_nodes
+      open (MYFILE, $pFile) || die("Could not open file!");
+      while (<MYFILE>) { chomp; $p_value = $_; }
+      close (MYFILE); 
+      open (MYFILE, $nFile) || die("Could not open file!");
+      while (<MYFILE>) { chomp; $n_nodes = $_; }
+      close (MYFILE); 
+
     } else {
-	print "<font color=red>No input functions! Poop.</font>";
-	die("Program quitting. No input functions");
+# Make sure extension is correct
+      $extension = substr $upload_file, -3;
+      if($extension ne "txt"){
+        print "<font color=red>Error: Must upload a text file, i.e,. <i>.txt</i>.</font>";
+        die("Program quitting. Extension not txt");
+      }
+
+# Get contents of file and n_nodes
+      flock(OUTFILE, LOCK_EX) or die ("Could not get exclusive lock $!");	  
+      $n_nodes = 0;
+      while($bytesread=read($upload_file, $buffer, 1024)) {
+        print OUTFILE $buffer;
+        while($buffer =~ m/f(\d+)/g) {
+          if ($1 > $n_nodes) { print "$1<br>";$n_nodes = $1; }
+        }
+      }
     }
-    close(OUTFILE);
+    flock(OUTFILE, LOCK_UN) or die ("Could not unlock file $!");
+    close $upload_file;
+  } elsif ($edit_functions) { # Otherwise parse functions from textarea value (no file uploaded)
+    print OUTFILE $edit_functions;
+    $n_nodes = 0;
+    while($edit_functions =~ m/f(\d+)/g) {
+      if ($1 > $n_nodes) { $n_nodes = $1; }
+    }
+    flock(OUTFILE, LOCK_UN) or die("Could not unlock file $!");
+  } else {
+    print "<font color=red>No input functions! Please upload a file or enter the functions.</font>";
+    die("Program quitting. No input functions");
+  }
+  close(OUTFILE);
 
     #remove any ^M characters
     `perl -pi -e 's/\r//g' "$clientip.functionfile.txt"`;

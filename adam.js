@@ -10,12 +10,14 @@ Javascript file for ADAM site.
 var formatExp = new Array();
 formatExp[0] = '<b>GINsim File</b>: Converts GINsim file to a polynomial system that ADAM will then proceed to analyze. Also outputs the variables and the converted system.';
 formatExp[1] = '<b>PDS</b>: Polynomial Dynamical System. Operations are interpreted as polynomial addition and multiplication.';
-formatExp[2] = '<b>PBN</b>: Probabilistic Boolean (or Multistate) Networks. Blahblahblah';
+formatExp[2] = '<b>PBN</b>: Probabilistic Boolean (or Multistate) Networks. Each nodes has several update rules, at each iteration, one is picked at random';
+formatExp[3] = '<b>Petri Net</b>: A (standard) Petri net generated with Snoopy. The Petri net must be <b><i>k</i>-bounded</b>, and <i>k</i> must be entered on the left.  This is an experimental feature, if you want to analyze the dynamics of the network, please copy and paste the generated PDS into ADAM.';
 
 // uploadType: Array of upload types for different input options on the site
 var uploadType = new Array();
-uploadType[0] = '<font color=blue size =\"1\">(.ginml)</font>';
-uploadType[1] = '<font color=blue size=\"1\">(.txt)</font>';
+uploadType[0] = '<font color=blue size =\"1\"> (.ginml)</font>';
+uploadType[1] = '<font color=blue size=\"1\"> (.txt)</font>';
+uploadType[3] = '<font color=blue size =\"1\"> (.xml or .spped)</font>';
 
 // formatChange(): disables and enables options based on which radio button is checked for
 // input format (GINsim, PDS, PBN). Also changes text explanation of options.
@@ -23,15 +25,23 @@ function formatChange() {
   var input = document.getElementById('explainInput');
   var state = document.getElementById('stateInput');
   var file = document.getElementById('fileInput');
-  if (document.form1.format_box[0].checked == true) { //if GINsim is checked
-    document.form1.p_value.disabled = true;
+  if (document.form1.format_box[0].checked == true || document.form1.format_box[3].checked == true) { //GinSim or Petri Net
     document.form1.translate_box.disabled = true;
     document.form1.edit_functions.value = '';
     document.form1.edit_functions.disabled = true;
     document.form1.stochastic.disabled = true;
-    state.innerHTML = '<font color="#666666" size="2">Enter number of states per node: </font>';
-    input.innerHTML = formatExp[0];
-    file.innerHTML = uploadType[0];
+    if (document.form1.format_box[0].checked == true) { //if GINsim is checked
+      document.form1.p_value.disabled = true;
+      input.innerHTML = formatExp[0];
+      file.innerHTML = uploadType[0];
+      state.innerHTML = '<font color="#666666" size="2">Enter number of states per node: </font>';
+    }
+    if (document.form1.format_box[3].checked == true) { // Petri Net
+      state.innerHTML = '<font color="black" size="2">Enter <i>k</i>-bound: </font>';
+      document.form1.p_value.disabled = false;
+      input.innerHTML = formatExp[3];
+      file.innerHTML = uploadType[3];
+    }
   }
   else {
     document.form1.p_value.disabled = false;

@@ -1,89 +1,28 @@
 require 'rubygems'
+require 'snoopy'
 require 'xmlsimple'
 require 'pp'
 
 # remove all <graphics> tags
+      
 
-filename = 'foo.xml'
-line_arr = File.readlines(filename)
-new_arr = []
-inGraphicsFlag = false
-line_arr.each do |line|
-
-  if ( line =~ /\s*<graphics/ )
-    inGraphicsFlag = true
-    next
-  end
-
-  if ( line =~ /\s*<\/graphics/ )
-    inGraphicsFlag = false
-    next
-  end
-
-  if inGraphicsFlag
-    next
-  end
-
-  new_arr.push line
-end 
-
-File.open(filename+".new", "w") do |f| 
-  new_arr.each{|line| f.puts(line)}
-end
-
-config = XmlSimple.xml_in(filename+".new", { 'KeyAttr' => ['name', 'node', 'id', 'node'] })
+filename = ARGV[0]
+pvalue = ARGV[1].to_i
 
 
+pn = Snoopy.new(filename, pvalue)
 
-# these are the nodes and their names
-index = 1
-variables = {}
-nNodes = config['nodeclasses'].first['nodeclass']['Place']['count'].to_i
-nodes = config['nodeclasses'].first['nodeclass']['Place']['node']
-nodes.each_pair{ |id, v|
-  puts "x#{index} = #{v['attribute']['Name']['content'].strip}"
-  variables[id] = index
-  index = index + 1
-}
-
-# these are the edges connecting places and transitions
-edges = config['edgeclasses'].first['edgeclass']['Edge']['edge']
-edges.keys
-edges.each_pair{ |id, e|
-#  puts e['source']
-#  puts e['target']
-}
-
-# these are the transitions
-index = 1
-transitions = config['nodeclasses'].first['nodeclass']['Transition']['node']
-transitions.each_pair{ |id, t|
-  inputs = edges.keys.select{ |k| edges[k]['target'] == id }.collect{ |k| edges[k]['source'] }
-  outputs= edges.keys.select{ |k| edges[k]['source'] == id }.collect{ |k| edges[k]['target'] }
-
-  puts 
-  puts "transition: #{index}"
-  index = index + 1
-  prod = ""
-  inputs.collect!{ |id| variables[id] }
-  inputs.each { |i| 
-    prod = prod + "x#{i}*"
+puts pn.printNames()
+puts ""
+pn.populateIncidenceMatrix()
+pn.makeIndicatorFunctions()
+pn.makeNetworks()
+pn.networks.each_with_index{ |network, index|
+  puts "transition: #{index+1}"
+  network.each_with_index{ |n, i|
+    puts "f#{i+1} = #{n}"
   }
-  prod.chop!
-
-  # if all inputs are on, decrease them
-  inputs.each{ |i| puts "f#{i} = 1 - #{prod}" }
-  
-  outputs.collect!{ |id| variables[id] }
-  # if all inputs are on, increase all outputs
-  outputs.each{ |i| puts "f#{i} = #{prod}" }
-
-  tmp = (inputs + outputs).uniq
-  vars = (1..nNodes).to_a - tmp
-  vars.each{ |i|
-    puts "f#{i} = x#{i}"
-  }
-
+  puts ""
 }
 
 
