@@ -131,7 +131,7 @@ print "<font size=\"2\">";
 print checkbox_group(-name=>'depgraph', -value=>'Dependency graph',
 -label=>'Dependency graph', -checked), "&nbsp\;&nbsp\;&nbsp\;", popup_menu(-name=>'DGformat',-values=>['*.gif','*.jpg','*.png','*.ps']);
 print "&nbsp\;&nbsp\;&nbsp\;";
-print checkbox_group(-name=>'feedback', -value=>'Feedback Circuit');
+print checkbox_group(-name=>'feedback', -value=>'Feedback Circuit', -disabled);
 print "&nbsp\;&nbsp\;&nbsp\;", checkbox_group(-name =>'stochastic', -value=>'Print probabilities', -label=>'Print probabilities', -checked);
 print "&nbsp\;&nbsp\;&nbsp\;";
 print checkbox_group(-name=>'statespace', -value=>'State space graph', -label=>'State space graph', -checked),"&nbsp\;&nbsp\;&nbsp\;", popup_menu(-name=>'SSformat',-values=>['*.gif','*.jpg','*.png','*.ps']), "<br>";
