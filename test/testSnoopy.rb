@@ -9,6 +9,17 @@ require 'fileutils'
 # ruby -I test test/testSnoopy.rb
 
 
+# To-do List
+
+# names of transitions
+# if places aren't named, display warning
+# shuffle result into PBN
+
+class TestSnoopyProducerConsumer < Test::Unit::TestCase
+  def setup 
+    @pn = Snoopy.new("procon_bounded.spped", 2)
+end
+
 class TestSnoopyNotStandard < Test::Unit::TestCase
   def testNotSupportedFile
     assert_raise(SystemExit) {
