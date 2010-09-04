@@ -18,7 +18,31 @@ require 'fileutils'
 class TestSnoopyProducerConsumer < Test::Unit::TestCase
   def setup 
     @pn = Snoopy.new("procon_bounded.spped", 2)
+  end
+
+  def testTransitionNames
+    assert_equal(@pn.networks == "produce")
+  end
+
+
+  def testFunctions
+    @pn.makeNetworks()
+    assert_equal(4, @pn.networks.size)
+
+    f = @pn.networks
+    expected = []
+    expected.push ['0', 'x2', 'x3', 'x4', 'x5', 'x1+x6']
+    expected.push ['x5*x6+x1', 'x5*x6+x2', 'x3', 'x4', 'x5*x6+x5', 'x5*x6+x6']
+    expected.push ['x1', 'x2*x4+x2', 'x2*x4+x3', 'x2*x4+x4', 'x2*x4+x5', 'x6']
+    expected.push ['x1', 'x2', '0', 'x3+x4', 'x5', 'x6' ]
+
+    assert_equal(expected, f)
+  end
 end
+
+
+
+
 
 class TestSnoopyNotStandard < Test::Unit::TestCase
   def testNotSupportedFile
