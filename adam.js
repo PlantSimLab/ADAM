@@ -64,8 +64,14 @@ function formatChange() {
 
 // Allows drop-down Polynomial/Boolean only if p_value is 2
 function pChange() {
-    if (document.form1.p_value.value == 2) { document.form1.translate_box.disabled = false; }
-    else { document.form1.translate_box.disabled = true; }
+    if (document.form1.p_value.value == 2) {
+	document.form1.translate_box.disabled = false;
+	document.form1.feedback.disabled = false;
+    }
+    else {
+	document.form1.translate_box.disabled = true;
+	document.form1.feedback.disabled = true;
+    }
 }
 
 /*2) Network Options*/
