@@ -412,13 +412,13 @@ sub create_input_function() {
       system("ruby petri-converter.rb $clientip $p_value");
       close PETRIOUTFILE;
 
-# Set p_value and n_nodes
-      open (MYFILE, $pFile) || die("Could not open file!");
-      while (<MYFILE>) { chomp; $p_value = $_; }
-      close (MYFILE); 
-      open (MYFILE, $nFile) || die("Could not open file!");
-      while (<MYFILE>) { chomp; $n_nodes = $_; }
-      close (MYFILE); 
+## Set p_value and n_nodes
+#      open (MYFILE, $pFile) || die("Could not open file!");
+#      while (<MYFILE>) { chomp; $p_value = $_; }
+#      close (MYFILE); 
+#      open (MYFILE, $nFile) || die("Could not open file!");
+#      while (<MYFILE>) { chomp; $n_nodes = $_; }
+#      close (MYFILE); 
 
     } else {
 # Make sure extension is correct
