@@ -42,7 +42,9 @@ print "<div id = \"main\">";
 #Div Box: Text Explanation :: Nav
 print "<div id=\"nav\"><p>";
 print "ADAM uses a combination of simulation and algorithms to analyze the dynamics of
-discrete biological systems. It can analyze <b>Logical Models</b> (in <a href= \"http://gin.univ-mrs.fr/\">GINSim</a> format), <b>Polynomial Dynamical 
+discrete biological systems. It can analyze bounded <b>Petri-nets</b>
+(generated with <a
+href=\"http://www-dssz.informatik.tu-cottbus.de/software/snoopy.html\">Snoopy</a>), <b>Logical Models</b> (in <a href= \"http://gin.univ-mrs.fr/\">GINSim</a> format), <b>Polynomial Dynamical 
 Systems (PDS)</b>, and <b>Probabilistic Boolean (or multistate) Networks</b>. For small enough networks (deterministic or probabilistic), ADAM simulates the 
 complete state space of the model and finds all attractors (steady states and limit cycles) together with statistics about the size of components. For larger networks, 
 ADAM computes fixed points for both deterministic and probabilistic networks, and limit cycle of the length specified by the user for deterministic networks. 
