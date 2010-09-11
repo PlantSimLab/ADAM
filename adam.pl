@@ -29,7 +29,7 @@ print "<div id=\"tipDiv\" style=\"position:absolute\; visibility:hidden\; z-inde
 
 #Div Box: ADAM Title :: Header
 print "<div id=\"header\">";
-$header = &Constant_HTML('/header.html');
+$header = &Constant_HTML('header.html');
 print $header;
 print "</div>";
 
@@ -38,7 +38,7 @@ print "<div id = \"main\">";
 
 #Div Box: Text Explanation :: Nav
 print "<div id=\"nav\"><p>";
-$navigation = &Constant_HTML('/navigation.html');
+$navigation = &Constant_HTML('navigation.html');
 print $navigation;
 
 print "ADAM uses a combination of simulation and algorithms to analyze the dynamics of
