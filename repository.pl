@@ -30,7 +30,7 @@ print <<ENDHTML;
 			</h1>
       <p> 
       Coming soon!
-      </p?
+      </p>
 		</div>
 		</div>
 	</body>
