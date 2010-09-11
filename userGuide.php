@@ -8,32 +8,13 @@
 		<link rel="stylesheet" type="text/css" href="/adam_style.css">
 	</head>
 	<body>
-		<!--#include virtual="header.html" -->
-		<?php include("header.html"); ?>
-		
 		<div id="header">
-			<a href="http://admg.vbi.vt.edu/"></a>
-			<table summary="Logos">
-				<tr>
-					<td align="left">
-						<img style="border:0px solid white;" src="http://dvd.vbi.vt.edu/vbi-logo.png" alt="VBI logo">
-					</td>
-					<td align="right">
-						<img style="border:0px solid white;" src="http://dvd.vbi.vt.edu/vt_logo.jpg" alt="VT logo">
-					</td>
-				</tr>
-				<tr>
-					<td colspan="2" align="center">
-						<font size="5">Analysis of Discrete Algebraic Models (ADAM) 1.0</font>
-					</td>
-				</tr>
-			</table>
+			<?php include("header.html"); ?>
 		</div>
 		<div id="main">
 			<div id="nav">
-				<h2>
-					<a href="/cgi-bin/git/adam.pl">Back to ADAM</a>&nbsp;&nbsp;&nbsp; <a href="/steptutorial.htm">Step-by-step tutorial</a>
-				</h2>
+				<?php include("navigation.html"); ?>
+			
 				<h1>
 					<font face="Verdana, Arial, Helvetica, sans-serif">Analysis of Discrete Algebraic Models User Guide</font>
 				</h1>
