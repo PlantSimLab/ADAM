@@ -28,7 +28,8 @@ print <<ENDHTML;
 			<h1>
 				ADAM Model repository of discrete biological systems
 			</h1>
-      <p> 
+      <p>
+
       Coming soon!
       </p>
 		</div>
