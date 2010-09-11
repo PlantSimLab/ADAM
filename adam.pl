@@ -29,11 +29,8 @@ print "<div id=\"tipDiv\" style=\"position:absolute\; visibility:hidden\; z-inde
 
 #Div Box: ADAM Title :: Header
 print "<div id=\"header\">";
-print "<a href=\"http://admg.vbi.vt.edu/\"><table><tr>";
-print "<td align=\"left\"><img style=\"border:0px solid white;\" src=\"http://dvd.vbi.vt.edu/vbi-logo.png\"></td>";
-print "<td align=\"right\"><img style=\"border:0px solid white;\" src=\"http://dvd.vbi.vt.edu/vt_logo.jpg\"></td></tr>";
-print "<tr><td colspan=\"2\" align=\"center\"><font size=\"5\">Analysis of
-Dynamic Algebraic Models (ADAM) 1.0 </font></b></td></tr></table></a>";
+$header = &Constant_HTML('header.html');
+print $header;
 print "</div>";
 
 #Div Box :: Main
@@ -41,6 +38,9 @@ print "<div id = \"main\">";
 
 #Div Box: Text Explanation :: Nav
 print "<div id=\"nav\"><p>";
+$navigation = &Constant_HTML('navigation.html');
+print $navigation;
+
 print "ADAM uses a combination of simulation and algorithms to analyze the dynamics of
 discrete biological systems. It can analyze bounded <b>Petri-nets</b>
 (generated with <a
@@ -50,7 +50,9 @@ complete state space of the model and finds all attractors (steady states and li
 ADAM computes fixed points for both deterministic and probabilistic networks, and limit cycle of the length specified by the user for deterministic networks. 
 You can follow our <a href=\"/steptutorial.htm\">step-by-step tutorial</a> or read the <a href=\"/userGuide.html\" target=\"_blank\">user guide</a>. It is important 
 that you follow the format specified in the guide. Make your selections and provide inputs (if any) in the form below and click 
-<i>Analyze</i> to run the software. To generate a model from experimental time course data, you can use <a href=\"http://polymath.vbi.vt.edu/polynome\">Polynome</a>.";
+<i>Analyze</i> to run the software. To generate a model from experimental time
+course data, you can use <a
+href=\"http://polymath.vbi.vt.edu/polynome\">Polynome</a>.<br><br>";
 print "</div>";
 
 
@@ -503,4 +505,19 @@ sub set_update_type() {
 		$update_box_param = "parallel";
 		$update_schedule = "0";
 	}
+}
+
+# read in a file to include it
+sub Constant_HTML {
+  local(*FILE); # filehandle
+  local($file); # file path
+  local($HTML); # HTML data
+
+  $file = $_[0] || die "There was no file specified!\n";
+
+  open(FILE, "<$file") || die "Couldn't open $file!\n";
+  $HTML = do { local $/; <FILE> }; #read whole file in through slurp #mode (by setting $/ to undef)
+  close(FILE);
+
+  return $HTML;
 }
