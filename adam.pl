@@ -48,8 +48,8 @@ href=\"http://www-dssz.informatik.tu-cottbus.de/software/snoopy.html\">Snoopy</a
 Systems (PDS)</b>, and <b>Probabilistic Boolean (or multistate) Networks</b>. For small enough networks (deterministic or probabilistic), ADAM simulates the 
 complete state space of the model and finds all attractors (steady states and limit cycles) together with statistics about the size of components. For larger networks, 
 ADAM computes fixed points for both deterministic and probabilistic networks, and limit cycle of the length specified by the user for deterministic networks. 
-You can follow our <a href=\"steptutorial.php\">step-by-step tutorial</a> or
-read the <a href=\"userGuide.php\" target=\"_blank\">user guide</a>. It is important 
+You can follow our <a href=\"steptutorial.pl\">step-by-step tutorial</a> or
+read the <a href=\"userGuide.pl\" target=\"_blank\">user guide</a>. It is important 
 that you follow the format specified in the guide. Make your selections and provide inputs (if any) in the form below and click 
 <i>Analyze</i> to run the software. To generate a model from experimental time
 course data, you can use <a

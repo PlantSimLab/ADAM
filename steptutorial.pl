@@ -1,20 +1,31 @@
+#!/usr/bin/perl
+print "Content-type: text/html\n\n";
+print <<ENDHTML;
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
 <html>
 	<head>
 		<title>
-			ADAM Model repository
+			ADAM Step-by-step tutorial
 		</title>
 		<link rel="stylesheet" type="text/css" href="/adam_style.css">
 	</head>
 	<body>
 		<div id="header">
-			<?php include("header.html"); ?>
+ENDHTML
+
+$header = &Constant_HTML('header.html');
+print $header;
+print <<ENDHTML;
 		</div>
 		<div id="main" >
 			<div id="nav">
-				<?php include("navigation.html"); ?>
+ENDHTML
+
+$navigation = &Constant_HTML('navigation.html');
+print $navigation;
+print <<ENDHTML;
 			<h1>
-				ADAM Model repository of discrete biological systems
+				Detailed examples of how to use ADAM
 			</h1>
 			<p><font size="2">
 				<a href="#GS">Logical Model (GINsim)</a> &nbsp;&nbsp;&nbsp; <a href="#PDS">Polynomial Dynamical System</a> &nbsp;&nbsp;&nbsp; <a href="#PBN">Probabilistic Boolean Network</a> &nbsp;&nbsp;&nbsp; <a href="#LN">Large Network</a> &nbsp;&nbsp;&nbsp; <a href="#conj">Conjunctive Network</a></font>
@@ -190,3 +201,20 @@
 		</div>
 	</body>
 </html>
+
+ENDHTML
+
+# read in a file to include it
+sub Constant_HTML {
+  local(*FILE); # filehandle
+  local($file); # file path
+  local($HTML); # HTML data
+
+  $file = $_[0] || die "There was no file specified!\n";
+
+  open(FILE, "<$file") || die "Couldn't open $file!\n";
+  $HTML = do { local $/; <FILE> }; #read whole file in through slurp #mode (by setting $/ to undef)
+  close(FILE);
+
+  return $HTML;
+}
