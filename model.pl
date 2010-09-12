@@ -30,7 +30,7 @@ $navigation = &Constant_HTML('navigation.html');
 print $navigation;
 print <<ENDHTML;
 <h1>
-	Model repository of Discrete Biological Systems
+	Model Repository of Discrete Biological Systems
 </h1>
 
 ENDHTML

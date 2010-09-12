@@ -1,4 +1,9 @@
 #!/usr/bin/perl
+
+use CGI;
+$cgi = new CGI;
+$model = $cgi->url_param('model');
+
 print "Content-type: text/html\n\n";
 print <<ENDHTML;
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
@@ -29,7 +34,7 @@ print <<ENDHTML;
 	Model Repository of Discrete Biological Systems
 </h1>
 <ul>
-	<li><a href="model.pl?model=phageLambda">Logical Model of Phage Lambda</a>
+	<li><a href="repository.pl?model=phageLambda">Logical Model of Phage Lambda</a>
 	
 	</li>
 	<li>Petri Net of ERK Pathway
@@ -39,6 +44,10 @@ print <<ENDHTML;
 </ul>
 
 ENDHTML
+$filename = 'models/' . $model . '.html';
+#print $filename;
+$content = &Constant_HTML($filename);
+print $content;
 
 # read in a file to include it
 sub Constant_HTML {
