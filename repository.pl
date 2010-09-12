@@ -37,9 +37,9 @@ print <<ENDHTML;
 	<li><a href="repository.pl?model=phageLambda">Logical Model of Phage Lambda</a>
 	
 	</li>
-	<li>Petri Net of ERK Pathway
+	<li><a href="repository.pl?model=ERK">Petri Net of ERK Pathway</a>
 	</li>
-	<li>Boolean Model of Lac Operon
+	<li><a href="repository.pl?model=LacOperon">Boolean Model of Lac Operon</a>
 	</li>
 </ul>
 
