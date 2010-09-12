@@ -30,7 +30,7 @@ $navigation = &Constant_HTML('navigation.html');
 print $navigation;
 print <<ENDHTML;
 <h1>
-	ADAM Model repository of Discrete Biological Systems
+	Model repository of Discrete Biological Systems
 </h1>
 
 ENDHTML

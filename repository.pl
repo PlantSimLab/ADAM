@@ -26,10 +26,10 @@ $navigation = &Constant_HTML('navigation.html');
 print $navigation;
 print <<ENDHTML;
 <h1>
-	ADAM Model repository of Discrete Biological Systems
+	Model Repository of Discrete Biological Systems
 </h1>
 <ul>
-	<li><a href="model.pl?model=PhageLambda">Logical Model of Phage Lambda</a>
+	<li><a href="model.pl?model=phageLambda">Logical Model of Phage Lambda</a>
 	
 	</li>
 	<li>Petri Net of ERK Pathway
