@@ -20,6 +20,43 @@ class TestSnoopyOpenSystem < Test::Unit::TestCase
   def setup
     @pn = Snoopy.new("pc_openSystem.spped", 2)
   end
+
+  def testDummy 
+    assert true
+  end
+end
+
+class TestSnoopyErkPathway< Test::Unit::TestCase
+  def setup
+    @pn = Snoopy.new("erk.spped", 2)
+  end
+
+  def testNames
+    assert_equal("x1 = RKIP-P\nx2 = MEK-PP_ERK\nx3 = RP\nx4 = Raf-1Star_RKIP_ERK-PP\nx5 = RKIP-P_RP\nx6 = MEK-PP\nx7 = Raf-1Star\nx8 = RKIP\nx9 = ERK\nx10 = Raf-1Star_RKIP\nx11 = ERK-PP\n", @pn.printNames())
+  end
+
+  def testFunctions
+    @pn.makeNetworks()
+    assert_equal(11, @pn.networks.size)
+    f = @pn.networks
+    expected = []
+    expected.push [ 'x1', '0', 'x3', 'x4', 'x5', 'x2+x6', 'x7', 'x8', 'x9', 'x10', 'x2+x11']
+    expected.push [ 'x1', 'x2', 'x3+x5', 'x4', '0', 'x6', 'x7', 'x5+x8', 'x9', 'x10', 'x11']
+    expected.push [ 'x1', 'x2', 'x3', 'x4', 'x5', 'x6', 'x7*x8+x7', 'x7*x8+x8', 'x9', 'x7*x8+x10', 'x11']
+    expected.push [ 'x1', 'x2', 'x3', 'x4', 'x5', 'x6', 'x7+x10', 'x8+x10', 'x9', '0', 'x11']
+    expected.push [ 'x1', 'x2', 'x3', 'x10*x11+x4', 'x5', 'x6', 'x7', 'x8', 'x9', 'x10*x11+x10', 'x10*x11+x11']
+    expected.push [ 'x1', 'x2', 'x3', '0', 'x5', 'x6', 'x7', 'x8', 'x9', 'x4+x10', 'x4+x11']
+    expected.push [ 'x1', 'x6*x9+x2', 'x3', 'x4', 'x5', 'x6*x9+x6', 'x7', 'x8', 'x6*x9+x9', 'x10', 'x11']
+    expected.push [ 'x1', '0', 'x3', 'x4', 'x5', 'x2+x6', 'x7', 'x8', 'x2+x9', 'x10', 'x11']
+    expected.push [ 'x1+x5', 'x2', 'x3+x5', 'x4', '0', 'x6', 'x7', 'x8', 'x9', 'x10', 'x11']
+    expected.push [ 'x1*x3+x1', 'x2', 'x1*x3+x3', 'x4', 'x1*x3+x5', 'x6', 'x7', 'x8', 'x9', 'x10', 'x11']
+    expected.push [ 'x1+x4', 'x2', 'x3', '0', 'x5', 'x6', 'x4+x7', 'x8', 'x4+x9', 'x10', 'x11']
+
+    
+
+    assert_equal(expected, f)
+  end
+
 end
 
 
@@ -180,10 +217,15 @@ class TestSnoopy < Test::Unit::TestCase
     assert_equal( [0,0,0], Array.new(@pn.nNodes, 0 ) )
   end
 
+
+  def testSimplifyFunctions
+    assert_equal( ['x1', 'x1^2', '0'], @pn.simplifyFunction( ['(x1)', '(x1)*(x1)', '3*x1']) ) 
+  end
+
   def testSimplifyFunction
-    assert_equal( 'x1', @pn.simplifyFunction( '(x1)') ) 
-    assert_equal( 'x1^2', @pn.simplifyFunction( '(x1)*(x1)') ) 
-    assert_equal( '0', @pn.simplifyFunction( '3*x1') ) 
+    assert_equal( ['x1'], @pn.simplifyFunction( '(x1)') ) 
+    assert_equal( ['x1^2'], @pn.simplifyFunction( '(x1)*(x1)') ) 
+    assert_equal( ['0'], @pn.simplifyFunction( '3*x1') ) 
   end
 
   # I manually tested the state space of these functions

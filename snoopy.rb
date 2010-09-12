@@ -52,8 +52,13 @@ class Snoopy
   end
 
   def simplifyFunction( input )
-    ret = `/usr/local/bin/M2 indicatorFunc.m2 --stop --no-debug --silent -q -e 'simplify( "#{input}", #{@pValue}, #{@nNodes}); exit 0'`
-    ret.chop!
+    functionList = ""
+    input.each{ |function|
+      functionList = functionList + "\"" + function + "\","
+    }
+    functionList.chop!
+    ret = `/usr/local/bin/M2 indicatorFunc.m2 --stop --no-debug --silent -q -e 'simplify( {#{functionList}}, #{@pValue}, #{@nNodes}); exit 0'`
+    ret.split( /\n/)
   end
 
   def assignIndexToIDs
@@ -96,10 +101,10 @@ class Snoopy
       at = @incidenceMatrix[index]
       for i in 1..@nNodes 
         addOn = "(#{c}) * #{at[i-1]}"
-        f = simplifyFunction "x#{i} + #{addOn}"
+        f = "x#{i} + #{addOn}"
         network.push f
       end
-      @networks.push network
+      @networks.push simplifyFunction network
     }
   end
 
@@ -120,9 +125,9 @@ class Snoopy
         func = func + "(#{ret.chop})*"
       }
       func.chop!
-      @indicatorFunctions.push simplifyFunction func
+      @indicatorFunctions.push func
     }
-    @indicatorFunctions
+    simplifyFunction @indicatorFunctions
   end 
 
   def populateIncidenceMatrix

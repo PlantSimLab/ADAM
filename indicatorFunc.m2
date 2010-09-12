@@ -11,11 +11,20 @@ indicatorF(ZZ,ZZ,ZZ,ZZ) := (a, b, i, p) -> (
 
 -- 
 simplify = method()
-simplify (String, ZZ, ZZ) := (input, p, n) -> (
+--simplify (String, ZZ, ZZ) := (input, p, n) -> (
+--  R = ZZ/p[ apply( (1..n), i -> value concatenate( "x", toString i)) ];
+--  QR = R / ideal apply(gens R, x -> x^p - x);
+--  pol := value input;
+--  print toString pol
+--)
+simplify (List, ZZ, ZZ) := (functionList, p, n) -> (
+  --print "calling simplify on List";
   R = ZZ/p[ apply( (1..n), i -> value concatenate( "x", toString i)) ];
   QR = R / ideal apply(gens R, x -> x^p - x);
-  pol := value input;
-  print toString pol
+  scan( functionList, input -> (
+    pol := value input;
+    print toString pol
+  ))
 )
 
 end
