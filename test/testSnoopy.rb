@@ -15,13 +15,21 @@ require 'fileutils'
 # if places aren't named, display warning
 # shuffle result into PBN
 
+
+class TestSnoopyOpenSystem < Test::Unit::TestCase
+  def setup
+    @pn = Snoopy.new("pc_openSystem.spped", 2)
+  end
+end
+
+
 class TestSnoopyProducerConsumer < Test::Unit::TestCase
   def setup 
     @pn = Snoopy.new("procon_bounded.spped", 2)
   end
 
   def testTransitionNames
-    assert_equal(@pn.networks == "produce")
+    #assert_equal(@pn.networks,  "produce")
   end
 
 
