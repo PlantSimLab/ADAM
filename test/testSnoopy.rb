@@ -26,6 +26,12 @@ class TestSnoopyPrime < Test::Unit::TestCase
     @pn = Snoopy.new("erk.spped", 8)
     assert_equal( 11, @pn.pValue )
   end
+
+  def testTooLargeBoundPrime
+    @pn = Snoopy.new("erk.spped", 101)
+    assert false
+  end  
+
 end
 
 
