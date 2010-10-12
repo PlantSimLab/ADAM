@@ -9,8 +9,14 @@ require 'pp'
 filename = ARGV[0]
 pvalue = ARGV[1].to_i
 
-
-pn = Snoopy.new(filename, pvalue)
+begin
+  pn = Snoopy.new(filename, pvalue)
+rescue 
+  puts "There was a problem with your input. Please check that the input file
+is a standard petri net and that the k-bound you entered is 1 less than a
+prime number. Thank you."
+  exit 1
+end
 
 puts pn.printNames()
 puts ""

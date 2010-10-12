@@ -1,5 +1,6 @@
 require 'rubygems'
 require 'xmlsimple'
+require 'mathn'
 
 # an instance of this class represents a Petri Net
 
@@ -15,7 +16,14 @@ class Snoopy
   attr_accessor :incidenceMatrix, :indicatorFunctions, :networks
   
   def initialize( filename, pValue )
+    
     @pValue = pValue
+
+    
+    unless isPrime?
+      raise 'not a prime number'
+    end
+
     @filename = filename
     parse()
 
@@ -140,6 +148,18 @@ class Snoopy
       row = Snoopy.arrayAdd( makeRow(inputs, -1), makeRow(outputs, 1))
       @incidenceMatrix.push row
     }
+  end
+
+  def isPrime?
+    a = Prime.new
+    a.each { |succ|
+      if succ > 100
+        break
+      end
+    }
+                
+    primes = a.instance_variable_get(:@primes)
+    primes.include? @pValue
   end
 
   def parse 

@@ -15,6 +15,25 @@ require 'fileutils'
 # if places aren't named, display warning
 # shuffle result into PBN
 
+class TestSnoopyPrime < Test::Unit::TestCase
+  def testShouldRaiseException
+    assert_raise(RuntimeError) {
+      @pn = Snoopy.new("erk.spped", 4)
+    }
+    assert_raise(RuntimeError) {
+      @pn = Snoopy.new("erk.spped", 8)
+    }
+  end
+
+  def testShouldNotRaise
+  assert_nothing_raised do
+      @pn = Snoopy.new("erk.spped", 3)
+      @pn = Snoopy.new("erk.spped", 2)
+    end
+  end
+
+end
+
 
 class TestSnoopyOpenSystem < Test::Unit::TestCase
   def setup
