@@ -17,12 +17,7 @@ class Snoopy
   
   def initialize( filename, pValue )
     
-    @pValue = pValue
-
-    
-    unless isPrime?
-      raise 'not a prime number'
-    end
+    @pValue = nextPrime pValue
 
     @filename = filename
     parse()
@@ -32,6 +27,8 @@ class Snoopy
       puts "Please use a Standard Petri Net. Other types of Petri Nets are not supported yet."
       exit 1
     end
+
+    puts "Here comes a #{pValue -1}-bounded Petri net converted to a system of polynomials over F_#{@pValue}."
     # node id and variable index (from 1 to n)
     @variables = {}
 
@@ -150,16 +147,16 @@ class Snoopy
     }
   end
 
-  def isPrime?
+  # return next largest prime number
+  def nextPrime p 
     a = Prime.new
     a.each { |succ|
-      if succ > 100
+      if succ.to_i >= p.to_i 
         break
       end
     }
                 
-    primes = a.instance_variable_get(:@primes)
-    primes.include? @pValue
+    a.instance_variable_get(:@primes).last
   end
 
   def parse 

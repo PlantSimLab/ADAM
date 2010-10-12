@@ -11,7 +11,7 @@ end
 clientip = ARGV[0]
 pvalue = ARGV[1]
 
-puts "Here comes a #{pvalue}-bounded petri net!<br>";
+#puts "Here comes a #{pvalue}-bounded petri net!<br>";
 
 # This is a little ugly, but the users enters the k from the k-bound, and p =
 # k+1

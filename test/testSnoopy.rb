@@ -16,22 +16,16 @@ require 'fileutils'
 # shuffle result into PBN
 
 class TestSnoopyPrime < Test::Unit::TestCase
-  def testShouldRaiseException
-    assert_raise(RuntimeError) {
-      @pn = Snoopy.new("erk.spped", 4)
-    }
-    assert_raise(RuntimeError) {
-      @pn = Snoopy.new("erk.spped", 8)
-    }
-  end
+  def testFindNextPrime
+    @pn = Snoopy.new("erk.spped", 2)
+    assert_equal( 2, @pn.pValue )
 
-  def testShouldNotRaise
-  assert_nothing_raised do
-      @pn = Snoopy.new("erk.spped", 3)
-      @pn = Snoopy.new("erk.spped", 2)
-    end
-  end
+    @pn = Snoopy.new("erk.spped", 4)
+    assert_equal( 5, @pn.pValue )
 
+    @pn = Snoopy.new("erk.spped", 8)
+    assert_equal( 11, @pn.pValue )
+  end
 end
 
 
