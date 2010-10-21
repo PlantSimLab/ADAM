@@ -41,7 +41,7 @@ print "<div id=\"nav\"><p>";
 $navigation = &Constant_HTML('navigation.html');
 print $navigation;
 
-print "ADAM uses a combination of simulation and algorithms to analyze the dynamics of
+print "ADAM uses a combination of simulation and mathematical algorithms to analyze the dynamics of
 discrete biological systems. It can analyze bounded <b>Petri-nets</b>
 (generated with <a
 href=\"http://www-dssz.informatik.tu-cottbus.de/software/snoopy.html\">Snoopy</a>), <b>Logical Models</b> (in <a href= \"http://gin.univ-mrs.fr/\">GINSim</a> format), <b>Polynomial Dynamical 
