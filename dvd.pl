@@ -157,7 +157,7 @@ if($p_value && $n_nodes)
   $buffer = "";  
 	$filename = "";
 	if($translate_box eq "Boolean") {
-		if($n_nodes > 21  || ($p_value**$n_nodes >= 2**22)) {
+		if($n_nodes > 221  || ($p_value**$n_nodes >= 2**222)) {
       print "<font color=red><i>Sorry. Unable to compute statistics for very large networks. It is suggested you download the standalone version which has no limitations</i></font><br>";
       `rm -f $clientip.functionfile.txt`;
       die("Translation unsuccessful");
@@ -209,7 +209,7 @@ if($p_value && $n_nodes)
 		print "] <br>";
         
         # only allow networks up to size 10
-		if($n_nodes > 21 || ($p_value**$n_nodes >= 2**23)) {
+		if($n_nodes > 221 || ($p_value**$n_nodes >= 2**223)) {
 			print "<font color=red><i>Sorry. Unable to compute statistics for very large networks. It is suggested you download the standalone version which has no limitations</i></font><br>";
 		}
 		else {
@@ -233,8 +233,10 @@ if($p_value && $n_nodes)
 	}
 	else {
     print "<font color=blue><b>Computing Trajectory of the given initialization</b></font>"." [m = ".$p_value.", n = ".$n_nodes."] <br>";
-		if($n_nodes > 21 || ($p_value**$n_nodes >= 2**22)) {
-		  print "<font color=red><i>Sorry. Unable to compute statistics for very large networks. It is suggested you download the standalone version which has no limitations</i></font><br>";
+		if($n_nodes > 221 || ($p_value**$n_nodes >= 2**222)) {
+		  print "<font color=red><i>Sorry. Unable to compute statistics for very
+      large networks. It is suggested you download the standalone version
+      which has no limitations bal</i></font><br>";
 		}
 		else {
       if( ($trajectory_value ne null) &&( $trajectory_value ne "") ) {
