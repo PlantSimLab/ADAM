@@ -42,6 +42,8 @@ print <<ENDHTML;
 	<li><a href="repository.pl?model=LacOperon">Boolean Model of Lac Operon</a>
 	</li>
 	<li><a href="repository.pl?model=hrpregulon">Boolean Model of the Pseudomonas syringae hrp Regulon</a>
+	<li><a href="repository.pl?model=Drosophila">Boolean Model of segment
+  polarity genes in Drosophila melanogaster</a>
 	</li>
 </ul>
 
