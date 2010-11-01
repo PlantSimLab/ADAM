@@ -1,6 +1,7 @@
 #adam_largeNetwork $n_nodes $p_value $filename $limCyc_length
 
 require 'partial_input'
+require 'pp'
 
 # Takes input from dvd website and passes it to M2 to compute fixed points
 # returns 0 (no errors) or 1 (errors) 
@@ -23,6 +24,11 @@ s = IO.readlines(functionFile,'').to_s
 # take the input functions and put the in a hash, for example
 # {1=>["x1+x2"], 2=>["x2"], 3=>["x3", "x2", "x1"]}
 functionHash = PartialInput.parse_into_hash s
+
+puts "<pre>"
+pp functionHash
+puts "</pre>"
+
  
 # this is the list that gives the number of functions per variable
 # if one variable has more than 1 function, the system is probabilistic
@@ -34,14 +40,6 @@ if false # numFunctions.max != 1
   end
 end
 
-# make M2 list numFunctions 
-m2_numFunctions = "{"
-numFunctions.each { |i| 
-  m2_numFunctions = m2_numFunctions + i.to_s
-  m2_numFunctions = m2_numFunctions + ","
-}
-m2_numFunctions.chop!
-m2_numFunctions = m2_numFunctions + "}"
 
 # some error checking on fi
 if  functionHash.keys.sort != (1..n_nodes.to_i).to_a 
@@ -80,7 +78,8 @@ puts "Running analysis now ...<br>"
 
 #one line is for my machine, one line is for the server b/c M2 is in different paths
 #  m2_result = `cd lib/M2code/; M2 solvebyGB.m2 --stop --no-debug --silent -q -e 'QR = makeRing(#{n_nodes}, #{p_value}); ll = gbSolver( matrix(QR, #{m2_system}), #{limCyc_length}, #{m2_numFunctions}); stdio << length ll << "?" << gbTable ll; exit 0'`
-  m2_result = `cd lib/M2code/; /usr/local/bin/M2 solvebyGB.m2 --stop --no-debug --silent -q -e 'QR = makeRing(#{n_nodes}, #{p_value}); ll = gbSolver( matrix(QR, #{m2_system}), #{limCyc_length}, #{m2_numFunctions}); stdio << length ll << "?" << gbTable ll; exit 0'`
+  m2_result = `cd lib/M2code/; /usr/local/bin/M2 solvebyGB.m2 --stop --no-debug --silent -q -e 'QR = makeRing(#{n_nodes}, #{p_value}); ll = gbSolver( matrix(QR, #{m2_system}), #{limCyc_length}); stdio << length ll << "?" << gbTable ll; exit 0'`
+  #puts "QR = makeRing(#{n_nodes}, #{p_value}); ll = gbSolver( matrix(QR, #{m2_system}), #{limCyc_length})<br>"
   #puts "cd lib/M2code/; /usr/local/bin/M2 solvebyGB.m2 --stop --no-debug --silent -q -e 'QR = makeRing(#{n_nodes}, #{p_value}); ll = gbSolver( matrix(QR, #{m2_system}), #{limCyc_length}, #{m2_numFunctions}); stdio << length ll << \"?\" << gbTable ll; exit 0'<br>"
   temp = m2_result.split('?')
   numCycles = temp.fetch(0)

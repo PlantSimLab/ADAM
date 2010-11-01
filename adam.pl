@@ -262,6 +262,7 @@ if ( $special_networks eq "Conjunctive/Disjunctive (Boolean rings only)" ) {
 	print  "<br><A href=\"$clientip.out1.$DGformat\" target=\"_blank\"><font color=\"#226677\"><i>Click to view the dependency graph.</i></font></A><br>";
     }
 
+
     # Analysis
     print "<font color=blue><b>Calculating fixed points for a large network, other analysis of dynamics not possible for now.</b></font><br>";
     print "<font color=blue><b>This is a very experimental feature, therefore there is no error checking. Use at your own risk.</b></font><br>";
@@ -439,7 +440,10 @@ sub create_input_function() {
       while($bytesread=read($upload_file, $buffer, 1024)) {
         print OUTFILE $buffer;
         while($buffer =~ m/f(\d+)/g) {
-          if ($1 > $n_nodes) { print "$1<br>";$n_nodes = $1; }
+          if ($1 > $n_nodes) { 
+            #print "$1<br>";
+            $n_nodes = $1; 
+          }
         }
       }
     }
