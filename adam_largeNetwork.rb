@@ -25,9 +25,9 @@ s = IO.readlines(functionFile,'').to_s
 # {1=>["x1+x2"], 2=>["x2"], 3=>["x3", "x2", "x1"]}
 functionHash = PartialInput.parse_into_hash s
 
-puts "<pre>"
-pp functionHash
-puts "</pre>"
+#puts "<pre>"
+#pp functionHash
+#puts "</pre>"
 
  
 # this is the list that gives the number of functions per variable
