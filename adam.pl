@@ -272,7 +272,7 @@ if ( $special_networks eq "Conjunctive/Disjunctive (Boolean rings only)" ) {
     print "Executing simulation<br>";
     print "hello<br>" if ($DEBUG);
     #if($p_value**$n_nodes >= 7000000000000)
-    if($n_nodes > 21 || $p_value**$n_nodes > 2**21) {
+    if($n_nodes > 201 || $p_value**$n_nodes > 2**210) {
         print "<font color=red>Simulation for large networks is not possible. Please chose <i>Algorithms</i> as <b>Analysis</b> option. </font><br>";
         die("Program quitting. Too many nodes");
     }
