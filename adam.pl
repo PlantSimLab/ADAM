@@ -265,7 +265,7 @@ if ( $special_networks eq "Conjunctive/Disjunctive (Boolean rings only)" ) {
 
     # Analysis
     print "<font color=blue><b>Calculating fixed points for a large network, other analysis of dynamics not possible for now.</b></font><br>";
-    print "<font color=blue><b>This is a very experimental feature, therefore there is no error checking. Use at your own risk.</b></font><br>";
+    #print "<font color=blue><b>This is a very experimental feature, therefore there is no error checking. Use at your own risk.</b></font><br>";
     set_update_type();
     system("ruby adam_largeNetwork.rb $n_nodes $p_value $filename $limCyc_length");
 } elsif ( $p_value && $n_nodes ) {
