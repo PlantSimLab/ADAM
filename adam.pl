@@ -3,7 +3,7 @@
 ## Hussein Vastani 
 ## Franziska Hinkelmann
 ## Bonbons
-## July 2010
+## December 2010
 
 ## ADAM1.0 with support for large networks and conjunctive 
 ## networks using M2 instead of perl enumeration
@@ -153,6 +153,7 @@ print "<center>", submit('button_name','Analyze'),"</center><br><br>";
 print "</div>";
 
 print "<div id =\"computation\">";
+
 #Google Analytics, Franzi's Account
 print <<ENDHTML;
 <script type="text/javascript">
@@ -160,10 +161,11 @@ var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "htt
 document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
 </script>
 <script type="text/javascript">
-try {
+try{
 var pageTracker = _gat._getTracker("UA-11219893-5");
 pageTracker._trackPageview();
-} catch(err) {}</script>
+} catch(err) {}
+</script>
 ENDHTML
 
 print end_form;
