@@ -344,3 +344,8 @@ function hideTip() {
 	t2=setTimeout("tipcss.visibility='hidden'",100);
 	tipOn = false;
 }
+
+
+
+
+
