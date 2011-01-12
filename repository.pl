@@ -45,6 +45,9 @@ print <<ENDHTML;
 	<li><a href="repository.pl?model=Drosophila">Boolean Model of segment
   polarity genes in Drosophila melanogaster</a>
 	</li>
+	<li><a href="repository.pl?model=Tcell">Boolean Model including relevant
+  genes or transcription factors for Th1 Th2 cell differentiation</a>
+	</li>
 </ul>
 
 ENDHTML
