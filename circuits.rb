@@ -1,4 +1,5 @@
 #circuits $n_nodes $filename $circuitFile
+# ruby circuits.rb n_nodes, infile, outfile
 
 require 'partial_input'
 
@@ -69,7 +70,8 @@ m2_system = m2_system + "}"
 #puts "<br>"
 
 #one line is for my machine, one line is for the server b/c M2 is in different paths
-#m2_result = `cd lib/M2code/; M2 functionalCircuits.m2 --stop --no-debug --silent -q -e 'll = circuits edgeMatrix #{m2_system}; stdio << length ll << "?" << circuitTable ll; exit 0'`
+#m2_result = `cd lib/M2code/; M2 functionalCircuits.m2 --stop --no-debug --silent -q -e 'printAdjacencyMatrix edgeMatrix #{m2_system}; exit 0'`
+#puts m2_result
 m2_result = `cd lib/M2code/; /usr/local/bin/M2 functionalCircuits.m2 --stop --no-debug --silent -q -e 'll = circuits edgeMatrix #{m2_system}; stdio << length ll << "?" << circuitTable ll; exit 0'`
 temp = m2_result.split('?')
 numCircuits = temp.fetch(0)
