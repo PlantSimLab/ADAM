@@ -8,7 +8,7 @@ Javascript file for ADAM site.
 
 // formatExp: Array of explanations for the different input options on the site
 var formatExp = new Array();
-formatExp[0] = '<b>GINsim File</b>: Converts GINsim file to a polynomial system that ADAM will then proceed to analyze. Also outputs the variables and the converted system.';
+formatExp[0] = '<b>GINsim File</b>: Converts GINsim file to a polynomial system that ADAM will then proceed to analyze. Also outputs the variables and the converted system. Files must be ginml files, if you have an archive (zginml), please unzip it first.';
 formatExp[1] = '<b>PDS</b>: Polynomial Dynamical System. Operations are interpreted as polynomial addition and multiplication.';
 formatExp[2] = '<b>PBN</b>: Probabilistic Boolean (or Multistate) Networks. Each nodes has several update rules, at each iteration, one is picked at random';
 formatExp[3] = '<b>Petri Net</b>: A (standard) Petri net generated with Snoopy. The Petri net must be <b><i>k</i>-bounded</b>, and <i>k</i> must be entered on the left.  This is an experimental feature, if you want to analyze the dynamics of the network, please copy and paste the generated PDS into ADAM.';
