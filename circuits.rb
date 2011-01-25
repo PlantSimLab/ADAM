@@ -1,20 +1,26 @@
-#circuits $n_nodes $filename $circuitFile
+#circuits $n_nodes $p_value $filename $circuitFile
 # ruby circuits.rb n_nodes, infile, outfile
 
 require 'partial_input'
 
 # Outputs functional circuits from dependency graphs
 
-unless ARGV.size == 3
-  puts "Usage: ruby circuits.rb n_nodes functionFile circuitFile"
+unless ARGV.size == 4
+  puts "Usage: ruby circuits.rb n_nodes p_value functionFile circuitFile"
   exit 0
 end
 
 n_nodes = ARGV[0]
-functionFile = ARGV[1]
-circuitFile = ARGV[2]
+p_value = ARGV[1]
+functionFile = ARGV[2]
+circuitFile = ARGV[3]
 
 puts "<br>"
+
+if p_value.to_i != 2 
+  puts "<font color=red>Error. Circuit analysis only possible when the number of states per node is 2.</font color=red><br>"
+  exit 1
+end
 
 # read the complete input file
 s = IO.readlines(functionFile,'').to_s
@@ -39,7 +45,7 @@ m2_numFunctions = m2_numFunctions + "}"
 if  functionHash.keys.sort != (1..n_nodes.to_i).to_a 
   #puts "functionHash: #{functionHash}<br>"
   #puts "functionHash.keys: #{functionHash.keys.sort}<br>"
-  puts "Error. There should be #{n_nodes} functions in order in the function input and functions should be called f1, ..., f#{n_nodes}. Did you maybe forget to select a file?<br>"
+  puts "<font color=red>Error. There should be #{n_nodes} functions in order in the function input and functions should be called f1, ..., f#{n_nodes}. Did you maybe forget to select a file?</font color=red><br>"
   exit 1
 end
 
@@ -55,7 +61,7 @@ functionHash.sort.each{ |index,functions|
     varIndices = varIndices.collect{ |x| x.slice(1, x.length-1) }
     for i in varIndices
       if (i.to_i > n_nodes.to_i)
-        puts "Error. Index of x out of range in function f#{index}. Exiting. <br>"
+        puts "<font color=red>Error. Index of x out of range in function f#{index}. Exiting. </font color=red><br>"
         exit 1
       end
     end
@@ -70,17 +76,17 @@ m2_system = m2_system + "}"
 #puts "<br>"
 
 #one line is for my machine, one line is for the server b/c M2 is in different paths
-#m2_result = `cd lib/M2code/; M2 functionalCircuits.m2 --stop --no-debug --silent -q -e 'printAdjacencyMatrix edgeMatrix #{m2_system}; exit 0'`
-#puts m2_result
-m2_result = `cd lib/M2code/; /usr/local/bin/M2 functionalCircuits.m2 --stop --no-debug --silent -q -e 'll = circuits edgeMatrix #{m2_system}; stdio << length ll << "?" << circuitTable ll; exit 0'`
+m2_result = `cd lib/M2code/; M2 functionalCircuits.m2 --stop --no-debug --silent -q -e 'printAdjacencyMatrix constructAdjacencyMatrix #{m2_system}; exit 0'`
+puts m2_result
+m2_result = `cd lib/M2code/; /usr/local/bin/M2 functionalCircuits.m2 --stop --no-debug --silent -q -e 'll = functionalCircuit #{m2_system}; stdio << length ll << "?" << circuitTable ll; exit 0'`
 temp = m2_result.split('?')
 numCircuits = temp.fetch(0)
 table = temp.fetch(1)
 f = ""
 if numCircuits.chomp == "0"
-  f = "There are no circuits in your dependency graph!<br><br>"
+  f = "There are no functional circuits in your dependency graph!<br><br>"
 else
-  f = "There are " + numCircuits + " circuits and they are: <br>" + table + "<br>"
+  f = "There are " + numCircuits + " functional circuits and they are: <br>" + table + "<br>"
 end
 
 File.open(circuitFile, "a"){|g| g.write(f)}
