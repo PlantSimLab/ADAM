@@ -227,7 +227,7 @@ if ($feedback == 1) {
     open FILE, ">$circuits" or die $!;
     print FILE "<html><body>";
     close FILE;
-    system("ruby circuits.rb $n_nodes $filename $circuits");
+    system("ruby circuits.rb $n_nodes $p_value $filename $circuits");
     open FILE, ">>$circuits" or die $!;
     print FILE "</body></html>";
     close FILE;
