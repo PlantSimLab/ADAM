@@ -115,7 +115,7 @@ print "<strong><font color=\"#black\">2) Analysis </font></strong></td></tr>";
 print "<tr class=\"lines\"><td colspan=\"2\"></td></tr>";
 print "<tr valign=\"top\"><td nowrap><font size=\"2\">";
 print "Select the type of network: <br>";
-print radio_group(-name=>'special_networks', -values=>['Conjunctive/Disjunctive (Boolean rings only)', 'Simulation (suggested for nodes <=11)', 'Algorithms (suggested for nodes > 11)'], -default=>'Simulation (suggested for nodes <=11)', -linebreak=>'true', -onChange=>'networkChange()');
+print radio_group(-name=>'special_networks', -values=>['Conjunctive/Disjunctive (Boolean rings only)', 'Simulation of all trajectories (suggested for nodes <=11)', 'Algorithms (suggested for nodes > 11)'], -default=>'Simulation of all trajectories (suggested for nodes <=11)', -linebreak=>'true', -onChange=>'networkChange()');
 print "</td>";
 print "<td id=\"explainNetwork\" class=\"explain\"></td>";
 print "</tr>";
