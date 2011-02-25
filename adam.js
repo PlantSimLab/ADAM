@@ -50,14 +50,22 @@ function formatChange() {
     file.innerHTML = uploadType[1];
 
     if (document.form1.format_box[1].checked == true) { //if PDS is checked
-      input.innerHTML = formatExp[1];
-      document.form1.edit_functions.value = 'f1 = x1+x2\nf2 = x1*x2*x3\nf3 = x1*x2+x3^2';
+      input.innerHTML = formatExp[1];	
+	  var sampleFunctions = 'f1 = x1+x2\nf2 = x1*x2*x3\nf3 = x1*x2+x3^2';
+	  //alert( document.form1.edit_functions.value );
+	  if (document.form1.edit_functions.value == ''  || document.form1.edit_functions.value == 'f1 = { \nx1+x2   #.9 \nx1      #.1\n }\nf2 = x1*x2*x3 \nf3 = { \nx1*x2+x3^2 \nx2 \n}') {//This is the first time we load the page
+      	document.form1.edit_functions.value = sampleFunctions;
+      }	
       document.form1.stochastic.disabled = true;
     }
     else { //else must be PBN
       input.innerHTML = formatExp[2];
       document.form1.stochastic.disabled = false;
-      document.form1.edit_functions.value = 'f1 = { \nx1+x2   #.9 \nx1      #.1\n }\nf2 = x1*x2*x3 \nf3 = { \nx1*x2+x3^2 \nx2 \n}';
+   	  var sampleFunctions = 'f1 = { \nx1+x2   #.9 \nx1      #.1\n }\nf2 = x1*x2*x3 \nf3 = { \nx1*x2+x3^2 \nx2 \n}';
+	  //alert( document.form1.edit_functions.value );
+	  if (document.form1.edit_functions.value == '' || document.form1.edit_functions.value == 'f1 = x1+x2\nf2 = x1*x2*x3\nf3 = x1*x2+x3^2') {//This is the first time we load the page
+      	document.form1.edit_functions.value = sampleFunctions;
+      }
     }
   }
 }
@@ -128,12 +136,13 @@ function networkChange() {
 }
 
 function change(){
+	//alert("Load");
     networkChange();
     formatChange();
 }
 
 function validate(){
-    if( (validateNumber(document.form1.p_value.value)) && (validateNumber(document.form1.n_nodes.value)) )
+    if( (validateNumber(document.form1.p_value.value))  )
   {
      if( (isEmpty(document.form1.upload_file.value))&&(isEmpty(document.form1.edit_functions.value)) )
      {
