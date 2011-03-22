@@ -69,7 +69,7 @@ print "<tr class=\"lines\"><td colspan=\"2\"></td></tr>";
 # Input Functions
 print "<tr valign=\"top\"><td ><font size=\"2\"><b>Model Type:</b><br>";
 %labels = ('GINsim'=>'Logical Model (GINsim file)',
-'PDS'=>"Polynomial Ddynamical System (PDS)",
+'PDS'=>"Polynomial Dynamical System (PDS)",
 'PBN'=>'Probabilistic Network',
 'PetriNet'=>'Petri Net',
 'TruthTable' => 'Truth Table');
@@ -223,7 +223,7 @@ if ($button_name eq "Analyze") {
 #make input functions - gives p_value and n_nodes
 create_input_function();
 
-if ($format_box = 'TT') {
+if ($format_box eq 'TT') {
 	print "We are working with truth tables $format_box <br>" if ($DEBUG);	
     #$circuits = "$clientip.circuits.html";
     #open FILE, ">$circuits" or die $!;
