@@ -400,7 +400,7 @@ sub create_input_function() {
   if($upload_file) {
     $fileuploaded = 1;
     if($format_box eq "GINsim"){
-# Make sure extension is correct
+	  # Make sure extension is correct
       $extension = substr $upload_file, -5;
       if($extension ne "ginml"){
         print "<font color=red>Error: Must upload a Logical Model generated with GINsim, i.e., a <i>.ginml</i> file.</font>";
@@ -454,6 +454,20 @@ sub create_input_function() {
 #      while (<MYFILE>) { chomp; $n_nodes = $_; }
 #      close (MYFILE); 
 
+    } elsif ($format_box eq "TruthTable") { 
+	  # Make sure extension is correct
+	  $upload_file =~ /\.(.+$)/;
+	  $extension = $1;
+	  #print "extention: $extension";
+      if($extension ne "txt") {
+        print "<font color=red>Error: Must upload a text file (.txt).</font>";
+        die("Program quitting. Extension not txt");
+      }
+	# Write functions to file on server for ruby script
+	  flock(OUTFILE, LOCK_EX) or die ("Could not get exclusive lock $!");	  
+	  while($bytesread=read($upload_file, $buffer, 1024)) {
+	      print OUTFILE $buffer;
+	  }
     } else {
 # Make sure extension is correct
       $extension = substr $upload_file, -3;
