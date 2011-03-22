@@ -39,7 +39,7 @@ s = s.split(/\n/)
 varNames = s.shift    #get the first line
 numLines = s.size
 #puts "number of lines #{s.size}<br>"
-#puts "names: #{names} <br>"
+#puts "names: #{varNames} <br>"
 
 inputNames = varNames.split(/\s+/)
 outputName = inputNames.pop
@@ -73,7 +73,7 @@ s.each{ |line|
 }
 
 #pp outputs
-#pp outputs.values
+#pp outputs.sort
 
 # prepare strings to run M2
 
@@ -84,7 +84,8 @@ LL = inputNames.collect{ |var|
 LL.chop!  #cut off last blank
 LL.chop!  #cut off last comma
 
-vals = outputs.values.collect{ |val| "\"#{val}\", " }.to_s
+vals = outputs.sort.collect{ |pairs|  "\"#{pairs.last}\", " }.to_s
+#puts vals
 vals.chop!  #cut off last blank
 vals.chop!
 

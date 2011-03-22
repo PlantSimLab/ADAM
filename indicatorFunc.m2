@@ -39,9 +39,10 @@ interpolate (List, ZZ, List) := (L, p, vals) -> (
   QR := R / ideal apply( gens R, x -> x^p-x) ;
   vals = apply(vals, l -> value toString l );
   X := set (0..p-1);
-  inputs := toList X^**n;
+  inputs := sort toList X^**n;
   --print toString L;
   --print toString vals;
+  --print toString inputs;
 
   pol := sum ( inputs, vals, (source, t) -> t* product( source, gens QR, (i, xi) -> 1 - (xi-i)^(p-1) ) );
   print toString pol
