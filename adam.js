@@ -12,16 +12,19 @@ formatExp[0] = '<b>GINsim File</b>: Converts GINsim file to a polynomial system 
 formatExp[1] = '<b>PDS</b>: Polynomial Dynamical System. Operations are interpreted as polynomial addition and multiplication.';
 formatExp[2] = '<b>PBN</b>: Probabilistic Boolean (or Multistate) Networks. Each nodes has several update rules, at each iteration, one is picked at random';
 formatExp[3] = '<b>Petri Net</b>: A (standard) Petri net generated with Snoopy. The Petri net must be <b><i>k</i>-bounded</b>, and <i>k</i> must be entered on the left.  This is an experimental feature, if you want to analyze the dynamics of the network, please copy and paste the generated PDS into ADAM.';
+formatExp[4] = '<b>Truth Table</b>: A table, where the top row consists of the names of the variables, the other rows are the inputs states at time t, and the right most column is the output value at time (t+1). Missing rows are assumed to have output value 0. Entries should be separated by white space.';
 
 // uploadType: Array of upload types for different input options on the site
 var uploadType = new Array();
 uploadType[0] = '<font color=blue size =\"1\"> (.ginml)</font>';
 uploadType[1] = '<font color=blue size=\"1\"> (.txt)</font>';
 uploadType[3] = '<font color=blue size =\"1\"> (.xml or .spped)</font>';
+uploadType[4] = '<font color=blue size =\"1\"> (.txt or .xls)</font>';
 
 // formatChange(): disables and enables options based on which radio button is checked for
 // input format (GINsim, PDS, PBN). Also changes text explanation of options.
 function formatChange() {
+  document.getElementById('notTT').style.visibility = 'visible';
   var input = document.getElementById('explainInput');
   var state = document.getElementById('stateInput');
   var file = document.getElementById('fileInput');
@@ -43,17 +46,39 @@ function formatChange() {
       file.innerHTML = uploadType[3];
     }
   }
-  else {
+  else if (document.form1.format_box[4].checked == true) { // Truth Table
+	document.form1.p_value.disabled = false;
+	document.getElementById('notTT').style.visibility = 'hidden';
+	document.form1.edit_functions.disabled = false;
+	document.form1.translate_box.disabled = true;
+	state.innerHTML = '<font size="2">Enter number of states per node: </font>';
+	input.innerHTML = formatExp[4];	  
+	file.innerHTML = uploadType[4];
+	var sampleFunctions = 'A(t) \tB(t) \tC(t+1)\n0\t0\t0 \n0\t1\t0 \n1\t0\t0 \n1\t1\t1';
+	  //alert( document.form1.edit_functions.value );
+	  if (document.form1.edit_functions.value == ''  || 
+			document.form1.edit_functions.value == 'f1 = { \nx1+x2   #.9 \nx1      #.1\n }\nf2 = x1*x2*x3 \nf3 = { \nx1*x2+x3^2 \nx2 \n}' || 
+			document.form1.edit_functions.value == 'f1 = x1+x2\nf2 = x1*x2*x3\nf3 = x1*x2+x3^2') 
+	  {//This is the first time we load the page
+      	document.form1.edit_functions.value = sampleFunctions;
+      }	
+      document.form1.stochastic.disabled = true;    
+  }
+  else { // PDS or pPDS
     document.form1.p_value.disabled = false;
     document.form1.edit_functions.disabled = false;
     state.innerHTML = '<font size="2">Enter number of states per node: </font>';	
     file.innerHTML = uploadType[1];
+	pChange();
 
     if (document.form1.format_box[1].checked == true) { //if PDS is checked
       input.innerHTML = formatExp[1];	
 	  var sampleFunctions = 'f1 = x1+x2\nf2 = x1*x2*x3\nf3 = x1*x2+x3^2';
 	  //alert( document.form1.edit_functions.value );
-	  if (document.form1.edit_functions.value == ''  || document.form1.edit_functions.value == 'f1 = { \nx1+x2   #.9 \nx1      #.1\n }\nf2 = x1*x2*x3 \nf3 = { \nx1*x2+x3^2 \nx2 \n}') {//This is the first time we load the page
+	  if (document.form1.edit_functions.value == ''  ||
+	 		document.form1.edit_functions.value == 'f1 = { \nx1+x2   #.9 \nx1      #.1\n }\nf2 = x1*x2*x3 \nf3 = { \nx1*x2+x3^2 \nx2 \n}' || 
+			document.form1.edit_functions.value == 'A(t) \tB(t) \tC(t+1)\n0\t0\t0 \n0\t1\t0 \n1\t0\t0 \n1\t1\t1') 
+	  {//This is the first time we load the page
       	document.form1.edit_functions.value = sampleFunctions;
       }	
       document.form1.stochastic.disabled = true;
@@ -63,7 +88,10 @@ function formatChange() {
       document.form1.stochastic.disabled = false;
    	  var sampleFunctions = 'f1 = { \nx1+x2   #.9 \nx1      #.1\n }\nf2 = x1*x2*x3 \nf3 = { \nx1*x2+x3^2 \nx2 \n}';
 	  //alert( document.form1.edit_functions.value );
-	  if (document.form1.edit_functions.value == '' || document.form1.edit_functions.value == 'f1 = x1+x2\nf2 = x1*x2*x3\nf3 = x1*x2+x3^2') {//This is the first time we load the page
+	  if (document.form1.edit_functions.value == '' || 
+		document.form1.edit_functions.value == 'f1 = x1+x2\nf2 = x1*x2*x3\nf3 = x1*x2+x3^2' ||
+		document.form1.edit_functions.value == 'A(t) \tB(t) \tC(t+1)\n0\t0\t0 \n0\t1\t0 \n1\t0\t0 \n1\t1\t1') 
+	  {//This is the first time we load the page
       	document.form1.edit_functions.value = sampleFunctions;
       }
     }
@@ -72,6 +100,7 @@ function formatChange() {
 
 // Allows drop-down Polynomial/Boolean only if p_value is 2
 function pChange() {
+	//alert ("pchange");
     if (document.form1.p_value.value == 2) {
 	document.form1.translate_box.disabled = false;
 	document.form1.feedback.disabled = false;
@@ -137,6 +166,7 @@ function networkChange() {
 
 function change(){
 	//alert("Load");
+	pChange();
     networkChange();
     formatChange();
 }

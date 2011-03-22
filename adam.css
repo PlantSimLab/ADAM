@@ -76,6 +76,10 @@ form {
 	white-space: nowrap;
 }
 
+#notTT {
+		background-color: red;
+}
+
 #inputs td {
 	width: 512px;
 	vertical-align: top;

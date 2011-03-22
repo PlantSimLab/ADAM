@@ -27,6 +27,27 @@ simplify (List, ZZ, ZZ) := (functionList, p, n) -> (
   ))
 )
 
+--L = {"x3", "x1"}
+--p = 2
+--vals = {0,1,0,1}
+interpolate = method()
+interpolate (List, ZZ, List) := (L, p, vals) -> (
+  params := select( vals, l -> ( class value toString l ) === Symbol );
+  R := ZZ/p[params / value][L];
+  --R := ZZ/p[L];
+  n := #L;
+  QR := R / ideal apply( gens R, x -> x^p-x) ;
+  vals = apply(vals, l -> value toString l );
+  X := set (0..p-1);
+  inputs := toList X^**n;
+  --print toString L;
+  --print toString vals;
+
+  pol := sum ( inputs, vals, (source, t) -> t* product( source, gens QR, (i, xi) -> 1 - (xi-i)^(p-1) ) );
+  print toString pol
+)
+
+
 end
 
 

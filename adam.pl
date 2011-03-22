@@ -67,12 +67,14 @@ print "</td></tr>";
 print "<tr class=\"lines\"><td colspan=\"2\"></td></tr>";
 
 # Input Functions
-print "<tr valign=\"top\"><td><font size=\"2\"><b>Model Type:</b><br>";
+print "<tr valign=\"top\"><td ><font size=\"2\"><b>Model Type:</b><br>";
 %labels = ('GINsim'=>'Logical Model (GINsim file)',
-'PDS'=>'PDS',
+'PDS'=>"Polynomial Ddynamical System (PDS)",
 'PBN'=>'Probabilistic Network',
-'PetriNet'=>'Petri Net');
-print radio_group(-name=>'format_box', -values=>['GINsim', 'PDS', 'PBN', 'PetriNet'], -labels=>\%labels, -default=>'PDS', -onChange=>'formatChange()');
+'PetriNet'=>'Petri Net',
+'TruthTable' => 'Truth Table');
+print radio_group(-name=>'format_box', -values=>['GINsim', 'PDS', 'PBN', 'PetriNet', 'TruthTable'],
+ 	-labels=>\%labels, -default=>'PDS', -onChange=>'formatChange()', -linebreak=>'true');
 print "</font></td>";
 # Explanatory Text
 print "<td rowspan=\"3\" id=\"explainInput\" class=\"explain\"></td>";
@@ -87,6 +89,7 @@ print "<tr><td></td></tr>";
 print "<tr><td></td></tr>";
 print "<tr><td></td></tr>";
 print "<tr><td></td></tr>";
+
 
 
 print "<tr class=\"lines\"><td colspan=\"2\"></td></tr>";
@@ -109,6 +112,7 @@ print "</table>";
 print "<br>";
 
 #Analysis
+print "<div id='notTT'>";
 print "<table>";
 print "<tr valign=\"top\"><td class=\"titleBox\" colspan=\"2\">";
 print "<strong><font color=\"#black\">2) Analysis </font></strong></td></tr>";
@@ -120,6 +124,7 @@ print "</td>";
 print "<td id=\"explainNetwork\" class=\"explain\"></td>";
 print "</tr>";
 print "</table>";
+
 
 print "<br>";
 
@@ -145,8 +150,9 @@ print "</td></tr>";
 
 print "<tr class=\"lines\"><td></td></tr>";
 
-print "<tr><td id=\"netOpts\" style=\"font-size:12px\">";
+print "<tr><td id=\"netOpts\" style=\"font-size:12px\"></div>";
 print "</table><br>";
+print "</div>";
 
 print "<center>", submit('button_name','Analyze'),"</center><br><br>";
 
@@ -217,9 +223,29 @@ if ($button_name eq "Analyze") {
 #make input functions - gives p_value and n_nodes
 create_input_function();
 
+if ($format_box = 'TT') {
+	print "We are working with truth tables $format_box <br>" if ($DEBUG);	
+    #$circuits = "$clientip.circuits.html";
+    #open FILE, ">$circuits" or die $!;
+    #print FILE "<html><body>";
+    #close FILE;
+	#print "n_nodes $n_nodes <br>" if ($DEBUG);
+	print "p $p_value <br>" if ($DEBUG);
+	
+    system("ruby truthTables.rb $p_value $filename");
+    #open FILE, ">>$circuits" or die $!;
+    #print FILE "</body></html>";
+    #close FILE;
+    #print "<a href=\"$circuits\" target=\"_blank\"><font color=\"#226677\"<i>Click to view the functional circuits.</i></font></a><br>";
+
+}
+
 # Set flag for creating the dependency graph
 ($depgraph eq "Dependency graph") ? {$depgraph = 1} : {$depgraph = 0};
 ($feedback eq "Feedback Circuit") ? {$feedback = 1} : {$feedback = 0};
+
+
+
 
 # Give link to functional circuits if checked
 if ($feedback == 1) {
