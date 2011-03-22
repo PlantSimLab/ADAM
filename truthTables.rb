@@ -23,6 +23,7 @@ p_value = ARGV[0]
 tableFile = ARGV[1]
 
 #puts "hello"
+#puts tableFile
 puts "<br>"
 
 p = p_value.to_i

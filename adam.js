@@ -19,7 +19,7 @@ var uploadType = new Array();
 uploadType[0] = '<font color=blue size =\"1\"> (.ginml)</font>';
 uploadType[1] = '<font color=blue size=\"1\"> (.txt)</font>';
 uploadType[3] = '<font color=blue size =\"1\"> (.xml or .spped)</font>';
-uploadType[4] = '<font color=blue size =\"1\"> (.txt or .xls)</font>';
+uploadType[4] = '<font color=blue size =\"1\"> (.txt)</font>';
 
 // formatChange(): disables and enables options based on which radio button is checked for
 // input format (GINsim, PDS, PBN). Also changes text explanation of options.
