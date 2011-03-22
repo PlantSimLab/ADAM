@@ -33,7 +33,7 @@ simplify (List, ZZ, ZZ) := (functionList, p, n) -> (
 interpolate = method()
 interpolate (List, ZZ, List) := (L, p, vals) -> (
   params := select( vals, l -> ( class value toString l ) === Symbol );
-  R := ZZ/p[params / value][L];
+  R := ZZ/p[params / value][L / value ];
   --R := ZZ/p[L];
   n := #L;
   QR := R / ideal apply( gens R, x -> x^p-x) ;
