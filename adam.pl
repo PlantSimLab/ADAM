@@ -223,7 +223,7 @@ if ($button_name eq "Analyze") {
 #make input functions - gives p_value and n_nodes
 create_input_function();
 
-if ($format_box eq 'TT') {
+if ($format_box eq "TruthTable") {
 	print "We are working with truth tables $format_box <br>" if ($DEBUG);	
     #$circuits = "$clientip.circuits.html";
     #open FILE, ">$circuits" or die $!;
