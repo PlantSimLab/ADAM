@@ -3,7 +3,7 @@
 ## Hussein Vastani 
 ## Franziska Hinkelmann
 ## Bonbons
-## December 2010
+## June 2011
 
 ## ADAM1.0 with support for large networks and conjunctive 
 ## networks using M2 instead of perl enumeration
@@ -79,6 +79,10 @@ print "</font></td>";
 # Explanatory Text
 print "<td rowspan=\"3\" id=\"explainInput\" class=\"explain\"></td>";
 print "</tr>";
+print "<tr><td><div id=\"continuous\">", checkbox(-name =>'continuous', -value=>'continuous', -label=>'Continuous'), "</div></td></tr>";
+
+
+# print "<tr><td><div id=\"continuous\"><form ><input type=\"checkbox\" name=\"continuous\" value=\"continuous\" /><font size=\"2\"><i>Continuous</i> System</font></form></td></tr>";
 
 print "<tr valign=\"top\"><td><font size=\"2\" id=\"stateInput\">Enter number of states per node: </font>";
 print textfield(-name=>'p_value',-size=>2, -maxlength=>2, -default=>3, -onChange=>'pChange()');
@@ -187,6 +191,7 @@ $p_value = param('p_value');
 $upload_file = upload('upload_file');
 $option_box = param('option_box');
 $format_box = param('format_box');
+$continuousTT = param('continuous');
 $translate_box = param('translate_box');
 $special_networks = param('special_networks');
 $limCyc_length = param('limCyc_length');
@@ -225,14 +230,24 @@ create_input_function();
 
 if ($format_box eq "TruthTable") {
 	print "We are working with truth tables $format_box <br>" if ($DEBUG);	
+	print "p $p_value <br>" if ($DEBUG);
+	if( $continuousTT eq 'continuous') {
+		print "We are working with continuous models: $continuous <br>" if ($DEBUG);	
+		system("ruby truthTablesContinuous.rb $p_value $filename");
+    } else {
+		print "We are not working with continuous models $continuous <br>" if ($DEBUG);	
+		system("ruby truthTables.rb $p_value $filename");
+	}
+	
+	
     #$circuits = "$clientip.circuits.html";
     #open FILE, ">$circuits" or die $!;
     #print FILE "<html><body>";
     #close FILE;
 	#print "n_nodes $n_nodes <br>" if ($DEBUG);
-	print "p $p_value <br>" if ($DEBUG);
 	
-    system("ruby truthTables.rb $p_value $filename");
+	
+    #system("ruby truthTables.rb $p_value $filename");
     #open FILE, ">>$circuits" or die $!;
     #print FILE "</body></html>";
     #close FILE;

@@ -12,7 +12,7 @@ formatExp[0] = '<b>GINsim File</b>: Converts GINsim file to a polynomial system 
 formatExp[1] = '<b>PDS</b>: Polynomial Dynamical System. Operations are interpreted as polynomial addition and multiplication.';
 formatExp[2] = '<b>PBN</b>: Probabilistic Boolean (or Multistate) Networks. Each nodes has several update rules, at each iteration, one is picked at random';
 formatExp[3] = '<b>Petri Net</b>: A (standard) Petri net generated with Snoopy. The Petri net must be <b><i>k</i>-bounded</b>, and <i>k</i> must be entered on the left.  This is an experimental feature, if you want to analyze the dynamics of the network, please copy and paste the generated PDS into ADAM.';
-formatExp[4] = '<b>Truth Table</b>: A table, where the top row consists of the names of the variables, the other rows are the inputs states at time t, and the right most column is the output value at time (t+1). Missing rows are assumed to have output value 0. Entries should be separated by white space.';
+formatExp[4] = '<b>Truth Table</b>: A table, where the top row consists of the names of the variables, the other rows are the inputs states at time t, and the right most column is the output value at time (t+1). Missing rows are assumed to have output value 0. Entries should be separated by white space. When <i>continuous</i> is checked, there will not be any <i>jumps</i> in the generated model, i.e., every variable changes its value by at most 1 at every time step.';
 
 // uploadType: Array of upload types for different input options on the site
 var uploadType = new Array();
@@ -24,15 +24,19 @@ uploadType[4] = '<font color=blue size =\"1\"> (.txt)</font>';
 // formatChange(): disables and enables options based on which radio button is checked for
 // input format (GINsim, PDS, PBN). Also changes text explanation of options.
 function formatChange() {
+//	alert( "format change ");
   document.getElementById('notTT').style.visibility = 'visible';
   var input = document.getElementById('explainInput');
   var state = document.getElementById('stateInput');
   var file = document.getElementById('fileInput');
+  var showContinuous = document.getElementById('continuous');
+  showContinuous.style.visibility = 'hidden';
   if (document.form1.format_box[0].checked == true || document.form1.format_box[3].checked == true) { //GinSim or Petri Net
     document.form1.translate_box.disabled = true;
     document.form1.edit_functions.value = '';
     document.form1.edit_functions.disabled = true;
     document.form1.stochastic.disabled = true;
+	showContinuous.style.visibility = 'hidden';
     if (document.form1.format_box[0].checked == true) { //if GINsim is checked
       document.form1.p_value.disabled = true;
       input.innerHTML = formatExp[0];
@@ -49,6 +53,7 @@ function formatChange() {
   else if (document.form1.format_box[4].checked == true) { // Truth Table
 	document.form1.p_value.disabled = false;
 	document.getElementById('notTT').style.visibility = 'hidden';
+	showContinuous.style.visibility = 'visible';
 	document.form1.edit_functions.disabled = false;
 	document.form1.translate_box.disabled = true;
 	state.innerHTML = '<font size="2">Enter number of states per node: </font>';
@@ -70,6 +75,7 @@ function formatChange() {
     state.innerHTML = '<font size="2">Enter number of states per node: </font>';	
     file.innerHTML = uploadType[1];
 	pChange();
+	showContinuous.style.visibility = 'hidden';
 
     if (document.form1.format_box[1].checked == true) { //if PDS is checked
       input.innerHTML = formatExp[1];	
