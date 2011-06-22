@@ -12,7 +12,7 @@ formatExp[0] = '<b>GINsim File</b>: Converts GINsim file to a polynomial system 
 formatExp[1] = '<b>PDS</b>: Polynomial Dynamical System. Operations are interpreted as polynomial addition and multiplication.';
 formatExp[2] = '<b>PBN</b>: Probabilistic Boolean (or Multistate) Networks. Each nodes has several update rules, at each iteration, one is picked at random';
 formatExp[3] = '<b>Petri Net</b>: A (standard) Petri net generated with Snoopy. The Petri net must be <b><i>k</i>-bounded</b>, and <i>k</i> must be entered on the left.  This is an experimental feature, if you want to analyze the dynamics of the network, please copy and paste the generated PDS into ADAM.';
-formatExp[4] = '<b>Truth Table</b>: A table, where the top row consists of the names of the variables, the other rows are the inputs states at time t, and the right most column is the output value at time (t+1). Missing rows are assumed to have output value 0. Entries should be separated by white space. When <i>continuous</i> is checked, there will not be any <i>jumps</i> in the generated model, i.e., every variable changes its value by at most 1 at every time step.';
+formatExp[4] = '<b>Transition Table</b>: A table, where the top row consists of the names of the variables, the other rows are the inputs states at time t, and the right most column is the output value at time (t+1). Missing rows are assumed to have output value 0. Entries should be separated by white space. When <i>continuous</i> is checked, there will not be any <i>jumps</i> in the generated model, i.e., every variable changes its value by at most 1 at every time step.';
 
 // uploadType: Array of upload types for different input options on the site
 var uploadType = new Array();
@@ -50,7 +50,7 @@ function formatChange() {
       file.innerHTML = uploadType[3];
     }
   }
-  else if (document.form1.format_box[4].checked == true) { // Truth Table
+  else if (document.form1.format_box[4].checked == true) { // transition Table
 	document.form1.p_value.disabled = false;
 	document.getElementById('notTT').style.visibility = 'hidden';
 	showContinuous.style.visibility = 'visible';

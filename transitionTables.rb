@@ -1,5 +1,5 @@
 
-# given a truth table, calculate the function that interpolates this table
+# given a transition table, calculate the function that interpolates this table
 # if the table is not of full size, assume 0 for the missing inputs
 #   A(t) 	B(t) 	C(t+1)
 #   0	   0	   0 
@@ -14,7 +14,7 @@ require 'pp'
 
 
 unless ARGV.size == 2
-  puts "Usage: ruby truthTables.rb p_value tableFile "
+  puts "Usage: ruby transitionTables.rb p_value tableFile "
   exit 0
 end
 
@@ -51,7 +51,7 @@ if (numLines > p ** n )
 end
 
 # keys of the hash are the integers corresonding to the p-ary string
-# values are the output value as determined by truth table
+# values are the output value as determined by transition table
 outputs = Hash.new
 
 # use a default value of 0, this should also put the keys in order
@@ -93,7 +93,7 @@ vals.chop!
 #puts "/usr/local/bin/M2 indicatorFunc.m2 --stop --no-debug --silent -q -e 'interpolate( {#{LL} }, #{p}, {#{vals}} ); exit 0'<br>"
 m2_result = `/usr/local/bin/M2 indicatorFunc.m2 --stop --no-debug --silent -q -e 'interpolate( {#{LL} }, #{p}, {#{vals}} ); exit 0'`
 
-puts "The following function interpolates the truth table: <br>"
+puts "The following function interpolates the transition table: <br>"
 puts "f_#{outputName.gsub(/\(.*\)/, "")} = #{m2_result}<br><br>"
 
 
