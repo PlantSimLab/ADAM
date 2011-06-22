@@ -72,8 +72,8 @@ print "<tr valign=\"top\"><td ><font size=\"2\"><b>Model Type:</b><br>";
 'PDS'=>"Polynomial Dynamical System (PDS)",
 'PBN'=>'Probabilistic Network',
 'PetriNet'=>'Petri Net',
-'TruthTable' => 'Truth Table');
-print radio_group(-name=>'format_box', -values=>['GINsim', 'PDS', 'PBN', 'PetriNet', 'TruthTable'],
+'TransitionTable' => 'Transition Table');
+print radio_group(-name=>'format_box', -values=>['GINsim', 'PDS', 'PBN', 'PetriNet', 'TransitionTable'],
  	-labels=>\%labels, -default=>'PDS', -onChange=>'formatChange()', -linebreak=>'true');
 print "</font></td>";
 # Explanatory Text
@@ -228,15 +228,15 @@ if ($button_name eq "Analyze") {
 #make input functions - gives p_value and n_nodes
 create_input_function();
 
-if ($format_box eq "TruthTable") {
-	print "We are working with truth tables $format_box <br>" if ($DEBUG);	
+if ($format_box eq "TransitionTable") {
+	print "We are working with transition tables $format_box <br>" if ($DEBUG);	
 	print "p $p_value <br>" if ($DEBUG);
 	if( $continuousTT eq 'continuous') {
 		print "We are working with continuous models: $continuous <br>" if ($DEBUG);	
-		system("ruby truthTablesContinuous.rb $p_value $filename");
+		system("ruby transitionTablesContinuous.rb $p_value $filename");
     } else {
 		print "We are not working with continuous models $continuous <br>" if ($DEBUG);	
-		system("ruby truthTables.rb $p_value $filename");
+		system("ruby transitionTables.rb $p_value $filename");
 	}
 	
 	
@@ -247,7 +247,7 @@ if ($format_box eq "TruthTable") {
 	#print "n_nodes $n_nodes <br>" if ($DEBUG);
 	
 	
-    #system("ruby truthTables.rb $p_value $filename");
+    #system("ruby transitionTables.rb $p_value $filename");
     #open FILE, ">>$circuits" or die $!;
     #print FILE "</body></html>";
     #close FILE;
@@ -469,7 +469,7 @@ sub create_input_function() {
 #      while (<MYFILE>) { chomp; $n_nodes = $_; }
 #      close (MYFILE); 
 
-    } elsif ($format_box eq "TruthTable") { 
+    } elsif ($format_box eq "TransitionTable") { 
 	  # Make sure extension is correct
 	  $upload_file =~ /\.(.+$)/;
 	  $extension = $1;
