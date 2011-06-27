@@ -122,8 +122,8 @@ function pChange() {
 // networkExp: Array of explanations for the different network options on the site
 var networkExp = new Array();
 networkExp[0] = '<b>Conjunctive/Disjunctive Networks</b>: For systems with only AND functions or only OR functions. All fixed points and limit cycles will be calculated.';
-networkExp[1] = '<b>Simulation of all trajectories</b>: For n < 12. Enumerates all possible states. Outputs at minimum fixed points and number of components. See \'Small Networks Options\' for other output options.';
-networkExp[2] = '<b>Algorithms</b>: For n > 11. Calculates limit cycles of a length that the user specifies.';
+networkExp[1] = '<b>Simulation of all trajectories</b>: The dynamics are analyzed by exhaustive search over the state space. This is possible for models with up to 2^30 states in the states space, i.e., 30 Boolean variables. For models with less than 1000 states, a graph of the complete state space can be generated.';
+networkExp[2] = '<b>Algorithms</b>: Calculates limit cycles of a length that the user specifies. We recommend this option when Simulation is not possible due to model size. ';
 
 // networkOpt: Array for the different options for different networks/algorithms on site
 var networkOpt = new Array();
