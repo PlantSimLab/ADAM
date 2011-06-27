@@ -279,6 +279,8 @@ if ($feedback == 1) {
 #    @signs = `ruby sign`
 #}
 
+
+## Conjunctive
 if ( $special_networks eq "Conjunctive/Disjunctive (Boolean rings only)" ) {
     # dynamics depend on the dependency graph, need to generate it 
     system("perl regulatory.pl $filename $n_nodes $clientip $DGformat") == 0
@@ -287,71 +289,77 @@ if ( $special_networks eq "Conjunctive/Disjunctive (Boolean rings only)" ) {
 
     # Give link to dependency graph if checked
     if ($depgraph = 1) {
-	print  "<br><A href=\"$dpGraph.$DGformat\" target=\"_blank\"><font color=\"#226677\"><i>Click to view the dependency graph.</i></font></A><br>";
+		print  "<br><A href=\"$dpGraph.$DGformat\" target=\"_blank\"><font color=\"#226677\"><i>Click to view the dependency graph.</i></font></A><br>";
     }
     
-    #BLAHBLAH i'm sad ._.
     system("ruby adam_conjunctive.rb $n_nodes $p_value $dpGraph.dot");
+## Algorithms
 } elsif ( $special_networks eq "Algorithms (suggested for nodes > 11)" ) {
     if(($limCyc_length eq null) || ($limCyc_length eq "")){
-	print "<font color=red>Please enter a length of the limit cycle you wish to compute. Enter 1 for fixed points</font>";
-	die("Program quitting. Empty field entered for limit cycle length in large networks.");
+		print "<font color=red>Please enter a length of the limit cycle you wish to compute. Enter 1 for fixed points</font>";
+		die("Program quitting. Empty field entered for limit cycle length in large networks.");
     }
 
     # Give link to dependency graph if checked
     if ($depgraph = 1) {
-	system("perl regulatory.pl $filename $n_nodes $clientip $DGformat") == 0
-	    or die("regulatory.pl died");
-	print  "<br><A href=\"$clientip.out1.$DGformat\" target=\"_blank\"><font color=\"#226677\"><i>Click to view the dependency graph.</i></font></A><br>";
+		system("perl regulatory.pl $filename $n_nodes $clientip $DGformat") == 0
+		    or die("regulatory.pl died");
+		print  "<br><A href=\"$clientip.out1.$DGformat\" target=\"_blank\"><font color=\"#226677\"><i>Click to view the dependency graph.</i></font></A><br>";
     }
-
-
-    # Analysis
-    #print "<font color=blue><b>Calculating fixed points for a large network, other analysis of dynamics not possible for now.</b></font><br>";
-    #print "<font color=blue><b>This is a very experimental feature, therefore there is no error checking. Use at your own risk.</b></font><br>";
     set_update_type();
     system("ruby adam_largeNetwork.rb $n_nodes $p_value $filename $limCyc_length");
+# Analysis by enumeration
 } elsif ( $p_value && $n_nodes ) {
     print "Executing simulation<br>";
     print "hello<br>" if ($DEBUG);
-    #if($p_value**$n_nodes >= 7000000000000)
-    if($n_nodes > 201 || $p_value**$n_nodes > 2**210) {
+    if($n_nodes > 32 || $p_value**$n_nodes > 2**32) {
         print "<font color=red>Simulation for large networks is not possible. Please chose <i>Algorithms</i> as <b>Analysis</b> option. </font><br>";
         die("Program quitting. Too many nodes");
     }
-   
+
     print "hello set_update_type<br>" if ($DEBUG);
     set_update_type();
 
     print $option_box if ($DEBUG);
 
+	# for more than 1000 nodes don't produce a graph, use C++ program instead
+	
     # Set flag for whether to print probabilities in state space
     ($stochastic eq "Print probabilities") ? {$stochastic = 1} : {$stochastic = 0 };
-    if($option_box eq "All trajectories from all possible initial states") {
-      print "<font color=blue><b>Analysis of the state space</b></font> <br>";
 
-      # Calling the wrapper script dvd_stochastic_runner.pl, which in
-      # turn calls DVDCore routines
-
-
-      print ("perl dvd_stochastic_runner.pl  $n_nodes $p_value 1 $updstoch_flag $clientip $SSformat $depgraph $updsequ_flag $update_schedule $stochastic 1 0 $filename\n<br> ") if ($DEBUG); 		
-
-
-      system("/usr/bin/perl dvd_stochastic_runner.pl  $n_nodes $p_value 1 $updstoch_flag $clientip $SSformat $depgraph $updsequ_flag $update_schedule $stochastic 1 0 $filename"); 		
-    } else {
-       print "<font color=blue><b>Computing Trajectory of the given initialization</b></font> <br>";
-       if( ($trajectory_value ne null) && ( $trajectory_value ne "") ) {
-          $trajectory_value =~ s/^\s+|\s+$//g;; #remove all leading and trailing white spaces
-          $trajectory_value =~  s/(\d+)\s+/$1 /g; #remove extra white space between the numbers
-          $trajectory_value =~ s/ /_/g;
-          print "trajectory_value: $trajectory_value<br>" if $DEBUG;
+	
+    if($option_box eq "All trajectories from all possible initial states") { # complete state space
+		print $format_box if ($DEBUG);
+		if ($p_value**$n_nodes > 1000 && $format_box eq "PDS" ) {
+			print "Calculating fixed points and limit cycles, not generating a graph of the state space.<BR>\n";
+			print("./Analysis/analysis $p_value ${clientip}.functionfile  <BR>") if ($DEBUG);
+			print("<pre>");
+			system("./Analysis/analysis $p_value ${clientip}.functionfile");
+			print("</pre>");
+			print("Done.<br>");
+		} else { #analysis through simulation with graph
+			if ($p_value**$n_nodes > 1000) {
+				print "<font color=red>Simulation for large stochastic networks is not possible. Please chose <i>Algorithms</i> as <b>Analysis</b> option. </font><br>";
+		        die("Program quitting. Too many nodes");
+			}
+		    print "<font color=blue><b>Analysis of the state space</b></font> <br>";
+	        print ("perl dvd_stochastic_runner.pl  $n_nodes $p_value 1 $updstoch_flag $clientip $SSformat $depgraph $updsequ_flag $update_schedule $stochastic 1 0 $filename\n<br> ") if ($DEBUG); 		
+	        system("/usr/bin/perl dvd_stochastic_runner.pl  $n_nodes $p_value 1 $updstoch_flag $clientip $SSformat $depgraph $updsequ_flag $update_schedule $stochastic 1 0 $filename"); 		
+		}
+    } else { # trajectory
+         print "<font color=blue><b>Computing Trajectory of the given initialization</b></font> <br>";
+         if( ($trajectory_value ne null) && ( $trajectory_value ne "") ) {
+	          $trajectory_value =~ s/^\s+|\s+$//g;; #remove all leading and trailing white spaces
+    	      $trajectory_value =~  s/(\d+)\s+/$1 /g; #remove extra white space between the numbers
+	          $trajectory_value =~ s/ /_/g;
+	          print "trajectory_value: $trajectory_value<br>" if $DEBUG;
           
-          system("/usr/bin/perl dvd_stochastic_runner.pl  $n_nodes $p_value 1 $updstoch_flag $clientip $SSformat $depgraph $updsequ_flag $update_schedule $stochastic 0 $trajectory_value $filename"); 		
-          print "/usr/bin/perl dvd_stochastic_runner.pl  $n_nodes $p_value 1 $updstoch_flag $clientip $SSformat $depgraph $updsequ_flag $update_schedule $stochastic 0 $trajectory_value $filename<br>" if $DEBUG; 		
-      } else {
-        print "<br><font color=red>Please enter an initial state or select <i>Complete State Space</i></font><br>";
-        die("Program quitting. Empty value for initialization field");
-      }
+	          system("/usr/bin/perl dvd_stochastic_runner.pl  $n_nodes $p_value 1 $updstoch_flag $clientip $SSformat $depgraph $updsequ_flag $update_schedule $stochastic 0 $trajectory_value $filename"); 		
+	          print "/usr/bin/perl dvd_stochastic_runner.pl  $n_nodes $p_value 1 $updstoch_flag $clientip $SSformat $depgraph $updsequ_flag $update_schedule $stochastic 0 $trajectory_value $filename<br>" if $DEBUG; 		
+    	 } else {
+	          print "<br><font color=red>Please enter an initial state or select <i>Complete State Space</i></font><br>";
+	          die("Program quitting. Empty value for initialization field");
+	     }
     }
     if($statespace eq "State space graph" && $option_box eq "All trajectories from all possible initial states") {
         if(-e "$clientip.out.$SSformat") {
