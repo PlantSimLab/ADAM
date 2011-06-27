@@ -312,7 +312,7 @@ if ( $special_networks eq "Conjunctive/Disjunctive (Boolean rings only)" ) {
 } elsif ( $p_value && $n_nodes ) {
     print "Executing simulation<br>";
     print "hello<br>" if ($DEBUG);
-    if($n_nodes > 32 || $p_value**$n_nodes > 2**32) {
+    if($n_nodes > 30 || $p_value**$n_nodes > 2**30) {
         print "<font color=red>Simulation for large networks is not possible. Please chose <i>Algorithms</i> as <b>Analysis</b> option. </font><br>";
         die("Program quitting. Too many nodes");
     }
@@ -398,7 +398,7 @@ print "<div id=\"footer\">";
 print "ADAM is currently still under development; if you ";
 print "spot any bugs or have any questions/comments, please <a href=\"mailto:mbrando1\@utk.edu\">";
 print "e-mail us</a>. ";
-print "(Bonny Guang, Madison Brandon, Rustin McNeill, Franziska Hinkelmann)";
+print "(Bonny Guang, Madison Brandon, Rustin McNeill, Paul Vines, Franziska Hinkelmann)";
 print "</td></tr>";
 print "</div>";
 

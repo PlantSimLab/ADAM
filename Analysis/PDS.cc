@@ -115,7 +115,7 @@ void PDS::parseTerm(string input, int termNum){
     }
   }
   else{
-    cout << "INPUT: " << input << endl;
+    //cout << "INPUT: " << input << endl;
     vector<unsigned char> * tempVar = new vector<unsigned char>();
     tempVar->push_back(0);
     vector<unsigned char> * tempPows = new vector<unsigned char>();    
