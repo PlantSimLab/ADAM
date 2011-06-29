@@ -55,7 +55,6 @@ PDS::PDS(string input, int states){
     vars.push_back(*(new vector<unsigned char>()));
     pows.push_back(*(new vector<unsigned char>()));
   }
-  //cout << vars[0].size() << endl;
   // Break apart at pluses and send to submethod
   for (int i = 0; i < breakPoints.size(); i++){
     if (i < breakPoints.size() - 1){
@@ -115,7 +114,6 @@ void PDS::parseTerm(string input, int termNum){
     }
   }
   else{
-    //cout << "INPUT: " << input << endl;
     vector<unsigned char> * tempVar = new vector<unsigned char>();
     tempVar->push_back(0);
     vector<unsigned char> * tempPows = new vector<unsigned char>();    

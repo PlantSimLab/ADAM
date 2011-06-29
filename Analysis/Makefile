@@ -1,10 +1,14 @@
 CC = g++
 
-PDS.o: PDS.cc PDS.h constants.h
+analysis : cyclone.o PDS.o constants.h PDS.h
+	$(CC) -o $@ cyclone.o PDS.o
+
+PDS.o : PDS.cc PDS.h constants.h
 	$(CC) -c PDS.cc
 
-cyclone.o: cyclone.cc constants.h PDS.h
+cyclone.o : cyclone.cc constants.h PDS.h
 	$(CC) -c cyclone.cc
 
-Cyclone: cyclone.o PDS.o constants.h PDS.h
-	$(CC) -o $@ cyclone.o PDS.o
+clean : 
+	rm analysis PDS.o cyclone.o
+

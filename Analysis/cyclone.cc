@@ -18,10 +18,10 @@ using namespace std;
 // Theoretical Limit of 3^11 states if limit cycle is the max size
 
 vector<PDS> pds; // vector of polynomial equations for each variable
-int state; // the current state
+unsigned long state; // the current state
 unsigned char * checkedArray;
-int num_states; // number of possibilities for states [0,1,2]
-int num_vars; // number of variables in the total system
+unsigned long num_states; // number of possibilities for states [0,1,2]
+unsigned int num_vars; // number of variables in the total system
 ofstream * fileOut; // output file pointer
 
 
@@ -31,9 +31,9 @@ ofstream * fileOut; // output file pointer
 void reset(){
   pds.clear();
 
-  int num_states = ceil(pow(num_states,num_vars) / BYTE_SIZE);
+  unsigned long total_states = ceil(pow(num_states,num_vars) / BYTE_SIZE);
   checkedArray = new unsigned char[num_states];
-  for (int i = 0; i < num_states; i++){
+  for (int i = 0; i < total_states; i++){
     checkedArray[i] = 0;
   }    
 
@@ -62,24 +62,17 @@ void parseInput(string input){
 
    // Generate break points for each 'f'
   for (int i = 0; i < input.length(); i++){
-    if (input[i] == 'f'){
+    if (input[i] == 'f' || input[i] == '\0'){
       breakPoints.push_back(i);
     }
   }
 
   // Split input at breakpoints and construct PDSs
-  for (int i = 0; i < breakPoints.size(); i++){
-    if (i < breakPoints.size() - 1){
-      string function = removeSpaces(input.substr(breakPoints[i], breakPoints[i+1] - breakPoints[i]));
-      temp = new PDS(function, num_states);
-    }
-    else{
-      string function = removeSpaces(input.substr(breakPoints[i], input.length()));
-      temp = new PDS(function, num_states);
-    }
+  for (int i = 0; i < breakPoints.size() - 1; i++){
+    string function = removeSpaces(input.substr(breakPoints[i], breakPoints[i+1] - breakPoints[i]));
+    temp = new PDS(function, num_states);
     pds.push_back(*temp);
   }
-
 }
 
 // PRE: filename contains the name of a valid input file
@@ -151,9 +144,9 @@ void printPDS(){
 //the conversion, j is the base to convert to
 // POST: v contains the base-j form of n, in ascending order of power
 // ASSUMPTIONS: v is long enough to fit n in base-j AND v is clean
-void decimalToTernary(int n, unsigned char * v, int j)
+void decimalToTernary(unsigned long n, unsigned char * v, int j)
 {
-  int a=0,b=n,i=0;
+  unsigned long a=0,b=n,i=0;
   while (b != 0)
     {
       a = b%j;
@@ -166,10 +159,10 @@ void decimalToTernary(int n, unsigned char * v, int j)
 // PRE: v is an array of numbers for a number in base-j, j is the base
 // of the number
 // POST: the decimal value of this is returned
-int ternaryToDecimal(unsigned char v[], int j){
-  int result = 0;
+unsigned long ternaryToDecimal(unsigned char v[], int j){
+  unsigned long result = 0;
   for (int i = 0; i < num_vars; i++){
-    result += (int)(v[i] * pow(j, i));
+    result += (unsigned long)(v[i] * pow(j, i));
   }
   return result;
 }
@@ -179,16 +172,16 @@ int ternaryToDecimal(unsigned char v[], int j){
 // POST: the value of the bit specified is returned, a 1 indicates it
 // has been visited before, a 0 indicates it has not been visited
 // before
-bool wasChecked(int state){
-  int index = state / BYTE_SIZE;
-  int bit = state % BYTE_SIZE;
+bool wasChecked(unsigned long state){
+  unsigned long index = state / BYTE_SIZE;
+  unsigned char bit = state % BYTE_SIZE;
 
   return (checkedArray[index]>>bit)&1;
 }
 
 // PRE: state is defined, checkedArray contains state-amount of bits
 // POST: the entry corresponding to state in checkedArray is now a 1
-void setChecked(int state){
+void setChecked(unsigned long state){
   if (!wasChecked(state)){ 
     unsigned char newValue = 1;
     unsigned char bit = state % BYTE_SIZE;
@@ -204,7 +197,7 @@ void setChecked(int state){
 
 // PRE: curState is an integer <= num_states^num_vars - 1
 // POST: the next state, according to the PDS, is returned
-int nextState(int curState){
+unsigned long nextState(unsigned long curState){
   unsigned char * temp = new unsigned char[num_vars];
   unsigned char * temp2 = new unsigned char[num_vars];
   for (int i = 0; i < num_vars; i++){
@@ -223,9 +216,9 @@ int nextState(int curState){
 // state
 // POST: the location of state in the vector path is returned if it
 // exists, otherwise -1 is returned
-int cycle(int state, vector<int>& path){
-  int cycle = -1;
-  for (int i = 0; i < path.size(); i++){
+long cycle(unsigned long state, vector<unsigned long>& path){
+  long cycle = -1;
+  for (unsigned long i = 0; i < path.size(); i++){
     if (state == path[i]){
       cycle = i;
     }
@@ -236,7 +229,7 @@ int cycle(int state, vector<int>& path){
 // PRE: cycleStart is an integer representing the first state in the
 // limit cycle, path is a vector containing the cycle
 // POST: each state in the limit cycle is output
-void outputCycle(int cycleStart, vector<int>& path){
+void outputCycle(long cycleStart, vector<unsigned long>& path){
 
   stringstream output;
   output << "CYCLE FOUND:\n LENGTH: ";
@@ -245,7 +238,7 @@ void outputCycle(int cycleStart, vector<int>& path){
 
   unsigned char * temp = new unsigned char[num_vars];
   
-  for (int i = cycleStart; i < path.size(); i++){
+  for (unsigned long i = cycleStart; i < path.size(); i++){
     for (int k = 0; k < num_vars; k++){
       temp[k] = 0;
     }
@@ -265,7 +258,7 @@ void outputCycle(int cycleStart, vector<int>& path){
 
 // PRE: curState is a valid state in state space
 // POST: curState is output in its array form
-void printState(int curState){
+void printState(unsigned long curState){
 
   unsigned char * temp = new unsigned char[num_vars]();
   for (int i = 0; i < num_vars; i++){
@@ -286,16 +279,16 @@ void printState(int curState){
 // PRE: PDS is defined
 // POST: all limit cycles have been found and output
 void run(){
-  vector<int> * path = new vector<int>();
+  vector<unsigned long> * path = new vector<unsigned long>();
   state = 0;
-  int maxState = pow(num_states, num_vars);
+  unsigned long maxState = pow(num_states, num_vars);
   
   cout << "State Space Size: " << maxState << endl;
-  path = new vector<int>();
-  for (int iterState = 0; iterState < maxState; iterState++){
+  path = new vector<unsigned long>();
+  for (unsigned long iterState = 0; iterState < maxState; iterState++){
     path->clear();
-
     state = iterState;
+
     // Continue traversal until hitting a checked state
     while (!wasChecked(state)){
       path->push_back(state);
@@ -304,7 +297,7 @@ void run(){
     }
     
     // If there's a cycle
-    int cycleLoc = cycle(state, *path);
+    long cycleLoc = cycle(state, *path);
     if (cycleLoc > -1){
       outputCycle(cycleLoc, *path);
     }
@@ -315,7 +308,6 @@ void run(){
 // cycles of the PDS in the file
 int main(int argc, char *argcv[]){
 
-  reset();
   string filename;
   if (argc < 3){
     cout << "Enter Filename (no extension): " << endl;
@@ -329,17 +321,16 @@ int main(int argc, char *argcv[]){
     temp >> num_states;
     filename = argcv[2];
   }
-  cout << "STATES: " << num_states << endl;
   string filenameOut = filename + "_results.txt";
   filename += ".txt";
   
-  //cout << filename << endl;
+  cout << filename << endl;
   num_vars = readInput(filename);
   fileOut = new ofstream(filenameOut.c_str());
  
-  int total_states = ceil(pow(num_states,num_vars) / BYTE_SIZE);
+  unsigned long total_states = ceil(pow(num_states,num_vars) / BYTE_SIZE);
   checkedArray = new unsigned char[total_states];
-  for (int i = 0; i < total_states; i++){
+  for (unsigned long i = 0; i < total_states; i++){
     checkedArray[i] = 0;
   }    
  
