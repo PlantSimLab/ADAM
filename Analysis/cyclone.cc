@@ -325,7 +325,6 @@ int main(int argc, char *argcv[]){
   string filenameOut = filename + "_results.txt";
   filename += ".txt";
   
-  cout << filename << endl;
   num_vars = readInput(filename);
   fileOut = new ofstream(filenameOut.c_str());
  
