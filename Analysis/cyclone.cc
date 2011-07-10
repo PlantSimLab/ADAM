@@ -33,7 +33,7 @@ void reset(){
 
   unsigned long total_states = ceil(pow(num_states,num_vars) / BYTE_SIZE);
   checkedArray = new unsigned char[num_states];
-  for (int i = 0; i < total_states; i++){
+  for (unsigned long i = 0; i < total_states; i++){
     checkedArray[i] = 0;
   }    
 
@@ -197,9 +197,9 @@ void setChecked(unsigned long state){
 
 // PRE: curState is an integer <= num_states^num_vars - 1
 // POST: the next state, according to the PDS, is returned
-unsigned long nextState(unsigned long curState){
-  unsigned char * temp = new unsigned char[num_vars];
-  unsigned char * temp2 = new unsigned char[num_vars];
+unsigned long nextState(unsigned long curState, unsigned char temp[], unsigned char temp2[]){
+  //  unsigned char * temp = new unsigned char[num_vars];
+  //  unsigned char * temp2 = new unsigned char[num_vars];
   for (int i = 0; i < num_vars; i++){
     temp[i] = 0;
     temp2[i] = 0;
@@ -279,27 +279,28 @@ void printState(unsigned long curState){
 // PRE: PDS is defined
 // POST: all limit cycles have been found and output
 void run(){
-  vector<unsigned long> * path = new vector<unsigned long>();
+  vector<unsigned long> path;
   state = 0;
   unsigned long maxState = pow(num_states, num_vars);
   
-  cout << "State Space Size: " << maxState << endl;
-  path = new vector<unsigned long>();
-  for (unsigned long iterState = 0; iterState < maxState; iterState++){
-    path->clear();
-    state = iterState;
+  unsigned char * ternCurState = new unsigned char[num_vars];
+  unsigned char * ternNextState = new unsigned char[num_vars];
 
+  cout << "State Space Size: " << maxState << endl;
+  for (unsigned long iterState = 0; iterState < maxState; iterState++){
+    path.clear();
+    state = iterState;
     // Continue traversal until hitting a checked state
     while (!wasChecked(state)){
-      path->push_back(state);
+      path.push_back(state);
       setChecked(state);
-      state = nextState(state);
+      state = nextState(state, ternCurState, ternNextState);
     }
     
     // If there's a cycle
-    long cycleLoc = cycle(state, *path);
+    long cycleLoc = cycle(state, path);
     if (cycleLoc > -1){
-      outputCycle(cycleLoc, *path);
+      outputCycle(cycleLoc, path);
     }
   }
 }
