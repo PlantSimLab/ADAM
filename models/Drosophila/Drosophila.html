@@ -1,0 +1,205 @@
+<h2>
+Boolean Model of segment polarity genes in Drosophila melanogaster
+</h2>
+
+<h3>Original Model</h3>
+<p><img src="/models/Drosophila/drosophila.jpg" align="left" alt="Drosophila Melanogaster" >
+	The topology of the regulatory interactions predicts the expression pattern of the segment polarity genes in Drosophila melanogaster</a>
+</p>
+<h3>Description</h3>
+Expression of the Drosophila segment polarity genes is initiated by a pre-pattern of pair-rule gene products and maintained by a network of regulatory interactions throughout several stages of embryonic development. Analysis of a model of gene interactions based on differential equations showed that wild-type expression patterns of these genes can be obtained for a wide range of kinetic parameters, which suggests that the steady states are determined by the topology of the network and the type of regulatory interactions between components, not the detailed form of the rate laws. To investigate this, we propose and analyse a Boolean model of this network which is based on a binary ON/OFF representation of mRNA and protein levels, and in which the interactions are formulated as logical functions. In this model the spatial and temporal patterns of gene expression are determined by the topology of the network and whether components are present or absent, rather than the absolute levels of the mRNAs and proteins and the functional details of their interactions. The model is able to reproduce the wild-type gene expression patterns, as well as the ectopic expression patterns observed in overexpression experiments and various mutants. Furthermore, we compute explicitly all steady states of the network and identify the basin of attraction of each steady state. The model gives important insights into the functioning of the segment polarity gene network, such as the crucial role of the wingless and sloppy paired genes, and the network's ability to correct errors in the pre-pattern.
+<h3>Variables</h3>
+x1 = SLP <br>
+x2 = wg <br>
+x3 = WG <br>
+x4 = en <br>
+x5 = EN <br>
+x6 = hh <br>
+x7 = HH <br>
+x8 = ptc <br>
+x9 = PTC <br>
+x10 = PH <br>
+x11 = SMO <br>
+x12 = ci <br>
+x13 = CI <br>
+x14 = CIA <br>
+x15 = CIR <br>
+The other 3 cells have the same variable order with variables x16 - x30 for the second cell, x31 - x45, for the third, and x46-x60 for the last cell. 
+<h3>Functions</h3>
+We generate the function as given in table 1 in [1]. Please note that activation of SMO and the binding of PTC to HH (Activation of PH) are instantaneous. This means that instead of using x10 (or x11), we have to use the right hand side of the equations for x10 (or x11).<br><br>
+
+Table 1 can be translated to the following: <br>
+SLP = SLP<br>
+wg = (((CIA * SLP)  * (~CIR) ) + ((wg  * (CIA +  SLP))  * (~CIR)))<br>
+WG = wg <br>
+en = ((WG(i-1)  +  WG(i+1) ) * (~SLP)) <br>
+EN = en <br>
+hh = (EN * (~CIR))<br>
+HH = hh <br>
+ptc = ((CIA * (~EN)) * (~CIR)) <br>
+PTC = (ptc + ((PTC * (~HH(i-1))) * (~HH(i+1))))<br>
+PH = (PTC  * (HH(i-1)  +  HH(i+1)))<br>
+SMO = (((~PTC)  +  HH(i-1)) +  HH(i+1))<br>
+ci = (~EN) <br>
+CI = ci<br>
+CIA = (CI * (((((~PTC)  +  HH(i-1)) +  HH(i+1)) + hh(i-1)) + hh(i+1)))<br>
+CIR = (((CI * (~(((~PTC)  +  HH(i-1)) +  HH(i+1)))) * (~hh(i-1))) *
+(~hh(i+1)))<br><br>
+
+Since there are 4 cells in each segment, we obtain a Polynomial Dynamical
+Systems over F2 in 60 variables. The polynomial form, as well as the simplified polynomials can be found at the end of this file.
+<h3>Number of States</h3>
+2 - Boolean 
+<br>
+<h3>Key Dynamic Features</h3>
+10 Fixed points, no 2-cycles, no 3-cycles <br>
+Fixed points: <br>
+<table border="1">
+<tr><td>000111100010000000111100010000111000011111110111000011111110</td></tr>
+<tr><td>000111101000000000000011111110100000001001101111000011111110</td></tr> <tr><td>000111100010000000000011111110100000001001101111000011111110</td></tr> <tr><td>000111101000000011000011111110100000001001101111000011111110</td></tr> <tr><td>000111100010000011000011111110100000001001101111000011111110</td></tr> <tr><td>000000011111110000111101000000111000011111110100000001001101</td></tr> <tr><td>011000011111110000111101000000111000011111110100000001001101</td></tr> <tr><td>000000011111110000111100010000111000011111110100000001001101</td></tr> <tr><td>011000011111110000111100010000111000011111110100000001001101</td></tr> <tr><td>000000001001101000000001001101100000001001101100000001001101</td></tr> 
+</table><br>
+The 10 fixed points that ADAM find, are exactly the fixed points listed in [1] (Figures 4b, 5a, 5b, 7a, 7b, 7c, 6a-j). Furthermore, we verified the trajectory for the initial wild type (Figure 4a [1]), ending in the steady state (Figure 4b [1]). 
+
+<table border="1">
+<tr><td>Initial State</td><td>000101000000000000000010001000100000010001000110000010001000</tr></td>
+<tr><td>after 1 iteration</td><td>000010100011000000000001011100100000001011100111000001011100</tr></td>
+<tr><td>after 2 iteration</td><td>000101000010100000000000111110100000001001101111000000111110</tr></td>
+<tr><td>after 3 iteration</td><td>000110100011010000000010011110100000001001101111000010011110</tr></td>
+<tr><td>after 4 iteration</td><td>000111000010100000000011011110100000001001101111000011011110</tr></td>
+<tr><td>after 5 iteration</td><td>000111100010010000000011001110100000001001101111000011001110</tr></td>
+<tr><td>6 - Fixed Point</td><td>000111100010000000000011111110100000001001101111000011111110</tr></td>
+</table>
+
+<h3>References</h3>
+[1] R. Albert and H. Othmer. The topology of the regulatory interactions predicts the expression pattern of the segment polarity genes in Drosophila melanogaster. Journal of Theoretical Biology, 223:1–18, 2003. <a href="http://dx.doi.org/10.1016/S0022-5193(03)00035-3">doi:10.1016/S0022-5193(03)00035-3</a>
+<h3>Author</h3>
+Franziska Hinkelmann 
+<h3>Last Updated</h3>
+November 2010
+<h3>Appendix: Polynomial Form</h3>
+ <br>
+f1 = 0<br>
+f2 = ((((x15+1)*(((x1+x14)+(x1*x14))*x2))+((x15+1)*(x1*x14)))+(((x15+1)*(((x1+x14)+(x1*x14))*x2))*((x15+1)*(x1*x14))))<br>
+f3 = x2<br>
+f4 = ((x1+1)*((x18+x48)+(x18*x48)))<br>
+f5 = x4<br>
+f6 = ((x15+1)*x5)<br>
+f7 = x6<br>
+f8 = ((x15+1)*((x5+1)*x14))<br>
+f9 = ((((x22+1)*((x52+1)*x9))+x8)+(((x22+1)*((x52+1)*x9))*x8))<br>
+f10 = (((x22+x52)+(x22*x52))*x9)<br>
+f11 = ((x22+((x52+(x9+1))+(x52*(x9+1))))+(x22*((x52+(x9+1))+(x52*(x9+1)))))<br>
+f12 = (x5+1)<br>
+f13 = x12<br>
+f14 = (((x21+((x51+((x22+((x52+(x9+1))+(x52*(x9+1))))+(x22*((x52+(x9+1))+(x52*(x9+1))))))+(x51*((x22+((x52+(x9+1))+(x52*(x9+1))))+(x22*((x52+(x9+1))+(x52*(x9+1))))))))+(x21*((x51+((x22+((x52+(x9+1))+(x52*(x9+1))))+(x22*((x52+(x9+1))+(x52*(x9+1))))))+(x51*((x22+((x52+(x9+1))+(x52*(x9+1))))+(x22*((x52+(x9+1))+(x52*(x9+1)))))))))*x13)<br>
+f15 = ((x21+1)*((x51+1)*((((x22+((x52+(x9+1))+(x52*(x9+1))))+(x22*((x52+(x9+1))+(x52*(x9+1)))))+1)*x13)))<br>
+f16 = 0<br>
+f17 = ((((x30+1)*(((x16+x29)+(x16*x29))*x17))+((x30+1)*(x16*x29)))+(((x30+1)*(((x16+x29)+(x16*x29))*x17))*((x30+1)*(x16*x29))))<br>
+f18 = x17<br>
+f19 = ((x16+1)*((x33+x3)+(x33*x3)))<br>
+f20 = x19<br>
+f21 = ((x30+1)*x20)<br>
+f22 = x21<br>
+f23 = ((x30+1)*((x20+1)*x29))<br>
+f24 = ((((x37+1)*((x7+1)*x24))+x23)+(((x37+1)*((x7+1)*x24))*x23))<br>
+f25 = (((x37+x7)+(x37*x7))*x24)<br>
+f26 = ((x37+((x7+(x24+1))+(x7*(x24+1))))+(x37*((x7+(x24+1))+(x7*(x24+1)))))<br>
+f27 = (x20+1)<br>
+f28 = x27<br>
+f29 = (((x36+((x6+((x37+((x7+(x24+1))+(x7*(x24+1))))+(x37*((x7+(x24+1))+(x7*(x24+1))))))+(x6*((x37+((x7+(x24+1))+(x7*(x24+1))))+(x37*((x7+(x24+1))+(x7*(x24+1))))))))+(x36*((x6+((x37+((x7+(x24+1))+(x7*(x24+1))))+(x37*((x7+(x24+1))+(x7*(x24+1))))))+(x6*((x37+((x7+(x24+1))+(x7*(x24+1))))+(x37*((x7+(x24+1))+(x7*(x24+1)))))))))*x28)<br>
+f30 = ((x36+1)*((x6+1)*((((x37+((x7+(x24+1))+(x7*(x24+1))))+(x37*((x7+(x24+1))+(x7*(x24+1)))))+1)*x28)))<br>
+f31 = 1<br>
+f32 = ((((x45+1)*(((x31+x44)+(x31*x44))*x32))+((x45+1)*(x31*x44)))+(((x45+1)*(((x31+x44)+(x31*x44))*x32))*((x45+1)*(x31*x44))))<br>
+f33 = x32<br>
+f34 = ((x31+1)*((x48+x18)+(x48*x18)))<br>
+f35 = x34<br>
+f36 = ((x45+1)*x35)<br>
+f37 = x36<br>
+f38 = ((x45+1)*((x35+1)*x44))<br>
+f39 = ((((x52+1)*((x22+1)*x39))+x38)+(((x52+1)*((x22+1)*x39))*x38))<br>
+f40 = (((x52+x22)+(x52*x22))*x39)<br>
+f41 = ((x52+((x22+(x39+1))+(x22*(x39+1))))+(x52*((x22+(x39+1))+(x22*(x39+1)))))<br>
+f42 = (x35+1)<br>
+f43 = x42<br>
+f44 = (((x51+((x21+((x52+((x22+(x39+1))+(x22*(x39+1))))+(x52*((x22+(x39+1))+(x22*(x39+1))))))+(x21*((x52+((x22+(x39+1))+(x22*(x39+1))))+(x52*((x22+(x39+1))+(x22*(x39+1))))))))+(x51*((x21+((x52+((x22+(x39+1))+(x22*(x39+1))))+(x52*((x22+(x39+1))+(x22*(x39+1))))))+(x21*((x52+((x22+(x39+1))+(x22*(x39+1))))+(x52*((x22+(x39+1))+(x22*(x39+1)))))))))*x43)<br>
+f45 = ((x51+1)*((x21+1)*((((x52+((x22+(x39+1))+(x22*(x39+1))))+(x52*((x22+(x39+1))+(x22*(x39+1)))))+1)*x43)))<br>
+f46 = 1<br>
+f47 = ((((x60+1)*(((x46+x59)+(x46*x59))*x47))+((x60+1)*(x46*x59)))+(((x60+1)*(((x46+x59)+(x46*x59))*x47))*((x60+1)*(x46*x59))))<br>
+f48 = x47<br>
+f49 = ((x46+1)*((x3+x33)+(x3*x33)))<br>
+f50 = x49<br>
+f51 = ((x60+1)*x50)<br>
+f52 = x51<br>
+f53 = ((x60+1)*((x50+1)*x59))<br>
+f54 = ((((x7+1)*((x37+1)*x54))+x53)+(((x7+1)*((x37+1)*x54))*x53))<br>
+f55 = (((x7+x37)+(x7*x37))*x54)<br>
+f56 = ((x7+((x37+(x54+1))+(x37*(x54+1))))+(x7*((x37+(x54+1))+(x37*(x54+1)))))<br>
+f57 = (x50+1)<br>
+f58 = x57<br>
+f59 = (((x6+((x36+((x7+((x37+(x54+1))+(x37*(x54+1))))+(x7*((x37+(x54+1))+(x37*(x54+1))))))+(x36*((x7+((x37+(x54+1))+(x37*(x54+1))))+(x7*((x37+(x54+1))+(x37*(x54+1))))))))+(x6*((x36+((x7+((x37+(x54+1))+(x37*(x54+1))))+(x7*((x37+(x54+1))+(x37*(x54+1))))))+(x36*((x7+((x37+(x54+1))+(x37*(x54+1))))+(x7*((x37+(x54+1))+(x37*(x54+1)))))))))*x58)<br>
+f60 = ((x6+1)*((x36+1)*((((x7+((x37+(x54+1))+(x37*(x54+1))))+(x7*((x37+(x54+1))+(x37*(x54+1)))))+1)*x58)))<br>
+ <br>
+
+This system simplifies to <br>
+f1 = 0<br>
+f2 = x1*x2*x15+x1*x14*x15+x2*x14*x15+x1*x2+x1*x14+x2*x14<br>
+f3 = x2<br>
+f4 = x1*x18*x48+x1*x18+x1*x48+x18*x48+x18+x48<br>
+f5 = x4<br>
+f6 = x5*x15+x5<br>
+f7 = x6<br>
+f8 = x5*x14*x15+x5*x14+x14*x15+x14<br>
+f9 = x8*x9*x22*x52+x8*x9*x22+x8*x9*x52+x9*x22*x52+x8*x9+x9*x22+x9*x52+x8+x9<br>
+f10 = x9*x22*x52+x9*x22+x9*x52<br>
+f11 = x9*x22*x52+x9*x22+x9*x52+x9+1<br>
+f12 = x5+1<br>
+f13 = x12<br>
+f14 = x9*x13*x21*x22*x51*x52+x9*x13*x21*x22*x51+x9*x13*x21*x22*x52+x9*x13*x21*x51*x52+x9*x13*x22*x51*x52+x9*x13*x21*x22+x9*x13*x21*x51+x9*x13*x22*x51+x9*x13*x21*x52+x9*x13*x22*x52+x9*x13*x51*x52+x9*x13*x21+x9*x13*x22+x9*x13*x51+x9*x13*x52+x9*x13+x13<br>
+f15 = x9*x13*x21*x22*x51*x52+x9*x13*x21*x22*x51+x9*x13*x21*x22*x52+x9*x13*x21*x51*x52+x9*x13*x22*x51*x52+x9*x13*x21*x22+x9*x13*x21*x51+x9*x13*x22*x51+x9*x13*x21*x52+x9*x13*x22*x52+x9*x13*x51*x52+x9*x13*x21+x9*x13*x22+x9*x13*x51+x9*x13*x52+x9*x13<br>
+f16 = 0<br>
+f17 = x16*x17*x30+x16*x29*x30+x17*x29*x30+x16*x17+x16*x29+x17*x29<br>
+f18 = x17<br>
+f19 = x3*x16*x33+x3*x16+x3*x33+x16*x33+x3+x33<br>
+f20 = x19<br>
+f21 = x20*x30+x20<br>
+f22 = x21<br>
+f23 = x20*x29*x30+x20*x29+x29*x30+x29<br>
+f24 = x7*x23*x24*x37+x7*x23*x24+x7*x24*x37+x23*x24*x37+x7*x24+x23*x24+x24*x37+x23+x24<br>
+f25 = x7*x24*x37+x7*x24+x24*x37<br>
+f26 = x7*x24*x37+x7*x24+x24*x37+x24+1<br>
+f27 = x20+1<br>
+f28 = x27<br>
+f29 = x6*x7*x24*x28*x36*x37+x6*x7*x24*x28*x36+x6*x7*x24*x28*x37+x6*x24*x28*x36*x37+x7*x24*x28*x36*x37+x6*x7*x24*x28+x6*x24*x28*x36+x7*x24*x28*x36+x6*x24*x28*x37+x7*x24*x28*x37+x24*x28*x36*x37+x6*x24*x28+x7*x24*x28+x24*x28*x36+x24*x28*x37+x24*x28+x28<br>
+f30 = x6*x7*x24*x28*x36*x37+x6*x7*x24*x28*x36+x6*x7*x24*x28*x37+x6*x24*x28*x36*x37+x7*x24*x28*x36*x37+x6*x7*x24*x28+x6*x24*x28*x36+x7*x24*x28*x36+x6*x24*x28*x37+x7*x24*x28*x37+x24*x28*x36*x37+x6*x24*x28+x7*x24*x28+x24*x28*x36+x24*x28*x37+x24*x28<br>
+f31 = 1<br>
+f32 = x31*x32*x45+x31*x44*x45+x32*x44*x45+x31*x32+x31*x44+x32*x44<br>
+f33 = x32<br>
+f34 = x18*x31*x48+x18*x31+x18*x48+x31*x48+x18+x48<br>
+f35 = x34<br>
+f36 = x35*x45+x35<br>
+f37 = x36<br>
+f38 = x35*x44*x45+x35*x44+x44*x45+x44<br>
+f39 = x22*x38*x39*x52+x22*x38*x39+x22*x39*x52+x38*x39*x52+x22*x39+x38*x39+x39*x52+x38+x39<br>
+f40 = x22*x39*x52+x22*x39+x39*x52<br>
+f41 = x22*x39*x52+x22*x39+x39*x52+x39+1<br>
+f42 = x35+1<br>
+f43 = x42<br>
+f44 = x21*x22*x39*x43*x51*x52+x21*x22*x39*x43*x51+x21*x22*x39*x43*x52+x21*x39*x43*x51*x52+x22*x39*x43*x51*x52+x21*x22*x39*x43+x21*x39*x43*x51+x22*x39*x43*x51+x21*x39*x43*x52+x22*x39*x43*x52+x39*x43*x51*x52+x21*x39*x43+x22*x39*x43+x39*x43*x51+x39*x43*x52+x39*x43+x43<br>
+f45 = x21*x22*x39*x43*x51*x52+x21*x22*x39*x43*x51+x21*x22*x39*x43*x52+x21*x39*x43*x51*x52+x22*x39*x43*x51*x52+x21*x22*x39*x43+x21*x39*x43*x51+x22*x39*x43*x51+x21*x39*x43*x52+x22*x39*x43*x52+x39*x43*x51*x52+x21*x39*x43+x22*x39*x43+x39*x43*x51+x39*x43*x52+x39*x43<br>
+f46 = 1<br>
+f47 = x46*x47*x60+x46*x59*x60+x47*x59*x60+x46*x47+x46*x59+x47*x59<br>
+f48 = x47<br>
+f49 = x3*x33*x46+x3*x33+x3*x46+x33*x46+x3+x33<br>
+f50 = x49<br>
+f51 = x50*x60+x50<br>
+f52 = x51<br>
+f53 = x50*x59*x60+x50*x59+x59*x60+x59<br>
+f54 = x7*x37*x53*x54+x7*x37*x54+x7*x53*x54+x37*x53*x54+x7*x54+x37*x54+x53*x54+x53+x54<br>
+f55 = x7*x37*x54+x7*x54+x37*x54<br>
+f56 = x7*x37*x54+x7*x54+x37*x54+x54+1<br>
+f57 = x50+1<br>
+f58 = x57<br>
+f59 = x6*x7*x36*x37*x54*x58+x6*x7*x36*x54*x58+x6*x7*x37*x54*x58+x6*x36*x37*x54*x58+x7*x36*x37*x54*x58+x6*x7*x54*x58+x6*x36*x54*x58+x7*x36*x54*x58+x6*x37*x54*x58+x7*x37*x54*x58+x36*x37*x54*x58+x6*x54*x58+x7*x54*x58+x36*x54*x58+x37*x54*x58+x54*x58+x58<br>
+f60 = x6*x7*x36*x37*x54*x58+x6*x7*x36*x54*x58+x6*x7*x37*x54*x58+x6*x36*x37*x54*x58+x7*x36*x37*x54*x58+x6*x7*x54*x58+x6*x36*x54*x58+x7*x36*x54*x58+x6*x37*x54*x58+x7*x37*x54*x58+x36*x37*x54*x58+x6*x54*x58+x7*x54*x58+x36*x54*x58+x37*x54*x58+x54*x58<br>
+<br>
+

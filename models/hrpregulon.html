@@ -1,0 +1,70 @@
+<h2>
+A Boolean Model of the Pseudomonas syringae hrp Regulon Predicts a Tightly Regulated System</h2>
+
+<h3>Original Model</h3>
+<p>
+	<img src="/models/hrpregulondiagram.jpg" alt="Network of the hrp regulon of P. syringae. Nodes (Blue circles) represent the proteins in the network and edges (black lines) represent regulatory interactions, arrow headed edges represent a positive regulatory interaction and T-headed edges represent a negative regulatory interaction.  "></img>
+</p>
+<h3>Description</h3>
+The Type III secretion system (TTSS) is a protein secretion machinery used by certain gram-negative bacterial pathogens of plants and animals to deliver effector molecules to the host and is at the core of the ability to cause disease. Extensive molecular and biochemical study has revealed the components and their interactions within this system but reductive approaches do not consider the dynamical properties of the system as a whole. In order to gain a better understanding of these dynamical behaviours and to create a basis for the refinement of the experimentally derived knowledge we created a Boolean model of the regulatory interactions within the hrp regulon of Pseudomonas syringae pathovar tomato strain DC3000 Pseudomonas syringae. We compared simulations of the model with experimental data and found them to be
+largely in accordance, though the hrpV node shows some differences in state changes to that expected. Our simulations also revealed interesting dynamical properties not previously predicted. The model predicts that the hrp regulon is a biologically stable two-state system, with each of the stable states being strongly attractive, a feature indicative of selection
+for a tightly regulated and responsive system. The model predicts that the state of the GacS/GacA node confers control, a prediction that is consistent with experimental observations that the protein has a role as master regulator. Simulated gene ‘‘knock out’’ experiments with the model predict that HrpL is a central information processing point within the network.<br>
+
+Number of variables:7<br> 
+Number of states: 2 states (True or False : Let ‘1’ be true and ‘0’ be false)<br>
+Number of states in state space: 2^7 = 128<br>
+
+
+Citation: MacLean D, Studholme DJ (2010) A Boolean Model of the Pseudomonas syringae hrp Regulon Predicts a Tightly Regulated System. PLoS ONE 5(2):
+e9101. doi:10.1371/journal.pone.0009101
+
+<h3>Variables</h3>
+x1 = GacSGacA<br>
+x2 = RpoN<br>
+x3 = HrpRS<br>
+x4 = HrpV<br>
+x5 = HrpA<br>
+x6 = HrpG<br>
+x7 = HrpL<br>
+
+<h3>Functions</h3>
+f1 = x1<br>
+f2 = x1<br>
+f3 = ((x1*(~x4))+x5)<br>
+f4 = ((x7*x2)*(~x6))<br>
+f5 = x7<br>
+f6 = x7<br>
+f7 = (x2*x3)<br>
+
+<h3>Boolean Converted to Polynomial Function by DVD</h3>
+f1 = x1 <br>
+f2 = x1 <br>
+f3 = ((x5+((x4+1)*x1))+(x5*((x4+1)*x1)))<br>
+f4 = ((x6+1)*(x2*x7))<br>
+f5 = x7<br>
+f6 = x7<br>
+f7 = (x3*x2)<br>
+
+<h3>Number of States</h3>
+2
+<br>
+<h3>Key Dynamic Features</h3>
+<h3>Analysis of State Space</h3>
+There are 2 components and 2 fixed point(s)<br>
+TOTAL: 128 = 2^7 nodes<br>
+fixed point(s)...<br>
+[ 0 0 0 0 0 0 0 ] lies in a component of size 64.<br>
+[ 1 1 1 0 1 1 1 ] lies in a component of size 64.<br> 
+
+<h4>Wiring Diagram</h4>
+<img src="/models/hrpregulonwiringdiagram.jpg" alt="Wiring diagram Pseudomonas syringae hrp Regulon"><br>
+<h3>References</h3>
+<a
+href="http://www.plosone.org/article/info:doi/10.1371/journal.pone.0009101">hrpRegulon model</a>
+<h3>Author</h3>
+Prashanth Ramanathan<br>
+<a href="mailto:prasha6@vt.edu">e-mail Prashanth</a>
+
+<h3>Last Updated</h3>
+October 2010
+

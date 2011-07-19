@@ -1,0 +1,153 @@
+<h2>
+Boolen model including relevant genes or transcription factors for Th1 Th2 cell differentiation.
+</h2>
+
+<h3>Original Model</h3>
+<p>
+	Combining Network Modeling and Gene Expression Microarray Analysis to Explore the Dynamics of Th1 and Th2 Cell Regulation
+</p>
+
+<h3>Description</h3>
+Two T helper (Th) cell subsets, namely Th1 and Th2 cells, play an important role in inflammatory diseases. The two subsets are thought to counter-regulate each other, and alterations in their balance result in different diseases. This paradigm has been challenged by recent clinical and experimental data. Because of the large number of genes involved in regulating Th1 and Th2 cells, assessment of this paradigm by modeling or experiments is difficult. Novel algorithms based on formal methods now permit the analysis of large gene regulatory networks. By combining these algorithms with in silico knockouts and gene expression microarray data from human T cells, we examined if the results were compatible with a counter-regulatory role of Th1 and Th2 cells. We constructed a directed network model of genes regulating Th1 and Th2 cells through text mining and manual curation. We identified four attractors in the network, three of which included genes that corresponded to Th0, Th1 and Th2 cells. The fourth attractor contained a mixture of Th1 and Th2 genes. We found that neither in silico knockouts of the Th1 and Th2 attractor genes nor gene expression microarray data from patients with immunological disorders and healthy subjects supported a counter-regulatory role of Th1 and Th2 cells. By combining network modeling with transcriptomic data analysis and in silico knockouts, we have devised a practical way to help unravel complex regulatory network topology and to increase our understanding of how network actions may differ in health and disease.
+
+<h3>Variables</h3>
+x1	=	IL-13 <br>
+x2	=	IL-5 <br>
+x3	=	TBET <br>
+x4	=	IFN-c <br>
+x5	=	MAF <br>
+x6	=	GATA3 <br>
+x7	=	IL-7R <br>
+x8	=	IL-18R <br>
+x9	=	IRAK <br>
+x10	=	STAT1 <br>
+x11	=	IFN-aR1 <br>
+x12	=	IFN-cR <br>
+x13	=	IL-4R <br>
+x14	=	IL-4 <br>
+x15	=	CTLA4 <br>
+x16	=	SHP1 <br>
+x17	=	LCK <br>
+x18	=	ZAP70 <br>
+x19	=	SLP76 <br>
+x20	=	VAV1 <br>
+x21	=	ITK<br>
+x22	=	PLCPG <br>
+x23	=	CD4 <br>
+x24	=	TCR <br>
+x25	=	CD3 <br>
+x26	=	CD45 <br>
+x27	=	TNFRSF4 <br>
+x28	=	NFKB <br>
+x29	=	IRF4 <br>
+x30	=	NFAT <br>
+x31	=	PI3K <br>
+x32	=	AKT1 <br>
+x33	=	COT <br>
+x34	=	NIK<br>
+x35	=	IKBKB <br>
+x36	=	CD28 <br>
+x37	=	JAK1 <br>
+x38	=	JAK3 <br>
+x39	=	STAT6 <br>
+x40	=	STAT4 <br>
+x41	=	SOCS1 <br>
+x42	=	IL-12R <br>
+x43	=	ICOS<br>
+x44	=	IL-7<br>
+x45	=	IL-18<br>
+x46	=	IL-12<br>
+x47	=	IFN-a<br>
+x48	=	CD80<br>
+x49	=	TNFSF4 <br>
+x50	=	ANTIGEN<br>
+x51	=	CD86<br>
+
+<h3>Functions</h3>
+We generate the function from table 4 in [1]. <br><br>
+f1 = x5*x6*x29*x30+x5*x6*x29+x5*x6*x30+x5*x29*x30+x6*x29*x30+x5*x6+x5*x29+x6*<br> 
+	<IMG SCR="yourimage.gif" HSPACE=40 VSPACE=1>x29+x5*x30+x6*x30+x29*x30+x5+x6+x29+x30<br>
+f2 = x5*x6*x29*x30+x5*x6*x29+x5*x6*x30+x5*x29*x30+x6*x29*x30+x5*x6+x5*x29+x6*x29+<br>
+	<IMG SCR="yourimage.gif" HSPACE=40 VSPACE=1>x5*x30+x6*x30+x29*x30+x5+x6+x29+x30<br>
+f3 = x6*x10*x12+x6*x10+x6*x12+x10*x12+x10+x12<br>
+f4 = x3*x7*x9*x10*x40+x3*x7*x9*x10+x3*x7*x9*x40+x3*x7*x10*x40+x3*x9*x10*x40+x7*x9*x10*x40+<br>
+	<IMG SCR="yourimage.gif" HSPACE=40 VSPACE=1>x3*x7*x9+x3*x7*x10+x3*x9*x10+x7*x9*x10+x3*x7*x40+x3*x9*x40+x7*x9*x40+x3*x10*x40+x7*x10*<br>
+	<IMG SCR="yourimage.gif" HSPACE=40 	VSPACE=1>x40+x9*x10*x40+x3*x7+x3*x9+x7*x9+x3*x10+x7*x10+x9*x10+x3*x40+x7*x40+x9*x40+x10*x40+x3+x7+<br>
+	<IMG SCR="yourimage.gif" HSPACE=40 VSPACE=1>x9+x10+x40<br>
+f5 = x39<br>
+f6 = x3*x39+x39<br>
+f7 = x44<br>
+f8 = x13*x45+x45<br>
+f9 = x8<br>
+f10 = x11*x12+x11+x12<br>
+f11 = x47<br>
+f12 = x4<br>
+f13 = x14*x41+x14<br>
+f14 = x5*x6*x29*x30+x5*x6*x29+x5*x6*x30+x5*x29*x30+x6*x29*x30+x5*x6+ x5*x29+x6*x29+x5*<br>
+	<IMG SCR="yourimage.gif" HSPACE=40 VSPACE=1>x30+x6*x30+x29*x30+x5+x6+x29+x30<br>
+f15 = x48<br>
+f16 = x15<br>
+f17 = x23*x26+x23+x26<br>
+f18 = x16*x17*x24*x25+x16*x17*x24+x16*x17*x25+x16*x24*x25+x17* x24*x25+x16*x17+x16*x24+<br>
+	<IMG SCR="yourimage.gif" HSPACE=40 VSPACE=1>x17*x24+x16*x25+x17*x25+x24*x25+x17+x24+x25<br>
+f19 = x18<br>
+f20 = x17<br>
+f21 = x19*x20*x36+x19*x20+x19*x36+x20*x36+x19+x20+x36<br>
+f22 = x21<br>
+f23 = x50<br>
+f24 = x50<br>
+f25 = x50<br>
+f26 = x50<br>
+f27 = x49<br>
+f28 = x12*x27*x35+x12*x27+x12*x35+x27*x35+x27+x35<br>
+f29 = x28*x39+x28+x39<br>
+f30 = x22*x27*x29*x36+x22*x27*x29+x22*x27*x36+x22*x29*x36+x27*x29*x36+x22*x27+x22*x29+ <br>
+	<IMG SCR="yourimage.gif" HSPACE=40 VSPACE=1>x27*x29+x22*x36+x27*x36+x29*x36+x22+x27+x29+x36<br>
+f31 = x36*x43+x36+x43<br>
+f32 = x31<br>
+f33 = x32<br>
+f34 = x33<br>
+f35 = x34<br>
+f36 = x51<br>
+f37 = x13*x16*x41+x13*x16+x13*x41+x13<br>
+f38 = x13<br>
+f39 = x11*x37*x38+x11*x37+x11*x38+x37*x38+x11+x37+x38<br>
+f40 = x11*x39*x42+x11*x39+x11*x42+x39*x42+x11+x42<br>
+f41 = x3*x10*x12+x3*x10+x3*x12+x10*x12+x3+x10+x12<br>
+f42 = x46<br>
+f43 = x49<br>
+f44 = 0<br>
+f45 = 0<br>
+f46 = 0<br>
+f47 = 0<br>
+f48 = 0<br>
+f49 = 0<br>
+f50 = 0<br>
+f51 = 0<br>
+
+
+<h3>Number of States</h3>
+2 - Boolean 
+
+<h3>Key Dynamic Features</h3>
+3 Fixed points, no 2-cycles, one 3-cycles <br>
+ <br>
+Fixed points, active variables: <br>
+None <br>
+x4, x12, x41, x10, x3 <br>
+x6, x1, x14, x13, x2, x29, x37, x38, x5, x30, x39 <br>
+<br>
+3-cycle, active variables: <br>
+s1: x4, x1, x14, x2, x38, x30 and x41 <br>
+s2: x12, x1, x14, x2 and x39 <br>
+s3: x6, x13, x29, x5, x41, x10 and x3<br>
+<br>
+
+<h3>References</h3>
+[1] Pedicini M, Barren&auml;s F, Clancy T, Castiglione F, Hovig E, et al. 2010 Combining Network Modeling and Gene Expression Microarray Analysis to Explore the Dynamics of Th1 and Th2 Cell Regulation. PLoS Comput Biol 6(12): e1001032. 
+<a href="http://dx.doi.org/10.1371/journal.pcbi.1001032">doi:10.1371/journal.pcbi.1001032</a>
+
+<h3>Author</h3>
+Franziska Hinkelmann 
+<h3>Last Updated</h3>
+January 2011

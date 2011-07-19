@@ -1,0 +1,173 @@
+<h2>
+NETWORK TOPOLOGY AS A DRIVER OF BISTABILITY IN THE
+LAC OPERON</h2>
+
+<h3>Original Model</h3>
+<p>
+	<img src="/models/lacoperonmodel.jpg" alt="Wiring Diagram of the LAC operon model"></img>
+</p>
+<h3>Description</h3>
+The lac operon in Escherichia coli has been studied extensively and is
+one of the earliest gene systems found to undergo both positive and negative control.The lac operon is known to exhibit bistability, in the sense that the operon is either induced or uninduced. Many dynamical models have been proposed to capture this phenomenon. While most are based on complex mathematical formulations, it has been suggested that for other gene systems network topology is sufficient to produce the desired dynamical behavior. We present a Boolean network as a discrete model for the lac operon. We include the two main glucose control mechanisms of catabolite repression and inducer exclusion in the model and show that it exhibits bistability. Further we present a reduced model which shows that lac mRNA and lactose form the core of the lac
+operon, and that this reduced model also exhibits the same dynamics. This work corroborates the claim that the key to dynamical properties is the topology of the network and signs of interactions.<br>
+
+Number of variables:9<br> 
+Number of states: 2 states<br>
+Number of states in state space: 2^9 = 512<br>
+
+
+Citation: Brandilyn Stigler and Alam Veliz-Cuba (2008) .Network Topology as a Driver of Bistability in the LAC operon. 
+arXiv:0807.3995v1 [q-bio.MN]
+
+<h3>Variables</h3>
+x1 = M<br>
+x2 = P<br>
+x3 = B<br>
+x4 = C<br>
+x5 = R<br>
+x6 = L<br>
+x7 = A<br>
+x8 = L1<br>
+x9 = A1<br>
+
+<h3>Functions</h3>
+f1 = ((~x5)*x4)<br>
+f2 = x1<br>
+f3 = x1<br>
+f4 = (~Ge)<br>
+f5 = ((~x7)*(~x9))<br>
+f6 = (((~Ge)*x2)*Le)<br>
+f7 = (x6*x3)<br>
+f8 = ((~Ge)*(x6+Le))<br>
+f9 = ((x7+x6)+x8)<br>
+
+<h3>Functions converted to polynomials by DVD </h3>
+f1 = (x4*(x5+1))<br>
+f2 = x1<br>
+f3 = x1<br>
+f4 = (Ge+1)<br>
+f5 = ((x9+1)*(x7+1))<br>
+f6 = (Le*(x2*(Ge+1)))<br>
+f7 = (x3*x6)<br>
+f8 = (((Le+x6)+(Le*x6))*(Ge+1))<br>
+f9 = ((x8+((x6+x7)+(x6*x7)))+(x8*((x6+x7)+(x6*x7))))<br>
+
+Le and Ge are extra cellular lactose and glucose and they will be considered as parameters in the model.<br>
+<h3>Number of States</h3>
+2
+<br>
+<h3>Key Dynamic Features</h3>
+There are going to be 4 cases, since a pair of parameters are involved with each parameter having 2 states. so the 4 cases are going to be when (Le,Ge) = (0,0),(0,1),(1,1) and (1,0) <br>
+
+<h3>Analysis of State Space when (Le,Ge) = (0,0) </h3>
+There are 1 components and 1 fixed point(s)<br>
+TOTAL: 512 = 2^9 nodes<br>
+Printing fixed point(s)...<br>
+[ 0 0 0 1 1 0 0 0 0 ] lies in a component of size 512. <br>
+
+<h3>Analysis of State Space when (Le,Ge) = (0,1) </h3>
+There are 1 components and 1 fixed point(s)<br>
+TOTAL: 512 = 2^9 nodes<br>
+Printing fixed point(s)...<br>
+[ 0 0 0 0 1 0 0 0 0 ] lies in a component of size 512.<br>
+
+<h3>Analysis of State Space when (Le,Ge) = (1,1) </h3>
+There are 1 components and 1 fixed point(s)<br>
+TOTAL: 512 = 2^9 nodes<br>
+Printing fixed point(s)...<br>
+[ 0 0 0 0 1 0 0 0 0 ] lies in a component of size 512.<br> 
+
+
+<h3>Analysis of State Space when (Le,Ge) = (1,0) </h3>
+There are 1 components and 1 fixed point(s)<br>
+TOTAL: 512 = 2^9 nodes<br>
+Printing fixed point(s)...<br>
+[ 1 1 1 1 0 1 1 1 1 ] lies in a component of size 512.<br>
+
+<h4>Wiring Diagram of the model for above cases </h4>
+<img src="/models/lacoperononezero.jpg" align="left" /><br>
+
+"In summary, the model predicts that the lac operon is OFF when extracellular glucose is available or there is neither extracellular glucose or lactose. When extracellular lactose is available and extracellular glucose is not, the model predicts that the operon is ON.
+That is, the model has two steady states."
+
+Citation: Brandilyn Stigler and Alam Veliz-Cuba (2008) .Network Topology as a Driver of Bistability in the LAC operon. 
+arXiv:0807.3995v1 [q-bio.MN]
+
+
+<h3>Reduced model</h3>
+<h4>Variables in reduced model</h4>
+x1 = M<br>
+x2 = L<br>
+<h4>Function of reduced model</h4>
+f1 = ((~Ge)*(x2+Le))<br>
+f2 = ((~Ge)*(x1*Le))<br>
+
+<h3>Functions converted to polynomials by DVD </h3>
+f1 = (((Le+x2)+(Le*x2))*(Ge+1))<br>
+f2 = ((Le*x1)*(Ge+1))<br>
+
+<h4>Wiring Diagram of the reduced LAC operon model</h4>
+<p>
+	<img src="/models/lacoperonreducedmodel.jpg" alt="Wiring Diagram of the reduced LAC operon model"></img>
+</p>
+<h4>Number of Variables in reduced model</h4>
+2 <br>
+Le and Ge are extra cellular lactose and glucose and they will be considered as parameters in the model.<br>
+
+<h3>Key Dynamic Features of the reduced model</h3>
+There are going to be 4 cases, since a pair of parameters are involved with each parameter having 2 states. so the 4 cases are going to be when (Le,Ge) = (0,0),(0,1),(1,1) and (1,0) <br>
+
+<h3>Analysis of State Space when (Le,Ge) = (0,0) </h3>
+There are 1 components and 1 fixed point(s)<br>
+TOTAL: 4 = 2^2 nodes<br>
+Printing fixed point(s)...<br>
+[ 0 0 ] lies in a component of size 4. <br>
+<h4>State Space of the model for (Le,Ge)=(0,0) </h4>
+<img src="/models/lacoperonreducedzerozzero.jpg" align="left" /><br>
+
+<h3>Analysis of State Space when (Le,Ge) = (0,1) </h3>
+There are 1 components and 1 fixed point(s)<br>
+TOTAL: 4 = 2^2 nodes<br>
+Printing fixed point(s)...<br>
+[ 0 0 ] lies in a component of size 4. <br>
+<h4>State Space of the model for (Le,Ge)=(0,1) </h4>
+<img src="/models/lacoperonreducedzeroone.jpg" align="left" /><br>
+
+<h3>Analysis of State Space when (Le,Ge) = (1,1) </h3>
+There are 1 components and 1 fixed point(s)<br>
+TOTAL: 4 = 2^2 nodes<br>
+Printing fixed point(s)...<br>
+[ 0 0 ] lies in a component of size 4. <br>
+<h4>State Space of the model for (Le,Ge)=(1,1) </h4>
+<img src="/models/lacoperonreducedoneone.jpg" align="left" /><br>
+
+
+<h3>Analysis of State Space when (Le,Ge) = (1,0) </h3>
+There are 1 components and 1 fixed point(s)<br>
+TOTAL: 4 = 2^2 nodes<br>
+Printing fixed point(s)...<br>
+[ 1 1 ] lies in a component of size 4. <br>
+<h4>State Space of the model for (Le,Ge)=(1,0) </h4>
+<img src="/models/lacoperonreducedonezero.jpg" align="left" /><br>
+
+"Just as with the model H, the reduced model has two different steady states, each corresponding to the operon being ON or OFF. Hence, reduction has preserved the dynamics of the system."
+
+Citation: Brandilyn Stigler and Alam Veliz-Cuba (2008) .Network Topology as a Driver of Bistability in the LAC operon. 
+arXiv:0807.3995v1 [q-bio.MN]
+
+
+<h4>Wiring Diagram of the model for above reduced cases</h4>
+<img src="/models/lacoperonreducedzerozerowire.jpg" align="left" /><br>
+
+
+
+<h3>References</h3>
+<a
+href="http://arxiv.org/abs/0807.3995"> Network Topology as a Driver of Bistability in the LAC operon model</a>
+<h3>Author</h3>
+Prashanth Ramanathan<br>
+<a href="mailto:prasha6@vt.edu">e-mail Prashanth</a>
+
+
+<h3>Last Updated</h3>
+October 2010

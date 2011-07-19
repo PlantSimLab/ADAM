@@ -2,7 +2,7 @@
 
 ##Hussein Vastani##
 
-die "Usage: regulatory.pl functionfile #nodes ip " if ($#ARGV != 3);
+die "Usage: regulatory.pl functionfile #nodes ip" if ($#ARGV != 3);
 
 #set path for graphviz for the server to use
 $ENV{'PATH'}='/usr/local/bin:/bin:/etc:/usr/bin';                           
@@ -11,6 +11,7 @@ $ENV{'LD_LIBRARY_PATH'}='/usr/local/lib/graphviz';
 $num_nodes = $ARGV[1];
 $clientip = $ARGV[2];
 $fileformat = $ARGV[3];
+#$sign = $ARGV[4];
 
 open (INFILE,$ARGV[0]) or die("Failed to open input file");
 $n = 1;

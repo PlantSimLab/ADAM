@@ -1,0 +1,76 @@
+﻿<h1>
+Boolean Model of a Protein-Protein Interaction (PPI)
+</h1>
+
+<h2>
+Original Model
+</h2>
+
+Encoding the state of interacting proteins to facilitate biological pathways reconstruction
+
+<h2>
+Description
+</h2>
+
+The interactions between proteins (e.g. phosphorylation, conformation, signal transduction, sub-cellular localization) are crucial for living cells. Understanding PPI's can provide some developments in not only systems biology but also novel therapeutics.  <br>
+<br>
+In the discrete model below, the interaction has been considered as phosphorylation of the residue "Ser 177" of a protein B by a protein A. In "Variables" and "Functions" below, x1 reflects the absence/presence of the protein A, whereas x2 indicates if the protein B has already been phosphorylated before the interaction. Right after this interaction, while f1 shows the absence/presence of the protein A, f2 points out whether the protein B has been phosphorylated or not. Since the interaction does not change any properties of the protein A, f1 must depend on only x1, in fact, it is equal to x1. On the other hand, the interaction does change some properties of the protein B, therefore f2 must depend on both x1 and x2.
+
+<h2>
+Variables
+</h2>
+
+x1 = Protein A <br>
+x2 = Protein B <br>
+ 
+<h2>
+Functions
+</h2>
+
+f1 = x1 <br>
+f2 = x1 + x2 + x1 * x2 <br>
+
+<h2>
+Number of States
+</h2>
+
+2 - Boolean
+
+<h2>
+Key Dynamic Features
+</h2>
+
+3 Components <br>
+3 Fixed points: 00, 01, 11 <br>
+No 2-cycles, no 3-cycles <br>
+
+<h3>
+State Space
+</h3>
+
+<img src = "/models/Termanini_model/state_space_ppi.gif">
+
+<h3>
+Wiring Diagram
+</h3>
+
+<img src="/models/Termanini_model/wiring_diagram_ppi.gif">
+
+
+<h2>
+References
+</h2>
+
+[1] Termanini, A., P.Tieri, et al. "Encoding the states of interacting proteins to facilitate biological pathways reconstruction." Biol Direct 5: 52; discussion 52. <a href="http://www.biology-direct.com/content/5/1/52"> biology-direct:/5/1/52 </a>
+
+<h2>
+Author
+</h2>
+
+Seda Arat
+ 
+<h2>
+Last Updated
+</h2>
+
+April 2011

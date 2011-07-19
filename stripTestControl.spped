@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="/xsl/spped2svg.xsl"?>
+<Snoopy version="2" revision="1.01">
+  <netclass name="Petri Net"/>
+  <nodeclasses count="4">
+    <nodeclass count="3" name="Place">
+      <node id="4159" net="1">
+        <attribute name="Name" id="4160" net="1">
+          <![CDATA[Node1]]>
+        </attribute>
+        <attribute name="ID" id="4162" net="1">
+          <![CDATA[0]]>
+        </attribute>
+        <attribute name="Marking" id="4164" net="1">
+          <![CDATA[0]]>
+        </attribute>
+        <attribute name="Logic" id="4166" net="1">
+          <![CDATA[0]]>
+        </attribute>
+        <attribute name="Comment" id="4167" net="1">
+          <![CDATA[]]>
+        </attribute>
+      </node>
+      <node id="4170" net="1">
+        <attribute name="Name" id="4171" net="1">
+          <![CDATA[Node2]]>
+        </attribute>
+        <attribute name="ID" id="4173" net="1">
+          <![CDATA[1]]>
+        </attribute>
+        <attribute name="Marking" id="4175" net="1">
+          <![CDATA[0]]>
+        </attribute>
+        <attribute name="Logic" id="4177" net="1">
+          <![CDATA[0]]>
+        </attribute>
+        <attribute name="Comment" id="4178" net="1">
+          <![CDATA[]]>
+        </attribute>
+      </node>
+      <node id="4181" net="1">
+        <attribute name="Name" id="4182" net="1">
+          <![CDATA[Node3]]>
+        </attribute>
+        <attribute name="ID" id="4184" net="1">
+          <![CDATA[2]]>
+        </attribute>
+        <attribute name="Marking" id="4186" net="1">
+          <![CDATA[0]]>
+        </attribute>
+        <attribute name="Logic" id="4188" net="1">
+          <![CDATA[0]]>
+        </attribute>
+        <attribute name="Comment" id="4189" net="1">
+          <![CDATA[]]>
+        </attribute>
+      </node>
+    </nodeclass>
+    <nodeclass count="1" name="Transition">
+      <node id="4192" net="1">
+        <attribute name="Name" id="4193" net="1">
+          <![CDATA[]]>
+        </attribute>
+        <attribute name="ID" id="4195" net="1">
+          <![CDATA[0]]>
+        </attribute>
+        <attribute name="Logic" id="4197" net="1">
+          <![CDATA[0]]>
+        </attribute>
+        <attribute name="Comment" id="4198" net="1">
+          <![CDATA[]]>
+        </attribute>
+      </node>
+    </nodeclass>
+    <nodeclass count="0" name="Coarse Place"/>
+    <nodeclass count="0" name="Coarse Transition"/>
+  </nodeclasses>
+  <edgeclasses count="1">
+    <edgeclass count="3" name="Edge">
+      <edge source="4159" target="4192" id="4201" net="1">
+        <attribute name="Multiplicity" id="4202" net="1">
+          <![CDATA[2]]>
+        </attribute>
+        <attribute name="Comment" id="4204" net="1">
+          <![CDATA[]]>
+        </attribute>
+      </edge>
+      <edge source="4170" target="4192" id="4207" net="1">
+        <attribute name="Multiplicity" id="4208" net="1">
+          <![CDATA[1]]>
+        </attribute>
+        <attribute name="Comment" id="4210" net="1">
+          <![CDATA[]]>
+        </attribute>
+      </edge>
+      <edge source="4192" target="4181" id="4213" net="1">
+        <attribute name="Multiplicity" id="4214" net="1">
+          <![CDATA[1]]>
+        </attribute>
+        <attribute name="Comment" id="4216" net="1">
+          <![CDATA[]]>
+        </attribute>
+      </edge>
+    </edgeclass>
+  </edgeclasses>
+  <metadataclasses count="2">
+    <metadataclass count="1" name="General">
+      <metadata id="4145" net="1">
+        <attribute name="Name" id="4146" net="1">
+          <![CDATA[]]>
+        </attribute>
+        <attribute name="Created" id="4148" net="1">
+          <![CDATA[2010-08-26 08:06:31]]>
+        </attribute>
+        <attribute name="Authors" id="4150" net="1">
+          <![CDATA[]]>
+        </attribute>
+        <attribute name="Keywords" id="4152" net="1">
+          <![CDATA[]]>
+        </attribute>
+        <attribute name="Description" id="4154" net="1">
+          <![CDATA[]]>
+        </attribute>
+        <attribute name="References" id="4156" net="1">
+          <![CDATA[]]>
+        </attribute>
+      </metadata>
+    </metadataclass>
+    <metadataclass count="0" name="Comment"/>
+  </metadataclasses>
+</Snoopy>
