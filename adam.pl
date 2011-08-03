@@ -66,14 +66,15 @@ print "</td></tr>";
 
 print "<tr class=\"lines\"><td colspan=\"2\"></td></tr>";
 
-# Input Functions
+# Model Type
 print "<tr valign=\"top\"><td ><font size=\"2\"><b>Model Type:</b><br>";
 %labels = ('GINsim'=>'Logical Model (GINsim file)',
 'PDS'=>"Polynomial Dynamical System (PDS)",
 'PBN'=>'Probabilistic Network',
 'PetriNet'=>'Petri Net',
-'TransitionTable' => 'Transition Table');
-print radio_group(-name=>'format_box', -values=>['GINsim', 'PDS', 'PBN', 'PetriNet', 'TransitionTable'],
+'TransitionTable' => 'Transition Table',
+'Control' => 'Heuristic Control');
+print radio_group(-name=>'format_box', -values=>['GINsim', 'PDS', 'PBN', 'PetriNet', 'TransitionTable', 'Control'],
  	-labels=>\%labels, -default=>'PDS', -onChange=>'formatChange()', -linebreak=>'true');
 print "</font></td>";
 # Explanatory Text
@@ -81,11 +82,19 @@ print "<td rowspan=\"3\" id=\"explainInput\" class=\"explain\"></td>";
 print "</tr>";
 print "<tr><td><div id=\"continuous\">", checkbox(-name =>'continuous', -value=>'continuous', -label=>'Continuous'), "</div></td></tr>";
 
+# for dream steady state for optimal control
+print "<tr valign=\"top\"><td><font size=\"2\" id=\"dreamsstext\">Please Enter the Desired Steady State: </font>";
 
-# print "<tr><td><div id=\"continuous\"><form ><input type=\"checkbox\" name=\"continuous\" value=\"continuous\" /><font size=\"2\"><i>Continuous</i> System</font></form></td></tr>";
+print "<tr><td><div id=\"dreamss\">", textfield(-name =>'dreamss', -value=>'? ? ? ? ? ? ? 0 ? ? ? ? ? ? ? ? ? ? ? ?', -label=>'Desired Steady State'), "</div></td></tr>";
+
+# for weights for optimal control
+print "<tr valign=\"top\"><td><font size=\"2\" id=\"weightstext\">Please Enter Weights for Each Node: </font>";
+
+print "<tr><td><div id=\"weights\">", textfield(-name =>'weights', -value=>'3 6 5 5 5 6 5 N 4 3 6 4 2 N 1 1 1 2 2 2', -label=>'Weights'), "</div></td></tr>";
+
 
 print "<tr valign=\"top\"><td><font size=\"2\" id=\"stateInput\">Enter number of states per node: </font>";
-print textfield(-name=>'p_value',-size=>2, -maxlength=>2, -default=>3, -onChange=>'pChange()');
+print textfield(-name=>'p_value',-size=>2, -maxlength=>2, -default=>2, -onChange=>'pChange()');
 print "&nbsp\;&nbsp\;&nbsp\;", popup_menu(-name=>'translate_box',-values=>['Polynomial','Boolean'], -disabled), "<br>";
 print "</td></tr>";
 
@@ -180,13 +189,15 @@ ENDHTML
 
 print end_form;
 
-open(ACCESS, ">>../../htdocs/no-ssl/access") or die("Failed to open file for writing");
-flock(ACCESS, LOCK_EX) or die ("Could not get exclusive lock $!");
-print ACCESS ($ENV{REMOTE_ADDR});
-system("date >>../../htdocs/no-ssl/access");
-flock(ACCESS, LOCK_UN) or die ("Could not unlock file $!");
-close(ACCESS);
+#open(ACCESS, ">>../../htdocs/no-ssl/access") or die("Failed to open file for writing");
+#flock(ACCESS, LOCK_EX) or die ("Could not get exclusive lock $!");
+#print ACCESS ($ENV{REMOTE_ADDR});
+#system("date >>../../htdocs/no-ssl/access");
+#flock(ACCESS, LOCK_UN) or die ("Could not unlock file $!");
+#close(ACCESS);
 
+$weights = param('weights');
+$dreamss = param('dreamss');
 $p_value = param('p_value');
 $upload_file = upload('upload_file');
 $option_box = param('option_box');
@@ -225,9 +236,17 @@ print "$special_networks <br>" if ($DEBUG);
 
 if ($button_name eq "Analyze") {
 
+
+
 #make input functions - gives p_value and n_nodes
 create_input_function();
 
+if ($format_box eq "Control") {  # This is where we call ruby
+   print "We are implementing Hueristic $format_box <br>" if ($DEBUG);	
+#print "ruby parseGA.rb \"$p_value\" \"$weights\" \"$dreamss\" \"$filename\"";
+system("ruby parseGA.rb \"$p_value\" \"$weights\" \"$dreamss\" \"$filename\"");
+
+}
 if ($format_box eq "TransitionTable") {
 	print "We are working with transition tables $format_box <br>" if ($DEBUG);	
 	print "p $p_value <br>" if ($DEBUG);
@@ -238,20 +257,6 @@ if ($format_box eq "TransitionTable") {
 		print "We are not working with continuous models $continuous <br>" if ($DEBUG);	
 		system("ruby transitionTables.rb $p_value $filename");
 	}
-	
-	
-    #$circuits = "$clientip.circuits.html";
-    #open FILE, ">$circuits" or die $!;
-    #print FILE "<html><body>";
-    #close FILE;
-	#print "n_nodes $n_nodes <br>" if ($DEBUG);
-	
-	
-    #system("ruby transitionTables.rb $p_value $filename");
-    #open FILE, ">>$circuits" or die $!;
-    #print FILE "</body></html>";
-    #close FILE;
-    #print "<a href=\"$circuits\" target=\"_blank\"><font color=\"#226677\"<i>Click to view the functional circuits.</i></font></a><br>";
 
 }
 
@@ -309,7 +314,11 @@ if ( $special_networks eq "Conjunctive/Disjunctive (Boolean rings only)" ) {
     set_update_type();
     system("ruby adam_largeNetwork.rb $n_nodes $p_value $filename $limCyc_length");
 # Analysis by enumeration
-} elsif ( $p_value && $n_nodes ) {
+} 
+elsif ($format_box eq "Control") {
+    # we do nothing
+}
+elsif ( $p_value && $n_nodes ) {
     print "Executing simulation<br>";
     print "hello<br>" if ($DEBUG);
     if($n_nodes > 30 || $p_value**$n_nodes > 2**30) {
@@ -477,7 +486,7 @@ sub create_input_function() {
 #      while (<MYFILE>) { chomp; $n_nodes = $_; }
 #      close (MYFILE); 
 
-    } elsif ($format_box eq "TransitionTable") { 
+    } elsif ($format_box eq "TransitionTable" or $format_box eq "Control") { 
 	  # Make sure extension is correct
 	  $upload_file =~ /\.(.+$)/;
 	  $extension = $1;
@@ -491,7 +500,8 @@ sub create_input_function() {
 	  while($bytesread=read($upload_file, $buffer, 1024)) {
 	      print OUTFILE $buffer;
 	  }
-    } else {
+    } 	
+    else {
 # Make sure extension is correct
       $extension = substr $upload_file, -3;
       if($extension ne "txt"){
