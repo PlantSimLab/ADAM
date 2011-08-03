@@ -83,14 +83,14 @@ print "</tr>";
 print "<tr><td><div id=\"continuous\">", checkbox(-name =>'continuous', -value=>'continuous', -label=>'Continuous'), "</div></td></tr>";
 
 # for dream steady state for optimal control
-print "<tr valign=\"top\"><td><font size=\"2\" id=\"dreamsstext\">Please Enter the Desired Steady State: </font>";
+print "<tr valign=\"top\"><td><font size=\"2\" id=\"dreamsstext\">Please enter the desired steady state: </font>";
 
 print "<tr><td><div id=\"dreamss\">", textfield(-name =>'dreamss', -value=>'? ? ? ? ? ? ? 0 ? ? ? ? ? ? ? ? ? ? ? ?', -label=>'Desired Steady State'), "</div></td></tr>";
 
 # for weights for optimal control
 print "<tr valign=\"top\"><td><font size=\"2\" id=\"weightstext\">Please Enter Weights for Each Node: </font>";
 
-print "<tr><td><div id=\"weights\">", textfield(-name =>'weights', -value=>'3 6 5 5 5 6 5 N 4 3 6 4 2 N 1 1 1 2 2 2', -label=>'Weights'), "</div></td></tr>";
+print "<tr><td><div id=\"weights\">", textfield(-name =>'weights', -value=>'1 1 1 1 1 1 1 N 1 1 1 1 1 N 1 1 1 1 1 1', -label=>'Weights'), "</div></td></tr>";
 
 
 print "<tr valign=\"top\"><td><font size=\"2\" id=\"stateInput\">Enter number of states per node: </font>";
