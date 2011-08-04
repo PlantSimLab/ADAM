@@ -1,7 +1,7 @@
 /*
-July, 2010
-Bonny Guang
-Javascript file for ADAM site.
+  July, 2010
+  Bonny Guang
+  Javascript file for ADAM site.
 */
 
 /* 1) Input Functions and Network Descriptions */
@@ -13,7 +13,7 @@ formatExp[1] = '<b>PDS</b>: Polynomial Dynamical System. Operations are interpre
 formatExp[2] = '<b>PBN</b>: Probabilistic Boolean (or Multistate) Networks. Each nodes has several update rules, at each iteration, one is picked at random';
 formatExp[3] = '<b>Petri Net</b>: A (standard) Petri net generated with Snoopy. The Petri net must be <b><i>k</i>-bounded</b>, and <i>k</i> must be entered on the left.  This is an experimental feature, if you want to analyze the dynamics of the network, please copy and paste the generated PDS into ADAM.';
 formatExp[4] = '<b>Transition Table</b>: A table, where the top row consists of the names of the variables, the other rows are the inputs states at time t, and the right most column is the output value at time (t+1). Missing rows are assumed to have output value 0. Entries should be separated by white space. When <i>continuous</i> is checked, there will not be any <i>jumps</i> in the generated model, i.e., every variable changes its value by at most 1 at every time step.';
-
+formatExp[5] = '<b>Heuristic Control</b>: Please enter the gene regulatory network as a polynomial dynamical system. ADAM will find the optimum combination of knockouts (that is those with the least cost where the cost is dependent on the inputted weights) using an adaptive genetic algorithm. Please enter the desired steady state and the weight for each respective gene (in numerical order e.g. the first entry would correspond to the first gene) seperated by white space.';
 // uploadType: Array of upload types for different input options on the site
 var uploadType = new Array();
 uploadType[0] = '<font color=blue size =\"1\"> (.ginml)</font>';
@@ -24,33 +24,61 @@ uploadType[4] = '<font color=blue size =\"1\"> (.txt)</font>';
 // formatChange(): disables and enables options based on which radio button is checked for
 // input format (GINsim, PDS, PBN). Also changes text explanation of options.
 function formatChange() {
-//	alert( "format change ");
-  document.getElementById('notTT').style.visibility = 'visible';
-  var input = document.getElementById('explainInput');
-  var state = document.getElementById('stateInput');
-  var file = document.getElementById('fileInput');
-  var showContinuous = document.getElementById('continuous');
-  showContinuous.style.visibility = 'hidden';
-  if (document.form1.format_box[0].checked == true || document.form1.format_box[3].checked == true) { //GinSim or Petri Net
-    document.form1.translate_box.disabled = true;
-    document.form1.edit_functions.value = '';
-    document.form1.edit_functions.disabled = true;
-    document.form1.stochastic.disabled = true;
+    //	alert( "format change ");
+    document.getElementById('notTT').style.visibility = 'visible';
+    var input = document.getElementById('explainInput');
+    var state = document.getElementById('stateInput');
+    var file = document.getElementById('fileInput');
+    var showContinuous = document.getElementById('continuous');
+    var showDreamss = document.getElementById('dreamss');
+    var showWeights = document.getElementById('weights');
+    var showDreamsstext = document.getElementById('dreamsstext');
+    var showWeightstext = document.getElementById('weightstext');
+    showDreamsstext.style.visibility = 'hidden';
+    showWeightstext.style.visibility = 'hidden';
+    showContinuous.style.visibility = 'hidden';
+    showDreamss.style.visibility = 'hidden';
+    showWeights.style.visibility = 'hidden';
+   
+    if (document.form1.format_box[0].checked == true || document.form1.format_box[3].checked == true) { //GinSim or Petri Net
+	document.form1.translate_box.disabled = true;
+	document.form1.edit_functions.value = '';
+	document.form1.edit_functions.disabled = true;
+	document.form1.stochastic.disabled = true;
 	showContinuous.style.visibility = 'hidden';
-    if (document.form1.format_box[0].checked == true) { //if GINsim is checked
-      document.form1.p_value.disabled = true;
-      input.innerHTML = formatExp[0];
-      file.innerHTML = uploadType[0];
-      state.innerHTML = '<font color="#666666" size="2">Enter number of states per node: </font>';
+	if (document.form1.format_box[0].checked == true) { //if GINsim is checked
+	    document.form1.p_value.disabled = true;
+	    input.innerHTML = formatExp[0];
+	    file.innerHTML = uploadType[0];
+	    state.innerHTML = '<font color="#666666" size="2">Enter number of states per node: </font>';
+	}
+
+	if (document.form1.format_box[3].checked == true) { // Petri Net
+	    state.innerHTML = '<font color="black" size="2">Enter <i>k</i>-bound: </font>';
+	    document.form1.p_value.disabled = false;
+	    input.innerHTML = formatExp[3];
+	    file.innerHTML = uploadType[3];
+	}
     }
-    if (document.form1.format_box[3].checked == true) { // Petri Net
-      state.innerHTML = '<font color="black" size="2">Enter <i>k</i>-bound: </font>';
-      document.form1.p_value.disabled = false;
-      input.innerHTML = formatExp[3];
-      file.innerHTML = uploadType[3];
+
+    else if (document.form1.format_box[5].checked == true) { // if Heuristic Control is checked
+	document.form1.p_value.disabled = false;
+	document.form1.edit_functions.disabled = false;
+	document.form1.translate_box.disabled = true;
+	document.form1.stochastic.disabled = true;
+	document.form1.edit_functions.value = 'f1 = x13*x15*x18*x19*x20+x13*x15*x18*x19+x13*x15*x18*x20+x13*x15*x19*x20+x13*x18*x19*x20+x15*x18*x19*x20+x13*x15*x18+x13*x15*x19+x13*x18*x19+x15*x18*x19+x13*x15*x20+x13*x18*x20+x15*x18*x20+x13*x19*x20+x15*x19*x20+x18*x19*x20+x13*x15+x13*x18+x15*x18+x13*x19+x15*x19+x18*x19+x13*x20+x15*x20+x18*x20+x19*x20+x13+x15+x18+x19+x20\nf2 =  x3*x4*x5+x3*x4+x4*x5+x4\nf3 = x2*x10*x12+x2*x10+x2*x12+x10*x12+x2+x10+x12+1\nf4 = x1*x9*x10*x12+x1*x9*x12+x9*x10*x12\nf5 = x2*x6*x10*x12+x2*x6*x10+x2*x6*x12+x2*x10*x12+x6*x10*x12+x2*x6+x2*x10+x6*x10+x2*x12+x6*x12+x10*x12+x2+x6+x10+x12+1\nf6 = x3*x5*x7+x3*x7+x5*x7+x7\nf7 = x12\nf8 = x2*x11\nf9 = x1*x10+x1+x10\nf10 = x13*x15*x18*x19*x20+x13*x15*x18*x19+x13*x15*x18*x20+x13*x15*x19*x20+x13*x18*x19*x20+x15*x18*x19*x20+x13*x15*x18+x13*x15*x19+x13*x18*x19+x15*x18*x19+x13*x15*x20+x13*x18*x20+x15*x18*x20+x13*x19*x20+x15*x19*x20+x18*x19*x20+x13*x15+x13*x18+x15*x18+x13*x19+x15*x19+x18*x19+x13*x20+x15*x20+x18*x20+x19*x20+x13+x15+x18+x19+x20\nf11 = x4\nf12 = x1*x9*x10+x1*x9+x1*x10+x9*x10+x1+x9+x10\nf13 = x9*x10*x18+x9*x10+x9*x18+x10*x18+x9+x10\nf14 = 1\nf15 = x14\nf16 = x14\nf17 = x14\nf18 = x16*x17\nf19 = x15*x16\nf20 = x15*x17'
+
+	state.innerHTML = '<font size="2">Enter number of states per node: </font>';
+	input.innerHTML = formatExp[5];
+	file.innerHTML = uploadType[4];
+	showDreamss.style.visibility = 'visible';
+	showWeights.style.visibility = 'visible';
+	showDreamsstext.style.visibility = 'visible';
+	showWeightstext.style.visibility = 'visible';
+	showContinuous.style.visibility = 'hidden';
+	document.getElementById('notTT').style.visibility = 'hidden';
     }
-  }
-  else if (document.form1.format_box[4].checked == true) { // transition Table
+    else if (document.form1.format_box[4].checked == true) { // transition Table
 	document.form1.p_value.disabled = false;
 	document.getElementById('notTT').style.visibility = 'hidden';
 	showContinuous.style.visibility = 'visible';
@@ -60,53 +88,53 @@ function formatChange() {
 	input.innerHTML = formatExp[4];	  
 	file.innerHTML = uploadType[4];
 	var sampleFunctions = 'A(t) \tB(t) \tC(t+1)\n0\t0\t0 \n0\t1\t0 \n1\t0\t0 \n1\t1\t1';
-	  //alert( document.form1.edit_functions.value );
-	  if (document.form1.edit_functions.value == ''  || 
-			document.form1.edit_functions.value == 'f1 = { \nx1+x2   #.9 \nx1      #.1\n }\nf2 = x1*x2*x3 \nf3 = { \nx1*x2+x3^2 \nx2 \n}' || 
-			document.form1.edit_functions.value == 'f1 = x1+x2\nf2 = x1*x2*x3\nf3 = x1*x2+x3^2') 
-	  {//This is the first time we load the page
-      	document.form1.edit_functions.value = sampleFunctions;
-      }	
-      document.form1.stochastic.disabled = true;    
-  }
-  else { // PDS or pPDS
-    document.form1.p_value.disabled = false;
-    document.form1.edit_functions.disabled = false;
-    state.innerHTML = '<font size="2">Enter number of states per node: </font>';	
-    file.innerHTML = uploadType[1];
+	//alert( document.form1.edit_functions.value );
+	if (document.form1.edit_functions.value == ''  || 
+	    document.form1.edit_functions.value == 'f1 = { \nx1+x2   #.9 \nx1      #.1\n }\nf2 = x1*x2*x3 \nf3 = { \nx1*x2+x3^2 \nx2 \n}' || 
+	    document.form1.edit_functions.value == 'f1 = x1+x2\nf2 = x1*x2*x3\nf3 = x1*x2+x3^2') 
+	{//This is the first time we load the page
+      	    document.form1.edit_functions.value = sampleFunctions;
+	}	
+	document.form1.stochastic.disabled = true;    
+    }
+    else { // PDS or pPDS
+	document.form1.p_value.disabled = false;
+	document.form1.edit_functions.disabled = false;
+	state.innerHTML = '<font size="2">Enter number of states per node: </font>';	
+	file.innerHTML = uploadType[1];
 	pChange();
 	showContinuous.style.visibility = 'hidden';
 
-    if (document.form1.format_box[1].checked == true) { //if PDS is checked
-      input.innerHTML = formatExp[1];	
-	  var sampleFunctions = 'f1 = x1+x2\nf2 = x1*x2*x3\nf3 = x1*x2+x3^2';
-	  //alert( document.form1.edit_functions.value );
-	  if (document.form1.edit_functions.value == ''  ||
-	 		document.form1.edit_functions.value == 'f1 = { \nx1+x2   #.9 \nx1      #.1\n }\nf2 = x1*x2*x3 \nf3 = { \nx1*x2+x3^2 \nx2 \n}' || 
-			document.form1.edit_functions.value == 'A(t) \tB(t) \tC(t+1)\n0\t0\t0 \n0\t1\t0 \n1\t0\t0 \n1\t1\t1') 
-	  {//This is the first time we load the page
-      	document.form1.edit_functions.value = sampleFunctions;
-      }	
-      document.form1.stochastic.disabled = true;
-    }
-    else { //else must be PBN
-      input.innerHTML = formatExp[2];
-      document.form1.stochastic.disabled = false;
-   	  var sampleFunctions = 'f1 = { \nx1+x2   #.9 \nx1      #.1\n }\nf2 = x1*x2*x3 \nf3 = { \nx1*x2+x3^2 \nx2 \n}';
-	  //alert( document.form1.edit_functions.value );
-	  if (document.form1.edit_functions.value == '' || 
+	if (document.form1.format_box[1].checked == true) { //if PDS is checked
+	    input.innerHTML = formatExp[1];	
+	    var sampleFunctions = 'f1 = x1+x2\nf2 = x1*x2*x3\nf3 = x1*x2+x3^2';
+	    //alert( document.form1.edit_functions.value );
+	    if (document.form1.edit_functions.value == ''  ||
+	 	document.form1.edit_functions.value == 'f1 = { \nx1+x2   #.9 \nx1      #.1\n }\nf2 = x1*x2*x3 \nf3 = { \nx1*x2+x3^2 \nx2 \n}' || 
+		document.form1.edit_functions.value == 'A(t) \tB(t) \tC(t+1)\n0\t0\t0 \n0\t1\t0 \n1\t0\t0 \n1\t1\t1') 
+	    {//This is the first time we load the page
+      		document.form1.edit_functions.value = sampleFunctions;
+	    }	
+	    document.form1.stochastic.disabled = true;
+	}
+	else { //else must be PBN
+	    input.innerHTML = formatExp[2];
+	    document.form1.stochastic.disabled = false;
+   	    var sampleFunctions = 'f1 = { \nx1+x2   #.9 \nx1      #.1\n }\nf2 = x1*x2*x3 \nf3 = { \nx1*x2+x3^2 \nx2 \n}';
+	    //alert( document.form1.edit_functions.value );
+	    if (document.form1.edit_functions.value == '' || 
 		document.form1.edit_functions.value == 'f1 = x1+x2\nf2 = x1*x2*x3\nf3 = x1*x2+x3^2' ||
 		document.form1.edit_functions.value == 'A(t) \tB(t) \tC(t+1)\n0\t0\t0 \n0\t1\t0 \n1\t0\t0 \n1\t1\t1') 
-	  {//This is the first time we load the page
-      	document.form1.edit_functions.value = sampleFunctions;
-      }
+	    {//This is the first time we load the page
+      		document.form1.edit_functions.value = sampleFunctions;
+	    }
+	}
     }
-  }
 }
 
 // Allows drop-down Polynomial/Boolean only if p_value is 2
 function pChange() {
-	//alert ("pchange");
+    //alert ("pchange");
     if (document.form1.p_value.value == 2) {
 	document.form1.translate_box.disabled = false;
 	document.form1.feedback.disabled = false;
@@ -133,15 +161,15 @@ networkOpt[0] = '';
 //TODO: this is really since it's all on one line, should figure out how to get it so it can be
 //  formatted (required to be one line right now)
 networkOpt[1] = 'Select the <b>updating scheme</b> for the functions (only for Logical Model or PDS):<br>' +
-'<input type="radio" name="update_box" value="Synchronous" checked onclick="document.form1.update_schedule.disabled=true"> Synchronous<br/>' +
-'<input type="radio" name="update_box" value="Sequential" onclick="document.form1.update_schedule.disabled=false"> Sequential<br>' +
-'&nbsp\;&nbsp\;&nbsp\;&nbsp\;- Enter update schedule separated by spaces: <br>' +
-'&nbsp\;&nbsp\;&nbsp\;&nbsp\;<input type="text" name="update_schedule" size="24" value="2 3 1" disabled>' +
-'<br><br>' +
-'<b>Simulation Option</b><br>' +
-'<input type="radio" name="option_box" value="All trajectories from all possible initial states" checked onclick="document.form1.trajectory_value.disabled=true">Complete State Space<br>' +
-'<input type="radio" name="option_box" value="One trajectory starting at an initial state" onclick="document.form1.trajectory_value.disabled=false">One trajectory starting at an initial state<br>' +
-'&nbsp\;&nbsp\;&nbsp\;&nbsp\;- Enter initialization separated by spaces: <br>&nbsp\;&nbsp\;&nbsp\;&nbsp\;<input type="text" name="trajectory_value" size="40" value="1 0 2" disabled>';
+    '<input type="radio" name="update_box" value="Synchronous" checked onclick="document.form1.update_schedule.disabled=true"> Synchronous<br/>' +
+    '<input type="radio" name="update_box" value="Sequential" onclick="document.form1.update_schedule.disabled=false"> Sequential<br>' +
+    '&nbsp\;&nbsp\;&nbsp\;&nbsp\;- Enter update schedule separated by spaces: <br>' +
+    '&nbsp\;&nbsp\;&nbsp\;&nbsp\;<input type="text" name="update_schedule" size="24" value="2 3 1" disabled>' +
+    '<br><br>' +
+    '<b>Simulation Option</b><br>' +
+    '<input type="radio" name="option_box" value="All trajectories from all possible initial states" checked onclick="document.form1.trajectory_value.disabled=true">Complete State Space<br>' +
+    '<input type="radio" name="option_box" value="One trajectory starting at an initial state" onclick="document.form1.trajectory_value.disabled=false">One trajectory starting at an initial state<br>' +
+    '&nbsp\;&nbsp\;&nbsp\;&nbsp\;- Enter initialization separated by spaces: <br>&nbsp\;&nbsp\;&nbsp\;&nbsp\;<input type="text" name="trajectory_value" size="40" value="1 1 2" disabled>';
 networkOpt[2] = '<b>Limit cycle length</b> to search for: <br>&nbsp\;&nbsp\;&nbsp\;&nbsp\;<input type="text" name="limCyc_length" size="2" value="1"><tr class="lines"><td></td></tr>Select the <b>updating scheme</b> for the functions (only for Logical Model or PDS):<br><input type="radio" name="update_box" value="Synchronous" checked> Synchronous<br/><input type="radio" name="update_box" value="Sequential"> Sequential<br>&nbsp\;&nbsp\;&nbsp\;&nbsp\;- Enter update schedule separated by spaces: <br>&nbsp\;&nbsp\;&nbsp\;&nbsp\;<input type="text" name="update_schedule" size="24" value="2 3 1"></font>';
 
 // networkChange(): changes menu of options based on which radio button is checked for
@@ -171,77 +199,77 @@ function networkChange() {
 }
 
 function change(){
-	//alert("Load");
-	pChange();
+    //alert("Load");
+    pChange();
     networkChange();
     formatChange();
 }
 
 function validate(){
     if( (validateNumber(document.form1.p_value.value))  )
-  {
-     if( (isEmpty(document.form1.upload_file.value))&&(isEmpty(document.form1.edit_functions.value)) )
-     {
+    {
+	if( (isEmpty(document.form1.upload_file.value))&&(isEmpty(document.form1.edit_functions.value)) )
+	{
 	    alert("Please upload a function file to continue.");
-        return false;
-     }
-    return true;
-   }
-  else
-  {
-   return false;
-  }
+            return false;
+	}
+	return true;
+    }
+    else
+    {
+	return false;
+    }
 }
 
 function isEmpty(val) {
-  return ( ( val == null ) || (val.length == 0) )
+    return ( ( val == null ) || (val.length == 0) )
 }
 function validateNumber(num) {
- if(isEmpty(num))
-   {
-     alert("Cannot accept empty input.");
-     return false;
-   }
-  for(i = 0; i < num.length; i++)
-  {
-     var c = num.charAt(i);
-     if(!((c >= "0") && (c <= "9")))
-      {
-	alert("Input must be a positive integer.");
-         return false;
-      }
-  }
-   return true;
+    if(isEmpty(num))
+    {
+	alert("Cannot accept empty input.");
+	return false;
+    }
+    for(i = 0; i < num.length; i++)
+    {
+	var c = num.charAt(i);
+	if(!((c >= "0") && (c <= "9")))
+	{
+	    alert("Input must be a positive integer.");
+            return false;
+	}
+    }
+    return true;
 }
 function validatePrime(prime) {
-  if(!(validateNumber(prime)) )
-   {
-    return false;
-   }
-   if(prime == 1)
-   {
-    alert(prime + " is not a prime number.");
-    return false;
-   }
-   for(i = 2; i <= Math.sqrt(prime); i++)
-   {
-      if( (prime%i) == 0 )
-      {
+    if(!(validateNumber(prime)) )
+    {
+	return false;
+    }
+    if(prime == 1)
+    {
 	alert(prime + " is not a prime number.");
-         return false;
-      }
-   }
- return true;
+	return false;
+    }
+    for(i = 2; i <= Math.sqrt(prime); i++)
+    {
+	if( (prime%i) == 0 )
+	{
+	    alert(prime + " is not a prime number.");
+            return false;
+	}
+    }
+    return true;
 }
 
 function doWarn(element) {
-if(element.value == "Yes"){
-  alert("WARNING!! May not be able to display graph with a large number of nodes");
-  return true;
- }
- else {
-  return false;
- }
+    if(element.value == "Yes"){
+	alert("WARNING!! May not be able to display graph with a large number of nodes");
+	return true;
+    }
+    else {
+	return false;
+    }
 }
 
 // This code is from Dynamic Web Coding www.dyn-web.com 
@@ -258,8 +286,8 @@ var nodyn = (!ns5 && !ns4 && !ie4 && !ie5) ? true : false;
 
 var origWidth, origHeight;
 if (ns4) {
-	origWidth = window.innerWidth; origHeight = window.innerHeight;
-	window.onresize = function() { if (window.innerWidth != origWidth || window.innerHeight != origHeight) history.go(0); }
+    origWidth = window.innerWidth; origHeight = window.innerHeight;
+    window.onresize = function() { if (window.innerWidth != origWidth || window.innerHeight != origHeight) history.go(0); }
 }
 
 if (nodyn) { event = "nope" }
@@ -295,12 +323,12 @@ messages[6] = new Array('<b>State space graph</b>: draws the graph of all trajec
 messages[7] = new Array('A rundown of the options: <br><br><b>Conjunctive/Disjunctive Networks</b>: For systems with only AND functions or only OR functions. All fixed points and limit cycles will be calculated.<b>Small Networks</b>: For n < 10. Enumerates all possible states. Outputs at minimum fixed points and number of components. See \'Small Networks Options\' for other output options.<br><b>Large Networks</b>: For n > 10. Calculates limit cycles of a length that the user specifies.<br>', "#DDECFF");
 messages[8] = new Array('<b>GINsim File</b>: Converts GINsim file to a polynomial system that AVDD will then proceed to analyze. Also outputs the variables and the converted system.', "#DDECFF");
 /*if (document.images) {
-	var theImgs = new Array();
-	for (var i=0; i<messages.length; i++) {
-  	theImgs[i] = new Image();
-		theImgs[i].src = messages[i][0];
+  var theImgs = new Array();
+  for (var i=0; i<messages.length; i++) {
+  theImgs[i] = new Image();
+  theImgs[i].src = messages[i][0];
   }
-}*/
+  }*/
 
 var startStr = '<table width="' + tipWidth + '"><tr><td align="left" width="100%">';
 //var midStr = '</td></tr><tr><td valign="top">';
@@ -308,24 +336,24 @@ var endStr = '</td></tr></table>';
 
 var tooltip, tipcss;
 function initTip() {
-	if (nodyn) return;
-	tooltip = (ns4)? document.tipDiv.document: (ie4)? document.all['tipDiv']: (ie5||ns5)? document.getElementById('tipDiv'): null;
-	tipcss = (ns4)? document.tipDiv: tooltip.style;
-	if (ie4||ie5||ns5) {	// ns4 would lose all this on rewrites
-		tipcss.width = tipWidth+"px";
-		tipcss.fontFamily = tipFontFamily;
-		tipcss.fontSize = tipFontSize;
-		tipcss.color = tipFontColor;
-		tipcss.backgroundColor = tipBgColor;
-		tipcss.borderColor = tipBorderColor;
-		tipcss.borderWidth = tipBorderWidth+"px";
-		tipcss.padding = tipPadding+"px";
-		tipcss.borderStyle = tipBorderStyle;
-	}
-	if (tooltip&&tipFollowMouse) {
-		if (ns4) document.captureEvents(Event.MOUSEMOVE);
-		document.onmousemove = trackMouse;
-	}
+    if (nodyn) return;
+    tooltip = (ns4)? document.tipDiv.document: (ie4)? document.all['tipDiv']: (ie5||ns5)? document.getElementById('tipDiv'): null;
+    tipcss = (ns4)? document.tipDiv: tooltip.style;
+    if (ie4||ie5||ns5) {	// ns4 would lose all this on rewrites
+	tipcss.width = tipWidth+"px";
+	tipcss.fontFamily = tipFontFamily;
+	tipcss.fontSize = tipFontSize;
+	tipcss.color = tipFontColor;
+	tipcss.backgroundColor = tipBgColor;
+	tipcss.borderColor = tipBorderColor;
+	tipcss.borderWidth = tipBorderWidth+"px";
+	tipcss.padding = tipPadding+"px";
+	tipcss.borderStyle = tipBorderStyle;
+    }
+    if (tooltip&&tipFollowMouse) {
+	if (ns4) document.captureEvents(Event.MOUSEMOVE);
+	document.onmousemove = trackMouse;
+    }
 }
 
 window.onload = initTip;
@@ -334,60 +362,60 @@ var t1,t2;	// for setTimeouts
 var tipOn = false;	// check if over tooltip link
 function doTooltip(evt,num) {
 
-	if (!tooltip) return;
-	if (t1) clearTimeout(t1);	if (t2) clearTimeout(t2);
-	tipOn = true;
-	// set colors if included in messages array
-	if (messages[num][1])	var curBgColor = messages[num][1];
-	else curBgColor = tipBgColor;
-	if (messages[num][2])	var curFontColor = messages[num][2];
-	else curFontColor = tipFontColor;
-	if (ns4) {
-		var tip = '<table bgcolor="' + tipBorderColor + '" width="' + tipWidth + '" cellspacing="0" cellpadding="' + tipBorderWidth + '" border="0"><tr><td><table bgcolor="' + curBgColor + '" width="100%" cellspacing="0" cellpadding="' + tipPadding + '" border="0"><tr><td>'+ startStr + '<span style="font-family:' + tipFontFamily + '; font-size:' + tipFontSize + '; color:' + curFontColor + ';">' + messages[num][0] + '</span>' + endStr + '</td></tr></table></td></tr></table>';
-		tooltip.write(tip);
-		tooltip.close();
-	} else if (ie4||ie5||ns5) {
-		var tip = startStr + '<span style="font-family:' + tipFontFamily + '; font-size:' + tipFontSize + '; color:' + curFontColor + ';">' + messages[num][0] + '</span>' + endStr;
-		tipcss.backgroundColor = curBgColor;
-	 	tooltip.innerHTML = tip;
-	}
-	if (!tipFollowMouse) positionTip(evt);
-	else t1=setTimeout("tipcss.visibility='visible'",100);
+    if (!tooltip) return;
+    if (t1) clearTimeout(t1);	if (t2) clearTimeout(t2);
+    tipOn = true;
+    // set colors if included in messages array
+    if (messages[num][1])	var curBgColor = messages[num][1];
+    else curBgColor = tipBgColor;
+    if (messages[num][2])	var curFontColor = messages[num][2];
+    else curFontColor = tipFontColor;
+    if (ns4) {
+	var tip = '<table bgcolor="' + tipBorderColor + '" width="' + tipWidth + '" cellspacing="0" cellpadding="' + tipBorderWidth + '" border="0"><tr><td><table bgcolor="' + curBgColor + '" width="100%" cellspacing="0" cellpadding="' + tipPadding + '" border="0"><tr><td>'+ startStr + '<span style="font-family:' + tipFontFamily + '; font-size:' + tipFontSize + '; color:' + curFontColor + ';">' + messages[num][0] + '</span>' + endStr + '</td></tr></table></td></tr></table>';
+	tooltip.write(tip);
+	tooltip.close();
+    } else if (ie4||ie5||ns5) {
+	var tip = startStr + '<span style="font-family:' + tipFontFamily + '; font-size:' + tipFontSize + '; color:' + curFontColor + ';">' + messages[num][0] + '</span>' + endStr;
+	tipcss.backgroundColor = curBgColor;
+	tooltip.innerHTML = tip;
+    }
+    if (!tipFollowMouse) positionTip(evt);
+    else t1=setTimeout("tipcss.visibility='visible'",100);
 }
 
 var mouseX, mouseY;
 function trackMouse(evt) {
-	mouseX = (ns4||ns5)? evt.pageX: window.event.clientX + document.body.scrollLeft;
-	mouseY = (ns4||ns5)? evt.pageY: window.event.clientY + document.body.scrollTop;
-	if (tipOn) positionTip(evt);
+    mouseX = (ns4||ns5)? evt.pageX: window.event.clientX + document.body.scrollLeft;
+    mouseY = (ns4||ns5)? evt.pageY: window.event.clientY + document.body.scrollTop;
+    if (tipOn) positionTip(evt);
 }
 
 function positionTip(evt) {
-	if (!tipFollowMouse) {
-		mouseX = (ns4||ns5)? evt.pageX: window.event.clientX + document.body.scrollLeft;
-		mouseY = (ns4||ns5)? evt.pageY: window.event.clientY + document.body.scrollTop;
-	}
-	// tooltip width and height
-	var tpWd = (ns4)? tooltip.width: (ie4||ie5)? tooltip.clientWidth: tooltip.offsetWidth;
-	var tpHt = (ns4)? tooltip.height: (ie4||ie5)? tooltip.clientHeight: tooltip.offsetHeight;
-	// document area in view (subtract scrollbar width for ns)
-	var winWd = (ns4||ns5)? window.innerWidth-20+window.pageXOffset: document.body.clientWidth+document.body.scrollLeft;
-	var winHt = (ns4||ns5)? window.innerHeight-20+window.pageYOffset: document.body.clientHeight+document.body.scrollTop;
-	// check mouse position against tip and window dimensions
-	// and position the tooltip 
-	if ((mouseX+offX+tpWd)>winWd) 
-		tipcss.left = (ns4)? mouseX-(tpWd+offX): mouseX-(tpWd+offX)+"px";
-	else tipcss.left = (ns4)? mouseX+offX: mouseX+offX+"px";
-	if ((mouseY+offY+tpHt)>winHt) 
-		tipcss.top = (ns4)? winHt-(tpHt+offY): winHt-(tpHt+offY)+"px";
-	else tipcss.top = (ns4)? mouseY+offY: mouseY+offY+"px";
-	if (!tipFollowMouse) t1=setTimeout("tipcss.visibility='visible'",100);
+    if (!tipFollowMouse) {
+	mouseX = (ns4||ns5)? evt.pageX: window.event.clientX + document.body.scrollLeft;
+	mouseY = (ns4||ns5)? evt.pageY: window.event.clientY + document.body.scrollTop;
+    }
+    // tooltip width and height
+    var tpWd = (ns4)? tooltip.width: (ie4||ie5)? tooltip.clientWidth: tooltip.offsetWidth;
+    var tpHt = (ns4)? tooltip.height: (ie4||ie5)? tooltip.clientHeight: tooltip.offsetHeight;
+    // document area in view (subtract scrollbar width for ns)
+    var winWd = (ns4||ns5)? window.innerWidth-20+window.pageXOffset: document.body.clientWidth+document.body.scrollLeft;
+    var winHt = (ns4||ns5)? window.innerHeight-20+window.pageYOffset: document.body.clientHeight+document.body.scrollTop;
+    // check mouse position against tip and window dimensions
+    // and position the tooltip 
+    if ((mouseX+offX+tpWd)>winWd) 
+	tipcss.left = (ns4)? mouseX-(tpWd+offX): mouseX-(tpWd+offX)+"px";
+    else tipcss.left = (ns4)? mouseX+offX: mouseX+offX+"px";
+    if ((mouseY+offY+tpHt)>winHt) 
+	tipcss.top = (ns4)? winHt-(tpHt+offY): winHt-(tpHt+offY)+"px";
+    else tipcss.top = (ns4)? mouseY+offY: mouseY+offY+"px";
+    if (!tipFollowMouse) t1=setTimeout("tipcss.visibility='visible'",100);
 }
 
 function hideTip() {
-	if (!tooltip) return;
-	t2=setTimeout("tipcss.visibility='hidden'",100);
-	tipOn = false;
+    if (!tooltip) return;
+    t2=setTimeout("tipcss.visibility='hidden'",100);
+    tipOn = false;
 }
 
 
