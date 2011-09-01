@@ -16,6 +16,8 @@ print header;             # create the HTTP header
 #say  param('upload_file');
 #exit 1;
 
+
+
 $p_value          = param('p_value');
 $k_value          = param('k_bound');
 $upload_file      = param('upload_file');
@@ -42,6 +44,10 @@ $updsequ_flag  = "0";
 $weights       = param('weights');
 $dreamss       = param('dreamss');
 
+if ($choice_box eq "") {
+	say '<a href="http://adam.vbi.vt.edu"/>ADAM has moved.</a>';
+	exit 1;
+}
 # this function reads input functions from file or text area and writes the input functions into $clientip.functionfile.txt
 sub create_input_function {
 
