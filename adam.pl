@@ -45,7 +45,7 @@ $weights       = param('weights');
 $dreamss       = param('dreamss');
 
 if ($choice_box eq "") {
-	say '<a href="http://adam.vbi.vt.edu"/>ADAM has moved.</a>';
+	say '<a href="http://adam.vbi.vt.edu"/>ADAM has moved.</a> Please update your bookmarks';
 	exit 1;
 }
 # this function reads input functions from file or text area and writes the input functions into $clientip.functionfile.txt
