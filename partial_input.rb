@@ -45,7 +45,7 @@ class PartialInput
         #pp function
         #puts variable
         if !function_state
-          puts "some error..." 
+          #puts "some error..." 
           return nil
         end
         functions[variable].push f
