@@ -45,17 +45,17 @@ def parseoutput(m2result)
 end
 
 # checks if there any invalid characters in dreamss
-def checkdreamss(dreamss)
-  dreamss.each {
-    |i|
-    if i == "0" || i == "1" || i == "?"
-      # we're good
+def checkdreamss(dreamss, field_size)
+  str_array = (0..(field_size-1)).collect{ |i| i.to_s}
+  dreamss.each { |i|
+    if (str_array.include? i) || i == "?" 
+        # we're good
     else
-     puts " <font color=red>Error, please re-enter desired steady state.</font color=red><br>"
+      puts " <font color=red>Error, please re-enter desired steady state.</font color=red><br>"
       exit 1
     end
   }
-end
+end 
 
 # checks if each weight is a valid character and a positive integer
 def checkweights(weights)
@@ -112,7 +112,7 @@ functions = tempfunctions + "\}"
 # put the goal steady state in M2 format
 cnt = 0
 dreamss = dreamss.split
-checkdreamss(dreamss)
+checkdreamss(dreamss, p)
 tempdreamss = "\{"
 dreamss.each do |ss|
   tempdreamss = tempdreamss + ss + ","

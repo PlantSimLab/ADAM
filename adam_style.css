@@ -1,10 +1,13 @@
 /*Bonny Guang, July 2010*/
 /*CSS Sheet for ADAM*/
-body,
-html {
-    margin:0;
-    padding:0;
-    color:#000;
+body {
+    margin: 0;
+    padding: 0;
+    color: #000;
+    width: 924px;
+	float: center;
+	margin: auto;
+
 }
 #wrap {
     margin:0 auto;
@@ -22,15 +25,21 @@ html {
    margin-right: auto;
 }
 
-/* Text Explanation */
-#nav { text-align: justify; }
+.nav { 	    
+	float: center;
+	text-align: center; 
+	/*border: 1px solid #ABABAB;*/
+}
 
 /* Main Block: Input Functions and State/Node Number; Also Output */
 #main {
+    width:924px;
     float: center;
     margin: auto;
-    width:924px;
-/*    background:#9c9;*/ /*will be green for debugging purposes*/
+	position: relative;
+}
+	
+
 }
 /* Controls main color and size of boxes. Currently pale gray-ish */
 #main table
@@ -41,44 +50,36 @@ html {
     background-color: #CCCCCC;
     width: 100%;
     border-spacing: 0px;
-    padding: 1px;
+    padding: 3px;
 }
 
 
-#computation {
-    float: center;
-    margin: auto;
-    width:924px;
-    text-align: justify;
-}
 #footer {
     float:center;
     width:1024px;
     margin-left: auto;
     margin-right: auto;
     font-size: .8em;
-    text-align: center;
+    /*text-align: center;*/
 }
-div
-{
-font-family: Verdana, Arial;
-style: position:absolute;
-}
+
+
 
 
 /* Controls color of the title boxes. Currently some kind of pale blue. */
-td.titleBox
-{
-background-color: #99C9FF;
-white-space: nowrap;
+td.titleBox {
+	background-color: #99C9FF;
+	white-space: nowrap;
 }
 /* Creates those little gray lines dividing each section */
 tr.lines td {
-background-color: #DCDCDC;
-height: 1px;
+	background-color: #DCDCDC;
+	height: 1px;
 }
 /* For explanation boxes */
 td.explain {
     width: 40%;
-    font-size: 12px;
+    /*font-size: 12px;*/
 }
+
+

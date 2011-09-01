@@ -1,193 +1,176 @@
-#!/usr/bin/perl
+#!/usr/bin/perl -w 
 
-## Hussein Vastani 
+## Hussein Vastani
 ## Franziska Hinkelmann
 ## Bonbons
-## June 2011
+## September 2011
 
-## ADAM1.0 with support for large networks and conjunctive 
-## networks using M2 instead of perl enumeration
-
-use CGI qw( :standard );
+use v5.10;
+use CGI qw/:standard/;    # load CGI routines
 use Fcntl qw( :flock );
+print header;             # create the HTTP header
+
+#say "<pre>";
+#say param;
+#say "</pre>";
+#say  param('upload_file');
+#exit 1;
+
+$p_value          = param('p_value');
+$k_value          = param('k_bound');
+$upload_file      = param('upload_file');
+$option_box       = "";
+$choice_box       = param('choice_box');         # build, analyze, control
+$format_box       = param('inputType');
+$continuous       = param('continuous');
+$anaysis_method = param('anaysis_method');
+$limCyc_length    = "1";                         #param('limCyc_length');
+$update_box       = "0";                         #param('update_box');
+$update_schedule  = "0";                         #param('update_schedule');
+$trajectory_box   = "0";                         #param('trajectory_box');
+$trajectory_value = "0";                         #param('trajectory_value');
+$statespace       = param('statespace');
+$depgraph         = param('depgraph');
+$feedback         = param('feedback');
+$edit_functions   = param('edit_functions');
+$SSformat         = param('SSformat');
+$DGformat         = param('DGformat');
+$stochastic
+    = param('probabilities'); # if set, probabilities are drawn in state space
+$updstoch_flag = "0";
+$updsequ_flag  = "0";
+$weights       = param('weights');
+$dreamss       = param('dreamss');
+
+# this function reads input functions from file or text area and writes the input functions into $clientip.functionfile.txt
+sub create_input_function {
+
+    #$DEBUG=1;
+    print "Clientip $clientip \n<br>" if ($DEBUG);
+    use Cwd;
+    $cwd = getcwd();
+    `mkdir -p $cwd/../../htdocs/no-ssl/files`;
+    $filename = "$clientip.functionfile.txt";
+
+    say "--" . $upload_file . "--" if ($DEBUG);
+    if ($upload_file) {
+
+        #system("ls");
+        say "cp ../../htdocs/no-ssl/files/$upload_file $filename <br>	"
+            if ($DEBUG);
+        system("cp ../../htdocs/no-ssl/files/$upload_file $filename");
+        if ($choice_box eq 'analyze'
+            && (   $format_box eq 'PDS'
+                || $format_box eq 'pPDS'
+                || $format_box eq 'BN'
+                || $format_box eq 'PBN' )
+            )
+        {
+            while ( $bytesread = read( $upload_file, $buffer, 1024 ) ) {
+                while ( $buffer =~ m/f(\d+)/g ) {
+                    if ( $1 > $n_nodes ) {
+
+                        #print "$1<br>";
+                        $n_nodes = $1;
+                    }
+                }
+            }
+        }
+    }
+    elsif ($edit_functions)
+    {    # Otherwise parse functions from textarea value (no file uploaded)
+        open( OUTFILE, ">$filename" );
+        print "open ok \n<br>" if ($DEBUG);
+        print OUTFILE $edit_functions;
+        $n_nodes = 0;
+        while ( $edit_functions =~ m/f(\d+)/g ) {
+            if ( $1 > $n_nodes ) { $n_nodes = $1; }
+        }
+        flock( OUTFILE, LOCK_UN )
+            or die("Could not unlock file $!");
+        close(OUTFILE);
+    }
+    else {
+        print
+            "<font color=red>No input functions! Please upload a file or enter the functions.</font>";
+        die("Program quitting. No input functions");
+    }
+
+    #say "$edit_functions";
+    #say "The number of nodes is $n_nodes.";
+    #remove any ^M characters
+    `perl -pi -e 's/\r//g' "$clientip.functionfile.txt"`;
+    $buffer = "";
+}
+
+# Take the Functions in functionfile.txt, translate them, and save the result back into functionfile.txt
+sub translate_functions {
+    print "translate_functions<br>" if ($DEBUG);
+    system(
+        "/usr/bin/perl translator.pl $clientip.functionfile.txt $clientip.trfunctionfile.txt $n_nodes"
+    );
+    $filename = "$clientip.trfunctionfile.txt";
+    if ( -e "$clientip.trfunctionfile.txt" ) {
+        print
+            "<A href=\"$clientip.trfunctionfile.txt\" target=\"_blank\"><font color=green><i>Translation from Boolean functions to Polynomial was successful.</i></font></A><br><br>";
+    }
+    else {
+        print
+            "<font color=red>Translation from Boolean functions to polynomial was unsuccessful</font><br>";
+        `rm -f $clientip.functionfile.txt`;
+        die("Translation unsuccessful");
+    }
+}
+
+sub set_update_type() {
+    return 0;    # not implemented yet
+    $update_box_param = "";
+    if ( $update_box eq 'Update_stochastic' ) {
+
+        #print "Update Stochastic<br>";
+        $update_box_param = "updstoch";
+        $updstoch_flag    = "1";
+        $update_schedule  = "0";
+    }
+    if ( $update_box eq 'Sequential' ) {
+
+        #print "$update_box<br>";
+        $update_box_param = "async";
+        $updsequ_flag     = "1";
+        if (   ( $update_schedule ne null )
+            && ( $update_schedule ne "" ) )
+        {
+            $update_schedule =~ s/^\s+|\s+$//g
+                ;    #remove all leading and trailing white spaces
+            $update_schedule =~ s/(\d+)\s+/$1 /g
+                ;    # remove extra spaces in between the numbers
+            $update_schedule =~ s/ /_/g;
+
+            #print "$update_schedule";
+        }
+        else {
+            print
+                "<br><font color=red>Please enter an update schedule or select <i>Synchronous</i>.</font><br>";
+            die("Program quitting. Empty value for update schedule field");
+        }
+    }
+    else {
+        $update_box_param = "parallel";
+        $update_schedule  = "0";
+    }
+}
 
 `mkdir -p ../../htdocs/no-ssl`;
 `touch ../../htdocs/no-ssl/access`;
+
 #get the clients ip address
 $clientip = $ENV{'REMOTE_ADDR'};
 $clientip =~ s/\./\-/g;
-($sec,$min,$hr) = localtime();
-$clientip = $clientip.'-'.$sec.'-'.$min.'-'.$hr;
-$clientip = '../../htdocs/no-ssl/files/'. $clientip;
+( $sec, $min, $hr ) = localtime();
+$clientip = $clientip . '-' . $sec . '-' . $min . '-' . $hr;
+$clientip = '../../htdocs/no-ssl/files/' . $clientip;
 
 #$clientip = $sec.'-'.$min.'-'.$hr;
-
-print header, start_html( -title=>'ADAM - Analysis of Dynamic Algebraic Models', -script=>{-language=>'JavaScript',-src=>'/adam.js'}, ,-onLoad=>'change()', -style=>{-src=>'/adam_style.css'});
-print start_multipart_form(-name=>'form1', -method =>"POST", -onSubmit=>"return validate()");
-print "<div id=\"wrap\">";
-print "<div id=\"tipDiv\" style=\"position:absolute\; visibility:hidden\; z-index:100\"></div>";
-
-#Div Box: ADAM Title :: Header
-print "<div id=\"header\">";
-$header = &Constant_HTML('header.html');
-print $header;
-print "</div>";
-
-#Div Box :: Main
-print "<div id = \"main\">";
-
-#Div Box: Text Explanation :: Nav
-print "<div id=\"nav\"><p>";
-$navigation = &Constant_HTML('navigation.html');
-print $navigation;
-
-print "ADAM uses a combination of simulation and mathematical algorithms to analyze the dynamics of
-discrete biological systems. It can analyze bounded <b>Petri-nets</b>
-(generated with <a
-href=\"http://www-dssz.informatik.tu-cottbus.de/software/snoopy.html\">Snoopy</a>), <b>Logical Models</b> (in <a href= \"http://gin.univ-mrs.fr/\">GINSim</a> format), <b>Polynomial Dynamical 
-Systems (PDS)</b>, and <b>Probabilistic Boolean (or multistate) Networks</b>. For small enough networks (deterministic or probabilistic), ADAM simulates the 
-complete state space of the model and finds all attractors (steady states and limit cycles) together with statistics about the size of components. For larger networks, 
-ADAM computes fixed points for both deterministic and probabilistic networks, and limit cycle of the length specified by the user for deterministic networks. 
-You can follow our <a href=\"steptutorial.pl\">step-by-step tutorial</a> or
-read the <a href=\"userGuide.pl\" target=\"_blank\">user guide</a>. It is important 
-that you follow the format specified in the guide. Make your selections and provide inputs (if any) in the form below and click 
-<i>Analyze</i> to run the software. To generate a model from experimental time
-course data, you can use <a
-href=\"http://polymath.vbi.vt.edu/polynome\">Polynome</a>.<br><br>";
-print "</div>";
-
-
-#Table Box 1: Input Functions Network Description
-print "<table>";
-# Header
-print "<tr valign=\"top\"><td class=\"titleBox\" colspan=\"2\">";
-print "<strong><font color=\"black\">1) Model</font></strong>";
-print "</td></tr>";
-
-print "<tr class=\"lines\"><td colspan=\"2\"></td></tr>";
-
-# Model Type
-print "<tr valign=\"top\"><td ><font size=\"2\"><b>Model Type:</b><br>";
-%labels = ('GINsim'=>'Logical Model (GINsim file)',
-'PDS'=>"Polynomial Dynamical System (PDS)",
-'PBN'=>'Probabilistic Network',
-'PetriNet'=>'Petri Net',
-'TransitionTable' => 'Transition Table',
-'Control' => 'Heuristic Control');
-print radio_group(-name=>'format_box', -values=>['GINsim', 'PDS', 'PBN', 'PetriNet', 'TransitionTable', 'Control'],
- 	-labels=>\%labels, -default=>'PDS', -onChange=>'formatChange()', -linebreak=>'true');
-print "</font></td>";
-# Explanatory Text
-print "<td rowspan=\"3\" id=\"explainInput\" class=\"explain\"></td>";
-print "</tr>";
-print "<tr><td><div id=\"continuous\">", checkbox(-name =>'continuous', -value=>'continuous', -label=>'Continuous'), "</div></td></tr>";
-
-# for dream steady state for optimal control
-print "<tr valign=\"top\"><td><font size=\"2\" id=\"dreamsstext\">Please enter the desired steady state: </font>";
-
-print "<tr><td><div id=\"dreamss\">", textfield(-name =>'dreamss', -value=>'? ? ? ? ? ? ? 0 ? ? ? ? ? ? ? ? ? ? ? ?', -label=>'Desired Steady State'), "</div></td></tr>";
-
-# for weights for optimal control
-print "<tr valign=\"top\"><td><font size=\"2\" id=\"weightstext\">Please Enter Weights for Each Node: </font>";
-
-print "<tr><td><div id=\"weights\">", textfield(-name =>'weights', -value=>'1 1 1 1 1 1 1 N 1 1 1 1 1 N 1 1 1 1 1 1', -label=>'Weights'), "</div></td></tr>";
-
-
-print "<tr valign=\"top\"><td><font size=\"2\" id=\"stateInput\">Enter number of states per node: </font>";
-print textfield(-name=>'p_value',-size=>2, -maxlength=>2, -default=>2, -onChange=>'pChange()');
-print "&nbsp\;&nbsp\;&nbsp\;", popup_menu(-name=>'translate_box',-values=>['Polynomial','Boolean'], -disabled), "<br>";
-print "</td></tr>";
-
-print "<tr><td></td></tr>";
-print "<tr><td></td></tr>";
-print "<tr><td></td></tr>";
-print "<tr><td></td></tr>";
-
-
-
-print "<tr class=\"lines\"><td colspan=\"2\"></td></tr>";
-print "<tr valign=\"top\"><td>";
-print "<font size=\"2\"><strong>Model Input: </strong><br></font>";
-print "</td></tr>";
-
-print "<tr><td><div align=\"center\">", filefield(-name=>'upload_file');
-print "<font id=\"fileInput\"></font>";
-print "</div></td></tr>";
-print "<tr valign=\"top\"><td><div align=\"center\"><font size=\"2\">or</font></div></td></tr>";
-print "<tr valign=\"top\"><td><div align=\"center\">";
-print textarea(-name=>'edit_functions',
-               -default=>'',
-               -rows=>8,
-               -columns=>50);
-print "</div></td></tr>";
-print "</table>";
-
-print "<br>";
-
-#Analysis
-print "<div id='notTT'>";
-print "<table>";
-print "<tr valign=\"top\"><td class=\"titleBox\" colspan=\"2\">";
-print "<strong><font color=\"#black\">2) Analysis </font></strong></td></tr>";
-print "<tr class=\"lines\"><td colspan=\"2\"></td></tr>";
-print "<tr valign=\"top\"><td nowrap><font size=\"2\">";
-print "Select the type of network: <br>";
-print radio_group(-name=>'special_networks', -values=>['Conjunctive/Disjunctive (Boolean rings only)', 'Simulation of all trajectories (suggested for nodes <=20)', 'Algorithms (suggested for nodes > 20)'], -default=>'Simulation of all trajectories (suggested for nodes <=20)', -linebreak=>'true', -onChange=>'networkChange()');
-print "</td>";
-print "<td id=\"explainNetwork\" class=\"explain\"></td>";
-print "</tr>";
-print "</table>";
-
-
-print "<br>";
-
-#Options
-print "<table>";
-print "<tr valign=\"top\"><td class=\"titleBox\">";
-print "<strong><font color=\"black\">3) Options</font></strong>";
-print "</td></tr>";
-
-print "<tr class=\"lines\"><td></td></tr>";
-
-print "<tr valign=\"top\"><td nowrap>";
-print "<font size=\"2\">";
-print checkbox_group(-name=>'depgraph', -value=>'Dependency graph',
--label=>'Dependency graph', -checked), "&nbsp\;&nbsp\;&nbsp\;", popup_menu(-name=>'DGformat',-values=>['*.gif','*.jpg','*.png','*.ps']);
-print "&nbsp\;&nbsp\;&nbsp\;";
-print checkbox_group(-name=>'feedback', -value=>'Feedback Circuit', -disabled);
-print "&nbsp\;&nbsp\;&nbsp\;", checkbox_group(-name =>'stochastic', -value=>'Print probabilities', -label=>'Print probabilities', -checked);
-print "&nbsp\;&nbsp\;&nbsp\;";
-print checkbox_group(-name=>'statespace', -value=>'State space graph', -label=>'State space graph', -checked),"&nbsp\;&nbsp\;&nbsp\;", popup_menu(-name=>'SSformat',-values=>['*.gif','*.jpg','*.png','*.ps']), "<br>";
-print "</font>";
-print "</td></tr>";
-
-print "<tr class=\"lines\"><td></td></tr>";
-
-print "<tr><td id=\"netOpts\" style=\"font-size:12px\"></div>";
-print "</table><br>";
-print "</div>";
-
-print "<center>", submit('button_name','Analyze'),"</center><br><br>";
-
-print "</div>";
-
-print "<div id =\"computation\">";
-
-#Google Analytics, Franzi's Account
-print <<ENDHTML;
-<script type="text/javascript">
-var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-</script>
-<script type="text/javascript">
-try{
-var pageTracker = _gat._getTracker("UA-11219893-5");
-pageTracker._trackPageview();
-} catch(err) {}
-</script>
-ENDHTML
-
-print end_form;
 
 #open(ACCESS, ">>../../htdocs/no-ssl/access") or die("Failed to open file for writing");
 #flock(ACCESS, LOCK_EX) or die ("Could not get exclusive lock $!");
@@ -196,79 +179,121 @@ print end_form;
 #flock(ACCESS, LOCK_UN) or die ("Could not unlock file $!");
 #close(ACCESS);
 
-$weights = param('weights');
-$dreamss = param('dreamss');
-$p_value = param('p_value');
-$upload_file = upload('upload_file');
-$option_box = param('option_box');
-$format_box = param('format_box');
-$continuousTT = param('continuous');
-$translate_box = param('translate_box');
-$special_networks = param('special_networks');
-$limCyc_length = param('limCyc_length');
-$update_box = param('update_box');
-$update_schedule = param('update_schedule');
-$trajectory_box = param('trajectory_box');
-$trajectory_value = param('trajectory_value');
-$statespace = param('statespace');
-$depgraph = param('depgraph');
-$feedback = param('feedback');
-$edit_functions = param('edit_functions');
-$SSformat = param('SSformat');
-$DGformat = param('DGformat');
-$stochastic =param('stochastic'); 	# if set, probabilities are drawn in state space
-$button_name = param('button_name');
-$updstoch_flag = "0";
-$updsequ_flag= "0";
 my $bytesread = "";
-my $buffer = "";
- 
+my $buffer    = "";
+
 $DEBUG = 0;
 
 $fileuploaded = 0;
 $SSformat =~ s/\*\.//;
 $DGformat =~ s/\*\.//;
-print "access was ok <br>" if ($DEBUG);
-print "$option_box <br>" if ($DEBUG);
-print "$format_box <br>" if ($DEBUG);
-print "$translate_box <br>" if ($DEBUG);
-print "$special_networks <br>" if ($DEBUG);
-
-if ($button_name eq "Analyze") {
-
-
+print "access was ok <br>"     if ($DEBUG);
+print "$option_box <br>"       if ($DEBUG);
+print "$format_box <br>"       if ($DEBUG);
+print "$translate_box <br>"    if ($DEBUG);
+print "$anaysis_method <br>" if ($DEBUG);
 
 #make input functions - gives p_value and n_nodes
 create_input_function();
 
-if ($format_box eq "Control") {  # This is where we call ruby
-   print "We are implementing Hueristic $format_box <br>" if ($DEBUG);	
-#print "ruby parseGA.rb \"$p_value\" \"$weights\" \"$dreamss\" \"$filename\"";
-system("ruby parseGA.rb \"$p_value\" \"$weights\" \"$dreamss\" \"$filename\"");
+#print "p_value: " . $p_value ."<br>";
+#print "n_nodes: " . $n_nodes ."<br>";
+#print $edit_functions . "\n";
 
-}
-if ($format_box eq "TransitionTable") {
-	print "We are working with transition tables $format_box <br>" if ($DEBUG);	
-	print "p $p_value <br>" if ($DEBUG);
-	if( $continuousTT eq 'continuous') {
-		print "We are working with continuous models: $continuous <br>" if ($DEBUG);	
-		system("ruby transitionTablesContinuous.rb $p_value $filename");
-    } else {
-		print "We are not working with continuous models $continuous <br>" if ($DEBUG);	
-		system("ruby transitionTables.rb $p_value $filename");
-	}
+#print $choice_box . "<br>";
+#print $continuous . "<br>";
 
+given ($choice_box) {
+    when (/control/) {
+        print "We are implementing Hueristic $format_box <br>"
+            if ($DEBUG);
+        system('ruby parseGA.rb "$p_value" "$weights" "$dreamss" "$filename"')
+            ; #"ruby parseGA.rb \"$p_value\" \"$weights\" \"$dreamss\" \"$filename\""
+    }
+    when (/build/) {
+
+        #$DEBUG =1;
+        print "We are working with transition tables $format_box <br>"
+            if ($DEBUG);
+        print "p $p_value <br>" if ($DEBUG);
+        if ( $continuous eq 'continuous' ) {
+            print "We are working with continuous models: $continuous <br>"
+                if ($DEBUG);
+            system("ruby transitionTablesContinuous.rb $p_value $filename");
+        }
+        else {
+            print "We are not working with continuous models $continuous <br>"
+                if ($DEBUG);
+            system("ruby transitionTables.rb $p_value $filename");
+        }
+    }
+    when (/analyze/) {
+        print $format_box . "<br>" if $DEBUG;
+        given ($format_box) {
+            when (/Petrinet/) {
+                say "cp $filename $clientip.spped" if $DEBUG;
+                system("cp $filename $clientip.spped");
+                system("ruby petri-converter.rb $clientip $k_value");
+            }
+            when (/GINsim/) {
+                say "cp $filename $clientip.ginsim.ginml" if $DEBUG;
+                system("cp $filename $clientip.ginsim.ginml");
+
+                # Convert GINsim file and get p_value and n_nodes
+                #The ruby script is supposed to write the p value into a file
+                system("ruby ginSim-converter.rb $clientip");
+                $pFile = "$clientip.pVal.txt";
+                $nFile = "$clientip.nVal.txt";
+
+                # Set p_value and n_nodes
+                open( MYFILE, $pFile ) || die("Could not open file!");
+                while (<MYFILE>) { chomp; $p_value = $_; }
+                close(MYFILE);
+                open( MYFILE, $nFile ) || die("Could not open file!");
+                while (<MYFILE>) { chomp; $n_nodes = $_; }
+                close(MYFILE);
+            }
+            when (/(BN)|(PBN)/) {
+                translate_functions();
+            }
+            when (/(PDS)|(pPDS)/) {
+
+            }
+            default {
+                say 'Invalid choice of model, there was an error.'
+            }
+        }
+    }
+    default {
+        say 'Invalid choice of input, there was an error.'
+    }
 }
+
+$useRegulatory = 0;
 
 # Set flag for creating the dependency graph
-($depgraph eq "Dependency graph") ? {$depgraph = 1} : {$depgraph = 0};
-($feedback eq "Feedback Circuit") ? {$feedback = 1} : {$feedback = 0};
+if ( $depgraph eq "Dependency graph" ) {
+    if ( $choice_box eq "analyze" ) {
+        if (   ( $format_box eq "PDS" )
+            || ( $format_box eq "BN" )
+            || ( $format_box eq "GINsim" ) )
+        {
+            $useRegulatory = 1;
+        }
+    }
 
+    $depgraph = 1;
+}
+else {
+    $depgraph = 0;
+}
 
-
+( $feedback eq "Feedback Circuit" )
+    ? { $feedback = 1 }
+    : { $feedback = 0 };
 
 # Give link to functional circuits if checked
-if ($feedback == 1) {
+if ( $feedback == 1 ) {
     $circuits = "$clientip.circuits.html";
     open FILE, ">$circuits" or die $!;
     print FILE "<html><body>";
@@ -277,327 +302,181 @@ if ($feedback == 1) {
     open FILE, ">>$circuits" or die $!;
     print FILE "</body></html>";
     close FILE;
-    print "<a href=\"$circuits\" target=\"_blank\"><font color=\"#226677\"<i>Click to view the functional circuits.</i></font></a><br>";
+    print
+        "<a href=\"$circuits\" target=\"_blank\"><font color=\"#226677\"<i>Click to view the functional circuits.</i></font></a><br>";
 }
 
-#if ($sign = 1) {
-#    @signs = `ruby sign`
-#}
+if ( $anaysis_method eq "Conjunctive" ) {
 
-
-## Conjunctive
-if ( $special_networks eq "Conjunctive/Disjunctive (Boolean rings only)" ) {
-    # dynamics depend on the dependency graph, need to generate it 
+    # dynamics depend on the dependency graph, need to generate it
     system("perl regulatory.pl $filename $n_nodes $clientip $DGformat") == 0
-      or die("regulatory.pl died");
+        or die("regulatory.pl died");
     $dpGraph = "$clientip.out1";
 
     # Give link to dependency graph if checked
-    if ($depgraph = 1) {
-		print  "<br><A href=\"$dpGraph.$DGformat\" target=\"_blank\"><font color=\"#226677\"><i>Click to view the dependency graph.</i></font></A><br>";
+    if ( $depgraph == 1 ) {
+        print
+            "<br><A href=\"$dpGraph.$DGformat\" target=\"_blank\"><font color=\"#226677\"><i>Click to view the dependency graph.</i></font></A><br>";
     }
-    
+
+    #print "ruby adam_conjunctive.rb $n_nodes $p_value $dpGraph.dot<br>" ;
     system("ruby adam_conjunctive.rb $n_nodes $p_value $dpGraph.dot");
-## Algorithms
-} elsif ( $special_networks eq "Algorithms (suggested for nodes > 20)" ) {
-    if(($limCyc_length eq null) || ($limCyc_length eq "")){
-		print "<font color=red>Please enter a length of the limit cycle you wish to compute. Enter 1 for fixed points</font>";
-		die("Program quitting. Empty field entered for limit cycle length in large networks.");
+}
+elsif ( $anaysis_method eq "Algorithms" ) {
+    $limCyc_length = 1;
+    if ( ( $limCyc_length eq null ) || ( $limCyc_length eq "" ) ) {
+        print
+            "<font color=red>Please enter a length of the limit cycle you wish to compute. Enter 1 for fixed points</font>";
+        die("Program quitting. Empty field entered for limit cycle length in large networks."
+        );
     }
 
     # Give link to dependency graph if checked
-    if ($depgraph = 1) {
-		system("perl regulatory.pl $filename $n_nodes $clientip $DGformat") == 0
-		    or die("regulatory.pl died");
-		print  "<br><A href=\"$clientip.out1.$DGformat\" target=\"_blank\"><font color=\"#226677\"><i>Click to view the dependency graph.</i></font></A><br>";
+    if ( $useRegulatory == 1 ) {
+        system("perl regulatory.pl $filename $n_nodes $clientip $DGformat")
+            == 0
+            or die("regulatory.pl died");
+        print
+            "<br><A href=\"$clientip.out1.$DGformat\" target=\"_blank\"><font color=\"#226677\"><i>Click to view the dependency graph.</i></font></A><br>";
     }
     set_update_type();
-    system("ruby adam_largeNetwork.rb $n_nodes $p_value $filename $limCyc_length");
-# Analysis by enumeration
-} 
-elsif ($format_box eq "Control") {
+    system(
+        "ruby adam_largeNetwork.rb $n_nodes $p_value $filename $limCyc_length"
+    );
+}
+elsif ( $format_box eq "Control" ) {
+
     # we do nothing
 }
-elsif ( $p_value && $n_nodes ) {
-    print "Executing simulation<br>";
-    print "hello<br>" if ($DEBUG);
-    if($n_nodes > 30 || $p_value**$n_nodes > 2**30) {
-        print "<font color=red>Simulation for large networks is not possible. Please chose <i>Algorithms</i> as <b>Analysis</b> option. </font><br>";
-        die("Program quitting. Too many nodes");
-    }
+elsif ( $anaysis_method eq "Simulation" ) {
 
-    print "hello set_update_type<br>" if ($DEBUG);
-    set_update_type();
+    #$DEBUG =1;
+    if ( $p_value && $n_nodes ) {
+        print "Executing simulation<br>";
+        print "hello<br>" if ($DEBUG);
+        if ( $n_nodes > 30 || $p_value**$n_nodes > 2**30 ) {
+            print
+                "<font color=red>Simulation for large networks is not possible. Please chose <i>Algorithms</i> as <b>Analysis</b> option. </font><br>";
+            die("Program quitting. Too many nodes");
+        }
 
-    print $option_box if ($DEBUG);
+        print "hello set_update_type<br>" if ($DEBUG);
+        set_update_type();
 
-	# for more than 1000 nodes don't produce a graph, use C++ program instead
-	
-    # Set flag for whether to print probabilities in state space
-    ($stochastic eq "Print probabilities") ? {$stochastic = 1} : {$stochastic = 0 };
+        print $option_box if ($DEBUG);
 
-	
-    if($option_box eq "All trajectories from all possible initial states") { # complete state space
-		print $format_box if ($DEBUG);
-		if ($p_value**$n_nodes > 1000 && $format_box eq "PDS" ) {
-			print "Calculating fixed points and limit cycles, not generating a graph of the state space.<BR>\n";
-			print("./Analysis/analysis $p_value ${clientip}.functionfile  <BR>") if ($DEBUG);
-			print("<pre>");
-			system("./Analysis/analysis $p_value ${clientip}.functionfile");
-			print("</pre>");
-			print("Done.<br>");
-		} else { #analysis through simulation with graph
-			if ($p_value**$n_nodes > 1000) {
-				print "<font color=red>Simulation for large stochastic networks is not possible. Please chose <i>Algorithms</i> as <b>Analysis</b> option. </font><br>";
-		        die("Program quitting. Too many nodes");
-			}
-		    print "<font color=blue><b>Analysis of the state space</b></font> <br>";
-	        print ("perl dvd_stochastic_runner.pl  $n_nodes $p_value 1 $updstoch_flag $clientip $SSformat $depgraph $updsequ_flag $update_schedule $stochastic 1 0 $filename\n<br> ") if ($DEBUG); 		
-	        system("/usr/bin/perl dvd_stochastic_runner.pl  $n_nodes $p_value 1 $updstoch_flag $clientip $SSformat $depgraph $updsequ_flag $update_schedule $stochastic 1 0 $filename"); 		
-		}
-    } else { # trajectory
-         print "<font color=blue><b>Computing Trajectory of the given initialization</b></font> <br>";
-         if( ($trajectory_value ne null) && ( $trajectory_value ne "") ) {
-	          $trajectory_value =~ s/^\s+|\s+$//g;; #remove all leading and trailing white spaces
-    	      $trajectory_value =~  s/(\d+)\s+/$1 /g; #remove extra white space between the numbers
-	          $trajectory_value =~ s/ /_/g;
-	          print "trajectory_value: $trajectory_value<br>" if $DEBUG;
-          
-	          system("/usr/bin/perl dvd_stochastic_runner.pl  $n_nodes $p_value 1 $updstoch_flag $clientip $SSformat $depgraph $updsequ_flag $update_schedule $stochastic 0 $trajectory_value $filename"); 		
-	          print "/usr/bin/perl dvd_stochastic_runner.pl  $n_nodes $p_value 1 $updstoch_flag $clientip $SSformat $depgraph $updsequ_flag $update_schedule $stochastic 0 $trajectory_value $filename<br>" if $DEBUG; 		
-    	 } else {
-	          print "<br><font color=red>Please enter an initial state or select <i>Complete State Space</i></font><br>";
-	          die("Program quitting. Empty value for initialization field");
-	     }
-    }
-    if($statespace eq "State space graph" && $option_box eq "All trajectories from all possible initial states") {
-        if(-e "$clientip.out.$SSformat") {
-            print  "<A href=\"$clientip.out.$SSformat\"
+     # for more than 1000 nodes don't produce a graph, use C++ program instead
+
+        # Set flag for whether to print probabilities in state space
+        ( $probabilities eq "probabilities" )
+            ? { $stochastic = 1 }
+            : { $stochastic = 0 };
+        $option_box = "All trajectories from all possible initial states";
+        if ( $option_box eq
+            "All trajectories from all possible initial states" )
+        {    # complete state space
+            print $format_box if ($DEBUG);
+            if (   $p_value**$n_nodes > 1000
+                && $format_box eq "PDS" )
+            {
+                print
+                    "Calculating fixed points and limit cycles, not generating a graph of the state space.<BR>\n";
+                print(
+                    "./Analysis/analysis $p_value ${clientip}.functionfile  <BR>"
+                ) if ($DEBUG);
+                print("<pre>");
+                system(
+                    "./Analysis/analysis $p_value ${clientip}.functionfile");
+                print("</pre>");
+                print("Done.<br>");
+            }
+            else {    #analysis through simulation with graph
+                if ( $p_value**$n_nodes > 1000 ) {
+                    print
+                        "<font color=red>Simulation for large stochastic networks is not possible. Please chose <i>Algorithms</i> as <b>Analysis</b> option. </font><br>";
+                    die("Program quitting. Too many nodes");
+                }
+                print
+                    "<font color=blue><b>Analysis of the state space</b></font> <br>";
+                print(
+                    "perl dvd_stochastic_runner.pl  $n_nodes $p_value 1 $updstoch_flag $clientip $SSformat $depgraph $updsequ_flag $update_schedule $stochastic 1 0 $filename\n<br> "
+                ) if ($DEBUG);
+                system(
+                    "/usr/bin/perl dvd_stochastic_runner.pl  $n_nodes $p_value 1 $updstoch_flag $clientip $SSformat $depgraph $updsequ_flag $update_schedule $stochastic 1 0 $filename"
+                );
+            }
+        }
+        else {    # trajectory
+            print
+                "<font color=blue><b>Computing Trajectory of the given initialization</b></font> <br>";
+            if (   ( $trajectory_value ne null )
+                && ( $trajectory_value ne "" ) )
+            {
+                $trajectory_value =~ s/^\s+|\s+$//g;
+                ;    #remove all leading and trailing white spaces
+                $trajectory_value =~ s/(\d+)\s+/$1 /g
+                    ;    #remove extra white space between the numbers
+                $trajectory_value =~ s/ /_/g;
+                print "trajectory_value: $trajectory_value<br>"
+                    if $DEBUG;
+
+                system(
+                    "/usr/bin/perl dvd_stochastic_runner.pl  $n_nodes $p_value 1 $updstoch_flag $clientip $SSformat $depgraph $updsequ_flag $update_schedule $stochastic 0 $trajectory_value $filename"
+                );
+                print
+                    "/usr/bin/perl dvd_stochastic_runner.pl  $n_nodes $p_value 1 $updstoch_flag $clientip $SSformat $depgraph $updsequ_flag $update_schedule $stochastic 0 $trajectory_value $filename<br>"
+                    if $DEBUG;
+            }
+            else {
+                print
+                    "<br><font color=red>Please enter an initial state or select <i>Complete State Space</i></font><br>";
+                die( "Program quitting. Empty value for initialization field"
+                );
+            }
+        }
+        if (   $statespace eq "State space graph"
+            && $option_box eq
+            "All trajectories from all possible initial states" )
+        {
+            if ( -e "$clientip.out.$SSformat" ) {
+                print "<A href=\"$clientip.out.$SSformat\"
             target=\"_blank\"><font color=\"#226677\"><i>Click to view the state space
             graph.</i></font></A><br>"
+            }
         }
-    } else {
-        if(-e "$clientip.graph.$SSformat") {
-            print  "<A href=\"$clientip.graph.$SSformat\" target=\"_blank\"><font
+        else {
+            if ( -e "$clientip.graph.$SSformat" ) {
+                print
+                    "<A href=\"$clientip.graph.$SSformat\" target=\"_blank\"><font
             color=\"#226677\"><i>Click to view the trajectory.</i></font></A><br>"
+            }
         }
-    }
-    #if(-e "$clientip.out1.$DGformat")
-    if(-e "$clientip.out1.$SSformat") {
-        print  "<A href=\"$clientip.out1.$DGformat\" target=\"_blank\"><font
+
+        #if(-e "$clientip.out1.$DGformat")
+        if ( -e "$clientip.out1.$SSformat" ) {
+            print
+                "<A href=\"$clientip.out1.$DGformat\" target=\"_blank\"><font
         color=\"#226677\"><i>Click to view the dependency graph.</i></font></A><br>";
 
-    }
-    
-#    `rm -f -R $clientip`;
-#    `rm -f $clientip.out.dot`;
-#    `rm -f $clientip.graph.dot`;
-#
-#    `rm -f $clientip.out1.dot`;
-#    `rm -f $clientip.out2.dot`;
-#    
-#    `rm -f $clientip.functionfile.txt`;
-#    `rm -f $clientip.trfunctionfile.txt`;
-
-}}
-print "</div>";
-
-#Box: Comments/Questions/Bugs Link :: Footer
-print "<div id=\"footer\">";
-print "ADAM is currently still under development; if you ";
-print "spot any bugs or have any questions/comments, please <a href=\"mailto:mbrando1\@utk.edu\">";
-print "e-mail us</a>. ";
-print "(Bonny Guang, Madison Brandon, Rustin McNeill, Paul Vines, Franziska Hinkelmann)";
-print "</td></tr>";
-print "</div>";
-
-print "</div>";
-
-print end_html();
-
-
-
-
-
-
-# this function reads input functions from file or text area and writes the input functions into $clientip.functionfile.txt
-sub create_input_function() {
-  print "Clientip $clientip \n<br>" if ($DEBUG);
-  use Cwd;
-  $cwd = getcwd();
-  `mkdir -p $cwd/../../htdocs/no-ssl/files`; 
-  open (OUTFILE, ">$clientip.functionfile.txt");
-  print "open ok \n<br>" if ($DEBUG);
-  $filename = "$clientip.functionfile.txt";
-  if($upload_file) {
-    $fileuploaded = 1;
-    if($format_box eq "GINsim"){
-	  # Make sure extension is correct
-      $extension = substr $upload_file, -5;
-      if($extension ne "ginml"){
-        print "<font color=red>Error: Must upload a Logical Model generated with GINsim, i.e., a <i>.ginml</i> file.</font>";
-        die("Program quitting. Extension not ginml");
-      }
-# Write functions to ginml file on server for ruby script
-      open (GINOUTFILE, ">$clientip.ginsim.ginml");
-      flock(GINOUTFILE, LOCK_EX) or die ("Could not get exclusive lock $!");
-      while($bytesread=read($upload_file, $buffer, 1024)) { print GINOUTFILE $buffer; }
-      flock(GINOUTFILE, LOCK_UN) or die ("Could not unlock file $!");
-      close $upload_file;
-
-      $pFile = "$clientip.pVal.txt";
-      $nFile = "$clientip.nVal.txt";
-# Convert GINsim file and get p_value and n_nodes
-      system("ruby ginSim-converter.rb $clientip");
-      close GINOUTFILE;
-
-# Set p_value and n_nodes
-      open (MYFILE, $pFile) || die("Could not open file!");
-      while (<MYFILE>) { chomp; $p_value = $_; }
-      close (MYFILE); 
-      open (MYFILE, $nFile) || die("Could not open file!");
-      while (<MYFILE>) { chomp; $n_nodes = $_; }
-      close (MYFILE); 
-    } elsif ($format_box eq "PetriNet"){
-# Make sure extension is correct
-      $extension = substr $upload_file, -5;
-      if($extension ne "spped"){
-        print "<font color=red>Error: Must upload a Petri Net generated with Snoopy, i.e., a <i>.spped</i> file.</font>";
-        die("Program quitting. Extension not spped");
-      }
-# Write functions to ginml file on server for ruby script
-      open (PETRIOUTFILE, ">$clientip.spped");
-      flock(PETRIOUTFILE, LOCK_EX) or die ("Could not get exclusive lock $!");
-      while($bytesread=read($upload_file, $buffer, 1024)) { print PETRIOUTFILE $buffer; }
-      flock(PETRIOUTFILE, LOCK_UN) or die ("Could not unlock file $!");
-      close $upload_file;
-
-      $pFile = "$clientip.pVal.txt";
-      $nFile = "$clientip.nVal.txt";
-# Convert Petri net file and get p_value and n_nodes
-      system("ruby petri-converter.rb $clientip $p_value");
-      close PETRIOUTFILE;
-
-## Set p_value and n_nodes
-#      open (MYFILE, $pFile) || die("Could not open file!");
-#      while (<MYFILE>) { chomp; $p_value = $_; }
-#      close (MYFILE); 
-#      open (MYFILE, $nFile) || die("Could not open file!");
-#      while (<MYFILE>) { chomp; $n_nodes = $_; }
-#      close (MYFILE); 
-
-    } elsif ($format_box eq "TransitionTable" or $format_box eq "Control") { 
-	  # Make sure extension is correct
-	  $upload_file =~ /\.(.+$)/;
-	  $extension = $1;
-	  #print "extention: $extension";
-      if($extension ne "txt") {
-        print "<font color=red>Error: Must upload a text file (.txt).</font>";
-        die("Program quitting. Extension not txt");
-      }
-	# Write functions to file on server for ruby script
-	  flock(OUTFILE, LOCK_EX) or die ("Could not get exclusive lock $!");	  
-	  while($bytesread=read($upload_file, $buffer, 1024)) {
-	      print OUTFILE $buffer;
-	  }
-    } 	
-    else {
-# Make sure extension is correct
-      $extension = substr $upload_file, -3;
-      if($extension ne "txt"){
-        print "<font color=red>Error: Must upload a text file, i.e,. <i>.txt</i>.</font>";
-        die("Program quitting. Extension not txt");
-      }
-
-# Get contents of file and n_nodes
-      flock(OUTFILE, LOCK_EX) or die ("Could not get exclusive lock $!");	  
-      $n_nodes = 0;
-      while($bytesread=read($upload_file, $buffer, 1024)) {
-        print OUTFILE $buffer;
-        while($buffer =~ m/f(\d+)/g) {
-          if ($1 > $n_nodes) { 
-            #print "$1<br>";
-            $n_nodes = $1; 
-          }
         }
-      }
-    }
-    flock(OUTFILE, LOCK_UN) or die ("Could not unlock file $!");
-    close $upload_file;
-  } elsif ($edit_functions) { # Otherwise parse functions from textarea value (no file uploaded)
-    print OUTFILE $edit_functions;
-    $n_nodes = 0;
-    while($edit_functions =~ m/f(\d+)/g) {
-      if ($1 > $n_nodes) { $n_nodes = $1; }
-    }
-    flock(OUTFILE, LOCK_UN) or die("Could not unlock file $!");
-  } else {
-    print "<font color=red>No input functions! Please upload a file or enter the functions.</font>";
-    die("Program quitting. No input functions");
-  }
-  close(OUTFILE);
 
-    #remove any ^M characters
-    `perl -pi -e 's/\r//g' "$clientip.functionfile.txt"`;
-    $buffer = "";  
+        #    `rm -f -R $clientip`;
+        #    `rm -f $clientip.out.dot`;
+        #    `rm -f $clientip.graph.dot`;
+        #
+        #    `rm -f $clientip.out1.dot`;
+        #    `rm -f $clientip.out2.dot`;
+        #
+        #    `rm -f $clientip.functionfile.txt`;
+        #    `rm -f $clientip.trfunctionfile.txt`;
 
-    if($translate_box eq "Boolean") {
-      translate_functions();
     }
 }
-
-
-sub translate_functions() {
-    print "translate_functions<br>" if ($DEBUG);
-    system("/usr/bin/perl translator.pl $clientip.functionfile.txt $clientip.trfunctionfile.txt $n_nodes");
-    $filename = "$clientip.trfunctionfile.txt";
-    if(-e "$clientip.trfunctionfile.txt") {
-      print  "<A href=\"$clientip.trfunctionfile.txt\" target=\"_blank\"><font color=green><i>Translation from Boolean functions to Polynomial was successful.</i></font></A><br><br>";
-    } else {
-      print "<font color=red>Translation from Boolean functions to polynomial was unsuccessful</font><br>";
-      `rm -f $clientip.functionfile.txt`;
-      die("Translation unsuccessful");
-    }
+else {
+    print "there was an error." . "\n";
 }
 
-sub set_update_type() {
-	$update_box_param = "";
-	if($update_box eq 'Update_stochastic') {
-		 #print "Update Stochastic<br>";
-	   $update_box_param = "updstoch";
-	   $updstoch_flag = "1";
-	   $update_schedule = "0";
-	}
-	if($update_box eq 'Sequential') {
-		#print "$update_box<br>";
-	   $update_box_param = "async";
-	   $updsequ_flag = "1";
-	   if( ($update_schedule ne null) &&( $update_schedule ne "") ) {
-		   $update_schedule =~ s/^\s+|\s+$//g; #remove all leading and trailing white spaces
-		   $update_schedule =~  s/(\d+)\s+/$1 /g; # remove extra spaces in between the numbers
-		   $update_schedule =~ s/ /_/g;
-		   #print "$update_schedule";
-	   } else {
-       print "<br><font color=red>Please enter an update schedule or select <i>Synchronous</i>.</font><br>";
-       die("Program quitting. Empty value for update schedule field");
-	   }
-	} else {
-		$update_box_param = "parallel";
-		$update_schedule = "0";
-	}
-}
+#print $anaysis_method . "<br>\n";
+#print $conjunctive . "<br>\n";
+exit 1;
 
-# read in a file to include it
-sub Constant_HTML {
-  local(*FILE); # filehandle
-  local($file); # file path
-  local($HTML); # HTML data
-
-  $file = $_[0] || die "There was no file specified!\n";
-
-  open(FILE, "<$file") || die "Couldn't open $file!\n";
-  $HTML = do { local $/; <FILE> }; #read whole file in through slurp #mode (by setting $/ to undef)
-  close(FILE);
-
-  return $HTML;
-}
