@@ -66,7 +66,7 @@ function postForm(file) {
 	var formdata = $("form").serialize();
 	formdata = formdata + file;
 	//alert(formdata);
-    $.post("adam.pl", formdata, function(data) {
+    $.post("../../cgi-bin/git/adam.pl", formdata, function(data) {
         $("#result").html(data);
         //alert(data);
     });
