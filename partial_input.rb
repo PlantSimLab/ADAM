@@ -31,7 +31,7 @@ class PartialInput
         #functions[variable] = functions[variable] + "{\n"
         function_list_state = true
       end
-      if (function = line.match /(\-?((x\d+(\^\d+)?)|0|1)((\+|\*|\-)((x\d+(\^\d+)?)|0|1))*(\#0?\.\d+)?)/ )
+      if (function = line.match /(\-?((x\d+(\^\d+)?)|\d+)((\+|\*|\-)((x\d+(\^\d+)?)|\d+))*(\#0?\.\d+)?)/ )
         good_line = true
         f = line
         if !function[-1].nil? # with probability
