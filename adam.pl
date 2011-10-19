@@ -72,15 +72,18 @@ sub create_input_function {
                 || $format_box eq 'PBN' )
             )
         {
-            while ( $bytesread = read( $upload_file, $buffer, 1024 ) ) {
+			open FILE, "<", $upload_file or die $!;
+            while ( $bytesread = read( FILE, $buffer, 1024 ) ) {
+				say "reading ..." if ($DEBUG);
                 while ( $buffer =~ m/f(\d+)/g ) {
                     if ( $1 > $n_nodes ) {
 
-                        #print "$1<br>";
+                        say "$1<br>" if ($DEBUG);
                         $n_nodes = $1;
                     }
                 }
             }
+			close(FILE);
         }
     }
     elsif ($edit_functions)

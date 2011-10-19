@@ -32,7 +32,7 @@ $(document).ready(function() {
         'folder': '/../../htdocs/no-ssl/files',
         'auto': false,
         'multi': false,
-		'removeCompleted' : false,
+		'removeCompleted' : true,
         'onSelect': function(event, ID, fileObj) {
             file = fileObj.name;
             //alert('The file ' + fileObj.name + ' was added to the queue.');
@@ -40,7 +40,7 @@ $(document).ready(function() {
         'onComplete': function() {
             //alert('Complete');
             postForm("&upload_file=" + file);
-            //file = "";
+            file = "";
         },
         'onCancel': function() {
             file = "";
