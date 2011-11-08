@@ -72,7 +72,7 @@ sub create_input_function {
                 || $format_box eq 'PBN' )
             )
         {
-			open FILE, "<", $upload_file or die $!;
+			open FILE, "<", $filename or die $!;
             while ( $bytesread = read( FILE, $buffer, 1024 ) ) {
 				say "reading ..." if ($DEBUG);
                 while ( $buffer =~ m/f(\d+)/g ) {
