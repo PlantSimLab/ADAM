@@ -32,8 +32,8 @@ $(document).ready(function() {
 	'uploader': '/uploadify/uploadify.swf',
         'script': '/uploadify/uploadify.php',
 	'cancelImg': '/uploadify/cancel.png',
-        //'folder': '/../../htdocs/no-ssl/files',
-        'folder': '/Documents/htdocs/no-ssl/files',
+        'folder': '/../../htdocs/no-ssl/files',
+        //'folder': '/Documents/htdocs/no-ssl/files', (for Seda's configuration)
 	'auto': false,
         'multi': false,
 	'removeCompleted' : true,
@@ -60,8 +60,8 @@ $(document).ready(function() {
 	'uploader': '/uploadify/uploadify.swf',
         'script': '/uploadify/uploadify.php',
 	'cancelImg': '/uploadify/cancel.png',
-        //'folder': '/../../htdocs/no-ssl/files',
-        'folder': '/Documents/htdocs/no-ssl/files',
+        'folder': '/../../htdocs/no-ssl/files',
+        //'folder': '/Documents/htdocs/no-ssl/files', (for Seda's configuration)
 	'auto': false,
         'multi': false,
 	'removeCompleted' : true,
