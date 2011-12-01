@@ -617,7 +617,7 @@ elsif ( $anaysis_method eq "sdds_graph" ) {
 }
 
 else {
-    print "there was an error." . "\n";
+    print "There was an error." . "\n";
 }
 
 
