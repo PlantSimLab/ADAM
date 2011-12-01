@@ -1,247 +1,318 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
 "http://www.w3.org/TR/html4/strict.dtd">
 <html lang="en">
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-		<title>
-			ADAM - Analysis of Dynamic Algebraic Models
-		</title>
-		<link rel="stylesheet" href="/adam_style.css" type="text/css" media="screen">
-		<link href="/uploadify/uploadify.css" type="text/css" rel="stylesheet">
-		<script type="text/javascript" src="/jquery-1.4.4.min.js">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>
+ADAM - Analysis of Dynamic Algebraic Models
+</title>
+<link rel="stylesheet" href="/adam_style.css" type="text/css" media="screen">
+<link href="/uploadify/uploadify.css" type="text/css" rel="stylesheet">
+<script type="text/javascript" src="/jquery-1.4.4.min.js">
 </script>
-		<script type="text/javascript" src="/uploadify/swfobject.js">
+<script type="text/javascript" src="/uploadify/swfobject.js">
 </script>
-		<script type="text/javascript" src="/uploadify/jquery.uploadify.v2.1.4.min.js">
+<script type="text/javascript" src="/uploadify/jquery.uploadify.v2.1.4.min.js">
 </script>
-		<script type="text/javascript" src="/adam.js">
+<script type="text/javascript" src="/adam.js">
 </script>
 <script type="text/javascript">
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-11219893-8']);
-  _gaq.push(['_trackPageview']);
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-11219893-8']);
+_gaq.push(['_trackPageview']);
 
-  (function() {
-   var ga = document.createElement('script'); ga.type =
-   'text/javascript'; ga.async = true;
-   ga.src = ('https:' == document.location.protocol ?
-     'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-   var s = document.getElementsByTagName('script')[0];
-   s.parentNode.insertBefore(ga, s);
-   })();
+(function() {
+var ga = document.createElement('script'); ga.type =
+'text/javascript'; ga.async = true;
+ga.src = ('https:' == document.location.protocol ?
+'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+var s = document.getElementsByTagName('script')[0];
+s.parentNode.insertBefore(ga, s);
+})();
 
 </script>
-	</head>
-	<body>
-		<div id="header"></div>
-		<div id="main">
-			<div class="nav"></div>
-			<div>
-				ADAM uses a combination of simulation and mathematical algorithms to analyze the dynamics of discrete biological systems. It can analyze bounded <b>Petri-nets</b> (generated with <a href="http://www-dssz.informatik.tu-cottbus.de/software/snoopy.html">Snoopy</a>), <b>Logical Models</b> (in <a href="http://gin.univ-mrs.fr/">GINSim</a> format), <b>Polynomial Dynamical Systems (PDS)</b>, and <b>Probabilistic Boolean (or multistate) Networks</b>. For small enough networks (deterministic or probabilistic), ADAM simulates the complete state space of the model and finds all attractors (steady states and limit cycles) together with statistics about the size of components. For larger networks, ADAM computes fixed points for both deterministic and probabilistic networks, and limit cycle of the length specified by the user for deterministic networks. You can follow our <a href="steptutorial.pl">step-by-step tutorial</a> or read the <a href="userGuide.pl" target="_blank">user guide</a>. It is important that you follow the format specified in the guide. Make your selections and provide inputs (if any) in the form below and click <i>Analyze</i> to run the software. To generate a model from experimental time course data, you can use <a href="http://polymath.vbi.vt.edu/polynome">Polynome</a>.<br>
-				<br>
-			</div>
-			<form>
-				<table>
-					<tr valign="top">
-						<td class="titleBox" colspan="2">
-							<strong><font color="black">1)</font></strong>
-						</td>
-					</tr>
-					<tr class="lines">
-						<td colspan="2"></td>
-					</tr>
-					<tr valign="top">
-						<td>
-							<b>I want to</b><br>
-							<input type="radio" name="choice_box" value="build">build a new model from experimental data;<br>
-							<input type="radio" name="choice_box" value="analyze" checked="checked">analyze an existing model;<br>
-							<input type="radio" name="choice_box" value="control">find optimal control for an existing model.
-						</td>
-						<td>
-							<div class="explain" id="explain_build">
-								<b>Build new model</b>: Build a new model based on your experimental data.
-							</div>
-							<div class="explain" id="explain_analyze">
-								<b>Analyze existing model</b>: Enter an existing model here. You can then analyze it for its long term behavior, and for small enough models obtain a picture of the phase space.
-							</div>
-							<div class="explain" id="explain_control">
-								<b>Heuristic Control</b>: Experimental feature: find the optimal knock out strategy for a given network. You might first need to build your network from experimental data or convert a Petri net or logical model to a polynomial dynamical system.
-							</div>
-						</td>
-					</tr>
-					<tr valign="top">
-						<td class="titleBox" colspan="2">
-							<strong><font color="black">2)</font></strong>
-						</td>
-					</tr>
-					<tr class="lines">
-						<td colspan="2"></td>
-					</tr>
-					<tr valign="top">
-						<td>
-							<div class="input" id="build">
-								Build your model from transition tables.<br>
-								<input type="checkbox" name="continuous" value="continuous">Continuous
-							</div>
-							<div class="input" id="analyze">
-								<strong>Model Type</strong><br>
-								<input type="radio" name="inputType" value="PDS" checked="checked">Polynomial Dynamical System (PDS)<br>
-								<input type="radio" name="inputType" value="BN">Boolean Network<br>
-								<input type="radio" name="inputType" value="pPDS">Probabilistic Polynomial Dynamical Systems (pPDS)<br>
-								<!--<input type="radio" name="inputType" value="PBN">Probabilistic Boolean Network (PBN)<br> -->
-								 <input type="radio" name="inputType" value="Petrinet">Petri Net (Snoopy file)<br>
-								<input type="radio" name="inputType" value="GINsim">Logical Model (GINsim file)<br>
-							</div>
-							<div class="input" id="control">
-								Optimal control<br>
-								Please enter the desired steady state:<br>
-								<input type="text" name="dreamss" value="? ? ? ? ? ? ? 0 ? ? ? ? ? ? ? ? ? ? ? ?" label="Desired Steady State"><br>
-								Please Enter Weights for Each Node:<br>
-								<input type="text" name="weights" value="1 1 1 1 1 1 1 N 1 1 1 1 1 N 1 1 1 1 1 1" label="Weights"><br>
-							</div><br>
-							<div class="input optionfield pvalue">
-								Enter number of states per node: <input type="text" name="p_value" id="p_value" value="2" size="2" maxlength="2"><br>
-							</div>
-							<div class="input optionfield" id="kbound">
-								Enter the k-bound: <input type="text" name="k_bound" value="2" size="2" maxlength="2"><br>
-							</div>
-						</td>
-						<td>
-							<div class="explain" id="explain_mt_build">
-								Enter the transition table based on your experimental data for each variable to obtain a polynomial dynamical system. A table, where the top row consists of the names of the variables, the other rows are the inputs states at time t, and the right most column is the output value at time (t+1). Missing rows are assumed to have output value 0. Entries should be separated by white space. When <i>continuous</i> is checked, there will not be any <i>jumps</i> in the generated model, i.e., every variable changes its value by at most 1 at every time step.
-							</div>
-							<div class="explain" id="explain_mt_analyze">
-								You can enter a polynomial dynamical systems (PDS), a probabilistic polynomial dynamical systems (or probabilistic Boolean network), a Petri net generated with Snoopy, or a logical model generated with GINsim.<br>
-								<div class="explain type" id="explain_BN">
-									<b>Boolean network</b>: Converts GINsim file to a polynomial system that ADAM will then proceed to analyze. Also outputs the variables and the converted system. Files must be ginml files, if you have an archive (zginml), please unzip it first.
-								</div>
-								<div class="explain type" id="explain_GINsim">
-									<b>GINsim File</b>: Converts GINsim file to a polynomial system that ADAM will then proceed to analyze. Also outputs the variables and the converted system. Files must be ginml files, if you have an archive (zginml), please unzip it first.
-								</div>
-								<div class="explain type" id="explain_PDS">
-									<b>PDS</b>: Polynomial Dynamical System. Operations are interpreted as polynomial addition and multiplication.
-								</div>
-								<!--<b>PBN</b>: Probabilistic Boolean Networks. Each nodes has several update rules, at each iteration, one is picked at random<br>-->
-								<div class="explain type" id="explain_pPDS">
-									<b>pPDS</b>: Probabilistic Polynomial Dynamical System. Each nodes has several update rules, at each iteration, one is picked at random
-								</div>
-								<div class="explain type" id="explain_Petrinet">
-									<b>Petri Net</b>: A (standard) Petri net generated with Snoopy. The Petri net must be <b><i>k</i>-bounded</b>, and <i>k</i> must be entered on the left. This is an experimental feature, if you want to analyze the dynamics of the network, please copy and paste the generated PDS into ADAM.
-								</div>
-							</div>
-							<div class="explain" id="explain_mt_control">
-								Please enter the gene regulatory network as a polynomial dynamical system. ADAM will find the optimal combination of knockouts (that is those with the least cost where the cost is dependent on the inputted weights) using an adaptive genetic algorithm. Please enter the desired steady state and the weight for each respective gene (in numerical order e.g. the first entry would correspond to the first gene) separated by white space.
-							</div>
-							<div class="input optionfield pvalue">
-								<br>
-								The <i>number of states</i> indicates the maximum number of different discrete values your variables can take on. This number must be a prime number. If the number of discrete values is not a prime number, please enter the next largest prime.<br>
-							</div>
-						</td>
-					</tr>
-					<tr valign="top">
-						<td class="titleBox" colspan="2">
-							<strong><font color="black">3)</font></strong>
-						</td>
-					</tr>
-					<tr class="lines">
-						<td colspan="2"></td>
-					</tr>
-					<tr>
-						<td>
-							<font size="2"><strong>Model Input:</strong> <input type="file" id="upload_file" name="upload_file" value="what"> 
-							<textarea name="edit_functions" rows="8" cols="50" id="inputArea">
-</textarea></font>
-						</td>
-						<td>
-							Upload a file or enter it directly into the text area.
-						</td>
-					</tr>
-					<tr valign="top" class="input option">
-						<td class="titleBox" colspan="2">
-							<strong><font color="black">4)</font></strong>
-						</td>
-					</tr>
-					<tr class="lines input option">
-						<td colspan="2"></td>
-					</tr>
-					<tr class="input option">
-						<td colspan="2">
-							<div class="input option" id="option">
-								<strong>What analysis would you like to run?</strong><br>
-								<input type="radio" name="anaysis_method" value="Simulation">Simulation of all trajectories (&lt; 20 nodes )<br>
-								<div class="input optionfield" id="Algorithms">
-									<input type="radio" name="anaysis_method" value="Algorithms" checked="checked">Algorithms (suggested for nodes &gt; 20)
-								</div>
-								<div class="input optionfield" id="conjunctive">
-									<input type="radio" name="anaysis_method" value="Conjunctive">The network I entered is conjuntive (or disjunctive) and I would like to make use of an efficient algorithm for these kind of networks.
-								</div>
-								<div class="optionfield">
-									Would you like to see a<br>
-									<input class="input option" type="checkbox" name="depgraph" value="Dependency graph" checked>Dependency graph <select name="DGformat">
-										<option value="*.gif">
-											*.gif
-										</option>
-										<option value="*.jpg">
-											*.jpg
-										</option>
-										<option value="*.png">
-											*.png
-										</option>
-										<option value="*.ps">
-											*.ps
-										</option>
-									</select><br>
-									<div class='input option' id="statespace">
-										<input type="checkbox" name="statespace" value="State space graph" checked>State space graph <select name="SSformat">
-											<option value="*.gif">
-												*.gif
-											</option>
-											<option value="*.jpg">
-												*.jpg
-											</option>
-											<option value="*.png">
-												*.png
-											</option>
-											<option value="*.ps">
-												*.ps
-											</option>
-										</select>
-									</div>
-								</div>
-								<div class='input option optionfield' id="feedback">
-									<input type="checkbox" name="feedback" value="Feedback Circuit">Feedback Circuit<br>
-								</div>
-								<div class='input option optionfield' name="probabilities" id="probabilities">
-									<input type="checkbox" name="stochastic" value="Print probabilities" checked label="Print probabilities">Print probabilities<br>
-								</div>
-							</div>
-						</td>
-					</tr>
-					<tr valign="top">
-						<td class="titleBox" colspan="2">
-							<strong><font color="black"></font></strong>
-						</td>
-					</tr>
-					<tr class="lines">
-						<td colspan="2"></td>
-					</tr>
-				</table>
-				<center>
-					<button type="button" id="analyze">Analyze</button>
-				</center>
-			</form>
-			<div id="result"></div>
-		</div>
-		<div class="nav"></div>
-		<div id="footer"></div>
-		<script type="text/javascript">
+</head>
+<body>
+<div id="header"></div>
+<div id="main">
+<div class="nav"></div>
+<div>
+   ADAM uses a combination of simulation and mathematical algorithms
+  to analyze the dynamics of discrete biological systems. It can
+  analyze bounded <b>Petri-nets</b> (generated with <a
+  href="http://www-dssz.informatik.tu-cottbus.de/software/snoopy.html">Snoopy</a>),
+  <b>Logical Models</b> (in <a
+  href="http://gin.univ-mrs.fr/">GINSim</a> format), <b>Polynomial Dynamical Systems (PDS)</b>, <b>Probabilistic Boolean (or multistate) Networks</b>, and <b>Stochastic Discrete Dynamical Systems (SDDS)</b>. For small enough networks (deterministic or probabilistic), ADAM simulates the complete state space of the model and finds all attractors (steady states and limit cycles) together with statistics about the size of components. For larger networks, ADAM computes fixed points for both deterministic and probabilistic networks, and limit cycle of the length specified by the user for deterministic networks. You can follow our <a href="steptutorial.pl">step-by-step tutorial</a> or read the <a href="userGuide.pl" target="_blank">user guide</a>. It is important that you follow the format specified in the guide. Make your selections and provide inputs (if any) in the form below and click <i>Analyze</i> to run the software. To generate a model from experimental time course data, you can use <a href="http://polymath.vbi.vt.edu/polynome">Polynome</a>.<br>
+  <br>
+</div>
+<form>
+<table>
+  <tr valign="top">
+    <td class="titleBox" colspan="2">
+      <strong><font color="black">1)</font></strong>
+    </td>
+  </tr>
+  <tr class="lines">
+    <td colspan="2"></td>
+  </tr>
+  <tr valign="top">
+    <td>
+      <b>I want to</b><br>
+      <input type="radio" name="choice_box" value="build">build a new model from experimental data;<br>
+      <input type="radio" name="choice_box" value="analyze" checked="checked">analyze an existing model;<br>
+      <input type="radio" name="choice_box" value="control">find optimal control for an existing model.
+    </td>
+    <td>
+    <div class="explain" id="explain_build">
+      <b>Build new model</b>: Build a new model based on your experimental data.
+    </div>
+    <div class="explain" id="explain_analyze">
+      <b>Analyze existing model</b>: Enter an existing model here. You can then analyze it for its long term behavior, and for small enough models obtain a picture of the phase space.
+    </div>
+    <div class="explain" id="explain_control">
+      <b>Heuristic Control</b>: Experimental feature: find the optimal knock out strategy for a given network. You might first need to build your network from experimental data or convert a Petri net or logical model to a polynomial dynamical system.
+    </div>
+    </td>
+  </tr>
+  <tr valign="top">
+    <td class="titleBox" colspan="2">
+      <strong><font color="black">2)</font></strong>
+    </td>
+  </tr>
+  <tr class="lines">
+    <td colspan="2"></td>
+  </tr>
+  <tr valign="top">
+    <td>
+    <div class="input" id="build">
+      Build your model from transition tables.<br>
+      <input type="checkbox" name="continuous" value="continuous">Continuous
+    </div>
+    <div class="input" id="analyze">
+      <strong>Model Type</strong><br>
+      <input type="radio" name="inputType" value="PDS" checked="checked">Polynomial Dynamical System (PDS)<br>
+      <input type="radio" name="inputType" value="BN">Boolean Network<br>
+      <input type="radio" name="inputType" value="pPDS">Probabilistic Polynomial Dynamical Systems (pPDS)<br>
+      <!--<input type="radio" name="inputType" value="PBN">Probabilistic Boolean Network (PBN)<br> -->
+      <input type="radio" name="inputType" value="Petrinet">Petri Net (Snoopy file)<br>
+      <input type="radio" name="inputType" value="GINsim">Logical Model (GINsim file)<br>
+
+      <input type="radio"name="inputType"value="SDDS">Stochastic Discrete Dynamical Systems (SDDS)<br>
+
+    </div>
+    <div class="input" id="control">
+      Optimal control<br>
+      Please enter the desired steady state:<br>
+      <input type="text" name="dreamss" value="? ? ? ? ? ? ? 0 ? ? ? ? ? ? ? ? ? ? ? ?" label="Desired Steady State"><br>
+      Please Enter Weights for Each Node:<br>
+      <input type="text" name="weights" value="1 1 1 1 1 1 1 N 1 1 1 1 1 N 1 1 1 1 1 1" label="Weights"><br>
+    </div><br>
+    <div class="input optionfield pvalue">
+      Enter number of states per node: <input type="text" name="p_value" id="p_value" value="2" size="2" maxlength="2"><br>
+    </div>
+    <div class="input optionfield" id="kbound">
+      Enter the k-bound: <input type="text" name="k_bound" value="2" size="2" maxlength="2"><br>
+    </div>
+    </td>
+    <td>
+    <div class="explain" id="explain_mt_build">
+      Enter the transition table based on your experimental data for each variable to obtain a polynomial dynamical system. A table, where the top row consists of the names of the variables, the other rows are the inputs states at time t, and the right most column is the output value at time (t+1). Missing rows are assumed to have output value 0. Entries should be separated by white space. When <i>continuous</i> is checked, there will not be any <i>jumps</i> in the generated model, i.e., every variable changes its value by at most 1 at every time step.
+    </div>
+    <div class="explain" id="explain_mt_analyze">
+      You can enter a polynomial dynamical systems (PDS), a probabilistic polynomial dynamical systems (or probabilistic Boolean network), a Petri net generated with Snoopy, a logical model generated with GINsim, or a stochastic discrete dynamical systems (SDDS).<br>
+    <div class="explain type" id="explain_BN">
+      <b>Boolean network</b>: Converts GINsim file to a polynomial system that ADAM will then proceed to analyze. Also outputs the variables and the converted system. Files must be ginml files, if you have an archive (zginml), please unzip it first.
+    </div>
+    <div class="explain type" id="explain_GINsim">
+      <b>GINsim File</b>: Converts GINsim file to a polynomial system that ADAM will then proceed to analyze. Also outputs the variables and the converted system. Files must be ginml files, if you have an archive (zginml), please unzip it first.
+    </div>
+    <div class="explain type" id="explain_PDS">
+      <b>PDS</b>: Polynomial Dynamical System. Operations are interpreted as polynomial addition and multiplication.
+    </div>
+    <!--<b>PBN</b>: Probabilistic Boolean Networks. Each nodes has several update rules, at each iteration, one is picked at random<br>-->
+    <div class="explain type" id="explain_pPDS">
+      <b>pPDS</b>: Probabilistic Polynomial Dynamical System. Each nodes has several update rules, at each iteration, one is picked at random
+    </div>
+    <div class="explain type" id="explain_Petrinet">
+      <b>Petri Net</b>: A (standard) Petri net generated with Snoopy. The Petri net must be <b><i>k</i>-bounded</b>, and <i>k</i> must be entered on the left. This is an experimental feature, if you want to analyze the dynamics of the network, please copy and paste the generated PDS into ADAM.
+    </div>
+    
+    <div class="explain type" id="explain_SDDS">
+      <br>
+      <b>SDDS</b>: Stochastic Discrete Dynamical Systems is a useful tool to generate and analyze mathematical models in systems biology, and it is suitable for cell population simulation. The inputs for SDDS: a file for the transition table and propensity matrix, an initial state, nodes of interest, and the number of states. <a href="models/SDDSexamples/StochasticLambdaPhageLysogeny.html"target="_blank">See an example...</a> 
+    </div>
+    
+    </div>
+    <div class="explain" id="explain_mt_control">
+      Please enter the gene regulatory network as a polynomial dynamical system. ADAM will find the optimal combination of knockouts (that is those with the least cost where the cost is dependent on the inputted weights) using an adaptive genetic algorithm. Please enter the desired steady state and the weight for each respective gene (in numerical order e.g. the first entry would correspond to the first gene) separated by white space.
+    </div>
+    <div class="input optionfield pvalue">
+      <br>
+      The <i>number of states</i> indicates the maximum number of different discrete values your variables can take on. This number must be a prime number. If the number of discrete values is not a prime number, please enter the next largest prime.<br>
+    </div>
+    </td>
+  </tr>
+  <tr valign="top">
+    <td class="titleBox" colspan="2">
+      <strong><font color="black">3)</font></strong>
+    </td>
+  </tr>
+  <tr class="lines">
+    <td colspan="2"></td>
+  </tr>
+  <tr>
+    <td>
+      <font size="2"><strong>Model Input:</strong><br><br>
+
+    <div class="file_explanation"id="file_exp_sdds">
+      <br>
+      <font size="3"> File for the transition table (.txt):
+    </div>
+      
+    <input type="file" id="upload_file" name="upload_file"value="what">
+    
+    <br>
+      <textarea name="edit_functions" rows="8" cols="50" id="inputArea">
+      </textarea></font>
+      
+    <div class="entries"id="sdds_entries">
+       <font size="3">
+      <br>
+      File for the propensity matrix (.txt): <input type="file" id="upload_file_pm" name="upload_file_pm" value="what"><br>
+      <br>
+      Initial state (seperated by a space) : <input type="text"name="initialState"id="initialState" value="0 1" size="32" maxlength="100"><br>
+      <br>
+      Nodes of interest : <input type="text"name="interestingNodes"value="1, 2" size="15" maxlength="15"><br>
+      <br>
+      Number of states : <input type="text"name="num_states"value="2"size="5" maxlength="2"><br>
+      <br>
+    </div>
+    
+    </td>
+    <td>
+      
+    <div class="explain" id="explain_mi">
+      Upload a file or enter it directly into the text area.
+    </div>
+
+    <div class="explain" id="explain_mi_sdds">
+      <br>
+      The <b>transition table</b> (<a href="example_tt.txt" target="_blank">e.g.</a>) must be complete, i.e. it must contain all possible states. In each row, the states must be seperated by an arrow, -> , and each variable in a state must be seperated by a space. The format for each line is: 0 0 -> 1 0.<br>
+      <br>
+      In the <b>propensity matrix</b> (<a href="example_pp.txt" target="_blank">e.g.</a>), the number of rows must be 2 (the first row is for activation and the second row is for degredation), the number of columns must be the number of nodes, and each propensity entries must be seperated by a space. If you prefer not to upload a file for it, then all probability entries will be 0.5 as default. The format for each row is: 0.1 0.95. <br>
+      <br>
+      The <b>initial state</b> is the starting point for all trajectories and simulations, and it must be separated by a space. The format is: 0 1. <br>
+      <br>
+      The <b>nodes of interest</b> are the ones of which you would like to see the behavior in the plot of cell population simulation. It must be seperated by a comma and the number of these nodes cannot be more than 5. The format is: 1, 2. <br> 
+      <br>
+      The <b>number of states</b> which decides how many values a state can get must be prime not more than 20. <br>
+      <br>
+    </div>
+    
+    </td>
+  </tr>
+  <tr valign="top" class="input option">
+    <td class="titleBox" colspan="2">
+      <strong><font color="black">4)</font></strong>
+    </td>
+  </tr>
+  <tr class="lines input option">
+    <td colspan="2"></td>
+  </tr>
+  <tr class="input option">
+    <td colspan="2">
+    <div class="input option" id="option">
+      <strong>What analysis would you like to run?</strong><br>
+
+    <div class="input optionfield" id="Simulation">
+      <input type="radio" name="anaysis_method" value="Simulation">Simulation of all trajectories (&lt; 20 nodes )<br>
+    </div>
+      
+    <div class="input optionfield" id="Algorithms">
+      <input type="radio" name="anaysis_method" value="Algorithms" checked="checked">Algorithms (suggested for nodes &gt; 20)
+    </div>
+    <div class="input optionfield" id="conjunctive">
+      <input type="radio" name="anaysis_method" value="Conjunctive">The network I entered is conjuntive (or disjunctive) and I would like to make use of an efficient algorithm for these kind of networks.
+    </div>
+
+    <div class="input optionfield" id="sdds_graph">
+      <input type="radio" name="anaysis_method" value="sdds_graph">Plot of cell population simulation and Histogram for probability distribution
+    </div>
+    
+    <div class="optionfield">
+      Would you like to see a<br>
+      <input class="input option" type="checkbox" name="depgraph" value="Dependency graph" checked>Dependency graph <select name="DGformat">
+	<option value="*.gif">
+	  *.gif
+	  </option>
+	<option value="*.jpg">
+	  *.jpg
+	  </option>
+	<option value="*.png">
+	  *.png
+	  </option>
+	<option value="*.ps">
+	  *.ps
+	  </option>
+      </select><br>
+    <div class='input option' id="statespace">
+      <input type="checkbox" name="statespace" value="State space graph" checked>State space graph <select name="SSformat">
+	<option value="*.gif">
+	  *.gif
+	  </option>
+	<option value="*.jpg">
+	  *.jpg
+	  </option>
+	<option value="*.png">
+	  *.png
+	  </option>
+	<option value="*.ps">
+	  *.ps
+	  </option>
+      </select>
+    </div>
+    </div>
+    <div class='input option optionfield' id="feedback">
+      <input type="checkbox" name="feedback" value="Feedback Circuit">Feedback Circuit<br>
+    </div>
+    <div class='input option optionfield' name="probabilities" id="probabilities">
+      <input type="checkbox" name="stochastic" value="Print probabilities" checked label="Print probabilities">Print probabilities<br>
+    </div>
+
+    <div class='input option optionfield' name="SteadyStates" id="SteadyStates">
+      <input type="checkbox" name="SteadyStates" value="Print Steady States">Print Steady States<br>
+    </div>
+    <div class='input option optionfield' name="TransitionMatrix" id="TransitionMatrix"> <input type="checkbox" name="TransitionMatrix" value="Print Transition Matrix">Print Probability Transition Matrix<br>
+    </div>
+    
+    </div>
+    </td>
+  </tr>
+  <tr valign="top">
+    <td class="titleBox" colspan="2">
+      <strong><font color="black"></font></strong>
+    </td>
+  </tr>
+  <tr class="lines">
+    <td colspan="2"></td>
+  </tr>
+</table>
+<center>
+<button type="button" id="analyze">Analyze</button>
+</center>
+</form>
+<div id="result"></div>
+</div>
+<div class="nav"></div>
+<div id="footer"></div>
+<script type="text/javascript">
 var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-		document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-		</script><script type="text/javascript">
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script><script type="text/javascript">
 try{
-		var pageTracker = _gat._getTracker("UA-11219893-5");
-		pageTracker._trackPageview();
-		} catch(err) {}
-		</script>
-	</body>
+var pageTracker = _gat._getTracker("UA-11219893-5");
+pageTracker._trackPageview();
+} catch(err) {}
+</script>
+</body>
 </html>
