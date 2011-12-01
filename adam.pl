@@ -80,7 +80,7 @@ sub create_input_function {
   
   use Cwd;
   $cwd = getcwd();
-  `mkdir -p $cwd/../../Documents/htdocs/no-ssl/files`;
+  `mkdir -p $cwd/../..htdocs/no-ssl/files`;
   $filename = "$clientip.functionfile.txt";
   
   if ($upload_file) {
@@ -88,8 +88,8 @@ sub create_input_function {
     say "--" . $upload_file . "--" if ($DEBUG);
     
     #system("ls");
-    say "cp ../../Documents/htdocs/no-ssl/files/$upload_file $filename <br>	" if ($DEBUG);
-    system("cp ../../Documents/htdocs/no-ssl/files/$upload_file $filename");
+    say "cp ../../htdocs/no-ssl/files/$upload_file $filename <br>	" if ($DEBUG);
+    system("cp ../../htdocs/no-ssl/files/$upload_file $filename");
     
     if ($choice_box eq 'analyze'
 	&& (   $format_box eq 'PDS'
@@ -224,15 +224,15 @@ sub SDDSerrorchecking_and_set_flags {
 }
 
 
-`mkdir -p ../../Documents/htdocs/no-ssl`;
-`touch ../../Documents/htdocs/no-ssl/access`;
+`mkdir -p ../../htdocs/no-ssl`;
+`touch ../../htdocs/no-ssl/access`;
 
 #get the clients ip address
 $clientip = $ENV{'REMOTE_ADDR'};
 $clientip =~ s/\./\-/g;
 ( $sec, $min, $hr ) = localtime();
 $clientip = $clientip . '-' . $sec . '-' . $min . '-' . $hr;
-$clientip = '../../Documents/htdocs/no-ssl/files/' . $clientip;
+$clientip = '../../htdocs/no-ssl/files/' . $clientip;
 
 #$clientip = $sec.'-'.$min.'-'.$hr;
 
@@ -332,12 +332,12 @@ given ($choice_box) {
 	      
 	      use Cwd;
 	      $cwd_sdds = getcwd();
-	      `mkdir -p $cwd_sdds/../../Documents/htdocs/no-ssl/files`;
+	      `mkdir -p $cwd_sdds/../../htdocs/no-ssl/files`;
 	      
 	      # checks if a file was uploaded for propensity matrix 
 	      if ($upload_file_pm) {
 		$filename_pm = "$clientip.pm.txt";
-		system("cp ../../Documents/htdocs/no-ssl/files/$upload_file_pm $filename_pm");
+		system("cp ../../htdocs/no-ssl/files/$upload_file_pm $filename_pm");
 		`perl -pi -e 's/\r//g' "$clientip.pm.txt"`;
 	      }
 	      else {
@@ -347,7 +347,7 @@ given ($choice_box) {
 	      # checks if a file was uploaded for transition table
 	      if ($upload_file) {
 		$filename_tt = "$clientip.tt.txt";
-		system("cp ../../Documents/htdocs/no-ssl/files/$upload_file $filename_tt");
+		system("cp ../../htdocs/no-ssl/files/$upload_file $filename_tt");
 		`perl -pi -e 's/\r//g' "$clientip.tt.txt"`;
 	      }
 	      else {
