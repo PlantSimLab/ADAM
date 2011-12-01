@@ -80,7 +80,11 @@ sub create_input_function {
   
   use Cwd;
   $cwd = getcwd();
+<<<<<<< HEAD
   `mkdir -p $cwd/../..htdocs/no-ssl/files`;
+=======
+  `mkdir -p $cwd/../../htdocs/no-ssl/files`;
+>>>>>>> 0fc4f7c7c6818f4955b16bb5b48e8558b3fb51dc
   $filename = "$clientip.functionfile.txt";
   
   if ($upload_file) {
@@ -617,7 +621,7 @@ elsif ( $anaysis_method eq "sdds_graph" ) {
 }
 
 else {
-    print "there was an error." . "\n";
+    print "There was an error." . "\n";
 }
 
 
