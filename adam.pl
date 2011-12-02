@@ -240,10 +240,10 @@ $clientip = '../../htdocs/no-ssl/files/' . $clientip;
 
 #$clientip = $sec.'-'.$min.'-'.$hr;
 
-#open(ACCESS, ">>../../Documents/htdocs/no-ssl/access") or die("Failed to open file for writing");
+#open(ACCESS, ">>../../htdocs/no-ssl/access") or die("Failed to open file for writing");
 #flock(ACCESS, LOCK_EX) or die ("Could not get exclusive lock $!");
 #print ACCESS ($ENV{REMOTE_ADDR});
-#system("date >>../../Documents/htdocs/no-ssl/access");
+#system("date >>../../htdocs/no-ssl/access");
 #flock(ACCESS, LOCK_UN) or die ("Could not unlock file $!");
 #close(ACCESS);
 
