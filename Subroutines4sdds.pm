@@ -4,8 +4,8 @@
 
 package Subroutines4sdds;
 
-use strict;
-use warnings;
+#use strict;
+#use warnings;
 
 #use Data::Dumper;
 use List::Util qw [min];
