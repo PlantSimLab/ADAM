@@ -3,6 +3,9 @@
 # Revision Date: 11/28/2011
 
 #!/usr/bin/perl
+
+print "---I am in SDDS.pl! <br>";
+
 use strict;
 use warnings;
 
