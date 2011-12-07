@@ -3,7 +3,7 @@
 ## Hussein Vastani
 ## Franziska Hinkelmann
 ## Bonbons
-## September 2011
+## November 2011
 
 use v5.10;
 use CGI qw/:standard/;    # load CGI routines
@@ -44,12 +44,30 @@ $updsequ_flag  = "0";
 $weights       = param('weights');
 $dreamss       = param('dreamss');
 
+
+# Declaration and initialization of (extra) parameters for SDDS
+$upload_file_pm = param('upload_file_pm');
+$initialState = "\"" . param('initialState') . "\"";
+$interestingNodes = "\"" . param('interestingNodes') . "\"";
+$num_states = param('num_states');
+$steadyStates = param('SteadyStates');
+$transitionMatrix = param('TransitionMatrix');
+$flag4ss = 0;
+$flag4tm = 0;
+
+
 if ($choice_box eq "") {
 	say '<a href="http://adam.vbi.vt.edu"/>ADAM has moved.</a> Please update your bookmarks';
 	exit 1;
 }
+
 # this function reads input functions from file or text area and writes the input functions into $clientip.functionfile.txt
 sub create_input_function {
+
+  # assures that the program will do nothing for SDDS and continue the algorithm
+  if ($format_box eq 'SDDS') {
+    return 0;
+  }
 
     #$DEBUG=1;
     print "Clientip $clientip \n<br>" if ($DEBUG);
@@ -169,6 +187,36 @@ sub set_update_type() {
     }
 }
 
+
+# Does error checking and sets the flags in SDDS
+sub SDDSerrorchecking_and_set_flags {
+
+  # error checking
+
+  if ($initialState eq "\"\"") {
+    print "<br> ERROR: The initial state must be specified for the system. Please check the initial state. <br>";
+    exit;
+  }
+  if ($interestingNodes eq "\"\"") {
+    print "<br> ERROR: The nodes of interest must be specified for the system. Please check the nodes of interest. <br>";
+    exit;
+  }
+  if ($num_states eq "") {
+    print "<br> ERROR: The number of states must be specified for the system. Please check the number of states. <br>";
+    exit;
+  }
+
+  # set flags
+
+  if ($steadyStates eq "Print Steady States") {
+    $flag4ss = 1;
+  }
+  if ($transitionMatrix eq "Print Transition Matrix") {
+    $flag4tm = 1;
+  }
+}
+
+
 `mkdir -p ../../htdocs/no-ssl`;
 `touch ../../htdocs/no-ssl/access`;
 
@@ -268,6 +316,62 @@ given ($choice_box) {
             when (/(PDS)|(pPDS)/) {
 
             }
+
+	    when (/(SDDS)/){
+	      
+	      SDDSerrorchecking_and_set_flags();
+	      
+	      use Cwd;
+	      $cwd_sdds = getcwd();
+	      `mkdir -p $cwd_sdds/../../htdocs/no-ssl/files`;
+	      
+	      # checks if a file was uploaded for propensity matrix 
+	      if ($upload_file_pm) {
+		$filename_pm = "$clientip.pm.txt";
+		system("cp ../../htdocs/no-ssl/files/$upload_file_pm $filename_pm");
+		`perl -pi -e 's/\r//g' "$clientip.pm.txt"`;
+	      }
+	      else {
+		print "<br>FYI: No file was uploaded for the propensity matrix, so uniform distribution will be used. <br>";
+	      }
+	      
+	      # checks if a file was uploaded for transition table
+	      if ($upload_file) {
+		$filename_tt = "$clientip.tt.txt";
+		system("cp ../../htdocs/no-ssl/files/$upload_file $filename_tt");
+		`perl -pi -e 's/\r//g' "$clientip.tt.txt"`;
+	      }
+	      else {
+		print "<br>ERROR: There must be a file uploaded for a (complete) transition table. <br>";
+		exit;
+	      }
+	      
+	      #$DEBUG = 1;
+	      
+	      if ($DEBUG) {
+		print "<br> trans. table = $upload_file <br>";
+		print "<br> prop. matrix = $upload_file_pm <br>";
+		print "<br> is = $initialState <br>";
+		print "<br> int. nodes = $interestingNodes <br>";
+		print "<br> state = $num_states <br>";
+		print "<br> ss = $steadyStates <br>";
+		print "<br> tm = $transitionMatrix <br>";
+		print "<br> flag4ss = $flag4ss <br>";
+		print "<br> flag4tm = $flag4tm <br>";
+	      }
+	      
+	      $plot_file = "$clientip.plot";
+	      $histogram_file = "$clientip.histogram";
+	      $tm_file = "$clientip.tm";
+	      
+	      if ($upload_file_pm) {
+		system ("perl SDDS.pl -t $filename_tt -p $filename_pm -i $initialState -n $interestingNodes -s $num_states -f $flag4ss -m $flag4tm -g $plot_file -h $histogram_file -x $tm_file");
+	      }
+	      else {
+		system ("perl SDDS.pl -t $filename_tt -i $initialState -n $interestingNodes -s $num_states -f $flag4ss -m $flag4tm -g $plot_file -h $histogram_file -x $tm_file");
+	      }
+	    } # end of /SDDS/
+
             default {
                 say 'Invalid choice of model, there was an error.'
             }
@@ -481,6 +585,20 @@ elsif ( $anaysis_method eq "Simulation" ) {
 
     }
 }
+
+elsif ( $anaysis_method eq "sdds_graph" ) {
+
+  if (-e "$clientip.plot.png"){ 
+    print "<br><A href=\"$clientip.plot.png\" target=\"_blank\"><font color=\"#226677\"><i>Click here to see the plot of cell population simulation.</i></font></A><br>";
+  }
+  if (-e "$clientip.histogram.png") {
+    print "<br><A href=\"$clientip.histogram.png\" target=\"_blank\"><font color=\"#226677\"><i>Click here to see the histogram for probability distribution.</i></font></A><br>";
+  }
+  if (-e "$clientip.tm.txt") {
+    print "<br><A href=\"$clientip.tm.txt\" target=\"_blank\"><font color=\"#226677\"><i>Click here to see the probability transition matrix of the system.</i></font></A><br>";
+  }
+}
+
 else {
     print "there was an error." . "\n";
 }
