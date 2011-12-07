@@ -3,7 +3,10 @@
 ## Hussein Vastani
 ## Franziska Hinkelmann
 ## Bonbons
+<<<<<<< HEAD
 
+=======
+>>>>>>> 2aad135407409bfa2eef5bc581bd0b6aa10634d2
 ## November 2011
 
 use v5.10;
@@ -46,7 +49,10 @@ $weights       = param('weights');
 $dreamss       = param('dreamss');
 
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 2aad135407409bfa2eef5bc581bd0b6aa10634d2
 # Declaration and initialization of (extra) parameters for SDDS
 $upload_file_pm = param('upload_file_pm');
 $initialState = "\"" . param('initialState') . "\"";
@@ -58,12 +64,16 @@ $flag4ss = 0;
 $flag4tm = 0;
 
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 2aad135407409bfa2eef5bc581bd0b6aa10634d2
 if ($choice_box eq "") {
   say '<a href="http://adam.vbi.vt.edu"/>ADAM has moved.</a> Please update your bookmarks';
   exit 1;
 }
 
+<<<<<<< HEAD
 
 #$DEBUG = 1;
 
@@ -89,6 +99,23 @@ sub create_input_function {
   
   if ($upload_file) {
     
+=======
+# this function reads input functions from file or text area and writes the input functions into $clientip.functionfile.txt
+sub create_input_function {
+
+  # assures that the program will do nothing for SDDS and continue the algorithm
+  if ($format_box eq 'SDDS') {
+    return 0;
+  }
+
+    #$DEBUG=1;
+    print "Clientip $clientip \n<br>" if ($DEBUG);
+    use Cwd;
+    $cwd = getcwd();
+    `mkdir -p $cwd/../../htdocs/no-ssl/files`;
+    $filename = "$clientip.functionfile.txt";
+
+>>>>>>> 2aad135407409bfa2eef5bc581bd0b6aa10634d2
     say "--" . $upload_file . "--" if ($DEBUG);
     
     #system("ls");
@@ -199,6 +226,10 @@ sub set_update_type() {
     }
 }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 2aad135407409bfa2eef5bc581bd0b6aa10634d2
 # Does error checking and sets the flags in SDDS
 sub SDDSerrorchecking_and_set_flags {
 
@@ -360,7 +391,11 @@ given ($choice_box) {
 	      }
 	      
 	      #$DEBUG = 1;
+<<<<<<< HEAD
 
+=======
+	      
+>>>>>>> 2aad135407409bfa2eef5bc581bd0b6aa10634d2
 	      if ($DEBUG) {
 		print "<br> trans. table = $upload_file <br>";
 		print "<br> prop. matrix = $upload_file_pm <br>";
@@ -620,6 +655,22 @@ elsif ( $anaysis_method eq "sdds_graph" ) {
   }
 }
 
+<<<<<<< HEAD
+=======
+elsif ( $anaysis_method eq "sdds_graph" ) {
+
+  if (-e "$clientip.plot.png"){ 
+    print "<br><A href=\"$clientip.plot.png\" target=\"_blank\"><font color=\"#226677\"><i>Click here to see the plot of cell population simulation.</i></font></A><br>";
+  }
+  if (-e "$clientip.histogram.png") {
+    print "<br><A href=\"$clientip.histogram.png\" target=\"_blank\"><font color=\"#226677\"><i>Click here to see the histogram for probability distribution.</i></font></A><br>";
+  }
+  if (-e "$clientip.tm.txt") {
+    print "<br><A href=\"$clientip.tm.txt\" target=\"_blank\"><font color=\"#226677\"><i>Click here to see the probability transition matrix of the system.</i></font></A><br>";
+  }
+}
+
+>>>>>>> 2aad135407409bfa2eef5bc581bd0b6aa10634d2
 else {
     print "There was an error." . "\n";
 }

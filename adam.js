@@ -24,9 +24,14 @@ $(document).ready(function() {
         changeChoiceBox($("input[name='choice_box']:checked").val());
     });
 
+<<<<<<< HEAD
     
     var filepmname = "";
     
+=======
+    var filepmname = "";
+
+>>>>>>> 2aad135407409bfa2eef5bc581bd0b6aa10634d2
     var file = "";
     $('#upload_file').uploadify({
 	'uploader': '/uploadify/uploadify.swf',
@@ -61,10 +66,16 @@ $(document).ready(function() {
         'script': '/uploadify/uploadify.php',
 	'cancelImg': '/uploadify/cancel.png',
         'folder': '/../../htdocs/no-ssl/files',
+<<<<<<< HEAD
         //'folder': '/Documents/htdocs/no-ssl/files', (for Seda's configuration)
 	'auto': false,
         'multi': false,
 	'removeCompleted' : true,
+=======
+	'auto': false,
+        'multi': false,
+	        'removeCompleted' : true,
+>>>>>>> 2aad135407409bfa2eef5bc581bd0b6aa10634d2
         'onSelect': function(event, ID, fileObj) {
             filePM = fileObj.name;
             //alert('The file ' + fileObj.name + ' was added to the queue.');
@@ -81,15 +92,26 @@ $(document).ready(function() {
 	    alert( "ERROR");
 	}
     });
+<<<<<<< HEAD
     
     $('button').click(function() {
         $("#result").html("Calculating...");
 	
+=======
+
+    $('button').click(function() {
+        $("#result").html("Calculating...");
+
+>>>>>>> 2aad135407409bfa2eef5bc581bd0b6aa10634d2
 	var files_param = "";
 
 	if (filePM != "") {
 	    //alert( filePM );
+<<<<<<< HEAD
         $('#upload_file_pm').uploadifyUpload();
+=======
+            $('#upload_file_pm').uploadifyUpload();
+>>>>>>> 2aad135407409bfa2eef5bc581bd0b6aa10634d2
 	}
 
         if (file != "") {
@@ -116,7 +138,11 @@ function postForm(file) {
 function changeChoiceBox(choiceBox) {
     $('.input').hide();
     $('.explain').hide();
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> 2aad135407409bfa2eef5bc581bd0b6aa10634d2
     $('#sdds_entries').hide();
     
     $('#inputArea').show();
@@ -154,8 +180,13 @@ function changeChoiceBox(choiceBox) {
 
 function changeModelType(type) {
     $('.optionfield').hide();
+<<<<<<< HEAD
     $('.explain.type').hide();
     
+=======
+	$('.explain.type').hide();
+
+>>>>>>> 2aad135407409bfa2eef5bc581bd0b6aa10634d2
     $('#file_exp_sdds').hide();
     $('#sdds_entries').hide();
     $('#explain_mi_sdds').hide();
@@ -163,7 +194,12 @@ function changeModelType(type) {
     $('#SteadyStates').hide();
     $('#TransitionMatrix').hide();
 
+<<<<<<< HEAD
     $("#explain_" + type).show(); 
+=======
+	$("#explain_" + type).show(); 
+
+>>>>>>> 2aad135407409bfa2eef5bc581bd0b6aa10634d2
     $('#inputArea').show();
     $('#explain_mi').show();
     $('#Simulation').show();
@@ -232,7 +268,11 @@ function changeAnalysisType(simulationType) {
         $('#statespace').hide();
     } else if (simulationType == 'Conjunctive') {
         //
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> 2aad135407409bfa2eef5bc581bd0b6aa10634d2
     } else if (simulationType == 'sdds_graph') {
 	//
 	
