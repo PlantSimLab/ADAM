@@ -2,7 +2,7 @@
 # Name: Having all properties needed for a state in SDDS
 # Revision Date: 11/28/2011
 
-package State;
+package State4sdds;
 
 use strict;
 use warnings;
