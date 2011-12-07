@@ -24,6 +24,8 @@ $(document).ready(function() {
         changeChoiceBox($("input[name='choice_box']:checked").val());
     });
 
+    var filepmname = "";
+
     var file = "";
     $('#upload_file').uploadify({
         'uploader': '/uploadify/uploadify.swf',
@@ -39,7 +41,7 @@ $(document).ready(function() {
         },
         'onComplete': function() {
             //alert('Complete');
-            postForm("&upload_file=" + file);
+            postForm("&upload_file=" + file + filepmname);
             file = "";
         },
         'onCancel': function() {
@@ -50,8 +52,43 @@ $(document).ready(function() {
 		}
     });
 
+    // filePM is for propensity matrix in SDDS
+    var filePM = "";
+    $('#upload_file_pm').uploadify({
+	'uploader': '/uploadify/uploadify.swf',
+        'script': '/uploadify/uploadify.php',
+	'cancelImg': '/uploadify/cancel.png',
+        'folder': '/../../htdocs/no-ssl/files',
+	'auto': false,
+        'multi': false,
+	        'removeCompleted' : true,
+        'onSelect': function(event, ID, fileObj) {
+            filePM = fileObj.name;
+            //alert('The file ' + fileObj.name + ' was added to the queue.');
+        },
+        'onComplete': function() {
+            //alert('Complete');
+            filepmname = "&upload_file_pm=" + filePM;
+            filePM = "";
+        },
+        'onCancel': function() {
+            filePM = "";
+        }, 
+	'onError': function() {
+	    alert( "ERROR");
+	}
+    });
+
     $('button').click(function() {
         $("#result").html("Calculating...");
+
+	var files_param = "";
+
+	if (filePM != "") {
+	    //alert( filePM );
+            $('#upload_file_pm').uploadifyUpload();
+	}
+
         if (file != "") {
             //alert( file );
             $('#upload_file').uploadifyUpload();
@@ -75,6 +112,12 @@ function postForm(file) {
 function changeChoiceBox(choiceBox) {
     $('.input').hide();
     $('.explain').hide();
+
+    $('#sdds_entries').hide();
+    
+    $('#inputArea').show();
+    $('#explain_mi').show();
+
     // show explanation for choice selected
 	$("#explain_" + choiceBox).show(); 
 	$("#explain_mt_" + choiceBox).show(); 
@@ -108,7 +151,20 @@ function changeChoiceBox(choiceBox) {
 function changeModelType(type) {
     $('.optionfield').hide();
 	$('.explain.type').hide();
+
+    $('#file_exp_sdds').hide();
+    $('#sdds_entries').hide();
+    $('#explain_mi_sdds').hide();
+    $('#sdds_graph').hide();
+    $('#SteadyStates').hide();
+    $('#TransitionMatrix').hide();
+
 	$("#explain_" + type).show(); 
+
+    $('#inputArea').show();
+    $('#explain_mi').show();
+    $('#Simulation').show();
+
     var pval = parseInt($('#p_value').val());
     var sampleInput;
     if (type == 'PDS') {
@@ -139,6 +195,23 @@ function changeModelType(type) {
     } else if (type == 'GINsim') {
 		$('#Algorithms').show();
         sampleInput = '';
+
+    } else if (type == 'SDDS') {
+	$('#inputArea').hide();
+	$('#explain_mi').hide();
+	$('#Simulation').hide();
+	
+	$('#file_exp_sdds').show();
+	$('#explain_mi_sdds').show();
+	$('#explain_mi_sdds').show();
+	$('#sdds_graph').show();
+	$('#sdds_entries').show();
+	$('#SteadyStates').show();
+	$('#TransitionMatrix').show();
+	
+	$('input[name="anaysis_method"][value="sdds_graph"]').attr('checked', true);
+        sampleInput = '';
+	
     } else {
         jQuery.error = console.error;
         jquery.error("wrong model type");
@@ -156,7 +229,11 @@ function changeAnalysisType(simulationType) {
         $('#statespace').hide();
     } else if (simulationType == 'Conjunctive') {
         //
-        } else {
+
+    } else if (simulationType == 'sdds_graph') {
+	//
+	
+    } else {
         jQuery.error = console.error;
         jquery.error("wrong type between simulation and algorithm");
         return 1;
