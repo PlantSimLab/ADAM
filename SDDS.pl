@@ -14,6 +14,7 @@ use GD::Graph::linespoints;
 use GD::Graph::colour;
 use GD::Graph::bars;
 
+print "Seda in SDDS!\n";
 
 =head1 NAME
 

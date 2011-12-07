@@ -1,5 +1,5 @@
 # Author(s): David Murrugarra & Seda Arat
-# Name: Having all the subroutines needed for Stochastic Discrete Dynamical Systems
+# Name: Handling inputs and outputs  for Stochastic Discrete Dynamical Systems
 # Revision Date: 11/28/2011
 
 package Subroutines4sdds;
