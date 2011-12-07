@@ -3,13 +3,6 @@
 ## Hussein Vastani
 ## Franziska Hinkelmann
 ## Bonbons
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-=======
->>>>>>> 2aad135407409bfa2eef5bc581bd0b6aa10634d2
-=======
->>>>>>> 2aad135407409bfa2eef5bc581bd0b6aa10634d2
 ## November 2011
 
 use v5.10;
@@ -52,13 +45,6 @@ $weights       = param('weights');
 $dreamss       = param('dreamss');
 
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-=======
->>>>>>> 2aad135407409bfa2eef5bc581bd0b6aa10634d2
-=======
->>>>>>> 2aad135407409bfa2eef5bc581bd0b6aa10634d2
 # Declaration and initialization of (extra) parameters for SDDS
 $upload_file_pm = param('upload_file_pm');
 $initialState = "\"" . param('initialState') . "\"";
@@ -70,48 +56,11 @@ $flag4ss = 0;
 $flag4tm = 0;
 
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-=======
->>>>>>> 2aad135407409bfa2eef5bc581bd0b6aa10634d2
-=======
->>>>>>> 2aad135407409bfa2eef5bc581bd0b6aa10634d2
 if ($choice_box eq "") {
   say '<a href="http://adam.vbi.vt.edu"/>ADAM has moved.</a> Please update your bookmarks';
   exit 1;
 }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-#$DEBUG = 1;
-
-# this function reads input functions from file or text area and writes the input functions into $clientip.functionfile.txt
-sub create_input_function {
-
-  # ensures that the program will not do anything unwanted in SDDS and continue the algorithm
-  if ($format_box eq 'SDDS') {
-    return 0;
-  }
-  
-  #$DEBUG=1;
-  print "<br> Clientip = $clientip \n<br>" if ($DEBUG);
-  
-  use Cwd;
-  $cwd = getcwd();
-<<<<<<< HEAD
-  `mkdir -p $cwd/../..htdocs/no-ssl/files`;
-=======
-  `mkdir -p $cwd/../../htdocs/no-ssl/files`;
->>>>>>> 0fc4f7c7c6818f4955b16bb5b48e8558b3fb51dc
-  $filename = "$clientip.functionfile.txt";
-  
-  if ($upload_file) {
-    
-=======
-=======
->>>>>>> 2aad135407409bfa2eef5bc581bd0b6aa10634d2
 # this function reads input functions from file or text area and writes the input functions into $clientip.functionfile.txt
 sub create_input_function {
 
@@ -127,12 +76,12 @@ sub create_input_function {
     `mkdir -p $cwd/../../htdocs/no-ssl/files`;
     $filename = "$clientip.functionfile.txt";
 
->>>>>>> 2aad135407409bfa2eef5bc581bd0b6aa10634d2
     say "--" . $upload_file . "--" if ($DEBUG);
-    
-    #system("ls");
-    say "cp ../../htdocs/no-ssl/files/$upload_file $filename <br>	" if ($DEBUG);
-    system("cp ../../htdocs/no-ssl/files/$upload_file $filename");
+    if ($upload_file) {
+
+        #system("ls");
+        say "cp ../../htdocs/no-ssl/files/$upload_file $filename <br>	" if ($DEBUG);
+        system("cp ../../htdocs/no-ssl/files/$upload_file $filename");
     
     if ($choice_box eq 'analyze'
 	&& (   $format_box eq 'PDS'
@@ -238,14 +187,7 @@ sub set_update_type() {
     }
 }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 
->>>>>>> 2aad135407409bfa2eef5bc581bd0b6aa10634d2
-=======
-
->>>>>>> 2aad135407409bfa2eef5bc581bd0b6aa10634d2
 # Does error checking and sets the flags in SDDS
 sub SDDSerrorchecking_and_set_flags {
 
@@ -407,26 +349,18 @@ given ($choice_box) {
 	      }
 	      
 	      #$DEBUG = 1;
-<<<<<<< HEAD
-<<<<<<< HEAD
 
-=======
-	      
->>>>>>> 2aad135407409bfa2eef5bc581bd0b6aa10634d2
-=======
-	      
->>>>>>> 2aad135407409bfa2eef5bc581bd0b6aa10634d2
-	      if ($DEBUG) {
-		print "<br> trans. table = $upload_file <br>";
-		print "<br> prop. matrix = $upload_file_pm <br>";
-		print "<br> is = $initialState <br>";
-		print "<br> int. nodes = $interestingNodes <br>";
-		print "<br> state = $num_states <br>";
-		print "<br> ss = $steadyStates <br>";
-		print "<br> tm = $transitionMatrix <br>";
-		print "<br> flag4ss = $flag4ss <br>";
-		print "<br> flag4tm = $flag4tm <br>";
-	      }
+	    if ($DEBUG) {
+		    print "<br> trans. table = $upload_file <br>";
+		    print "<br> prop. matrix = $upload_file_pm <br>";
+		    print "<br> is = $initialState <br>";
+		    print "<br> int. nodes = $interestingNodes <br>";
+		    print "<br> state = $num_states <br>";
+		    print "<br> ss = $steadyStates <br>";
+		    print "<br> tm = $transitionMatrix <br>";
+		    print "<br> flag4ss = $flag4ss <br>";
+		    print "<br> flag4tm = $flag4tm <br>";
+        }
 	      
 	      $plot_file = "$clientip.plot";
 	      $histogram_file = "$clientip.histogram";
@@ -675,28 +609,6 @@ elsif ( $anaysis_method eq "sdds_graph" ) {
   }
 }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> 2aad135407409bfa2eef5bc581bd0b6aa10634d2
-elsif ( $anaysis_method eq "sdds_graph" ) {
-
-  if (-e "$clientip.plot.png"){ 
-    print "<br><A href=\"$clientip.plot.png\" target=\"_blank\"><font color=\"#226677\"><i>Click here to see the plot of cell population simulation.</i></font></A><br>";
-  }
-  if (-e "$clientip.histogram.png") {
-    print "<br><A href=\"$clientip.histogram.png\" target=\"_blank\"><font color=\"#226677\"><i>Click here to see the histogram for probability distribution.</i></font></A><br>";
-  }
-  if (-e "$clientip.tm.txt") {
-    print "<br><A href=\"$clientip.tm.txt\" target=\"_blank\"><font color=\"#226677\"><i>Click here to see the probability transition matrix of the system.</i></font></A><br>";
-  }
-}
-
-<<<<<<< HEAD
->>>>>>> 2aad135407409bfa2eef5bc581bd0b6aa10634d2
-=======
->>>>>>> 2aad135407409bfa2eef5bc581bd0b6aa10634d2
 else {
     print "There was an error." . "\n";
 }
