@@ -14,7 +14,7 @@ use GD::Graph::linespoints;
 use GD::Graph::colour;
 use GD::Graph::bars;
 
-print "Seda in SDDS!\n";
+print "I am in SDDS.pl! <br>";
 
 =head1 NAME
 
@@ -131,19 +131,6 @@ $plot_file = $ARGV{'-g'};
 $histogram_file = $ARGV{'-h'};
 $tm_file = $ARGV{'-x'};
 $output_file = $ARGV{'-o'};
-
-if(1){
-print "<br> These are the inputs for SDDS: 
-tt = $transitiontable <br>
-is = $initialstate <br>
-int. nodes = $interestingnodes <br>
-states = $number_of_states <br>
-f4ss = $flag4ss <br>
-f4tm = $flag4tm <br>
-p_file = $plot_file <br>
-h_file = $histogram_file <br>
-tm_file = $tm_file <br>";
-}
 
 # it is for random number generator
 srand(time | $$);

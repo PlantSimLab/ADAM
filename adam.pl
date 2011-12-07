@@ -345,18 +345,6 @@ given ($choice_box) {
                 else {
                     print "<br>FYI: No file was uploaded for the propensity matrix, so uniform distribution will be used. <br>";
                 }
-                #$DEBUG = 1;
-	            if ($DEBUG) {
-		            print "<br> trans. table = $upload_file <br>";
-		            print "<br> prop. matrix = $upload_file_pm <br>";
-		            print "<br> is = $initialState <br>";
-		            print "<br> int. nodes = $interestingNodes <br>";
-		            print "<br> state = $num_states <br>";
-		            print "<br> ss = $steadyStates <br>";
-		            print "<br> tm = $transitionMatrix <br>";
-		            print "<br> flag4ss = $flag4ss <br>";
-		            print "<br> flag4tm = $flag4tm <br>";
-                }
 	      
 	            $plot_file = "$clientip.plot";
 	            $histogram_file = "$clientip.histogram";
@@ -370,7 +358,7 @@ given ($choice_box) {
                     say("perl SDDS.pl -t $filename_tt -i $initialState -n $interestingNodes -s $num_states -f $flag4ss -m $flag4tm -g $plot_file -h $histogram_file -x $tm_file") if $DEBUG;
 		            system("perl SDDS.pl -t $filename_tt -i $initialState -n $interestingNodes -s $num_states -f $flag4ss -m $flag4tm -g $plot_file -h $histogram_file -x $tm_file");
 	            }
-	        } # end of /SDDS/
+            } # end of /SDDS/
 
             default {
                 say 'Invalid choice of model, there was an error.'
@@ -611,6 +599,8 @@ else {
     print "There was an error." . "\n";
 }
 
+#print $anaysis_method . "<br>\n";
+##print $conjunctive . "<br>\n";
 
 exit 1;
 

@@ -82,19 +82,20 @@ $(document).ready(function() {
     $('button').click(function() {
         $("#result").html("Calculating...");
 	
+	var files_param = "";
 
 	if (filePM != "") {
 	    //alert( filePM );
         $('#upload_file_pm').uploadifyUpload();
     }
-
-        if (file != "") {
+        
+    if (file != "") {
             //alert( file );
             $('#upload_file').uploadifyUpload();
-        } else {
+    } else {
             //alert(formdata);
             postForm("");
-        }
+    }
     });
 });
 
@@ -150,8 +151,8 @@ function changeChoiceBox(choiceBox) {
 
 function changeModelType(type) {
     $('.optionfield').hide();
-	$('.explain.type').hide();
-
+    $('.explain.type').hide();
+    
     $('#file_exp_sdds').hide();
     $('#sdds_entries').hide();
     $('#explain_mi_sdds').hide();
