@@ -1,0 +1,188 @@
+<?xml version="1.0"?>
+<!DOCTYPE gxl SYSTEM "http://gin.univ-mrs.fr/GINsim/GINML_2_1.dtd">
+<gxl xmlns:xlink="http://www.w3.org/1999/xlink">
+	<graph id="default" class="regulatory" nodeorder="IFNg IL4 IL12 IFNgR IL4R IL12R STAT1 STAT6 STAT4 SOCS1 GATA3 Tbet">
+		<node id="SOCS1" basevalue="0" maxvalue="1">
+			<parameter idActiveInteractions="Tbet_SOCS1_0" val="1"/>
+			<parameter idActiveInteractions="STAT1_SOCS1_0" val="1"/>
+			<parameter idActiveInteractions="Tbet_SOCS1_0 STAT1_SOCS1_0" val="1"/>
+			<nodevisualsetting>
+				<ellipse x="156" y="327" width="51" height="30" backgroundColor="#990000" foregroundColor="#FFFFFF"/>
+			</nodevisualsetting>
+		</node>
+		<node id="IL12R" basevalue="0" maxvalue="1">
+			<parameter idActiveInteractions="IL12_IL12R_0" val="1"/>
+			<nodevisualsetting>
+				<ellipse x="625" y="255" width="51" height="30" backgroundColor="#990000" foregroundColor="#FFFFFF"/>
+			</nodevisualsetting>
+		</node>
+		<node id="IL12" basevalue="0" maxvalue="1">
+			<nodevisualsetting>
+				<ellipse x="625" y="337" width="51" height="30" backgroundColor="#009900" foregroundColor="#FFFFFF"/>
+			</nodevisualsetting>
+		</node>
+		<node id="IFNgR" basevalue="0" maxvalue="1">
+			<parameter idActiveInteractions="IFNg_IFNgR_0" val="1"/>
+			<nodevisualsetting>
+				<ellipse x="61" y="161" width="51" height="30" backgroundColor="#990000" foregroundColor="#FFFFFF"/>
+			</nodevisualsetting>
+		</node>
+		<node id="STAT6" basevalue="0" maxvalue="1">
+			<parameter idActiveInteractions="IL4R_STAT6_0" val="1"/>
+			<nodevisualsetting>
+				<ellipse x="557" y="34" width="51" height="30" backgroundColor="#990000" foregroundColor="#FFFFFF"/>
+			</nodevisualsetting>
+		</node>
+		<node id="IFNg" basevalue="0" maxvalue="1">
+			<parameter idActiveInteractions="STAT4_IFNg_0" val="1"/>
+			<parameter idActiveInteractions="Tbet_IFNg_0 STAT4_IFNg_0" val="1"/>
+			<parameter idActiveInteractions="Tbet_IFNg_0" val="1"/>
+			<nodevisualsetting>
+				<ellipse x="225" y="162" width="51" height="30" backgroundColor="#990000" foregroundColor="#FFFFFF"/>
+			</nodevisualsetting>
+		</node>
+		<node id="IL4" basevalue="0" maxvalue="1">
+			<parameter idActiveInteractions="GATA3_IL4_0" val="1"/>
+			<nodevisualsetting>
+				<ellipse x="417" y="160" width="51" height="30" backgroundColor="#990000" foregroundColor="#FFFFFF"/>
+			</nodevisualsetting>
+		</node>
+		<node id="IL4R" basevalue="0" maxvalue="1">
+			<parameter idActiveInteractions="IL4_IL4R_0" val="1"/>
+			<nodevisualsetting>
+				<ellipse x="556" y="160" width="51" height="30" backgroundColor="#990000" foregroundColor="#FFFFFF"/>
+			</nodevisualsetting>
+		</node>
+		<node id="GATA3" basevalue="0" maxvalue="1">
+			<parameter idActiveInteractions="STAT6_GATA3_0" val="1"/>
+			<nodevisualsetting>
+				<ellipse x="416" y="33" width="51" height="30" backgroundColor="#990000" foregroundColor="#FFFFFF"/>
+			</nodevisualsetting>
+		</node>
+		<node id="STAT4" basevalue="0" maxvalue="1">
+			<parameter idActiveInteractions="IL12R_STAT4_0" val="1"/>
+			<nodevisualsetting>
+				<ellipse x="224" y="257" width="51" height="30" backgroundColor="#990000" foregroundColor="#FFFFFF"/>
+			</nodevisualsetting>
+		</node>
+		<node id="Tbet" basevalue="0" maxvalue="1">
+			<parameter idActiveInteractions="STAT1_Tbet_0" val="1"/>
+			<parameter idActiveInteractions="Tbet_Tbet_0 STAT1_Tbet_0" val="1"/>
+			<parameter idActiveInteractions="Tbet_Tbet_0" val="1"/>
+			<nodevisualsetting>
+				<ellipse x="225" y="33" width="51" height="30" backgroundColor="#990000" foregroundColor="#FFFFFF"/>
+			</nodevisualsetting>
+		</node>
+		<node id="STAT1" basevalue="0" maxvalue="1">
+			<parameter idActiveInteractions="IFNgR_STAT1_0" val="1"/>
+			<nodevisualsetting>
+				<ellipse x="62" y="32" width="51" height="30" backgroundColor="#990000" foregroundColor="#FFFFFF"/>
+			</nodevisualsetting>
+		</node>
+		<edge id="SOCS1_IL4R_0" from="SOCS1" to="IL4R" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="181,342 581,175" line_style="curve" line_color="#330000" line_width="2" routage="auto"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="SOCS1_IFNgR_0" from="SOCS1" to="IFNgR" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="181,342 86,176" line_style="curve" line_color="#330000" line_width="2" routage="auto"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="IL12R_STAT4_0" from="IL12R" to="STAT4" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="650,270 249,272" line_style="curve" line_color="#330000" line_width="2" routage="auto"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="IL12_IL12R_0" from="IL12" to="IL12R" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="650,352 650,270" line_style="curve" line_color="#330000" line_width="2" routage="auto"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="IFNgR_STAT1_0" from="IFNgR" to="STAT1" minvalue="1" maxvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="86,176 87,47" line_style="curve" line_color="#330000" line_width="2" routage="auto"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="STAT6_GATA3_0" from="STAT6" to="GATA3" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="582,49 441,48" line_style="curve" line_color="#330000" line_width="2" routage="auto"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="STAT6_IL12R_0" from="STAT6" to="IL12R" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="582,49 650,270" line_style="curve" line_color="#330000" line_width="2" routage="auto"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="IFNg_IFNgR_0" from="IFNg" to="IFNgR" minvalue="1" maxvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="250,177 86,176" line_style="curve" line_color="#330000" line_width="2" routage="auto"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="IL4_IL4R_0" from="IL4" to="IL4R" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="442,175 581,175" line_style="curve" line_color="#330000" line_width="2" routage="auto"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="IL4R_STAT6_0" from="IL4R" to="STAT6" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="581,175 582,49" line_style="curve" line_color="#330000" line_width="2" routage="auto"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="GATA3_IL4_0" from="GATA3" to="IL4" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="441,48 442,175" line_style="curve" line_color="#330000" line_width="2" routage="auto"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="GATA3_STAT4_0" from="GATA3" to="STAT4" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="441,48 249,272" line_style="curve" line_color="#330000" line_width="2" routage="auto"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="GATA3_Tbet_0" from="GATA3" to="Tbet" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="441,48 393,33 298,33 250,48" line_style="curve" line_color="#330000" line_width="2" routage="auto"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="STAT4_IFNg_0" from="STAT4" to="IFNg" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="249,272 250,177" line_style="curve" line_color="#330000" line_width="2" routage="auto"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="Tbet_IFNg_0" from="Tbet" to="IFNg" minvalue="1" maxvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="250,48 250,177" line_style="curve" line_color="#330000" line_width="2" routage="auto"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="Tbet_SOCS1_0" from="Tbet" to="SOCS1" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="250,48 181,342" line_style="curve" line_color="#330000" line_width="2" routage="auto"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="Tbet_GATA3_0" from="Tbet" to="GATA3" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="250,48 298,63 393,63 441,48" line_style="curve" line_color="#330000" line_width="2" routage="auto"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="Tbet_Tbet_0" from="Tbet" to="Tbet" minvalue="1" maxvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="250,48 220,38 200,8 240,8 250,48" line_style="curve" line_color="#330000" line_width="2" routage="auto"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="STAT1_SOCS1_0" from="STAT1" to="SOCS1" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="87,47 181,342" line_style="curve" line_color="#330000" line_width="2" routage="auto"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="STAT1_Tbet_0" from="STAT1" to="Tbet" minvalue="1" maxvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="87,47 250,48" line_style="curve" line_color="#330000" line_width="2" routage="auto"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="STAT1_IL4_0" from="STAT1" to="IL4" minvalue="1" maxvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="87,47 442,175" line_style="curve" line_color="#330000" line_width="2" routage="auto"/>
+			</edgevisualsetting>
+		</edge>
+	</graph>
+</gxl>
