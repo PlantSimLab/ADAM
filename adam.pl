@@ -4,7 +4,10 @@
 ## Franziska Hinkelmann
 ## Bonbons
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> 2aad135407409bfa2eef5bc581bd0b6aa10634d2
 =======
 >>>>>>> 2aad135407409bfa2eef5bc581bd0b6aa10634d2
 ## November 2011
@@ -50,7 +53,10 @@ $dreamss       = param('dreamss');
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> 2aad135407409bfa2eef5bc581bd0b6aa10634d2
 =======
 >>>>>>> 2aad135407409bfa2eef5bc581bd0b6aa10634d2
 # Declaration and initialization of (extra) parameters for SDDS
@@ -65,7 +71,10 @@ $flag4tm = 0;
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> 2aad135407409bfa2eef5bc581bd0b6aa10634d2
 =======
 >>>>>>> 2aad135407409bfa2eef5bc581bd0b6aa10634d2
 if ($choice_box eq "") {
@@ -73,6 +82,7 @@ if ($choice_box eq "") {
   exit 1;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 #$DEBUG = 1;
@@ -100,6 +110,8 @@ sub create_input_function {
   if ($upload_file) {
     
 =======
+=======
+>>>>>>> 2aad135407409bfa2eef5bc581bd0b6aa10634d2
 # this function reads input functions from file or text area and writes the input functions into $clientip.functionfile.txt
 sub create_input_function {
 
@@ -227,6 +239,10 @@ sub set_update_type() {
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> 2aad135407409bfa2eef5bc581bd0b6aa10634d2
 =======
 
 >>>>>>> 2aad135407409bfa2eef5bc581bd0b6aa10634d2
@@ -392,7 +408,11 @@ given ($choice_box) {
 	      
 	      #$DEBUG = 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+	      
+>>>>>>> 2aad135407409bfa2eef5bc581bd0b6aa10634d2
 =======
 	      
 >>>>>>> 2aad135407409bfa2eef5bc581bd0b6aa10634d2
@@ -656,7 +676,10 @@ elsif ( $anaysis_method eq "sdds_graph" ) {
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 2aad135407409bfa2eef5bc581bd0b6aa10634d2
 elsif ( $anaysis_method eq "sdds_graph" ) {
 
   if (-e "$clientip.plot.png"){ 
@@ -670,6 +693,9 @@ elsif ( $anaysis_method eq "sdds_graph" ) {
   }
 }
 
+<<<<<<< HEAD
+>>>>>>> 2aad135407409bfa2eef5bc581bd0b6aa10634d2
+=======
 >>>>>>> 2aad135407409bfa2eef5bc581bd0b6aa10634d2
 else {
     print "There was an error." . "\n";

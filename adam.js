@@ -25,9 +25,14 @@ $(document).ready(function() {
     });
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     
     var filepmname = "";
     
+=======
+    var filepmname = "";
+
+>>>>>>> 2aad135407409bfa2eef5bc581bd0b6aa10634d2
 =======
     var filepmname = "";
 
@@ -99,16 +104,50 @@ $(document).ready(function() {
 	
 =======
 
+    // filePM is for propensity matrix in SDDS
+    var filePM = "";
+    $('#upload_file_pm').uploadify({
+	'uploader': '/uploadify/uploadify.swf',
+        'script': '/uploadify/uploadify.php',
+	'cancelImg': '/uploadify/cancel.png',
+        'folder': '/../../htdocs/no-ssl/files',
+	'auto': false,
+        'multi': false,
+	        'removeCompleted' : true,
+        'onSelect': function(event, ID, fileObj) {
+            filePM = fileObj.name;
+            //alert('The file ' + fileObj.name + ' was added to the queue.');
+        },
+        'onComplete': function() {
+            //alert('Complete');
+            filepmname = "&upload_file_pm=" + filePM;
+            filePM = "";
+        },
+        'onCancel': function() {
+            filePM = "";
+        }, 
+	'onError': function() {
+	    alert( "ERROR");
+	}
+    });
+
     $('button').click(function() {
         $("#result").html("Calculating...");
 
+<<<<<<< HEAD
+>>>>>>> 2aad135407409bfa2eef5bc581bd0b6aa10634d2
+=======
 >>>>>>> 2aad135407409bfa2eef5bc581bd0b6aa10634d2
 	var files_param = "";
 
 	if (filePM != "") {
 	    //alert( filePM );
 <<<<<<< HEAD
+<<<<<<< HEAD
         $('#upload_file_pm').uploadifyUpload();
+=======
+            $('#upload_file_pm').uploadifyUpload();
+>>>>>>> 2aad135407409bfa2eef5bc581bd0b6aa10634d2
 =======
             $('#upload_file_pm').uploadifyUpload();
 >>>>>>> 2aad135407409bfa2eef5bc581bd0b6aa10634d2
@@ -139,7 +178,11 @@ function changeChoiceBox(choiceBox) {
     $('.input').hide();
     $('.explain').hide();
 <<<<<<< HEAD
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> 2aad135407409bfa2eef5bc581bd0b6aa10634d2
 =======
 
 >>>>>>> 2aad135407409bfa2eef5bc581bd0b6aa10634d2
@@ -186,6 +229,9 @@ function changeModelType(type) {
 =======
 	$('.explain.type').hide();
 
+<<<<<<< HEAD
+>>>>>>> 2aad135407409bfa2eef5bc581bd0b6aa10634d2
+=======
 >>>>>>> 2aad135407409bfa2eef5bc581bd0b6aa10634d2
     $('#file_exp_sdds').hide();
     $('#sdds_entries').hide();
@@ -195,7 +241,12 @@ function changeModelType(type) {
     $('#TransitionMatrix').hide();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     $("#explain_" + type).show(); 
+=======
+	$("#explain_" + type).show(); 
+
+>>>>>>> 2aad135407409bfa2eef5bc581bd0b6aa10634d2
 =======
 	$("#explain_" + type).show(); 
 
@@ -269,7 +320,11 @@ function changeAnalysisType(simulationType) {
     } else if (simulationType == 'Conjunctive') {
         //
 <<<<<<< HEAD
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> 2aad135407409bfa2eef5bc581bd0b6aa10634d2
 =======
 
 >>>>>>> 2aad135407409bfa2eef5bc581bd0b6aa10634d2
