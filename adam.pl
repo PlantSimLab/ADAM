@@ -345,7 +345,7 @@ given ($choice_box) {
             else {
                 print "<br>FYI: No file was uploaded for the propensity matrix, so uniform distribution will be used. <br>";
             }
-	        $DEBUG = 1;
+            #$DEBUG = 1;
 	        if ($DEBUG) {
 		        print "<br> trans. table = $upload_file <br>";
 		        print "<br> prop. matrix = $upload_file_pm <br>";
@@ -594,7 +594,7 @@ elsif ( $anaysis_method eq "Simulation" ) {
 
 elsif ( $anaysis_method eq "sdds_graph" ) {
 
-  if (-e "$clientip.plot.png"){ 
+  if (-e "$clientip.plot.png") { 
     print "<br><A href=\"$clientip.plot.png\" target=\"_blank\"><font color=\"#226677\"><i>Click here to see the plot of cell population simulation.</i></font></A><br>";
   }
   if (-e "$clientip.histogram.png") {

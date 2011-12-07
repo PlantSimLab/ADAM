@@ -14,6 +14,7 @@ use GD::Graph::linespoints;
 use GD::Graph::colour;
 use GD::Graph::bars;
 
+
 =head1 NAME
 
 SDDS.pl - Simulate a stochastic model from a possible initialization.
@@ -130,7 +131,7 @@ $histogram_file = $ARGV{'-h'};
 $tm_file = $ARGV{'-x'};
 $output_file = $ARGV{'-o'};
 
-if(0){
+if(1){
 print "<br> These are the inputs for SDDS: 
 tt = $transitiontable <br>
 is = $initialstate <br>
