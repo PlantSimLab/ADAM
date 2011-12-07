@@ -1,13 +1,13 @@
 # Author(s): David Murrugarra & Seda Arat
 # Name: Generating the plot, histogram and transition matrix for SDDS
-# Revision Date: 11/28/2011
+# Revision Date: 12/7/2011
 
 #!/usr/bin/perl
 
 print "---I am in SDDS.pl! <br>";
 
-#use strict;
-#use warnings;
+use strict;
+use warnings;
 
 use Subroutines4sdds;
 #use Data::Dumper;
@@ -19,107 +19,6 @@ use GD::Graph::bars;
 
 print "I am in SDDS.pl---! <br>";
 
-=head1 NAME
-
-SDDS.pl - Simulate a stochastic model from a possible initialization.
-
-=head1 USAGE
-
-SDDS.pl -t <transition-table> -p <propensity-matrix> -i <initial-state> -n <interesting-nodes> -s <number-states> -f <flag-steadystates> -m <flag-transitionmatrix> -g <plot-file> -h <histogram-file> -x <tm-file> -o <output-file>
-
-=head1 SYNOPSIS
-
-SDDS.pl -t <transition-table> -p <propensity-matrix> -i <initial-state> -n <interesting-nodes> -s <number-states> -f <flag-steadystates> -m <flag-transitionmatrix> -g <plot-file> -h <histogram-file> -x <tm-file -o <output-file>
-
-=head1 DESCRIPTION
-
-SDDS.pl - Simulate a stochastic model from a possible initialization.
-
-=head1 REQUIRED ARGUMENTS
-
-=over
-
-=item -t[ransition-table] <transition-table>
-
-The name of the file containing the transition table for the finite dynamical system (e.g., F1.txt). 
-
-=for Euclid:
-
-network-file.type: readable
-
-=item -i[nitial-state] <initial-state>
-
-The string containing the initial state.
-
-=item -n <interesting-nodes>
-
-The string containing the interesting nodes.
-
-=item -s <number-states>
-
-The number of states.
-
-=item -f <flag-steadystates>
-
-The number indicating if steadystate will be shown
-
-=item -m <flag-transitionMatrix>
-
-The number indicating if transitionmatrix will be shown
-
-=item -g <plot-file>
-
-The name of the file to plot the average trajectory.
-
-=for Euclid:
-
-file.type: writeable
-
-=item -h[istogram-file] <histogram-file>
-
-The name of the file to get the histogram of the percentage vector.
-
-=for Euclid:
-
-file.type: writeable
-
-=back
-
-=head1 OPTIONS
-
-=over
-
-=item -p[ropensity-matrix] <propensity-matrix>
-
-The name of the file containing the propensity matrix.
-
-=for Euclid:
-
-network-file.type: readable
-
-=item -x <tm-file>
-
-The name of the file to get the whole transition matrix.
-
-=for Euclid:
-
-file.type: writeable
-
-=item -o[utput-file] <output-file>
-
-The name of the file to print the results.
-
-=for Euclid:
-
-file.type: writeable
-
-=back
-
-=head1 AUTHOR
-
-David Murrugarra Tomairo & Seda Arat
-
-=cut
 
 my ($transitiontable, $propensitymatrix, $initialstate, $interestingnodes, $number_of_states, $flag4ss, $flag4tm, $plot_file, $histogram_file, $tm_file, $output_file);
 
