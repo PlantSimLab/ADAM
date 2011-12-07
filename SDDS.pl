@@ -6,8 +6,8 @@
 
 print "---I am in SDDS.pl! <br>";
 
-use strict;
-use warnings;
+#use strict;
+#use warnings;
 
 use Subroutines4sdds;
 #use Data::Dumper;
@@ -17,7 +17,7 @@ use GD::Graph::linespoints;
 use GD::Graph::colour;
 use GD::Graph::bars;
 
-print "I am in SDDS.pl! <br>";
+print "I am in SDDS.pl---! <br>";
 
 =head1 NAME
 

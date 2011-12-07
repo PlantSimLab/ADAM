@@ -5,8 +5,8 @@
 package State4sdds;
 
 #use Data::Dumper;
-use strict;
-use warnings;
+#use strict;
+#use warnings;
 
 use Class::Struct
 
