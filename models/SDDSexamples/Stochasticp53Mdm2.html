@@ -1,0 +1,82 @@
+<h2>
+Stochastic Model of p53-Mdm2
+</h2>
+
+<h3>Description</h3>
+
+<img src="/models/SDDSexamples/p53_model_pic.png" align='left'>
+
+<br>
+<br>
+The p53-Mdm2 network is one of the most widely studied gene regulatory networks. W. Abou-Jaude, D. Ouattara and M. Kauffman proposed a logical four-variable model to describe the dynamics of the tumor suppressor protein p53 and its negative regulator Mdm2 in the presence and absence of DNA damage. This model encompasses the roles of the regulatory genes P, Mc, Mn, and Dam.
+<br>
+
+<h3>Variables</h3>
+
+node1 = P (protein p53) <br>
+node2 = Mc (cytoplasmic Mdm2) <br>
+node3 = Mn (nuclear Mdm2) <br>
+node4 = Dam (DNA damage) <br>
+
+<h3>Transition Table</h3>
+
+<a href="/models/SDDSexamples/p53_tt.txt" target="_blank">Click to see the transition table of p53-Mdm2 model</a>
+
+<h3>Propensity Parameters</h3>
+
+<a href="/models/SDDSexamples/p53_pp.txt" target="_blank">Click to see the propensity parameters of p53-Mdm2 model</a>
+
+<h3>Initial State</h3>
+
+0 0 1 1 (representing the state when DNA damage is introduced)
+
+<h3>Nodes of Interest</h3>
+
+1, 2, 3, 4
+
+<h3>Number of States</h3>
+
+3 <br>
+
+<h3>Key Dynamic Features</h3>
+
+<h4>Steady States</h4>
+
+There is only 1 steady state in the system, which is 0 0 1 0.
+
+<h4>Cell Population Simulation</h4>
+
+<img src="/models/SDDSexamples/p53_plot.png"><br>
+
+<h4>Probability Distribution</h4>
+
+<img src="/models/SDDSexamples/p53_histogram.png"><br>
+
+<h4>Transition Matrix</h4>
+
+<a href="/models/SDDSexamples/p53_tm.txt" target="_blank">Click to see the transition matrix of p53-Mdm2 model</a>
+
+<h4>Other examples for Stochastic Discrete Dynamical Systems</h4>
+
+<a href="/models/SDDSexamples/StochasticLambdaPhageLysis.html" target="_blank">Stochastic Model of Lambda Phage Infection (Lysis) </a>
+
+<br>
+
+<a href="/models/SDDSexamples/StochasticLambdaPhageLysogeny.html" target="_blank">Stochastic Model of Lambda Phage Infection (Lysogeny) </a>
+
+<h3>References</h3>
+
+<a> D. Murrugarra, A. Veliz-Cuba, B. Aguilar, S. Arat, R. Laubenbacher "Modeling Stochasticity and Variability in Gene Regulatory Networks" (under revision) </a>
+
+<h3>Author</h3>
+
+Seda Arat 
+
+<h3>Last Updated</h3>
+
+November 2011
+<br>
+<br>
+<br>
+<br>
+<br>

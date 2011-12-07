@@ -1,0 +1,84 @@
+<h2>
+Stochastic Model of Lambda Phage Infection (Lysogeny)
+</h2>
+
+<h3>Description</h3>
+
+<img src="/models/SDDSexamples/LambdaPhage_model_pic.png" align='left'>
+
+<br>
+<br>
+Control of the outcome of phage lambda infection is one of the best understood regulatory systems. Thieffry and Thomas proposed a logical model to describe the dynamics of the network, which is a bistable switch between lysis and lysogeny. <b>Lysogeny</b> is the state where the phage will incorporate its DNA into the bacterium and become dormant. In other words, if the phage is in lysogeny, then the gene CI is fully expressed and all other genes are off.
+<br>
+<br>
+
+<h3>Variables</h3>
+
+node1 = CI <br>
+node2 = CRO <br>
+node3 = CII <br>
+node4 = N <br>
+
+<h3>Transition Table</h3>
+
+<a href="/models/SDDSexamples/LambdaPhage_tt.txt" target="_blank">Click to see the transition table of lambda phage model</a>
+
+<h3>Propensity Parameters</h3>
+
+<a href="/models/SDDSexamples/LambdaPhageLysogeny_pp.txt" target="_blank">Click to see the propensity parameters of lambda phage model for lysogeny</a>
+
+<h3>Initial State</h3>
+
+0 0 0 0 (representing the state of the bacterium at the moment of phage infection)
+
+<h3>Nodes of Interest</h3>
+
+1, 2, 3, 4
+
+<h3>Number of States</h3>
+
+5 <br>
+
+<h3>Key Dynamic Features</h3>
+
+<h4>Steady States</h4>
+
+There is only 1 steady state in the system, which is 2 0 0 0.
+
+<h4>Cell Population Simulation</h4>
+
+<img src="/models/SDDSexamples/LambdaPhageLysogeny_plot.png">
+<br>
+
+<h4>Probability Distribution</h4>
+
+<img src="/models/SDDSexamples/LambdaPhageLysogeny_histogram.png">
+<br>
+
+<h4>Transition Matrix</h4>
+
+<a href="/models/SDDSexamples/LambdaPhageLysogeny_tm.txt" target="_blank">Click to see the transition matrix of lambda phage model for Lysogeny</a>
+
+<h4>Other examples for Stochastic Discrete Dynamical Systems</h4>
+
+<a href="/models/SDDSexamples/StochasticLambdaPhageLysis.html" target="_blank">Stochastic Model of Lambda Phage Infection (Lysis) </a>
+
+<br>
+
+<a href="/models/SDDSexamples/Stochasticp53Mdm2.html" target="_blank">Stochastic Model of p53-Mdm2 </a>
+
+<h3>References</h3>
+
+<a> D. Murrugarra, A. Veliz-Cuba, B. Aguilar, S. Arat, R. Laubenbacher "Modeling Stochasticity and Variability in Gene Regulatory Networks" (under revision) </a>
+
+<h3>Author</h3>
+
+Seda Arat 
+
+<h3>Last Updated</h3>
+November 2011
+<br>
+<br>
+<br>
+<br>
+<br>
