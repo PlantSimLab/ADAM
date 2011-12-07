@@ -121,7 +121,6 @@ David Murrugarra Tomairo & Seda Arat
 my ($transitiontable, $propensitymatrix, $initialstate, $interestingnodes, $number_of_states, $flag4ss, $flag4tm, $plot_file, $histogram_file, $tm_file, $output_file);
 
 $transitiontable = $ARGV[0];
-$propensitymatrix = $ARGV;
 $initialstate = $ARGV[1];
 $interestingnodes = $ARGV[2];
 $number_of_states = $ARGV[3];

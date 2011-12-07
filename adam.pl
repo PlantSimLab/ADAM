@@ -349,7 +349,7 @@ given ($choice_box) {
 	            $plot_file = "$clientip.plot";
 	            $histogram_file = "$clientip.histogram";
 	            $tm_file = "$clientip.tm";
-                #$DEBUG = 1;
+                $DEBUG = 1;
 	            if ($upload_file_pm) {
                     say("/usr/bin/perl SDDS.pl -t $filename_tt -p $filename_pm -i $initialState -n $interestingNodes -s $num_states -f $flag4ss -m $flag4tm -g $plot_file -h $histogram_file -x $tm_file")  if $DEBUG;
 		            system("/usr/bin/perl SDDS.pl $filename_tt $initialState $interestingNodes $num_states $flag4ss $flag4tm $plot_file $histogram_file $tm_file $filename_pm");
