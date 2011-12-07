@@ -349,10 +349,10 @@ given ($choice_box) {
 	      $tm_file = "$clientip.tm";
 	      
 	      if ($upload_file_pm) {
-		system ("perl SDDS.pl -t $filename_tt -p $filename_pm -i $initialState -n $interestingNodes -s $num_states -f $flag4ss -m $flag4tm -g $plot_file -h $histogram_file -x $tm_file");
+		system ("/usr/bin/perl SDDS.pl $filename_tt $initialState $interestingNodes $num_states $flag4ss $flag4tm $plot_file $histogram_file $tm_file $filename_pm");
 	      }
 	      else {
-		system ("perl SDDS.pl -t $filename_tt -i $initialState -n $interestingNodes -s $num_states -f $flag4ss -m $flag4tm -g $plot_file -h $histogram_file -x $tm_file");
+		system ("/usr/bin/perl SDDS.pl $filename_tt $initialState $interestingNodes $num_states $flag4ss $flag4tm $plot_file $histogram_file $tm_file");
 	      }
 	    } # end of /SDDS/
 

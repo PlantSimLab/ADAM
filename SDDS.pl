@@ -120,30 +120,18 @@ David Murrugarra Tomairo & Seda Arat
 
 my ($transitiontable, $propensitymatrix, $initialstate, $interestingnodes, $number_of_states, $flag4ss, $flag4tm, $plot_file, $histogram_file, $tm_file, $output_file);
 
-$transitiontable = $ARGV{'-t'};
-$propensitymatrix = $ARGV{'-p'};
-$initialstate = $ARGV{'-i'};
-$interestingnodes = $ARGV{'-n'};
-$number_of_states = $ARGV{'-s'};
-$flag4ss = $ARGV{'-f'};
-$flag4tm = $ARGV{'-m'};
-$plot_file = $ARGV{'-g'};
-$histogram_file = $ARGV{'-h'};
-$tm_file = $ARGV{'-x'};
-$output_file = $ARGV{'-o'};
+$transitiontable = $ARGV[0];
+$initialstate = $ARGV[1];
+$interestingnodes = $ARGV[2];
+$number_of_states = $ARGV[3];
+$flag4ss = $ARGV[4];
+$flag4tm = $ARGV[5];
+$plot_file = $ARGV[6];
+$histogram_file = $ARGV[7];
 
-if(0){
-print "<br> These are the inputs for SDDS: 
-tt = $transitiontable <br>
-is = $initialstate <br>
-int. nodes = $interestingnodes <br>
-states = $number_of_states <br>
-f4ss = $flag4ss <br>
-f4tm = $flag4tm <br>
-p_file = $plot_file <br>
-h_file = $histogram_file <br>
-tm_file = $tm_file <br>";
-}
+if ($ARGV[8]) { $tm_file = $ARGV[8];}
+if ($ARGV[9]) { $propensitymatrix = $ARGV[9];}
+if ($ARGV[10]) { $output_file = $ARGV[10];}
 
 # it is for random number generator
 srand(time | $$);
