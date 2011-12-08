@@ -352,17 +352,19 @@ given ($choice_box) {
 	    
 	            if ($upload_file_pm) {
 		            if ($DEBUG) {
-                        say ("perl SDDS.pl $filename_tt $initialState $interestingNodes $num_states $flag4ss $flag4tm $plot_file $histogram_file $tm_file $filename_pm <br>");
-                    }
-		            system ("perl SDDS.pl $filename_tt $initialState $interestingNodes $num_states $flag4ss $flag4tm $plot_file $histogram_file $tm_file $filename_pm") == 0 or die ("ERROR: SDDS.pl is dead! <br>");
+		                say ("perl SDDS.pl $filename_tt $initialState $interestingNodes $num_states $flag4ss $flag4tm $plot_file $histogram_file $tm_file $filename_pm <br>");
+		            }
+		            system ("perl SDDS.pl");
+		            #`perl SDDS.pl $filename_tt $initialState $interestingNodes $num_states $flag4ss $flag4tm $plot_file $histogram_file $tm_file $filename_pm`;
 	            }
 	            else {
-                    if ($DEBUG) {
+		            if ($DEBUG) {
 		                say ("perl SDDS.pl $filename_tt $initialState $interestingNodes $num_states $flag4ss $flag4tm $plot_file $histogram_file $tm_file <br>");
-                    }
-                    system ("perl SDDS.pl $filename_tt $initialState $interestingNodes $num_states $flag4ss $flag4tm $plot_file $histogram_file $tm_file") == 0 or die ("ERROR: SDDS.pl is dead! <br>");
+		            }
+	                system ("perl SDDS.pl");
+		            #`perl SDDS.pl $filename_tt $initialState $interestingNodes $num_states $flag4ss $flag4tm $plot_file $histogram_file $tm_file`;
 	            }
-	        } # end of /SDDS/
+	    } # end of /SDDS/
 
             default {
                 say 'Invalid choice of model, there was an error.'
