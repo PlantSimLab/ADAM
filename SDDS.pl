@@ -14,7 +14,7 @@ use warnings;
 
 use Subroutines4sdds;
 #use Data::Dumper;
-#use Getopt::Euclid;
+use Getopt::Euclid;
 use GD::Graph;
 use GD::Graph::linespoints;
 use GD::Graph::colour;
