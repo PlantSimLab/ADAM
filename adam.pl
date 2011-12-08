@@ -349,12 +349,18 @@ given ($choice_box) {
 	      $tm_file = "$clientip.tm";
 	      
 	      if ($upload_file_pm) {
-		say ("perl SDDS.pl $filename_tt $initialState $interestingNodes $num_states $flag4ss $flag4tm $plot_file $histogram_file $tm_file $filename_pm <br>");
-		system ("perl SDDS.pl $filename_tt $initialState $interestingNodes $num_states $flag4ss $flag4tm $plot_file $histogram_file $tm_file $filename_pm");
+		if ($DEBUG) {
+		  say ("perl SDDS.pl $filename_tt $initialState $interestingNodes $num_states $flag4ss $flag4tm $plot_file $histogram_file $tm_file $filename_pm <br>");
+		}
+		system ("perl SDDS.pl");
+		#`perl SDDS.pl $filename_tt $initialState $interestingNodes $num_states $flag4ss $flag4tm $plot_file $histogram_file $tm_file $filename_pm`;
 	      }
 	      else {
-		say ("perl SDDS.pl $filename_tt $initialState $interestingNodes $num_states $flag4ss $flag4tm $plot_file $histogram_file $tm_file <br>");
-		system ("perl SDDS.pl $filename_tt $initialState $interestingNodes $num_states $flag4ss $flag4tm $plot_file $histogram_file $tm_file");
+		if ($DEBUG) {
+		  say ("perl SDDS.pl $filename_tt $initialState $interestingNodes $num_states $flag4ss $flag4tm $plot_file $histogram_file $tm_file <br>");
+		}
+		system ("perl SDDS.pl");
+		#`perl SDDS.pl $filename_tt $initialState $interestingNodes $num_states $flag4ss $flag4tm $plot_file $histogram_file $tm_file`;
 	      }
 	    } # end of /SDDS/
 
