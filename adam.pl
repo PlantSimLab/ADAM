@@ -47,8 +47,10 @@ $dreamss       = param('dreamss');
 
 # Declaration and initialization of (extra) parameters for SDDS
 $upload_file_pm = param('upload_file_pm');
-$initialState = "\"" . param('initialState') . "\"";
-$interestingNodes = "\"" . param('interestingNodes') . "\"";
+#$initialState = "\"" . param('initialState') . "\"";
+#$interestingNodes = "\"" . param('interestingNodes') . "\"";
+$initialState = param('initialState');
+$interestingNodes = param('interestingNodes');
 $num_states = param('num_states');
 $steadyStates = param('SteadyStates');
 $transitionMatrix = param('TransitionMatrix');
