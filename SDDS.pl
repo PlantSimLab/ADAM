@@ -6,7 +6,6 @@
 
 print "---I am in SDDS.pl! <br>";
 
-if (0) {
 use strict;
 use warnings;
 
@@ -204,5 +203,5 @@ else {
   print IMG $histogram->plot(\@data_histogram)->png;
   close (IMG) or die ("<br>ERROR: Cannot close $histogram_file for writing! <br>");
 }
-}
+
 exit;
