@@ -354,17 +354,15 @@ given ($choice_box) {
 		            if ($DEBUG) {
 		                say ("perl SDDS.pl $filename_tt $initialState $interestingNodes $num_states $flag4ss $flag4tm $plot_file $histogram_file $tm_file $filename_pm <br>");
 		            }
-		            `perl SDDS.pl`;
-		            #`perl SDDS.pl $filename_tt $initialState $interestingNodes $num_states $flag4ss $flag4tm $plot_file $histogram_file $tm_file $filename_pm`;
+		            system ("perl SDDS.pl $filename_tt $initialState $interestingNodes $num_states $flag4ss $flag4tm $plot_file $histogram_file $tm_file $filename_pm");
 	            }
 	            else {
 		            if ($DEBUG) {
 		                say ("perl SDDS.pl $filename_tt $initialState $interestingNodes $num_states $flag4ss $flag4tm $plot_file $histogram_file $tm_file <br>");
 		            }
-	                system ("perl SDDS.pl");
-		            #`perl SDDS.pl $filename_tt $initialState $interestingNodes $num_states $flag4ss $flag4tm $plot_file $histogram_file $tm_file`;
+		            system ("perl SDDS.pl $filename_tt $initialState $interestingNodes $num_states $flag4ss $flag4tm $plot_file $histogram_file $tm_file");
 	            }
-	    } # end of /SDDS/
+	        } # end of /SDDS/
 
             default {
                 say 'Invalid choice of model, there was an error.'

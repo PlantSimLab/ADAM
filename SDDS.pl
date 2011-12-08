@@ -6,9 +6,6 @@
 
 print "---I am in SDDS.pl! <br>";
 
-exit;
-
-
 use strict;
 use warnings;
 
