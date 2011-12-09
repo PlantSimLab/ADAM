@@ -4,14 +4,10 @@
 
 #!/usr/bin/perl
 
-print "I am in SDDS.pl! <br>";
-
 use strict;
 use warnings;
 
 use Subroutines4sdds;
-#use Data::Dumper;
-#use Getopt::Euclid;
 use GD::Graph;
 use GD::Graph::linespoints;
 use GD::Graph::colour;
@@ -32,7 +28,7 @@ $tm_file = $ARGV[8];
 
 if ($ARGV[9]) { $propensitymatrix = $ARGV[9];}
 
-print ("---$transitiontable---$initialstate---$interestingnodes---$number_of_states---$flag4ss---$flag4tm---$plot_file---$histogram_file---$tm_file---$propensitymatrix---\n");
+#print ("---$transitiontable---$initialstate---$interestingnodes---$number_of_states---$flag4ss---$flag4tm---$plot_file---$histogram_file---$tm_file---$propensitymatrix---\n");
 
 # it is for random number generator
 srand(time | $$);

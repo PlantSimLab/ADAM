@@ -49,8 +49,6 @@ $dreamss       = param('dreamss');
 $upload_file_pm = param('upload_file_pm');
 $initialState = "\"" . param('initialState') . "\"";
 $interestingNodes = "\"" . param('interestingNodes') . "\"";
-#$initialState = param('initialState');
-#$interestingNodes = param('interestingNodes');
 $num_states = param('num_states');
 $steadyStates = param('SteadyStates');
 $transitionMatrix = param('TransitionMatrix');
@@ -349,7 +347,7 @@ given ($choice_box) {
 	      $plot_file = "$clientip.plot";
 	      $histogram_file = "$clientip.histogram";
 	      $tm_file = "$clientip.tm";
-	      $DEBUG = 1;
+	      $DEBUG = 0;
 	      
 	      if ($upload_file_pm) {
 		if ($DEBUG) {
