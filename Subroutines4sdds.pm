@@ -7,7 +7,6 @@ package Subroutines4sdds;
 use strict;
 use warnings;
 
-#use Data::Dumper;
 use List::Util qw [min];
 use State4sdds;
 use Class::Struct
@@ -65,7 +64,7 @@ sub get_initialstate {
     $sdds->num_nodes(scalar @{$sdds->initialState()});
 
     foreach my $value (@{$sdds->initialState()}) {
-      if ($value >= $sdds->num_states()) {
+      if ((isnot_number($value)) || ($value >= $sdds->num_states())) {
 	print ("<br>ERROR: Since the number of states is " , $sdds->num_states(), " , the initial state, @{$sdds->initialState()}, must consist of the numbers which are at most " , $sdds->num_states() - 1 , " . Please check the initial state and/or the number of states. <br>");
 	exit;
       }
