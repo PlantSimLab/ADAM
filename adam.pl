@@ -3,7 +3,8 @@
 ## Hussein Vastani
 ## Franziska Hinkelmann
 ## Bonbons
-## November 2011
+## Seda Arat (sdds)
+## December 2011
 
 use v5.10;
 use CGI qw/:standard/;    # load CGI routines
@@ -49,8 +50,6 @@ $dreamss       = param('dreamss');
 $upload_file_pm = param('upload_file_pm');
 $initialState = "\"" . param('initialState') . "\"";
 $interestingNodes = "\"" . param('interestingNodes') . "\"";
-#$initialState = param('initialState');
-#$interestingNodes = param('interestingNodes');
 $num_states = param('num_states');
 $steadyStates = param('SteadyStates');
 $transitionMatrix = param('TransitionMatrix');
@@ -351,8 +350,9 @@ given ($choice_box) {
 	      $plot_file = "$clientip.plot";
 	      $histogram_file = "$clientip.histogram";
 	      $tm_file = "$clientip.tm";
-	      $DEBUG = 1;
 
+	      $DEBUG = 0;
+	      
 	      if ($upload_file_pm) {
     		if ($DEBUG) {
 	    	  say ("perl SDDS.pl $filename_tt $initialState $interestingNodes $num_states $flag4ss $flag4tm $plot_file $histogram_file $tm_file $filename_pm <br>");
