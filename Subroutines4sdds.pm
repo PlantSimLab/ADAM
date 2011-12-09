@@ -251,7 +251,7 @@ sub get_transitiontable_and_allstates {
       
       # Creates a 'state' object.
       my ($state);
-      $state = State::new();
+      $state = State4sdds::new();
       $state->get_value_and_strState(\@is);
       $state->decimal_rep($sdds->convert_to_decimal(\@is));    
       
