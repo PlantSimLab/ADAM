@@ -347,22 +347,23 @@ given ($choice_box) {
                 else {
                     print "<br>FYI: No file was uploaded for the propensity matrix, so uniform distribution will be used. <br>";
                 }
-	      
-	            $plot_file = "$clientip.plot";
-	            $histogram_file = "$clientip.histogram";
-	            $tm_file = "$clientip.tm";
-	    
+
+	      $plot_file = "$clientip.plot";
+	      $histogram_file = "$clientip.histogram";
+	      $tm_file = "$clientip.tm";
+	      $DEBUG = 1;
+
 	      if ($upload_file_pm) {
-		if ($DEBUG) {
-		  say ("perl SDDS.pl $filename_tt $initialState $interestingNodes $num_states $flag4ss $flag4tm $plot_file $histogram_file $tm_file $filename_pm <br>");
-		}
-		system ("perl SDDS.pl $filename_tt $initialState $interestingNodes $num_states $flag4ss $flag4tm $plot_file $histogram_file $tm_file $filename_pm");
+    		if ($DEBUG) {
+	    	  say ("perl SDDS.pl $filename_tt $initialState $interestingNodes $num_states $flag4ss $flag4tm $plot_file $histogram_file $tm_file $filename_pm <br>");
+	    	}   
+		    system ("perl SDDS.pl $filename_tt $initialState $interestingNodes $num_states $flag4ss $flag4tm $plot_file $histogram_file $tm_file $filename_pm");
 	      }
 	      else {
-		if ($DEBUG) {
-		  say ("perl SDDS.pl $filename_tt $initialState $interestingNodes $num_states $flag4ss $flag4tm $plot_file $histogram_file $tm_file <br>");
-		}
-		system ("perl SDDS.pl $filename_tt $initialState $interestingNodes $num_states $flag4ss $flag4tm $plot_file $histogram_file $tm_file");
+		    if ($DEBUG) {
+		        say ("perl SDDS.pl $filename_tt $initialState $interestingNodes $num_states $flag4ss $flag4tm $plot_file $histogram_file $tm_file <br>");
+		    }
+		    system ("perl SDDS.pl $filename_tt $initialState $interestingNodes $num_states $flag4ss $flag4tm $plot_file $histogram_file $tm_file");
 	      }
 	    } # end of /SDDS/
 	    
