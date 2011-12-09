@@ -349,6 +349,7 @@ given ($choice_box) {
 	      $plot_file = "$clientip.plot";
 	      $histogram_file = "$clientip.histogram";
 	      $tm_file = "$clientip.tm";
+	      $DEBUG = 1;
 	      
 	      if ($upload_file_pm) {
 		if ($DEBUG) {

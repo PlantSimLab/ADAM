@@ -4,7 +4,7 @@
 
 #!/usr/bin/perl
 
-print "---I am in SDDS.pl! <br>";
+print "I am in SDDS.pl! <br>";
 
 use strict;
 use warnings;
@@ -16,8 +16,6 @@ use GD::Graph;
 use GD::Graph::linespoints;
 use GD::Graph::colour;
 use GD::Graph::bars;
-
-print "I am in SDDS.pl---! <br>";
 
 
 my ($transitiontable, $initialstate, $interestingnodes, $number_of_states, $flag4ss, $flag4tm, $plot_file, $histogram_file, $tm_file, $propensitymatrix);
@@ -33,6 +31,8 @@ $histogram_file = $ARGV[7];
 $tm_file = $ARGV[8];
 
 if ($ARGV[9]) { $propensitymatrix = $ARGV[9];}
+
+print ("---$transitiontable---$initialstate---$interestingnodes---$number_of_states---$flag4ss---$flag4tm---$plot_file---$histogram_file---$tm_file---$propensitymatrix---\n");
 
 # it is for random number generator
 srand(time | $$);
