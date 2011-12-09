@@ -352,15 +352,21 @@ given ($choice_box) {
 	      
 	      if ($upload_file_pm) {
 		if ($DEBUG) {
-		  say ("perl SDDS.pl $filename_tt $initialState $interestingNodes $num_states $flag4ss $flag4tm $plot_file $histogram_file $tm_file $filename_pm <br>");
+		  #say ("perl SDDS.pl $filename_tt $initialState $interestingNodes $num_states $flag4ss $flag4tm $plot_file $histogram_file $tm_file $filename_pm <br>");
 		}
-		system ("perl SDDS.pl", $filename_tt, $initialState, $interestingNodes, $num_states, $flag4ss, $flag4tm, $plot_file, $histogram_file, $tm_file, $filename_pm);
+		#system ("perl SDDS.pl", $filename_tt, $initialState, $interestingNodes, $num_states, $flag4ss, $flag4tm, $plot_file, $histogram_file, $tm_file, $filename_pm);
+		$n = 8;
+		$str = "seda";
+		system ("perl SDDS.pl $n $str");
 	      }
 	      else {
 		if ($DEBUG) {
-		  say ("perl SDDS.pl $filename_tt $initialState $interestingNodes $num_states $flag4ss $flag4tm $plot_file $histogram_file $tm_file <br>");
+		  #say ("perl SDDS.pl $filename_tt $initialState $interestingNodes $num_states $flag4ss $flag4tm $plot_file $histogram_file $tm_file <br>");
 		}
-		system ("perl SDDS.pl", $filename_tt, $initialState, $interestingNodes, $num_states, $flag4ss, $flag4tm, $plot_file, $histogram_file, $tm_file);
+		#system ("perl SDDS.pl", $filename_tt, $initialState, $interestingNodes, $num_states, $flag4ss, $flag4tm, $plot_file, $histogram_file, $tm_file);
+		$n = 28;
+		$str = "seda";
+		system ("perl SDDS.pl $n $str");
 	      }
 	    } # end of /SDDS/
 
