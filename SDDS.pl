@@ -6,13 +6,6 @@
 
 print "---I am in SDDS.pl! <br>";
 
-$n = $ARGV[0];
-$str = $ARGV[1];
-
-print "---$n---$str---\n";
-
-exit;
-
 use strict;
 use warnings;
 
@@ -27,7 +20,7 @@ use GD::Graph::bars;
 print "I am in SDDS.pl---! <br>";
 
 
-my ($transitiontable, $propensitymatrix, $initialstate, $interestingnodes, $number_of_states, $flag4ss, $flag4tm, $plot_file, $histogram_file, $tm_file, $output_file);
+my ($transitiontable, $initialstate, $interestingnodes, $number_of_states, $flag4ss, $flag4tm, $plot_file, $histogram_file, $tm_file, $propensitymatrix);
 
 $transitiontable = $ARGV[0];
 $initialstate = $ARGV[1];
@@ -37,10 +30,9 @@ $flag4ss = $ARGV[4];
 $flag4tm = $ARGV[5];
 $plot_file = $ARGV[6];
 $histogram_file = $ARGV[7];
+$tm_file = $ARGV[8];
 
-if ($ARGV[8]) { $tm_file = $ARGV[8];}
 if ($ARGV[9]) { $propensitymatrix = $ARGV[9];}
-if ($ARGV[10]) { $output_file = $ARGV[10];}
 
 # it is for random number generator
 srand(time | $$);
