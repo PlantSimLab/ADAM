@@ -6,6 +6,13 @@
 
 print "---I am in SDDS.pl! <br>";
 
+$n = $ARGV[0];
+$str = $ARGV[1];
+
+print "---$n---$str---\n";
+
+exit;
+
 use strict;
 use warnings;
 
