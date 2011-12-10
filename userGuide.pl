@@ -44,6 +44,11 @@ print <<ENDHTML;
 					<li>
 						<a href="#PBN"><font face="Verdana, Arial, Helvetica, sans-serif">How to Analyze a Probabilistic Network</font></a>
 					</li>
+
+                                        <li>
+						<a href="#SDDS"><font face="Verdana, Arial, Helvetica, sans-serif">How to Analyze a Stochastic Discrete Dynamical System (SDDS)?"</font></a>
+					</li>
+
 					<li>
 						<a href="#ModelType"><font face="Verdana, Arial, Helvetica, sans-serif">What is the <i>Model Type</i>?</font></a>
 					</li>
@@ -56,6 +61,21 @@ print <<ENDHTML;
 					<li>
 						<a href="#numStates"><font face="Verdana, Arial, Helvetica, sans-serif">What is the <i>number of states per node</i>?</font></a>
 					</li>
+
+                                        <li>
+						<a href="#transitionTable"><font face="Verdana, Arial, Helvetica, sans-serif">What is the (complete) transition table</i>?</font></a>
+					</li>
+                                        <li>
+						<a href="#propensityMatrix"><font face="Verdana, Arial, Helvetica, sans-serif">What is the propensity matrix</i>?</font></a>
+					</li>
+
+                                        <li>
+						<a href="#initialState"><font face="Verdana, Arial, Helvetica, sans-serif">What is the <i>initial state</i>?</font></a>
+					</li>
+                                        <li>
+						<a href="#interestingNodes"><font face="Verdana, Arial, Helvetica, sans-serif">What are the <i>nodes of interest</i>?</font></a>
+					</li>
+
 					<li>
 						<a href="#DG"><font face="Verdana, Arial, Helvetica, sans-serif">What is the <i>Dependency Graph</i>?</font></a>
 					</li>
@@ -103,7 +123,7 @@ print <<ENDHTML;
 					<a name="Overview" id="Overview">Overview</a>
 				</h3>
 				<p>
-					ADAM is a web-based tool for the analysis and visualization of the dynamics of multi-state, discrete models of biological networks. Multi-state discrete models are characterized by a collection of functions. For a network of <i>n</i> nodes, the corresponding discrete model will have <i>n</i> functions, where the <i>i</i>-th function describes the state transitions of the <i>i</i>-th node in the network. The user may select one of three inputs: a GINsim file, a PDS (polynomial dynamical system), or a PBN (probabilistic Boolean network). The user may upload a file or enter functions into the text box. Based upon which input type the user selects, other input options may appear. The user is guided through additional input/output options. ADAM can calculate fixed points and limit cycles of a specified length, produce the dependency graph for all networks and the state space for networks which are simulated, the graph of trajectories starting from a given initial state, and identify functional circuits along with their signed edges. ADAM analyzes dynamics using a combination of simulation and abstract algebra techniques. The method of computation and the output will depend on options selected by the user.
+					ADAM is a web-based tool for the analysis and visualization of the dynamics of multi-state, discrete models of biological networks. Multi-state discrete models are characterized by a collection of functions. For a network of <i>n</i> nodes, the corresponding discrete model will have <i>n</i> functions, where the <i>i</i>-th function describes the state transitions of the <i>i</i>-th node in the network. The user may select one of four inputs: a GINsim file, a PDS (polynomial dynamical system), a PBN (probabilistic Boolean network), or an SDDS (stochastic discrete dynamical system). The user may upload a file or enter functions into the text box. Based upon which input type the user selects, other input options may appear. The user is guided through additional input/output options. ADAM can calculate fixed points and limit cycles of a specified length, produce the dependency graph for all networks and the state space for networks which are simulated, the graph of trajectories starting from a given initial state, and identify functional circuits along with their signed edges. ADAM analyzes dynamics using a combination of simulation and abstract algebra techniques. The method of computation and the output will depend on options selected by the user.
 				</p>
 				<div align="right">
 					<a href="#top"><font size="-1" color="#FF0000">Return to the top</font></a>
@@ -160,6 +180,71 @@ print <<ENDHTML;
 				<div align="right">
 					<a href="#top"><font size="-1" color="#FF0000">Return to the top</font></a>
 				</div>
+
+                                <h3>
+					<a name="SDDS" id="SDDS">How to Analyze a Stachastic Discrete Dynamical System (SDDS)</a>
+				</h3>
+				<p>
+					The user uploads a text file (.txt) for the <b>complete</b> transition table corresponding to their network. A complete transition table consists of all possible states and the their next states with delimiter, an arrow (->). For example, the complete transition table of a 3-node boolean network can be:
+                                </p>
+                                <ul>
+					<li>0 0 0 -> 0 1 0</li>
+                                        <li>0 0 1 -> 0 1 1</li>
+                                        <li>0 1 0 -> 0 1 0</li>
+                                        <li>0 1 1 -> 0 0 0</li>
+                                        <li>1 0 0 -> 1 1 0</li>
+                                        <li>1 0 1 -> 1 0 1</li>
+                                        <li>1 1 0 -> 0 0 1</li>
+                                        <li>1 1 1 -> 0 0 0</li>
+				</ul>
+                                <p>
+                                        Note that the states consist of numbers not more than 2, because this is a boolean network, i.e. the number of states for this network is 2.
+				</p>
+                                <p>
+                                        The user may also upload a text file (.txt) for the propensity matrix. If s/he does not want to upload one for the propensity matrix, then all entries will be 0.5 as default. In the propensity matrix the number of rows must be 2 that the first row is for activation and the second row is for degredation, and the number of columns must be the number of nodes (variables) in the network. Propensity entries must be seperated by a space and between 0 and 1. The sum of the activation and degradation of a node does not have to be equal to 1. For example, the propensity matrix of a 3-node boolean network must have 2 rows and 3 colums and can be:
+				</p>
+                                <ul>
+					<li>0.17 0.4 0.85</li>
+                                        <li>0.05 0.7 0.01</li>
+				</ul>
+				<p>
+					Therefore, for the <b>first</b> node, 0.17 is the <b>activation propensity</b>, 0.05 is the <b>degradation propensity</b>; for the <b>second</b> node, 0.4 is the <b>activation propensity</b>, 0.7 is the <b>degradation propensity</b>; for the <b>third</b> node, 0.85 is the <b>activation propensity</b>, 0.01 is the <b>degradation propensity</b>.
+				</p>
+				<p>
+					The user specifies the initial state, which is the starting point for all trajectories and simulations for their system. An initial state consists of integers at least 0 and less than number of states and these numbers must be separated by a space. The number of integers in the initial state must be equal to the number of nodes (variables) in the network. For example, the initial state of a 3-node boolean network can be: 0 1 1 but cannot be: 0 1
+                          	</p>
+				<p>
+					The user specifies the nodes of interests, which consists of integers between 1 and the number of nodes (variables) and commas as delimiter. The nodes of interest indicates of which nodes the user would like to see the behavior in the plot of cell population simulation. The user can enter at most 5 nodes of interest. For example, in a 3-node boolean network, if the nodes of interest is 1, 3, then node1 and node 3 will be shown in the plot of cell population simulation.
+                          	</p>
+				<p>
+					The user specifies the number of states determining how many values a state can have. It must be prime and not more than 20. For example, the number of states is 2 for a boolean network. If the number of states is 5, then the states for any node are 0, 1, and 2.
+                          	</p>
+				<p>
+					The SDDS is analyzed (using "Plot of cell population simulation and Histogram for probability distribution) with the number of time steps = 50 and the number of simulation = 100. The plot of cell population simulation shows what the behavior of the nodes of interest are. It can be interpreted frm the plot whether the node oscillates or approaches a certain value. However, the histogram for probability distribution indicates how frequently the states show up in the trajectories. The state and its frequency will not be shown if the frequency is less than 1.
+                          	</p>
+				<p>
+					ADAM will provide what the steady states are for the system if the user checks "Print Steady States". Probability transition matrix can also be generated if the user checks "Print Probability Transition Matrix". A steady state is the state where the system does not change in time. In the example provided for the (complete) transition table, the steady states for that system are 0 1 0 and 1 0 1. Probability transition matrix is a huge structure provides the probability of going each state to all possible states. Only <b>nonzero</b> probabilities will be provided, i.e. if the probability of going from a state to another is 0, then it will not be shown in the probability transition matrix. Besides, the sum of all probabilities going from any specific state must be 1. For example, the probability transition matrix for a 3-node boolean network can be:
+                                <ul>
+					<li>Pr (0 0 0 -> 0 0 0) = 0.1</li>
+                               	        <li>Pr (0 0 0 -> 1 0 0) = 0.3 </li>
+					<li>Pr (0 0 0 -> 0 1 0) = 0.6</li>
+
+                               	        <li>Pr (0 0 1 -> 0 1 1) = 0.5 </li>
+					<li>Pr (0 0 1 -> 1 1 0) = 0.5</li>
+
+                               	        <li>Pr (0 1 0 -> 0 1 0) = 1 </li>
+
+                                        ... (continues...)
+
+				</ul>
+                                <p>
+                                        Pr (0 0 0 -> 0 0 0) = 0.1 indicates that the probability of going from 0 0 0 to 0 0 0 itself is 0.1. In addition, 0 0 1 goes to 0 1 1 and 1 1 0 with probability 0.5. Since 0 1 0 is one of the steady states, the probability of going from 0 1 0 to itself is of course 1. Note that the sum of all probabilities going from 0 0 0 is 1 (= 0.1 + 0.3 + 0.6).
+                          	</p>
+
+				<div align="right">
+					<a href="#top"><font size="-1" color="#FF0000">Return to the top</font></a>
+				</div>
+
 				<h3>
 					<a name="ModelType" id="ModelType">What is the <i>Model Type</i>?</a>
 				</h3>
@@ -191,7 +276,7 @@ print <<ENDHTML;
 					<a name="numStates" id="numStates">What is the <i>number of states per node</i>?</a>
 				</h3>
 				<p>
-					The states, or varying levels of concentration a protein may have or gene expression levels. If the number of states per node of a model is 2, then it is a Boolean model, with genes being either on, 0, or off, 1. In a model with 3 states, 0 can represent the state in which a gene is not expressed, 1 a gene with a medium expression level, and 2 a high leve. 
+					The states, or varying levels of concentration a protein may have or gene expression levels. If the number of states per node of a model is 2, then it is a Boolean model, with genes being either on, 0, or off, 1. In a model with 3 states, 0 can represent the state in which a gene is not expressed, 1 a gene with a medium expression level, and 2 a high level. 
 				</p>
 				<div align="right">
 					<a href="#top"><font size="-1" color="#FF0000">Return to the top</font></a>
@@ -409,7 +494,8 @@ print <<ENDHTML;
 				</h3>
 				<p>
 					<a href="mailto:fhinkel@vt.edu">Please email us if you have any problems!</a><br>
-					<font face="Verdana, Arial, Helvetica, sans-serif">Madison Brandon<br>
+					<font face="Verdana, Arial, Helvetica, sans-serif">
+                                        Madison Brandon<br>
 					Nick Eriksson<br>
 					Bonny Guang<br>
 					Abdul Jarrah<br>
@@ -418,6 +504,7 @@ print <<ENDHTML;
 					Rustin McNeill<br>
 					Brandilyn Stigler<br>
 					Hussein Vastani<br>
+                                        Seda Arat<br> 
 					<a href="http://img10.imageshack.us/img10/9024/p7080016crop.png">Chuck</a><br></font>
 				</p>
 				<div align="right">
