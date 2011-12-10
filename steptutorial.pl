@@ -227,13 +227,13 @@ print <<ENDHTML;
 				Click <i>Analyze</i> to view the outputs.
 			</p>
 			<p>
-				<img border="0" width="150" height="450" src="/steptutorial_files/sdds.png">
+				<img border="0" width="434" height="181" src="/steptutorial_files/sdds.png">
 			</p>
 
 		</div>
 		<div id="nav">
 			<h2>
-				<a href="/cgi-bin/git/adam.html">Back to ADAM</a>&nbsp;&nbsp;&nbsp; <a href="/userGuide.html">User Guide</a>
+				<a href="/cgi-bin/git/adam.pl">Back to ADAM</a>&nbsp;&nbsp;&nbsp; <a href="/userGuide.html">User Guide</a>
 			</h2>
 		</div>
 		</div>
