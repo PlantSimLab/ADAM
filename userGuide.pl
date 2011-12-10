@@ -167,7 +167,7 @@ print <<ENDHTML;
 				</div>
 
                                 <h3>
-					<a name="SDDS" id="SDDS">How to Analyze a Stachastic Discrete Dynamical System (SDDS)</a>
+					<a name="SDDS" id="SDDS">How to Analyze a Stochastic Discrete Dynamical System (SDDS)</a>
 				</h3>
 				<p>
 					The user uploads a text file (.txt) for the <b>complete transition table</b> corresponding to their network. A complete transition table consists of all possible states and the their next states with delimiter, an arrow (->). For example, the complete transition table of a 3-node boolean network can be:
@@ -199,7 +199,7 @@ print <<ENDHTML;
 					The user specifies the <b>initial state</b>, which is the starting point for all trajectories and simulations for their system. An initial state consists of integers at least 0 and less than number of states and these numbers must be separated by a space. The number of integers in the initial state must be equal to the number of nodes (variables) in the network. For example, the initial state of a 3-node boolean network can be: 0 1 1 but cannot be: 0 1
                           	</p>
 				<p>
-					The user specifies the <b>nodes of interests</b>, which consists of integers between 1 and the number of nodes (variables) and commas as delimiter. The nodes of interest indicates of which nodes the user would like to see the behavior in the plot of cell population simulation. The user can enter at most 5 nodes of interest. For example, in a 3-node boolean network, if the nodes of interest is 1, 3, then node1 and node 3 will be shown in the plot of cell population simulation.
+					The user specifies the <b>nodes of interest</b>, which consists of integers between 1 and the number of nodes (variables) and commas as delimiter. The nodes of interest indicates of which nodes the user would like to see the behavior in the plot of cell population simulation. The user can enter at most 5 nodes of interest. For example, in a 3-node boolean network, if the nodes of interest is 1, 3, then node1 and node 3 will be shown in the plot of cell population simulation.
                           	</p>
 				<p>
 					The user specifies the <b>number of states</b> determining how many values a state can have. It must be prime and not more than 20. For example, the number of states is 2 for a boolean network. If the number of states is 5, then the states for any node are 0, 1, and 2.
