@@ -27,7 +27,7 @@ print <<ENDHTML;
 			<h1>
 				Detailed examples of how to use ADAM
 			</h1>
-			<p><font size="2">
+			<p><font size="3">
 				<a href="#GS">Logical Model (GINsim)</a> &nbsp;&nbsp;&nbsp; <a href="#PDS">Polynomial Dynamical System</a> &nbsp;&nbsp;&nbsp; <a href="#PBN">Probabilistic Boolean Network</a> &nbsp;&nbsp;&nbsp; <a href="#LN">Large Network</a> &nbsp;&nbsp;&nbsp; <a href="#conj">Conjunctive Network</a> &nbsp;&nbsp;&nbsp; <a href="#SDDS">Stochastic Discrete Dynamical System</a></font>
 			</p>
 			<h2>
