@@ -28,7 +28,7 @@ print <<ENDHTML;
 				Detailed examples of how to use ADAM
 			</h1>
 			<p><font size="2">
-				<a href="#GS">Logical Model (GINsim)</a> &nbsp;&nbsp;&nbsp; <a href="#PDS">Polynomial Dynamical System</a> &nbsp;&nbsp;&nbsp; <a href="#PBN">Probabilistic Boolean Network</a> &nbsp;&nbsp;&nbsp; <a href="#LN">Large Network</a> &nbsp;&nbsp;&nbsp; <a href="#conj">Conjunctive Network</a></font>
+				<a href="#GS">Logical Model (GINsim)</a> &nbsp;&nbsp;&nbsp; <a href="#PDS">Polynomial Dynamical System</a> &nbsp;&nbsp;&nbsp; <a href="#PBN">Probabilistic Boolean Network</a> &nbsp;&nbsp;&nbsp; <a href="#LN">Large Network</a> &nbsp;&nbsp;&nbsp; <a href="#conj">Conjunctive Network</a> &nbsp;&nbsp;&nbsp; <a href="#SDDS">Stochastic Discrete Dynamical System</a></font>
 			</p>
 			<h2>
 				<a name="GS" id="GS">How to use a Logical Model (GINsim file) as an input</a>
@@ -192,10 +192,48 @@ print <<ENDHTML;
 			<p>
 				<img border="0" width="434" height="49" src="steptutorial_files/image026.png">
 			</p>
+
+<h2>
+				<a name="SDDS" id="SDDS">How to enter a Stochastic Discrete Dynamical System (SDDS)</a>
+			</h2>
+			<p>
+				Select <b>Stochastic Discrete Dynamical Systems</b> as the format of the input functions.
+			</p>
+			<p>
+				Upload the (complete) transition table file for 4 node Lambda phage model (available <a href = "/steptutorial_files/LambdaPhage_tt.txt" target="_blank">here</a>).
+			</p>
+			<p>
+				Upload the propensity matrix file for 4 node Lambda phage model-Lysogeny (available <a href = "/steptutorial_files/LambdaPhageLysogeny_pp.txt" target="_blank">here</a>).
+			</p>
+                        <p>
+				Enter 0 0 0 0 as the initial state for 4 node Lambda phage model.
+			</p>
+			<p>
+				Enter 1, 2, 3, 4 as the nodes of interest. 
+			</p>
+                        <p>
+				Enter 5 as the number of states for 4 node Lambda phage model.
+			</p>
+			<p>
+				Note that "Plot of cell population simulation and Histogram for probability distribution" is always selected. 
+			</p>
+	                <p>
+				Select "Print Steady States" if you would like to know what the steady states are.
+			</p>
+                	<p>
+			        Select "Print Probability Transition Matrix" if you would like to see the probability transition matrix.
+			</p>
+			<p>
+				Click <i>Analyze</i> to view the outputs.
+			</p>
+			<p>
+				<img border="0" width="150" height="450" src="/steptutorial_files/sdds.png">
+			</p>
+
 		</div>
 		<div id="nav">
 			<h2>
-				<a href="/cgi-bin/git/adam.pl">Back to ADAM</a>&nbsp;&nbsp;&nbsp; <a href="/userGuide.html">User Guide</a>
+				<a href="/cgi-bin/git/adam.html">Back to ADAM</a>&nbsp;&nbsp;&nbsp; <a href="/userGuide.html">User Guide</a>
 			</h2>
 		</div>
 		</div>
