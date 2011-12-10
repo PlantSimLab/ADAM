@@ -31,73 +31,68 @@ s.parentNode.insertBefore(ga, s);
 })();
 
 </script>
-</head>
-<body>
-<div id="header"></div>
-<div id="main">
-<div class="nav"></div>
-<div>
-   ADAM uses a combination of simulation and mathematical algorithms
-  to analyze the dynamics of discrete biological systems. It can
-  analyze bounded <b>Petri-nets</b> (generated with <a
-  href="http://www-dssz.informatik.tu-cottbus.de/software/snoopy.html">Snoopy</a>),
-  <b>Logical Models</b> (in <a
-  href="http://gin.univ-mrs.fr/">GINSim</a> format), <b>Polynomial Dynamical Systems (PDS)</b>, <b>Probabilistic Boolean (or multistate) Networks</b>, and <b>Stochastic Discrete Dynamical Systems (SDDS)</b>. For small enough networks (deterministic or probabilistic), ADAM simulates the complete state space of the model and finds all attractors (steady states and limit cycles) together with statistics about the size of components. For larger networks, ADAM computes fixed points for both deterministic and probabilistic networks, and limit cycle of the length specified by the user for deterministic networks. You can follow our <a href="steptutorial.pl">step-by-step tutorial</a> or read the <a href="userGuide.pl" target="_blank">user guide</a>. It is important that you follow the format specified in the guide. Make your selections and provide inputs (if any) in the form below and click <i>Analyze</i> to run the software. To generate a model from experimental time course data, you can use <a href="http://polymath.vbi.vt.edu/polynome">Polynome</a>.<br>
-  <br>
-</div>
-<form>
-<table>
-  <tr valign="top">
-    <td class="titleBox" colspan="2">
-      <strong><font color="black">1)</font></strong>
-    </td>
-  </tr>
-  <tr class="lines">
-    <td colspan="2"></td>
-  </tr>
-  <tr valign="top">
-    <td>
-      <b>I want to</b><br>
-      <input type="radio" name="choice_box" value="build">build a new model from experimental data;<br>
-      <input type="radio" name="choice_box" value="analyze" checked="checked">analyze an existing model;<br>
-      <input type="radio" name="choice_box" value="control">find optimal control for an existing model.
-    </td>
-    <td>
-    <div class="explain" id="explain_build">
-      <b>Build new model</b>: Build a new model based on your experimental data.
-    </div>
-    <div class="explain" id="explain_analyze">
-      <b>Analyze existing model</b>: Enter an existing model here. You can then analyze it for its long term behavior, and for small enough models obtain a picture of the phase space.
-    </div>
-    <div class="explain" id="explain_control">
-      <b>Heuristic Control</b>: Experimental feature: find the optimal knock out strategy for a given network. You might first need to build your network from experimental data or convert a Petri net or logical model to a polynomial dynamical system.
-    </div>
-    </td>
-  </tr>
-  <tr valign="top">
-    <td class="titleBox" colspan="2">
-      <strong><font color="black">2)</font></strong>
-    </td>
-  </tr>
-  <tr class="lines">
-    <td colspan="2"></td>
-  </tr>
-  <tr valign="top">
-    <td>
-    <div class="input" id="build">
-      Build your model from transition tables.<br>
-      <input type="checkbox" name="continuous" value="continuous">Continuous
-    </div>
-    <div class="input" id="analyze">
-      <strong>Model Type</strong><br>
-      <input type="radio" name="inputType" value="PDS" checked="checked">Polynomial Dynamical System (PDS)<br>
-      <input type="radio" name="inputType" value="BN">Boolean Network<br>
-      <input type="radio" name="inputType" value="pPDS">Probabilistic Polynomial Dynamical Systems (pPDS)<br>
-      <!--<input type="radio" name="inputType" value="PBN">Probabilistic Boolean Network (PBN)<br> -->
-      <input type="radio" name="inputType" value="Petrinet">Petri Net (Snoopy file)<br>
-      <input type="radio" name="inputType" value="GINsim">Logical Model (GINsim file)<br>
+	</head>
+	<body>
+		<div id="header"></div>
+		<div id="main">
+			<div class="nav"></div>
+			<div>
+				ADAM uses a combination of simulation and mathematical algorithms to analyze the dynamics of discrete biological systems. It can analyze bounded <b>Petri-nets</b> (generated with <a href="http://www-dssz.informatik.tu-cottbus.de/software/snoopy.html">Snoopy</a>), <b>Logical Models</b> (in <a href="http://gin.univ-mrs.fr/">GINSim</a> format), <b>Polynomial Dynamical Systems (PDS)</b>, and <b>Probabilistic Boolean (or multistate) Networks</b>, and <b>Stochastic Discrete Dynamical Systems (SDDS)</b>. For small enough networks (deterministic or probabilistic), ADAM simulates the complete state space of the model and finds all attractors (steady states and limit cycles) together with statistics about the size of components. For larger networks, ADAM computes fixed points for both deterministic and probabilistic networks, and limit cycle of the length specified by the user for deterministic networks. You can follow our <a href="/cgi-bin/git/steptutorial.pl">step-by-step tutorial</a> or read the <a href="/cgi-bin/git/userGuide.pl" target="_blank">user guide</a>. It is important that you follow the format specified in the guide. Make your selections and provide inputs (if any) in the form below and click <i>Analyze</i> to run the software. To generate a model from experimental time course data, you can use <a href="http://polymath.vbi.vt.edu/polynome">Polynome</a>.<br>
+				<br>
+			</div>
+			<form>
+				<table>
+					<tr valign="top">
+						<td class="titleBox" colspan="2">
+							<strong><font color="black">1)</font></strong>
+						</td>
+					</tr>
+					<tr class="lines">
+						<td colspan="2"></td>
+					</tr>
+					<tr valign="top">
+						<td>
+							<b>I want to</b><br>
+							<input type="radio" name="choice_box" value="build">build a new model from experimental data;<br>
+							<input type="radio" name="choice_box" value="analyze" checked="checked">analyze an existing model;<br>
+							<input type="radio" name="choice_box" value="control">find optimal control for an existing model.
+						</td>
+						<td>
+							<div class="explain" id="explain_build">
+								<b>Build new model</b>: Build a new model based on your experimental data.
+							</div>
+							<div class="explain" id="explain_analyze">
+								<b>Analyze existing model</b>: Enter an existing model here. You can then analyze it for its long term behavior, and for small enough models obtain a picture of the phase space.
+							</div>
+							<div class="explain" id="explain_control">
+								<b>Heuristic Control</b>: Experimental feature: find the optimal knock out strategy for a given network. You might first need to build your network from experimental data or convert a Petri net or logical model to a polynomial dynamical system.
+							</div>
+						</td>
+					</tr>
+					<tr valign="top">
+						<td class="titleBox" colspan="2">
+							<strong><font color="black">2)</font></strong>
+						</td>
+					</tr>
+					<tr class="lines">
+						<td colspan="2"></td>
+					</tr>
+					<tr valign="top">
+						<td>
+							<div class="input" id="build">
+								Build your model from transition tables.<br>
+								<input type="checkbox" name="continuous" value="continuous">Continuous
+							</div>
+							<div class="input" id="analyze">
+								<strong>Model Type</strong><br>
+								<input type="radio" name="inputType" value="PDS" checked="checked">Polynomial Dynamical System (PDS)<br>
+								<input type="radio" name="inputType" value="BN">Boolean Network<br>
+								<input type="radio" name="inputType" value="pPDS">Probabilistic Polynomial Dynamical Systems (pPDS)<br>
+								<!--<input type="radio" name="inputType" value="PBN">Probabilistic Boolean Network (PBN)<br> -->
+								 <input type="radio" name="inputType" value="Petrinet">Petri Net (Snoopy file)<br>
+								<input type="radio" name="inputType" value="GINsim">Logical Model (GINsim file)<br>
 
-      <input type="radio"name="inputType"value="SDDS">Stochastic Discrete Dynamical Systems (SDDS)<br>
+                                <input type="radio"name="inputType"value="SDDS">Stochastic Discrete Dynamical Systems (SDDS)<br>
 
     </div>
     <div class="input" id="control">
