@@ -224,10 +224,10 @@ print <<ENDHTML;
 			        Select "Print Probability Transition Matrix" if you would like to see the probability transition matrix.
 			</p>
 			<p>
-				Click <i>Analyze</i> to view the outputs.
+				Click <i>Analyze</i> to view the outputs. <br><br>
 			</p>
 			<p>
-				<img border="0" width="434" height="181" src="/steptutorial_files/sdds.png">
+				<img border="0" width="434" height="181" src="steptutorial_files/sdds.png">
 			</p>
 
 		</div>
