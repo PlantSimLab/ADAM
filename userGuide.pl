@@ -61,21 +61,6 @@ print <<ENDHTML;
 					<li>
 						<a href="#numStates"><font face="Verdana, Arial, Helvetica, sans-serif">What is the <i>number of states per node</i>?</font></a>
 					</li>
-
-                                        <li>
-						<a href="#transitionTable"><font face="Verdana, Arial, Helvetica, sans-serif">What is the (complete) transition table</i>?</font></a>
-					</li>
-                                        <li>
-						<a href="#propensityMatrix"><font face="Verdana, Arial, Helvetica, sans-serif">What is the propensity matrix</i>?</font></a>
-					</li>
-
-                                        <li>
-						<a href="#initialState"><font face="Verdana, Arial, Helvetica, sans-serif">What is the <i>initial state</i>?</font></a>
-					</li>
-                                        <li>
-						<a href="#interestingNodes"><font face="Verdana, Arial, Helvetica, sans-serif">What are the <i>nodes of interest</i>?</font></a>
-					</li>
-
 					<li>
 						<a href="#DG"><font face="Verdana, Arial, Helvetica, sans-serif">What is the <i>Dependency Graph</i>?</font></a>
 					</li>
@@ -185,7 +170,7 @@ print <<ENDHTML;
 					<a name="SDDS" id="SDDS">How to Analyze a Stachastic Discrete Dynamical System (SDDS)</a>
 				</h3>
 				<p>
-					The user uploads a text file (.txt) for the <b>complete</b> transition table corresponding to their network. A complete transition table consists of all possible states and the their next states with delimiter, an arrow (->). For example, the complete transition table of a 3-node boolean network can be:
+					The user uploads a text file (.txt) for the <b>complete transition table</b> corresponding to their network. A complete transition table consists of all possible states and the their next states with delimiter, an arrow (->). For example, the complete transition table of a 3-node boolean network can be:
                                 </p>
                                 <ul>
 					<li>0 0 0 -> 0 1 0</li>
@@ -201,7 +186,7 @@ print <<ENDHTML;
                                         Note that the states consist of numbers not more than 2, because this is a boolean network, i.e. the number of states for this network is 2.
 				</p>
                                 <p>
-                                        The user may also upload a text file (.txt) for the propensity matrix. If s/he does not want to upload one for the propensity matrix, then all entries will be 0.5 as default. In the propensity matrix the number of rows must be 2 that the first row is for activation and the second row is for degredation, and the number of columns must be the number of nodes (variables) in the network. Propensity entries must be seperated by a space and between 0 and 1. The sum of the activation and degradation of a node does not have to be equal to 1. For example, the propensity matrix of a 3-node boolean network must have 2 rows and 3 colums and can be:
+                                        The user may also upload a text file (.txt) for the <b>propensity matrix</b>. If s/he does not want to upload one for the propensity matrix, then the uniform distribution will be used, i.e. all entries will be 0.5 as default. In the propensity matrix the number of rows must be 2 that the first row is for activation and the second row is for degredation, and the number of columns must be the number of nodes (variables) in the network. Propensity entries must be seperated by a space and between 0 and 1. The sum of the activation and degradation of a node does not have to be equal to 1. For example, the propensity matrix of a 3-node boolean network must have 2 rows and 3 colums and can be:
 				</p>
                                 <ul>
 					<li>0.17 0.4 0.85</li>
@@ -211,19 +196,19 @@ print <<ENDHTML;
 					Therefore, for the <b>first</b> node, 0.17 is the <b>activation propensity</b>, 0.05 is the <b>degradation propensity</b>; for the <b>second</b> node, 0.4 is the <b>activation propensity</b>, 0.7 is the <b>degradation propensity</b>; for the <b>third</b> node, 0.85 is the <b>activation propensity</b>, 0.01 is the <b>degradation propensity</b>.
 				</p>
 				<p>
-					The user specifies the initial state, which is the starting point for all trajectories and simulations for their system. An initial state consists of integers at least 0 and less than number of states and these numbers must be separated by a space. The number of integers in the initial state must be equal to the number of nodes (variables) in the network. For example, the initial state of a 3-node boolean network can be: 0 1 1 but cannot be: 0 1
+					The user specifies the <b>initial state</b>, which is the starting point for all trajectories and simulations for their system. An initial state consists of integers at least 0 and less than number of states and these numbers must be separated by a space. The number of integers in the initial state must be equal to the number of nodes (variables) in the network. For example, the initial state of a 3-node boolean network can be: 0 1 1 but cannot be: 0 1
                           	</p>
 				<p>
-					The user specifies the nodes of interests, which consists of integers between 1 and the number of nodes (variables) and commas as delimiter. The nodes of interest indicates of which nodes the user would like to see the behavior in the plot of cell population simulation. The user can enter at most 5 nodes of interest. For example, in a 3-node boolean network, if the nodes of interest is 1, 3, then node1 and node 3 will be shown in the plot of cell population simulation.
+					The user specifies the <b>nodes of interests</b>, which consists of integers between 1 and the number of nodes (variables) and commas as delimiter. The nodes of interest indicates of which nodes the user would like to see the behavior in the plot of cell population simulation. The user can enter at most 5 nodes of interest. For example, in a 3-node boolean network, if the nodes of interest is 1, 3, then node1 and node 3 will be shown in the plot of cell population simulation.
                           	</p>
 				<p>
-					The user specifies the number of states determining how many values a state can have. It must be prime and not more than 20. For example, the number of states is 2 for a boolean network. If the number of states is 5, then the states for any node are 0, 1, and 2.
+					The user specifies the <b>number of states</b> determining how many values a state can have. It must be prime and not more than 20. For example, the number of states is 2 for a boolean network. If the number of states is 5, then the states for any node are 0, 1, and 2.
                           	</p>
 				<p>
-					The SDDS is analyzed (using "Plot of cell population simulation and Histogram for probability distribution) with the number of time steps = 50 and the number of simulation = 100. The plot of cell population simulation shows what the behavior of the nodes of interest are. It can be interpreted frm the plot whether the node oscillates or approaches a certain value. However, the histogram for probability distribution indicates how frequently the states show up in the trajectories. The state and its frequency will not be shown if the frequency is less than 1.
+					The SDDS is analyzed (using "Plot of cell population simulation and Histogram for probability distribution) with the number of time steps = 50 and the number of simulation = 100. The <b>plot of cell population simulation</b> shows what the behavior of the nodes of interest are. It can be interpreted from the plot whether the node oscillates or approaches a certain value. However, the <b>histogram for probability distribution</b> indicates how frequently the states show up in the trajectories. The state and its frequency will not be shown if the frequency is less than 1.
                           	</p>
 				<p>
-					ADAM will provide what the steady states are for the system if the user checks "Print Steady States". Probability transition matrix can also be generated if the user checks "Print Probability Transition Matrix". A steady state is the state where the system does not change in time. In the example provided for the (complete) transition table, the steady states for that system are 0 1 0 and 1 0 1. Probability transition matrix is a huge structure provides the probability of going each state to all possible states. Only <b>nonzero</b> probabilities will be provided, i.e. if the probability of going from a state to another is 0, then it will not be shown in the probability transition matrix. Besides, the sum of all probabilities going from any specific state must be 1. For example, the probability transition matrix for a 3-node boolean network can be:
+					ADAM will provide what the steady states are for the system if the user checks "<b>Print Steady States</b>", and probability transition matrix if the user checks "<b>Print Probability Transition Matrix</b>". A steady state is the state where the system does not change in time. In the example given for the (complete) transition table, the steady states for that system are 0 1 0 and 1 0 1. However, a probability transition matrix is a huge structure provides the probability of going each state to all possible states. Only <b>nonzero</b> probabilities will be provided, i.e. if the probability of going from a state to another is 0, then it will not be shown in the probability transition matrix. Besides, the sum of all probabilities going from any specific state must be 1. For example, the probability transition matrix for a 3-node boolean network can be:
                                 <ul>
 					<li>Pr (0 0 0 -> 0 0 0) = 0.1</li>
                                	        <li>Pr (0 0 0 -> 1 0 0) = 0.3 </li>
