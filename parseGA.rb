@@ -8,6 +8,8 @@ require 'pp'
 #        ARGV[2]: dream steady state
 #        ARGV[3]: Input Function
 
+debug = false
+
 
 
 unless ARGV.size == 4
@@ -79,6 +81,8 @@ dreamss = ARGV[2]
 inputfunctions = ARGV[3]
 
 
+
+
 puts "<br>"
 p = p_value.to_i
 
@@ -89,12 +93,20 @@ end
 
 # Read the functions
 functions = Array.new
+
+if debug 
+  puts functions
+end
+
 file = File.new(inputfunctions, "r")
 cnt = 0
 while(line = file.gets)
   functions[cnt] = line.gsub(" ", "")
   functions[cnt] = "\"" + functions[cnt].rstrip + "\""
   cnt = cnt + 1
+  if debug 
+    puts line
+  end
 end
 file.close
 
@@ -157,7 +169,7 @@ if $?.exitstatus == 7
   puts " The genetic algorithm found these resulting knockouts<br>" 
   parseoutput(m2_result)
 else
-  "<font color=red>Error. Number of nodes should be a positive integer.</font color=red><br>"
+  puts "<font color=red>Error. Number of nodes should be a positive integer.</font color=red><br>"
   puts "<font color=red> Error. Please re-enter your function, refer to the userguide for the correct format.</font color=red><br>"
 end
 

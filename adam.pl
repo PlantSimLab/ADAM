@@ -267,8 +267,8 @@ given ($choice_box) {
     when (/control/) {
         print "We are implementing Heuristic $format_box <br>"
             if ($DEBUG);
-        system('ruby parseGA.rb "$p_value" "$weights" "$dreamss" "$filename"')
-            ; #"ruby parseGA.rb \"$p_value\" \"$weights\" \"$dreamss\" \"$filename\""
+        system("ruby parseGA.rb \"$p_value\" \"$weights\" \"$dreamss\" \"$filename\""); #"ruby parseGA.rb \"$p_value\" \"$weights\" \"$dreamss\" \"$filename\""
+		print "ruby parseGA.rb \"$p_value\" \"$weights\" \"$dreamss\" \"$filename\"" if ($DEBUG);
     }
     when (/build/) {
 
