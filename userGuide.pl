@@ -46,7 +46,7 @@ print <<ENDHTML;
 					</li>
 
                                         <li>
-						<a href="#SDDS"><font face="Verdana, Arial, Helvetica, sans-serif">How to Analyze a Stochastic Discrete Dynamical System (SDDS)?"</font></a>
+						<a href="#SDDS"><font face="Verdana, Arial, Helvetica, sans-serif">How to Analyze a Stochastic Discrete Dynamical System (SDDS)</font></a>
 					</li>
 
 					<li>
@@ -202,10 +202,10 @@ print <<ENDHTML;
 					The user specifies the <b>nodes of interest</b>, which consists of integers between 1 and the number of nodes (variables) and commas as delimiter. The nodes of interest indicates of which nodes the user would like to see the behavior in the plot of cell population simulation. The user can enter at most 5 nodes of interest. For example, in a 3-node boolean network, if the nodes of interest is 1, 3, then node1 and node 3 will be shown in the plot of cell population simulation.
                           	</p>
 				<p>
-					The user specifies the <b>number of states</b> determining how many values a state can have. It must be prime and not more than 20. For example, the number of states is 2 for a boolean network. If the number of states is 5, then the states for any node are 0, 1, and 2.
+					The user specifies the <b>number of states</b> determining how many values a state can have. It must be prime and not more than 20. For example, the number of states is 2 for a boolean network. If the number of states is 3, then the states for any node are 0, 1, and 2.
                           	</p>
 				<p>
-					The SDDS is analyzed (using "Plot of cell population simulation and Histogram for probability distribution) with the number of time steps = 50 and the number of simulation = 100. The <b>plot of cell population simulation</b> shows what the behavior of the nodes of interest are. It can be interpreted from the plot whether the node oscillates or approaches a certain value. However, the <b>histogram for probability distribution</b> indicates how frequently the states show up in the trajectories. The state and its frequency will not be shown if the frequency is less than 1.
+					The SDDS is analyzed (using "Plot of cell population simulation and Histogram for probability distribution) with the number of time steps = 50 and the number of simulation = 100. The <b>plot of cell population simulation</b> shows what the behavior of the nodes of interest are. It can be interpreted from the plot whether the node oscillates or approaches to a certain value. However, the <b>histogram for probability distribution</b> indicates how frequently the states show up in the trajectories. The state and its frequency will not be shown if the frequency is less than 1.
                           	</p>
 				<p>
 					ADAM will provide what the steady states are for the system if the user checks "<b>Print Steady States</b>", and probability transition matrix if the user checks "<b>Print Probability Transition Matrix</b>". A steady state is the state where the system does not change in time. In the example given for the (complete) transition table, the steady states for that system are 0 1 0 and 1 0 1. However, a probability transition matrix is a huge structure provides the probability of going each state to all possible states. Only <b>nonzero</b> probabilities will be provided, i.e. if the probability of going from a state to another is 0, then it will not be shown in the probability transition matrix. Besides, the sum of all probabilities going from any specific state must be 1. For example, the probability transition matrix for a 3-node boolean network can be:
