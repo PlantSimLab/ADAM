@@ -193,7 +193,7 @@ print <<ENDHTML;
                                         <li>0.05 0.7 0.01</li>
 				</ul>
 				<p>
-					Therefore, for the <b>first</b> node, 0.17 is the <b>activation propensity</b>, 0.05 is the <b>degradation propensity</b>; for the <b>second</b> node, 0.4 is the <b>activation propensity</b>, 0.7 is the <b>degradation propensity</b>; for the <b>third</b> node, 0.85 is the <b>activation propensity</b>, 0.01 is the <b>degradation propensity</b>.
+					Therefore, for the <b>first</b> node, 0.17 is the <b>activation propensity</b>, 0.05 is the <b>degradation propensity</b>; for the <b>second</b> node, 0.4 is the <b>activation propensity</b>, 0.7 is the <b>degradation propensity</b>; for the <b>third</b> node, 0.85 is the <b>activation propensity</b>, 0.01 is the <b>degradation propensity</b>. "Activation Propensity" is the probability that the variable is being activated (increased) at the next time step. Similarly, "Degradation Propensity" is the probability that the variable is being degraded(decreased) at the next time step.
 				</p>
 				<p>
 					The user specifies the <b>initial state</b>, which is the starting point for all trajectories and simulations for their system. An initial state consists of integers at least 0 and less than number of states and these numbers must be separated by a space. The number of integers in the initial state must be equal to the number of nodes (variables) in the network. For example, the initial state of a 3-node boolean network can be: 0 1 1 but cannot be: 0 1
