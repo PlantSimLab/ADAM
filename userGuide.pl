@@ -208,7 +208,7 @@ print <<ENDHTML;
 					The SDDS is analyzed (using "Plot of cell population simulation and Histogram for probability distribution) with the number of time steps = 50 and the number of simulation = 100. The <b>plot of cell population simulation</b> shows what the behavior of the nodes of interest are. It can be interpreted from the plot whether the node oscillates or approaches to a certain value. However, the <b>histogram for probability distribution</b> indicates how frequently the states show up in the trajectories. The state and its frequency will not be shown if the frequency is less than 1.
                           	</p>
 				<p>
-					ADAM will provide what the steady states are for the system if the user checks "<b>Print Steady States</b>", and probability transition matrix if the user checks "<b>Print Probability Transition Matrix</b>". A steady state is the state where the system does not change in time. In the example given for the (complete) transition table, the steady states for that system are 0 1 0 and 1 0 1. However, a probability transition matrix is a huge structure provides the probability of going each state to all possible states. Only <b>nonzero</b> probabilities will be provided, i.e. if the probability of going from a state to another is 0, then it will not be shown in the probability transition matrix. Besides, the sum of all probabilities going from any specific state must be 1. For example, the probability transition matrix for a 3-node boolean network can be:
+					ADAM will provide what the steady states are for the system if the user checks "<b>Print Steady States</b>", and probability transition matrix if the user checks "<b>Print Probability Transition Matrix</b>". A steady state is the state where the system does not change in time. In the example given for the (complete) transition table, the steady states for that system are 0 1 0 and 1 0 1. However, a probability transition matrix is a huge structure provides the probability of going each state to all possible states. Only <b>nonzero</b> probabilities will be provided, i.e. if the probability of going from a state to another is 0, then it will not be shown in the probability transition matrix. Besides, the sum of all transition probabilities from any specific state to all states must be 1. Here is an example for the probability transition matrix of a 3-node boolean network:
                                 <ul>
 					<li>Pr (0 0 0 -> 0 0 0) = 0.1</li>
                                	        <li>Pr (0 0 0 -> 1 0 0) = 0.3 </li>
@@ -223,7 +223,7 @@ print <<ENDHTML;
 
 				</ul>
                                 <p>
-                                        Pr (0 0 0 -> 0 0 0) = 0.1 indicates that the probability of going from 0 0 0 to 0 0 0 itself is 0.1. In addition, 0 0 1 goes to 0 1 1 and 1 1 0 with probability 0.5. Since 0 1 0 is one of the steady states, the probability of going from 0 1 0 to itself is of course 1. Note that the sum of all probabilities going from 0 0 0 is 1 (= 0.1 + 0.3 + 0.6).
+                                        Pr (0 0 0 -> 0 0 0) = 0.1 indicates that the probability of transitioning from 0 0 0 to 0 0 0 itself is 0.1. In addition, 0 0 1 transitions to 0 1 1 and 1 1 0 with the probability 0.5. Since 0 1 0 is one of the steady states, the probability of transitioning from 0 1 0 to itself is of course 1. Note that the sum of all transition probabilities for 0 0 0 is 1 (= 0.1 + 0.3 + 0.6).
                           	</p>
 
 				<div align="right">
