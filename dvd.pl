@@ -234,10 +234,10 @@ if($p_value && $n_nodes)
 	}
 	else {
     print "<font color=blue><b>Computing Trajectory of the given initialization</b></font>"." [m = ".$p_value.", n = ".$n_nodes."] <br>";
-		if($n_nodes > 11 || ($p_value**$n_nodes >= 2**11)) {
+		if($n_nodes > 29 || ($p_value**$n_nodes >= 2**29)) {
 		  print "<font color=red><i>Sorry. Unable to compute statistics for very
       large networks. It is suggested you download the standalone version
-      which has no limitations bal</i></font><br>";
+      which has no limitations.</i></font><br>";
 		}
 		else {
       if( ($trajectory_value ne null) &&( $trajectory_value ne "") ) {
