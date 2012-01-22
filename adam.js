@@ -24,16 +24,15 @@ $(document).ready(function() {
         changeChoiceBox($("input[name='choice_box']:checked").val());
     });
 
-    
     var filepmname = "";
-    
+
     var file = "";
     $('#upload_file').uploadify({
 	'uploader': '/uploadify/uploadify.swf',
         'script': '/uploadify/uploadify.php',
 	'cancelImg': '/uploadify/cancel.png',
         'folder': '/../../htdocs/no-ssl/files',
-	'auto': false,
+       	'auto': false,
         'multi': false,
 	'removeCompleted' : true,
         'onSelect': function(event, ID, fileObj) {
@@ -59,12 +58,11 @@ $(document).ready(function() {
 	'uploader': '/uploadify/uploadify.swf',
         'script': '/uploadify/uploadify.php',
 	'cancelImg': '/uploadify/cancel.png',
-        //'folder': '/../../htdocs/no-ssl/files',
-        'folder': '/Documents/htdocs/no-ssl/files',
-	'auto': false,
+        'folder': '/../../htdocs/no-ssl/files',
+        'auto': false,
         'multi': false,
 	'removeCompleted' : true,
-        'onSelect': function(event, ID, fileObj) {
+    'onSelect': function(event, ID, fileObj) {
             filePM = fileObj.name;
             //alert('The file ' + fileObj.name + ' was added to the queue.');
         },
@@ -78,9 +76,9 @@ $(document).ready(function() {
         }, 
 	'onError': function() {
 	    alert( "ERROR");
-	}
+    }
     });
-    
+
     $('button').click(function() {
         $("#result").html("Calculating...");
 	
@@ -89,15 +87,15 @@ $(document).ready(function() {
 	if (filePM != "") {
 	    //alert( filePM );
         $('#upload_file_pm').uploadifyUpload();
-	}
-
-        if (file != "") {
+    }
+        
+    if (file != "") {
             //alert( file );
             $('#upload_file').uploadifyUpload();
-        } else {
+    } else {
             //alert(formdata);
             postForm("");
-        }
+    }
     });
 });
 
@@ -115,7 +113,7 @@ function postForm(file) {
 function changeChoiceBox(choiceBox) {
     $('.input').hide();
     $('.explain').hide();
-    
+
     $('#sdds_entries').hide();
     
     $('#inputArea').show();
@@ -161,8 +159,9 @@ function changeModelType(type) {
     $('#sdds_graph').hide();
     $('#SteadyStates').hide();
     $('#TransitionMatrix').hide();
-
+    
     $("#explain_" + type).show(); 
+
     $('#inputArea').show();
     $('#explain_mi').show();
     $('#Simulation').show();
@@ -231,7 +230,7 @@ function changeAnalysisType(simulationType) {
         $('#statespace').hide();
     } else if (simulationType == 'Conjunctive') {
         //
-	
+
     } else if (simulationType == 'sdds_graph') {
 	//
 	

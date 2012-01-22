@@ -1,6 +1,6 @@
 # Author(s): David Murrugarra & Seda Arat
 # Name: Having all the subroutines needed for Stochastic Discrete Dynamical Systems
-# Revision Date: 1/18/2012
+# Revision Date: 1/22/2012
 
 package Subroutines4sdds;
 

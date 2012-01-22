@@ -1,0 +1,542 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE gxl SYSTEM "http://gin.univ-mrs.fr/GINsim/GINML_2_1.dtd">
+<gxl xmlns:xlink="http://www.w3.org/1999/xlink">
+	<graph id="default" class="regulatory" nodeorder="A1 C1 D1 F1 N1 S1 W1 A2 C2 D2 F2 N2 S2 W2 A3 C3 D3 F3 N3 S3 W3 A4 C4 D4 F4 N4 S4 W4">
+<node id="S4" basevalue="0" maxvalue="2">
+  <parameter idActiveInteractions="W3_S4_0" val="2"/>
+  <parameter idActiveInteractions="W3_S4_0 N4_S4_0" val="2"/>
+  <parameter idActiveInteractions="A4_S4_0" val="1"/>
+  <parameter idActiveInteractions="W3_S4_0 A4_S4_0" val="2"/>
+  <parameter idActiveInteractions="A4_S4_0 N4_S4_0" val="1"/>
+  <parameter idActiveInteractions="W3_S4_0 A4_S4_0 N4_S4_0" val="2"/>
+
+			<nodevisualsetting>
+				<point x="820" y="40"/>
+			</nodevisualsetting>
+</node>
+<node id="C3" basevalue="0" maxvalue="1">
+  <parameter idActiveInteractions="N3_C3_0" val="1"/>
+
+			<nodevisualsetting>
+				<point x="660" y="162"/>
+			</nodevisualsetting>
+</node>
+<node id="A4" basevalue="0" maxvalue="1">
+			<nodevisualsetting>
+				<point x="920" y="370"/>
+			</nodevisualsetting>
+</node>
+<node id="N2" basevalue="0" maxvalue="1">
+  <parameter idActiveInteractions="F2_N2_0 D1_N2_0" val="1"/>
+  <parameter idActiveInteractions="F2_N2_0 D3_N2_0" val="1"/>
+  <parameter idActiveInteractions="F2_N2_0 D1_N2_0 D3_N2_0" val="1"/>
+  <parameter idActiveInteractions="S1_N2_0" val="1"/>
+  <parameter idActiveInteractions="D1_N2_0 S1_N2_0" val="1"/>
+  <parameter idActiveInteractions="S1_N2_0 D3_N2_0" val="1"/>
+  <parameter idActiveInteractions="D1_N2_0 S1_N2_0 D3_N2_0" val="1"/>
+  <parameter idActiveInteractions="F2_N2_0 D1_N2_0 S1_N2_0" val="1"/>
+  <parameter idActiveInteractions="F2_N2_0 S1_N2_0 D3_N2_0" val="1"/>
+  <parameter idActiveInteractions="F2_N2_0 D1_N2_0 S1_N2_0 D3_N2_0" val="1"/>
+  <parameter idActiveInteractions="S3_N2_0" val="1"/>
+  <parameter idActiveInteractions="S3_N2_0 D1_N2_0" val="1"/>
+  <parameter idActiveInteractions="S3_N2_0 D3_N2_0" val="1"/>
+  <parameter idActiveInteractions="S3_N2_0 D1_N2_0 D3_N2_0" val="1"/>
+  <parameter idActiveInteractions="S3_N2_0 F2_N2_0 D1_N2_0" val="1"/>
+  <parameter idActiveInteractions="S3_N2_0 F2_N2_0 D3_N2_0" val="1"/>
+  <parameter idActiveInteractions="S3_N2_0 F2_N2_0 D1_N2_0 D3_N2_0" val="1"/>
+  <parameter idActiveInteractions="S3_N2_0 S1_N2_0" val="1"/>
+  <parameter idActiveInteractions="S3_N2_0 D1_N2_0 S1_N2_0" val="1"/>
+  <parameter idActiveInteractions="S3_N2_0 S1_N2_0 D3_N2_0" val="1"/>
+  <parameter idActiveInteractions="S3_N2_0 D1_N2_0 S1_N2_0 D3_N2_0" val="1"/>
+  <parameter idActiveInteractions="S3_N2_0 F2_N2_0 D1_N2_0 S1_N2_0" val="1"/>
+  <parameter idActiveInteractions="S3_N2_0 F2_N2_0 S1_N2_0 D3_N2_0" val="1"/>
+  <parameter idActiveInteractions="S3_N2_0 F2_N2_0 D1_N2_0 S1_N2_0 D3_N2_0" val="1"/>
+  <parameter idActiveInteractions="D1_N2_1" val="1"/>
+  <parameter idActiveInteractions="D1_N2_1 D3_N2_0" val="1"/>
+  <parameter idActiveInteractions="D1_N2_1 F2_N2_0" val="1"/>
+  <parameter idActiveInteractions="D1_N2_1 F2_N2_0 D3_N2_0" val="1"/>
+  <parameter idActiveInteractions="D1_N2_1 S1_N2_0" val="1"/>
+  <parameter idActiveInteractions="D1_N2_1 S1_N2_0 D3_N2_0" val="1"/>
+  <parameter idActiveInteractions="D1_N2_1 F2_N2_0 S1_N2_0" val="1"/>
+  <parameter idActiveInteractions="D1_N2_1 F2_N2_0 S1_N2_0 D3_N2_0" val="1"/>
+  <parameter idActiveInteractions="D1_N2_1 S3_N2_0" val="1"/>
+  <parameter idActiveInteractions="D1_N2_1 S3_N2_0 D3_N2_0" val="1"/>
+  <parameter idActiveInteractions="D1_N2_1 S3_N2_0 F2_N2_0" val="1"/>
+  <parameter idActiveInteractions="D1_N2_1 S3_N2_0 F2_N2_0 D3_N2_0" val="1"/>
+  <parameter idActiveInteractions="D1_N2_1 S3_N2_0 S1_N2_0" val="1"/>
+  <parameter idActiveInteractions="D1_N2_1 S3_N2_0 S1_N2_0 D3_N2_0" val="1"/>
+  <parameter idActiveInteractions="D1_N2_1 S3_N2_0 F2_N2_0 S1_N2_0" val="1"/>
+  <parameter idActiveInteractions="D1_N2_1 S3_N2_0 F2_N2_0 S1_N2_0 D3_N2_0" val="1"/>
+  <parameter idActiveInteractions="D3_N2_1" val="1"/>
+  <parameter idActiveInteractions="D3_N2_1 D1_N2_0" val="1"/>
+  <parameter idActiveInteractions="D3_N2_1 F2_N2_0" val="1"/>
+  <parameter idActiveInteractions="D3_N2_1 F2_N2_0 D1_N2_0" val="1"/>
+  <parameter idActiveInteractions="D3_N2_1 S1_N2_0" val="1"/>
+  <parameter idActiveInteractions="D3_N2_1 D1_N2_0 S1_N2_0" val="1"/>
+  <parameter idActiveInteractions="D3_N2_1 F2_N2_0 S1_N2_0" val="1"/>
+  <parameter idActiveInteractions="D3_N2_1 F2_N2_0 D1_N2_0 S1_N2_0" val="1"/>
+  <parameter idActiveInteractions="D3_N2_1 S3_N2_0" val="1"/>
+  <parameter idActiveInteractions="D3_N2_1 S3_N2_0 D1_N2_0" val="1"/>
+  <parameter idActiveInteractions="D3_N2_1 S3_N2_0 F2_N2_0" val="1"/>
+  <parameter idActiveInteractions="D3_N2_1 S3_N2_0 F2_N2_0 D1_N2_0" val="1"/>
+  <parameter idActiveInteractions="D3_N2_1 S3_N2_0 S1_N2_0" val="1"/>
+  <parameter idActiveInteractions="D3_N2_1 S3_N2_0 D1_N2_0 S1_N2_0" val="1"/>
+  <parameter idActiveInteractions="D3_N2_1 S3_N2_0 F2_N2_0 S1_N2_0" val="1"/>
+  <parameter idActiveInteractions="D3_N2_1 S3_N2_0 F2_N2_0 D1_N2_0 S1_N2_0" val="1"/>
+  <parameter idActiveInteractions="D1_N2_1 D3_N2_1" val="1"/>
+  <parameter idActiveInteractions="D1_N2_1 D3_N2_1 F2_N2_0" val="1"/>
+  <parameter idActiveInteractions="D1_N2_1 D3_N2_1 S1_N2_0" val="1"/>
+  <parameter idActiveInteractions="D1_N2_1 D3_N2_1 F2_N2_0 S1_N2_0" val="1"/>
+  <parameter idActiveInteractions="D1_N2_1 D3_N2_1 S3_N2_0" val="1"/>
+  <parameter idActiveInteractions="D1_N2_1 D3_N2_1 S3_N2_0 F2_N2_0" val="1"/>
+  <parameter idActiveInteractions="D1_N2_1 D3_N2_1 S3_N2_0 S1_N2_0" val="1"/>
+  <parameter idActiveInteractions="D1_N2_1 D3_N2_1 S3_N2_0 F2_N2_0 S1_N2_0" val="1"/>
+
+			<nodevisualsetting>
+				<point x="340" y="162"/>
+			</nodevisualsetting>
+</node>
+<node id="A3" basevalue="0" maxvalue="1">
+			<nodevisualsetting>
+				<point x="660" y="370"/>
+			</nodevisualsetting>
+</node>
+<node id="D3" basevalue="0" maxvalue="2">
+  <parameter idActiveInteractions="W2_D3_0" val="2"/>
+  <parameter idActiveInteractions="W4_D3_0" val="2"/>
+  <parameter idActiveInteractions="W4_D3_0 W2_D3_0" val="2"/>
+  <parameter idActiveInteractions="N3_D3_0" val="1"/>
+  <parameter idActiveInteractions="W2_D3_0 N3_D3_0" val="2"/>
+  <parameter idActiveInteractions="W4_D3_0 N3_D3_0" val="2"/>
+  <parameter idActiveInteractions="W2_D3_0 W4_D3_0 N3_D3_0" val="2"/>
+
+			<nodevisualsetting>
+				<point x="580" y="282"/>
+			</nodevisualsetting>
+</node>
+<node id="W1" basevalue="0" maxvalue="1">
+  <parameter idActiveInteractions="N1_W1_0" val="1"/>
+
+			<nodevisualsetting>
+				<point x="190" y="162"/>
+			</nodevisualsetting>
+</node>
+<node id="F3" basevalue="0" maxvalue="1">
+  <parameter idActiveInteractions="A3_F3_0" val="1"/>
+
+			<nodevisualsetting>
+				<point x="500" y="280"/>
+			</nodevisualsetting>
+</node>
+<node id="F1" basevalue="0" maxvalue="1">
+  <parameter idActiveInteractions="A1_F1_0" val="1"/>
+
+			<nodevisualsetting>
+				<point x="30" y="280"/>
+			</nodevisualsetting>
+</node>
+<node id="D4" basevalue="0" maxvalue="2">
+  <parameter idActiveInteractions="W3_D4_0" val="2"/>
+  <parameter idActiveInteractions="N4_D4_0" val="1"/>
+  <parameter idActiveInteractions="W3_D4_0 N4_D4_0" val="2"/>
+
+			<nodevisualsetting>
+				<point x="820" y="272"/>
+			</nodevisualsetting>
+</node>
+<node id="D1" basevalue="0" maxvalue="2">
+  <parameter idActiveInteractions="W2_D1_0" val="2"/>
+  <parameter idActiveInteractions="N1_D1_0" val="1"/>
+  <parameter idActiveInteractions="W2_D1_0 N1_D1_0" val="2"/>
+
+			<nodevisualsetting>
+				<point x="110" y="282"/>
+			</nodevisualsetting>
+</node>
+<node id="S3" basevalue="0" maxvalue="2">
+  <parameter idActiveInteractions="W2_S3_0" val="2"/>
+  <parameter idActiveInteractions="W4_S3_0" val="2"/>
+  <parameter idActiveInteractions="W4_S3_0 W2_S3_0" val="2"/>
+  <parameter idActiveInteractions="N3_S3_0 W2_S3_0" val="2"/>
+  <parameter idActiveInteractions="W4_S3_0 N3_S3_0" val="1"/>
+  <parameter idActiveInteractions="W4_S3_0 N3_S3_0 W2_S3_0" val="2"/>
+  <parameter idActiveInteractions="A3_S3_0 W2_S3_0" val="2"/>
+  <parameter idActiveInteractions="W4_S3_0 A3_S3_0" val="2"/>
+  <parameter idActiveInteractions="W4_S3_0 A3_S3_0 W2_S3_0" val="2"/>
+  <parameter idActiveInteractions="A3_S3_0 N3_S3_0" val="1"/>
+  <parameter idActiveInteractions="A3_S3_0 N3_S3_0 W2_S3_0" val="2"/>
+  <parameter idActiveInteractions="W4_S3_0 A3_S3_0 N3_S3_0" val="2"/>
+  <parameter idActiveInteractions="W4_S3_0 A3_S3_0 N3_S3_0 W2_S3_0" val="2"/>
+  <parameter idActiveInteractions="W4_S3_0 A3_S3_0 C3_S3_0 N3_S3_0 W2_S3_0" val="1"/>
+
+			<nodevisualsetting>
+				<point x="580" y="42"/>
+			</nodevisualsetting>
+</node>
+<node id="D2" basevalue="0" maxvalue="2">
+  <parameter idActiveInteractions="W1_D2_0" val="2"/>
+  <parameter idActiveInteractions="W3_D2_0" val="2"/>
+  <parameter idActiveInteractions="W1_D2_0 W3_D2_0" val="2"/>
+  <parameter idActiveInteractions="N2_D2_0" val="1"/>
+  <parameter idActiveInteractions="W1_D2_0 N2_D2_0" val="2"/>
+  <parameter idActiveInteractions="W3_D2_0 N2_D2_0" val="2"/>
+  <parameter idActiveInteractions="W3_D2_0 W1_D2_0 N2_D2_0" val="2"/>
+
+			<nodevisualsetting>
+				<point x="340" y="282"/>
+			</nodevisualsetting>
+</node>
+<node id="A2" basevalue="0" maxvalue="1">
+			<nodevisualsetting>
+				<point x="430" y="370"/>
+			</nodevisualsetting>
+</node>
+<node id="N4" basevalue="0" maxvalue="1">
+  <parameter idActiveInteractions="D3_N4_0 F4_N4_0" val="1"/>
+  <parameter idActiveInteractions="S3_N4_0" val="1"/>
+  <parameter idActiveInteractions="S3_N4_0 D3_N4_0" val="1"/>
+  <parameter idActiveInteractions="S3_N4_0 D3_N4_0 F4_N4_0" val="1"/>
+  <parameter idActiveInteractions="D3_N4_1" val="1"/>
+  <parameter idActiveInteractions="D3_N4_1 F4_N4_0" val="1"/>
+  <parameter idActiveInteractions="D3_N4_1 S3_N4_0" val="1"/>
+  <parameter idActiveInteractions="D3_N4_1 S3_N4_0 F4_N4_0" val="1"/>
+
+			<nodevisualsetting>
+				<point x="820" y="162"/>
+			</nodevisualsetting>
+</node>
+<node id="W4" basevalue="0" maxvalue="1">
+  <parameter idActiveInteractions="N4_W4_0" val="1"/>
+
+			<nodevisualsetting>
+				<point x="730" y="162"/>
+			</nodevisualsetting>
+</node>
+<node id="W2" basevalue="0" maxvalue="1">
+  <parameter idActiveInteractions="N2_W2_0" val="1"/>
+
+			<nodevisualsetting>
+				<point x="420" y="162"/>
+			</nodevisualsetting>
+</node>
+<node id="A1" basevalue="0" maxvalue="1">
+			<nodevisualsetting>
+				<point x="200" y="380"/>
+			</nodevisualsetting>
+</node>
+<node id="C1" basevalue="0" maxvalue="1">
+  <parameter idActiveInteractions="N1_C1_0" val="1"/>
+
+			<nodevisualsetting>
+				<point x="30" y="162"/>
+			</nodevisualsetting>
+</node>
+<node id="F4" basevalue="0" maxvalue="1">
+  <parameter idActiveInteractions="A4_F4_0" val="1"/>
+
+			<nodevisualsetting>
+				<point x="730" y="270"/>
+			</nodevisualsetting>
+</node>
+<node id="S2" basevalue="0" maxvalue="2">
+  <parameter idActiveInteractions="W1_S2_0" val="2"/>
+  <parameter idActiveInteractions="W3_S2_0" val="2"/>
+  <parameter idActiveInteractions="W1_S2_0 W3_S2_0" val="2"/>
+  <parameter idActiveInteractions="N2_S2_0 W1_S2_0" val="2"/>
+  <parameter idActiveInteractions="W3_S2_0 N2_S2_0" val="2"/>
+  <parameter idActiveInteractions="W3_S2_0 N2_S2_0 W1_S2_0" val="2"/>
+  <parameter idActiveInteractions="A2_S2_0" val="1"/>
+  <parameter idActiveInteractions="A2_S2_0 W1_S2_0" val="2"/>
+  <parameter idActiveInteractions="W3_S2_0 A2_S2_0" val="2"/>
+  <parameter idActiveInteractions="W3_S2_0 A2_S2_0 W1_S2_0" val="2"/>
+  <parameter idActiveInteractions="A2_S2_0 N2_S2_0" val="1"/>
+  <parameter idActiveInteractions="A2_S2_0 N2_S2_0 W1_S2_0" val="2"/>
+  <parameter idActiveInteractions="W3_S2_0 A2_S2_0 N2_S2_0" val="2"/>
+  <parameter idActiveInteractions="W3_S2_0 A2_S2_0 N2_S2_0 W1_S2_0" val="1"/>
+
+			<nodevisualsetting>
+				<point x="340" y="32"/>
+			</nodevisualsetting>
+</node>
+<node id="C2" basevalue="0" maxvalue="1">
+  <parameter idActiveInteractions="N2_C2_0" val="1"/>
+
+			<nodevisualsetting>
+				<point x="260" y="162"/>
+			</nodevisualsetting>
+</node>
+<node id="S1" basevalue="0" maxvalue="2">
+  <parameter idActiveInteractions="W2_S1_0" val="2"/>
+  <parameter idActiveInteractions="W2_S1_0 N1_S1_0" val="2"/>
+  <parameter idActiveInteractions="A1_S1_0" val="1"/>
+  <parameter idActiveInteractions="A1_S1_0 W2_S1_0" val="2"/>
+  <parameter idActiveInteractions="A1_S1_0 N1_S1_0" val="1"/>
+  <parameter idActiveInteractions="A1_S1_0 N1_S1_0 W2_S1_0" val="2"/>
+
+			<nodevisualsetting>
+				<point x="110" y="32"/>
+			</nodevisualsetting>
+</node>
+<node id="C4" basevalue="0" maxvalue="1">
+  <parameter idActiveInteractions="N4_C4_0" val="1"/>
+
+			<nodevisualsetting>
+				<point x="900" y="162"/>
+			</nodevisualsetting>
+</node>
+<node id="N1" basevalue="0" maxvalue="1">
+  <parameter idActiveInteractions="F1_N1_0 D2_N1_0" val="1"/>
+  <parameter idActiveInteractions="S2_N1_0" val="1"/>
+  <parameter idActiveInteractions="S2_N1_0 D2_N1_0" val="1"/>
+  <parameter idActiveInteractions="S2_N1_0 F1_N1_0 D2_N1_0" val="1"/>
+  <parameter idActiveInteractions="D2_N1_1" val="1"/>
+  <parameter idActiveInteractions="D2_N1_1 F1_N1_0" val="1"/>
+  <parameter idActiveInteractions="D2_N1_1 S2_N1_0" val="1"/>
+  <parameter idActiveInteractions="D2_N1_1 S2_N1_0 F1_N1_0" val="1"/>
+
+			<nodevisualsetting>
+				<point x="110" y="162"/>
+			</nodevisualsetting>
+</node>
+<node id="N3" basevalue="0" maxvalue="1">
+  <parameter idActiveInteractions="D2_N3_0 F3_N3_0" val="1"/>
+  <parameter idActiveInteractions="D4_N3_0 F3_N3_0" val="1"/>
+  <parameter idActiveInteractions="D2_N3_0 D4_N3_0 F3_N3_0" val="1"/>
+  <parameter idActiveInteractions="S2_N3_0" val="1"/>
+  <parameter idActiveInteractions="D2_N3_0 S2_N3_0" val="1"/>
+  <parameter idActiveInteractions="D4_N3_0 S2_N3_0" val="1"/>
+  <parameter idActiveInteractions="D2_N3_0 D4_N3_0 S2_N3_0" val="1"/>
+  <parameter idActiveInteractions="D2_N3_0 S2_N3_0 F3_N3_0" val="1"/>
+  <parameter idActiveInteractions="D4_N3_0 S2_N3_0 F3_N3_0" val="1"/>
+  <parameter idActiveInteractions="D2_N3_0 D4_N3_0 S2_N3_0 F3_N3_0" val="1"/>
+  <parameter idActiveInteractions="S4_N3_0" val="1"/>
+  <parameter idActiveInteractions="D2_N3_0 S4_N3_0" val="1"/>
+  <parameter idActiveInteractions="D4_N3_0 S4_N3_0" val="1"/>
+  <parameter idActiveInteractions="D2_N3_0 D4_N3_0 S4_N3_0" val="1"/>
+  <parameter idActiveInteractions="D2_N3_0 F3_N3_0 S4_N3_0" val="1"/>
+  <parameter idActiveInteractions="D4_N3_0 F3_N3_0 S4_N3_0" val="1"/>
+  <parameter idActiveInteractions="D2_N3_0 D4_N3_0 F3_N3_0 S4_N3_0" val="1"/>
+  <parameter idActiveInteractions="S2_N3_0 S4_N3_0" val="1"/>
+  <parameter idActiveInteractions="D2_N3_0 S2_N3_0 S4_N3_0" val="1"/>
+  <parameter idActiveInteractions="D4_N3_0 S2_N3_0 S4_N3_0" val="1"/>
+  <parameter idActiveInteractions="D2_N3_0 D4_N3_0 S2_N3_0 S4_N3_0" val="1"/>
+  <parameter idActiveInteractions="D2_N3_0 S2_N3_0 F3_N3_0 S4_N3_0" val="1"/>
+  <parameter idActiveInteractions="D4_N3_0 S2_N3_0 F3_N3_0 S4_N3_0" val="1"/>
+  <parameter idActiveInteractions="D2_N3_0 D4_N3_0 S2_N3_0 F3_N3_0 S4_N3_0" val="1"/>
+  <parameter idActiveInteractions="D2_N3_1" val="1"/>
+  <parameter idActiveInteractions="D2_N3_1 D4_N3_0" val="1"/>
+  <parameter idActiveInteractions="D2_N3_1 F3_N3_0" val="1"/>
+  <parameter idActiveInteractions="D2_N3_1 D4_N3_0 F3_N3_0" val="1"/>
+  <parameter idActiveInteractions="D2_N3_1 S2_N3_0" val="1"/>
+  <parameter idActiveInteractions="D2_N3_1 D4_N3_0 S2_N3_0" val="1"/>
+  <parameter idActiveInteractions="D2_N3_1 S2_N3_0 F3_N3_0" val="1"/>
+  <parameter idActiveInteractions="D2_N3_1 D4_N3_0 S2_N3_0 F3_N3_0" val="1"/>
+  <parameter idActiveInteractions="D2_N3_1 S4_N3_0" val="1"/>
+  <parameter idActiveInteractions="D2_N3_1 D4_N3_0 S4_N3_0" val="1"/>
+  <parameter idActiveInteractions="D2_N3_1 F3_N3_0 S4_N3_0" val="1"/>
+  <parameter idActiveInteractions="D2_N3_1 D4_N3_0 F3_N3_0 S4_N3_0" val="1"/>
+  <parameter idActiveInteractions="D2_N3_1 S2_N3_0 S4_N3_0" val="1"/>
+  <parameter idActiveInteractions="D2_N3_1 D4_N3_0 S2_N3_0 S4_N3_0" val="1"/>
+  <parameter idActiveInteractions="D2_N3_1 S2_N3_0 F3_N3_0 S4_N3_0" val="1"/>
+  <parameter idActiveInteractions="D2_N3_1 D4_N3_0 S2_N3_0 F3_N3_0 S4_N3_0" val="1"/>
+  <parameter idActiveInteractions="D4_N3_1" val="1"/>
+  <parameter idActiveInteractions="D4_N3_1 D2_N3_0" val="1"/>
+  <parameter idActiveInteractions="D4_N3_1 F3_N3_0" val="1"/>
+  <parameter idActiveInteractions="D4_N3_1 D2_N3_0 F3_N3_0" val="1"/>
+  <parameter idActiveInteractions="D4_N3_1 S2_N3_0" val="1"/>
+  <parameter idActiveInteractions="D4_N3_1 D2_N3_0 S2_N3_0" val="1"/>
+  <parameter idActiveInteractions="D4_N3_1 S2_N3_0 F3_N3_0" val="1"/>
+  <parameter idActiveInteractions="D4_N3_1 D2_N3_0 S2_N3_0 F3_N3_0" val="1"/>
+  <parameter idActiveInteractions="D4_N3_1 S4_N3_0" val="1"/>
+  <parameter idActiveInteractions="D4_N3_1 D2_N3_0 S4_N3_0" val="1"/>
+  <parameter idActiveInteractions="D4_N3_1 F3_N3_0 S4_N3_0" val="1"/>
+  <parameter idActiveInteractions="D4_N3_1 D2_N3_0 F3_N3_0 S4_N3_0" val="1"/>
+  <parameter idActiveInteractions="D4_N3_1 S2_N3_0 S4_N3_0" val="1"/>
+  <parameter idActiveInteractions="D4_N3_1 D2_N3_0 S2_N3_0 S4_N3_0" val="1"/>
+  <parameter idActiveInteractions="D4_N3_1 S2_N3_0 F3_N3_0 S4_N3_0" val="1"/>
+  <parameter idActiveInteractions="D4_N3_1 D2_N3_0 S2_N3_0 F3_N3_0 S4_N3_0" val="1"/>
+  <parameter idActiveInteractions="D2_N3_1 D4_N3_1" val="1"/>
+  <parameter idActiveInteractions="D2_N3_1 D4_N3_1 F3_N3_0" val="1"/>
+  <parameter idActiveInteractions="D2_N3_1 D4_N3_1 S2_N3_0" val="1"/>
+  <parameter idActiveInteractions="D2_N3_1 D4_N3_1 S2_N3_0 F3_N3_0" val="1"/>
+  <parameter idActiveInteractions="D2_N3_1 D4_N3_1 S4_N3_0" val="1"/>
+  <parameter idActiveInteractions="D2_N3_1 D4_N3_1 F3_N3_0 S4_N3_0" val="1"/>
+  <parameter idActiveInteractions="D2_N3_1 D4_N3_1 S2_N3_0 S4_N3_0" val="1"/>
+  <parameter idActiveInteractions="D2_N3_1 D4_N3_1 S2_N3_0 F3_N3_0 S4_N3_0" val="1"/>
+
+			<nodevisualsetting>
+				<point x="580" y="162"/>
+			</nodevisualsetting>
+</node>
+<node id="F2" basevalue="0" maxvalue="1">
+  <parameter idActiveInteractions="A2_F2_0" val="1"/>
+
+			<nodevisualsetting>
+				<point x="260" y="290"/>
+			</nodevisualsetting>
+</node>
+<node id="W3" basevalue="0" maxvalue="1">
+  <parameter idActiveInteractions="N3_W3_0" val="1"/>
+
+			<nodevisualsetting>
+				<point x="500" y="162"/>
+			</nodevisualsetting>
+</node>
+		<edge id="S4_N4_0" from="S4" to="N4" minvalue="2" maxvalue="2" sign="negative">
+		</edge>
+		<edge id="S4_N3_0" from="S4" to="N3" minvalue="1" maxvalue="2" sign="positive">
+		</edge>
+		<edge id="C3_D3_0" from="C3" to="D3" minvalue="1" sign="negative">
+		</edge>
+		<edge id="C3_S3_0" from="C3" to="S3" minvalue="1" sign="negative">
+		</edge>
+		<edge id="A4_F4_0" from="A4" to="F4" minvalue="1" sign="positive">
+		</edge>
+		<edge id="A4_D4_0" from="A4" to="D4" minvalue="1" sign="negative">
+		</edge>
+		<edge id="A4_S4_0" from="A4" to="S4" minvalue="1" sign="positive">
+		</edge>
+		<edge id="N2_C2_0" from="N2" to="C2" minvalue="1" sign="positive">
+		</edge>
+		<edge id="N2_S2_0" from="N2" to="S2" minvalue="1" sign="positive">
+		</edge>
+		<edge id="N2_W2_0" from="N2" to="W2" minvalue="1" sign="positive">
+		</edge>
+		<edge id="N2_D2_0" from="N2" to="D2" minvalue="1" sign="positive">
+		</edge>
+		<edge id="A3_D3_0" from="A3" to="D3" minvalue="1" sign="negative">
+		</edge>
+		<edge id="A3_F3_0" from="A3" to="F3" minvalue="1" sign="positive">
+		</edge>
+		<edge id="A3_S3_0" from="A3" to="S3" minvalue="1" sign="positive">
+		</edge>
+		<edge id="D3_N2_0" from="D3" to="N2" minvalue="1" maxvalue="1" sign="positive">
+		</edge>
+		<edge id="D3_N2_1" from="D3" to="N2" minvalue="2" maxvalue="2" sign="positive">
+		</edge>
+		<edge id="D3_N3_0" from="D3" to="N3" minvalue="2" maxvalue="2" sign="negative">
+		</edge>
+		<edge id="D3_N4_0" from="D3" to="N4" minvalue="1" maxvalue="1" sign="positive">
+		</edge>
+		<edge id="D3_N4_1" from="D3" to="N4" minvalue="2" maxvalue="2" sign="positive">
+		</edge>
+		<edge id="W1_D2_0" from="W1" to="D2" minvalue="1" sign="positive">
+		</edge>
+		<edge id="W1_S2_0" from="W1" to="S2" minvalue="1" sign="positive">
+		</edge>
+		<edge id="F3_N3_0" from="F3" to="N3" minvalue="1" sign="unknown">
+		</edge>
+		<edge id="F1_N1_0" from="F1" to="N1" minvalue="1" sign="unknown">
+		</edge>
+		<edge id="D4_N4_0" from="D4" to="N4" minvalue="2" maxvalue="2" sign="negative">
+		</edge>
+		<edge id="D4_N3_0" from="D4" to="N3" minvalue="1" maxvalue="1" sign="positive">
+		</edge>
+		<edge id="D4_N3_1" from="D4" to="N3" minvalue="2" maxvalue="2" sign="positive">
+		</edge>
+		<edge id="D1_N1_0" from="D1" to="N1" minvalue="2" maxvalue="2" sign="negative">
+		</edge>
+		<edge id="D1_N2_0" from="D1" to="N2" minvalue="1" maxvalue="1" sign="positive">
+		</edge>
+		<edge id="D1_N2_1" from="D1" to="N2" minvalue="2" maxvalue="2" sign="positive">
+		</edge>
+		<edge id="S3_N4_0" from="S3" to="N4" minvalue="1" maxvalue="2" sign="positive">
+		</edge>
+		<edge id="S3_N3_0" from="S3" to="N3" minvalue="2" maxvalue="2" sign="negative">
+		</edge>
+		<edge id="S3_N2_0" from="S3" to="N2" minvalue="1" maxvalue="2" sign="positive">
+		</edge>
+		<edge id="D2_N1_0" from="D2" to="N1" minvalue="1" maxvalue="1" sign="positive">
+		</edge>
+		<edge id="D2_N1_1" from="D2" to="N1" minvalue="2" maxvalue="2" sign="positive">
+		</edge>
+		<edge id="D2_N2_0" from="D2" to="N2" minvalue="2" maxvalue="2" sign="negative">
+		</edge>
+		<edge id="D2_N3_0" from="D2" to="N3" minvalue="1" maxvalue="1" sign="positive">
+		</edge>
+		<edge id="D2_N3_1" from="D2" to="N3" minvalue="2" maxvalue="2" sign="positive">
+		</edge>
+		<edge id="A2_S2_0" from="A2" to="S2" minvalue="1" sign="positive">
+		</edge>
+		<edge id="A2_F2_0" from="A2" to="F2" minvalue="1" sign="positive">
+		</edge>
+		<edge id="A2_D2_0" from="A2" to="D2" minvalue="1" sign="negative">
+		</edge>
+		<edge id="N4_S4_0" from="N4" to="S4" minvalue="1" sign="positive">
+		</edge>
+		<edge id="N4_C4_0" from="N4" to="C4" minvalue="1" sign="positive">
+		</edge>
+		<edge id="N4_D4_0" from="N4" to="D4" minvalue="1" sign="positive">
+		</edge>
+		<edge id="N4_W4_0" from="N4" to="W4" minvalue="1" sign="positive">
+		</edge>
+		<edge id="W4_D3_0" from="W4" to="D3" minvalue="1" sign="positive">
+		</edge>
+		<edge id="W4_S3_0" from="W4" to="S3" minvalue="1" sign="positive">
+		</edge>
+		<edge id="W2_S1_0" from="W2" to="S1" minvalue="1" sign="positive">
+		</edge>
+		<edge id="W2_D1_0" from="W2" to="D1" minvalue="1" sign="positive">
+		</edge>
+		<edge id="W2_S3_0" from="W2" to="S3" minvalue="1" sign="positive">
+		</edge>
+		<edge id="W2_D3_0" from="W2" to="D3" minvalue="1" sign="positive">
+		</edge>
+		<edge id="A1_D1_0" from="A1" to="D1" minvalue="1" sign="negative">
+		</edge>
+		<edge id="A1_S1_0" from="A1" to="S1" minvalue="1" sign="positive">
+		</edge>
+		<edge id="A1_F1_0" from="A1" to="F1" minvalue="1" sign="positive">
+		</edge>
+		<edge id="C1_D1_0" from="C1" to="D1" minvalue="1" sign="negative">
+		</edge>
+		<edge id="C1_S1_0" from="C1" to="S1" minvalue="1" sign="negative">
+		</edge>
+		<edge id="F4_N4_0" from="F4" to="N4" minvalue="1" sign="unknown">
+		</edge>
+		<edge id="S2_N3_0" from="S2" to="N3" minvalue="1" maxvalue="2" sign="positive">
+		</edge>
+		<edge id="S2_N2_0" from="S2" to="N2" minvalue="2" maxvalue="2" sign="negative">
+		</edge>
+		<edge id="S2_N1_0" from="S2" to="N1" minvalue="1" maxvalue="2" sign="positive">
+		</edge>
+		<edge id="C2_D2_0" from="C2" to="D2" minvalue="1" sign="negative">
+		</edge>
+		<edge id="C2_S2_0" from="C2" to="S2" minvalue="1" sign="negative">
+		</edge>
+		<edge id="S1_N2_0" from="S1" to="N2" minvalue="1" maxvalue="2" sign="positive">
+		</edge>
+		<edge id="S1_N1_0" from="S1" to="N1" minvalue="2" maxvalue="2" sign="negative">
+		</edge>
+		<edge id="C4_D4_0" from="C4" to="D4" minvalue="1" sign="negative">
+		</edge>
+		<edge id="C4_S4_0" from="C4" to="S4" minvalue="1" sign="negative">
+		</edge>
+		<edge id="N1_C1_0" from="N1" to="C1" minvalue="1" sign="positive">
+		</edge>
+		<edge id="N1_W1_0" from="N1" to="W1" minvalue="1" sign="positive">
+		</edge>
+		<edge id="N1_S1_0" from="N1" to="S1" minvalue="1" sign="positive">
+		</edge>
+		<edge id="N1_D1_0" from="N1" to="D1" minvalue="1" sign="positive">
+		</edge>
+		<edge id="N3_C3_0" from="N3" to="C3" minvalue="1" sign="positive">
+		</edge>
+		<edge id="N3_W3_0" from="N3" to="W3" minvalue="1" sign="positive">
+		</edge>
+		<edge id="N3_S3_0" from="N3" to="S3" minvalue="1" sign="positive">
+		</edge>
+		<edge id="N3_D3_0" from="N3" to="D3" minvalue="1" sign="positive">
+		</edge>
+		<edge id="F2_N2_0" from="F2" to="N2" minvalue="1" sign="unknown">
+		</edge>
+		<edge id="W3_S2_0" from="W3" to="S2" minvalue="1" sign="positive">
+		</edge>
+		<edge id="W3_D2_0" from="W3" to="D2" minvalue="1" sign="positive">
+		</edge>
+		<edge id="W3_S4_0" from="W3" to="S4" minvalue="1" sign="positive">
+		</edge>
+		<edge id="W3_D4_0" from="W3" to="D4" minvalue="1" sign="positive">
+		</edge>
+	</graph>
+</gxl>

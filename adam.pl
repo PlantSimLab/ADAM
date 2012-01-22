@@ -58,8 +58,8 @@ $flag4tm = 0;
 
 
 if ($choice_box eq "") {
-	say '<a href="http://adam.vbi.vt.edu"/>ADAM has moved.</a> Please update your bookmarks';
-	exit 1;
+  say '<a href="http://adam.vbi.vt.edu"/>ADAM has moved.</a> Please update your bookmarks';
+  exit 1;
 }
 
 # this function reads input functions from file or text area and writes the input functions into $clientip.functionfile.txt
@@ -81,73 +81,73 @@ sub create_input_function {
     if ($upload_file) {
 
         #system("ls");
-        say "cp ../../htdocs/no-ssl/files/$upload_file $filename <br>	"
-            if ($DEBUG);
+        say "cp ../../htdocs/no-ssl/files/$upload_file $filename <br>	" if ($DEBUG);
         system("cp ../../htdocs/no-ssl/files/$upload_file $filename");
-        if ($choice_box eq 'analyze'
-            && (   $format_box eq 'PDS'
-                || $format_box eq 'pPDS'
-                || $format_box eq 'BN'
-                || $format_box eq 'PBN' )
-            )
-        {
-			open FILE, "<", $filename or die $!;
-            while ( $bytesread = read( FILE, $buffer, 1024 ) ) {
-				say "reading ..." if ($DEBUG);
-                while ( $buffer =~ m/f(\d+)/g ) {
-                    if ( $1 > $n_nodes ) {
-
-                        say "$1<br>" if ($DEBUG);
-                        $n_nodes = $1;
-                    }
-                }
-            }
-			close(FILE);
-        }
-    }
-    elsif ($edit_functions)
+    
+    if ($choice_box eq 'analyze'
+	&& (   $format_box eq 'PDS'
+	       || $format_box eq 'pPDS'
+	       || $format_box eq 'BN'
+	       || $format_box eq 'PBN' )
+       )
+      {
+	open (FILE, "< $filename") or die ("Cannot open $filename");
+	while ( $bytesread = read( FILE, $buffer, 1024 ) ) {
+	  say "reading ..." if ($DEBUG);
+	  while ( $buffer =~ m/f(\d+)/g ) {
+	    if ( $1 > $n_nodes ) {
+	      
+	      say "$1<br>" if ($DEBUG);
+	      $n_nodes = $1;
+	    }
+	  }
+	}
+	close(FILE);
+      }
+  }
+  elsif ($edit_functions)
     {    # Otherwise parse functions from textarea value (no file uploaded)
-        open( OUTFILE, ">$filename" );
-        print "open ok \n<br>" if ($DEBUG);
-        print OUTFILE $edit_functions;
-        $n_nodes = 0;
-        while ( $edit_functions =~ m/f(\d+)/g ) {
-            if ( $1 > $n_nodes ) { $n_nodes = $1; }
-        }
-        flock( OUTFILE, LOCK_UN )
-            or die("Could not unlock file $!");
-        close(OUTFILE);
+      open( OUTFILE, ">$filename" );
+      print "open ok \n<br>" if ($DEBUG);
+      print OUTFILE $edit_functions;
+      $n_nodes = 0;
+      while ( $edit_functions =~ m/f(\d+)/g ) {
+	if ( $1 > $n_nodes ) { $n_nodes = $1; }
+      }
+      flock( OUTFILE, LOCK_UN )
+	or die("Could not unlock file $!");
+      close(OUTFILE);
     }
-    else {
-        print
-            "<font color=red>No input functions! Please upload a file or enter the functions.</font>";
-        die("Program quitting. No input functions");
-    }
-
-    #say "$edit_functions";
-    #say "The number of nodes is $n_nodes.";
-    #remove any ^M characters
-    `perl -pi -e 's/\r//g' "$clientip.functionfile.txt"`;
-    $buffer = "";
+  else {
+    print
+      "<font color=red>No input functions! Please upload a file or enter the functions.</font>";
+    die("Program quitting. No input functions");
+  }
+  
+  #say "$edit_functions";
+  #say "The number of nodes is $n_nodes.";
+  #remove any ^M characters
+  `perl -pi -e 's/\r//g' "$clientip.functionfile.txt"`;
+  $buffer = "";
 }
 
 # Take the Functions in functionfile.txt, translate them, and save the result back into functionfile.txt
 sub translate_functions {
-    print "translate_functions<br>" if ($DEBUG);
-    system(
+  print "translate_functions<br>" if ($DEBUG);
+  system(
         "/usr/bin/perl translator.pl $clientip.functionfile.txt $clientip.trfunctionfile.txt $n_nodes"
-    );
-    $filename = "$clientip.trfunctionfile.txt";
-    if ( -e "$clientip.trfunctionfile.txt" ) {
-        print
-            "<A href=\"$clientip.trfunctionfile.txt\" target=\"_blank\"><font color=green><i>Translation from Boolean functions to Polynomial was successful.</i></font></A><br><br>";
-    }
-    else {
-        print
-            "<font color=red>Translation from Boolean functions to polynomial was unsuccessful</font><br>";
-        `rm -f $clientip.functionfile.txt`;
-        die("Translation unsuccessful");
-    }
+	);
+  $filename = "$clientip.trfunctionfile.txt";
+  if ( -e "$clientip.trfunctionfile.txt" ) {
+    print
+      "<A href=\"$clientip.trfunctionfile.txt\" target=\"_blank\"><font color=green><i>Translation from Boolean functions to Polynomial was successful.</i></font></A><br><br>";
+  }
+  else {
+    print
+      "<font color=red>Translation from Boolean functions to polynomial was unsuccessful</font><br>";
+    `rm -f $clientip.functionfile.txt`;
+    die("Translation unsuccessful");
+  }
 }
 
 sub set_update_type() {
@@ -240,30 +240,32 @@ $clientip = '../../htdocs/no-ssl/files/' . $clientip;
 my $bytesread = "";
 my $buffer    = "";
 
-$DEBUG = 0;
+#$DEBUG = 0;
 
-$fileuploaded = 0;
+#$fileuploaded = 0;
 $SSformat =~ s/\*\.//;
 $DGformat =~ s/\*\.//;
-print "access was ok <br>"     if ($DEBUG);
-print "$option_box <br>"       if ($DEBUG);
-print "$format_box <br>"       if ($DEBUG);
-print "$translate_box <br>"    if ($DEBUG);
-print "$anaysis_method <br>" if ($DEBUG);
 
 #make input functions - gives p_value and n_nodes
 create_input_function();
 
-#print "p_value: " . $p_value ."<br>";
-#print "n_nodes: " . $n_nodes ."<br>";
-#print $edit_functions . "\n";
-
-#print $choice_box . "<br>";
-#print $continuous . "<br>";
+if ($DEBUG) {
+  print "access was ok <br>";    
+  print "option_box = $option_box <br>";       
+  print "format_box = $format_box <br>";       
+  print "translate_box = $translate_box <br>";    
+  print "anaysis_method = $anaysis_method <br>";
+  
+  #print "p_value: " . $p_value ."<br>";
+  #print "n_nodes: " . $n_nodes ."<br>";
+  #print $edit_functions . "\n";
+  #print $choice_box . "<br>";
+  #print $continuous . "<br>";
+}
 
 given ($choice_box) {
     when (/control/) {
-        print "We are implementing Hueristic $format_box <br>"
+        print "We are implementing Heuristic $format_box <br>"
             if ($DEBUG);
         system("ruby parseGA.rb \"$p_value\" \"$weights\" \"$dreamss\" \"$filename\""); #"ruby parseGA.rb \"$p_value\" \"$weights\" \"$dreamss\" \"$filename\""
 		print "ruby parseGA.rb \"$p_value\" \"$weights\" \"$dreamss\" \"$filename\"" if ($DEBUG);
@@ -286,7 +288,7 @@ given ($choice_box) {
         }
     }
     when (/analyze/) {
-        print $format_box . "<br>" if $DEBUG;
+        
         given ($format_box) {
             when (/Petrinet/) {
                 say "cp $filename $clientip.spped" if $DEBUG;
@@ -318,43 +320,44 @@ given ($choice_box) {
 
             }
 
-	    when (/(SDDS)/){
-	      SDDSerrorchecking_and_set_flags();  
-	      use Cwd;
-	      $cwd_sdds = getcwd();
-	      `mkdir -p $cwd_sdds/../../htdocs/no-ssl/files`;
+    	    when (/(SDDS)/) {
+	          SDDSerrorchecking_and_set_flags();
+	          use Cwd;
+	          $cwd_sdds = getcwd();
+	          `mkdir -p $cwd_sdds/../../htdocs/no-ssl/files`;
 	      
-	      # checks if a file was uploaded for transition table
-	      if ($upload_file) {
-		$filename_tt = "$clientip.tt.txt";
-		system("cp ../../htdocs/no-ssl/files/$upload_file $filename_tt");
-		`perl -pi -e 's/\r//g' "$clientip.tt.txt"`;
-	      }
-	      else {
-		print "<br>ERROR: There must be a file uploaded for a (complete) transition table. <br>";
-		exit;
-	      }
-	      
-	      # checks if a file was uploaded for propensity matrix 
-	      if ($upload_file_pm) {
-		$filename_pm = "$clientip.pm.txt";
-		system("cp ../../htdocs/no-ssl/files/$upload_file_pm $filename_pm");
-		`perl -pi -e 's/\r//g' "$clientip.pm.txt"`;
-	      }
-	      else {
-		print "<br>FYI: No file was uploaded for the propensity matrix, so uniform distribution will be used. <br>";
-	      }
-	      
+	            # checks if a file was uploaded for transition table
+	            if ($upload_file) {
+		            $filename_tt = "$clientip.tt.txt";
+		            system("cp ../../htdocs/no-ssl/files/$upload_file $filename_tt");
+		            `perl -pi -e 's/\r//g' "$clientip.tt.txt"`;
+	            }
+	            else {
+		            print "<br>ERROR: There must be a file uploaded for a (complete) transition table. <br>";
+		            exit;
+	            }
+
+                # checks if a file was uploaded for propensity matrix 
+                if ($upload_file_pm) {
+                    $filename_pm = "$clientip.pm.txt";
+                    system("cp ../../htdocs/no-ssl/files/$upload_file_pm $filename_pm");
+                    `perl -pi -e 's/\r//g' "$clientip.pm.txt"`;
+                }
+                else {
+                    print "<br>FYI: No file was uploaded for the propensity matrix, so uniform distribution will be used. <br>";
+                }
+
 	      $plot_file = "$clientip.plot";
 	      $histogram_file = "$clientip.histogram";
 	      $tm_file = "$clientip.tm";
+
 	      $DEBUG = 0;
 	      
 	      if ($upload_file_pm) {
 		if ($DEBUG) {
 		  say ("perl SDDS.pl -f $filename_tt -i $initialState -n $interestingNodes -s $num_states -a $flag4ss -b $flag4tm -g $plot_file -h $histogram_file -t $tm_file -p $filename_pm <br>");
 		}
-		system ("perl SDDS.pl -f $filename_tt -i $initialState -n $interestingNodes -s $num_states -a $flag4ss -b $flag4tm -g $plot_file -h $histogram_file -t $tm_file -p $filename_pm <br>");
+		system ("perl SDDS.pl -f $filename_tt -i $initialState -n $interestingNodes -s $num_states -a $flag4ss -b $flag4tm -g $plot_file -h $histogram_file -t $tm_file -p $filename_pm");
 	      }
 	      else {
 		if ($DEBUG) {
@@ -384,7 +387,7 @@ if ( $depgraph eq "Dependency graph" ) {
             || ( $format_box eq "GINsim" ) )
         {
             $useRegulatory = 1;
-        }
+        }   
     }
 
     $depgraph = 1;
@@ -393,9 +396,12 @@ else {
     $depgraph = 0;
 }
 
-( $feedback eq "Feedback Circuit" )
-    ? { $feedback = 1 }
-    : { $feedback = 0 };
+if ($feedback eq "Feedback Circuit") {
+  $feedback = 1;
+}
+else {
+  $feedback = 0;
+}
 
 # Give link to functional circuits if checked
 if ( $feedback == 1 ) {
@@ -412,7 +418,7 @@ if ( $feedback == 1 ) {
 }
 
 if ( $anaysis_method eq "Conjunctive" ) {
-
+  
     # dynamics depend on the dependency graph, need to generate it
     system("perl regulatory.pl $filename $n_nodes $clientip $DGformat") == 0
         or die("regulatory.pl died");
@@ -420,10 +426,10 @@ if ( $anaysis_method eq "Conjunctive" ) {
 
     # Give link to dependency graph if checked
     if ( $depgraph == 1 ) {
-        print
-            "<br><A href=\"$dpGraph.$DGformat\" target=\"_blank\"><font color=\"#226677\"><i>Click to view the dependency graph.</i></font></A><br>";
+      print
+	"<br><A href=\"$dpGraph.$DGformat\" target=\"_blank\"><font color=\"#226677\"><i>Click to view the dependency graph.</i></font></A><br>";
     }
-
+    
     #print "ruby adam_conjunctive.rb $n_nodes $p_value $dpGraph.dot<br>" ;
     system("ruby adam_conjunctive.rb $n_nodes $p_value $dpGraph.dot");
 }
@@ -473,13 +479,18 @@ elsif ( $anaysis_method eq "Simulation" ) {
      # for more than 1000 nodes don't produce a graph, use C++ program instead
 
         # Set flag for whether to print probabilities in state space
-        ( $probabilities eq "probabilities" )
-            ? { $stochastic = 1 }
-            : { $stochastic = 0 };
+        if ($probabilities eq "probabilities") {
+	  $stochastic = 1;
+	}
+	else {
+	  $stochastic = 0;
+	}
+
         $option_box = "All trajectories from all possible initial states";
-        if ( $option_box eq
-            "All trajectories from all possible initial states" )
-        {    # complete state space
+
+        if ( $option_box eq "All trajectories from all possible initial states" ) {   
+	  
+	  # complete state space
             print $format_box if ($DEBUG);
             if (   $p_value**$n_nodes > 1000
                 && $format_box eq "PDS" )
@@ -498,7 +509,7 @@ elsif ( $anaysis_method eq "Simulation" ) {
             else {    #analysis through simulation with graph
                 if ( $p_value**$n_nodes > 1000 ) {
                     print
-                        "<font color=red>Simulation for large stochastic networks is not possible. Please chose <i>Algorithms</i> as <b>Analysis</b> option. </font><br>";
+                        "<font color=red>Simulation for large stochastic networks is not possible. Please choose <i>Algorithms</i> as <b>Analysis</b> option. </font><br>";
                     die("Program quitting. Too many nodes");
                 }
                 print
@@ -510,7 +521,7 @@ elsif ( $anaysis_method eq "Simulation" ) {
                     "/usr/bin/perl dvd_stochastic_runner.pl  $n_nodes $p_value 1 $updstoch_flag $clientip $SSformat $depgraph $updsequ_flag $update_schedule $stochastic 1 0 $filename"
                 );
             }
-        }
+	  }
         else {    # trajectory
             print
                 "<font color=blue><b>Computing Trajectory of the given initialization</b></font> <br>";
@@ -538,7 +549,7 @@ elsif ( $anaysis_method eq "Simulation" ) {
                 die( "Program quitting. Empty value for initialization field"
                 );
             }
-        }
+	  }
         if (   $statespace eq "State space graph"
             && $option_box eq
             "All trajectories from all possible initial states" )
@@ -576,11 +587,11 @@ elsif ( $anaysis_method eq "Simulation" ) {
         #    `rm -f $clientip.trfunctionfile.txt`;
 
       }
-}
+  }
 
 elsif ( $anaysis_method eq "sdds_graph" ) {
 
-  if (-e "$clientip.plot.png"){ 
+  if (-e "$clientip.plot.png") { 
     print "<br><A href=\"$clientip.plot.png\" target=\"_blank\"><font color=\"#226677\"><i>Click here to see the plot of cell population simulation.</i></font></A><br>";
   }
   if (-e "$clientip.histogram.png") {
@@ -592,10 +603,11 @@ elsif ( $anaysis_method eq "sdds_graph" ) {
 }
 
 else {
-    print "there was an error." . "\n";
+    print "There was an error." . "\n";
 }
 
 #print $anaysis_method . "<br>\n";
-#print $conjunctive . "<br>\n";
+##print $conjunctive . "<br>\n";
+
 exit 1;
 
