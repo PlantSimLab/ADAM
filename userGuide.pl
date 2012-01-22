@@ -170,7 +170,7 @@ print <<ENDHTML;
 					<a name="SDDS" id="SDDS">How to Analyze a Stochastic Discrete Dynamical System (SDDS)</a>
 				</h3>
 				<p>
-					The user uploads a text file (.txt) for the <b>complete transition table</b> corresponding to their network. A complete transition table consists of all possible states and the their next states with delimiter, an arrow (->). For example, the complete transition table of a 3-node boolean network can be:
+					If the user would like to upload a text file (.txt) for the <b>complete transition table</b> corresponding to their network, then it consists of all possible states and the their future states with delimiter, an arrow (->). For example, the complete transition table of a 3-node boolean network can be:
                                 </p>
                                 <ul>
 					<li>0 0 0 -> 0 1 0</li>
@@ -185,6 +185,17 @@ print <<ENDHTML;
                                 <p>
                                         Note that the states consist of numbers not more than 2, because this is a boolean network, i.e. the number of states for this network is 2.
 				</p>
+                                <p>
+					If the user would like to upload a text file (.txt) for the <b>functions</b> corresponding to their network, then it consists of the updating functions of all variables. For example, the functions of a 3-node boolean network can be:
+                                </p>
+                                <ul>
+					<li>f1 = x1 + 1</li>
+                                        <li>f2 = x1 * x3 + x2 ^ 2</li>
+                                        <li>f3 = x2 + x3 ^ 3</li>
+				</ul>
+                                <p>
+                                        Here, f1 indicates the updating function of the first variable, denoted by x1. Similarly, f2 indicates the updating function of the second variable, denoted by x2, and f2 indicates the updating function of the third variable, denoted by x3. Note that the number of functions must be equal to the number of variables.
+                                </p>
                                 <p>
                                         The user may also upload a text file (.txt) for the <b>propensity matrix</b>. If s/he does not want to upload one for the propensity matrix, then the uniform distribution will be used, i.e. all entries will be 0.5 as default. In the propensity matrix the number of rows must be 2 that the first row is for activation and the second row is for degredation, and the number of columns must be the number of nodes (variables) in the network. Propensity entries must be seperated by a space and between 0 and 1. The sum of the activation and degradation of a node does not have to be equal to 1. For example, the propensity matrix of a 3-node boolean network must have 2 rows and 3 colums and can be:
 				</p>

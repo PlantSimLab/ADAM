@@ -200,7 +200,7 @@ print <<ENDHTML;
 				Select <b>Stochastic Discrete Dynamical Systems</b> as the format of the input functions.
 			</p>
 			<p>
-				Upload the (complete) transition table file for 4 node Lambda phage model (available <a href = "/steptutorial_files/LambdaPhage_tt.txt" target="_blank">here</a>).
+				Upload either the (complete) transition table file for 4 node Lambda phage model (available <a href = "/steptutorial_files/LambdaPhage_tt.txt" target="_blank">here</a>) or the functions file for 4 node Lambda phage model (available <a href = "/steptutorial_files/LambdaPhage_func.txt" target="_blank">here</a>).
 			</p>
 			<p>
 				Upload the propensity matrix file for 4 node Lambda phage model-Lysogeny (available <a href = "/steptutorial_files/LambdaPhageLysogeny_pp.txt" target="_blank">here</a>).
