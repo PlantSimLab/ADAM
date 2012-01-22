@@ -1,6 +1,6 @@
 # Author(s): David Murrugarra & Seda Arat
 # Name: Having all the subroutines needed for Stochastic Discrete Dynamical Systems
-# Revision Date: 11/28/2011
+# Revision Date: 1/18/2012
 
 package Subroutines4sdds;
 
@@ -8,37 +8,36 @@ use strict;
 use warnings;
 
 use List::Util qw [min];
-use State4sdds;
 use Class::Struct
 
 (
- flag4tm => '$',
- flag4ss => '$',
-
  max_num_interestingNodes => '$',
- max_num_reachableStates => '$',
  max_num_nodes => '$',
  max_num_states => '$',
- max_element_stateSpace => '$',
-
- num_nodes => '$',
- num_states => '$',
  num_steps => '$',
  num_simulations => '$',
+ max_element_stateSpace => '$',
+
+ flag4ss => '$',
+ flag4tm => '$',
+ flag4func => '$',
+
+ num_states => '$',
 
  initialState => '@',
  interestingNodes => '@',
+ 
+ num_nodes => '$',
 
  propensityMatrix => '%',
- transitionTable =>'%',
+ functions =>'@',
+ transitionTable => '%',
 
- allStates => '%',
- transitionProbabilityArray => '@',
- steadyStates => '%',
  allTrajectories => '%',
  reachableStates => '%',
- percentageVector => '@',
  averageTrajectory => '@',
+ transitionProbabilityArray => '@',
+ steadyStates => '%',
 );
 
 =pod
@@ -89,6 +88,7 @@ sub get_interestingnodes {
   my @temp = split (/\,/, $interestingnodes);
   my $temp = join (' ', @temp);
   @{$sdds->interestingNodes()} = split(/\s+/, $temp);
+
   my $num_interestingnodes = @{$sdds->interestingNodes()};
   my $min_value = min $sdds->max_num_interestingNodes, $sdds->num_nodes();
   
@@ -121,7 +121,7 @@ all probabilities are 0.5 as a default.
 sub get_propensitymatrix {
   my $sdds = shift;
   my $matrix = shift;
-  my ($i, @activation, @degradation, $activation, $degradation, $j, $n, $str, $m);
+  my ($i, @activation, @degradation, $n);
 
   if ($matrix) {
     $i = 0;
@@ -178,104 +178,147 @@ sub get_propensitymatrix {
       }
     }
     
-    for ($j = 0; $j < $n; $j++) {
+    for (my $j = 0; $j < $n; $j++) {
       my @temp = ($activation[$j], $degradation[$j]);
       $sdds->propensityMatrix($j, \@temp);
     }
   }
   else {
-    for ($j = 0; $j < $sdds->num_nodes(); $j++) {
+    for (my $j = 0; $j < $sdds->num_nodes(); $j++) {
       my @temp = (0.5, 0.5);
       $sdds->propensityMatrix($j, \@temp);
     }
   }
 }
 
-
 ############################################################
 
 =pod
 
-$sdds = get_transitiontable_and_allstates($transitiontable);
+$sdds = get_functions_or_transitiontable($file);
+
+Either gets the functions or transition table depending on the user's 
+preference.
+
+Reads and stores the functions in an array. The first entry is the updating
+function of the first node, the second entry is the updating function of the
+second node, so on...
 
 Reads and stores the transition table in a hash table whose keys are 
-the decimal representation of the states and values are the next state 
-and stored as references.
-
-Stores all states in a hash table whose keys are the decimal representation 
-of the states and values are the state objects.
+the decimal representation of the states and values are the decimal 
+representation of their next state.
 
 =cut
 
-sub get_transitiontable_and_allstates {
+sub get_functions_or_transitiontable {
   my $sdds = shift;
-  my $transitiontable = shift;
-  my ($inputs, $outputs, $s, $total_num_states, $size_tt, $i);
+  my $file = shift;
   
-  open(OUTPUT,"<",$transitiontable) or die("<br>ERROR: Cannot open $transitiontable for reading! <br>");
-  while (<OUTPUT>) {
-    chomp;
-    my ($inputs,$outputs) = split(/\-.*>/);
+  my $flag = 1;
 
-    # removes the white spaces from the beginning and the end of $inputs and $outputs
-    $inputs =~ s/^\s+//;
-    $inputs =~ s/\s+$//;
+  open (FILE, "< $file") or die ("<br>ERROR: Cannot open $file for reading! <br>");
+  while (my $line = <FILE>) {
+    chomp ($line);
+    
+    # skip empty lines
+    if ($line =~ /^\s*$/) {
+      next;
+    }
 
-    $outputs =~ s/^\s+//;
-    $outputs =~ s/\s+$//;
-
-    if ($inputs && $outputs) {
-      my @is = split(/\s+/,$inputs);
-      my @ns = split(/\s+/, $outputs);
-
-      my $size_of_is = scalar @is;
-      if ($size_of_is != $sdds->num_nodes()) {
-	print ("<br>ERROR: The length of the states in the transition table must match with the number of variables in the system. Please revise the transition table and/or the initial state. <br>");
+    if ($flag) {
+      if ($line =~ /(f|x|=)/) {
+	$sdds->flag4func(1);
+      }
+      elsif ($line =~ /-.*>/) {
+	$sdds->flag4func(0);
+      }
+      else {
+	print  ("<br>ERROR: Please revise the format of $file. <br>");
 	exit;
       }
+      $flag = 0;
+    }
+    
+    if ($sdds->flag4func()) {
+      my ($a, $f) = split(/=/,$line);
       
-      my $size_of_ns = scalar @ns;
-      if ($size_of_ns != $sdds->num_nodes()) {
-	print ("<br>ERROR: The length of the states in the transition table must match with the length of the initial state. Please revise the transition table and/or the initial state. <br>");
-	exit;
-      }
+      $f =~ s/\^/\*\*/g; # replace carret with double stars
+      $f =~ s/x(\d+)/\$x\[$1\]/g; #for evaluation
+      push(@{$sdds->functions()}, $f);
+    }
+    else {
+      my ($inputs,$outputs) = split(/\-.*>/, $line);
       
-      for ($i = 0; $i < $size_of_is; $i++) {
+      # removes the white spaces from the beginning and the end of $inputs and $outputs
+      $inputs =~ s/^\s+//;
+      $inputs =~ s/\s+$//;
+      
+      $outputs =~ s/^\s+//;
+      $outputs =~ s/\s+$//;
+      
+      if ($inputs && $outputs) {
+	my @is = split(/\s+/,$inputs);
+	my @ns = split(/\s+/, $outputs);
+	
+	my $size_of_is = scalar @is;
 
-	if ((isnot_number($is[$i])) || (isnot_number($ns[$i])) || ($is[$i] >= $sdds->num_states()) || ($ns[$i] >= $sdds->num_states())) {
-	  print ("<br>ERROR: The states must consist of the numbers which are at most ", $sdds->num_states() - 1, " in the transition table. Please revise the transition table and/or the number of states. <br>");
+	unless ($size_of_is == $sdds->num_nodes()) {
+	  print ("<br>ERROR: The length of the states in the transition table must match with the number of variables in the system. Please revise the transition table and/or the initial state. <br>");
+	  exit;
+	}
+	
+	my $size_of_ns = scalar @ns;
+
+	unless ($size_of_ns == $sdds->num_nodes()) {
+	  print ("<br>ERROR: The length of the states in the transition table must match with the length of the initial state. Please revise the transition table and/or the initial state. <br>");
+	  exit;
+	}
+	
+	for (my $i = 0; $i < $size_of_is; $i++) {
+	  
+	  if ((isnot_number($is[$i])) || (isnot_number($ns[$i])) || ($is[$i] >= $sdds->num_states()) || ($ns[$i] >= $sdds->num_states())) {
+	    print ("<br>ERROR: The states must consist of the numbers which are at most ", $sdds->num_states() - 1, " in the transition table. Please revise the transition table and/or the number of states. <br>");
+	    exit;
+	  }
+	}    
+	
+	my $idec = $sdds->convert_from_state_to_decimal(\@is);
+	
+	if (!defined($sdds->transitionTable($idec))) {
+	  my $ndec = $sdds->convert_from_state_to_decimal(\@ns);
+	  $sdds->transitionTable($idec, $ndec);
+	}
+	else {
+	  print ("<br>ERROR: The transition table must not include the state, @ns ,  more than once. Please revise the transition table. <br>");
 	  exit;
 	}
       }
-      
-      # Creates a 'state' object.
-      my ($state);
-      $state = State4sdds::new();
-      $state->get_value_and_strState(\@is);
-      $state->decimal_rep($sdds->convert_to_decimal(\@is));    
-      
-      my $key = $state->decimal_rep();
-      
-      if (!defined($sdds->transitionTable($key))) {
-	$sdds->transitionTable($key, \@ns);
-      }
-      else {
-	print ("<br>ERROR: The transition table must not include the state, @ns ,  more than once. Please revise the transition table. <br>");
-	exit;
-      }
-      $state->get_nextstate_tt($sdds->transitionTable());
-      $sdds->allStates($key,$state);
-   }
-    # end of while loop 
+    }
   }
-  close(OUTPUT) or die("<br>ERROR: Cannot close $transitiontable for reading! <br>");
+  close (FILE) or die ("<br>ERROR: Cannot close $file! <br>");
   
-  $total_num_states = $sdds->num_states()**$sdds->num_nodes();
-  $size_tt = keys (%{$sdds->transitionTable()});
-  
-  if ($size_tt < $total_num_states) {
-    print ("<br>ERROR: The transition table must include all possible states. Please revise the transition table and/or the number of states. <br>");
-    exit;
+  #Error checking
+  if ($sdds->flag4func()) {
+    my $size_func = scalar @{$sdds->functions()};
+    unless ($size_func == $sdds->num_nodes()) {
+      print ("<br>ERROR: The number of functions in the file must be equal to the number of nodes. Please revise the function file and/or the initial state. <br>");
+      exit;
+    }
+  }
+  else {
+    my $total_num_states = $sdds->num_states()**$sdds->num_nodes();
+    my $size_tt = keys (%{$sdds->transitionTable()});
+    
+    unless ($size_tt == $total_num_states) {
+      print ("<br>ERROR: The transition table must include all possible states. Please revise the transition table and/or the number of states. <br>");
+      exit;
+    }
+  }
+
+  if (0) {
+    foreach my $key (sort {$a <=> $b} keys %{$sdds->transitionTable()}) {
+      print "$key <--> " . $sdds->transitionTable($key) . "\n";
+    }
   }
 }
 
@@ -290,36 +333,37 @@ the trajectories and the values are the trajectories whose starting
 points are the initial state and length is num_steps+1.
 
 Stores the reachable states in all trajectories as a hash table whose 
-keys are the decimal rep. of the states and values are the 
-percentages of that state. 
+keys are the string rep. of the states and values are the 
+percentages of these states.
 
 =cut
 
 sub get_alltrajectories_and_reachablestates {
   my $sdds = shift;
-  my ($i, $j, $n);
   
-  $n = $sdds->num_simulations() * $sdds->num_steps();
+  my $n = $sdds->num_simulations() * $sdds->num_steps();
 
-  for ($i = 0; $i < $sdds->num_simulations(); $i++) {
+  for (my $i = 1; $i <= $sdds->num_simulations(); $i++) {
     my @temp = ();  # stores a single trajectory each time 
     my $is = $sdds->initialState();
-    push (@temp, $sdds->convert_to_decimal($is));
+    push (@temp, $sdds->convert_from_state_to_decimal($is));
     
-    for ($j = 1; $j <= $sdds->num_steps(); $j++) {
-      my @ns = $sdds->get_nextstate_pm($is, $sdds->propensityMatrix());
+    for (my $j = 1; $j <= $sdds->num_steps(); $j++) {
+
+      my @ns = $sdds->get_nextstate_pm($is);
+      my $dec = $sdds->convert_from_state_to_decimal(\@ns);
+      my $str = join (' ', @ns);
       my $value = 0;
 
-      if (!defined($sdds->reachableStates($sdds->convert_to_decimal(\@ns)))) {
+      if (!defined ($sdds->reachableStates($str))) {
 	$value = 100 / $n;
-	$sdds->reachableStates($sdds->convert_to_decimal(\@ns), $value);
       }
       else {
-	$value = $sdds->reachableStates($sdds->convert_to_decimal(\@ns));
+	$value = $sdds->reachableStates($str);
 	$value += 100 / $n;
-	$sdds->reachableStates($sdds->convert_to_decimal(\@ns), $value);
       }
-      push (@temp, $sdds->convert_to_decimal(\@ns));
+      $sdds->reachableStates($str, $value);
+      push (@temp, $dec);
       $is = \@ns;
     } # end of for loop $j
 
@@ -339,28 +383,28 @@ Stores the averageTrajectory of all trajectories in an array
 
 sub get_average_trajectory {
   my $sdds = shift;
-  my ($total_num_states, $i, $j, $k, $r);
   
-  $total_num_states = $sdds->num_states()**$sdds->num_nodes();
+  my $total_num_states = $sdds->num_states()**$sdds->num_nodes();
 
   # Initial state must be the first state in averageTrajectory.
   push (@{$sdds->averageTrajectory()},@{$sdds->initialState()});
 
-  for ($i = 1; $i <= $sdds->num_steps(); $i++) {
+  for (my $i = 1; $i <= $sdds->num_steps(); $i++) {
     my @temp = ();  # keeps the values of i-th states in trajectories
-    for ($j = 0; $j < $sdds->num_simulations(); $j++) {
+
+    for (my $j = 1; $j <= $sdds->num_simulations(); $j++) {
       my @traj = @{$sdds->allTrajectories($j)};
-      my $temp_state = $sdds->allStates($traj[$i]);
-      my @value = @{$temp_state->value()};
+      my @value = $sdds->convert_from_decimal_to_state($traj[$i - 1]);
       push (@temp, @value);
     }
 
     my @sum = ();
-    for ($k = 0; $k < $sdds->num_nodes(); $k++) {
-      for ($r = 0; $r < $sdds->num_simulations(); $r++) {
+    for (my $k = 0; $k < $sdds->num_nodes(); $k++) {
+      for (my $r = 0; $r < $sdds->num_simulations(); $r++) {
 	my $w = ($r * $sdds->num_nodes()) + $k;
 	$sum[$k] += $temp[$w];
       } 
+
       push (@{$sdds->averageTrajectory()}, $sum[$k] / $sdds->num_simulations());
     }
   }
@@ -384,10 +428,9 @@ steady states.
 
 sub get_transitionprobabilityarray_and_steadystates {
   my $sdds = shift;
-  my ($total_num_states, $key, $i, $j, $k, $num_steadystates);
   
-  $total_num_states = $sdds->num_states()**$sdds->num_nodes();
-  $key = 1;
+  my $total_num_states = $sdds->num_states()**$sdds->num_nodes();
+  my $key = 1;
 
   if ($total_num_states > $sdds->max_element_stateSpace()) {
      print ("<br>FYI: Since the number of elements in the state space is too large, transition matrix will not be provided. <br>");
@@ -395,21 +438,19 @@ sub get_transitionprobabilityarray_and_steadystates {
   }
 
   if ($sdds->flag4tm()) {
-    for ($i = 0; $i < $total_num_states; $i++) {
+    for (my $i = 1; $i <= $total_num_states; $i++) {
       my %temp = ();
-      my $state = $sdds->allStates($i + 1);
-      my @x = @{$state->value()};
-      my @z = @{$state->nextstate_tt()};
+      my @x = $sdds->convert_from_decimal_to_state($i);
+      my @z = $sdds->get_nextstate(\@x);
       
-      for ($j = 0; $j < $total_num_states; $j++) {
+      for (my $j = 1; $j <= $total_num_states; $j++) {
 	my $p = 1;
 	my $total_p = 0;
-	my $state1 = $sdds->allStates($j + 1);
-	my @y = @{$state1->value()};
+	my @y = $sdds->convert_from_decimal_to_state($j);
 	
-	for ($k = 0; $k < $sdds->num_nodes(); $k++) {
+	for (my $k = 0; $k < $sdds->num_nodes(); $k++) {
 	  my $c = 0;
-	  my @array = @{${$sdds->propensityMatrix}{$k}};
+	  my @array = @{${$sdds->propensityMatrix()}{$k}};
 	  if ($x[$k] < $z[$k]) {
 	    if ($y[$k] == $z[$k]) {
 	      $c = $array[0];
@@ -441,8 +482,8 @@ sub get_transitionprobabilityarray_and_steadystates {
 	
 	# Stores the steady states in a hash table if the flag is on.
 	if ($sdds->flag4ss() && $i == $j && $p == 1) {
-	  my $state = $sdds->allStates($i + 1);
-	  $sdds->steadyStates($key, $state->decimal_rep());
+	  my $str = join (' ', @x);
+	  $sdds->steadyStates($key, $str);
 	  $key++;
 	}
 	
@@ -460,18 +501,18 @@ sub get_transitionprobabilityarray_and_steadystates {
       } # end of for loop $j
       
       # Stores all the probabilities in the transition probability array as a hash table.
-      @{$sdds->transitionProbabilityArray}[$i] = \%temp; 
+      ${$sdds->transitionProbabilityArray()}[$i - 1] = \%temp; 
+      
     } # end of for loop $i
   }
   elsif ($sdds->flag4ss()) {
-    for ($i = 1; $i <= $total_num_states; $i++) {
-      my $state = $sdds->allStates($i);
-      my @x = @{$state->value()};
-      my @z = @{$state->nextstate_tt()};
-      my $x = join ('', @x);
-      my $z = join ('', @z);
+    for (my $i = 1; $i <= $total_num_states; $i++) {
+      my @x = $sdds->convert_from_decimal_to_state($i);
+      my @z = $sdds->get_nextstate(\@x);
+      my $x = join (' ', @x);
+      my $z = join (' ', @z);
       if ($x eq $z) {
-	$sdds->steadyStates($key, $i);
+	$sdds->steadyStates($key, $x);
 	$key++;
       }
     }
@@ -481,17 +522,17 @@ sub get_transitionprobabilityarray_and_steadystates {
   # Prints out the steady states if the system has any and the user wants.
   
   if ($sdds->flag4ss()) {
-    $num_steadystates = keys (%{$sdds->steadyStates()});
-    if ($num_steadystates == 0) {
+    $key--;
+    if ($key == 0) {
       print ("<br>There is not any steady state in this system. <br>"); 
     }
-    elsif ($num_steadystates == 1) {
-      print ("<br>There is only 1 steady state in this system, which is @{$sdds->allStates($sdds->steadyStates(1))->value()} . <br>");
+    elsif ($key == 1) {
+      print ("<br>There is only 1 steady state in this system, which is: ", $sdds->steadyStates(1), ". <br>");
     }
     else {
-      print ("<br>There are $num_steadystates steady states in this system, which are: <br>");
-      foreach my $a (sort values %{$sdds->steadyStates()}) {
-	print ("@{$sdds->allStates($a)->value()} <br>");
+      print ("<br>There are $key steady states in this system, which are: <br>");
+      foreach my $key ( sort {$a <=> $b} keys %{$sdds->steadyStates()}) {
+	print ($sdds->steadyStates($key), "<br>");
       }
     }
   }
@@ -501,29 +542,101 @@ sub get_transitionprobabilityarray_and_steadystates {
 
 =pod
 
-$sdds = convert_to_decimal($node);
+$sdds = convert_from_state_to_decimal ($state);
 
-Converts the given state to its decimal representation and adds 1 for convenience.
+Converts a given state to its decimal representation and adds 1 for convenience.
 
 =cut
 
-sub convert_to_decimal {
+sub convert_from_state_to_decimal {
   my $sdds = shift;
-  my $node = shift;
-  my($i, $result);
+  my $state = shift;
+  my $decimal_rep = 1;
 
-  for ($i = 0; $i < $sdds->num_nodes(); $i++){
-    $result += $$node[$sdds->num_nodes() - 1 - $i] * ($sdds->num_states() ** $i);
+  for (my $i = 0; $i < $sdds->num_nodes(); $i++) {
+    $decimal_rep += $$state[$sdds->num_nodes() - $i - 1] * ($sdds->num_states() ** $i);
   }
-  $result++;
-  return $result;
+  return $decimal_rep;
 }
 
 ############################################################
 
 =pod
 
-$sdds = get_nextstate_pm($node, $matrix);
+$sdds = convert_from_decimal_to_state ($n);
+
+Converts the decimal representation of a state to state itself.
+
+=cut
+
+sub convert_from_decimal_to_state {
+  my $sdds = shift;
+  my $n = shift;
+  my ($quotient, $remainder);
+  my @state = ();
+  $n--;
+
+  do {
+    $quotient = int $n / $sdds->num_states();
+    $remainder = $n % $sdds->num_states();
+    push (@state, $remainder);
+    $n = $quotient;
+  } until ($quotient == 0);
+
+  my $dif = $sdds->num_nodes() - (scalar @state);
+
+  if ($dif) {
+    for (my $i = 0; $i < $dif; $i++) {
+      push (@state, 0);
+    }
+  }
+
+  @state = reverse @state;
+  return @state;
+}
+
+###########################################################################
+
+=pod
+
+$sdds = get_nextstate($state);
+
+Returns the next state (as an array) depending on the initial state 
+via @functions or %transitionTable
+
+=cut
+
+sub get_nextstate {
+  my $sdds = shift;
+  my $state = shift;
+  my @x = @$state;
+  my @nextState = ();
+
+  if ($sdds->flag4func()) {
+    my @temp = @{$sdds->functions()};
+    
+    for (my $i = 0; $i < @temp; $i++) {
+      for (my $j = 0; $j < @x; $j++) {
+	my $k = $j + 1;
+	$temp[$i] =~ s/\$x\[$k\]/\($x[$j]\)/g;
+      }
+      
+      $nextState[$i] = eval($temp[$i]) % $sdds->num_states();
+    }
+  }
+  else {
+     my $dec = $sdds->convert_from_state_to_decimal(\@x);
+     $dec = $sdds->transitionTable($dec);
+     @nextState = $sdds->convert_from_decimal_to_state($dec);
+  }
+  return @nextState;
+}
+
+###########################################################################
+
+=pod
+
+$sdds = get_nextstate_pm($state);
 
 Returns the next state (as an array) depending on the initial state and 
 its corresponding probabilities in the propensity matrix.
@@ -532,39 +645,37 @@ its corresponding probabilities in the propensity matrix.
 
 sub get_nextstate_pm {
   my $sdds = shift;
-  my $node = shift;
-  my $matrix = shift;
-  my (@x, $state, @z, $r, $n, @next_state, $j);
+  my $state = shift;
 
-  @x = @$node;
-  $state = $sdds->allStates($sdds->convert_to_decimal($node));
-  @z = @{$state->nextstate_tt()};
-  $r = rand;
+  my @x = @$state;
+  my @z = $sdds->get_nextstate(\@x);
+  my @next_statePM;
 
-  for ($j = 0; $j < $sdds->num_nodes(); $j++) {
-    my @temp = @{$$matrix{$j}};
+  for (my $j = 0; $j < $sdds->num_nodes(); $j++) {
+    my $r = rand;
+    my @temp = @{$sdds->propensityMatrix($j)};
 
     if ($x[$j] < $z[$j]) {
       if ($r < $temp[0]) {
-	$next_state[$j] = $z[$j];
+	$next_statePM[$j] = $z[$j];
       }
       else{
-	$next_state[$j] = $x[$j];
+	$next_statePM[$j] = $x[$j];
       }
     }
     elsif ($x[$j] > $z[$j]) {
       if ($r < $temp[1]) {
-	$next_state[$j] = $z[$j];
+	$next_statePM[$j] = $z[$j];
       }
       else{
-	$next_state[$j] = $x[$j];
+	$next_statePM[$j] = $x[$j];
       }
     }
     else {
-      $next_state[$j] = $x[$j];
+      $next_statePM[$j] = $x[$j];
     }
   }
-  return (@next_state);
+  return @next_statePM;
 }
 
 ############################################################
