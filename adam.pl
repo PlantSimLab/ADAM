@@ -337,6 +337,8 @@ given ($choice_box) {
 		            exit;
 	            }
 
+		  print "<br>upload_file_pm = $upload_file_pm <br>";
+
                 # checks if a file was uploaded for propensity matrix 
                 if ($upload_file_pm) {
                     $filename_pm = "$clientip.pm.txt";
