@@ -3,7 +3,8 @@
 ## Hussein Vastani
 ## Franziska Hinkelmann
 ## Bonbons
-## November 2011
+## Seda Arat (sdds)
+## January 2012
 
 use v5.10;
 use CGI qw/:standard/;    # load CGI routines
@@ -351,15 +352,15 @@ given ($choice_box) {
 	      
 	      if ($upload_file_pm) {
 		if ($DEBUG) {
-		  say ("perl SDDS.pl $filename_tt $initialState $interestingNodes $num_states $flag4ss $flag4tm $plot_file $histogram_file $tm_file $filename_pm <br>");
+		  say ("perl SDDS.pl -f $filename_tt -i $initialState -n $interestingNodes -s $num_states -a $flag4ss -b $flag4tm -g $plot_file -h $histogram_file -t $tm_file -p $filename_pm <br>");
 		}
-		system ("perl SDDS.pl $filename_tt $initialState $interestingNodes $num_states $flag4ss $flag4tm $plot_file $histogram_file $tm_file $filename_pm");
+		system ("perl SDDS.pl -f $filename_tt -i $initialState -n $interestingNodes -s $num_states -a $flag4ss -b $flag4tm -g $plot_file -h $histogram_file -t $tm_file -p $filename_pm <br>");
 	      }
 	      else {
 		if ($DEBUG) {
-		  say ("perl SDDS.pl $filename_tt $initialState $interestingNodes $num_states $flag4ss $flag4tm $plot_file $histogram_file $tm_file <br>");
+		  say ("perl SDDS.pl -f $filename_tt -i $initialState -n $interestingNodes -s $num_states -a $flag4ss -b $flag4tm -g $plot_file -h $histogram_file -t $tm_file <br>");
 		}
-		system ("perl SDDS.pl $filename_tt $initialState $interestingNodes $num_states $flag4ss $flag4tm $plot_file $histogram_file $tm_file");
+		system ("perl SDDS.pl -f $filename_tt -i $initialState -n $interestingNodes -s $num_states -a $flag4ss -b $flag4tm -g $plot_file -h $histogram_file -t $tm_file");
 	      }
 	    } # end of /SDDS/
 	    
