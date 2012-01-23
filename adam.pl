@@ -321,38 +321,40 @@ given ($choice_box) {
             }
 
     	    when (/(SDDS)/) {
-	          SDDSerrorchecking_and_set_flags();
-	          use Cwd;
-	          $cwd_sdds = getcwd();
-	          `mkdir -p $cwd_sdds/../../htdocs/no-ssl/files`;
+	      SDDSerrorchecking_and_set_flags();
+	      use Cwd;
+	      $cwd_sdds = getcwd();
+	      `mkdir -p $cwd_sdds/../../htdocs/no-ssl/files`;
 	      
-	            # checks if a file was uploaded for transition table
-	            if ($upload_file) {
-		            $filename_tt = "$clientip.tt.txt";
-		            system("cp ../../htdocs/no-ssl/files/$upload_file $filename_tt");
-		            `perl -pi -e 's/\r//g' "$clientip.tt.txt"`;
-	            }
-	            else {
-		            print "<br>ERROR: There must be a file uploaded for a (complete) transition table. <br>";
-		            exit;
-	            }
+	      # checks if a file was uploaded for transition table
+	      if ($upload_file) {
+		$filename_tt = "$clientip.tt.txt";
+		system("cp ../../htdocs/no-ssl/files/$upload_file $filename_tt");
+		`perl -pi -e 's/\r//g' "$clientip.tt.txt"`;
+	      }
+	      else {
+		print "<br>ERROR: There must be a file uploaded for a (complete) transition table. <br>";
+		exit;
+	      }
 
-		  print "<br>upload_file_pm = $upload_file_pm <br>";
-
-                # checks if a file was uploaded for propensity matrix 
-                if ($upload_file_pm) {
-                    $filename_pm = "$clientip.pm.txt";
-                    system("cp ../../htdocs/no-ssl/files/$upload_file_pm $filename_pm");
-                    `perl -pi -e 's/\r//g' "$clientip.pm.txt"`;
-                }
-                else {
-                    print "<br>FYI: No file was uploaded for the propensity matrix, so uniform distribution will be used. <br>";
-                }
-
+	      if ($DEBUG) {
+		print "<br>upload_file_pm = $upload_file_pm <br>";
+	      }
+	      
+	      # checks if a file was uploaded for propensity matrix 
+	      if ($upload_file_pm) {
+		$filename_pm = "$clientip.pm.txt";
+		system("cp ../../htdocs/no-ssl/files/$upload_file_pm $filename_pm");
+		`perl -pi -e 's/\r//g' "$clientip.pm.txt"`;
+	      }
+	      else {
+		print "<br>FYI: No file was uploaded for the propensity matrix, so uniform distribution will be used. <br>";
+	      }
+	      
 	      $plot_file = "$clientip.plot";
 	      $histogram_file = "$clientip.histogram";
 	      $tm_file = "$clientip.tm";
-
+	      
 	      $DEBUG = 0;
 	      
 	      if ($upload_file_pm) {
