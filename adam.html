@@ -157,11 +157,11 @@ s.parentNode.insertBefore(ga, s);
   </tr>
   <tr>
     <td>
-      <font size="2"><strong>Model Input:</strong><br><br>
+      <font size="3"><strong>Model Input:</strong><br><br>
 
     <div class="file_explanation"id="file_exp_sdds">
       <br>
-      <font size="3"> File for the functions/transition table (.txt):
+      <font size="3"> File for the transition table/functions (.txt):
     </div>
       
     <input type="file" id="upload_file" name="upload_file"value="what">
@@ -192,7 +192,7 @@ s.parentNode.insertBefore(ga, s);
 
     <div class="explain" id="explain_mi_sdds">
       <br>
-      Either the <b>transition table</b> or the <b>functions</b> corresponding to the system can be uploaded. The transition table (<a href="/models/SDDSexamples/example_tt.txt"target="_blank">e.g.</a>) must be complete, i.e. it must contain all possible states. In each row, the states must be seperated by an arrow, -> , and each variable in a state must be seperated by a space. The format for each line is: 0 0 -> 1 0. On the other hand, the functions (<a href="/models/SDDSexamples/example_func.txt"target="_blank">e.g.</a>) must be the updating function of each node. f1, f2, f3, ... represent the function, x1,x2,... represent the nodes in the system. <br>
+      Either the <b>transition table</b> or <b>functions</b> can be uploaded. The <b>transition table</b> (<a href="/models/SDDSexamples/example_tt.txt"target="_blank">e.g.</a>) must be complete, i.e. it must contain all possible states. In each row, the states must be seperated by an arrow, -> , and each variable in a state must be seperated by a space. The format for each line is: 0 0 -> 1 0. On the other hand, the <b>functions</b> (<a href="/models/SDDSexamples/example_func.txt"target="_blank">e.g.</a>) must be the updating function of each node. f1, f2, f3,... represent the functions, whereas x1,x2,... represent the nodes in the system. <br>
       <br>
       In the <b>propensity matrix</b> (<a href="/models/SDDSexamples/example_pp.txt" target="_blank">e.g.</a>), the number of rows must be 2 (the first row is for activation and the second row is for degredation), the number of columns must be the number of nodes, and each propensity entries must be seperated by a space. If you prefer not to upload a file for it, then each entry will be 0.5 as default. The format for each row is: 0.1 0.95. <br>
       <br>
