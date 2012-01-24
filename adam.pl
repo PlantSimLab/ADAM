@@ -65,7 +65,7 @@ if ($choice_box eq "") {
 # this function reads input functions from file or text area and writes the input functions into $clientip.functionfile.txt
 sub create_input_function {
 
-  # assures that the program will do nothing for SDDS and continue the algorithm
+  # the program will do nothing for SDDS and continue the algorithm
   if ($format_box eq 'SDDS') {
     return 0;
   }
@@ -333,12 +333,8 @@ given ($choice_box) {
 		`perl -pi -e 's/\r//g' "$clientip.tt.txt"`;
 	      }
 	      else {
-		print "<br>ERROR: There must be a file uploaded for a (complete) transition table. <br>";
+		print "<br>ERROR: There must be a file uploaded for a (complete) transition table/functions. <br>";
 		exit;
-	      }
-
-	      if ($DEBUG) {
-		print "<br>upload_file_pm = $upload_file_pm <br>";
 	      }
 	      
 	      # checks if a file was uploaded for propensity matrix 
@@ -354,8 +350,6 @@ given ($choice_box) {
 	      $plot_file = "$clientip.plot";
 	      $histogram_file = "$clientip.histogram";
 	      $tm_file = "$clientip.tm";
-	      
-	      $DEBUG = 0;
 	      
 	      if ($upload_file_pm) {
 		if ($DEBUG) {
