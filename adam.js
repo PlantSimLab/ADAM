@@ -63,7 +63,7 @@ $(document).ready(function() {
         'folder': '/../../htdocs/no-ssl/files',
         'auto': false,
         'multi': false,
-	//'removeCompleted' : true,
+	'removeCompleted' : true,
     'onSelect': function(event, ID, fileObj) {
             filePM = fileObj.name;
             //alert('The file ' + fileObj.name + ' was added to the queue.');
