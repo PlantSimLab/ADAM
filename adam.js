@@ -26,31 +26,6 @@ $(document).ready(function() {
 
     var filepmname = "";
 
-    var file = "";
-    $('#upload_file').uploadify({
-	'uploader': '/uploadify/uploadify.swf',
-        'script': '/uploadify/uploadify.php',
-	'cancelImg': '/uploadify/cancel.png',
-        'folder': '/../../htdocs/no-ssl/files',
-       	'auto': false,
-        'multi': false,
-	'removeCompleted' : true,
-        'onSelect': function(event, ID, fileObj) {
-            file = fileObj.name;
-            //alert('The file ' + fileObj.name + ' was added to the queue.');
-        },
-        'onComplete': function() {
-            //alert('Complete');
-            postForm("&upload_file=" + file + filepmname);
-            file = "";
-        },
-        'onCancel': function() {
-            file = "";
-        }, 
-	'onError': function() {
-	    alert( "ERROR");
-	}
-    });
 
     // filePM is for propensity matrix in SDDS
 
@@ -80,6 +55,35 @@ $(document).ready(function() {
 	    alert( "ERROR");
     }
     });
+
+
+    var file = "";
+    $('#upload_file').uploadify({
+	'uploader': '/uploadify/uploadify.swf',
+        'script': '/uploadify/uploadify.php',
+	'cancelImg': '/uploadify/cancel.png',
+        'folder': '/../../htdocs/no-ssl/files',
+       	'auto': false,
+        'multi': false,
+	'removeCompleted' : true,
+        'onSelect': function(event, ID, fileObj) {
+            file = fileObj.name;
+            //alert('The file ' + fileObj.name + ' was added to the queue.');
+        },
+        'onComplete': function() {
+            //alert('Complete');
+            postForm("&upload_file=" + file + filepmname);
+            file = "";
+        },
+        'onCancel': function() {
+            file = "";
+        }, 
+	'onError': function() {
+	    alert( "ERROR");
+	}
+    });
+
+    
 
     $('button').click(function() {
         $("#result").html("Calculating...");
