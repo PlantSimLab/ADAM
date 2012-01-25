@@ -3,7 +3,6 @@
 ## Hussein Vastani
 ## Franziska Hinkelmann
 ## Bonbons
-## Seda Arat (sdds)
 ## January 2012
 
 use v5.10;
@@ -329,7 +328,7 @@ given ($choice_box) {
 	      # checks if a file was uploaded for transition table
 	      if ($upload_file) {
 		$filename_tt = "$clientip.tt.txt";
-		system("cp ../../htdocs/no-ssl/files/$upload_file $filename_tt");
+		system ("cp ../../htdocs/no-ssl/files/$upload_file $filename_tt");
 		`perl -pi -e 's/\r//g' "$clientip.tt.txt"`;
 	      }
 	      else {

@@ -126,7 +126,7 @@ sub get_propensitymatrix {
   if ($matrix) {
     $i = 0;
     
-    open (OUTPUT, "< $matrix") or die("<br>ERROR: Cannot open $matrix for reading! <br>");
+    open (OUTPUT, "< $matrix") or die("<br>ERROR: Cannot open the propensity matrix file for reading! <br>");
     while (my $line = <OUTPUT>) {
       chomp($line);
       
@@ -143,7 +143,7 @@ sub get_propensitymatrix {
 	@activation = split(/\s+/, $line);
 	$n = scalar @activation;
 	if ($n != $sdds->num_nodes()) {
-	  print ("<br>ERROR: The number of columns in first row (activation) in the propensity matrix must match with the number of variables in the system. Please check the propensity matrix and/or the initial state. <br>");
+	  print ("<br>ERROR: The number of columns in first row (activation) in the propensity matrix must match with the number of variables in the system. Please check the propensity matrix file and/or the initial state. <br>");
 	  exit;
 	}
 	$i++;
@@ -162,7 +162,7 @@ sub get_propensitymatrix {
       }
     }
 
-    close(OUTPUT) or die("<br>ERROR: Cannot close $matrix for reading! <br>");
+    close(OUTPUT) or die("<br>ERROR: Cannot close the propensity matrix file! <br>");
     
     # Error checking on the entries of the propensity matrix.
     for ($i = 0; $i < $n; $i++) {
@@ -206,7 +206,7 @@ sub get_functions_or_transitiontable {
   my $sdds = shift;
   my $file = shift;
 
-  open (FILE, "< $file") or die ("<br>ERROR: Cannot open $file for reading! <br>");
+  open (FILE, "< $file") or die ("<br>ERROR: Cannot open the transition table / functions file for reading! <br>");
   while (my $line = <FILE>) {
     chomp ($line);
     
@@ -216,19 +216,19 @@ sub get_functions_or_transitiontable {
     }
 
     if ($line =~ /(f|x|=)/) {
-      close (FILE) or die ("<br>ERROR: Cannot close $file! <br>");
+      close (FILE) or die ("<br>ERROR: Cannot close the transition table / functions file! <br>");
       $sdds->flag4func(1);
       $sdds->get_functions ($file);
       last;
     }
     elsif ($line =~ /-.*>/) {
-      close (FILE) or die ("<br>ERROR: Cannot close $file! <br>");
+      close (FILE) or die ("<br>ERROR: Cannot close the transition table / functions file! <br>");
       $sdds->flag4func(0);
       $sdds->get_tt ($file);
       last;
     }
     else {
-      print ("<br>ERROR: Please revise the format of $file. <br>");
+      print ("<br>ERROR: Please revise the format of the transition table / functions file. <br>");
       exit;
     }
   }
@@ -252,7 +252,7 @@ sub get_functions {
   my $f;
   my $flag = 0;
 
-  open (FILE, "< $file") or die ("<br>ERROR: Cannot open $file for reading! <br>");
+  open (FILE, "< $file") or die ("<br>ERROR: Cannot open the functions file for reading! <br>");
   while (my $line = <FILE>) {
     chomp ($line);
     
@@ -277,7 +277,7 @@ sub get_functions {
 	$f .= $line;
       }
       else {
-	print "<br> ERROR: The format of $file is wrong. Please revise the file for the functions. <br>";
+	print "<br> ERROR: The format of the functions file is wrong. Please revise it. <br>";
 	exit;
       }
     }
@@ -288,12 +288,12 @@ sub get_functions {
   
   push(@{$sdds->functions()}, $f);
   
-  close (FILE) or die ("<br>ERROR: Cannot close $file! <br>");
+  close (FILE) or die ("<br>ERROR: Cannot close the functions file! <br>");
   
   # Error checking
   my $size_func = scalar @{$sdds->functions()};
   unless ($size_func == $sdds->num_nodes()) {
-    print ("<br>ERROR: The number of functions in the file must be equal to the number of nodes. Please revise the function file and/or the initial state. <br>");
+    print ("<br>ERROR: The number of functions in the file must be equal to the number of nodes. Please revise the functions file and/or the initial state. <br>");
     exit;
   }
 }
@@ -314,7 +314,7 @@ sub get_tt {
   my $sdds = shift;
   my $file = shift;
 
-  open (FILE, "< $file") or die ("<br>ERROR: Cannot open $file for reading! <br>");
+  open (FILE, "< $file") or die ("<br>ERROR: Cannot open the transition table file for reading! <br>");
   while (my $line = <FILE>) {
     chomp ($line);
     
@@ -339,21 +339,21 @@ sub get_tt {
       my $size_of_is = scalar @is;
       
       unless ($size_of_is == $sdds->num_nodes()) {
-	print ("<br>ERROR: The length of the states in the transition table must match with the number of variables in the system. Please revise the transition table and/or the initial state. <br>");
+	print ("<br>ERROR: The length of the states in the transition table must match with the number of variables in the system. Please revise the transition table file and/or the initial state. <br>");
 	exit;
       }
       
       my $size_of_ns = scalar @ns;
       
       unless ($size_of_ns == $sdds->num_nodes()) {
-	print ("<br>ERROR: The length of the states in the transition table must match with the length of the initial state. Please revise the transition table and/or the initial state. <br>");
+	print ("<br>ERROR: The length of the states in the transition table must match with the length of the initial state. Please revise the transition table file and/or the initial state. <br>");
 	exit;
       }
       
       for (my $i = 0; $i < $size_of_is; $i++) {
 	
 	if ((isnot_number($is[$i])) || (isnot_number($ns[$i])) || ($is[$i] >= $sdds->num_states()) || ($ns[$i] >= $sdds->num_states())) {
-	  print ("<br>ERROR: The states must consist of the numbers which are at most ", $sdds->num_states() - 1, " in the transition table. Please revise the transition table and/or the number of states. <br>");
+	  print ("<br>ERROR: The states must consist of the numbers which are at most ", $sdds->num_states() - 1, " in the transition table. Please revise the transition table file and/or the number of states. <br>");
 	  exit;
 	}
       }    
@@ -365,20 +365,20 @@ sub get_tt {
 	$sdds->transitionTable($idec, $ndec);
       }
       else {
-	print ("<br>ERROR: The transition table must not include the state, @ns ,  more than once. Please revise the transition table. <br>");
+	print ("<br>ERROR: The transition table can not include the state, @ns , more than once. Please revise the transition table file. <br>");
 	exit;
       }
     }
   }
 
-  close (FILE) or die ("<br>ERROR: Cannot close $file! <br>");
+  close (FILE) or die ("<br>ERROR: Cannot close the transition table file! <br>");
   
   # Error checking
   my $total_num_states = $sdds->num_states()**$sdds->num_nodes();
   my $size_tt = keys (%{$sdds->transitionTable()});
   
   unless ($size_tt == $total_num_states) {
-    print ("<br>ERROR: The transition table must include all possible states. Please revise the transition table and/or the number of states. <br>");
+    print ("<br>ERROR: The transition table must include all possible states. Please revise the transition table file and/or the number of states. <br>");
     exit;
   }
 }

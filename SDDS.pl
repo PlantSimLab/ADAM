@@ -236,10 +236,10 @@ my @data_plotting = (
 		    );
 
 
-open(IMG," > $plot_file.png") or die("<br>ERROR: Cannot open $plot_file for plotting! <br>");
+open(IMG," > $plot_file.png") or die("<br>ERROR: Cannot open the file for plotting! <br>");
 binmode IMG;
 print IMG $graph->plot(\@data_plotting)->png;
-close (IMG) or die ("<br>ERROR: Cannot close $plot_file for writing! <br>");
+close (IMG) or die ("<br>ERROR: Cannot close the file for plotting! <br>");
 
 
 # Gets the histogram according to percentage vector
@@ -282,17 +282,17 @@ if ($s) {
 			\@y_axis4histogram,
 		       );
   
-  open(IMG," > $histogram_file.png") or die("<br>ERROR: Cannot open $histogram_file for histogram! <br>");
+  open(IMG," > $histogram_file.png") or die("<br>ERROR: Cannot open the file for histogram! <br>");
   binmode IMG;
   print IMG $histogram->plot(\@data_histogram)->png;
-  close (IMG) or die ("<br>ERROR: Cannot close $histogram_file for writing! <br>");
+  close (IMG) or die ("<br>ERROR: Cannot close the file for histogram! <br>");
 }
 
 #Prints out the transition matrix if the user wants  
 
 if ($sdds->flag4tm()) {
   my $total_num_states = $sdds->num_states()**$sdds->num_nodes();
-  open(TM," > $tm_file.txt") or die("<br>ERROR: Cannot open $tm_file for transition matrix! <br>");
+  open(TM," > $tm_file.txt") or die("<br>ERROR: Cannot open the file for probability transition matrix! <br>");
   for (my $k = 1; $k <= $total_num_states; $k++) {  
     my %temp = %{${$sdds->transitionProbabilityArray}[$k - 1]};
     my @state1 = $sdds->convert_from_decimal_to_state($k);
@@ -304,7 +304,7 @@ if ($sdds->flag4tm()) {
     }
     print TM "_________________________________________________\n\n";
   }
-  close (TM) or die("<br>ERROR: Cannot close $tm_file for writing! <br>");
+  close (TM) or die("<br>ERROR: Cannot close the file for probability transition matrix! <br>");
 }
 
 exit;
