@@ -104,11 +104,11 @@ $(document).ready(function() {
 function postForm(file) {
     var formdata = $("form").serialize();
     formdata = formdata + file;
-    //alert(formdata);
-    //console.log(formdata);
+    alert(formdata);
+    console.log(formdata);
     $.post("../../cgi-bin/git/adam.pl", formdata, function(data) {
         $("#result").html(data);
-        //alert(data);
+        alert(data);
     });
 };
 
