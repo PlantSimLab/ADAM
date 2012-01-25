@@ -25,9 +25,7 @@ $(document).ready(function() {
     });
 
     var filepmname = "";
-
-    // filepm is for propensity matrix in SDDS
-    var filepm = "";
+    var file = "";
 
     $('#upload_file_pm').uploadify({
 	'uploader': '/uploadify/uploadify.swf',
@@ -38,23 +36,23 @@ $(document).ready(function() {
         'multi': false,
 	'removeCompleted' : true,
 	'onSelect': function(event, ID, fileObj) {
-            filepm = fileObj.name;
+            file = fileObj.name;
             alert('The file ' + fileObj.name + ' was added to the queue.');
         },
         'onComplete': function() {
             alert('Complete');
-            filepmname = "&upload_file_pm=" + filepm;
-            filepm = "";
+            filepmname = "&upload_file_pm=" + file;
+            file = "";
         },
         'onCancel': function() {
-            filepm = "";
+            file = "";
         }, 
 	'onError': function() {
 	    alert( "ERROR");
 	}
     });
 
-    var file = "";
+    
     $('#upload_file').uploadify({
 	'uploader': '/uploadify/uploadify.swf',
         'script': '/uploadify/uploadify.php',
@@ -86,18 +84,18 @@ $(document).ready(function() {
 	
 	//var files_param = "";
 
-	if (filepm != "") {
+	if (filepmname != "") {
 	    alert( filepm );
-        $('#upload_file_pm').uploadifyUpload();
-    }
+            $('#upload_file_pm').uploadifyUpload();
+	}
         
-    if (file != "") {
+	if (file != "") {
             alert( file );
             $('#upload_file').uploadifyUpload();
-    } else {
+	} else {
             alert(formdata);
             postForm("");
-    }
+	}
     });
 });
 
