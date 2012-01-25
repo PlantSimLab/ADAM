@@ -83,17 +83,13 @@ $(document).ready(function() {
         $("#result").html("Calculating...");
 	
 	//var files_param = "";
-
-	if (filepmname != "") {
-	    alert( filepmname );
-            $('#upload_file_pm').uploadifyUpload();
-	}
         
 	if (file != "") {
             alert( file );
             $('#upload_file').uploadifyUpload();
+	    $('#upload_file_pm').uploadifyUpload();
 	} else {
-            alert(formdata);
+            //alert(formdata);
             postForm("");
 	}
     });
