@@ -85,7 +85,7 @@ $(document).ready(function() {
 	//var files_param = "";
 
 	if (filepmname != "") {
-	    alert( filepm );
+	    alert( filepmname );
             $('#upload_file_pm').uploadifyUpload();
 	}
         
