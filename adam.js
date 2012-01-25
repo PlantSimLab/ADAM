@@ -61,10 +61,9 @@ $(document).ready(function() {
         'script': '/uploadify/uploadify.php',
 	'cancelImg': '/uploadify/cancel.png',
         'folder': '/../../htdocs/no-ssl/files',
-	'removeCompleted' : true,
         'auto': false,
         'multi': false,
-	//'removeCompleted' : true,
+	'removeCompleted' : true,
 	'onSelect': function(event, ID, fileObj) {
             filePM = fileObj.name;
             //alert('The file ' + fileObj.name + ' was added to the queue.');
