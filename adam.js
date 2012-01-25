@@ -39,10 +39,10 @@ $(document).ready(function() {
 	'removeCompleted' : true,
 	'onSelect': function(event, ID, fileObj) {
             filepm = fileObj.name;
-            //alert('The file ' + fileObj.name + ' was added to the queue.');
+            alert('The file ' + fileObj.name + ' was added to the queue.');
         },
         'onComplete': function() {
-            //alert('Complete');
+            alert('Complete');
             filepmname = "&upload_file_pm=" + filepm;
             filepm = "";
         },
@@ -65,10 +65,10 @@ $(document).ready(function() {
 	'removeCompleted' : true,
         'onSelect': function(event, ID, fileObj) {
             file = fileObj.name;
-            //alert('The file ' + fileObj.name + ' was added to the queue.');
+            alert('The file ' + fileObj.name + ' was added to the queue.');
         },
         'onComplete': function() {
-            //alert('Complete');
+            alert('Complete');
             postForm("&upload_file=" + file + filepmname);
             file = "";
         },
@@ -87,15 +87,15 @@ $(document).ready(function() {
 	//var files_param = "";
 
 	if (filepm != "") {
-	    //alert( filepm );
+	    alert( filepm );
         $('#upload_file_pm').uploadifyUpload();
     }
         
     if (file != "") {
-            //alert( file );
+            alert( file );
             $('#upload_file').uploadifyUpload();
     } else {
-            //alert(formdata);
+            alert(formdata);
             postForm("");
     }
     });
