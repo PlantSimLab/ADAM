@@ -26,6 +26,34 @@ $(document).ready(function() {
 
     var filepmname = "";
 
+    // filepm is for propensity matrix in SDDS
+    var filepm = "";
+
+    $('#upload_file_pm').uploadify({
+	'uploader': '/uploadify/uploadify.swf',
+        'script': '/uploadify/uploadify.php',
+	'cancelImg': '/uploadify/cancel.png',
+        'folder': '/../../htdocs/no-ssl/files',
+        'auto': false,
+        'multi': false,
+	'removeCompleted' : true,
+	'onSelect': function(event, ID, fileObj) {
+            filepm = fileObj.name;
+            //alert('The file ' + fileObj.name + ' was added to the queue.');
+        },
+        'onComplete': function() {
+            //alert('Complete');
+            filepmname = "&upload_file_pm=" + filepm;
+            filepm = "";
+        },
+        'onCancel': function() {
+            filepm = "";
+        }, 
+	'onError': function() {
+	    alert( "ERROR");
+	}
+    });
+
     var file = "";
     $('#upload_file').uploadify({
 	'uploader': '/uploadify/uploadify.swf',
@@ -52,42 +80,14 @@ $(document).ready(function() {
 	}
     });
 
-    // filePM is for propensity matrix in SDDS
-
-    var filePM = "";
-
-    $('#upload_file_pm').uploadify({
-	'uploader': '/uploadify/uploadify.swf',
-        'script': '/uploadify/uploadify.php',
-	'cancelImg': '/uploadify/cancel.png',
-        'folder': '/../../htdocs/no-ssl/files',
-        'auto': false,
-        'multi': false,
-	'removeCompleted' : true,
-	'onSelect': function(event, ID, fileObj) {
-            filePM = fileObj.name;
-            //alert('The file ' + fileObj.name + ' was added to the queue.');
-        },
-        'onComplete': function() {
-            //alert('Complete');
-            filepmname = "&upload_file_pm=" + filePM;
-            filePM = "";
-        },
-        'onCancel': function() {
-            filePM = "";
-        }, 
-	'onError': function() {
-	    alert( "ERROR");
-	}
-    });
 
     $('button').click(function() {
         $("#result").html("Calculating...");
 	
 	//var files_param = "";
 
-	if (filePM != "") {
-	    //alert( filePM );
+	if (filepm != "") {
+	    //alert( filepm );
         $('#upload_file_pm').uploadifyUpload();
     }
         
