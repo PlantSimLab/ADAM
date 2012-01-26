@@ -186,7 +186,7 @@ print <<ENDHTML;
                                         Note that the states consist of numbers not more than 2, because this is a boolean network, i.e. the number of states for this network is 2.
 				</p>
                                 <p>
-					If the user would like to upload a text file (.txt) for the <b>functions</b> corresponding to their network, then it consists of the updating functions of all variables. For example, the functions of a 3-node boolean network can be:
+					If the user would like to upload a text file (.txt) for the <b>functions</b> instead of the complete transition table, then the functions file consists of the updating functions of all variables. For example, the functions of a 3-node boolean network can be:
                                 </p>
                                 <ul>
 					<li>f1 = x1 + 1</li>
@@ -197,7 +197,7 @@ print <<ENDHTML;
                                         Here, f1 indicates the updating function of the first variable, denoted by x1. Similarly, f2 indicates the updating function of the second variable, denoted by x2, and f2 indicates the updating function of the third variable, denoted by x3. Note that the number of functions must be equal to the number of variables.
                                 </p>
                                 <p>
-                                        The user may also upload a text file (.txt) for the <b>propensity matrix</b>. If s/he does not want to upload one for the propensity matrix, then the uniform distribution will be used, i.e. all entries will be 0.5 as default. In the propensity matrix the number of rows must be 2 that the first row is for activation and the second row is for degredation, and the number of columns must be the number of nodes (variables) in the network. Propensity entries must be seperated by a space and between 0 and 1. The sum of the activation and degradation of a node does not have to be equal to 1. For example, the propensity matrix of a 3-node boolean network must have 2 rows and 3 colums and can be:
+                                        The user uploads a text file (.txt) for the <b>propensity matrix</b>. If they do not know the propensity matrix paramaters or want to get random simulations, then they can create a (.txt) file with all entries 0.5. In the propensity matrix the number of rows must be 2 that the first row is for activation and the second row is for degredation, and the number of columns must be the number of nodes (variables) in the network. Propensity entries must be seperated by a space and between 0 and 1. The sum of the activation and degradation of a node does not have to be equal to 1. For example, the propensity matrix of a 3-node boolean network must have 2 rows and 3 colums and can be:
 				</p>
                                 <ul>
 					<li>0.17 0.4 0.85</li>
@@ -206,6 +206,13 @@ print <<ENDHTML;
 				<p>
 					Therefore, for the <b>first</b> node, 0.17 is the <b>activation propensity</b>, 0.05 is the <b>degradation propensity</b>; for the <b>second</b> node, 0.4 is the <b>activation propensity</b>, 0.7 is the <b>degradation propensity</b>; for the <b>third</b> node, 0.85 is the <b>activation propensity</b>, 0.01 is the <b>degradation propensity</b>. "Activation Propensity" is the probability that the variable is being activated (increased) at the next time step. Similarly, "Degradation Propensity" is the probability that the variable is being degraded(decreased) at the next time step.
 				</p>
+                                <p>
+                                        Note that for random simulations, the propensity matrix of a 3-node boolean network must be:
+                                </p>
+                                <ul>
+					<li>0.5 0.5 0.5</li>
+                                        <li>0.5 0.5 0.5</li>
+				</ul>
 				<p>
 					The user specifies the <b>initial state</b>, which is the starting point for all trajectories and simulations for their system. An initial state consists of integers at least 0 and less than number of states and these numbers must be separated by a space. The number of integers in the initial state must be equal to the number of nodes (variables) in the network. For example, the initial state of a 3-node boolean network can be: 0 1 1 but cannot be: 0 1
                           	</p>

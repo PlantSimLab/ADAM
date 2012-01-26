@@ -1,6 +1,6 @@
 # Author(s): David Murrugarra & Seda Arat
 # Name: Having all the subroutines needed for Stochastic Discrete Dynamical Systems
-# Revision Date: 1/25/2012
+# Revision Date: January 2012
 
 package Subroutines4sdds;
 
@@ -48,8 +48,8 @@ sub get_initialstate {
   
   # Error message for $num_states, $num_steps, $num_simulations
   
-  if (isnot_number($sdds->num_states()) || $sdds->num_states() < 2 || $sdds->num_states() > $sdds->max_num_states()) {
-    print ("<br>ERROR: The number of states must be a number between 2 and ", $sdds->max_num_states(), " . <br>");
+  if (isnot_number($sdds->num_states()) || $sdds->num_states() < 2 || $sdds->num_states() > $sdds->max_num_states() || (isnot_prime($sdds->num_states()))) {
+    print ("<br>ERROR: The number of states must be a prime number between 2 and ", $sdds->max_num_states(), " . <br>");
     exit;
   }
   else {
@@ -747,6 +747,21 @@ sub isnot_float {
   }
   else {
     return 0;
+  }
+}
+
+############################################################
+
+# Returns true if the input is not a prime number 
+# (between 2 and 20), false otherwise.
+
+sub isnot_prime {
+  my ($p) = @_;
+  if ($p =~ /2|3|5|7|11|13|17|19/) {
+    return 0;
+  }
+  else {
+    return 1;
   }
 }
 

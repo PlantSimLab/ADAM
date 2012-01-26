@@ -1,6 +1,6 @@
 # Author(s): David Murrugarra & Seda Arat
 # Name: Generating the plot, histogram and transition matrix for SDDS
-# Revision Date: 1/25/2012
+# Revision Date: January 2012
 
 #!/usr/bin/perl
 
