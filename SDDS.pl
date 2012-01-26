@@ -1,6 +1,6 @@
 # Author(s): David Murrugarra & Seda Arat
 # Name: Generating the plot, histogram and transition matrix for SDDS
-# Revision Date: 1/22/2012
+# Revision Date: 1/25/2012
 
 #!/usr/bin/perl
 
@@ -20,11 +20,11 @@ SDDS.pl - Simulate a stochastic model from a possible initialization.
 
 =head1 USAGE
 
-SDDS.pl -f <functions_or_transitiontable-file> -p <pm-file> -i <initial-state> -n <interesting-nodes> -s <number-states> - a <flag-steadystates> -b <flag-transitionmatrix> -g <plot-file> -h <histogram-file> -t <tm-file> -o <output-file>
+SDDS.pl -f <functions_or_transitiontable-file> -p <propensitymatrix-file> -i <initial-state> -n <interesting-nodes> -s <number-states> - a <flag-steadystates> -b <flag-transitionmatrix> -g <plot-file> -h <histogram-file> -t <tm-file> -o <output-file>
 
 =head1 SYNOPSIS
 
-SDDS.pl -f <functions_or_transitiontable-file> -p <pm-file> -i <initial-state> -n <interesting-nodes> -s <number-states> -a <flag-steadystates> -b <flag-transitionmatrix> -g <plot-file> -h <histogram-file> -t <tm-file> -o <output-file>
+SDDS.pl -f <functions_or_transitiontable-file> -p <propensitymatrix-file> -i <initial-state> -n <interesting-nodes> -s <number-states> -a <flag-steadystates> -b <flag-transitionmatrix> -g <plot-file> -h <histogram-file> -t <tm-file> -o <output-file>
 
 =head1 DESCRIPTION
 
@@ -37,6 +37,14 @@ SDDS.pl - Simulate a stochastic model from a possible initialization.
 =item -f[unctions_or_transitiontable-file] <functions_or_transitiontable-file>
 
 The name of the file containing the functions or transition table for the finite dynamical system (.txt). 
+
+=for Euclid:
+
+network-file.type: readable
+
+=item -p[ropensitymatrix-file] <pp-file>
+
+The name of the file containing the propensity probabilities for the system.
 
 =for Euclid:
 
@@ -84,14 +92,6 @@ file.type: writeable
 
 =over
 
-=item -p[ropensitymatrix-file] <pp-file>
-
-The name of the file containing the propensity probabilities for the system.
-
-=for Euclid:
-
-network-file.type: readable
-
 =item -t[transitionmatrix-file] <tm-file>
 
 The name of the file to get the whole transition matrix.
@@ -118,27 +118,21 @@ David Murrugarra & Seda Arat
 
 
 
-my ($func_or_tt_file, $initialstate, $interestingnodes, $num_states, $flag4ss, $flag4tm, $plot_file, $histogram_file, $tm_file, $propensitymatrix_file, $output_file);
+my ($func_or_tt_file, $propensitymatrix_file, $initialstate, $interestingnodes, $num_states, $flag4ss, $flag4tm, $plot_file, $histogram_file, $tm_file, $output_file);
 
 $func_or_tt_file = $ARGV{'-f'};
-
+$propensitymatrix_file = $ARGV{'-p'};
 $initialstate = $ARGV{'-i'};
 $interestingnodes = $ARGV{'-n'};
-
 $num_states = $ARGV{'-s'};
-
 $flag4ss = $ARGV{'-a'};
 $flag4tm = $ARGV{'-b'};
-
 $plot_file = $ARGV{'-g'};
 $histogram_file = $ARGV{'-h'};
-
 $tm_file = $ARGV{'-t'};
-$propensitymatrix_file = $ARGV{'-p'};
-
 $output_file = $ARGV{'-o'};
 
-#print ("---$func_or_tt_file---$initialstate---$interestingnodes---$num_states---$flag4ss---$flag4tm---$plot_file---$histogram_file---$tm_file---$propensitymatrix_file---\n");
+#print ("---$func_or_tt_file---$propensitymatrix_file---$initialstate---$interestingnodes---$num_states---$flag4ss---$flag4tm---$plot_file---$histogram_file---$tm_file---\n");
 
 # it is for random number generator
 srand(time | $$);

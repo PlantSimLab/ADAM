@@ -1,6 +1,6 @@
 # Author(s): David Murrugarra & Seda Arat
 # Name: Having all the subroutines needed for Stochastic Discrete Dynamical Systems
-# Revision Date: 1/22/2012
+# Revision Date: 1/25/2012
 
 package Subroutines4sdds;
 
@@ -17,22 +17,16 @@ use Class::Struct
  num_steps => '$',
  num_simulations => '$',
  max_element_stateSpace => '$',
-
  flag4ss => '$',
  flag4tm => '$',
  flag4func => '$',
-
  num_states => '$',
-
  initialState => '@',
  interestingNodes => '@',
- 
  num_nodes => '$',
-
  propensityMatrix => '%',
  functions =>'@',
  transitionTable => '%',
-
  allTrajectories => '%',
  reachableStates => '%',
  averageTrajectory => '@',
@@ -111,83 +105,70 @@ sub get_interestingnodes {
 
 $sdds = get_propensitymatrix($matrix);
 
-Reads and stores the propensity matrix in a hash if the user uploaded one. 
+Reads and stores the propensity matrix in a hash. 
 The keys of the hash are the column numbers and the values are arrays having 
-the probability of activation and degradation. If the used did not upload one, 
-all probabilities are 0.5 as a default.
+the probability of activation and degradation.
 
 =cut
 
 sub get_propensitymatrix {
   my $sdds = shift;
   my $matrix = shift;
-  my ($i, @activation, @degradation, $n);
-
-  if ($matrix) {
-    $i = 0;
+  my (@activation, @degradation, $n);
+  my $i = 0;
     
-    open (OUTPUT, "< $matrix") or die("<br>ERROR: Cannot open the propensity matrix file for reading! <br>");
-    while (my $line = <OUTPUT>) {
-      chomp($line);
-      
-      my $temp = $line;
-      $temp =~ s/\s*//g;
-      
-      # skip empty lines
-      unless ($temp) {
-	next;
-      }
-      
-
-      if ($i == 0) {
-	@activation = split(/\s+/, $line);
-	$n = scalar @activation;
-	if ($n != $sdds->num_nodes()) {
-	  print ("<br>ERROR: The number of columns in first row (activation) in the propensity matrix must match with the number of variables in the system. Please check the propensity matrix file and/or the initial state. <br>");
-	  exit;
-	}
-	$i++;
-      }
-      elsif ($i == 1) {
-	@degradation = split(/\s+/, $line);
-	$n = scalar @degradation;
-	if ($n != $sdds->num_nodes()) {
-	  print ("<br>ERROR: The number of columns in second row (degradation) in the propensity matrix must match with the number of variables in the system. Please check the propensity matrix and/or the initial state. <br>");
-	  exit;
-	}
-	$i++;
-      }
-      else {
-	last;
-      }
-    }
-
-    close(OUTPUT) or die("<br>ERROR: Cannot close the propensity matrix file! <br>");
+  open (OUTPUT, "< $matrix") or die("<br>ERROR: Cannot open the propensity matrix file for reading! <br>");
+  while (my $line = <OUTPUT>) {
+    chomp($line);
     
-    # Error checking on the entries of the propensity matrix.
-    for ($i = 0; $i < $n; $i++) {
-      
-      if ((isnot_float($activation[$i])) || ($activation[$i] < 0) || ($activation[$i] > 1)) {
-	print ("<br>ERROR: \" $activation[$i] \" in the propensity matrix must be a number between 0 and 1. <br>");
-	exit;
-      }
-
-      if ((isnot_float($degradation[$i])) || ($degradation[$i] < 0) || ($degradation[$i] > 1)) {
-	print ("<br>ERROR: \" $degradation[$i] \" in the propensity matrix must be a number between 0 and 1. <br>");
-	exit;
-      }
+    # skip empty lines
+    if ($line =~ /^\s*$/) {
+      next;
     }
     
-    for (my $j = 0; $j < $n; $j++) {
-      my @temp = ($activation[$j], $degradation[$j]);
-      $sdds->propensityMatrix($j, \@temp);
+    if ($i == 0) {
+      @activation = split(/\s+/, $line);
+      $n = scalar @activation;
+      if ($n != $sdds->num_nodes()) {
+	print ("<br>ERROR: The number of columns in first row (activation) in the propensity matrix must match with the number of variables in the system. Please check the propensity matrix file and/or the initial state. <br>");
+	exit;
+      }
+      $i++;
+    }
+    elsif ($i == 1) {
+      @degradation = split(/\s+/, $line);
+      $n = scalar @degradation;
+      if ($n != $sdds->num_nodes()) {
+	print ("<br>ERROR: The number of columns in second row (degradation) in the propensity matrix must match with the number of variables in the system. Please check the propensity matrix and/or the initial state. <br>");
+	exit;
+      }
+      $i++;
+    }
+    else {
+      print ("<br>FYI: The number of rows must be exactly 2 in the propensity matrix, so other than the first 2 rows were not considered. <br>");
+      last;
     }
   }
-  else {
-    for (my $j = 0; $j < $sdds->num_nodes(); $j++) {
-      my @temp = (0.5, 0.5);
-      $sdds->propensityMatrix($j, \@temp);
+  
+  close(OUTPUT) or die("<br>ERROR: Cannot close the propensity matrix file! <br>");
+  
+  # Error checking on the entries of the propensity matrix.
+  for ($i = 0; $i < $n; $i++) {
+    
+    if ((isnot_float($activation[$i])) || ($activation[$i] < 0) || ($activation[$i] > 1)) {
+      print ("<br>ERROR: \" $activation[$i] \" in the propensity matrix must be a number between 0 and 1. <br>");
+      exit;
     }
+    
+    if ((isnot_float($degradation[$i])) || ($degradation[$i] < 0) || ($degradation[$i] > 1)) {
+      print ("<br>ERROR: \" $degradation[$i] \" in the propensity matrix must be a number between 0 and 1. <br>");
+      exit;
+    }
+  }
+  
+  for (my $j = 0; $j < $n; $j++) {
+    my @temp = ($activation[$j], $degradation[$j]);
+    $sdds->propensityMatrix($j, \@temp);
   }
 }
 

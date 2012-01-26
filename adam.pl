@@ -3,6 +3,7 @@
 ## Hussein Vastani
 ## Franziska Hinkelmann
 ## Bonbons
+## Seda Arat (sdds)
 ## January 2012
 
 use v5.10;
@@ -332,7 +333,7 @@ given ($choice_box) {
 		`perl -pi -e 's/\r//g' "$clientip.tt.txt"`;
 	      }
 	      else {
-		print "<br>ERROR: There must be a file uploaded for a (complete) transition table/functions. <br>";
+		print "<br>ERROR: There must be a file uploaded for the (complete) transition table/functions. <br>";
 		exit;
 	      }
 	      
@@ -343,25 +344,18 @@ given ($choice_box) {
 		`perl -pi -e 's/\r//g' "$clientip.pm.txt"`;
 	      }
 	      else {
-		print "<br>FYI: No file was uploaded for the propensity matrix, so uniform distribution will be used. <br>";
+		print "<br>ERROR: There must be a file uploaded for the propensity matrix. <br>";
+		exit;
 	      }
 	      
 	      $plot_file = "$clientip.plot";
 	      $histogram_file = "$clientip.histogram";
 	      $tm_file = "$clientip.tm";
 	      
-	      if ($upload_file_pm) {
-		if ($DEBUG) {
-		  say ("perl SDDS.pl -f $filename_tt -i $initialState -n $interestingNodes -s $num_states -a $flag4ss -b $flag4tm -g $plot_file -h $histogram_file -t $tm_file -p $filename_pm <br>");
-		}
-		system ("perl SDDS.pl -f $filename_tt -i $initialState -n $interestingNodes -s $num_states -a $flag4ss -b $flag4tm -g $plot_file -h $histogram_file -t $tm_file -p $filename_pm");
+	      if ($DEBUG) {
+		say ("perl SDDS.pl -f $filename_tt -i $initialState -n $interestingNodes -s $num_states -a $flag4ss -b $flag4tm -g $plot_file -h $histogram_file -t $tm_file -p $filename_pm <br>");
 	      }
-	      else {
-		if ($DEBUG) {
-		  say ("perl SDDS.pl -f $filename_tt -i $initialState -n $interestingNodes -s $num_states -a $flag4ss -b $flag4tm -g $plot_file -h $histogram_file -t $tm_file <br>");
-		}
-		system ("perl SDDS.pl -f $filename_tt -i $initialState -n $interestingNodes -s $num_states -a $flag4ss -b $flag4tm -g $plot_file -h $histogram_file -t $tm_file");
-	      }
+	      system ("perl SDDS.pl -f $filename_tt -i $initialState -n $interestingNodes -s $num_states -a $flag4ss -b $flag4tm -g $plot_file -h $histogram_file -t $tm_file -p $filename_pm");
 	    } # end of /SDDS/
 	    
             default {
