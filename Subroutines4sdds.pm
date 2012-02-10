@@ -1,6 +1,6 @@
 # Author(s): David Murrugarra & Seda Arat
 # Name: Having all the subroutines needed for Stochastic Discrete Dynamical Systems
-# Revision Date: January 2012
+# Revision Date: February 2012
 
 package Subroutines4sdds;
 
@@ -14,13 +14,15 @@ use Class::Struct
  max_num_interestingNodes => '$',
  max_num_nodes => '$',
  max_num_states => '$',
- num_steps => '$',
- num_simulations => '$',
+ max_num_steps => '$',
+ max_num_simulations => '$',
  max_element_stateSpace => '$',
  flag4ss => '$',
  flag4tm => '$',
  flag4func => '$',
  num_states => '$',
+ num_steps => '$',
+ num_simulations => '$',
  initialState => '@',
  interestingNodes => '@',
  num_nodes => '$',
@@ -50,6 +52,14 @@ sub get_initialstate {
   
   if (isnot_number($sdds->num_states()) || $sdds->num_states() < 2 || $sdds->num_states() > $sdds->max_num_states() || (isnot_prime($sdds->num_states()))) {
     print ("<br>ERROR: The number of states must be a prime number between 2 and ", $sdds->max_num_states(), " . <br>");
+    exit;
+  }
+  elsif (isnot_number($sdds->num_steps()) || $sdds->num_steps() < 1 || $sdds->num_steps() > $sdds->max_num_steps()) {
+    print ("<br>ERROR: The number of steps must be a number between 1 and ", $sdds->max_num_steps(), " . <br>");
+    exit;
+  }
+  elsif (isnot_number($sdds->num_simulations()) || $sdds->num_simulations() < 1 || $sdds->num_simulations() > $sdds->max_num_simulations()) {
+    print ("<br>ERROR: The number of simulations must be a number between 1 and ", $sdds->max_num_simulations(), " . <br>");
     exit;
   }
   else {
@@ -382,7 +392,6 @@ percentages of these states.
 
 sub get_alltrajectories_and_reachablestates {
   my $sdds = shift;
-  
   my $n = $sdds->num_simulations() * $sdds->num_steps();
 
   for (my $i = 1; $i <= $sdds->num_simulations(); $i++) {

@@ -51,6 +51,8 @@ $upload_file_pm = param('upload_file_pm');
 $initialState = "\"" . param('initialState') . "\"";
 $interestingNodes = "\"" . param('interestingNodes') . "\"";
 $num_states = param('num_states');
+$num_steps = param('num_steps');
+$num_simulations = param('num_simulations');
 $steadyStates = param('SteadyStates');
 $transitionMatrix = param('TransitionMatrix');
 $flag4ss = 0;
@@ -353,9 +355,9 @@ given ($choice_box) {
 	      $tm_file = "$clientip.tm";
 	      
 	      if ($DEBUG) {
-		say ("perl SDDS.pl -f $filename_tt -i $initialState -n $interestingNodes -s $num_states -a $flag4ss -b $flag4tm -g $plot_file -h $histogram_file -t $tm_file -p $filename_pm <br>");
+		say ("perl SDDS.pl -f $filename_tt -i $initialState -n $interestingNodes -s $num_states -e $num_steps -m $num_simulations -a $flag4ss -b $flag4tm -g $plot_file -h $histogram_file -t $tm_file -p $filename_pm <br>");
 	      }
-	      system ("perl SDDS.pl -f $filename_tt -i $initialState -n $interestingNodes -s $num_states -a $flag4ss -b $flag4tm -g $plot_file -h $histogram_file -t $tm_file -p $filename_pm");
+	      system ("perl SDDS.pl -f $filename_tt -i $initialState -n $interestingNodes -s $num_states -e $num_steps -m $num_simulations -a $flag4ss -b $flag4tm -g $plot_file -h $histogram_file -t $tm_file -p $filename_pm");
 	    } # end of /SDDS/
 	    
             default {

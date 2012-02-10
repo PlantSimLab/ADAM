@@ -1,6 +1,6 @@
 # Author(s): David Murrugarra & Seda Arat
 # Name: Generating the plot, histogram and transition matrix for SDDS
-# Revision Date: January 2012
+# Revision Date: February 2012
 
 #!/usr/bin/perl
 
@@ -20,11 +20,11 @@ SDDS.pl - Simulate a stochastic model from a possible initialization.
 
 =head1 USAGE
 
-SDDS.pl -f <functions_or_transitiontable-file> -p <propensitymatrix-file> -i <initial-state> -n <interesting-nodes> -s <number-states> - a <flag-steadystates> -b <flag-transitionmatrix> -g <plot-file> -h <histogram-file> -t <tm-file> -o <output-file>
+SDDS.pl -f <functions_or_transitiontable-file> -p <propensitymatrix-file> -i <initial-state> -n <interesting-nodes> -s <number-states> -e <number-steps> -m <number-simulations> - a <flag-steadystates> -b <flag-transitionmatrix> -g <plot-file> -h <histogram-file> -t <tm-file> -o <output-file>
 
 =head1 SYNOPSIS
 
-SDDS.pl -f <functions_or_transitiontable-file> -p <propensitymatrix-file> -i <initial-state> -n <interesting-nodes> -s <number-states> -a <flag-steadystates> -b <flag-transitionmatrix> -g <plot-file> -h <histogram-file> -t <tm-file> -o <output-file>
+SDDS.pl -f <functions_or_transitiontable-file> -p <propensitymatrix-file> -i <initial-state> -n <interesting-nodes> -s <number-states> -e <number-steps> -m <number-simulations> -a <flag-steadystates> -b <flag-transitionmatrix> -g <plot-file> -h <histogram-file> -t <tm-file> -o <output-file>
 
 =head1 DESCRIPTION
 
@@ -61,6 +61,14 @@ The string containing the nodes of interest.
 =item -s <number-states>
 
 The number of states.
+
+=item -s <number-steps>
+
+The number of steps.
+
+=item -s <number-simulations>
+
+The number of simulations.
 
 =item -a <flag-steadystates>
 
@@ -118,13 +126,15 @@ David Murrugarra & Seda Arat
 
 
 
-my ($func_or_tt_file, $propensitymatrix_file, $initialstate, $interestingnodes, $num_states, $flag4ss, $flag4tm, $plot_file, $histogram_file, $tm_file, $output_file);
+my ($func_or_tt_file, $propensitymatrix_file, $initialstate, $interestingnodes, $num_states, $num_steps, $num_simulations, $flag4ss, $flag4tm, $plot_file, $histogram_file, $tm_file, $output_file);
 
 $func_or_tt_file = $ARGV{'-f'};
 $propensitymatrix_file = $ARGV{'-p'};
 $initialstate = $ARGV{'-i'};
 $interestingnodes = $ARGV{'-n'};
 $num_states = $ARGV{'-s'};
+$num_steps = $ARGV{'-e'};
+$num_simulations = $ARGV{'-m'};
 $flag4ss = $ARGV{'-a'};
 $flag4tm = $ARGV{'-b'};
 $plot_file = $ARGV{'-g'};
@@ -132,7 +142,7 @@ $histogram_file = $ARGV{'-h'};
 $tm_file = $ARGV{'-t'};
 $output_file = $ARGV{'-o'};
 
-#print ("---$func_or_tt_file---$propensitymatrix_file---$initialstate---$interestingnodes---$num_states---$flag4ss---$flag4tm---$plot_file---$histogram_file---$tm_file---\n");
+#print ("---$func_or_tt_file---$propensitymatrix_file---$initialstate---$interestingnodes---$num_states---$num_steps---$num_simulations---$flag4ss---$flag4tm---$plot_file---$histogram_file---$tm_file---\n");
 
 # it is for random number generator
 srand(time | $$);
@@ -144,11 +154,13 @@ $sdds = Subroutines4sdds::new();
 $sdds->max_num_interestingNodes(5);
 $sdds->max_num_nodes(20);
 $sdds->max_num_states(20);
-$sdds->num_steps(50);
-$sdds->num_simulations(100);
+$sdds->max_num_steps(10**3);
+$sdds->max_num_simulations(10**6);
 $sdds->max_element_stateSpace(10**3);
 
 $sdds->num_states($num_states);
+$sdds->num_steps($num_steps);
+$sdds->num_simulations($num_simulations);
 
 $sdds->get_initialstate($initialstate);
 $sdds->get_interestingnodes($interestingnodes);
@@ -205,7 +217,7 @@ $graph->set_legend(@legend_keys);
 $graph -> set (
 	       x_label => 'Time Steps',
 	       y_label => "Average Expression Level",
-	       title => 'Cell Population Simulation (# of simulations = 100)',
+	       title => 'Cell Population Simulation',
 	       x_min_value => 0,
 	       x_label_position => 1/2,
 	       y_min_value => 0,

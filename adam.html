@@ -134,7 +134,7 @@ s.parentNode.insertBefore(ga, s);
     
     <div class="explain type" id="explain_SDDS">
       <br>
-      <b>SDDS</b>: Stochastic Discrete Dynamical Systems is a useful tool to generate and analyze mathematical models in systems biology, and it is suitable for cell population simulation. The inputs for SDDS: a file for the transition table and propensity matrix, an initial state, nodes of interest, and the number of states. <a href="/models/SDDSexamples/StochasticLambdaPhageLysogeny.html"target="_blank">See an example...</a> 
+      <b>SDDS</b>: Stochastic Discrete Dynamical Systems is a useful tool to generate and analyze mathematical models in systems biology, and it is suitable for cell population simulation. The inputs for SDDS: a file for the transition table and propensity matrix, an initial state, nodes of interest, the number of states,the number of steps and the number of simulations. <a href="/models/SDDSexamples/StochasticLambdaPhageLysogeny.html"target="_blank">See an example...</a> 
     </div>
     
     </div>
@@ -181,6 +181,12 @@ s.parentNode.insertBefore(ga, s);
       <br><br>
       Number of states : <input type="text"name="num_states"value="2"size="10" maxlength="2"><br>
       <br><br>
+      <br><br>
+      Number of steps : <input type="text"name="num_steps"value="50"size="10" maxlength="10"><br>
+      <br><br>
+      <br><br>
+      Number of simulations : <input type="text"name="num_simulations"value="100"size="10" maxlength="10"><br>
+      <br><br>
     </div>
     
     </td>
@@ -201,6 +207,12 @@ s.parentNode.insertBefore(ga, s);
       The <b>nodes of interest</b> are the ones of which you would like to see the behavior in the plot of cell population simulation. It must be seperated by a comma and the number of these nodes cannot be more than 5. The format is: 1, 2. <br> 
       <br>
       The <b>number of states</b> which decides how many values a state can get must be prime not more than 20. <br>
+      <br>
+      <br>
+      The <b>number of steps</b> which indicates the lenght of each trajectory in the simulations. <br>
+      <br>
+      <br>
+      The <b>number of simulations</b> which determines how many simulations is needed for the system. If the number of simulations is 1, then only 1 trajctory will be produced, and if the number of simulations is 100, then 100 trajectories will be produced. Note that since it is a stochastic simulation, all trajectories are not supposed to be the same. <br>
       <br>
     </div>
     
