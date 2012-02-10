@@ -321,7 +321,7 @@ given ($choice_box) {
             when (/(PDS)|(pPDS)/) {
 
             }
-	    $DEBUG = 1;
+	    
     	    when (/(SDDS)/) {
 	      SDDSerrorchecking_and_set_flags();
 	      use Cwd;
