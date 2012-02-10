@@ -168,25 +168,25 @@ s.parentNode.insertBefore(ga, s);
     
     <br>
       <textarea name="edit_functions" rows="8" cols="50" id="inputArea">
-      </textarea></font>
+      </textarea>
       
     <div class="entries"id="sdds_entries">
        <font size="3">
       <br>
-      <textarea name="propensityMatrix" rows="20" cols="8" id="inputArea"></textarea>
+      The propensity matrix: <textarea name="propensityMatrix" rows="20" cols="8" id="inputArea"></textarea>
       <br>
       File for the propensity matrix (.txt): <input type="file" id="upload_file_pm" name="upload_file_pm" value="what"><br>
       <br>
       Initial state (seperated by a space) : <input type="text"name="initialState"id="initialState" value="0 1" size="40" maxlength="100"><br>
-      <br><br>
+      <br
       Nodes of interest : <input type="text"name="interestingNodes"value="1, 2" size="40" maxlength="20"><br>
-      <br><br>
+      <br>
       Number of states : <input type="text"name="num_states"value="2"size="21" maxlength="2"><br>
-      <br><br>
+      <br>
       Number of steps : <input type="text"name="num_steps"value="50"size="22" maxlength="10"><br>
-      <br><br>
+      <br>
       Number of simulations : <input type="text"name="num_simulations"value="100"size="15" maxlength="10"><br>
-      <br><br>
+      <br></font>
     </div>
     
     </td>
@@ -200,7 +200,7 @@ s.parentNode.insertBefore(ga, s);
       <br>
       Either the <b>transition table</b> or <b>functions</b> must be uploaded. The <b>transition table</b> (<a href="/models/SDDSexamples/example_tt.txt"target="_blank">e.g.</a>) must contain all possible states. In each row, the states must be seperated by an arrow, -> , and each variable in a state must be seperated by a space. The format for each line is: 0 0 -> 1 0. On the other hand, the <b>functions</b> (<a href="/models/SDDSexamples/example_func.txt"target="_blank">e.g.</a>) must be the updating function of each node. f1, f2, f3,... represent the functions, whereas x1,x2,... represent the nodes in the system. <br>
       <br>
-      In the <b>propensity matrix</b> (<a href="/models/SDDSexamples/example_pp.txt" target="_blank">e.g.</a>), the number of rows must be 2 (the first row is for activation and the second row is for degredation), the number of columns must be the number of nodes, and each propensity entries must be seperated by a space. If you prefer to get random simulations, then each entry should be 0.5. The format for each row is: 0.1 0.95. <br>
+      In the <b>propensity matrix</b>, the number of rows must be the number of nodes, the number of columns must be 2 (the first column is for activation and the second column is for degredation), and each propensity entries must be seperated by a space. For random simulations, each entry should be 0.5. The format for each row is: 0.3 0.7. <br>
       <br>
       The <b>initial state</b> is the starting point for all trajectories, and it must be separated by a space. The format is: 0 1. <br>
       <br>
