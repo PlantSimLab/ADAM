@@ -174,8 +174,8 @@ s.parentNode.insertBefore(ga, s);
       Initial state : <input type="text"name="initialState"id="initialState" value="0 1" size="40" maxlength="100"><br>
       Nodes of interest : <input type="text"name="interestingNodes"value="1, 2" size="40" maxlength="20"><br>
       Number of states : <input type="text"name="num_states"value="2"size="22.5" maxlength="2"><br>
-      Number of steps : <input type="text"name="num_steps"value="50"size="23" maxlength="10"><br>
-      Number of simulations : <input type="text"name="num_simulations"value="100"size="16.5" maxlength="10"><br>
+      Number of steps : <input type="text"name="num_steps"value="50"size="22.75" maxlength="10"><br>
+      Number of simulations : <input type="text"name="num_simulations"value="100"size="16.55" maxlength="10"><br>
       </font>
     </div>
     
@@ -196,9 +196,9 @@ s.parentNode.insertBefore(ga, s);
       <br>
       The <b>nodes of interest</b> are the ones of which you would like to see the behavior in the plot of cell population simulation. It must be seperated by a comma and the number of these nodes cannot be more than 5. The format is: 1, 2. <br> 
       <br>
-      The <b>number of states</b> which decides how many distinct values a state can get must be prime not more than 20. <br>
+      The <b>number of states</b> which indicates the maximum number of different discrete values your variables can take on. This number must be a prime number. If the function file is uploaded and the number of discrete values is not a prime number, please enter the next largest prime. It is not valid if the transition table is used. <br>
       <br>
-      The <b>number of steps</b> which indicates the lenght of each trajectory in the simulations. <br>
+      The <b>number of steps</b> which indicates how many states must a trajectory have after the initial state. For instance, if the number of steps is 3, then the trajectory consists of 4 states and the first state in the trajectory is the initial state. <br>
       <br>
       The <b>number of simulations</b> which determines how many simulations is needed for the system. If you would like to see only 1 cell population simulation, then the number of simulations should be 1. <br>
       <br>
