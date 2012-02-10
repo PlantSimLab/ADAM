@@ -47,7 +47,8 @@ $dreamss       = param('dreamss');
 
 
 # Declaration and initialization of (extra) parameters for SDDS
-$upload_file_pm = param('upload_file_pm');
+#$upload_file_pm = param('upload_file_pm');
+$propensityMatrix   = param('propensityMatrix');
 $initialState = "\"" . param('initialState') . "\"";
 $interestingNodes = "\"" . param('interestingNodes') . "\"";
 $num_states = param('num_states');
@@ -57,6 +58,8 @@ $steadyStates = param('SteadyStates');
 $transitionMatrix = param('TransitionMatrix');
 $flag4ss = 0;
 $flag4tm = 0;
+
+print "--$propensityMatrix--<br>";
 
 
 if ($choice_box eq "") {
@@ -348,13 +351,22 @@ given ($choice_box) {
 	      }
 	      
 	      # checks if a file was uploaded for propensity matrix 
-	      if ($upload_file_pm) {
+	      #if ($upload_file_pm) {
+	      # $filename_pm = "$clientip.pm.txt";
+	      #	system("cp ../../htdocs/no-ssl/files/$upload_file_pm $filename_pm");
+	      #	`perl -pi -e 's/\r//g' "$clientip.pm.txt"`;
+	      #}
+
+	      # checks if propensity parameters were entered
+	      if ($propensityMatrix) {
 		$filename_pm = "$clientip.pm.txt";
-		system("cp ../../htdocs/no-ssl/files/$upload_file_pm $filename_pm");
-		`perl -pi -e 's/\r//g' "$clientip.pm.txt"`;
+		open (PM, ">$filename_pm");
+		print "open ok \n<br>" if ($DEBUG);
+		print PM $propensityMatrix;
+		close (PM);
 	      }
 	      else {
-		print "<br>ERROR: There must be a file uploaded for the propensity matrix. <br>";
+		print "<br>ERROR: The propensity matrix entries must be specified. <br>";
 		exit;
 	      }
 	      
