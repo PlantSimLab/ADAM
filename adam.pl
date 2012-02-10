@@ -208,7 +208,15 @@ sub SDDSerrorchecking_and_set_flags {
     print "<br> ERROR: The number of states must be specified for the system. Please check the number of states. <br>";
     exit;
   }
-
+  if ($num_steps eq "") {
+    print "<br> ERROR: The number of steps must be specified for the system. Please check the number of states. <br>";
+    exit;
+  }
+  if ($num_simulations eq "") {
+    print "<br> ERROR: The number of simulations must be specified for the system. Please check the number of states. <br>";
+    exit;
+  }
+  
   # set flags
 
   if ($steadyStates eq "Print Steady States") {

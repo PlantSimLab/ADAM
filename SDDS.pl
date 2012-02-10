@@ -142,7 +142,7 @@ $histogram_file = $ARGV{'-h'};
 $tm_file = $ARGV{'-t'};
 $output_file = $ARGV{'-o'};
 
-print ("---$func_or_tt_file---$propensitymatrix_file---$initialstate---$interestingnodes---$num_states---$num_steps---$num_simulations---$flag4ss---$flag4tm---$plot_file---$histogram_file---$tm_file---\n");
+#print ("---$func_or_tt_file---$propensitymatrix_file---$initialstate---$interestingnodes---$num_states---$num_steps---$num_simulations---$flag4ss---$flag4tm---$plot_file---$histogram_file---$tm_file---\n");
 
 # it is for random number generator
 srand(time | $$);
