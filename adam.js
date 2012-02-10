@@ -213,7 +213,8 @@ function changeModelType(type) {
 	$('#TransitionMatrix').show();
 	
 	$('input[name="anaysis_method"][value="sdds_graph"]').attr('checked', true);
-        sampleInput = '0.5 0.5\n0.5 0.5';
+	$('#pm').val('0.5 0.5\n0.5 0.5');
+        sampleInput = '';
 	
     } else {
         jQuery.error = console.error;
