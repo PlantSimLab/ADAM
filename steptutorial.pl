@@ -206,8 +206,14 @@ print <<ENDHTML;
 				Enter 
                                   <p>
                                      0.8 0.2
+                                  </p>
+                                  <p>
                                      0.2 0.8
+                                  </p>
+                                  <p>
                                      0.9 0.9
+                                  </p>
+                                  <p>
                                      0.9 0.9
                                   </p>
                                 in the text area as the propensity matrix for 4 node Lambda phage model.

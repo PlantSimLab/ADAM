@@ -200,9 +200,9 @@ print <<ENDHTML;
                                         The user enters the <b>propensity matrix</b> entries. If they do not know the propensity matrix paramaters or want to get random simulations, then all entries of the propensity matrix should be 0.5. In the propensity matrix, the number of rows must be the number of nodes (variables) in the network, and the number of columns must be 2 that the first column is for activation and the second column is for degredation propensity. Propensity entries must be seperated by a space and a number between 0 and 1. The sum of the activation and degradation of a node does not have to be equal to 1. For example, the propensity matrix of a 3-node boolean network must have 3 rows and 2 colums and can be:
 				</p>
                                 <ul>
-					<li>0.57 0.05</li>
-                                        <li>0.40 0.70</li>
-                                        <li>0.85 0.15</li>
+					<li>0.57  0.05</li>
+                                        <li>0.40  0.70</li>
+                                        <li>0.85  0.15</li>
 				</ul>
 				<p>
 					Therefore, for the <b>first</b> node, 0.57 is the <b>activation propensity</b>, 0.05 is the <b>degradation propensity</b>; for the <b>second</b> node, 0.40 is the <b>activation propensity</b>, 0.70 is the <b>degradation propensity</b>; for the <b>third</b> node, 0.85 is the <b>activation propensity</b>, 0.15 is the <b>degradation propensity</b>. "Activation Propensity" is the probability that the variable is being activated (increased) at the next time step. Similarly, "Degradation Propensity" is the probability that the variable is being degraded(decreased) at the next time step.
@@ -216,7 +216,7 @@ print <<ENDHTML;
                                         <li>0.5 0.5</li>
 				</ul>
 				<p>
-					The user specifies the <b>initial state</b>, which is the starting point for all trajectories and simulations for their system. An initial state consists of integers at least 0 and less than number of states and these numbers must be separated by a space. The number of integers in the initial state must be equal to the number of nodes (variables) in the network. For example, the initial state of a 3-node boolean network can be: 0 1 1 but cannot be: 0 1
+					The user specifies the <b>initial state</b>, which is the starting point for all trajectories and simulations for their system. An initial state consists of integers at least 0 and less than number of states and these numbers must be separated by a space. The number of integers in the initial state must be equal to the number of nodes (variables) in the network. For example, the initial state of a 3-node boolean network can be: 0 1 1 but cannot be: 0 1.
                           	</p>
 				<p>
 					The user specifies the <b>nodes of interest</b>, which consists of integers between 1 and the number of nodes (variables) and commas as delimiter. The nodes of interest indicates of which nodes the user would like to see the behavior in the plot of cell population simulation. The user must enter at least 1 and can enter at most 5 nodes of interest. For example, in a 3-node boolean network, if the nodes of interest is 1, 3, then node1 and node3 will be shown in the plot of cell population simulation.
