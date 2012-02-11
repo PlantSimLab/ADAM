@@ -24,15 +24,13 @@ $(document).ready(function() {
         changeChoiceBox($("input[name='choice_box']:checked").val());
     });
 
-    var filepmname = "";
-
     var file = "";
     $('#upload_file').uploadify({
-	'uploader': '/uploadify/uploadify.swf',
+        'uploader': '/uploadify/uploadify.swf',
         'script': '/uploadify/uploadify.php',
-	'cancelImg': '/uploadify/cancel.png',
+        'cancelImg': '/uploadify/cancel.png',
         'folder': '/../../htdocs/no-ssl/files',
-       	'auto': false,
+        'auto': false,
         'multi': false,
 	'removeCompleted' : true,
         'onSelect': function(event, ID, fileObj) {
@@ -41,7 +39,7 @@ $(document).ready(function() {
         },
         'onComplete': function() {
             //alert('Complete');
-            postForm("&upload_file=" + file + filepmname);
+            postForm("&upload_file=" + file);
             file = "";
         },
         'onCancel': function() {
@@ -51,67 +49,29 @@ $(document).ready(function() {
 	    alert( "ERROR");
 	}
     });
-
-    // filepm is for propensity matrix in SDDS
-    var filepm = "";
-
-    $('#upload_file_pm').uploadify({
-	'uploader': '/uploadify/uploadify.swf',
-        'script': '/uploadify/uploadify.php',
-	'cancelImg': '/uploadify/cancel.png',
-        'folder': '/../../htdocs/no-ssl/files',
-        'auto': false,
-        'multi': false,
-	'removeCompleted' : true,
-	'onSelect': function(event, ID, fileObj) {
-            filepm = fileObj.name;
-            //alert('The file ' + fileObj.name + ' was added to the queue.');
-        },
-        'onComplete': function() {
-            //alert('Complete');
-            filepmname = "&upload_file_pm=" + filepm;
-            filepm = "";
-        },
-        'onCancel': function() {
-            filepm = "";
-        }, 
-	'onError': function() {
-	    alert( "ERROR");
-	}
-    });
-
 
     $('button').click(function() {
         $("#result").html("Calculating...");
-	
-	//var files_param = "";
-
-	if (filepm != "") {
-	    //alert( filepm );
-            $('#upload_file_pm').uploadifyUpload();
-	}
-        
-	if (file != "") {
+        if (file != "") {
             //alert( file );
             $('#upload_file').uploadifyUpload();
-	} else {
+        } else {
             //alert(formdata);
             postForm("");
-	}
+        }
     });
 });
 
 function postForm(file) {
-    var formdata = $("form").serialize();
-    formdata = formdata + file;
-    //alert(formdata);
-    //console.log(formdata);
+	var formdata = $("form").serialize();
+	formdata = formdata + file;
+	//alert(formdata);
     $.post("../../cgi-bin/git/adam.pl", formdata, function(data) {
         $("#result").html(data);
         //alert(data);
     });
 };
-
+    
 function changeChoiceBox(choiceBox) {
     $('.input').hide();
     $('.explain').hide();
@@ -213,7 +173,7 @@ function changeModelType(type) {
 	$('#TransitionMatrix').show();
 	
 	$('input[name="anaysis_method"][value="sdds_graph"]').attr('checked', true);
-	$('#pm').val('0.5 0.5\n0.5 0.5');
+	$('#pm').val('0.3 0.7\n0.5 0.5');
         sampleInput = '';
 	
     } else {
