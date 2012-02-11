@@ -203,7 +203,14 @@ print <<ENDHTML;
 				Upload either the (complete) transition table file for 4 node Lambda phage model (available <a href = "/steptutorial_files/LambdaPhage_tt.txt" target="_blank">here</a>) or the functions file for 4 node Lambda phage model (available <a href = "/steptutorial_files/LambdaPhage_func.txt" target="_blank">here</a>).
 			</p>
 			<p>
-				Upload the propensity matrix file for 4 node Lambda phage model-Lysogeny (available <a href = "/steptutorial_files/LambdaPhageLysogeny_pp.txt" target="_blank">here</a>).
+				Enter 
+                                  <p>
+                                     0.8 0.2
+                                     0.2 0.8
+                                     0.9 0.9
+                                     0.9 0.9
+                                  </p>
+                                in the text area as the propensity matrix for 4 node Lambda phage model.
 			</p>
                         <p>
 				Enter 0 0 0 0 as the initial state for 4 node Lambda phage model.
@@ -214,6 +221,12 @@ print <<ENDHTML;
                         <p>
 				Enter 5 as the number of states for 4 node Lambda phage model.
 			</p>
+                        <p>
+				Enter 50 as the number of steps for 4 node Lambda phage model.
+                        </p>
+                        <p>
+				Enter 100 as the number of simulations for 4 node Lambda phage model.
+                        </p>
 			<p>
 				Note that "Plot of cell population simulation and Histogram for probability distribution" is always selected. 
 			</p>

@@ -50,8 +50,8 @@ sub get_initialstate {
   
   # Error message for $num_states, $num_steps, $num_simulations
   
-  if (isnot_number($sdds->num_states()) || $sdds->num_states() < 2 || $sdds->num_states() > $sdds->max_num_states() || (isnot_prime($sdds->num_states()))) {
-    print ("<br>ERROR: The number of states must be a prime number between 2 and ", $sdds->max_num_states(), " . <br>");
+  if (isnot_number($sdds->num_states()) || $sdds->num_states() < 2 || $sdds->num_states() > $sdds->max_num_states()) {
+    print ("<br>ERROR: The number of states must be a number between 2 and ", $sdds->max_num_states(), " . <br>");
     exit;
   }
   elsif (isnot_number($sdds->num_steps()) || $sdds->num_steps() < 1 || $sdds->num_steps() > $sdds->max_num_steps()) {
@@ -116,16 +116,16 @@ sub get_interestingnodes {
 $sdds = get_propensitymatrix($matrix);
 
 Reads and stores the propensity matrix in a hash. 
-The keys of the hash are the column numbers and the values are arrays having 
-the probability of activation and degradation.
+The keys of the hash are the row numbers and the values are arrays having 
+the propensity of activation and degradation.
 
 =cut
 
 sub get_propensitymatrix {
   my $sdds = shift;
   my $matrix = shift;
-  my (@activation, @degradation, $n);
-  my $i = 0;
+  my (@array, $n);
+  my $i = 1;
     
   open (OUTPUT, "< $matrix") or die("<br>ERROR: Cannot open the propensity matrix file for reading! <br>");
   while (my $line = <OUTPUT>) {
@@ -135,51 +135,38 @@ sub get_propensitymatrix {
     if ($line =~ /^\s*$/) {
       next;
     }
-    
-    if ($i == 0) {
-      @activation = split(/\s+/, $line);
-      $n = scalar @activation;
-      if ($n != $sdds->num_nodes()) {
-	print ("<br>ERROR: The number of columns in first row (activation) in the propensity matrix must match with the number of variables in the system. Please check the propensity matrix file and/or the initial state. <br>");
-	exit;
-      }
-      $i++;
-    }
-    elsif ($i == 1) {
-      @degradation = split(/\s+/, $line);
-      $n = scalar @degradation;
-      if ($n != $sdds->num_nodes()) {
-	print ("<br>ERROR: The number of columns in second row (degradation) in the propensity matrix must match with the number of variables in the system. Please check the propensity matrix and/or the initial state. <br>");
-	exit;
-      }
-      $i++;
-    }
     else {
-      print ("<br>FYI: The number of rows must be exactly 2 in the propensity matrix, so other than the first 2 rows were not considered. <br>");
-      last;
+      my @array = split(/\s+/, $line);
+      
+      if (scalar @array != 2) {
+	print ("<br>ERROR: The number of columns must be exactly 2 in the propensity matrix. Please revise the $i-th row. <br>");
+	exit;
+      }
+
+      # Error checking on the entries of the propensity matrix.
+      if ((isnot_float($array[0])) || ($array[0] < 0) || ($array[0] > 1)) {
+	print ("<br>ERROR: \" $array[0] \" in the propensity matrix must be a number between 0 and 1. Please check the first column of the $i-th row in the propensity matrix. <br>");
+	exit;
+      }
+      
+      if ((isnot_float($array[1])) || ($array[1] < 0) || ($array[1] > 1)) {
+	print ("<br>ERROR: \" $array[1] \" in the propensity matrix must be a number between 0 and 1. Please check the second column of the $i-th row in the propensity matrix. <br>");
+	exit;
+      }
+      
+      $sdds->propensityMatrix($i, \@array);
+      $i++;
     }
   }
   
   close(OUTPUT) or die("<br>ERROR: Cannot close the propensity matrix file! <br>");
-  
-  # Error checking on the entries of the propensity matrix.
-  for ($i = 0; $i < $n; $i++) {
-    
-    if ((isnot_float($activation[$i])) || ($activation[$i] < 0) || ($activation[$i] > 1)) {
-      print ("<br>ERROR: \" $activation[$i] \" in the propensity matrix must be a number between 0 and 1. <br>");
-      exit;
-    }
-    
-    if ((isnot_float($degradation[$i])) || ($degradation[$i] < 0) || ($degradation[$i] > 1)) {
-      print ("<br>ERROR: \" $degradation[$i] \" in the propensity matrix must be a number between 0 and 1. <br>");
-      exit;
-    }
+
+  $i--;
+  if ($i != $sdds->num_nodes()) {
+    print ("<br>ERROR: The number of rows must be equal to the number of nodes in the system. Please revise the propensity matrix and/or the initial state. <br>");
+    exit;
   }
-  
-  for (my $j = 0; $j < $n; $j++) {
-    my @temp = ($activation[$j], $degradation[$j]);
-    $sdds->propensityMatrix($j, \@temp);
-  }
+
 }
 
 ############################################################
@@ -268,7 +255,7 @@ sub get_functions {
 	$f .= $line;
       }
       else {
-	print "<br> ERROR: The format of the functions file is wrong. Please revise it. <br>";
+	print "<br> ERROR: The format of the functions in the file is not correct. <br>";
 	exit;
       }
     }
@@ -392,6 +379,7 @@ percentages of these states.
 
 sub get_alltrajectories_and_reachablestates {
   my $sdds = shift;
+  
   my $n = $sdds->num_simulations() * $sdds->num_steps();
 
   for (my $i = 1; $i <= $sdds->num_simulations(); $i++) {
@@ -501,25 +489,30 @@ sub get_transitionprobabilityarray_and_steadystates {
 	
 	for (my $k = 0; $k < $sdds->num_nodes(); $k++) {
 	  my $c = 0;
-	  my @array = @{${$sdds->propensityMatrix()}{$k}};
-	  if ($x[$k] < $z[$k]) {
-	    if ($y[$k] == $z[$k]) {
+	  my @array = @{$sdds->propensityMatrix($k + 1)};
+
+	  my $s = $x[$k];
+	  my $t = $y[$k];
+	  my $u = $z[$k];
+
+	  if ($s < $u) {
+	    if ($t == $u) {
 	      $c = $array[0];
 	    }
-	    if ($y[$k] == $x[$k]) {
+	    if ($t == $s) {
 	      $c = 1 - $array[0];
 	    }
 	  }
-	  elsif ($x[$k] > $z[$k]) {
-	    if ($y[$k] == $z[$k]) {
+	  elsif ($s > $u) {
+	    if ($t == $u) {
 	      $c = $array[1];
 	    }
-	    if ($y[$k] == $x[$k]) {
+	    if ($t == $s) {
 	      $c = 1 - $array[1];
 	    }
 	  }
-	  else { # $x[$k] = $z[$k]
-	    if ($y[$k] == $x[$k]) {
+	  else {
+	    if ($t == $s) {
 	      $c = 1;
 	    }
 	  }
@@ -530,27 +523,27 @@ sub get_transitionprobabilityarray_and_steadystates {
 	  }
 	  $p = $p * $c;
 	} # end of for loop $k
-	
-	# Stores the steady states in a hash table if the flag is on.
-	if ($sdds->flag4ss() && $i == $j && $p == 1) {
-	  my $str = join (' ', @x);
-	  $sdds->steadyStates($key, $str);
-	  $key++;
-	}
-	
-	# Stores the nonzero probabilities in a temp hash as a value
-	if ($p) {
-	  $temp{$j} = $p;
-	}
 
-	# Checks if total_p reaches 1. If so, no need to do more calculations.
-	$total_p += $p;
-	if ($total_p == 1) {
-	  last;
+	if ($p) {
+	
+	  # Stores the steady states in a hash table if the flag is on.
+	  if ($sdds->flag4ss() && $i == $j && $p == 1) {
+	    my $str = join (' ', @x);
+	    $sdds->steadyStates($key, $str);
+	    $key++;
+	  }
+	  
+	  $temp{$j} = $p;
+
+	  # Checks if total_p reaches 1. If so, no need to do more calculations.
+	  $total_p += $p;
+	  if ($total_p == 1) {
+	    last;
+	  }
 	}
 
       } # end of for loop $j
-      
+
       # Stores all the probabilities in the transition probability array as a hash table.
       ${$sdds->transitionProbabilityArray()}[$i - 1] = \%temp; 
       
@@ -703,27 +696,29 @@ sub get_nextstate_pm {
   my @next_statePM;
 
   for (my $j = 0; $j < $sdds->num_nodes(); $j++) {
-    my $r = rand;
-    my @temp = @{$sdds->propensityMatrix($j)};
+    my @temp = @{$sdds->propensityMatrix($j + 1)};
+    my $r = rand ($temp[0] + $temp[1]);
+    my $a = $x[$j];
+    my $b = $z[$j];
 
-    if ($x[$j] < $z[$j]) {
+    if ($a < $b) {
       if ($r < $temp[0]) {
-	$next_statePM[$j] = $z[$j];
+	push (@next_statePM, $b);
       }
       else{
-	$next_statePM[$j] = $x[$j];
+	push (@next_statePM, $a);
       }
     }
-    elsif ($x[$j] > $z[$j]) {
+    elsif ($a > $b) {
       if ($r < $temp[1]) {
-	$next_statePM[$j] = $z[$j];
+	push (@next_statePM, $b);
       }
       else{
-	$next_statePM[$j] = $x[$j];
+	push (@next_statePM, $a);
       }
     }
     else {
-      $next_statePM[$j] = $x[$j];
+      push (@next_statePM, $a);
     }
   }
   return @next_statePM;
@@ -756,21 +751,6 @@ sub isnot_float {
   }
   else {
     return 0;
-  }
-}
-
-############################################################
-
-# Returns true if the input is not a prime number 
-# (between 2 and 20), false otherwise.
-
-sub isnot_prime {
-  my ($p) = @_;
-  if ($p =~ /2|3|5|7|11|13|17|19/) {
-    return 0;
-  }
-  else {
-    return 1;
   }
 }
 

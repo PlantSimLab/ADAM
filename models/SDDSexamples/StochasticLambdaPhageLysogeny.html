@@ -9,6 +9,8 @@ Stochastic Model of Lambda Phage Infection (Lysogeny)
 <br>
 Control of the outcome of phage lambda infection is one of the best understood regulatory systems. Thieffry and Thomas proposed a logical model to describe the dynamics of the network, which is a bistable switch between lysis and lysogeny. <b>Lysogeny</b> is the state where the phage will incorporate its DNA into the bacterium and become dormant. In other words, if the phage is in lysogeny, then the gene CI is fully expressed and all other genes are off.
 <br>
+<br>
+<br>
 
 <h3>Variables</h3>
 
@@ -27,7 +29,10 @@ node4 = N <br>
 
 <h3>Propensity Parameters</h3>
 
-<a href="/models/SDDSexamples/LambdaPhageLysogeny_pp.txt" target="_blank">Click to see the propensity parameters of lambda phage model for lysogeny</a>
+0.8 0.2
+0.2 0.8
+0.9 0.9
+0.9 0.9
 
 <h3>Initial State</h3>
 
@@ -40,6 +45,14 @@ node4 = N <br>
 <h3>Number of States</h3>
 
 5 <br>
+
+<h3>Number of Steps</h3>
+
+50 <br>
+
+<h3>Number of Simulations</h3>
+
+100 <br>
 
 <h3>Key Dynamic Features</h3>
 
@@ -78,7 +91,7 @@ There is only 1 steady state in the system, which is 2 0 0 0.
 Seda Arat 
 
 <h3>Last Updated</h3>
-January 2012
+February 2012
 <br>
 <br>
 <br>

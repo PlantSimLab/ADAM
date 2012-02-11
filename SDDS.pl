@@ -64,11 +64,11 @@ The number of states.
 
 =item -e <number-steps>
 
-The number of steps.
+The number of states.
 
 =item -m <number-simulations>
 
-The number of simulations.
+The number of states.
 
 =item -a <flag-steadystates>
 
@@ -145,7 +145,7 @@ $output_file = $ARGV{'-o'};
 #print ("---$func_or_tt_file---$propensitymatrix_file---$initialstate---$interestingnodes---$num_states---$num_steps---$num_simulations---$flag4ss---$flag4tm---$plot_file---$histogram_file---$tm_file---\n");
 
 # it is for random number generator
-srand(time | $$);
+srand (time | $$);
 
 my ($sdds);
 
@@ -273,7 +273,7 @@ if ($s) {
   $histogram -> set (
 		     x_label => 'States',
 		     y_label => 'Percentages',
-		     title => 'Probability Distribution (# of simulations = 100)',
+		     title => 'Probability Distribution',
 		     x_label_position => 1/2,
 		     y_min_value => 0,
 		     y_max_value => 100,
