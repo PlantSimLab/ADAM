@@ -161,6 +161,11 @@ sub get_propensitymatrix {
   
   close(OUTPUT) or die("<br>ERROR: Cannot close the propensity matrix file! <br>");
 
+  unless (%{$sdds->propensityMatrix()}) {
+    print ("<br>ERROR: The propensity matrix is empty. <br>");
+    exit;
+  }
+
   $i--;
   if ($i != $sdds->num_nodes()) {
     print ("<br>ERROR: The number of rows must be equal to the number of nodes in the system. Please revise the propensity matrix and/or the initial state. <br>");
@@ -183,6 +188,7 @@ preference.
 sub get_functions_or_transitiontable {
   my $sdds = shift;
   my $file = shift;
+  my $flag = 0;
 
   open (FILE, "< $file") or die ("<br>ERROR: Cannot open the transition table / functions file for reading! <br>");
   while (my $line = <FILE>) {
@@ -196,12 +202,14 @@ sub get_functions_or_transitiontable {
     if ($line =~ /(f|x|=)/) {
       close (FILE) or die ("<br>ERROR: Cannot close the transition table / functions file! <br>");
       $sdds->flag4func(1);
+      $flag = 1;
       $sdds->get_functions ($file);
       last;
     }
     elsif ($line =~ /-.*>/) {
       close (FILE) or die ("<br>ERROR: Cannot close the transition table / functions file! <br>");
       $sdds->flag4func(0);
+      $flag = 1;
       $sdds->get_tt ($file);
       last;
     }
@@ -209,6 +217,11 @@ sub get_functions_or_transitiontable {
       print ("<br>ERROR: Please revise the format of the transition table / functions file. <br>");
       exit;
     }
+  }
+
+  unless ($flag) {
+    print ("<br>ERROR: The file for transition table/functions is empty. <br>");
+    exit;
   }
 }
 
