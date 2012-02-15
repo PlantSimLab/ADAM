@@ -710,7 +710,7 @@ sub get_nextstate_pm {
 
   for (my $j = 0; $j < $sdds->num_nodes(); $j++) {
     my @temp = @{$sdds->propensityMatrix($j + 1)};
-    my $r = rand ($temp[0] + $temp[1]);
+    my $r = rand;
     my $a = $x[$j];
     my $b = $z[$j];
 
