@@ -1,6 +1,6 @@
 # Author(s): David Murrugarra & Seda Arat
 # Name: Having all the subroutines needed for Stochastic Discrete Dynamical Systems
-# Revision Date: February 2012
+# Revision Date: March 2012
 
 package Subroutines4sdds;
 
@@ -188,8 +188,8 @@ preference.
 sub get_functions_or_transitiontable {
   my $sdds = shift;
   my $file = shift;
-  my $flag = 0;
-
+  $sdds->flag4func(-1);
+  
   open (FILE, "< $file") or die ("<br>ERROR: Cannot open the transition table / functions file for reading! <br>");
   while (my $line = <FILE>) {
     chomp ($line);
@@ -199,28 +199,56 @@ sub get_functions_or_transitiontable {
       next;
     }
 
-    if ($line =~ /(f|x|=)/) {
-      close (FILE) or die ("<br>ERROR: Cannot close the transition table / functions file! <br>");
-      $sdds->flag4func(1);
-      $flag = 1;
-      $sdds->get_functions ($file);
-      last;
+    if ($line =~ /(f|=|x)/) {
+      if ($sdds->flag4func() == 0) {
+	print ("<br>ERROR: Please revise the format of the transition table / functions file. <br>");
+	exit;
+      }
+      elsif ($sdds->flag4func() == -1) {
+	$sdds->flag4func(1);
+      }
+      else {}
+      $sdds->get_functions ($line);
     }
     elsif ($line =~ /-.*>/) {
-      close (FILE) or die ("<br>ERROR: Cannot close the transition table / functions file! <br>");
-      $sdds->flag4func(0);
-      $flag = 1;
-      $sdds->get_tt ($file);
-      last;
+      if ($sdds->flag4func() == 1) {
+	print ("<br>ERROR: Please revise the format of the transition table / functions file. <br>");
+	exit;
+      }
+      elsif ($sdds->flag4func() == -1) {
+	$sdds->flag4func(0);
+      }
+      else {}
+      $sdds->get_tt ($line);
     }
     else {
       print ("<br>ERROR: Please revise the format of the transition table / functions file. <br>");
       exit;
     }
   }
-
-  unless ($flag) {
-    print ("<br>ERROR: The file for transition table/functions is empty. <br>");
+  
+  close (FILE) or die ("<br>ERROR: Cannot close the transition table file! <br>");
+  
+  # Error checking
+  
+  if (scalar (@{$sdds->functions()})) {
+    my $size_func = scalar @{$sdds->functions()};
+    unless ($size_func == $sdds->num_nodes()) {
+      print ("<br>ERROR: The number of functions in the file must be equal to the number of nodes. Please revise the functions file and/or the initial state. <br>");
+      exit;
+    }
+  }
+  elsif (scalar (keys %{$sdds->transitionTable()})) {
+    my $total_num_states = $sdds->num_states()**$sdds->num_nodes();
+    my $size_tt = keys (%{$sdds->transitionTable()});
+    
+    unless ($size_tt == $total_num_states) {
+      print ("<br>ERROR: The transition table must include all possible states. Please revise the transition table file and/or the number of states. <br>");
+      exit;
+    }
+  }
+  else {
+    print ("<br>ERROR: Please revise the file for the transition table/functions, which seems empty. <br>");
     exit;
   }
 }
@@ -229,7 +257,7 @@ sub get_functions_or_transitiontable {
 
 =pod
 
-$sdds = get_functions ($file);
+$sdds = get_functions ($line);
 
 Reads and stores the functions in an array. The first entry is the updating
 function of the first node, the second entry is the updating function of the
@@ -239,61 +267,28 @@ second node, so on...
 
 sub get_functions {
   my $sdds = shift;
-  my $file = shift;
+  my $line = shift;
   my $f;
-  my $flag = 0;
 
-  open (FILE, "< $file") or die ("<br>ERROR: Cannot open the functions file for reading! <br>");
-  while (my $line = <FILE>) {
-    chomp ($line);
-    
-    # skip empty lines
-    if ($line =~ /^\s*$/) {
-      next;
-    }
+  $line =~ s/\^/\*\*/g; # replace carret with double stars
+  $line =~ s/x(\d+)/\$x\[$1\]/g; #for evaluation
 
-    # checks if the line is a new function or a sequent line 
-    # of the previous function
-    if ($line =~ /^(f|F)/) {
-      
-      if ($flag) {
-	push(@{$sdds->functions()}, $f);
-      }
-      
-      $flag = 1;
-      (my $a, $f) = split(/=/,$line);
-    }
-    else {
-      if ($flag) {
-	$f .= $line;
-      }
-      else {
-	print "<br> ERROR: The format of the functions in the file is not correct. <br>";
-	exit;
-      }
-    }
-    
-    $f =~ s/\^/\*\*/g; # replace carret with double stars
-    $f =~ s/x(\d+)/\$x\[$1\]/g; #for evaluation
+  unless ($line =~ /^f/) {
+    my $temp = pop (@{$sdds->functions()});
+    $f = $temp . $line;
   }
-  
+  else {
+    (my $a, $f) = split(/=/,$line);
+  }
+
   push(@{$sdds->functions()}, $f);
-  
-  close (FILE) or die ("<br>ERROR: Cannot close the functions file! <br>");
-  
-  # Error checking
-  my $size_func = scalar @{$sdds->functions()};
-  unless ($size_func == $sdds->num_nodes()) {
-    print ("<br>ERROR: The number of functions in the file must be equal to the number of nodes. Please revise the functions file and/or the initial state. <br>");
-    exit;
-  }
 }
 
 ############################################################
 
 =pod
 
-$sdds = get_tt ($file);
+$sdds = get_tt ($line);
 
 Reads and stores the transition table in a hash table whose keys are 
 the decimal representation of the states and values are the decimal 
@@ -303,74 +298,54 @@ representation of their next state.
 
 sub get_tt {
   my $sdds = shift;
-  my $file = shift;
-
-  open (FILE, "< $file") or die ("<br>ERROR: Cannot open the transition table file for reading! <br>");
-  while (my $line = <FILE>) {
-    chomp ($line);
+  my $line = shift;
+  
+  my ($inputs,$outputs) = split(/\-.*>/, $line);
+  
+  # removes the white spaces from the beginning and the end of $inputs and $outputs
+  $inputs =~ s/^\s+//;
+  $inputs =~ s/\s+$//;
+  
+  $outputs =~ s/^\s+//;
+  $outputs =~ s/\s+$//;
+  
+  if ($inputs && $outputs) {
+    my @is = split(/\s+/,$inputs);
+    my @ns = split(/\s+/, $outputs);
     
-    # skip empty lines
-    if ($line =~ /^\s*$/) {
-      next;
+    my $size_of_is = scalar @is;
+    
+    unless ($size_of_is == $sdds->num_nodes()) {
+      print ("<br>ERROR: The length of the states in the transition table must match with the number of variables in the system. Please revise the transition table file and/or the initial state. <br>");
+      exit;
     }
     
-    my ($inputs,$outputs) = split(/\-.*>/, $line);
+    my $size_of_ns = scalar @ns;
     
-    # removes the white spaces from the beginning and the end of $inputs and $outputs
-    $inputs =~ s/^\s+//;
-    $inputs =~ s/\s+$//;
-    
-    $outputs =~ s/^\s+//;
-    $outputs =~ s/\s+$//;
-    
-    if ($inputs && $outputs) {
-      my @is = split(/\s+/,$inputs);
-      my @ns = split(/\s+/, $outputs);
-      
-      my $size_of_is = scalar @is;
-      
-      unless ($size_of_is == $sdds->num_nodes()) {
-	print ("<br>ERROR: The length of the states in the transition table must match with the number of variables in the system. Please revise the transition table file and/or the initial state. <br>");
-	exit;
-      }
-      
-      my $size_of_ns = scalar @ns;
-      
-      unless ($size_of_ns == $sdds->num_nodes()) {
-	print ("<br>ERROR: The length of the states in the transition table must match with the length of the initial state. Please revise the transition table file and/or the initial state. <br>");
-	exit;
-      }
-      
-      for (my $i = 0; $i < $size_of_is; $i++) {
-	
-	if ((isnot_number($is[$i])) || (isnot_number($ns[$i])) || ($is[$i] >= $sdds->num_states()) || ($ns[$i] >= $sdds->num_states())) {
-	  print ("<br>ERROR: The states must consist of the numbers which are at most ", $sdds->num_states() - 1, " in the transition table. Please revise the transition table file and/or the number of states. <br>");
-	  exit;
-	}
-      }    
-      
-      my $idec = $sdds->convert_from_state_to_decimal(\@is);
-      
-      if (!defined($sdds->transitionTable($idec))) {
-	my $ndec = $sdds->convert_from_state_to_decimal(\@ns);
-	$sdds->transitionTable($idec, $ndec);
-      }
-      else {
-	print ("<br>ERROR: The transition table can not include the state, @ns , more than once. Please revise the transition table file. <br>");
-	exit;
-      }
+    unless ($size_of_ns == $sdds->num_nodes()) {
+      print ("<br>ERROR: The length of the states in the transition table must match with the length of the initial state. Please revise the transition table file and/or the initial state. <br>");
+      exit;
     }
-  }
+    
+    for (my $i = 0; $i < $size_of_is; $i++) {
+      
+      if ((isnot_number($is[$i])) || (isnot_number($ns[$i])) || ($is[$i] >= $sdds->num_states()) || ($ns[$i] >= $sdds->num_states())) {
+	print ("<br>ERROR: The states must consist of the numbers which are at most ", $sdds->num_states() - 1, " in the transition table. Please revise the transition table file and/or the number of states. <br>");
+	exit;
+      }
+    }    
+    
+    my $idec = $sdds->convert_from_state_to_decimal(\@is);
+    
+    if (!defined($sdds->transitionTable($idec))) {
+      my $ndec = $sdds->convert_from_state_to_decimal(\@ns);
+      $sdds->transitionTable($idec, $ndec);
+    }
+    else {
+      print ("<br>ERROR: The transition table can not include the state, @ns , more than once. Please revise the transition table file. <br>");
+      exit;
+    }
 
-  close (FILE) or die ("<br>ERROR: Cannot close the transition table file! <br>");
-  
-  # Error checking
-  my $total_num_states = $sdds->num_states()**$sdds->num_nodes();
-  my $size_tt = keys (%{$sdds->transitionTable()});
-  
-  unless ($size_tt == $total_num_states) {
-    print ("<br>ERROR: The transition table must include all possible states. Please revise the transition table file and/or the number of states. <br>");
-    exit;
   }
 }
 
@@ -709,29 +684,27 @@ sub get_nextstate_pm {
   my @next_statePM;
 
   for (my $j = 0; $j < $sdds->num_nodes(); $j++) {
-    my @temp = @{$sdds->propensityMatrix($j + 1)};
     my $r = rand;
-    my $a = $x[$j];
-    my $b = $z[$j];
+    my @temp = @{$sdds->propensityMatrix($j + 1)};
 
-    if ($a < $b) {
+    if ($x[$j] < $z[$j]) {
       if ($r < $temp[0]) {
-	push (@next_statePM, $b);
+	$next_statePM[$j] = $z[$j];
       }
       else{
-	push (@next_statePM, $a);
+	$next_statePM[$j] = $x[$j];
       }
     }
-    elsif ($a > $b) {
+    elsif ($x[$j] > $z[$j]) {
       if ($r < $temp[1]) {
-	push (@next_statePM, $b);
+	$next_statePM[$j] = $z[$j];
       }
       else{
-	push (@next_statePM, $a);
+	$next_statePM[$j] = $x[$j];
       }
     }
     else {
-      push (@next_statePM, $a);
+      $next_statePM[$j] = $x[$j];
     }
   }
   return @next_statePM;
