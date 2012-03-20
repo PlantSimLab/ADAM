@@ -495,7 +495,7 @@ elsif ( $anaysis_method eq "Simulation" ) {
 	  
 	  # complete state space
             print $format_box if ($DEBUG);
-            if (   $p_value**$n_nodes > 10000
+            if (   $p_value**$n_nodes > 20000
                 && $format_box eq "PDS" )
             {
                 print
@@ -510,7 +510,7 @@ elsif ( $anaysis_method eq "Simulation" ) {
                 print("Done.<br>");
             }
             else {    #analysis through simulation with graph
-                if ( $p_value**$n_nodes > 10000 ) {
+                if ( $p_value**$n_nodes > 20000 ) {
                     print
                         "<font color=red>Simulation for large stochastic networks is not possible. Please choose <i>Algorithms</i> as <b>Analysis</b> option. </font><br>";
                     die("Program quitting. Too many nodes");
