@@ -1,6 +1,6 @@
 # Author(s): David Murrugarra & Seda Arat
 # Name: Generating the plot, histogram and transition matrix for SDDS
-# Revision Date: February 2012
+# Revision Date: March 2012
 
 #!/usr/bin/perl
 
@@ -10,9 +10,9 @@ use warnings;
 use Subroutines4sdds;
 use Getopt::Euclid;
 use GD::Graph;
-#use GD::Graph::linespoints;
-#use GD::Graph::colour;
-#use GD::Graph::bars;
+use GD::Graph::linespoints;
+use GD::Graph::colour;
+use GD::Graph::bars;
 
 =head1 NAME
 
