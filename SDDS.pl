@@ -216,6 +216,7 @@ my $graph = GD::Graph::linespoints->new(900, 500);
 $graph->set_legend(@legend_keys);
 $graph -> set (
 	       bgclr => [qw (white)],
+	       transparent => 0,
 	       x_label => "Time Steps",
 	       y_label => "Average Expression Level",
 	       title => "Cell Population Simulation",
