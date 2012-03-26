@@ -288,9 +288,9 @@ if ($s) {
 			\@y_axis4histogram,
 		       );
   
-  open(IMG," > $histogram_file.png") or die("<br>ERROR: Cannot open the file for histogram! <br>");
+  open(IMG," > $histogram_file.gif") or die("<br>ERROR: Cannot open the file for histogram! <br>");
   binmode IMG;
-  print IMG $histogram->plot(\@data_histogram)->png;
+  print IMG $histogram->plot(\@data_histogram)->gif;
   close (IMG) or die ("<br>ERROR: Cannot close the file for histogram! <br>");
 }
 
