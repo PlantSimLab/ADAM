@@ -124,8 +124,6 @@ David Murrugarra & Seda Arat
 
 =cut
 
-
-
 my ($func_or_tt_file, $propensitymatrix_file, $initialstate, $interestingnodes, $num_states, $num_steps, $num_simulations, $flag4ss, $flag4tm, $plot_file, $histogram_file, $tm_file, $output_file);
 
 $func_or_tt_file = $ARGV{'-f'};
@@ -173,15 +171,13 @@ $sdds->get_functions_or_transitiontable($func_or_tt_file);
 
 $sdds->get_alltrajectories_and_reachablestates();
 $sdds->get_average_trajectory();
-$sdds->get_transitionprobabilityarray_and_steadystates();
+$sdds->get_transitionMatrix_and_steadystates($tm_file);
 
 # it is for not showing the states whose percentage is below the threshold in histogram
 my $threshold4histogram = 1;
 my $max_num_histogramStates = 20;
 
-
 my ($i, $j, @x_axis4plotting, %y_axis4plotting, @legend_keys, @x_axis4histogram, @y_axis4histogram);
-
 
 # Gets the data for plotting according to averageTrajectory
 
@@ -213,11 +209,11 @@ for (my $a = 0; $a < $sdds->max_num_interestingNodes(); $a++) {
 }
 
 my $graph = GD::Graph::linespoints->new(900, 500);
-$graph->set_legend(@legend_keys);
+$graph -> set_legend(@legend_keys);
 $graph -> set (
-	       x_label => "Time Steps",
+	       x_label => 'Time Steps',
 	       y_label => "Average Expression Level",
-	       title => "Cell Population Simulation",
+	       title => 'Cell Population Simulation',
 	       x_min_value => 0,
 	       x_label_position => 1/2,
 	       y_min_value => 0,
@@ -242,7 +238,7 @@ my @data_plotting = (
 		    );
 
 
-open(IMG," > $plot_file.png") or die("<br>ERROR: Cannot open the file for plotting! <br>");
+open (IMG," > $plot_file.png") or die("<br>ERROR: Cannot open the file for plotting! <br>");
 binmode IMG;
 print IMG $graph->plot(\@data_plotting)->png;
 close (IMG) or die ("<br>ERROR: Cannot close the file for plotting! <br>");
@@ -271,9 +267,9 @@ if ($s) {
   
   my $histogram = GD::Graph::bars->new(900, 500);
   $histogram -> set (
-		     x_label => "States",
-		     y_label => "Percentages",
-		     title => "Probability Distribution",
+		     x_label => 'States',
+		     y_label => 'Percentages',
+		     title => 'Probability Distribution',
 		     x_label_position => 1/2,
 		     y_min_value => 0,
 		     y_max_value => 100,
@@ -288,29 +284,10 @@ if ($s) {
 			\@y_axis4histogram,
 		       );
   
-  open(IMG," > $histogram_file.png") or die("<br>ERROR: Cannot open the file for histogram! <br>");
+  open (IMG," > $histogram_file.png") or die("<br>ERROR: Cannot open the file for histogram! <br>");
   binmode IMG;
   print IMG $histogram->plot(\@data_histogram)->png;
   close (IMG) or die ("<br>ERROR: Cannot close the file for histogram! <br>");
-}
-
-#Prints out the transition matrix if the user wants  
-
-if ($sdds->flag4tm()) {
-  my $total_num_states = $sdds->num_states()**$sdds->num_nodes();
-  open(TM," > $tm_file.txt") or die("<br>ERROR: Cannot open the file for probability transition matrix! <br>");
-  for (my $k = 1; $k <= $total_num_states; $k++) {  
-    my %temp = %{${$sdds->transitionProbabilityArray}[$k - 1]};
-    my @state1 = $sdds->convert_from_decimal_to_state($k);
-
-    foreach my $key (sort {$a <=> $b} keys %temp) {
-      my @state2 = $sdds->convert_from_decimal_to_state($key);
-
-      print TM ("Pb (@state1 -> @state2) = ", $temp{$key}, "\n");
-    }
-    print TM "_________________________________________________\n\n";
-  }
-  close (TM) or die("<br>ERROR: Cannot close the file for probability transition matrix! <br>");
 }
 
 exit;

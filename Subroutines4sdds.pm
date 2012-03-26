@@ -441,11 +441,9 @@ sub get_average_trajectory {
 
 =pod
 
-$sdds = get_transitionprobabilityarray_and_steadystates();
+$sdds = get_transitionMatrix_and_steadystates();
 
-Stores the transition probability array as an array whose elements 
-are the references of hashes whose keys are decimal representation 
-of the states and values are (nonzero) probabilities.
+Writes the transition probability matrix into a file.
 
 Stores the steady states in a hash table if the system has any.
 Its keys are 1, 2, ... and values are the decimal rep. of the 
@@ -453,18 +451,24 @@ steady states.
 
 =cut
 
-sub get_transitionprobabilityarray_and_steadystates {
+sub get_transitionMatrix_and_steadystates {
   my $sdds = shift;
+  my $tm_file = shift;
   
   my $total_num_states = $sdds->num_states()**$sdds->num_nodes();
   my $key = 1;
 
-  if ($total_num_states > $sdds->max_element_stateSpace()) {
-     print ("<br>FYI: Since the number of elements in the state space is too large, transition matrix will not be provided. <br>");
-     $sdds->flag4tm(0);
+  unless (($sdds->flag4tm()) || ($sdds->flag4ss())) {
+    return;
   }
 
-  if ($sdds->flag4tm()) {
+  if (($total_num_states > $sdds->max_element_stateSpace()) && $sdds->flag4tm()) {
+     print ("<br>FYI: Since the number of elements in the state space is too large, transition matrix will not be provided. <br>");
+  }
+  elsif ($sdds->flag4tm()) {
+    
+    open(TM," > $tm_file.txt") or die("<br>ERROR: Cannot open the file for probability transition matrix! <br>");
+    
     for (my $i = 1; $i <= $total_num_states; $i++) {
       my %temp = ();
       my @x = $sdds->convert_from_decimal_to_state($i);
@@ -520,8 +524,8 @@ sub get_transitionprobabilityarray_and_steadystates {
 	    $sdds->steadyStates($key, $str);
 	    $key++;
 	  }
-	  
-	  $temp{$j} = $p;
+
+	  print TM ("Pb (@x -> @y) = ", $p, "\n");
 
 	  # Checks if total_p reaches 1. If so, no need to do more calculations.
 	  $total_p += $p;
@@ -532,10 +536,12 @@ sub get_transitionprobabilityarray_and_steadystates {
 
       } # end of for loop $j
 
-      # Stores all the probabilities in the transition probability array as a hash table.
-      ${$sdds->transitionProbabilityArray()}[$i - 1] = \%temp; 
+      print TM "_________________________________________________\n\n";
       
     } # end of for loop $i
+
+    close (TM) or die("<br>ERROR: Cannot close the file for probability transition matrix! <br>");
+
   }
   elsif ($sdds->flag4ss()) {
     for (my $i = 1; $i <= $total_num_states; $i++) {
@@ -549,7 +555,7 @@ sub get_transitionprobabilityarray_and_steadystates {
       }
     }
   }
-  else {};
+  else {}
   
   # Prints out the steady states if the system has any and the user wants.
   

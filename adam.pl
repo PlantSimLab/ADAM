@@ -4,7 +4,7 @@
 ## Franziska Hinkelmann
 ## Bonbons
 ## Seda Arat (sdds)
-## January 2012
+## March 2012
 
 use v5.10;
 use CGI qw/:standard/;    # load CGI routines
@@ -343,17 +343,17 @@ given ($choice_box) {
 		`perl -pi -e 's/\r//g' "$clientip.tt.txt"`;
 	      }
 	      else {
-		print "<br>ERROR: There must be a file uploaded for the (complete) transition table/functions. <br>";
+		print "<br>ERROR: There must be a file uploaded for the (complete) transition table or functions. <br>";
 		exit;
 	      }
 
 	      # checks if propensity parameters were entered
 	      if ($propensityMatrix) {
 		$filename_pm = "$clientip.pm.txt";
-		open (PM, ">$filename_pm");
+		open (PM, ">$filename_pm") or die ("<br>ERROR: Cannot open the file for propensity parameters! <br>");
 		print "open ok \n<br>" if ($DEBUG);
 		print PM $propensityMatrix;
-		close (PM);
+		close (PM) or die ("<br>ERROR: Cannot close the file for propensity parameters! <br>");
 	      }
 	      else {
 		print "<br>ERROR: The propensity matrix entries must be specified. <br>";
