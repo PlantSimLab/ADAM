@@ -32,7 +32,6 @@ use Class::Struct
  allTrajectories => '%',
  reachableStates => '%',
  averageTrajectory => '@',
- transitionProbabilityArray => '@',
  steadyStates => '%',
 );
 
