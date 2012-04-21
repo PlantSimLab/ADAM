@@ -118,6 +118,7 @@ function changeModelType(type) {
     $('.optionfield').hide();
     $('.explain.type').hide();
     
+    $('#pdsep_entries').hide();
     $('#file_exp_sdds').hide();
     $('#sdds_entries').hide();
     $('#explain_mi_sdds').hide();
