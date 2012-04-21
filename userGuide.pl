@@ -41,6 +41,12 @@ print <<ENDHTML;
 					<li>
 						<a href="#PDS"><font face="Verdana, Arial, Helvetica, sans-serif">How to Analyze a Polynomial Dynamical System (PDS)</font></a>
 					</li>
+
+                                 	<li>
+						<a href="#PDSep"><font face="Verdana, Arial, Helvetica, sans-serif">How to Analyze a Polynomial Dynamical System with External Parameters (PDSep)</font></a>
+					</li>
+
+
 					<li>
 						<a href="#PBN"><font face="Verdana, Arial, Helvetica, sans-serif">How to Analyze a Probabilistic Network</font></a>
 					</li>
@@ -108,7 +114,7 @@ print <<ENDHTML;
 					<a name="Overview" id="Overview">Overview</a>
 				</h3>
 				<p>
-					ADAM is a web-based tool for the analysis and visualization of the dynamics of multi-state, discrete models of biological networks. Multi-state discrete models are characterized by a collection of functions. For a network of <i>n</i> nodes, the corresponding discrete model will have <i>n</i> functions, where the <i>i</i>-th function describes the state transitions of the <i>i</i>-th node in the network. The user may select one of four inputs: a GINsim file, a PDS (polynomial dynamical system), a PBN (probabilistic Boolean network), or an SDDS (stochastic discrete dynamical system). The user may upload a file or enter functions into the text box. Based upon which input type the user selects, other input options may appear. The user is guided through additional input/output options. ADAM can calculate fixed points and limit cycles of a specified length, produce the dependency graph for all networks and the state space for networks which are simulated, the graph of trajectories starting from a given initial state, and identify functional circuits along with their signed edges. ADAM analyzes dynamics using a combination of simulation and abstract algebra techniques. The method of computation and the output will depend on options selected by the user.
+					ADAM is a web-based tool for the analysis and visualization of the dynamics of multi-state, discrete models of biological networks. Multi-state discrete models are characterized by a collection of functions. For a network of <i>n</i> nodes, the corresponding discrete model will have <i>n</i> functions, where the <i>i</i>-th function describes the state transitions of the <i>i</i>-th node in the network. The user may select one of four inputs: a GINsim file, a PDS (polynomial dynamical system), a PDSep (polynomial dynamical system with external parameters), a PBN (probabilistic Boolean network), or an SDDS (stochastic discrete dynamical system). The user may upload a file or enter functions into the text box. Based upon which input type the user selects, other input options may appear. The user is guided through additional input/output options. ADAM can calculate fixed points and limit cycles of a specified length, produce the dependency graph for all networks and the state space for networks which are simulated, the graph of trajectories starting from a given initial state, and identify functional circuits along with their signed edges. ADAM analyzes dynamics using a combination of simulation and abstract algebra techniques. The method of computation and the output will depend on options selected by the user.
 				</p>
 				<div align="right">
 					<a href="#top"><font size="-1" color="#FF0000">Return to the top</font></a>
@@ -151,6 +157,33 @@ print <<ENDHTML;
 				<div align="right">
 					<a href="#top"><font size="-1" color="#FF0000">Return to the top</font></a>
 				</div>
+
+                                <h3>
+					<a name="PDSep" id="PDSep">How to Analyze a Polynomial Dynamical System with External Parameters (PDSep)</a>
+				</h3>
+				<p>
+					The user can upload a text file (.txt) or directly enter the functions of a PDS in which the external parameters can take place. The user can also specify any number of external parameters that can affect the system. The <i>number of states </i> must be specified. It denotes the maximum number of discrete values that all variables in the system (including <i>external parameters</i>) can take on. Note that this must be a prime number up to 99. For example, if <i>number of states per node</i> = 3, then the possible states for any node are 0, 1, and 2. 
+				</p>
+				<p>
+					Each node of the user's network is represented by a variable. Variable names are <i>x1</i>, <i>x2</i>, etc. Function names are <i>f1</i>, <i>f2</i>, etc. The convention is that <i>fk</i> is the function which describes the state transitions of the node represented by <i>xk</i>. ADAM will use the functions from the input text box only when the user DOES NOT select a file to upload. The functions should follow the following formatting rules:
+				</p>
+				<ul>
+					<li>The functions should begin with <i>f</i> followed by an integer, example <i>f1</i>, <i>f2</i>, <i>f3</i>,...,<i>fn</i>, where <i>n</i> is the number of variables
+					</li>
+					<li>Use * for multiplication, + for additions and ^ for exponents.
+					</li>
+					<li>The variables should begin with <i>x</i> followed by an integer, example <i>x1</i>, <i>x2</i>, <i>x3</i>,...,<i>xn</i>, where <i>n</i> is the number of states
+					</li>
+                                       	<li>The external parameters can be anything but it is better not to begin with <i>x</i> followed by an integer as the variables. For example, it can be N, Mg, NO3, pH, etc. The name of the specified external parameter must be exactly the same the one taking place in the functions.
+					</li>
+				</ul>
+				<p>
+					The PDSep can be analyzed using <i>Algorithms</i> or <i>Simulation</i>. For small networks (less than 10 nodes), the complete state space can be simulated and all attractors (fixed points and limit cycles) are found. In addition to that, the size of each component, i.e., the basin of attraction, are determined. For larger networks, a simulation of the complete state space is not possible. The algorithms that ADAM uses are fast for sparse systems; if every node has many neighbors in the wiring diagram, ADAM may need some time to complete the analysis.
+				</p>
+				<div align="right">
+					<a href="#top"><font size="-1" color="#FF0000">Return to the top</font></a>
+				</div>
+
 				<h3>
 					<a name="PBN" id="PBN">How to Analyze a Probabilistic Network</a>
 				</h3>

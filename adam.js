@@ -77,6 +77,9 @@ function changeChoiceBox(choiceBox) {
     $('.explain').hide();
 
     $('#sdds_entries').hide();
+
+    $('#pdsep_entries').hide();
+    $('#file_exp_pdsep').hide();
     
     $('#inputArea').show();
     $('#explain_mi').show();
@@ -175,6 +178,21 @@ function changeModelType(type) {
 	$('input[name="anaysis_method"][value="sdds_graph"]').attr('checked', true);
 	$('#pm').val('0.3 0.7\n0.5 0.5');
         sampleInput = '';
+	
+    } else if (type = 'PDSep') {
+	$('#explain_mi').hide();
+
+	$('.pvalue').show();
+        sampleInput = 'f1 = x1+x2+N\nf2 = x1*x2*x3+N*Mg\nf3 = Mg*x2+x3^2';
+        if (pval == 2) {
+            $('#conjunctive').show();
+            $('#feedback').show();
+        }
+	$('#Algorithms').show();
+
+	$('#pdsep_entries').show();
+	$('#file_exp_pdsep').show();
+	$('#epArea').val('N = 1 \nMg = 0');
 	
     } else {
         jQuery.error = console.error;

@@ -28,7 +28,7 @@ print <<ENDHTML;
 				Detailed examples of how to use ADAM
 			</h1>
 			<p><font size="3">
-				<a href="#GS">Logical Model (GINsim)</a> &nbsp;&nbsp;&nbsp; <a href="#PDS">Polynomial Dynamical System</a> &nbsp;&nbsp;&nbsp; <a href="#PBN">Probabilistic Boolean Network</a> &nbsp;&nbsp;&nbsp; <a href="#LN">Large Network</a> &nbsp;&nbsp;&nbsp; <a href="#conj">Conjunctive Network</a> &nbsp;&nbsp;&nbsp; <a href="#SDDS">Stochastic Discrete Dynamical System</a></font>
+				<a href="#GS">Logical Model (GINsim)</a> &nbsp;&nbsp;&nbsp; <a href="#PDS">Polynomial Dynamical System</a> &nbsp;&nbsp;&nbsp; <a href="#PDSep">Polynomial Dynamical System with External Parameters</a> &nbsp;&nbsp;&nbsp; <a href="#PBN">Probabilistic Boolean Network</a> &nbsp;&nbsp;&nbsp; <a href="#LN">Large Network</a> &nbsp;&nbsp;&nbsp; <a href="#conj">Conjunctive Network</a> &nbsp;&nbsp;&nbsp; <a href="#SDDS">Stochastic Discrete Dynamical System</a></font>
 			</p>
 			<h2>
 				<a name="GS" id="GS">How to use a Logical Model (GINsim file) as an input</a>
@@ -87,6 +87,47 @@ print <<ENDHTML;
 			<p>
 				<img border="0" width="314" height="128" src="steptutorial_files/image010.png">
 			</p>
+
+                 	<h2>
+				<a name="PDSep" id="PDSep">How to enter a Polynomial Dynamical System with External Parameters</a>
+			</h2>
+			<p>
+				Select <b>PDSep</b> as the format for input functions.
+			</p>
+			<p>
+				Enter the number of states each node may have. For this example, enter 3. This indicates each node may be 0, 1 or 2.
+			</p>
+			<p>
+				Enter the functions in the text box below. For this example we will have 4 functions. Enter
+			</p>
+			<p>
+				f1 = x1+x2+N
+			</p>
+			<p>
+				f2 = x1*x2*x3+N^2*Mg
+			</p>
+			<p>
+				f3 = Mg*x2+x3^2
+			</p>
+                        <p>
+				f4 = x1+Mg^2+x1+1
+			</p>
+                        <p>
+				Enter the external parameters in the text box below. For this example we will have 2 external parameters. Enter
+			</p>
+			<p>
+				N = 1
+			</p>
+			<p>
+				Mg = 0
+			</p>
+                        <p>
+				Under network options, select simulation, as there are only 4 nodes.
+			</p>
+			<p>
+				Click <i>Analyze</i> to view the results.
+			</p>
+	       
 			<h2>
 				<a name="PBN" id="PBN">How to Enter a Probabilistic Boolean Network</a>
 			</h2>
