@@ -117,7 +117,8 @@ function changeChoiceBox(choiceBox) {
 function changeModelType(type) {
     $('.optionfield').hide();
     $('.explain.type').hide();
-    
+
+    $('#file_exp_pdsep').hide();
     $('#pdsep_entries').hide();
     $('#file_exp_sdds').hide();
     $('#sdds_entries').hide();
