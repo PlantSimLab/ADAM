@@ -77,9 +77,9 @@ function changeChoiceBox(choiceBox) {
     $('.explain').hide();
     
     $('#sdds_entries').hide();
-    
     $('#opds_entries').hide();
     $('#file_exp_opds').hide();
+    $('#osdds_entries').hide();
     
     $('#inputArea').show();
     $('#explain_mi').show();
