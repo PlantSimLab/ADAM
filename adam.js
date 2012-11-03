@@ -122,6 +122,7 @@ function changeModelType(type) {
     $('#opds_entries').hide();
     $('#file_exp_sdds').hide();
     $('#sdds_entries').hide();
+    $('#osdds_entries').hide();
     $('#explain_mi_sdds').hide();
     $('#sdds_graph').hide();
     $('#SteadyStates').hide();
