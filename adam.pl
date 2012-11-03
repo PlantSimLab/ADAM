@@ -3,8 +3,8 @@
 ## Hussein Vastani
 ## Franziska Hinkelmann
 ## Bonbons
-## Seda Arat (SDDS and PDSep)
-## April 2012
+## Seda Arat (SDDS, oPDS, and oSDDS)
+## October 2012
 
 use v5.10;
 use CGI qw/:standard/;    # load CGI routines
@@ -52,9 +52,14 @@ $flag4ss = 0;
 $flag4tm = 0;
 
 
-# Declaration and initialization of PDSep parameters
+# Declaration and initialization of oPDS parameters
 $external_parameters = param('externalParameters');
 $n_nodes = 0;
+
+
+#Declaration and initialization of oSDDS parameter(s)
+$external_parameters = param('externalParameters');
+
 
 $DEBUG = 0;
 
@@ -66,8 +71,8 @@ if ($choice_box eq "") {
 # this function reads input functions from file or text area and writes the input functions into $clientip.functionfile.txt
 sub create_input_function {
   
-  # the program will do nothing for SDDS and continue the algorithm
-  if ($format_box eq 'SDDS') {
+  # the program will do nothing for SDDS or oSDDS, and continue the algorithm
+  if (($format_box eq 'SDDS') || ($format_box eq 'oSDDS')) {
     return;
   }
 
@@ -78,7 +83,7 @@ sub create_input_function {
   
   say "--" . $upload_file . "--" if ($DEBUG);
   
-  if ($format_box eq 'PDSep') {
+  if ($format_box eq 'oPDS') {
     
     $funcfilename = "$clientip.funcfile.txt";
     
@@ -406,7 +411,7 @@ given ($choice_box) {
 	translate_functions();
       }
       
-      when (/(PDS)|(pPDS)|(PDSep)/) {
+      when (/(PDS)|(pPDS)|(oPDS)/) {
 	
       }
       
@@ -449,6 +454,96 @@ given ($choice_box) {
 	}
 	system ("perl SDDS.pl -f $filename_tt -i $initialState -n $interestingNodes -s $num_states -e $num_steps -m $num_simulations -a $flag4ss -b $flag4tm -g $plot_file -h $histogram_file -t $tm_file -p $filename_pm");
       } # end of /SDDS/
+
+      when (/oSDDS/) {
+	SDDSerrorchecking_and_set_flags();
+	use Cwd;
+	$cwd_sdds = getcwd();
+	`mkdir -p $cwd_sdds/../../htdocs/no-ssl/files`;
+	
+	# checks if a file was uploaded for functions
+	if ($upload_file) {
+	  $filename_tt = "$clientip.func.txt";
+	  system ("cp ../../htdocs/no-ssl/files/$upload_file $filename_func");
+	  `perl -pi -e 's/\r//g' "$clientipfunct.txt"`;
+	}
+	else {
+	  print "<br>ERROR: There must be a file uploaded for the functions. <br>";
+	  exit;
+	}
+
+	$epfilename =  "$clientip.epfile.txt";
+    
+	if ($external_parameters) {
+	  open (EP, ">$epfilename") or die ("<br>ERROR: Cannot open the file for external parameters! <br>");
+	  print "open ok \n<br>" if ($DEBUG);
+	  print EP $external_parameters;
+	  close (EP) or die ("<br>ERROR: Cannot close the file for external parameters! <br>");
+	}
+	else {
+	  print "<br>ERROR: There must be some external parameters for the system. Please enter the external parameters directly into the text area. <br>";
+	  exit;
+	}
+	
+	%externalParameters = ();
+	open (EPFILE, "<$epfilename") or die ("Cannot open epfile! \n");
+	
+	while (my $temp = <EPFILE>) {
+	  chomp ($temp);
+	  ($ep, $value) = split (/=/, $temp);
+	  $ep =~ s/\s//g;
+	  $value =~ s/\s//g;
+	  
+	  $externalParameters{$ep} = $value;
+	}
+	
+	close (EPFILE);
+	
+	open (FUNCFILE, "<$funcfilename") or die (" Cannot open funcfile! \n");
+	open (OUTFILE, ">$filename") or die (" Cannot open outputfile! \n");
+	
+	while (my $func = <FUNCFILE>) {
+	  chomp ($func);
+	  
+	  # skip empty lines
+	  if ($func =~ /^\s*$/) {
+	    next;
+	  }
+	  
+	  foreach my $key (keys (%externalParameters)) {
+	    
+	    my $value = $externalParameters{$key};
+	    
+	    $func =~ s/$key/$value/g;
+	  }
+	  print OUTFILE "$func \n";
+	}
+    
+	close (FUNCFILE);
+	close (OUTFILE);
+	
+	# checks if propensity parameters were entered
+	if ($propensityMatrix) {
+	  $filename_pm = "$clientip.pm.txt";
+	  open (PM, ">$filename_pm") or die ("<br>ERROR: Cannot open the file for propensity parameters! <br>");
+	  print "open ok \n<br>" if ($DEBUG);
+	  print PM $propensityMatrix;
+	  close (PM) or die ("<br>ERROR: Cannot close the file for propensity parameters! <br>");
+	}
+	else {
+	  print "<br>ERROR: The propensity matrix entries must be specified. <br>";
+	  exit;
+	}
+	
+	$plot_file = "$clientip.plot";
+	$histogram_file = "$clientip.histogram";
+	$tm_file = "$clientip.tm";
+	
+	if ($DEBUG) {
+	  say ("perl SDDS.pl -f $filename_tt -i $initialState -n $interestingNodes -s $num_states -e $num_steps -m $num_simulations -a $flag4ss -b $flag4tm -g $plot_file -h $histogram_file -t $tm_file -p $filename_pm <br>");
+	}
+	system ("perl SDDS.pl -f $filename_tt -i $initialState -n $interestingNodes -s $num_states -e $num_steps -m $num_simulations -a $flag4ss -b $flag4tm -g $plot_file -h $histogram_file -t $tm_file -p $filename_pm");
+      } # end of /oSDDS/
            
       default {
 	say 'Invalid choice of model, there was an error.'
@@ -468,7 +563,7 @@ if ( $depgraph eq "Dependency graph" ) {
     if (   ( $format_box eq "PDS" )
 	   || ( $format_box eq "BN" )
 	   || ( $format_box eq "GINsim" )
-	   || ( $format_box eq "PDSep" ))
+	   || ( $format_box eq "oPDS" ))
       {
 	$useRegulatory = 1;
       }   

@@ -49,7 +49,7 @@ $(document).ready(function() {
 	    alert( "ERROR");
 	}
     });
-
+    
     $('button').click(function() {
         $("#result").html("Calculating...");
         if (file != "") {
@@ -63,27 +63,27 @@ $(document).ready(function() {
 });
 
 function postForm(file) {
-	var formdata = $("form").serialize();
-	formdata = formdata + file;
-	//alert(formdata);
+    var formdata = $("form").serialize();
+    formdata = formdata + file;
+    //alert(formdata);
     $.post("../../cgi-bin/git/adam.pl", formdata, function(data) {
         $("#result").html(data);
         //alert(data);
     });
 };
-    
+
 function changeChoiceBox(choiceBox) {
     $('.input').hide();
     $('.explain').hide();
-
+    
     $('#sdds_entries').hide();
-
-    $('#pdsep_entries').hide();
-    $('#file_exp_pdsep').hide();
+    
+    $('#opds_entries').hide();
+    $('#file_exp_opds').hide();
     
     $('#inputArea').show();
     $('#explain_mi').show();
-
+    
     // show explanation for choice selected
     $("#explain_" + choiceBox).show(); 
     $("#explain_mt_" + choiceBox).show(); 
@@ -118,8 +118,8 @@ function changeModelType(type) {
     $('.optionfield').hide();
     $('.explain.type').hide();
 
-    $('#file_exp_pdsep').hide();
-    $('#pdsep_entries').hide();
+    $('#file_exp_opds').hide();
+    $('#opds_entries').hide();
     $('#file_exp_sdds').hide();
     $('#sdds_entries').hide();
     $('#explain_mi_sdds').hide();
@@ -128,11 +128,11 @@ function changeModelType(type) {
     $('#TransitionMatrix').hide();
     
     $("#explain_" + type).show(); 
-
+    
     $('#inputArea').show();
     $('#explain_mi').show();
     $('#Simulation').show();
-
+    
     var pval = parseInt($('#p_value').val());
     var sampleInput;
     if (type == 'PDS') {
@@ -163,7 +163,7 @@ function changeModelType(type) {
     } else if (type == 'GINsim') {
 	$('#Algorithms').show();
         sampleInput = '';
-
+	
     } else if (type == 'SDDS') {
 	$('#inputArea').hide();
 	$('#explain_mi').hide();
@@ -171,7 +171,7 @@ function changeModelType(type) {
 	
 	$('#file_exp_sdds').show();
 	$('#explain_mi_sdds').show();
-	$('#explain_mi_sdds').show();
+	//$('#explain_mi_sdds').show();
 	$('#sdds_graph').show();
 	$('#sdds_entries').show();
 	$('#SteadyStates').show();
@@ -181,9 +181,9 @@ function changeModelType(type) {
 	$('#pm').val('0.3 0.7\n0.5 0.5');
         sampleInput = '';
 	
-    } else if (type = 'PDSep') {
+    } else if (type = 'oPDS') {
 	$('#explain_mi').hide();
-
+	
 	$('.pvalue').show();
         sampleInput = 'f1 = x1+x2+N\nf2 = x1*x2*x3+N*Mg\nf3 = Mg*x2+x3^2';
         if (pval == 2) {
@@ -191,16 +191,33 @@ function changeModelType(type) {
             $('#feedback').show();
         }
 	$('#Algorithms').show();
-
-	$('#pdsep_entries').show();
-	$('#file_exp_pdsep').show();
+	
+	$('#opds_entries').show();
+	$('#file_exp_opds').show();
 	$('#epArea').val('N = 1 \nMg = 0');
 	
+    } else if (type = 'oSDDS') {
+	$('#inputArea').hide();
+	$('#explain_mi').hide();
+	$('#Simulation').hide();
+	
+	$('#file_exp_osdds').show();
+	$('#explain_mi_osdds').show();
+	$('#sdds_graph').show();
+	$('#osdds_entries').show();
+	$('#SteadyStates').show();
+	$('#TransitionMatrix').show();
+	
+	$('input[name="anaysis_method"][value="sdds_graph"]').attr('checked', true);
+	$('#pm').val('0.3 0.7\n0.5 0.5');
+	$('#epArea').val('N = 1 \nMg = 0');
+        sampleInput = '';
+
     } else {
         jQuery.error = console.error;
-        jquery.error("wrong model type");
-        return 1;
-    }
+	jquery.error("wrong model type");
+	return 1;
+}
     $('#inputArea').val(sampleInput);
     return sampleInput;
 };
