@@ -202,7 +202,7 @@ s.parentNode.insertBefore(ga, s);
     </div>
 
     <div class="entries"id="osdds_entries">
-      The external parameters: <textarea name="externalParameters" rows="10" cols="15" id="epArea"></textarea><br>
+      The external parameters: <br><textarea name="externalParameters" rows="10" cols="15" id="epArea"></textarea><br>
       The propensity matrix: <br><textarea name="propensityMatrix" rows="10" cols="15" id="pm"></textarea><br><br>
       Initial state : <input type="text"name="initialState"id="initialState" value="0 1" size="40" maxlength="100"><br><br>
       Nodes of interest : <input type="text"name="interestingNodes"value="1, 2" size="40" maxlength="20"><br><br>
@@ -241,7 +241,7 @@ The <b>number of simulations</b> which determines how many simulations is needed
    <br>
    The file for <b>functions</b> must be uploaded. The <b>functions</b> (<a href="/models/SDDSexamples/example_func.txt"target="_blank">e.g.</a>) must be the update function of each node. f1, f2, f3,... represent the functions, whereas x1,x2,... represent the nodes in the system. Since it is an open system, external parameters may appear in the functions.<br>
    <br>
-   External parameters should be entered directly into the text area. There must be only one external parameter for each line.<br>
+   <b>External parameters</b> should be entered directly into the text area. There must be only one external parameter for each line.<br>
    <br>
    In the <b>propensity matrix</b>, the number of rows must be equal to the number of nodes, the number of columns must be 2 (the first column is for activation and the second column is for degradation), and each propensity entries must be seperated by a space. For random simulations, each entry should be 0.5. The format for each row is: 0.3 0.7. <br>
    <br>

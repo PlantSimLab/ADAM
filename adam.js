@@ -212,7 +212,6 @@ function changeModelType(type) {
 	$('input[name="anaysis_method"][value="sdds_graph"]').attr('checked', true);
 	$('#pm').val('0.3 0.7\n0.5 0.5');
 	$('#epArea').val('N = 1 \nMg = 0');
-        sampleInput = '';
 
     } else {
         jQuery.error = console.error;

@@ -38,28 +38,24 @@ $updsequ_flag  = "0";
 $weights       = param('weights');
 $dreamss       = param('dreamss');
 
+# Declaration and initialization of SDDS and oSDDS parameters
+if (($format_box eq 'SDDS') || ($format_box eq 'oSDDS')){
+  $propensityMatrix = param('propensityMatrix');
+  $initialState = "\"" . param('initialState') . "\"";
+  $interestingNodes = "\"" . param('interestingNodes') . "\"";
+  $num_states = param('num_states');
+  $num_steps = param('num_steps');
+  $num_simulations = param('num_simulations');
+  $steadyStates = param('SteadyStates');
+  $transitionMatrix = param('TransitionMatrix');
+  $flag4ss = 0;
+  $flag4tm = 0;
+}
 
-# Declaration and initialization of SDDS parameters
-$propensityMatrix = param('propensityMatrix');
-$initialState = "\"" . param('initialState') . "\"";
-$interestingNodes = "\"" . param('interestingNodes') . "\"";
-$num_states = param('num_states');
-$num_steps = param('num_steps');
-$num_simulations = param('num_simulations');
-$steadyStates = param('SteadyStates');
-$transitionMatrix = param('TransitionMatrix');
-$flag4ss = 0;
-$flag4tm = 0;
-
-
-# Declaration and initialization of oPDS parameters
-$external_parameters = param('externalParameters');
-$n_nodes = 0;
-
-
-#Declaration and initialization of oSDDS parameter(s)
-$external_parameters = param('externalParameters');
-
+# Declaration and initialization of oPDS and oSDDS parameters
+if (($format_box eq 'oPDS') ||(($format_box eq 'oSDDS'))) {
+  $external_parameters = param('externalParameters');
+}
 
 $DEBUG = 0;
 
@@ -155,8 +151,6 @@ sub create_input_function {
   }
 
   else {
-    
-    #$DEBUG=1;
     print "Clientip $clientip \n<br>" if ($DEBUG);
    
     if ($upload_file) {
@@ -267,7 +261,7 @@ sub set_update_type() {
 }
 
 
-# Does error checking and sets the flags in SDDS
+# Does error checking and sets the flags in SDDS and oSDDS
 sub SDDSerrorchecking_and_set_flags {
   
   # error checking
@@ -325,8 +319,6 @@ $clientip = '../../htdocs/no-ssl/files/' . $clientip;
 
 my $bytesread = "";
 my $buffer    = "";
-
-#$DEBUG = 1;
 
 #$fileuploaded = 0;
 $SSformat =~ s/\*\.//;
@@ -412,7 +404,7 @@ given ($choice_box) {
       }
       
       when (/(PDS)|(pPDS)|(oPDS)/) {
-	
+	//
       }
       
       when (/SDDS/) {
