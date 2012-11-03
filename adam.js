@@ -182,7 +182,7 @@ function changeModelType(type) {
 	$('#pm').val('0.3 0.7\n0.5 0.5');
         sampleInput = '';
 	
-    } else if (type = 'oPDS') {
+    } else if (type == 'oPDS') {
 	$('#explain_mi').hide();
 	
 	$('.pvalue').show();
@@ -197,7 +197,7 @@ function changeModelType(type) {
 	$('#file_exp_opds').show();
 	$('#epArea').val('N = 1 \nMg = 0');
 	
-    } else if (type = 'oSDDS') {
+    } else if (type == 'oSDDS') {
 	$('#inputArea').hide();
 	$('#explain_mi').hide();
 	$('#Simulation').hide();
