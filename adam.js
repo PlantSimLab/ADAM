@@ -121,6 +121,7 @@ function changeModelType(type) {
     $('#file_exp_opds').hide();
     $('#opds_entries').hide();
     $('#file_exp_sdds').hide();
+    $('#file_exp_osdds').hide();
     $('#sdds_entries').hide();
     $('#osdds_entries').hide();
     $('#explain_mi_sdds').hide();
@@ -204,8 +205,8 @@ function changeModelType(type) {
 	
 	$('#file_exp_osdds').show();
 	$('#explain_mi_osdds').show();
-	$('#sdds_graph').show();
 	$('#osdds_entries').show();
+	$('#sdds_graph').show();
 	$('#SteadyStates').show();
 	$('#TransitionMatrix').show();
 	
