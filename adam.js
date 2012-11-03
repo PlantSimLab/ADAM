@@ -173,7 +173,6 @@ function changeModelType(type) {
 	
 	$('#file_exp_sdds').show();
 	$('#explain_mi_sdds').show();
-	//$('#explain_mi_sdds').show();
 	$('#sdds_graph').show();
 	$('#sdds_entries').show();
 	$('#SteadyStates').show();
