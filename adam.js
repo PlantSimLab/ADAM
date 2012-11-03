@@ -121,13 +121,14 @@ function changeModelType(type) {
     $('#file_exp_opds').hide();
     $('#opds_entries').hide();
     $('#file_exp_sdds').hide();
-    $('#file_exp_osdds').hide();
     $('#sdds_entries').hide();
-    $('#osdds_entries').hide();
     $('#explain_mi_sdds').hide();
     $('#sdds_graph').hide();
     $('#SteadyStates').hide();
     $('#TransitionMatrix').hide();
+    $('#file_exp_osdds').hide();
+    $('#explain_mi_osdds').hide();
+    $('#osdds_entries').hide();
     
     $("#explain_" + type).show(); 
     
@@ -196,6 +197,7 @@ function changeModelType(type) {
 	$('#opds_entries').show();
 	$('#file_exp_opds').show();
 	$('#epArea').val('N = 1 \nMg = 0');
+	sampleInput = '';
 	
     } else if (type == 'oSDDS') {
 	$('#inputArea').hide();
@@ -212,6 +214,7 @@ function changeModelType(type) {
 	$('input[name="anaysis_method"][value="sdds_graph"]').attr('checked', true);
 	$('#pm').val('0.3 0.7\n0.5 0.5');
 	$('#epArea').val('N = 1 \nMg = 0');
+	sampleInput = '';
 
     } else {
         jQuery.error = console.error;
