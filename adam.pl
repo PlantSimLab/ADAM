@@ -38,8 +38,8 @@ $updsequ_flag  = "0";
 $weights       = param('weights');
 $dreamss       = param('dreamss');
 
-# Declaration and initialization of SDDS and oSDDS parameters
-if (($format_box eq 'SDDS') || ($format_box eq 'oSDDS')){
+# Declaration and initialization of SDDS parameters
+if ($format_box eq 'SDDS') {
   $propensityMatrix = param('propensityMatrix');
   $initialState = "\"" . param('initialState') . "\"";
   $interestingNodes = "\"" . param('interestingNodes') . "\"";
@@ -52,10 +52,26 @@ if (($format_box eq 'SDDS') || ($format_box eq 'oSDDS')){
   $flag4tm = 0;
 }
 
-# Declaration and initialization of oPDS and oSDDS parameters
-if (($format_box eq 'oPDS') || (($format_box eq 'oSDDS'))) {
+# Declaration and initialization of oPDS parameters
+elsif ($format_box eq 'oPDS') {
   $external_parameters = param('externalParameters');
 }
+
+#Declaration and initialization of oSDDS parameters
+elsif ($format_box eq 'oSDDS') {
+  $propensityMatrix = param('propensityMatrix');
+  $external_parameters = param('externalParameters');
+  $initialState = "\"" . param('initialState') . "\"";
+  $interestingNodes = "\"" . param('interestingNodes') . "\"";
+  $num_states = param('num_states');
+  $num_steps = param('num_steps');
+  $num_simulations = param('num_simulations');
+  $steadyStates = param('SteadyStates');
+  $transitionMatrix = param('TransitionMatrix');
+  $flag4ss = 0;
+  $flag4tm = 0;
+}
+else {}
 
 $DEBUG = 0;
 
