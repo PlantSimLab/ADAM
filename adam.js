@@ -196,10 +196,9 @@ function changeModelType(type) {
 	
 	$('#opds_entries').show();
 	$('#file_exp_opds').show();
+	$('#epArea').val('N = 1 \nMg = 0');
 
 	$('input[name="anaysis_method"][value="Simulation"]').attr('checked', true);
-	$('#epArea').val('N = 1 \nMg = 0');
-	//sampleInput = '';
 	
     } else if (type == 'oSDDS') {
 	$('#inputArea').hide();
@@ -235,10 +234,8 @@ function changeAnalysisType(simulationType) {
         $('#statespace').hide();
     } else if (simulationType == 'Conjunctive') {
         //
-
     } else if (simulationType == 'sdds_graph') {
 	//
-	
     } else {
         jQuery.error = console.error;
         jquery.error("wrong type between simulation and algorithm");
