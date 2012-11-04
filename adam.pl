@@ -59,13 +59,13 @@ elsif ($format_box eq 'oPDS') {
 
 #Declaration and initialization of oSDDS parameters
 elsif ($format_box eq 'oSDDS') {
-  $propensityMatrix = param('propensityMatrix');
-  $external_parameters = param('externalParameters');
-  $initialState = "\"" . param('initialState') . "\"";
-  $interestingNodes = "\"" . param('interestingNodes') . "\"";
-  $num_states = param('num_states');
-  $num_steps = param('num_steps');
-  $num_simulations = param('num_simulations');
+  $propensityMatrix = param('propensityMatrix-osdds');
+  $external_parameters = param('externalParameters-osdds');
+  $initialState = "\"" . param('initialState-osdds') . "\"";
+  $interestingNodes = "\"" . param('interestingNodes-osdds') . "\"";
+  $num_states = param('num_states-osdds');
+  $num_steps = param('num_steps-osdds');
+  $num_simulations = param('num_simulations-osdds');
   $steadyStates = param('SteadyStates');
   $transitionMatrix = param('TransitionMatrix');
   $flag4ss = 0;
