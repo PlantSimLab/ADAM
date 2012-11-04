@@ -53,7 +53,7 @@ if (($format_box eq 'SDDS') || ($format_box eq 'oSDDS')){
 }
 
 # Declaration and initialization of oPDS and oSDDS parameters
-if (($format_box eq 'oPDS') ||(($format_box eq 'oSDDS'))) {
+if (($format_box eq 'oPDS') || (($format_box eq 'oSDDS'))) {
   $external_parameters = param('externalParameters');
 }
 
