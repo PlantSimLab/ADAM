@@ -183,23 +183,6 @@ function changeModelType(type) {
 	$('#pm').val('0.3 0.7\n0.5 0.5');
         sampleInput = '';
 	
-    } else if (type == 'oPDS') {
-	$('#explain_mi').hide();
-	
-	$('.pvalue').show();
-        sampleInput = 'f1 = x1+x2+N\nf2 = x1*x2*x3+N*Mg\nf3 = Mg*x2+x3^2';
-        if (pval == 2) {
-            $('#conjunctive').show();
-            $('#feedback').show();
-        }
-	$('#Algorithms').show();
-	
-	$('#opds_entries').show();
-	$('#file_exp_opds').show();
-	$('#epArea').val('N = 1 \nMg = 0');
-
-	$('input[name="anaysis_method"][value="Simulation"]').attr('checked', true);
-	
     } else if (type == 'oSDDS') {
 	$('#inputArea').hide();
 	$('#explain_mi').hide();
@@ -217,6 +200,23 @@ function changeModelType(type) {
 	//$('#epArea').val('N = 1 \nMg = 0');
 	sampleInput = '';
 
+    } else if (type == 'oPDS') {
+	$('#explain_mi').hide();
+	
+	$('.pvalue').show();
+        sampleInput = 'f1 = x1+x2+N\nf2 = x1*x2*x3+N*Mg\nf3 = Mg*x2+x3^2';
+        if (pval == 2) {
+            $('#conjunctive').show();
+            $('#feedback').show();
+        }
+	$('#Algorithms').show();
+	
+	$('#opds_entries').show();
+	$('#file_exp_opds').show();
+	$('#epArea').val('N = 1 \nMg = 0');
+
+	$('input[name="anaysis_method"][value="Simulation"]').attr('checked', true);
+	
     } else {
         jQuery.error = console.error;
 	jquery.error("wrong model type");
