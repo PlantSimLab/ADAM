@@ -197,6 +197,7 @@ function changeModelType(type) {
 	$('#opds_entries').show();
 	$('#file_exp_opds').show();
 	$('#epArea').val('N = 1 \nMg = 0');
+	sampleInput = '';
 	
     } else if (type == 'oSDDS') {
 	$('#inputArea').hide();
@@ -212,13 +213,14 @@ function changeModelType(type) {
 	
 	$('input[name="anaysis_method"][value="sdds_graph"]').attr('checked', true);
 	$('#pm').val('0.3 0.7\n0.5 0.5');
-	$('#epArea').val('N = 1 \nMg = 0');
+	//$('#epArea').val('N = 1 \nMg = 0');
+	sampleInput = '';
 
     } else {
         jQuery.error = console.error;
 	jquery.error("wrong model type");
 	return 1;
-}
+    }
     $('#inputArea').val(sampleInput);
     return sampleInput;
 };
