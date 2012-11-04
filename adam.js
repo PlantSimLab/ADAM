@@ -196,8 +196,10 @@ function changeModelType(type) {
 	
 	$('#opds_entries').show();
 	$('#file_exp_opds').show();
+
+	$('input[name="anaysis_method"][value="Simulation"]').attr('checked', true);
 	$('#epArea').val('N = 1 \nMg = 0');
-	sampleInput = '';
+	//sampleInput = '';
 	
     } else if (type == 'oSDDS') {
 	$('#inputArea').hide();
