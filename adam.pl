@@ -4,7 +4,7 @@
 ## Franziska Hinkelmann
 ## Bonbons
 ## Seda Arat (SDDS, oPDS, and oSDDS)
-## October 2012
+## December 2012
 
 use v5.10;
 use CGI qw/:standard/;    # load CGI routines
@@ -420,7 +420,7 @@ given ($choice_box) {
       }
       
       when (/(PDS)|(pPDS)|(oPDS)/) {
-	//
+	# do nothing
       }
       
       when (/SDDS/) {

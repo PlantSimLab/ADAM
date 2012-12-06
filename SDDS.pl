@@ -1,6 +1,6 @@
 # Author(s): David Murrugarra & Seda Arat
-# Name: Generating the plot, histogram and transition matrix for SDDS
-# Revision Date: March 2012
+# Name: Generating the plot, histogram and transition probability matrix for SDDS
+# Revision Date: December 2012
 
 #!/usr/bin/perl
 
@@ -140,7 +140,7 @@ $histogram_file = $ARGV{'-h'};
 $tm_file = $ARGV{'-t'};
 $output_file = $ARGV{'-o'};
 
-#print ("---$func_or_tt_file---$propensitymatrix_file---$initialstate---$interestingnodes---$num_states---$num_steps---$num_simulations---$flag4ss---$flag4tm---$plot_file---$histogram_file---$tm_file---\n");
+print ("<br>---$func_or_tt_file---$propensitymatrix_file---$initialstate---$interestingnodes---$num_states---$num_steps---$num_simulations---$flag4ss---$flag4tm---$plot_file---$histogram_file---$tm_file---<br>");
 
 # it is for random number generator
 srand (time | $$);
@@ -212,7 +212,6 @@ my $graph = GD::Graph::linespoints->new(900, 500);
 $graph -> set_legend(@legend_keys);
 $graph -> set (
 	       transparent => 0,
-	       bgclr => qw (white),
 	       x_label => 'Time Steps',
 	       y_label => "Average Expression Level",
 	       title => 'Cell Population Simulation',
@@ -270,7 +269,6 @@ if ($s) {
   my $histogram = GD::Graph::bars->new(900, 500);
   $histogram -> set (
 		     transparent => 0,
-		     bgclr => qw (white),
 		     x_label => 'States',
 		     y_label => 'Percentages',
 		     title => 'Probability Distribution',

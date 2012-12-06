@@ -1,6 +1,6 @@
 # Author(s): David Murrugarra & Seda Arat
 # Name: Having all the subroutines needed for Stochastic Discrete Dynamical Systems
-# Revision Date: March 2012
+# Revision Date: December 2012
 
 package Subroutines4sdds;
 
@@ -322,7 +322,7 @@ sub get_tt {
     my $size_of_ns = scalar @ns;
     
     unless ($size_of_ns == $sdds->num_nodes()) {
-      print ("<br>ERROR: The length of the states in the transition table must match with the length of the initial state. Please revise the transition table file and/or the initial state. <br>");
+      print ("<br>ERROR: The length of the states in the transition table must match with the number of variables in the system. Please revise the transition table file and/or the initial state. <br>");
       exit;
     }
     
@@ -411,9 +411,6 @@ sub get_average_trajectory {
   my $sdds = shift;
   
   my $total_num_states = $sdds->num_states()**$sdds->num_nodes();
-
-  # Initial state must be the first state in averageTrajectory.
-  push (@{$sdds->averageTrajectory()},@{$sdds->initialState()});
 
   for (my $i = 1; $i <= $sdds->num_steps(); $i++) {
     my @temp = ();  # keeps the values of i-th states in trajectories
