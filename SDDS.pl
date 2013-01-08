@@ -1,6 +1,6 @@
 # Author(s): David Murrugarra & Seda Arat
 # Name: Generating the plot, histogram and transition probability matrix for SDDS
-# Revision Date: December 2012
+# Revision Date: January 2013
 
 #!/usr/bin/perl
 
@@ -211,7 +211,6 @@ for (my $a = 0; $a < $sdds->max_num_interestingNodes(); $a++) {
 my $graph = GD::Graph::linespoints->new(900, 500);
 $graph -> set_legend(@legend_keys);
 $graph -> set (
-	       transparent => 0,
 	       x_label => 'Time Steps',
 	       y_label => "Average Expression Level",
 	       title => 'Cell Population Simulation',
@@ -268,7 +267,6 @@ if ($s) {
   
   my $histogram = GD::Graph::bars->new(900, 500);
   $histogram -> set (
-		     transparent => 0,
 		     x_label => 'States',
 		     y_label => 'Percentages',
 		     title => 'Probability Distribution',
