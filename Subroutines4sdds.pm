@@ -1,6 +1,6 @@
 # Author(s): David Murrugarra & Seda Arat
 # Name: Having all the subroutines needed for Stochastic Discrete Dynamical Systems
-# Revision Date: December 2012
+# Revision Date: January 2013
 
 package Subroutines4sdds;
 
@@ -475,42 +475,7 @@ sub get_transitionMatrix_and_steadystates {
 	my $total_p = 0;
 	my @y = $sdds->convert_from_decimal_to_state($j);
 	
-	for (my $k = 0; $k < $sdds->num_nodes(); $k++) {
-	  my $c = 0;
-	  my @array = @{$sdds->propensityMatrix($k + 1)};
-
-	  my $s = $x[$k];
-	  my $t = $y[$k];
-	  my $u = $z[$k];
-
-	  if ($s < $u) {
-	    if ($t == $u) {
-	      $c = $array[0];
-	    }
-	    if ($t == $s) {
-	      $c = 1 - $array[0];
-	    }
-	  }
-	  elsif ($s > $u) {
-	    if ($t == $u) {
-	      $c = $array[1];
-	    }
-	    if ($t == $s) {
-	      $c = 1 - $array[1];
-	    }
-	  }
-	  else {
-	    if ($t == $s) {
-	      $c = 1;
-	    }
-	  }
-
-	  if ($c == 0) {
-	    $p = 0;
-	    last;
-	  }
-	  $p = $p * $c;
-	} # end of for loop $k
+	my $p = get_transitionprobability(\@x, \@y, \@z);
 
 	if ($p) {
 	
@@ -710,6 +675,63 @@ sub get_nextstate_pm {
     }
   }
   return @next_statePM;
+}
+
+############################################################
+
+=pod
+
+$sdds = get_transitionprobability($x, $y, $z);
+
+Returns the probability p of transition from the state x to the state y where the state z is the next state of the state x
+
+=cut
+
+sub get_transitionprobability {
+  my $sdds = shift;
+  my $x = shift;
+  my $y = shift;
+  my $z = shift;
+
+  my $p = 1;
+
+  for (my $k = 0; $k < $sdds->num_nodes(); $k++) {
+    my $c = 0;
+    my @array = @{$sdds->propensityMatrix($k + 1)};
+    
+    my $s = $x[$k];
+    my $t = $y[$k];
+    my $u = $z[$k];
+    
+    if ($s < $u) {
+      if ($t == $u) {
+	$c = $array[0];
+      }
+      if ($t == $s) {
+	$c = 1 - $array[0];
+      }
+    }
+    elsif ($s > $u) {
+      if ($t == $u) {
+	$c = $array[1];
+      }
+      if ($t == $s) {
+	$c = 1 - $array[1];
+      }
+    }
+    else {
+      if ($t == $s) {
+	$c = 1;
+      }
+    }
+    
+    if ($c == 0) {
+      $p = 0;
+      last;
+    }
+    $p = $p * $c;
+  } # end of for loop $k
+  return $p;
 }
 
 ############################################################

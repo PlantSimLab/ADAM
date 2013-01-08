@@ -489,7 +489,7 @@ given ($choice_box) {
 	  close (EP) or die ("<br>ERROR: Cannot close the file for external parameters! <br>");
 	}
 	else {
-	  print "<br>ERROR: There must be some external parameters for the system. Please enter the external parameters directly into the text area. <br>";
+	  print "<br>ERROR: There must be some external parameters for the (open) system. Please enter the external parameters directly into the text area. <br>";
 	  exit;
 	}
 	
