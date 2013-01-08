@@ -534,7 +534,6 @@ given ($choice_box) {
 	if ($propensityMatrix) {
 	  $filename_pm = "$clientip.pm.txt";
 	  open (PM, ">$filename_pm") or die ("<br>ERROR: Cannot open the file for propensity parameters! <br>");
-	  print "open ok \n<br>" if ($DEBUG);
 	  print PM $propensityMatrix;
 	  close (PM) or die ("<br>ERROR: Cannot close the file for propensity parameters! <br>");
 	}
