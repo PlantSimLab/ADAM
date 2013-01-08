@@ -472,9 +472,9 @@ given ($choice_box) {
 	
 	# checks if a file was uploaded for functions
 	if ($upload_file) {
-	  $filename_tt = "$clientip.func.txt";
+	  $filename_func = "$clientip.func.txt";
 	  system ("cp ../../htdocs/no-ssl/files/$upload_file $filename_func");
-	  `perl -pi -e 's/\r//g' "$clientipfunct.txt"`;
+	  `perl -pi -e 's/\r//g' "$clientip.func.txt"`;
 	}
 	else {
 	  print "<br>ERROR: There must be a file uploaded for the functions. <br>";
@@ -508,7 +508,7 @@ given ($choice_box) {
 	
 	close (EPFILE);
 	
-	open (FUNCFILE, "<$funcfilename") or die (" Cannot open funcfile! \n");
+	open (FUNCFILE, "<$filename_func") or die (" Cannot open funcfile! \n");
 	open (OUTFILE, ">$filename") or die (" Cannot open outputfile! \n");
 	
 	while (my $func = <FUNCFILE>) {
@@ -549,9 +549,9 @@ given ($choice_box) {
 	$tm_file = "$clientip.tm";
 	
 	if ($DEBUG) {
-	  say ("perl SDDS.pl -f $filename_tt -i $initialState -n $interestingNodes -s $num_states -e $num_steps -m $num_simulations -a $flag4ss -b $flag4tm -g $plot_file -h $histogram_file -t $tm_file -p $filename_pm <br>");
+	  say ("perl SDDS.pl -f $filename -p $filename_pm -i $initialState -n $interestingNodes -s $num_states -e $num_steps -m $num_simulations -a $flag4ss -b $flag4tm -g $plot_file -h $histogram_file -t $tm_file <br>");
 	}
-	system ("perl SDDS.pl -f $filename_tt -p $filename_pm -i $initialState -n $interestingNodes -s $num_states -e $num_steps -m $num_simulations -a $flag4ss -b $flag4tm -g $plot_file -h $histogram_file -t $tm_file");
+	system ("perl SDDS.pl -f $filename -p $filename_pm -i $initialState -n $interestingNodes -s $num_states -e $num_steps -m $num_simulations -a $flag4ss -b $flag4tm -g $plot_file -h $histogram_file -t $tm_file");
       } # end of /oSDDS/
            
       default {
