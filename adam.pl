@@ -432,9 +432,9 @@ given ($choice_box) {
 	
 	# checks if a file was uploaded for transition table
 	if ($upload_file) {
-	  $filename_tt = "$clientip.tt.txt";
-	  system ("cp ../../htdocs/no-ssl/files/$upload_file $filename_tt");
-	  `perl -pi -e 's/\r//g' "$clientip.tt.txt"`;
+	  $filename = "$clientip.file.txt";
+	  system ("cp ../../htdocs/no-ssl/files/$upload_file $filename");
+	  `perl -pi -e 's/\r//g' "$clientip.file.txt"`;
 	}
 	else {
 	  print "<br>ERROR: There must be a file uploaded for the (complete) transition table or functions. <br>";
@@ -445,7 +445,6 @@ given ($choice_box) {
 	if ($propensityMatrix) {
 	  $filename_pm = "$clientip.pm.txt";
 	  open (PM, ">$filename_pm") or die ("<br>ERROR: Cannot open the file for propensity parameters! <br>");
-	  print "open ok \n<br>" if ($DEBUG);
 	  print PM $propensityMatrix;
 	  close (PM) or die ("<br>ERROR: Cannot close the file for propensity parameters! <br>");
 	}
@@ -459,9 +458,9 @@ given ($choice_box) {
 	$tm_file = "$clientip.tm";
 	
 	if ($DEBUG) {
-	  say ("perl SDDS.pl -f $filename_tt -p $filename_pm -i $initialState -n $interestingNodes -s $num_states -e $num_steps -m $num_simulations -a $flag4ss -b $flag4tm -g $plot_file -h $histogram_file -t $tm_file <br>");
+	  say ("perl SDDS.pl -f $filename -p $filename_pm -i $initialState -n $interestingNodes -s $num_states -e $num_steps -m $num_simulations -a $flag4ss -b $flag4tm -g $plot_file -h $histogram_file -t $tm_file <br>");
 	}
-	system ("perl SDDS.pl -f $filename_tt -p $filename_pm -i $initialState -n $interestingNodes -s $num_states -e $num_steps -m $num_simulations -a $flag4ss -b $flag4tm -g $plot_file -h $histogram_file -t $tm_file");
+	system ("perl SDDS.pl -f $filename -p $filename_pm -i $initialState -n $interestingNodes -s $num_states -e $num_steps -m $num_simulations -a $flag4ss -b $flag4tm -g $plot_file -h $histogram_file -t $tm_file");
       } # end of /SDDS/
 
       when (/oSDDS/) {
