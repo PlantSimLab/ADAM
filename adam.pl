@@ -73,7 +73,7 @@ elsif ($format_box eq 'oSDDS') {
 }
 else {}
 
-$DEBUG = 0;
+$DEBUG = 1;
 
 if ($choice_box eq "") {
   say '<a href="http://adam.vbi.vt.edu"/>ADAM has moved.</a> Please update your bookmarks';
