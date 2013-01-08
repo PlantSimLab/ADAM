@@ -471,7 +471,6 @@ sub get_transitionMatrix_and_steadystates {
       my @z = $sdds->get_nextstate(\@x);
       
       for (my $j = 1; $j <= $total_num_states; $j++) {
-	my $p = 1;
 	my $total_p = 0;
 	my @y = $sdds->convert_from_decimal_to_state($j);
 	
@@ -699,9 +698,9 @@ sub get_transitionprobability {
     my $c = 0;
     my @array = @{$sdds->propensityMatrix($k + 1)};
     
-    my $s = $x[$k];
-    my $t = $y[$k];
-    my $u = $z[$k];
+    my $s = $x->[$k];
+    my $t = $y->[$k];
+    my $u = $z->[$k];
     
     if ($s < $u) {
       if ($t == $u) {
