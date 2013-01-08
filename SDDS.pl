@@ -14,6 +14,8 @@ use GD::Graph::linespoints;
 use GD::Graph::colour;
 use GD::Graph::bars;
 
+print "I am here! \n";
+
 =head1 NAME
 
 SDDS.pl - Simulate a stochastic model from a possible initialization.
