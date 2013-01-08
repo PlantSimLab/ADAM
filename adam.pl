@@ -355,6 +355,7 @@ if ($DEBUG) {
   print "n_nodes = $n_nodes <br>";
 
   print "edit_functions = $edit_functions <br>";
+  print "propensityMatrix = $propensityMatrix <br>";
   print "external_parameters = $external_parameters <br>";
 
 }
