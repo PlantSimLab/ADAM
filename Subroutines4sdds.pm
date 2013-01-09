@@ -65,8 +65,6 @@ sub get_initialstate {
     @{$sdds->initialState()} = split(/\s+/, $initialstate);
     $sdds->num_nodes(scalar @{$sdds->initialState()});
 
-    print "<br> num_nodes: ", $sdds->num_nodes(), " <br>";
-
     foreach my $value (@{$sdds->initialState()}) {
       if ((isnot_number($value)) || ($value >= $sdds->num_states())) {
 	print ("<br>ERROR: Since the number of states is " , $sdds->num_states(), " , the initial state, @{$sdds->initialState()}, must consist of the numbers which are at most " , $sdds->num_states() - 1 , " . Please check the initial state and/or the number of states. <br>");
