@@ -374,7 +374,7 @@ sub get_alltrajectories_and_reachablestates {
     my $is = $sdds->initialState();
     push (@temp, $sdds->convert_from_state_to_decimal($is));
     
-    for (my $j = 1; $j <= $sdds->num_steps(); $j++) {
+    for (my $j = 1; $j <= $sdds->num_steps()+1; $j++) {
 
       my @ns = $sdds->get_nextstate_pm($is);
       my $dec = $sdds->convert_from_state_to_decimal(\@ns);
@@ -412,7 +412,7 @@ sub get_average_trajectory {
   
   my $total_num_states = $sdds->num_states()**$sdds->num_nodes();
 
-  for (my $i = 1; $i <= $sdds->num_steps(); $i++) {
+  for (my $i = 1; $i <= $sdds->num_steps()+1; $i++) {
     my @temp = ();  # keeps the values of i-th states in trajectories
 
     for (my $j = 1; $j <= $sdds->num_simulations(); $j++) {
@@ -474,7 +474,7 @@ sub get_transitionMatrix_and_steadystates {
 	my $total_p = 0;
 	my @y = $sdds->convert_from_decimal_to_state($j);
 	
-	my $p = get_transitionprobability(\@x, \@y, \@z);
+	my $p = $sdds->get_transitionprobability(\@x, \@y, \@z);
 
 	if ($p) {
 	
