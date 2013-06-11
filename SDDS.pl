@@ -8,7 +8,8 @@ use strict;
 use warnings;
 
 use Subroutines4sdds;
-use lib "/usr/lib/perl5/vendor_perl/5.12.3/x86_64-linux-thread-multi";
+
+use lib "/usr/lib/perl5/vendor_perl/5.12.3";
 use Getopt::Euclid;
 use GD::Graph;
 use GD::Graph::linespoints;
