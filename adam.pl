@@ -4,7 +4,7 @@
 ## Franziska Hinkelmann
 ## Bonbons
 ## Seda Arat (SDDS, oPDS, and oSDDS)
-## December 2012
+## June 2013
 
 use v5.10;
 use CGI qw/:standard/;    # load CGI routines
