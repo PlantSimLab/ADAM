@@ -7,6 +7,8 @@
 use strict;
 use warnings;
 
+print "I am here ! ";
+
 use Subroutines4sdds;
 use Getopt::Euclid;
 use GD::Graph;

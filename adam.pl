@@ -458,7 +458,7 @@ given ($choice_box) {
 	$tm_file = "$clientip.tm";
 	
 	if ($DEBUG) {
-	  say ("perl SDDS.pl -f $filename -p $filename_pm -i $initialState -n $interestingNodes -s $num_states -e $num_steps -m $num_simulations -a $flag4ss -b $flag4tm -g $plot_file -h $histogram_file -t $tm_file <br>");
+	  say ("<br> perl SDDS.pl -f $filename -p $filename_pm -i $initialState -n $interestingNodes -s $num_states -e $num_steps -m $num_simulations -a $flag4ss -b $flag4tm -g $plot_file -h $histogram_file -t $tm_file <br>");
 	}
 	system ("perl SDDS.pl -f $filename -p $filename_pm -i $initialState -n $interestingNodes -s $num_states -e $num_steps -m $num_simulations -a $flag4ss -b $flag4tm -g $plot_file -h $histogram_file -t $tm_file");
       } # end of /SDDS/
