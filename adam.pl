@@ -6,7 +6,7 @@
 ## Seda Arat (SDDS, oPDS, and oSDDS)
 ## June 2013
 
-#use v5.10;
+use v5.12;
 use CGI qw/:standard/;    # load CGI routines
 use Fcntl qw( :flock );
 print header;             # create the HTTP header
