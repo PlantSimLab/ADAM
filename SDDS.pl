@@ -9,7 +9,7 @@ use warnings;
 
 use Subroutines4sdds;
 use Getopt::Euclid;
-use lib "/usr/lib/perl5/vendor_perl/5.12.3/GD";
+use lib "/usr/lib/perl5/vendor_perl/5.12.3/x86_64-linux-thread-multi/";
 use GD::Graph;
 use GD::Graph::linespoints;
 use GD::Graph::bars;
