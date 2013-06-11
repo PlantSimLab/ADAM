@@ -73,7 +73,7 @@ elsif ($format_box eq 'oSDDS') {
 }
 else {}
 
-$DEBUG = 1;
+$DEBUG = 0;
 
 if ($choice_box eq "") {
   say '<a href="http://adam.vbi.vt.edu"/>ADAM has moved.</a> Please update your bookmarks';
@@ -456,6 +456,8 @@ given ($choice_box) {
 	$plot_file = "$clientip.plot";
 	$histogram_file = "$clientip.histogram";
 	$tm_file = "$clientip.tm";
+
+	print "will be fixed soon! <br>";
 	
 	if ($DEBUG) {
 	  say ("<br> perl SDDS.pl -f $filename -p $filename_pm -i $initialState -n $interestingNodes -s $num_states -e $num_steps -m $num_simulations -a $flag4ss -b $flag4tm -g $plot_file -h $histogram_file -t $tm_file <br>");
@@ -545,6 +547,8 @@ given ($choice_box) {
 	$plot_file = "$clientip.plot";
 	$histogram_file = "$clientip.histogram";
 	$tm_file = "$clientip.tm";
+
+	print "will be fixed soon! <br>";
 	
 	if ($DEBUG) {
 	  say ("perl SDDS.pl -f $filename -p $filename_pm -i $initialState -n $interestingNodes -s $num_states -e $num_steps -m $num_simulations -a $flag4ss -b $flag4tm -g $plot_file -h $histogram_file -t $tm_file <br>");

@@ -7,7 +7,7 @@
 use strict;
 use warnings;
 
-print "I am here ! ";
+#print "I am here ! ";
 
 use Subroutines4sdds;
 use Getopt::Euclid;
@@ -141,7 +141,7 @@ $histogram_file = $ARGV{'-h'};
 $tm_file = $ARGV{'-t'};
 $output_file = $ARGV{'-o'};
 
-print ("<br>---$func_or_tt_file---$propensitymatrix_file---$initialstate---$interestingnodes---$num_states---$num_steps---$num_simulations---$flag4ss---$flag4tm---$plot_file---$histogram_file---$tm_file---<br>");
+#print ("<br>---$func_or_tt_file---$propensitymatrix_file---$initialstate---$interestingnodes---$num_states---$num_steps---$num_simulations---$flag4ss---$flag4tm---$plot_file---$histogram_file---$tm_file---<br>");
 
 # it is for random number generator
 srand (time | $$);
