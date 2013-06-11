@@ -7,13 +7,14 @@
 use strict;
 use warnings;
 
-#print "I am here ! ";
-
 use Subroutines4sdds;
+use lib "/usr/lib/perl5/vendor_perl/5.12.3/x86_64-linux-thread-multi";
 use Getopt::Euclid;
-use /usr/lib/perl5/vendor_perl/5.12.3/x86_64-linux-thread-multi/GD::Graph;
+use GD::Graph;
 use GD::Graph::linespoints;
 use GD::Graph::bars;
+
+print "I am here ! ";
 
 =head1 NAME
 
