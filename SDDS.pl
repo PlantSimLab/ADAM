@@ -9,6 +9,7 @@ use warnings;
 
 use lib "./SDDS_PerlModules";
 use Subroutines4sdds;
+use GD::Graph;
 use GD::Graph::linespoints;
 use GD::Graph::bars;
 
