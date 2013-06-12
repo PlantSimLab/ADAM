@@ -9,123 +9,14 @@ use warnings;
 
 use lib "./SDDS_PerlModules";
 use Subroutines4sdds;
-use Getopt::Euclid;
 use GD::Graph::linespoints;
 use GD::Graph::bars;
 
-print "I am here ! ";
+# USAGE: SDDS.pl -f <functions_or_transitiontable-file> -p <propensitymatrix-file> -i <initial-state> -n <interesting-nodes> -s <number-states> -e <number-steps> -m <number-simulations> - a <flag-steadystates> -b <flag-transitionmatrix> -g <plot-file> -h <histogram-file> -t <tm-file>
 
-=head1 NAME
+print "I am here in SDDS.pl ! ";
 
-SDDS.pl - Simulate a stochastic model from a possible initialization.
-
-=head1 USAGE
-
-SDDS.pl -f <functions_or_transitiontable-file> -p <propensitymatrix-file> -i <initial-state> -n <interesting-nodes> -s <number-states> -e <number-steps> -m <number-simulations> - a <flag-steadystates> -b <flag-transitionmatrix> -g <plot-file> -h <histogram-file> -t <tm-file> -o <output-file>
-
-=head1 SYNOPSIS
-
-SDDS.pl -f <functions_or_transitiontable-file> -p <propensitymatrix-file> -i <initial-state> -n <interesting-nodes> -s <number-states> -e <number-steps> -m <number-simulations> -a <flag-steadystates> -b <flag-transitionmatrix> -g <plot-file> -h <histogram-file> -t <tm-file> -o <output-file>
-
-=head1 DESCRIPTION
-
-SDDS.pl - Simulate a stochastic model from a possible initialization.
-
-=head1 REQUIRED ARGUMENTS
-
-=over
-
-=item -f[unctions_or_transitiontable-file] <functions_or_transitiontable-file>
-
-The name of the file containing the functions or transition table for the finite dynamical system (.txt). 
-
-=for Euclid:
-
-network-file.type: readable
-
-=item -p[ropensitymatrix-file] <pp-file>
-
-The name of the file containing the propensity probabilities for the system.
-
-=for Euclid:
-
-network-file.type: readable
-
-=item -i[nitial-state] <initial-state>
-
-The string containing the initial state.
-
-=item -n <interesting-nodes>
-
-The string containing the nodes of interest.
-
-=item -s <number-states>
-
-The number of states.
-
-=item -e <number-steps>
-
-The number of states.
-
-=item -m <number-simulations>
-
-The number of states.
-
-=item -a <flag-steadystates>
-
-The number indicating if the steadystates will be shown
-
-=item -b <flag-transitionmatrix>
-
-The number indicating if the transitionmatrix will be shown
-
-=item -g <plot-file>
-
-The name of the file to plot the average trajectory.
-
-=for Euclid:
-
-file.type: writeable
-
-=item -h[istogram-file] <histogram-file>
-
-The name of the file to get the histogram of the percentage vector.
-
-=for Euclid:
-
-file.type: writeable
-
-=back
-
-=head1 OPTIONS
-
-=over
-
-=item -t[transitionmatrix-file] <tm-file>
-
-The name of the file to get the whole transition matrix.
-
-=for Euclid:
-
-file.type: writeable
-
-=item -o[utput-file] <output-file>
-
-The name of the file to print the results.
-
-=for Euclid:
-
-file.type: writeable
-
-=back
-
-=head1 AUTHOR
-
-David Murrugarra & Seda Arat
-
-=cut
-
-my ($func_or_tt_file, $propensitymatrix_file, $initialstate, $interestingnodes, $num_states, $num_steps, $num_simulations, $flag4ss, $flag4tm, $plot_file, $histogram_file, $tm_file, $output_file);
+my ($func_or_tt_file, $propensitymatrix_file, $initialstate, $interestingnodes, $num_states, $num_steps, $num_simulations, $flag4ss, $flag4tm, $plot_file, $histogram_file, $tm_file);
 
 $func_or_tt_file = $ARGV{'-f'};
 $propensitymatrix_file = $ARGV{'-p'};
@@ -139,7 +30,6 @@ $flag4tm = $ARGV{'-b'};
 $plot_file = $ARGV{'-g'};
 $histogram_file = $ARGV{'-h'};
 $tm_file = $ARGV{'-t'};
-$output_file = $ARGV{'-o'};
 
 #print ("<br>---$func_or_tt_file---$propensitymatrix_file---$initialstate---$interestingnodes---$num_states---$num_steps---$num_simulations---$flag4ss---$flag4tm---$plot_file---$histogram_file---$tm_file---<br>");
 
