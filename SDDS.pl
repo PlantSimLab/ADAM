@@ -7,9 +7,9 @@
 use strict;
 use warnings;
 
+use lib "./";
 use Subroutines4sdds;
 use Getopt::Euclid;
-use GD::Graph;
 use GD::Graph::linespoints;
 use GD::Graph::bars;
 
