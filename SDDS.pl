@@ -7,7 +7,7 @@
 use strict;
 use warnings;
 
-use lib "./";
+use lib "./SDDS_PerlModules";
 use Subroutines4sdds;
 use Getopt::Euclid;
 use GD::Graph::linespoints;
