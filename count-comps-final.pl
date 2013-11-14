@@ -157,7 +157,7 @@ if($found == 0)
 			}
 			if( ($func =~ m/[\+\-\*\(][\)\+\-\*\^]/g) || ($func =~ m/\)[\(\d x]/g) || ($func =~ m/\d[\( x]/g) )
 			{
-				$errString = "ERROR: Incorrect syntax in line $n. Read the <a href=http://dvd.vbi.vt.edu/visualizer/tutorial.html target=_blank>tutorial</a> for correct formatting rules.";
+				$errString = "ERROR: Incorrect syntax in line $n. Read the <a href=\"visualizer/tutorial.html\" target=_blank>tutorial</a> for correct formatting rules.";
 				$found = 1;
 				last;
 			}

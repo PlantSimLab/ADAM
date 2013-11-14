@@ -90,7 +90,7 @@ sub create_input_function {
 
   use Cwd;
   $cwd = getcwd();
-  `mkdir -p $cwd/../../htdocs/no-ssl/files`;
+  `mkdir -p tmp/files`;
   $filename = "$clientip.functionfile.txt";
   
   say "--" . $upload_file . "--" if ($DEBUG);
@@ -100,8 +100,8 @@ sub create_input_function {
     $funcfilename = "$clientip.funcfile.txt";
     
     if ($upload_file) {
-      say "cp ../../htdocs/no-ssl/files/$upload_file $funcfilename <br>	" if ($DEBUG);
-      system("cp ../../htdocs/no-ssl/files/$upload_file $funcfilename");
+      say "cp tmp/files/$upload_file $funcfilename <br>	" if ($DEBUG);
+      system("cp tmp/files/$upload_file $funcfilename");
     }
     elsif ($edit_functions) {
       open (TA, ">$funcfilename") or die ("<br>ERROR: Cannot open the file for functions! <br>");
@@ -171,8 +171,8 @@ sub create_input_function {
    
     if ($upload_file) {
       
-      say "cp ../../htdocs/no-ssl/files/$upload_file $filename <br>	" if ($DEBUG);
-      system("cp ../../htdocs/no-ssl/files/$upload_file $filename");
+      say "cp tmp/files/$upload_file $filename <br>	" if ($DEBUG);
+      system("cp tmp/files/$upload_file $filename");
       
       if ($choice_box eq 'analyze'
 	  && (   $format_box eq 'PDS'
@@ -314,22 +314,22 @@ sub SDDSerrorchecking_and_set_flags {
 }
 
 
-`mkdir -p ../../htdocs/no-ssl`;
-`touch ../../htdocs/no-ssl/access`;
+`mkdir -p tmp`;
+`touch tmp/access`;
 
 #get the clients ip address
 $clientip = $ENV{'REMOTE_ADDR'};
 $clientip =~ s/\./\-/g;
 ( $sec, $min, $hr ) = localtime();
 $clientip = $clientip . '-' . $sec . '-' . $min . '-' . $hr;
-$clientip = '../../htdocs/no-ssl/files/' . $clientip;
+$clientip = 'tmp/files/' . $clientip;
 
 #$clientip = $sec.'-'.$min.'-'.$hr;
 
-#open(ACCESS, ">>../../htdocs/no-ssl/access") or die("Failed to open file for writing");
+#open(ACCESS, ">>tmp/access") or die("Failed to open file for writing");
 #flock(ACCESS, LOCK_EX) or die ("Could not get exclusive lock $!");
 #print ACCESS ($ENV{REMOTE_ADDR});
-#system("date >>../../htdocs/no-ssl/access");
+#system("date >>tmp/access");
 #flock(ACCESS, LOCK_UN) or die ("Could not unlock file $!");
 #close(ACCESS);
 
@@ -428,12 +428,12 @@ given ($choice_box) {
 	SDDSerrorchecking_and_set_flags();
 	use Cwd;
 	$cwd_sdds = getcwd();
-	`mkdir -p $cwd_sdds/../../htdocs/no-ssl/files`;
+	`mkdir -p tmp/files`;
 	
 	# checks if a file was uploaded for transition table
 	if ($upload_file) {
 	  $filename = "$clientip.file.txt";
-	  system ("cp ../../htdocs/no-ssl/files/$upload_file $filename");
+	  system ("cp tmp/files/$upload_file $filename");
 	  `perl -pi -e 's/\r//g' "$clientip.file.txt"`;
 	}
 	else {
@@ -469,12 +469,12 @@ given ($choice_box) {
 	SDDSerrorchecking_and_set_flags();
 	use Cwd;
 	$cwd_sdds = getcwd();
-	`mkdir -p $cwd_sdds/../../htdocs/no-ssl/files`;
+	`mkdir -p tmp/files`;
 	
 	# checks if a file was uploaded for functions
 	if ($upload_file) {
 	  $filename_func = "$clientip.func.txt";
-	  system ("cp ../../htdocs/no-ssl/files/$upload_file $filename_func");
+	  system ("cp tmp/files/$upload_file $filename_func");
 	  `perl -pi -e 's/\r//g' "$clientip.func.txt"`;
 	}
 	else {

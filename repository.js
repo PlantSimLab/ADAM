@@ -8,13 +8,13 @@ Javascript file for Repository site.
 
 $(document).ready(function()
 {
-	$('#header').load('/header.html');
-	$('.navigation').load('/navigation.html');
-	$('#footer').load('/footer.html');
+	$('#header').load('header.html');
+	$('.navigation').load('navigation.html');
+	$('#footer').load('footer.html');
  	
 	$(".model").click( function() {
 		//alert ('/models/' + $(this).attr('id') + '.html');
-		$('#model').load('/models/' + $(this).attr('id') + '.html');
+		$('#model').load('models/' + $(this).attr('id') + '.html');
 	})
 	
 	

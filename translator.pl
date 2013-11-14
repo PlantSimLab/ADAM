@@ -97,14 +97,14 @@ if($found == 0)
 		   }
 		   if( ($func =~ m/[\+\-\*\(][\)\+\-\*]/g) || ($func =~ m/[\+\*][\~]/g) || ($func =~ m/\)[\(\d\~x]/g) || ($func =~ m/\d[\(\~ x]/g) )
 		   {
-				$errString = "ERROR: Incorrect syntax in line $n. Read the <a href=http://dvd.vbi.vt.edu/visualizer/tutorial.html target=_blank>tutorial</a> for correct formatting rules.";
+				$errString = "ERROR: Incorrect syntax in line $n. Read the <a href=\"visualizer/tutorial.html\" target=\"_blank\">tutorial</a> for correct formatting rules.";
 				$found = 1;
 				last;
 		   }
 		   # check to see if the number of opening paranthesis is atleast equal to the number of operators. 
 		   if( ( tr/\(/\(/ ) < (  tr/\+/\+/ + tr/\*/\*/ + tr/~/~/ ) )
 		   {
-			   $errString = "ERROR: Function does not adhere to <b>Fully Bracketed Infix Expressions</b> format in line $n. Read the <a href=http://dvd.vbi.vt.edu/visualizer/tutorial.html target=_blank>tutorial</a> for more information.";
+			   $errString = "ERROR: Function does not adhere to <b>Fully Bracketed Infix Expressions</b> format in line $n. Read the <a href=\"visualizer/tutorial.html\" target=\"_blank\">tutorial</a> for more information.";
 			   $found = 1;
 			   last;
 		   }

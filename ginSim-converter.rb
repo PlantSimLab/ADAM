@@ -11,7 +11,7 @@ end
 clientip = ARGV[0]
 
 #result = `cd lib/M2code/; M2 convertToPDS.m2 --stop --no-debug --silent -q -e 'cF = converter("../../#{clientip}.ginsim.ginml"); stdio << toString first cF << "?" << toString last cF << "?" << char ring last cF << "?" << numgens ring last cF; exit 0'`
-result = `cd lib/M2code/; /usr/local/bin/M2 convertToPDS.m2 --stop --no-debug --silent -q -e 'cF = converter("../../#{clientip}.ginsim.ginml"); stdio << toString first cF << "?" << toString last cF << "?" << char ring last cF << "?" << numgens ring last cF; exit 0'`
+result = `cd lib/M2code/; M2 convertToPDS.m2 --stop --no-debug --silent -q -e 'cF = converter("../../#{clientip}.ginsim.ginml"); stdio << toString first cF << "?" << toString last cF << "?" << char ring last cF << "?" << numgens ring last cF; exit 0'`
 
 result = result.split("?")
 varList = result.fetch(0)

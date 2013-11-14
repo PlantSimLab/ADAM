@@ -163,7 +163,7 @@ ss_and_weights = dreamss + weights
 # call M2
 #puts "#{num_vars}, #{p_value}, #{functions}, #{ss_and_weights}"
 
-m2_result = `/usr/local/bin/M2 methodAdaptiveGA.m2 -q -e 'AdaptiveGAwPS(#{num_vars}, #{p_value}, #{functions}, #{ss_and_weights} ); exit 7'`
+m2_result = `M2 methodAdaptiveGA.m2 -q -e 'AdaptiveGAwPS(#{num_vars}, #{p_value}, #{functions}, #{ss_and_weights} ); exit 7'`
 #puts m2_result
 if $?.exitstatus == 7
   puts " The genetic algorithm found these resulting knockouts<br>" 

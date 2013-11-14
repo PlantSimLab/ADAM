@@ -7,7 +7,7 @@ print <<ENDHTML;
 		<title>
 			ADAM Step-by-step tutorial
 		</title>
-		<link rel="stylesheet" type="text/css" href="/adam_style.css">
+		<link rel="stylesheet" type="text/css" href="adam_style.css">
 	</head>
 	<body>
 		<div id="header">
@@ -241,7 +241,7 @@ print <<ENDHTML;
 				Select <b>Stochastic Discrete Dynamical Systems</b> as the format of the input functions.
 			</p>
 			<p>
-				Upload either the (complete) transition table file for 4 node Lambda phage model (available <a href = "/steptutorial_files/LambdaPhage_tt.txt" target="_blank">here</a>) or the functions file for 4 node Lambda phage model (available <a href = "/steptutorial_files/LambdaPhage_func.txt" target="_blank">here</a>).
+				Upload either the (complete) transition table file for 4 node Lambda phage model (available <a href="steptutorial_files/LambdaPhage_tt.txt" target="_blank">here</a>) or the functions file for 4 node Lambda phage model (available <a href="steptutorial_files/LambdaPhage_func.txt" target="_blank">here</a>).
 			</p>
 			<p>
 				Enter 
@@ -293,7 +293,7 @@ print <<ENDHTML;
 		</div>
 		<div id="nav">
 			<h2>
-				<a href="/cgi-bin/git/adam.pl">Back to ADAM</a>&nbsp;&nbsp;&nbsp; <a href="/userGuide.html">User Guide</a>
+				<a href="adam.pl">Back to ADAM</a>&nbsp;&nbsp;&nbsp; <a href="userGuide.pl">User Guide</a>
 			</h2>
 		</div>
 		</div>

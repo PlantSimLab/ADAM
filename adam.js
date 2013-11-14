@@ -1,7 +1,7 @@
 $(document).ready(function() {
-    $('#header').load("/header.html");
-    $('#footer').load("/footer.html");
-    $('.nav').load("/navigation.html");
+    $('#header').load("header.html");
+    $('#footer').load("footer.html");
+    $('.nav').load("navigation.html");
     $('.input').hide();
     $('.explain').hide();
     
@@ -26,10 +26,10 @@ $(document).ready(function() {
 
     var file = "";
     $('#upload_file').uploadify({
-        'uploader': '/uploadify/uploadify.swf',
-        'script': '/uploadify/uploadify.php',
-        'cancelImg': '/uploadify/cancel.png',
-        'folder': '/../../htdocs/no-ssl/files',
+        'uploader': 'uploadify/uploadify.swf',
+        'script': 'uploadify/uploadify.php',
+        'cancelImg': 'uploadify/cancel.png',
+        'folder': 'tmp/files',
         'auto': false,
         'multi': false,
 	'removeCompleted' : true,
@@ -66,7 +66,7 @@ function postForm(file) {
     var formdata = $("form").serialize();
     formdata = formdata + file;
     //alert(formdata);
-    $.post("../../cgi-bin/git/adam.pl", formdata, function(data) {
+    $.post("adam.pl", formdata, function(data) {
         $("#result").html(data);
         //alert(data);
     });
