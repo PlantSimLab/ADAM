@@ -1,6 +1,3 @@
 [submodule "lib"]
 	path = lib
 	url = localhost:/home/git/reu.git
-[submodule "controlM2"]
-	path = controlM2
-	url = localhost:/home/git/control.git
