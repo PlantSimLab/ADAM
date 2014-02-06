@@ -88,10 +88,14 @@ $function_file);
 
 if($response[0] == 1) { # a response code should always be returned by the main DVDCore functions
     _log($_) foreach(@Output_array);
+
     if ($trajectory_flag) {
-        print "Number of components $Output_array[2]<br>";
+        print "<br>Number of components $Output_array[2]<br>";
         print "Number of fixed points $Output_array[3]<br>";
-        print "$Output_array[5]<br>";
+        $cycles = $Output_array[2] - $Output_array[3];
+        print "Number of cycles $cycles <br><br>";
+        print "$Output_array[5]<br><br>";
+        print "$Output_array[4]<br>";
     }
 } 
 else {

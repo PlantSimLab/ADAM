@@ -877,9 +877,9 @@ sub create_output {
     my $cwd = getcwd();  
     print "current dir $cwd\n<br>" if ($DEBUG);
     `ccomps -x -o $client_wd/tmp/component $dot_filename`;
-    print "return value of ccomps: $? \n<br>" if ($DEBUG);
     print "ccomps -x -o $client_wd/tmp/component $dot_filename\n<br>" if ($DEBUG);
     print "return value of ccomps: $? \n<br>" if ($DEBUG);
+    system("mv $client_wd/tmp/component $client_wd/tmp/component_0");
 
  #store the components in files /tmp/component, /tmp/component_1, etc
  #FIXME: parse output of ccomps -v to get #components, then eliminate gc check
@@ -890,42 +890,87 @@ sub create_output {
 
     #first process ./tmp/component (stupid naming scheme by ccomps)
     #FIXME: this really should be broken into a procedure
-    $size = `grep label $client_wd/tmp/component | wc -l`;
-    print "grep label $client_wd/tmp/component | wc -l\n<br>" if ($DEBUG);	
-    print "$size\n<br>" if ($DEBUG);
-    $cycle
-        = `sccmap $client_wd/tmp/component 2> $client_wd/dev/null | grep label | wc -l`;
-        print "sccmap $client_wd/tmp/component 2> $client_wd/dev/null | grep label | wc -l\n" if ($DEBUG);
-    chomp $size;
-    chomp $cycle;
-    $size  =~ s/\s+//;
-    $cycle =~ s/\s+//;
+    # $size = `gc -n $client_wd/tmp/component`;
+    # print "gc -n $client_wd/tmp/component\n<br>" if ($DEBUG);	
+    # print "$size\n<br>" if ($DEBUG);
+    # `sccmap $client_wd/tmp/component -o $client_wd/tmp/cycle_$i`
+    # $cycle
+    #    = `sccmap $client_wd/tmp/component 2> $client_wd/dev/null | grep label | wc -l`;
+    # print "sccmap $client_wd/tmp/component 2> $client_wd/dev/null | grep label | wc -l\n" if ($DEBUG);
+    # chomp $size;
+    # chomp $cycle;
+    # $size  =~ s/\s+//;
+    # $cycle =~ s/\s+//;
 
-    if ( $cycle == 0 ) { $cycle++; }
+    # if ( $cycle == 0 ) { $cycle++; }
     ### don't print any compononents and their cycles yet
     #$Output_array[4] = "1 $size $cycle";
 
-    $total_size += $size;
+    $total_size = 0;
+    $numCycles = 0;
+    $haveCycles = 0;
 
-    #if $num_comps > 1 then loop over $clientip/tmp/component_$i
-
-    for ( $i = 1; $i < $num_comps; $i++ ) {
-        $size = `grep label $client_wd/tmp/component_$i | wc -l`;
-        $cycle
-            = `sccmap $client_wd/tmp/component_$i 2> $client_wd/dev/null | grep label |wc -l`;
+    for ( $i = 0; $i < $num_comps; $i++ ) {
+        $size = `grep -c label $client_wd/tmp/component_$i`;
+        `sccmap $client_wd/tmp/component_$i -o $client_wd/tmp/cycle_$i`;
+        print "sccmap $client_wd/tmp/component_$i -o $client_wd/tmp/cycle_$i \n<br>" if ($DEBUG);
+        $cycle = `grep -c label $client_wd/tmp/cycle_$i`;
 
         chomp $size;
         chomp $cycle;
         $size  =~ s/\s+//;
         $cycle =~ s/\s+//;
-        if ( $cycle == 0 ) { $cycle++; }
-        $tmp = $i + 1;
 
-        # print "$tmp $size $cycle";
+        if ( $cycle == 0 ) { 
+            $cycle++; 
+        }
+        else {
+            if ($haveCycles == 0) {
+                $Output_array[4] = "Attractor, cycle length, component size<br>";
+                $haveCycles = 1;
+            }
+
+            ## We need to create a textual representation fot the cycle.
+            my $edge = [];
+            my $state = [];
+            my $start = -1;
+
+            open(CYCLE, $client_wd . "/tmp/cycle_$i");
+
+            foreach $line (<CYCLE>) {
+                if ($line =~ /->/) {
+                    $line =~ /node([0-9]+)\s*->\s*node([0-9]+)/;
+                    $edge[$1] = $2;
+                }
+                elsif ($line =~ /label/) {
+                    $line =~ /node([0-9]+).*" ([ 0-9]+)"/;
+                    if ($start < 0) {
+                        $start = $1;
+                    }
+                    $state[$1] = $2;
+                }
+            }
+
+            close(CYCLE);
+            
+            $attractor = "($state[$start])";
+            $node = $edge[$start];
+
+            while ($node != $start) {
+                $attractor .= " -> ($state[$node])";
+                $node = $edge[$node];
+            }
+            
+            $Output_array[4] .= "$attractor, $cycle, $size <br>";
+            print  "$attractor, $cycle, $size <br>" if ($DEBUG);
+        }
+
+        # print "component_$i: nodes: $size, length: $cycle \n<br>";
         ### don't print any compononents and their cycles yet
         # $Output_array[4] = $Output_array[4]."|$tmp $size $cycle";
         $total_size += $size;
     }
+
     if ( $fp > 0 ) {
         for ( $i = 0; $i < scalar(@fixed_points); $i++ ) {
             _log("number of fixed points: $#fixed_points +1");
@@ -952,9 +997,7 @@ sub create_output {
 #`ccomps -Xnode$num $dot_filename -v > $client_wd/tmp/blah 2> $client_wd/dev/null`;
 #then we count how many labels (and thus nodes) there are in the file
 # don't count lines with -> in them
-            $s = `grep label $client_wd/tmp/blah | grep -v ">" | wc -l`;
-
-            #$s = `grep label $client_wd/tmp/blah | wc -l`;
+            $s = `grep -c label $client_wd/tmp/blah`;
             chomp($s);
             $s =~ s/\s+//;
 

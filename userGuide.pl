@@ -566,7 +566,7 @@ print <<ENDHTML;
 					<a href="#top"><font size="-1" color="#FF0000">Return to the top</font></a>
 				</div>
 				<h2>
-					<a href="cgi-bin/git/adam.pl">Back to ADAM</a>&nbsp;&nbsp;&nbsp; <a href="steptutorial.pl">Step-by-step tutorial</a>
+					<a href="adam.pl">Back to ADAM</a>&nbsp;&nbsp;&nbsp; <a href="steptutorial.pl">Step-by-step tutorial</a>
 				</h2>
 			</div>
 		</div>

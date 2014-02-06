@@ -101,7 +101,7 @@ sub create_input_function {
     
     if ($upload_file) {
       say "cp tmp/files/$upload_file $funcfilename <br>	" if ($DEBUG);
-      system("cp tmp/files/$upload_file $funcfilename");
+      $result = `"cp tmp/files/$upload_file $funcfilename"`;
     }
     elsif ($edit_functions) {
       open (TA, ">$funcfilename") or die ("<br>ERROR: Cannot open the file for functions! <br>");
@@ -172,7 +172,7 @@ sub create_input_function {
     if ($upload_file) {
       
       say "cp tmp/files/$upload_file $filename <br>	" if ($DEBUG);
-      system("cp tmp/files/$upload_file $filename");
+      $result = `"cp tmp/files/$upload_file $filename"`;
       
       if ($choice_box eq 'analyze'
 	  && (   $format_box eq 'PDS'
@@ -222,9 +222,9 @@ sub create_input_function {
 # Take the Functions in functionfile.txt, translate them, and save the result back into functionfile.txt
 sub translate_functions {
   print "translate_functions<br>" if ($DEBUG);
-  system(
+  $result = `
 	 "/usr/bin/perl translator.pl $clientip.functionfile.txt $clientip.trfunctionfile.txt $n_nodes"
-	);
+	`;
   $filename = "$clientip.trfunctionfile.txt";
   if ( -e "$clientip.trfunctionfile.txt" ) {
     print
@@ -253,7 +253,7 @@ sub set_update_type() {
     #print "$update_box<br>";
     $update_box_param = "async";
     $updsequ_flag     = "1";
-    if (   ( $update_schedule ne null )
+    if (   ( defined $update_schedule )
 	   && ( $update_schedule ne "" ) )
       {
 	$update_schedule =~ s/^\s+|\s+$//g
@@ -365,7 +365,7 @@ given ($choice_box) {
   when (/control/) {
     print "We are implementing Heuristic $format_box <br>"
       if ($DEBUG);
-    system("ruby parseGA.rb \"$p_value\" \"$weights\" \"$dreamss\" \"$filename\""); #"ruby parseGA.rb \"$p_value\" \"$weights\" \"$dreamss\" \"$filename\""
+    $result = `"ruby parseGA.rb \"$p_value\" \"$weights\" \"$dreamss\" \"$filename\""`; #"ruby parseGA.rb \"$p_value\" \"$weights\" \"$dreamss\" \"$filename\""
     print "ruby parseGA.rb \"$p_value\" \"$weights\" \"$dreamss\" \"$filename\"" if ($DEBUG);
   }
 
@@ -378,12 +378,13 @@ given ($choice_box) {
     if ( $continuous eq 'continuous' ) {
       print "We are working with continuous models: $continuous <br>"
 	if ($DEBUG);
-      system("ruby transitionTablesContinuous.rb $p_value $filename");
+      $result = `"ruby transitionTablesContinuous.rb $p_value $filename"`;
     }
     else {
       print "We are not working with continuous models $continuous <br>"
 	if ($DEBUG);
-      system("ruby transitionTables.rb $p_value $filename");
+      $result = `ruby transitionTables.rb $p_value $filename`;
+      print $result;
     }
   }
 
@@ -393,17 +394,17 @@ given ($choice_box) {
 
       when (/Petrinet/) {
 	say "cp $filename $clientip.spped" if $DEBUG;
-	system("cp $filename $clientip.spped");
-	system("ruby petri-converter.rb $clientip $k_value");
+	$result = `"cp $filename $clientip.spped"`;
+	$result = `"ruby petri-converter.rb $clientip $k_value"`;
       }
 
       when (/GINsim/) {
 	say "cp $filename $clientip.ginsim.ginml" if $DEBUG;
-	system("cp $filename $clientip.ginsim.ginml");
+	$result = `"cp $filename $clientip.ginsim.ginml"`;
 	
 	# Convert GINsim file and get p_value and n_nodes
 	#The ruby script is supposed to write the p value into a file
-	system("ruby ginSim-converter.rb $clientip");
+	$result = `"ruby ginSim-converter.rb $clientip"`;
 	$pFile = "$clientip.pVal.txt";
 	$nFile = "$clientip.nVal.txt";
 	
@@ -586,7 +587,7 @@ else {
   $depgraph = 0;
 }
 
-if ($feedback eq "Feedback Circuit") {
+if (defined $feedback && $feedback eq "Feedback Circuit") {
   $feedback = 1;
 }
 else {
@@ -599,7 +600,7 @@ if ( $feedback == 1 ) {
   open FILE, ">$circuits" or die $!;
   print FILE "<html><body>";
   close FILE;
-  system("ruby circuits.rb $n_nodes $p_value $filename $circuits");
+  $result = `"ruby circuits.rb $n_nodes $p_value $filename $circuits"`;
   open FILE, ">>$circuits" or die $!;
   print FILE "</body></html>";
   close FILE;
@@ -625,7 +626,7 @@ if ( $anaysis_method eq "Conjunctive" ) {
 }
 elsif ( $anaysis_method eq "Algorithms" ) {
   $limCyc_length = 1;
-  if ( ( $limCyc_length eq null ) || ( $limCyc_length eq "" ) ) {
+  if ( ( ! defined $limCyc_length ) || ( $limCyc_length eq "" ) ) {
     print
       "<font color=red>Please enter a length of the limit cycle you wish to compute. Enter 1 for fixed points</font>";
     die("Program quitting. Empty field entered for limit cycle length in large networks."
@@ -634,7 +635,7 @@ elsif ( $anaysis_method eq "Algorithms" ) {
   
   # Give link to dependency graph if checked
   if ( $useRegulatory == 1 ) {
-    system("perl regulatory.pl $filename $n_nodes $clientip $DGformat")
+    system("perl regulatory.pl $n_nodes $clientip $DGformat")
       == 0
 	or die("regulatory.pl died");
     print
@@ -706,15 +707,16 @@ elsif ( $anaysis_method eq "Simulation" ) {
 	print(
 	      "perl dvd_stochastic_runner.pl  $n_nodes $p_value 1 $updstoch_flag $clientip $SSformat $depgraph $updsequ_flag $update_schedule $stochastic 1 0 $filename\n<br> "
 	     ) if ($DEBUG);
-	system(
-	       "/usr/bin/perl dvd_stochastic_runner.pl  $n_nodes $p_value 1 $updstoch_flag $clientip $SSformat $depgraph $updsequ_flag $update_schedule $stochastic 1 0 $filename"
-	      );
+
+        $output = `/usr/bin/perl dvd_stochastic_runner.pl  $n_nodes $p_value 1 $updstoch_flag $clientip $SSformat $depgraph $updsequ_flag $update_schedule $stochastic 1 0 $filename`;
+
+        print $output;
       }
     }
     else {    # trajectory
       print
 	"<font color=blue><b>Computing Trajectory of the given initialization</b></font> <br>";
-      if (   ( $trajectory_value ne null )
+      if (   ( defined $trajectory_value )
 	     && ( $trajectory_value ne "" ) )
 	{
 	  $trajectory_value =~ s/^\s+|\s+$//g;

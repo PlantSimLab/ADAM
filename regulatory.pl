@@ -11,7 +11,7 @@ $ENV{'LD_LIBRARY_PATH'}='/usr/local/lib/graphviz';
 $num_nodes = $ARGV[1];
 $clientip = $ARGV[2];
 $fileformat = $ARGV[3];
-#$sign = $ARGV[4];
+# $sign = $ARGV[4];
 
 open (INFILE,$ARGV[0]) or die("Failed to open input file");
 $n = 1;
