@@ -609,11 +609,11 @@ if ( $feedback == 1 ) {
 }
 
 if ( $anaysis_method eq "Conjunctive" ) {
-  
-  # dynamics depend on the dependency graph, need to generate it
-  system("perl regulatory.pl $filename $n_nodes $clientip $DGformat") == 0
-    or die("regulatory.pl died");
-  $dpGraph = "$clientip.out1";
+ 
+    # dynamics depend on the dependency graph, need to generate it
+    print "perl regulatory.pl $filename $n_nodes $clientip $DGformat" if ($DEBUG);
+    system("perl regulatory.pl $filename $n_nodes $clientip $DGformat") == 0 or die("regulatory.pl died");
+    $dpGraph = "$clientip.out1";
   
   # Give link to dependency graph if checked
   if ( $depgraph == 1 ) {
@@ -635,23 +635,22 @@ elsif ( $anaysis_method eq "Algorithms" ) {
   
   # Give link to dependency graph if checked
   if ( $useRegulatory == 1 ) {
-    system("perl regulatory.pl $n_nodes $clientip $DGformat")
-      == 0
-	or die("regulatory.pl died");
+      print "perl regulatory.pl $filename $n_nodes $clientip $DGformat" if ($DEBUG);
+      system("perl regulatory.pl $filename $n_nodes $clientip $DGformat") == 0 or die("regulatory.pl died");
     print
       "<br><A href=\"$clientip.out1.$DGformat\" target=\"_blank\"><font color=\"#226677\"><i>Click to view the dependency graph.</i></font></A><br>";
   }
   set_update_type();
-  system(
-	 "ruby adam_largeNetwork.rb $n_nodes $p_value $filename $limCyc_length"
-	);
+
+  print "ruby adam_largeNetwork.rb $n_nodes $p_value $filename $limCyc_length" if ($DEBUG);
+
+  $result = `ruby adam_largeNetwork.rb $n_nodes $p_value $filename $limCyc_length`;
+  print $result;
 }
 elsif ( $format_box eq "Control" ) {
   # we do nothing
 }
 elsif ( $anaysis_method eq "Simulation" ) {
-  
-  #$DEBUG =1;
   if ( $p_value && $n_nodes ) {
     print "Executing simulation<br>";
     print "hello<br>" if ($DEBUG);
