@@ -73,7 +73,7 @@ elsif ($format_box eq 'oSDDS') {
 }
 else {}
 
-$DEBUG = 0;
+$DEBUG = 1;
 
 if ($choice_box eq "") {
   say '<a href="http://adam.vbi.vt.edu"/>ADAM has moved.</a> Please update your bookmarks';
@@ -101,7 +101,7 @@ sub create_input_function {
     
     if ($upload_file) {
       say "cp tmp/files/$upload_file $funcfilename <br>	" if ($DEBUG);
-      $result = `"cp tmp/files/$upload_file $funcfilename"`;
+      $result = `cp "tmp/files/$upload_file" "$funcfilename"`;
     }
     elsif ($edit_functions) {
       open (TA, ">$funcfilename") or die ("<br>ERROR: Cannot open the file for functions! <br>");
@@ -172,8 +172,8 @@ sub create_input_function {
     if ($upload_file) {
       
       say "cp tmp/files/$upload_file $filename <br>	" if ($DEBUG);
-      $result = `"cp tmp/files/$upload_file $filename"`;
-      
+      $result = `cp "$cwd/tmp/files/$upload_file" "$filename"`;
+
       if ($choice_box eq 'analyze'
 	  && (   $format_box eq 'PDS'
 		 || $format_box eq 'pPDS'
@@ -365,7 +365,7 @@ given ($choice_box) {
   when (/control/) {
     print "We are implementing Heuristic $format_box <br>"
       if ($DEBUG);
-    $result = `"ruby parseGA.rb \"$p_value\" \"$weights\" \"$dreamss\" \"$filename\""`; #"ruby parseGA.rb \"$p_value\" \"$weights\" \"$dreamss\" \"$filename\""
+    $result = `ruby parseGA.rb "$p_value" "$weights" "$dreamss" "$filename"`; #"ruby parseGA.rb \"$p_value\" \"$weights\" \"$dreamss\" \"$filename\""
     print "ruby parseGA.rb \"$p_value\" \"$weights\" \"$dreamss\" \"$filename\"" if ($DEBUG);
   }
 
@@ -378,7 +378,7 @@ given ($choice_box) {
     if ( $continuous eq 'continuous' ) {
       print "We are working with continuous models: $continuous <br>"
 	if ($DEBUG);
-      $result = `"ruby transitionTablesContinuous.rb $p_value $filename"`;
+      $result = `ruby transitionTablesContinuous.rb $p_value "$filename"`;
     }
     else {
       print "We are not working with continuous models $continuous <br>"
@@ -394,17 +394,17 @@ given ($choice_box) {
 
       when (/Petrinet/) {
 	say "cp $filename $clientip.spped" if $DEBUG;
-	$result = `"cp $filename $clientip.spped"`;
-	$result = `"ruby petri-converter.rb $clientip $k_value"`;
+	$result = `cp "$filename" "$clientip.spped"`;
+	$result = `ruby petri-converter.rb $clientip $k_value`;
       }
 
       when (/GINsim/) {
 	say "cp $filename $clientip.ginsim.ginml" if $DEBUG;
-	$result = `"cp $filename $clientip.ginsim.ginml"`;
+	$result = `cp "$filename" "$clientip.ginsim.ginml"`;
 	
 	# Convert GINsim file and get p_value and n_nodes
 	#The ruby script is supposed to write the p value into a file
-	$result = `"ruby ginSim-converter.rb $clientip"`;
+	$result = `ruby ginSim-converter.rb $clientip`;
 	$pFile = "$clientip.pVal.txt";
 	$nFile = "$clientip.nVal.txt";
 	
@@ -600,7 +600,7 @@ if ( $feedback == 1 ) {
   open FILE, ">$circuits" or die $!;
   print FILE "<html><body>";
   close FILE;
-  $result = `"ruby circuits.rb $n_nodes $p_value $filename $circuits"`;
+  $result = `ruby circuits.rb $n_nodes $p_value "$filename" $circuits`;
   open FILE, ">>$circuits" or die $!;
   print FILE "</body></html>";
   close FILE;
