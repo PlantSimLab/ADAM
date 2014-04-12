@@ -23,7 +23,7 @@ if p_value.to_i != 2
 end
 
 # read the complete input file
-s = IO.readlines(functionFile,'').to_s
+s = IO.readlines(functionFile)
 
 # take the input functions and put the in a hash, for example
 # {1=>["x1+x2"], 2=>["x2"], 3=>["x3", "x2", "x1"]}

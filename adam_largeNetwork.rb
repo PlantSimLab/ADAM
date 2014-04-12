@@ -1,6 +1,6 @@
 #adam_largeNetwork $n_nodes $p_value $filename $limCyc_length
 
-require 'partial_input'
+require './partial_input'
 require 'pp'
 
 # Takes input from dvd website and passes it to M2 to compute fixed points
@@ -19,7 +19,7 @@ limCyc_length = ARGV[3]
 puts "<br>"
 
 # read the complete input file
-s = IO.readlines(functionFile,'').to_s
+s = IO.readlines(functionFile)
 
 # take the input functions and put the in a hash, for example
 # {1=>["x1+x2"], 2=>["x2"], 3=>["x3", "x2", "x1"]}

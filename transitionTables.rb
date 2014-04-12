@@ -34,8 +34,8 @@ if p == -1
 end
 
 # read the complete input file
-s = IO.readlines(tableFile,'').to_s
-s = s.split(/\n/)
+s = IO.readlines(tableFile)
+
 varNames = s.shift    #get the first line
 numLines = s.size
 #puts "number of lines #{s.size}<br>"
