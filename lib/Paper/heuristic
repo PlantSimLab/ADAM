@@ -1,0 +1,21 @@
+--MONOMIAL ORDERING
+We calculate Groebner bases using graded reverse lex order as it typically gives the smallest Groebner bases, [BAYER and
+STILLMAN (1987a)] then calculate Groebner bases for the resultant ideals in lexicographical order, as it places the polynomials in triangular form, making back substitution and hence finding solutions for the polynomials easy.
+
+--FINITE FIELDS
+We also calculate Groebner bases in modular form, as it has been shown to be much faster usually. See [W.S. Brown, ON E U C L I D ' S A L G O R I T H M AND THE C O M P U T A T I O N OF P O L Y N O M I A L G R E A T E S T COMMON D I V I S O R S] The reason is because it limits the degree of the polynomials, leading to simpler S-polynomial additions. (this is my guess, I can't/haven't tried to find info for it really, but it makes sense)
+
+--SPARSE POLYNOMIALS
+Sparse polynomials mean that there will occur more cases in which the LCM of the leading monomials of two polynomials will be the two leading monomials multiplied together, implying that their S-polynomial is 0. [Proposition 4 of Ideals Varieties Algorithms Ch.2.9] Even for those cases in which the S-polynomial isn't 0, simpler S-polynomials will be added. (also my guess) another reason why we think Groebner basis computation will be fast for most logical models of biological systems.
+
+--OTHER HEURISTICS?
+
+error: unable to create temporary sha1 filename ./objects/16/tmp_obj_Nfd1vn: No space left on device
+
+fatal: failed to write object
+error: unpack-objects exited with error code 128
+error: unpack failed: unpack-objects abnormal exit
+To git@mithril.vbi.vt.edu:~/reu.git
+ ! [remote rejected] master -> master (n/a (unpacker error))
+error: failed to push some refs to 'git@mithril.vbi.vt.edu:~/reu.git'
+

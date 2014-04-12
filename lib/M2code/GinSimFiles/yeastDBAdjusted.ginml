@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE gxl SYSTEM "file://fr/univmrs/ibdm/GINsim/ressources/GINML_2_1.dtd">
+<gxl xmlns:xlink="http://www.w3.org/1999/xlink">
+	<graph id="default_name" class="regulatory" nodeorder="Start SK Cdc2_Cdc13 Ste9 Rum1 Slp1 Wee1_Mik1 Cdc25 PP">
+<node id="Cdc25" basevalue="0" maxvalue="1">
+  <parameter idActiveInteractions="Cdc2_Cdc13_Cdc25_0" val="1"/>
+  <parameter idActiveInteractions="Cdc2_Cdc13_Cdc25_1" val="1"/>
+  <parameter idActiveInteractions="PP_Cdc25_0 Cdc2_Cdc13_Cdc25_1" val="1"/>
+
+			<nodevisualsetting>
+				<ellipse x="152" y="210" width="50" height="20" backgroundColor="#FF99FF" foregroundColor="#000000"/>
+			</nodevisualsetting>
+</node>
+<node id="PP" basevalue="0" maxvalue="1">
+  <parameter idActiveInteractions="Slp1_PP_0" val="1"/>
+
+			<nodevisualsetting>
+				<ellipse x="22" y="215" width="50" height="30" backgroundColor="#FFFFFF" foregroundColor="#000000"/>
+			</nodevisualsetting>
+</node>
+<node id="Rum1" basevalue="1" maxvalue="1">
+  <parameter idActiveInteractions="PP_Rum1_0" val="1"/>
+  <parameter idActiveInteractions="PP_Rum1_0 Cdc2_Cdc13_Rum1_0" val="1"/>
+  <parameter idActiveInteractions="PP_Rum1_0 SK_Rum1_0" val="1"/>
+  <parameter idActiveInteractions="PP_Rum1_0 SK_Rum1_0 Cdc2_Cdc13_Rum1_0" val="1"/>
+
+			<nodevisualsetting>
+				<ellipse x="176" y="101" width="50" height="20" backgroundColor="#FFFF33" foregroundColor="#000000"/>
+			</nodevisualsetting>
+</node>
+<node id="Slp1" basevalue="0" maxvalue="1">
+  <parameter idActiveInteractions="Cdc2_Cdc13_Slp1_0" val="1"/>
+
+			<nodevisualsetting>
+				<ellipse x="18" y="279" width="50" height="20" backgroundColor="#FF9933" foregroundColor="#000000"/>
+			</nodevisualsetting>
+</node>
+<node id="Cdc2_Cdc13" basevalue="1" maxvalue="2">
+  <parameter idActiveInteractions="Cdc25_Cdc2_Cdc13_0" val="2"/>
+  <parameter idActiveInteractions="Wee1_Mik1_Cdc2_Cdc13_0" val="1"/>
+  <parameter idActiveInteractions="Cdc25_Cdc2_Cdc13_0 Wee1_Mik1_Cdc2_Cdc13_0" val="1"/>
+
+			<nodevisualsetting>
+				<rect x="104" y="154" width="90" height="20" backgroundColor="#00FF33" foregroundColor="#000000"/>
+			</nodevisualsetting>
+</node>
+<node id="Wee1_Mik1" basevalue="1" maxvalue="1">
+  <parameter idActiveInteractions="PP_Wee1_Mik1_0" val="1"/>
+  <parameter idActiveInteractions="PP_Wee1_Mik1_0 Cdc2_Cdc13_Wee1_Mik1_0" val="1"/>
+
+			<nodevisualsetting>
+				<ellipse x="226" y="296" width="83" height="20" backgroundColor="#FF9999" foregroundColor="#000000"/>
+			</nodevisualsetting>
+</node>
+<node id="Start" basevalue="0" maxvalue="1">
+			<nodevisualsetting>
+				<ellipse x="126" y="8" width="50" height="20" backgroundColor="#FFFFFF" foregroundColor="#000000"/>
+			</nodevisualsetting>
+</node>
+<node id="SK" basevalue="0" maxvalue="1">
+  <parameter idActiveInteractions="Start_SK_0" val="1"/>
+
+			<nodevisualsetting>
+				<ellipse x="126" y="56" width="50" height="20" backgroundColor="#CCFFFF" foregroundColor="#000000"/>
+			</nodevisualsetting>
+</node>
+<node id="Ste9" basevalue="1" maxvalue="1">
+  <parameter idActiveInteractions="PP_Ste9_0" val="1"/>
+  <parameter idActiveInteractions="PP_Ste9_0 Cdc2_Cdc13_Ste9_0" val="1"/>
+  <parameter idActiveInteractions="PP_Ste9_0 SK_Ste9_0" val="1"/>
+  <parameter idActiveInteractions="PP_Ste9_0 SK_Ste9_0 Cdc2_Cdc13_Ste9_0" val="1"/>
+
+			<nodevisualsetting>
+				<ellipse x="70" y="101" width="50" height="20" backgroundColor="#FF0000" foregroundColor="#000000"/>
+			</nodevisualsetting>
+</node>
+		<edge id="Cdc25_Cdc2_Cdc13_0" from="Cdc25" to="Cdc2_Cdc13" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="177,220 177,189 149,164" line_style="straight" line_color="#00CC33" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="PP_Ste9_0" from="PP" to="Ste9" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="47,230 46,113 95,111" line_style="straight" line_color="#00CC33" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="PP_Rum1_0" from="PP" to="Rum1" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="47,230 214,238 201,111" line_style="straight" line_color="#00CC33" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="PP_Wee1_Mik1_0" from="PP" to="Wee1_Mik1" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="47,230 242,238 267,306" line_style="straight" line_color="#00CC33" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="PP_Cdc25_0" from="PP" to="Cdc25" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="47,230 142,217 177,220" line_style="straight" line_color="#FF0033" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="Rum1_Cdc2_Cdc13_0" from="Rum1" to="Cdc2_Cdc13" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="201,111 164,115 149,164" line_style="straight" line_color="#FF0033" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="Slp1_PP_0" from="Slp1" to="PP" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="43,289 48,256 47,230" line_style="straight" line_color="#00CC33" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="Slp1_Cdc2_Cdc13_0" from="Slp1" to="Cdc2_Cdc13" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="43,289 118,285 149,164" line_style="straight" line_color="#FF0033" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="Cdc2_Cdc13_Cdc25_0" from="Cdc2_Cdc13" to="Cdc25" minvalue="1" maxvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="149,164 156,195 177,220" line_style="straight" line_color="#00CC33" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="Cdc2_Cdc13_Cdc25_1" from="Cdc2_Cdc13" to="Cdc25" minvalue="2" sign="positive">
+			<edgevisualsetting>
+				<polyline points="149,164 156,195 177,220" line_style="straight" line_color="#00CC33" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="Cdc2_Cdc13_Ste9_0" from="Cdc2_Cdc13" to="Ste9" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="149,164 114,149 95,111" line_style="straight" line_color="#FF0033" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="Cdc2_Cdc13_Rum1_0" from="Cdc2_Cdc13" to="Rum1" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="149,164 185,133 201,111" line_style="straight" line_color="#FF0033" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="Cdc2_Cdc13_Wee1_Mik1_0" from="Cdc2_Cdc13" to="Wee1_Mik1" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="149,164 301,158 267,306" line_style="straight" line_color="#FF0033" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="Cdc2_Cdc13_Slp1_0" from="Cdc2_Cdc13" to="Slp1" minvalue="2" sign="positive">
+			<edgevisualsetting>
+				<polyline points="149,164 133,298 43,289" line_style="straight" line_color="#00CC33" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="Wee1_Mik1_Cdc2_Cdc13_0" from="Wee1_Mik1" to="Cdc2_Cdc13" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="267,306 287,173 149,164" line_style="straight" line_color="#FF0033" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="Start_SK_0" from="Start" to="SK" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="151,18 151,66" line_style="straight" line_color="#00CC33" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="SK_Ste9_0" from="SK" to="Ste9" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="151,66 76,63 95,111" line_style="straight" line_color="#FF0033" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="SK_Rum1_0" from="SK" to="Rum1" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="151,66 222,67 201,111" line_style="straight" line_color="#FF0033" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="Ste9_Cdc2_Cdc13_0" from="Ste9" to="Cdc2_Cdc13" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="95,111 133,112 149,164" line_style="straight" line_color="#FF0033" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+	</graph>
+</gxl>

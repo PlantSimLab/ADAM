@@ -1,0 +1,508 @@
+starting to write...
+Benchmark test for regular networks using GBboolean
+
+number of variables = 17
+number of terms = 5
+max number of variables per term = 5
+random functions generated are: 
+{c*i*q + c*e + q, 1, e, b*e*i + i*m*o + m*o, b*d*k + b, d*e*j*n + d*j*m*n, c*f*i + c*f + e*k + i*k, c*g*p + g*p, h*q, d*f*o*p*q + d*f*o*q + d*o*q + f*o*q + d*o, c*f*h*q + c*f*m*q + m*q, b*d*f*o*q + b*f*o*q + d*f*q + b*d + f, e*l*o + c*l + e + o, a*c*p, b*e*o, b*d*i*l + d, a*b*m + a*h*m + a}
+running getGBBoolean on F
+Groebner basis is: 
+ideal (o, p, c + 1, e + 1, b + 1, d, q, g, a + 1, f, i, m + 1, n, k, j, l, h)
+Cpu time: .00300018 minutes
+
+number of variables = 19
+number of terms = 1
+max number of variables per term = 2
+random functions generated are: 
+{p, h*r, 1, 1, 1, o*q, l, 1, r, a, d, d*k, h, d, k*q, s, 1, 1, 1}
+running getGBBoolean on F
+Groebner basis is: 
+ideal (s + 1, r + 1, q + 1, p + 1, k + 1, i + 1, m + 1, h + 1, g + 1, f + 1, e + 1, n + 1, o + 1, d + 1, l + 1, c + 1, b + 1, j + 1, a + 1)
+Cpu time: 0 minutes
+
+number of variables = 13
+number of terms = 3
+max number of variables per term = 2
+random functions generated are: 
+{j*m + m, a*c + a + c, f, i*l, 1, i, f*l, d*e + d + e, 0, g*l + l, d*j, 0, a*l}
+running getGBBoolean on F
+Groebner basis is: 
+ideal (l, i, j, f, g, e + 1, d, k, h + 1, c, a, m, b)
+Cpu time: 0 minutes
+
+number of variables = 10
+number of terms = 2
+max number of variables per term = 4
+random functions generated are: 
+{a*b, b*h, a*g, c, b*e*j + e*j, i*j, a*c*f + a, h, c*g*j + c*j, c*f + f*j}
+running getGBBoolean on F
+Groebner basis is: 
+ideal (f, c + g, i, b*h + b, e, d + g, a + g, b*g + g, j, g*h + g)
+Cpu time: 0 minutes
+
+number of variables = 10
+number of terms = 10
+max number of variables per term = 3
+random functions generated are: 
+{c*d*g + c*d + c*g + d*g + c + d, a*h + d + h, e + 1, c*g*j, d*e*g + d*e + d + 1, e*h*i + e*i + i + 1, a, e*h + h, d*g*h + d*g + h, g*h*i + g*i + g + h}
+running getGBBoolean on F
+Groebner basis is: 
+ideal (g, j, f + 1, e + 1, c, d, a, b, i, h)
+Cpu time: 0 minutes
+
+number of variables = 15
+number of terms = 3
+max number of variables per term = 2
+random functions generated are: 
+{a*b, 1, o, f*g + g, e, i + o + 1, b*n, 1, 1, o + 1, 1, a*k + a + 1, c, 2, o}
+running getGBBoolean on F
+Groebner basis is: 
+ideal (n, k + 1, j + o + 1, i + 1, h + 1, f + o, d, m + o, c + o, b + 1, g, l + 1)
+Cpu time: .0000666667 minutes
+
+number of variables = 11
+number of terms = 10
+max number of variables per term = 5
+random functions generated are: 
+{b*c*h*j, a*c*d*e + a*d*e*i + a*c*d + a*d*e + a*c*i + c*d*i + c*e*i + a*c + e*i, 1, d*g*i*j + d*i*j*k + d*g*i, c*d*e, b*c*i + b*i*k + i + 1, c*g*h + c*g*i + h*i*k + g*h + g*i, g*h*k + e*g + e*h, b*e*h*i + b*e*i + b*i*k + b*e + e*h + b*k + i*k + e, d*i*j + 1, a*b*c*f + a*c + h}
+running getGBBoolean on F
+Groebner basis is: 
+ideal (d, c + 1, g + k, i + k, b, f + k + 1, a, e, h + k, j + 1)
+Cpu time: 0 minutes
+
+number of variables = 18
+number of terms = 3
+max number of variables per term = 6
+random functions generated are: 
+{b*f*g*i*k*o, a*g*i*n + a*g*k*o + a*g*i, a*g*l*m*p + l*m*p + k*p, g*h*i*o + e*g*o*q + e*h*o*q, f*i*l*n + g*i*p, e*i*r + e*i, c*f*j*r + a*j + 1, k*m*q, f, h*i*k*n, a*c*e*m*q + a*e*l, h*i*o*r, b*e*g*k, a*f*h + a*h + f*l, b*c*d*f*l*q + b*d*f*l, f*n, b*e*l*m, f*g*j*k*p + f*k}
+running getGBBoolean on F
+Groebner basis is: 
+ideal (h, l, j, f, r, e, i, d, q, m, o, a, g + 1, c, b, n, k, p)
+Cpu time: 0 minutes
+
+number of variables = 13
+number of terms = 3
+max number of variables per term = 4
+random functions generated are: 
+{d*e + i, e*l, c, c*i*k + c*k + i*k, a*g*l, g*h*k*l + g*h, i*k, e, b*c*k + b + 1, c*f + g + 1, h, b*d*m, a*f*h + a*h}
+running getGBBoolean on F
+Groebner basis is: 
+ideal (h, g, f, e, d, b, l, i + 1, a + 1, k, j + 1, m)
+Cpu time: 0 minutes
+
+number of variables = 17
+number of terms = 5
+max number of variables per term = 3
+random functions generated are: 
+{d*e + 1, a*h + p + 1, c*d + c + 1, n + o + 1, l*o, h*n + h*q + q, l*m*q + q, g*h*q, q, b*n*q + b*n + b*q + b + n, 1, g*n + f + 1, b*i + g*i + i, b*m*o + b*o + m + o + 1, i*j + j*m + j + m, a*f + a*i + a + f + 1, i}
+running getGBBoolean on F
+Groebner basis is: 
+ideal 1
+Cpu time: .0000666834 minutes
+
+number of variables = 13
+number of terms = 3
+max number of variables per term = 5
+random functions generated are: 
+{c*d*f*m, e*i + h*i + e*m, b*c*m, g*i + 1, d*e*l, d*f*g + g*i*k, e*j*m + 1, a*g*h + a*d, a*e*g + b*g + 1, d*e*l + d*j*l, h*i + k*m, f*g, k + 1}
+running getGBBoolean on F
+Groebner basis is: 
+ideal (k, g + 1, d, f, e, b, c, a, i + 1, h, m + 1, j, l)
+Cpu time: 0 minutes
+
+number of variables = 19
+number of terms = 2
+max number of variables per term = 3
+random functions generated are: 
+{i + 1, h, r, e*h, a + k, i*n*r + n*r, h*q, b, e*l + e, a*i + i, 1, h*m*n, f*p + f, a, j*n*r, i*q + 1, 0, a*j*q + a*q, a*c + a}
+running getGBBoolean on F
+Groebner basis is: 
+ideal (q, k + 1, o, p + 1, l, g, f, m, h*s + d + h, c, b + h, e + s + 1, i + s + 1, a + s, r, j + s + 1, n + s)
+Cpu time: 0 minutes
+
+number of variables = 19
+number of terms = 6
+max number of variables per term = 3
+random functions generated are: 
+{b*c*g + b*g + b + c, q*s, f*k*s + k*s + f, g, b*l*r, p + 1, b*e*s + b, g*i + g, f*s + n*s + f + s, d*l*n + n, n*p, j + 1, b, f*j + e, a*j + a*q, b*c + c*e + b, h*s + m, e*m + e + p, e*f + e*n + n}
+running getGBBoolean on F
+Groebner basis is: 
+ideal (k, j + s, n + s, h, f + 1, i + s + 1, e, p, r, d, c + 1, m, b, l + s + 1, g, a + 1, q, o + s)
+Cpu time: .0000666667 minutes
+
+number of variables = 17
+number of terms = 8
+max number of variables per term = 6
+random functions generated are: 
+{d*h*j*k*p*q + d*h*j*k*p + h*j*k*p*q + h*j*q + d*h + j*k + k, c*d*h*l + c*d*h*p + c*d*l*p + c*d*e + d*l, g*h*k*o*q + g*n*o*q + k*n*o*q + g*h*o, h*k*m + c*d + g*h, a*e*l*p*q + e*j*l*q + a*e*p*q + e*p, b*g*k + b*o*p + 1, a*d*e*q + d*e*q, a*o*p, a*d*j*n*o, a*j, e*i*j*n*o + e*i*l*n*o + e*l*n*o + e*n + i*n + i*o + i + n, b*e*h*j + b*h*o, c*e*j*k + e*j*k + e*k*q + c*p*q + c*q, a*e*j*n*o + e*j*n*p + a*e*j + n*o*p + e*j, a*c*e*i*k + a*c*e*k + a*d*i*k + c*d*k + c*k, d*f*g*o + c*d*k + c*g*k + c*o + f, a*f*g*h*i*n + a*f*g*i + a*g*i*n + f*g*n + a*g}
+running getGBBoolean on F
+Groebner basis is: 
+ideal (c, m, b, d, a, p + 1, q, g, i, n, j, f + 1, k, l, o, h)
+Cpu time: .0256016 minutes
+
+number of variables = 17
+number of terms = 7
+max number of variables per term = 4
+random functions generated are: 
+{d*j*l*n + j*l*n + j*l + 1, d*f*h + d*f*p + d, i*j*k + i*k*m + i*j + k*m, d*e*f, b + 1, k*m*n*p + k*m + k*p + m*p + n, d*h*j, a*d*o + d, b*e*p + e*i, e*k + f + 1, c*d*j*l + c*d*j + c*d*l + d*l + c, d*m*q + g*m*q + d*m, h + 1, e*p + 1, f*j*n*p + f*p + n*p + f, c*k + c*l + k, d*i*m + d*m*p + d*m + m}
+running getGBBoolean on F
+Groebner basis is: 
+ideal (h, f + o, e + 1, q + 1, c + o + 1, j, d, b, a + 1, p, n + 1, i*o + i, k + o + 1, l, m + 1, g)
+Cpu time: .000866717 minutes
+
+number of variables = 18
+number of terms = 8
+max number of variables per term = 2
+random functions generated are: 
+{0, q, m + r + 1, 1, 2, b*g + b + 1, n + 1, d*m + m, i, h*j + j, b*p + p, 1, a*p + a + p, b*m + b + m, p, 2, b + 1, f*g + f + g + 1}
+running getGBBoolean on F
+Groebner basis is: 
+ideal 1
+Cpu time: 0 minutes
+
+number of variables = 20
+number of terms = 8
+max number of variables per term = 3
+random functions generated are: 
+{c*d + c, e*p*t + e*p + e*t + p*t + p + t, n*o*t + n*o + t, d*m*n + d + n + 1, p*s*t + p*t + s*t + p + t, a*g*i + g*i + a + g + i + 1, k + 1, c*t + e + 1, g*j + 1, o + 1, a*n*p + a*n + p, d*n + p, k*l, a + q, i*o*t + i*t + o*t + t, f*i + f, c*f*t + 1, b*d*l + d*l + b + l + 1, c*i*l + c*l + i*l + 1, n + q}
+running getGBBoolean on F
+Groebner basis is: 
+ideal (n + 1, m, j + 1, q + t + 1, g + t + 1, i + t, p, e, d + l, c + t, h + t + 1, l*t, o, b + t, r + t + 1, a + t, k + t, f + t, s + 1)
+Cpu time: 0 minutes
+
+number of variables = 17
+number of terms = 3
+max number of variables per term = 2
+random functions generated are: 
+{f + k + 1, o*q + o, 1, j + k, a*i, b + 1, b*o + b + 1, k, f*h, n*q, g + q, o, b + 1, l, a*l + l, 0, c*i + i + 1}
+running getGBBoolean on F
+Groebner basis is: 
+ideal (p, n + o, l + o, j + o, h, g + 1, i, d + o, c + 1, q + 1, f + 1, m + 1, b, k, a, e)
+Cpu time: 0 minutes
+
+number of variables = 17
+number of terms = 3
+max number of variables per term = 3
+random functions generated are: 
+{j, g*l, d*k, f*o*q, h, d + 1, m, o, c*n + n, c*f*o + c*o, k, a*i + g, e*q + e, l, h*l*m, d*i, e*f*g + e}
+running getGBBoolean on F
+Groebner basis is: 
+ideal (l + o, h + o, g + o, e + o, m + o, f + 1, d, p, c, i + o, j, b + o, a, n + o, q)
+Cpu time: 0 minutes
+
+number of variables = 13
+number of terms = 5
+max number of variables per term = 4
+random functions generated are: 
+{c*i*j*m + c*i*j + m + 1, g*i*j + a*g, b*f, i*j, b*d*g*m + g*m + m + 1, l, b*d*j + d*j + a, d*m + m, c, d, b*d*h*i + b, d*e*g*h + d*e*g + e*g*h + d*e, c*j*m + g*j*m + c*g + g*m + m}
+running getGBBoolean on F
+Groebner basis is: 
+ideal (f, j, d, h + m, l, c, k + m + 1, i, b + m + 1, e + m + 1, g + m + 1, a + m + 1)
+Cpu time: 0 minutes
+
+number of variables = 17
+number of terms = 5
+max number of variables per term = 4
+random functions generated are: 
+{f*j, a*n*q, a*m + m, c*e + e + o, g*h + d, d*h*k*n + d*h*k + d*h*n + d*h + d, h*p + g*q + h, b*d*e*h + b*d + b*h, c*k*m + c*f + c*m + f*m + m, d*f*p + h*p, b*o, b*l*q + q, f*j + f*q + j, k*l*q + k, e*g*h + 1, b*e*m + m, a*o}
+running getGBBoolean on F
+Groebner basis is: 
+ideal 1
+Cpu time: .0000666668 minutes
+
+number of variables = 14
+number of terms = 4
+max number of variables per term = 5
+random functions generated are: 
+{f*h*l, a*e*h*i*j + e*j, b*e*g*h + a*b*g + g, m*n + g, a*h*l*m + a*h + 1, i*j, c*e*m, b*j*l, f*i*k*m + f*i + i*m + i, g*m*n + c*g + g + n, d*e*h + d*h*m, n, c*g*h, c*h*m + c*h}
+running getGBBoolean on F
+Groebner basis is: 
+ideal (l, f, d, g, j, n, k, a, e + 1, b, c, h, m)
+Cpu time: .0000666832 minutes
+
+number of variables = 13
+number of terms = 4
+max number of variables per term = 3
+random functions generated are: 
+{a*m + b*m, d*j + j + 1, j + l, b*d + d*f + b + f, e*h*j + e, a*k + d*k, c*d + d, a*e + j, e*f, c*d + c + e + 1, d + 1, h*k, 1}
+running getGBBoolean on F
+Groebner basis is: 
+ideal (m + 1, h + 1, i, d, c, e, g, b, f, j + 1, a, l + 1, k + 1)
+Cpu time: 0 minutes
+
+number of variables = 19
+number of terms = 8
+max number of variables per term = 3
+random functions generated are: 
+{j*p*s + j*s + j + p + s + 1, i*s + g, j*m*p + j*m + p + 1, i + p, d*l + d + g + 1, 0, a*o + 1, a, b*m*s + b*m + m*s + s, a*c*r, a*i*m + a*i + a + m, j*m*o + j*o + o + 1, j*k*o + 1, h*n + e + h + n, g*n + g + n + 1, h*o*r, 1, f*l + f + l + 1, j*p + b + p}
+running getGBBoolean on F
+Groebner basis is: 
+ideal (q + 1, m + 1, s + 1, f, l + 1, e, d, g + 1, c + 1, r, b + 1, i, h, a, k + 1, j, o, p)
+Cpu time: .00013335 minutes
+
+number of variables = 19
+number of terms = 5
+max number of variables per term = 2
+random functions generated are: 
+{a*j + j, 0, 0, c*i + 1, j + o + 1, 1, d, l*r + l + 1, d*h + h, j*k + j + k, c, a + o + 1, b + c, a + k, g*i + 1, k + 1, q, d*k + d, f*p}
+running getGBBoolean on F
+Groebner basis is: 
+ideal (k, h + 1, i, f + 1, p + 1, e, d + 1, r + 1, o + 1, s + 1, c, g + 1, m, b, l, a, j, n)
+Cpu time: .0000666668 minutes
+
+number of variables = 20
+number of terms = 2
+max number of variables per term = 4
+random functions generated are: 
+{b*k, e*g*h*l, j*s + r*s, k*o, g*h, f*r, c*t, s, d + s, g*s + a, l*m*o + o, r, n*r + t, b*l*q*s + q*s, n*s + k, n*q + 1, d*h*n, a*j*n*s + n, d*f, t}
+running getGBBoolean on F
+Groebner basis is: 
+ideal (p + 1, m + t, l, k + o, h, f, e, i + o, d + o, q, s, c, g, b, n, j, a, r)
+Cpu time: .0000666668 minutes
+
+number of variables = 15
+number of terms = 7
+max number of variables per term = 4
+random functions generated are: 
+{a*d*e*i + a*d*e + a*e*i + d*e*i + a, b*c*o + b*g*o + c*g + c*o + b + 1, b*c*k + c*l + c + k + 1, a*h*j + h*i*j + h*j + a, c*f*o + c, a*d*l + d*f*l + a*f + d*l + f, d*i*n + 1, 1, d*k + a*o + o + 1, c*g*h + g*h*o + c*g + c + o, d*i*k + d*k + i*k + k, f*i*o + f*i, g*h + h + m, i*k*m + i*m*n + i*m + k*n + i + k, c*n + d*n + n + o}
+running getGBBoolean on F
+Groebner basis is: 
+ideal (h + 1, g + 1, f + 1, c + 1, e + 1, o, j + 1, i + 1, d, a, m*n + m + n + 1, k, l + 1)
+Cpu time: 0 minutes
+
+number of variables = 18
+number of terms = 4
+max number of variables per term = 6
+random functions generated are: 
+{b*f*j + m, e*g*k + b*e*r, a*d*h, i*k*o + q, h*k*p*q*r + k*o*p*r + q*r, h*i*l*p*q + i*l, b*g*l + l*n, a*b*d*m + a*b*i, c*h*k + c*k*r + c*m*r + m*q*r, g*l*m*n + c*l, d*i*l*m*r + h*i*m*r + i*l*m*r, e*f*h*m + e*f*h + e*h*m + h*m*p, a*f*i*m + h*i*k*m + a*i*k + m, a*k*n*p, a*f*g*i*p + a*f*i*n + a*f*g + f*g, f*j*k*r + j*r, k*p*q, d*m*n*o + a*m*o + a*p}
+running getGBBoolean on F
+Groebner basis is: 
+ideal (f, e, d, j, i, g, b, a + m, c, n, h, k, p, q, l, r, o)
+Cpu time: .00153343 minutes
+
+number of variables = 19
+number of terms = 2
+max number of variables per term = 3
+random functions generated are: 
+{a + e, 0, 0, m*o + o, n*o + n*q, k, j*o + j, d*n*s, n, l*s, d*m + l*m, 2, l, a*d + a, a*b*g + 1, e*m, o*p, f*g, d*r}
+running getGBBoolean on F
+Groebner basis is: 
+ideal (q, m, l, j, i, g, f, r, n, e, p, d + 1, s, h, k, c, b, o + 1)
+Cpu time: 0 minutes
+
+number of variables = 12
+number of terms = 7
+max number of variables per term = 2
+random functions generated are: 
+{a*c + a, 0, b*g, d + f + 1, i, 2, 1, i*j + j + 1, i*k, j + 1, 0, a}
+running getGBBoolean on F
+Groebner basis is: 
+ideal 1
+Cpu time: 0 minutes
+
+number of variables = 12
+number of terms = 2
+max number of variables per term = 5
+random functions generated are: 
+{c*f*l, d*g*j, a*k + j, e*i*j*l + c*j*l, 1, b*c*e + c*e*l, e*i, e*f*g*h + e*g, c*e*k + a*k, g*i, a*i*j, c}
+running getGBBoolean on F
+Groebner basis is: 
+ideal (l, e + 1, g, h, c, d, b, f, a, j, i, k)
+Cpu time: 0 minutes
+
+number of variables = 16
+number of terms = 7
+max number of variables per term = 4
+random functions generated are: 
+{b*e*l*p + b*l*p + b*p, d*m + d, h + 1, 0, h*j + h, a*f*n + d*f*n + f + n, a*i*k + a*l, b*n + n + 1, h*l*m*n + h*l*n + l*m + h*n + l*n + n, e*i + e*o, b*i + 1, h, c*d*h, a*b + b*h + m, j*m, i*j*m + j*m*p + 1}
+running getGBBoolean on F
+Groebner basis is: 
+ideal (o, p + 1, h + 1, i, e + 1, j, d, c, m, b, l + 1, k + 1, a, g, n)
+Cpu time: 0 minutes
+
+number of variables = 11
+number of terms = 2
+max number of variables per term = 4
+random functions generated are: 
+{f*j, d*f*g*j + 1, e*h, 1, c*h, c, a*b*d*j + a, c*e + d*h, a*b*c, b*i*k + a*b, g*j*k + g*k}
+running getGBBoolean on F
+Groebner basis is: 
+ideal (k, d + 1, f, c, e, b + 1, a, j, g, i)
+Cpu time: 0 minutes
+
+number of variables = 19
+number of terms = 7
+max number of variables per term = 3
+random functions generated are: 
+{j*o*q + o*q + q, a + i + 1, h + q + 1, c, f*k + f*n, n*q + f + n, g*n*s + n*s + g, f*o, n + p, d*m + m*p + d, a*q + a, f*g + 1, d*e*n + e + n, f + r + 1, i*m + i*s + i + s, p + 1, b*m*q + b*q + 1, 1, f*p*q + p*q + f}
+running getGBBoolean on F
+Groebner basis is: 
+ideal 1
+Cpu time: 0 minutes
+
+number of variables = 19
+number of terms = 6
+max number of variables per term = 6
+random functions generated are: 
+{e*i*k + e*j*r + e*k, c*j*n*q*r + c*g*n*r + c*j*q*r + g*j*q + j, f*h*i*p + f*i*p*r + h*i*o + f*o, b*d*e*j*r + b*e*n*r + d*j*n*r + b*e*r, b*e*k*r + b*e + b*n + n, j*m*o*p + c*j*o + c*e + e*j + c*m, e*l*q*r*s + m*q*r*s + l*m*s + e*m, a*h*k + a*h*q + k*m*q + a*b + a*k + a, b*g*r, a*h*i*j + a*i*j + h*j*n + a*h*p + h*j, b*h*l + b*h*r + b*k*r + b*m + k, b*g*m + g*m, b*h*i*r + b*e*r, e*o*p*s + h*o*p*s + e*o + e*s, a*i*l*p + a*i*l + a*l + l*p + p, a*e*h*j*o + a*d*h + d*e*h, k*m*s, e*n*o*r + n*o*r + e*n + o*r + o, b*c*h*n + b*h + c}
+running getGBBoolean on F
+Groebner basis is: 
+ideal (p, f, c, e, b, m, r, d, a, o, j, h, g, s, q, i, l, n)
+Cpu time: .348155 minutes
+
+number of variables = 15
+number of terms = 1
+max number of variables per term = 5
+random functions generated are: 
+{f*l, a*j, a*i*m*n, c*i*j*l, b*c*l, e*h*l*o, k*m, a*j*m*n*o, j*l, h, a*k*m*n, f*l*m, 1, 1, g*i*j*l}
+running getGBBoolean on F
+Groebner basis is: 
+ideal (n + 1, m + 1, i + o, h + o, g + o, l + o, f + o, d + o, e + o, a + o, b + o, j + o, c + o, k + o)
+Cpu time: 0 minutes
+
+number of variables = 10
+number of terms = 3
+max number of variables per term = 6
+random functions generated are: 
+{a*b*e*i + a*b*g, f*g*h, b*f*g*i, a*b*c*d*e*j + a*b*e*j + a*d, c*g*h*i*j + c*i + i, a*e*g*i + a*f*j + e*i*j, 1, c*g, a*f*h*j + h*i + i*j, a*c*h + b}
+running getGBBoolean on F
+Groebner basis is: 
+ideal (g + 1, c, e, b, h, f, j, a, d, i)
+Cpu time: 0 minutes
+
+number of variables = 12
+number of terms = 1
+max number of variables per term = 6
+random functions generated are: 
+{d*g*l, a*b, a*d*e*f*i, a*f, a*c*e*i*l, c*g*l, a*e*g*i*k*l, i, j*l, b*e*f*j*k, a, b*e*g*h}
+running getGBBoolean on F
+Groebner basis is: 
+ideal (i + l, h + l, k + l, b + l, f + l, a + l, d + l, c + l, j + l, g + l, e + l)
+Cpu time: .0000666857 minutes
+
+number of variables = 15
+number of terms = 5
+max number of variables per term = 2
+random functions generated are: 
+{a*k + 1, h + 1, e*o + e + o + 1, 0, 1, c*l + c + l, 0, n*o + 1, 1, i*k, g*o + g, k*l + k, d*j + d, c + m, a}
+running getGBBoolean on F
+Groebner basis is: 
+ideal (l, i + 1, j, h + 1, g, k, e + 1, d, m, n, c, f, b, a + 1, o + 1)
+Cpu time: 0 minutes
+
+number of variables = 19
+number of terms = 4
+max number of variables per term = 2
+random functions generated are: 
+{a, d*s + 1, h*q + h + 1, a*l + a + l + 1, a*h + a + 1, g*q + 1, 1, l + 1, 1, i, b*d + b + d + 1, c + d, 0, 1, d*f, 1, b, i, k*q + 1}
+running getGBBoolean on F
+Groebner basis is: 
+ideal (p + 1, n + 1, m, s + 1, r + 1, j + 1, i + 1, h, g + 1, f, o, d, c + 1, l + 1, b + 1, k, a + e + 1, q + 1)
+Cpu time: .0000666658 minutes
+
+number of variables = 17
+number of terms = 6
+max number of variables per term = 5
+random functions generated are: 
+{i*n*q + q, d*n + i*n + f + i + n + 1, d*f*g*h*p + d*g*p, h*i*k*m + h*i*k*n + h*k + i*k + i + 1, c*d*f*i*j + f*i*j, d*n, a*i*n*o*p + a*o*p, a*b*f*k + a*e*f*k + a*e*k, d*e*f*m*q + d*e*f*m + e*f + d, d*j*l*n*o + j*n + j*o, b*d*i*p + b*i*o*p + i*p + i, h*j + j, c*l*m*q + j*l*q + l*m*q + c*j, a*f + e*q + f, g*n*o*p + h*o*p + g*o + h*p, g*h*j*m, g*l*p + g*o*p}
+running getGBBoolean on F
+Groebner basis is: 
+ideal (l, o, d + 1, f + n, j, c, m, e, b, i + 1, a, g, h, q, k + 1, p)
+Cpu time: .000266683 minutes
+
+number of variables = 18
+number of terms = 7
+max number of variables per term = 4
+random functions generated are: 
+{l*o*r + l*o, i*j*p*r + j*p*r + i*r + j, c*r, l*n*r + g*n + g*r + n + 1, b*h*p + b*p + p*q, h*l*m + h*l, a*b*f*n + a*b*f + a*b*n + f*n + n, a*i, b*d + c*o + d*o + b, i*k*o + i*o*q + i*q + i, d*g*r + d*q*r + d*g + d*r + g, e*f*n + j*n + f + j, i*p*q + f*p + f*q + 1, a*n*p*r + a*n*r + a*n + a*r + n*r, e*h*m + 1, e*q + e + q, j*r, b*i*m + i*m + b}
+running getGBBoolean on F
+Groebner basis is: 
+ideal (r + 1, f, m + 1, d + n + 1, k + 1, l, b + 1, i + 1, e + p, c, a, h, g + n, q, o + 1, j)
+Cpu time: .000600036 minutes
+
+number of variables = 11
+number of terms = 5
+max number of variables per term = 4
+random functions generated are: 
+{f, b*j*k + b*h + j*k + j + 1, g*k, f*i + f*j + f + 1, c*h + c*j + 1, d*e*f + d*e*g + d*e, f*h*k + a*h + k + 1, d*e*i + i, i, b*e*g + b*g*j + b*j + e*j, a*g + f + i + 1}
+running getGBBoolean on F
+Groebner basis is: 
+ideal (d + 1, h, i + 1, c, e + 1, j + 1, b, a, f, g + 1, k)
+Cpu time: 0 minutes
+
+number of variables = 10
+number of terms = 9
+max number of variables per term = 3
+random functions generated are: 
+{a*g*i + a*g + g*i + i + 1, a*h*j + a*j + h*j + h, a + d, a*f*h + a*f, c*h*j + h*j + j + 1, b*e + e*i + b + e + i, a*b*g + a*g + b*g + g, h*j + j + 1, h*i*j + 1, d*i + i*j + d}
+running getGBBoolean on F
+Groebner basis is: 
+ideal (h + j + 1, e + j + 1, f + 1, a, b + j + 1, c, d, g, i + 1)
+Cpu time: 0 minutes
+
+number of variables = 14
+number of terms = 3
+max number of variables per term = 2
+random functions generated are: 
+{1, j + l + 1, e*k + e + k, 1, 1, g*h + 1, c*m + c + 1, 1, a*g + 1, 1, c + e, k, b*c + 1, c*e}
+running getGBBoolean on F
+Groebner basis is: 
+ideal (k, j + 1, h + 1, f, e + 1, d + 1, l, c + 1, g + 1, n + 1, b, m + 1, a + 1, i)
+Cpu time: 0 minutes
+
+number of variables = 13
+number of terms = 8
+max number of variables per term = 2
+random functions generated are: 
+{c*f + c + f + 1, f*h + f + h, e*j + e, c*e + e + 1, b*l + b, d*f + 1, l + 1, l, 1, e + 1, b, i*l + l + 1, f}
+running getGBBoolean on F
+Groebner basis is: 
+ideal 1
+Cpu time: 0 minutes
+
+number of variables = 11
+number of terms = 6
+max number of variables per term = 2
+random functions generated are: 
+{a*f + a, h*j + h, b + 1, f + 1, i*k + k, h*k, e + f, g + 1, 0, a*i + i, g*k + 1}
+running getGBBoolean on F
+Groebner basis is: 
+ideal (i, g, k + 1, f + 1, h + 1, e + 1, d, c, b + 1, j, a)
+Cpu time: 0 minutes
+
+number of variables = 12
+number of terms = 4
+max number of variables per term = 5
+random functions generated are: 
+{a*b*j*l + a*b*l + i*j + b*l, f*h*j + a*g, b*f*h + d*f*l + f*l, d*e*f*h, a*b*c + a*b*g + a*c*h + a*g*h, c*e*f*g + a*f, e*f*h + e*f*l, c*g*k + e*f, a*b*c + a*c + g + k, e*h*j*k + e*g*k, b*d*l + e*f*l, g*h + h*j + 1}
+running getGBBoolean on F
+Groebner basis is: 
+ideal (g, d, k, b, a, i, f, j, l + 1, c, h, e)
+Cpu time: .000400031 minutes
+
+number of variables = 14
+number of terms = 10
+max number of variables per term = 5
+random functions generated are: 
+{d*g*m + g, d*g*h*m*n + d*h*m + d*g*n + d*m + h*n + m + n, b*c*f + b*f + e*k + f*k + k, a*c*j*k + c*f*j*k + c*f*k + a*j + j*k + a, b*e*h*n + h*l + e*n + l + n + 1, c*k*n, a*d*i*n + a*d*i + a*d*n + d*i*n + 1, c*h*i*k + c*h*i + c*i*j + c*i*k + h*j*k + i*j*k + c*h, a*c*f*k + n + 1, b*e*h + d*e*h + b*d*m + b + m, f*i*k*l + a*i*l + f*i*l + f*k + k*l + k, a*j*m + e*j*m + e*l*m + a*l + e*l + e, c*d*n + d*n + b, e*f*j}
+running getGBBoolean on F
+Groebner basis is: 
+ideal 1
+Cpu time: .000200017 minutes
+
+number of variables = 13
+number of terms = 1
+max number of variables per term = 6
+random functions generated are: 
+{a*c*d*g, d*h*i*k*l, a*e*g*m, e*g*h*k, b*d*g*j, e*i*k*l, c*g*k, e*j*m, g*h*i*l, c*h, h, f*g*h*j, a*f*g*h*i}
+running getGBBoolean on F
+Groebner basis is: 
+ideal (h + m, d + m, j + m, b + m, l + m, c + m, a + m, i + m, k + m, g + m, f + m, e + m)
+Cpu time: .0000666698 minutes
+
+number of variables = 30
+number of terms = 9
+max number of variables per term = 5
+random functions generated are: 
+{d*n*t*x + n*t*x + d*x + n*D + x*D + d + n + 1, f*w*z + z, h*n*o*D + n*D, d*j*x + d*k*x + j*k*x + d*m*x + m*x + k, d*h*s*v + d*h*v*B + d*s*v + d*v*B + s*v*B + d*s + h*s + d*B + s*B, i*j*m + j + v + 1, f*p*y + d*f + y, d*f*n*C + f*B*C + d*f + d*B + B*C + d + f + n + 1, c*h*p + g*p + c + g + h + 1, j*l*n*r*w + j*l + l*r, c*f*j*C + c*f*B + c*f*C + c*B*C + c*j + f*C, b*h*s*D + b*h*y*D + b*h*D + b*y*D + b*s + s*y, a*k*v*z + a*q*v + v, b*j*s*C + g*j + 1, j*o*p + o*p*t + j*o*u + o*t*u + j*t + j*u + o, d*q*w*x + d*k*x + q*x, k*o*p*v + j*o*p + o*p + j*v, b*q*v + q*v*y, c*d*g*n*y + c*g*n*y, g*p*x, a*e*k*D + e*u*D + k*u + a*D + e + k + D, j*m*y*z*A + m, g*t*A*C + g*r*t + r*t*C + g*r + r + t + A + 1, e*o*q + j*q*B + o*q*B + j*q + o*q + e + 1, o*t*B*D + o*z*D + t*z, w*y + g*z + j + y, a*f*l*D + f*D + p*D + a, i*m*r + i*r*v + m*r*v + i*m + i*B + v*B + i + m + 1, b*o*y*z + c*o*y*z + b*c*o + b*c*z + c*y*z + c*z + c + z, i*p*C + i*m + i*n + i}

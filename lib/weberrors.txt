@@ -1,0 +1,49 @@
+Network Description
+n = 5 p = 3
+
+Input Functions
+f1 = x5
+f2 = x4+x6
+f3 = x3
+f4 = x2
+f5 = x1
+
+Network Options
+Large, 2 cycles
+
+Does not display error message for large network
+Gives correct error message for small network
+--DONE--
+
+Limitations lists restricted number of states that can be displayed in a state space to be 1000, but cannot display the state space of a model with 512 states (yeastOrlando).
+--I've run into this error also before. I think the program just doesn't make the image or something for some reason. Anyway, I don't really want to fix it...--
+
+This network does not work for as a large network: 
+f1 = x1
+f2 = x2
+f3 = x3
+[Tue Jul 27 23:41:02 2010] [error] [client ::1] /Users/franzi/Documents/Research/Macaulay2/trunk/Macaulay2/m2/methods.m2:30:35:(1):[9]: error: no method found for applying support to:, referer: http://localhost/~franzi/cgi-bin/git/adam.pl
+[Tue Jul 27 23:41:02 2010] [error] [client ::1]      argument   :  {} (of class List), referer: http://localhost/~franzi/cgi-bin/git/adam.pl
+
+"Running fixed point calculation now ...
+There are no limit cycles of length 2"
+This should say running limit cycle calculation
+--DONE--
+
+large network button seems to be broken for number of nodes >= 5
+--DONE--
+
+Upload lamdba phage 4 model doesn't display the 4th gene. file found here http://gin.univ-mrs.fr/GINsim/model_repository/MICROBIOLOGICAL%20REGULATORY%20NETWORKS/Phage%20Lambda/PhageLambda/description.html
+--DONE--
+
+--NEW--
+Need an error message related to GIMsim button not being checked if a file is uploaded and user still submits. Or if a file is uploaded the box is automatically checked
+-- might not be relevant in v2--
+
+--NEW--
+
+"Running fixed point calculation now ...
+There are no limit cycles of length 7. "
+This should be running cycle computations... or something
+
+

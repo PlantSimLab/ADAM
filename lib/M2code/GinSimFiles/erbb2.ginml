@@ -1,0 +1,472 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE gxl SYSTEM "http://gin.univ-mrs.fr/GINsim/GINML_2_1.dtd">
+<gxl xmlns:xlink="http://www.w3.org/1999/xlink">
+	<graph id="ErbB2" class="regulatory" nodeorder="MEK1 CDK4 p21 CyclinD1 p27 CDK2 CyclinE1 pRB1 ERalpha AKT1 CDK6 MYC IGF1R EGF ERBB1 ERBB2 ERBB3 ERBB2_3 ERBB1_2 ERBB1_3">
+<node id="ERBB2_3" basevalue="0" maxvalue="1">
+  <parameter idActiveInteractions="ERBB3_ERBB2_3_0 ERBB2_ERBB2_3_0" val="1"/>
+
+			<nodevisualsetting>
+				<rect x="631" y="130" width="72" height="35" backgroundColor="#666666" foregroundColor="#FFFFFF"/>
+			</nodevisualsetting>
+</node>
+<node id="ERBB2" basevalue="0" maxvalue="1">
+  <parameter idActiveInteractions="EGF_ERBB2_0" val="1"/>
+
+			<nodevisualsetting>
+				<rect x="413" y="59" width="65" height="30" backgroundColor="#999999" foregroundColor="#FFFFFF"/>
+			</nodevisualsetting>
+</node>
+<node id="ERBB3" basevalue="0" maxvalue="1">
+  <parameter idActiveInteractions="EGF_ERBB3_0" val="1"/>
+
+			<nodevisualsetting>
+				<rect x="548" y="57" width="65" height="30" backgroundColor="#999999" foregroundColor="#FFFFFF"/>
+			</nodevisualsetting>
+</node>
+<node id="pRB1" basevalue="0" maxvalue="1">
+  <parameter idActiveInteractions="CDK4_pRB1_0 CDK6_pRB1_0 CDK2_pRB1_0" val="1"/>
+  <parameter idActiveInteractions="CDK4_pRB1_0 CDK6_pRB1_0" val="1"/>
+
+			<nodevisualsetting>
+				<rect x="422" y="673" width="79" height="34" backgroundColor="#FF3333" foregroundColor="#FFFFFF"/>
+			</nodevisualsetting>
+</node>
+<node id="CyclinE1" basevalue="0" maxvalue="1">
+  <parameter idActiveInteractions="MYC_CyclinE1_0" val="1"/>
+
+			<nodevisualsetting>
+				<ellipse x="682" y="475" width="65" height="34" backgroundColor="#00CCCC" foregroundColor="#FFFFFF"/>
+			</nodevisualsetting>
+</node>
+<node id="MEK1" basevalue="0" maxvalue="1">
+  <parameter idActiveInteractions="IGF1R_MEK1_0" val="1"/>
+  <parameter idActiveInteractions="ERBB2_3_MEK1_0" val="1"/>
+  <parameter idActiveInteractions="ERBB1_MEK1_0" val="1"/>
+  <parameter idActiveInteractions="ERBB1_2_MEK1_0" val="1"/>
+  <parameter idActiveInteractions="ERBB1_3_MEK1_0" val="1"/>
+  <parameter idActiveInteractions="IGF1R_MEK1_0 ERBB2_3_MEK1_0" val="1"/>
+  <parameter idActiveInteractions="IGF1R_MEK1_0 ERBB1_MEK1_0" val="1"/>
+  <parameter idActiveInteractions="IGF1R_MEK1_0 ERBB1_2_MEK1_0" val="1"/>
+  <parameter idActiveInteractions="IGF1R_MEK1_0 ERBB1_3_MEK1_0" val="1"/>
+  <parameter idActiveInteractions="ERBB2_3_MEK1_0 ERBB1_MEK1_0" val="1"/>
+  <parameter idActiveInteractions="ERBB2_3_MEK1_0 ERBB1_2_MEK1_0" val="1"/>
+  <parameter idActiveInteractions="ERBB2_3_MEK1_0 ERBB1_3_MEK1_0" val="1"/>
+  <parameter idActiveInteractions="ERBB1_MEK1_0 ERBB1_2_MEK1_0" val="1"/>
+  <parameter idActiveInteractions="ERBB1_MEK1_0 ERBB1_3_MEK1_0" val="1"/>
+  <parameter idActiveInteractions="ERBB1_2_MEK1_0 ERBB1_3_MEK1_0" val="1"/>
+  <parameter idActiveInteractions="IGF1R_MEK1_0 ERBB2_3_MEK1_0 ERBB1_MEK1_0" val="1"/>
+  <parameter idActiveInteractions="ERBB2_3_MEK1_0 ERBB1_MEK1_0 ERBB1_2_MEK1_0" val="1"/>
+  <parameter idActiveInteractions="ERBB1_MEK1_0 ERBB1_2_MEK1_0 ERBB1_3_MEK1_0" val="1"/>
+  <parameter idActiveInteractions="IGF1R_MEK1_0 ERBB1_MEK1_0 ERBB1_3_MEK1_0" val="1"/>
+  <parameter idActiveInteractions="IGF1R_MEK1_0 ERBB1_2_MEK1_0 ERBB1_3_MEK1_0" val="1"/>
+  <parameter idActiveInteractions="IGF1R_MEK1_0 ERBB1_MEK1_0 ERBB1_2_MEK1_0" val="1"/>
+  <parameter idActiveInteractions="ERBB2_3_MEK1_0 ERBB1_2_MEK1_0 ERBB1_3_MEK1_0" val="1"/>
+  <parameter idActiveInteractions="ERBB2_3_MEK1_0 ERBB1_MEK1_0 ERBB1_3_MEK1_0" val="1"/>
+  <parameter idActiveInteractions="IGF1R_MEK1_0 ERBB2_3_MEK1_0 ERBB1_3_MEK1_0" val="1"/>
+  <parameter idActiveInteractions="IGF1R_MEK1_0 ERBB2_3_MEK1_0 ERBB1_2_MEK1_0" val="1"/>
+  <parameter idActiveInteractions="IGF1R_MEK1_0 ERBB2_3_MEK1_0 ERBB1_MEK1_0 ERBB1_2_MEK1_0" val="1"/>
+  <parameter idActiveInteractions="ERBB2_3_MEK1_0 ERBB1_MEK1_0 ERBB1_2_MEK1_0 ERBB1_3_MEK1_0" val="1"/>
+  <parameter idActiveInteractions="IGF1R_MEK1_0 ERBB1_MEK1_0 ERBB1_2_MEK1_0 ERBB1_3_MEK1_0" val="1"/>
+  <parameter idActiveInteractions="IGF1R_MEK1_0 ERBB2_3_MEK1_0 ERBB1_2_MEK1_0 ERBB1_3_MEK1_0" val="1"/>
+  <parameter idActiveInteractions="IGF1R_MEK1_0 ERBB2_3_MEK1_0 ERBB1_MEK1_0 ERBB1_3_MEK1_0" val="1"/>
+  <parameter idActiveInteractions="IGF1R_MEK1_0 ERBB2_3_MEK1_0 ERBB1_MEK1_0 ERBB1_2_MEK1_0 ERBB1_3_MEK1_0" val="1"/>
+
+			<nodevisualsetting>
+				<ellipse x="571" y="246" width="61" height="46" backgroundColor="#FF9999" foregroundColor="#FFFFFF"/>
+			</nodevisualsetting>
+</node>
+<node id="CDK4" basevalue="0" maxvalue="1">
+  <parameter idActiveInteractions="CyclinD1_CDK4_0" val="1"/>
+
+			<nodevisualsetting>
+				<ellipse x="277" y="601" width="66" height="33" backgroundColor="#006600" foregroundColor="#FFFFFF"/>
+			</nodevisualsetting>
+</node>
+<node id="ERalpha" basevalue="0" maxvalue="1">
+  <parameter idActiveInteractions="MEK1_ERalpha_0" val="1"/>
+  <parameter idActiveInteractions="AKT1_ERalpha_0" val="1"/>
+  <parameter idActiveInteractions="MEK1_ERalpha_0 AKT1_ERalpha_0" val="1"/>
+
+			<nodevisualsetting>
+				<ellipse x="191" y="356" width="72" height="42" backgroundColor="#000099" foregroundColor="#FFFFFF"/>
+			</nodevisualsetting>
+</node>
+<node id="MYC" basevalue="0" maxvalue="1">
+  <parameter idActiveInteractions="MEK1_MYC_0" val="1"/>
+  <parameter idActiveInteractions="AKT1_MYC_0" val="1"/>
+  <parameter idActiveInteractions="ERalpha_MYC_0" val="1"/>
+  <parameter idActiveInteractions="MEK1_MYC_0 AKT1_MYC_0" val="1"/>
+  <parameter idActiveInteractions="AKT1_MYC_0 ERalpha_MYC_0" val="1"/>
+  <parameter idActiveInteractions="MEK1_MYC_0 ERalpha_MYC_0" val="1"/>
+  <parameter idActiveInteractions="MEK1_MYC_0 AKT1_MYC_0 ERalpha_MYC_0" val="1"/>
+
+			<nodevisualsetting>
+				<ellipse x="650" y="355" width="74" height="40" backgroundColor="#FF00FF" foregroundColor="#FFFFFF"/>
+			</nodevisualsetting>
+</node>
+<node id="CDK6" basevalue="0" maxvalue="1">
+  <parameter idActiveInteractions="CyclinD1_CDK6_0" val="1"/>
+
+			<nodevisualsetting>
+				<ellipse x="439" y="579" width="73" height="33" backgroundColor="#006600" foregroundColor="#FFFFFF"/>
+			</nodevisualsetting>
+</node>
+<node id="ERBB1" basevalue="0" maxvalue="1">
+  <parameter idActiveInteractions="EGF_ERBB1_0" val="1"/>
+
+			<nodevisualsetting>
+				<rect x="297" y="58" width="65" height="30" backgroundColor="#999999" foregroundColor="#FFFFFF"/>
+			</nodevisualsetting>
+</node>
+<node id="IGF1R" basevalue="0" maxvalue="1">
+  <parameter idActiveInteractions="ERalpha_IGF1R_0" val="1"/>
+  <parameter idActiveInteractions="AKT1_IGF1R_0" val="1"/>
+  <parameter idActiveInteractions="ERalpha_IGF1R_0 AKT1_IGF1R_0" val="1"/>
+
+			<nodevisualsetting>
+				<rect x="779" y="138" width="72" height="35" backgroundColor="#6666FF" foregroundColor="#FFFFFF"/>
+			</nodevisualsetting>
+</node>
+<node id="ERBB1_3" basevalue="0" maxvalue="1">
+  <parameter idActiveInteractions="ERBB1_ERBB1_3_0 ERBB3_ERBB1_3_0" val="1"/>
+
+			<nodevisualsetting>
+				<rect x="472" y="126" width="72" height="35" backgroundColor="#666666" foregroundColor="#FFFFFF"/>
+			</nodevisualsetting>
+</node>
+<node id="p27" basevalue="1" maxvalue="1">
+  <parameter idActiveInteractions="ERalpha_p27_0" val="1"/>
+
+			<nodevisualsetting>
+				<ellipse x="366" y="471" width="65" height="37" backgroundColor="#00CC00" foregroundColor="#FFFFFF"/>
+			</nodevisualsetting>
+</node>
+<node id="CDK2" basevalue="0" maxvalue="1">
+  <parameter idActiveInteractions="CyclinE1_CDK2_0" val="1"/>
+
+			<nodevisualsetting>
+				<ellipse x="600" y="603" width="64" height="33" backgroundColor="#006600" foregroundColor="#FFFFFF"/>
+			</nodevisualsetting>
+</node>
+<node id="p21" basevalue="1" maxvalue="1">
+  <parameter idActiveInteractions="ERalpha_p21_0" val="1"/>
+
+			<nodevisualsetting>
+				<ellipse x="554" y="470" width="71" height="35" backgroundColor="#00CC00" foregroundColor="#FFFFFF"/>
+			</nodevisualsetting>
+</node>
+<node id="CyclinD1" basevalue="0" maxvalue="1">
+  <parameter idActiveInteractions="ERalpha_CyclinD1_0 MYC_CyclinD1_0 MEK1_CyclinD1_0" val="1"/>
+  <parameter idActiveInteractions="ERalpha_CyclinD1_0 AKT1_CyclinD1_0 MYC_CyclinD1_0" val="1"/>
+  <parameter idActiveInteractions="ERalpha_CyclinD1_0 AKT1_CyclinD1_0 MYC_CyclinD1_0 MEK1_CyclinD1_0" val="1"/>
+
+			<nodevisualsetting>
+				<ellipse x="151" y="481" width="70" height="31" backgroundColor="#00CCCC" foregroundColor="#FFFFFF"/>
+			</nodevisualsetting>
+</node>
+<node id="EGF" basevalue="1" maxvalue="1">
+			<nodevisualsetting>
+				<ellipse x="453" y="0" width="55" height="25" backgroundColor="#003366" foregroundColor="#FFFFFF"/>
+			</nodevisualsetting>
+</node>
+<node id="AKT1" basevalue="0" maxvalue="1">
+  <parameter idActiveInteractions="IGF1R_AKT1_0" val="1"/>
+  <parameter idActiveInteractions="ERBB2_3_AKT1_0" val="1"/>
+  <parameter idActiveInteractions="ERBB1_AKT1_0" val="1"/>
+  <parameter idActiveInteractions="ERBB1_2_AKT1_0" val="1"/>
+  <parameter idActiveInteractions="ERBB1_3_AKT1_0" val="1"/>
+  <parameter idActiveInteractions="IGF1R_AKT1_0 ERBB2_3_AKT1_0" val="1"/>
+  <parameter idActiveInteractions="IGF1R_AKT1_0 ERBB1_AKT1_0" val="1"/>
+  <parameter idActiveInteractions="IGF1R_AKT1_0 ERBB1_2_AKT1_0" val="1"/>
+  <parameter idActiveInteractions="IGF1R_AKT1_0 ERBB1_3_AKT1_0" val="1"/>
+  <parameter idActiveInteractions="ERBB2_3_AKT1_0 ERBB1_AKT1_0" val="1"/>
+  <parameter idActiveInteractions="ERBB2_3_AKT1_0 ERBB1_2_AKT1_0" val="1"/>
+  <parameter idActiveInteractions="ERBB2_3_AKT1_0 ERBB1_3_AKT1_0" val="1"/>
+  <parameter idActiveInteractions="ERBB1_AKT1_0 ERBB1_2_AKT1_0" val="1"/>
+  <parameter idActiveInteractions="ERBB1_AKT1_0 ERBB1_3_AKT1_0" val="1"/>
+  <parameter idActiveInteractions="ERBB1_2_AKT1_0 ERBB1_3_AKT1_0" val="1"/>
+  <parameter idActiveInteractions="IGF1R_AKT1_0 ERBB2_3_AKT1_0 ERBB1_AKT1_0" val="1"/>
+  <parameter idActiveInteractions="IGF1R_AKT1_0 ERBB2_3_AKT1_0 ERBB1_2_AKT1_0" val="1"/>
+  <parameter idActiveInteractions="IGF1R_AKT1_0 ERBB2_3_AKT1_0 ERBB1_3_AKT1_0" val="1"/>
+  <parameter idActiveInteractions="ERBB2_3_AKT1_0 ERBB1_2_AKT1_0 ERBB1_3_AKT1_0" val="1"/>
+  <parameter idActiveInteractions="ERBB1_AKT1_0 ERBB1_2_AKT1_0 ERBB1_3_AKT1_0" val="1"/>
+  <parameter idActiveInteractions="ERBB2_3_AKT1_0 ERBB1_AKT1_0 ERBB1_2_AKT1_0" val="1"/>
+  <parameter idActiveInteractions="IGF1R_AKT1_0 ERBB1_AKT1_0 ERBB1_3_AKT1_0" val="1"/>
+  <parameter idActiveInteractions="IGF1R_AKT1_0 ERBB1_AKT1_0 ERBB1_2_AKT1_0" val="1"/>
+  <parameter idActiveInteractions="IGF1R_AKT1_0 ERBB1_2_AKT1_0 ERBB1_3_AKT1_0" val="1"/>
+  <parameter idActiveInteractions="ERBB2_3_AKT1_0 ERBB1_AKT1_0 ERBB1_3_AKT1_0" val="1"/>
+  <parameter idActiveInteractions="IGF1R_AKT1_0 ERBB2_3_AKT1_0 ERBB1_AKT1_0 ERBB1_2_AKT1_0" val="1"/>
+  <parameter idActiveInteractions="ERBB2_3_AKT1_0 ERBB1_AKT1_0 ERBB1_2_AKT1_0 ERBB1_3_AKT1_0" val="1"/>
+  <parameter idActiveInteractions="IGF1R_AKT1_0 ERBB1_AKT1_0 ERBB1_2_AKT1_0 ERBB1_3_AKT1_0" val="1"/>
+  <parameter idActiveInteractions="IGF1R_AKT1_0 ERBB2_3_AKT1_0 ERBB1_AKT1_0 ERBB1_3_AKT1_0" val="1"/>
+  <parameter idActiveInteractions="IGF1R_AKT1_0 ERBB2_3_AKT1_0 ERBB1_2_AKT1_0 ERBB1_3_AKT1_0" val="1"/>
+  <parameter idActiveInteractions="IGF1R_AKT1_0 ERBB2_3_AKT1_0 ERBB1_AKT1_0 ERBB1_2_AKT1_0 ERBB1_3_AKT1_0" val="1"/>
+
+			<nodevisualsetting>
+				<ellipse x="337" y="235" width="63" height="49" backgroundColor="#FF9999" foregroundColor="#FFFFFF"/>
+			</nodevisualsetting>
+</node>
+<node id="ERBB1_2" basevalue="0" maxvalue="1">
+  <parameter idActiveInteractions="ERBB1_ERBB1_2_0 ERBB2_ERBB1_2_0" val="1"/>
+
+			<nodevisualsetting>
+				<rect x="198" y="129" width="72" height="35" backgroundColor="#666666" foregroundColor="#FFFFFF"/>
+			</nodevisualsetting>
+</node>
+		<edge id="ERBB2_3_AKT1_0" from="ERBB2_3" to="AKT1" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="667,147 368,259" line_style="curve" line_color="#00CCCC" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="ERBB2_3_MEK1_0" from="ERBB2_3" to="MEK1" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="667,147 601,269" line_style="curve" line_color="#00CCCC" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="ERBB2_3_IGF1R_0" from="ERBB2_3" to="IGF1R" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="667,147 815,155" line_style="curve" line_color="#00CCCC" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="ERBB2_ERBB2_3_0" from="ERBB2" to="ERBB2_3" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="445,74 667,147" line_style="curve" line_color="#00CCCC" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="ERBB2_ERBB1_2_0" from="ERBB2" to="ERBB1_2" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="445,74 234,146" line_style="curve" line_color="#00CCCC" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="ERBB3_ERBB2_3_0" from="ERBB3" to="ERBB2_3" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="580,72 667,147" line_style="curve" line_color="#00CCCC" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="ERBB3_ERBB1_3_0" from="ERBB3" to="ERBB1_3" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="580,72 508,143" line_style="curve" line_color="#00CCCC" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="CyclinE1_CDK2_0" from="CyclinE1" to="CDK2" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="714,492 632,619" line_style="curve" line_color="#00CCCC" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="MEK1_CyclinD1_0" from="MEK1" to="CyclinD1" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="601,269 186,496" line_style="curve" line_color="#00CCCC" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="MEK1_ERalpha_0" from="MEK1" to="ERalpha" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="601,269 227,377" line_style="curve" line_color="#00CCCC" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="MEK1_MYC_0" from="MEK1" to="MYC" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="601,269 687,375" line_style="curve" line_color="#00CCCC" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="CDK4_pRB1_0" from="CDK4" to="pRB1" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="310,617 461,690" line_style="curve" line_color="#00CCCC" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="CDK4_p21_0" from="CDK4" to="p21" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="310,617 456,566 589,487" line_style="curve" line_color="#00CCCC" line_width="2" routage="auto"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="CDK4_p27_0" from="CDK4" to="p27" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="310,617 366,562 398,489" line_style="curve" line_color="#00CCCC" line_width="2" routage="auto"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="ERalpha_CyclinD1_0" from="ERalpha" to="CyclinD1" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="227,377 186,496" line_style="curve" line_color="#00CCCC" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="ERalpha_IGF1R_0" from="ERalpha" to="IGF1R" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="227,377 815,155" line_style="curve" line_color="#00CCCC" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="ERalpha_p21_0" from="ERalpha" to="p21" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="227,377 589,487" line_style="curve" line_color="#00CCCC" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="ERalpha_MYC_0" from="ERalpha" to="MYC" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="227,377 687,375" line_style="curve" line_color="#00CCCC" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="ERalpha_p27_0" from="ERalpha" to="p27" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="227,377 398,489" line_style="curve" line_color="#00CCCC" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="MYC_CyclinE1_0" from="MYC" to="CyclinE1" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="687,375 714,492" line_style="curve" line_color="#00CCCC" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="MYC_p21_0" from="MYC" to="p21" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="687,375 589,487" line_style="curve" line_color="#00CCCC" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="MYC_CyclinD1_0" from="MYC" to="CyclinD1" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="687,375 186,496" line_style="curve" line_color="#00CCCC" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="MYC_p27_0" from="MYC" to="p27" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="687,375 398,489" line_style="curve" line_color="#00CCCC" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="CDK6_pRB1_0" from="CDK6" to="pRB1" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="475,595 461,690" line_style="curve" line_color="#00CCCC" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="ERBB1_ERBB1_2_0" from="ERBB1" to="ERBB1_2" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="329,73 234,146" line_style="curve" line_color="#00CCCC" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="ERBB1_ERBB1_3_0" from="ERBB1" to="ERBB1_3" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="329,73 508,143" line_style="curve" line_color="#00CCCC" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="ERBB1_AKT1_0" from="ERBB1" to="AKT1" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="329,73 368,259" line_style="curve" line_color="#00CCCC" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="ERBB1_MEK1_0" from="ERBB1" to="MEK1" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="329,73 601,269" line_style="curve" line_color="#00CCCC" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="IGF1R_AKT1_0" from="IGF1R" to="AKT1" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="815,155 588,192 368,259" line_style="curve" line_color="#00CCCC" line_width="2" routage="auto"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="IGF1R_MEK1_0" from="IGF1R" to="MEK1" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="815,155 601,269" line_style="curve" line_color="#00CCCC" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="ERBB1_3_AKT1_0" from="ERBB1_3" to="AKT1" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="508,143 368,259" line_style="curve" line_color="#00CCCC" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="ERBB1_3_MEK1_0" from="ERBB1_3" to="MEK1" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="508,143 601,269" line_style="curve" line_color="#00CCCC" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="p27_CDK2_0" from="p27" to="CDK2" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="398,489 507,567 632,619" line_style="curve" line_color="#00CCCC" line_width="2" routage="auto"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="p27_CDK4_0" from="p27" to="CDK4" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="398,489 341,544 310,617" line_style="curve" line_color="#00CCCC" line_width="2" routage="auto"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="CDK2_p27_0" from="CDK2" to="p27" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="632,619 522,541 398,489" line_style="curve" line_color="#00CCCC" line_width="2" routage="auto"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="CDK2_pRB1_0" from="CDK2" to="pRB1" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="632,619 461,690" line_style="curve" line_color="#00CCCC" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="p21_CDK2_0" from="p21" to="CDK2" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="589,487 632,619" line_style="curve" line_color="#00CCCC" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="p21_CDK4_0" from="p21" to="CDK4" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="589,487 443,538 310,617" line_style="curve" line_color="#00CCCC" line_width="2" routage="auto"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="CyclinD1_CDK4_0" from="CyclinD1" to="CDK4" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="186,496 310,617" line_style="curve" line_color="#00CCCC" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="CyclinD1_CDK6_0" from="CyclinD1" to="CDK6" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="186,496 475,595" line_style="curve" line_color="#00CCCC" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="EGF_ERBB1_0" from="EGF" to="ERBB1" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="480,12 329,73" line_style="curve" line_color="#00CCCC" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="EGF_ERBB2_0" from="EGF" to="ERBB2" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="480,12 445,74" line_style="curve" line_color="#00CCCC" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="EGF_ERBB3_0" from="EGF" to="ERBB3" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="480,12 580,72" line_style="curve" line_color="#00CCCC" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="AKT1_CyclinD1_0" from="AKT1" to="CyclinD1" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="368,259 186,496" line_style="curve" line_color="#00CCCC" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="AKT1_MYC_0" from="AKT1" to="MYC" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="368,259 687,375" line_style="curve" line_color="#00CCCC" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="AKT1_p27_0" from="AKT1" to="p27" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="368,259 398,489" line_style="curve" line_color="#00CCCC" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="AKT1_ERalpha_0" from="AKT1" to="ERalpha" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="368,259 227,377" line_style="curve" line_color="#00CCCC" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="AKT1_IGF1R_0" from="AKT1" to="IGF1R" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="368,259 595,222 815,155" line_style="curve" line_color="#00CCCC" line_width="2" routage="auto"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="AKT1_p21_0" from="AKT1" to="p21" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="368,259 589,487" line_style="curve" line_color="#00CCCC" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="ERBB1_2_AKT1_0" from="ERBB1_2" to="AKT1" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="234,146 368,259" line_style="curve" line_color="#00CCCC" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="ERBB1_2_MEK1_0" from="ERBB1_2" to="MEK1" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="234,146 601,269" line_style="curve" line_color="#00CCCC" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+	</graph>
+</gxl>

@@ -1,0 +1,503 @@
+starting to write...
+Benchmark test for valence = 2
+
+number of variables = 68
+number of terms = 6
+max number of variables per term = 2
+random functions generated are: 
+{1, h*X + h, w*K + w + K, d*q + 1, e + Z + 1, C*x1 + x1, 0, M*Y, D*X + X + 1, N, x*x7 + x7, x7, b + Q + 1, G*x13 + 1, J*x12, x10 + 1, H*M + 1, a*u, A, Z, a + u, 1, v*G + v + G, x*y + y + 1, h*L, 4, P*V, x6, O*X, H*V + V + 1, 0, x3 + 1, h*x15, J*x8 + J, B*S, t + 1, x0, x6*x7 + x7, 1, B + 1, o*F, x14 + 1, h, u*x2 + x2, e*B, x2*x9 + x2 + x9 + 1, A*x4 + 1, S + 1, I*O + 1, d + P, l + 1, x7 + x15 + 1, 0, T + 1, c*G + c + G, I, F + x0, m*x11 + m + x11 + 1, a*x15 + x15, h + x + 1, A + 1, 0, I + J, 1, i*j + i, 1, D, t*x2 + t + 1}
+running getGB on F with option Algorithm => Sugarless
+Groebner basis is: 
+{1}
+Cpu time: .0004667 minutes
+
+number of variables = 86
+number of terms = 10
+max number of variables per term = 2
+random functions generated are: 
+{T + 1, C*X + 1, z*x8, 1, D*x24 + 1, x5, w + 1, K*T + K + 1, g*Y + g, x3*x21, w*x5 + x5, a*R + 1, q*u + 1, N*x8 + x8 + 1, g + x3, n*x16 + n + x16 + 1, x19 + 1, D + P + 1, L*Y + L + Y + 1, F*x20 + x20 + 1, x18 + 1, F*x11 + F + x11 + 1, x30, x30 + 1, x8 + 1, x*M + x + M + 1, T*x20, x18*x19, g*y + g, t*Q + Q, q + w + 1, f*z, R*T, t*x32, 1, f*M + f + M + 1, W*x30 + W + 1, x1, V + 1, p*O + p + O + 1, f, 1, G*x10 + G + x10 + 1, l*G + G, j + 1, b*x15 + b + x15, x9, 0, C + 1, U, g*P + g + P + 1, Z + 1, x23 + 1, W, x14*x25 + x14, m*x10 + m + x10 + 1, R, K + 1, S*x1 + x1, M + x17, x26 + 1, C*x2 + C + x2 + 1, P*x18 + P + 1, J + x10 + 1, x31, x30 + 1, Z*x10, O, x + x0 + 1, I + 1, t + E + 1, j + x9, x12 + x30, z*x19 + x19, G*x17 + G + 1, F*X + F, A, 1, D, D*Z + Z, p + x22, H, 2, x14*x18 + x14, C*F + C + F, g}
+running getGB on F with option Algorithm => Sugarless
+Groebner basis is: 
+{1}
+Cpu time: 0 minutes
+
+number of variables = 54
+number of terms = 6
+max number of variables per term = 2
+random functions generated are: 
+{k, b + c + 1, H + 1, d*F, j*K + K, n + B + 1, e + w + 1, p*J + J + 1, p + U + 1, N*R + R, 0, 1, n + N, E + 1, N, h + D + 1, S*Y, y*P + P, l*Z + l + Z, M + 1, k*B + k + B + 1, d, m, f*h, F, t, u*Y + 1, w*M, x + Z + 1, i*A + A + 1, b + 1, K, 1, x1 + 1, t*Y + Y, u, y + 1, k*A + k + A, 0, b*u + 1, h*T + h, g*N, k*Z, k*P + 1, c*G + 1, f + 1, 0, w + 1, 0, O + 1, z*Q + Q, r + 1, z + 1, H*V + V}
+running getGB on F with option Algorithm => Sugarless
+Groebner basis is: 
+{1}
+Cpu time: .0000666667 minutes
+
+number of variables = 91
+number of terms = 9
+max number of variables per term = 2
+random functions generated are: 
+{A, x17*x30 + x17, b, 1, 0, x8, 2, 0, I, x36 + 1, J*x26, 1, F*x17 + F + x17, l, X*x35 + X + 1, 1, 0, x35, c*x28 + 1, x4*x35 + 1, F*x34 + x34 + 1, s*O + O, x20 + 1, r*x7 + r + 1, n*Y + n + Y + 1, 0, k + 1, L*x20 + x20 + 1, Z*x22 + Z + x22, l + 1, T + 1, x37 + 1, 1, m*x20 + x20 + 1, T*x33 + x33, B*x19 + B + x19 + 1, U*x12, J*x20, x5 + 1, x18*x34 + x18 + x34 + 1, z + x13, A, 1, 0, x27 + 1, x27 + 1, 1, P + x10 + 1, a*x22, 1, I*x0 + I + 1, u + N + 1, 0, z, x0*x2 + x0 + 1, x3*x6 + x6 + 1, x20 + 1, M*x35 + M + x35 + 1, b*x7, v + x20 + 1, 0, 1, O*S + O, E + 1, j, g*x9 + x9, o + 1, w*x14 + x14 + 1, c*x38, w*x14, N*x10 + N, q*x36 + q + x36 + 1, 0, T, l*Y, q*S + S + 1, 0, X + 1, y*x34 + y + 1, l, Z, x23, X*x17, 0, b*v + b, D + 1, x32, w*x25 + 1, j*C + j + C + 1, a*x26, u + U + 1}
+running getGB on F with option Algorithm => Sugarless
+Groebner basis is: 
+{x38 + 1, x37 + 1, x36, x35 + 1, x34, x33 + 1, x32, x31, x30, x29 + 1, x28 + 1, x27 + 1, x26 + 1, x25, x24, x23 + 1, x22, x21, x20, x19 + 1, x18, x17, x16, x15 + 1, x14, x13 + 1, x12 + 1, x11, x10 + 1, x9 + 1, x8, x7 + 1, x6, x5, x4 + 1, x3 + 1, x2 + 1, x1, x0, Z + 1, Y, X + 1, W, V + 1, U + 1, T, S, R, Q + 1, P + 1, O + 1, N + 1, M + 1, L, K + 1, J, I + 1, H + 1, G + 1, F, E + 1, D, C + 1, B + 1, A + 1, z, y, x + 1, w + 1, v, u + 1, t, s + 1, r + 1, q, p + 1, o + 1, n + 1, m, l + 1, k, j + 1, i + 1, h, g, f, e, d + 1, c, b, a + 1}
+Cpu time: .00813385 minutes
+
+number of variables = 77
+number of terms = 10
+max number of variables per term = 2
+random functions generated are: 
+{x6 + x12, x20 + 1, E*x14 + 1, 1, 1, s*Y + Y, o*v, L + 1, l, z*P + 1, Y*x8 + Y + x8, x10, x8*x22 + x8 + x22, E*K + E, h + x6 + 1, V, c*e + 1, W*x14 + W + x14 + 1, C + 1, x1 + 1, x, x4, x1*x12 + x12 + 1, y*O + y, B, 0, g + x, 0, w + 1, x21*x24 + x21 + x24 + 1, N*x19 + N + x19, i + o + 1, x2, x17*x19 + x19, E, r + R + 1, u*N + u, 1, 0, E, M + W, Y*x24 + Y + x24, G + 1, e*E + e, 1, o*x23 + 1, E + 1, i + 1, S*x16, h*x24 + x24, N, Z, 0, j*w + w, 0, 0, 1, L*S + S + 1, W, x17, k*x23 + 1, a*e + a + e + 1, U*x0 + U, y, x0 + x10 + 1, m + K, x23 + 1, i*D + i + D, e + q + 1, B*E + B + E, N*O, x1*x24 + x24 + 1, T, A*x1 + x1 + 1, 1, h*x13 + x13, P}
+running getGB on F with option Algorithm => Sugarless
+Groebner basis is: 
+{x24 + 1, x23 + 1, x22 + 1, x21 + 1, x20, x19, x18, x17 + 1, x16, x15, x14, x13 + 1, x12 + 1, x11, x10, x9, x8, x7 + 1, x6, x5 + 1, x4 + 1, x3, x2, x1, x0, Y + 1, X + 1, W, V + 1, U, T, S + 1, R, Q + 1, P + 1, O, N + 1, M, L + 1, K, J, I + 1, H, G, F, E + 1, D, C + 1, B, A + 1, z, y, x, w, v + 1, u, t + 1, s, r + 1, q, p + 1, o + 1, n + 1, m + 1, l, k + 1, j + 1, i, h, g + 1, f + 1, e + 1, d + 1, c + 1, b + 1, a + 1}
+Cpu time: .00486698 minutes
+
+number of variables = 92
+number of terms = 3
+max number of variables per term = 2
+random functions generated are: 
+{d*M + d + 1, t, g*N + g + N, u, R, Z*x18, x11*x16, t*L + t, w*x31 + w, N, i + 1, x7*x26 + x26, c, 1, B*x13 + B + 1, I, t, u*x31, E*x32 + E, 1, q*x31, x4, K + x33 + 1, 0, 1, x2*x18 + x2 + x18, 1, K*x17 + 1, x14 + 1, x13, 1, C + 1, 1, G + 1, t + N, 0, b*R + 1, Q, h*x5, H + 1, 1, j*x13, 3, Q*W + 1, p*x16, o + 1, z*J, x39 + 1, d*x27, 0, 1, h*C, 1, 0, A + 1, x19*x21, x22, x, v, x37, D*x33 + D + x33, 1, 1, 0, x9*x18 + 1, Q*x12 + x12, x + x28 + 1, H*T + H + T, x24*x25 + x25, 2, G*P + G + P, a*P + a, c, I*x24, q, 0, x11*x14 + x11, W, x16 + 1, 0, 1, g*x24, P, b*C, m*x24 + x24, x9*x11 + x11, J, E, p, Y, x19, x33}
+running getGB on F with option Algorithm => Sugarless
+Groebner basis is: 
+{x39, x38, x37 + 1, x36, x35 + 1, x34, x33, x32, x31 + 1, x30, x29, x28 + 1, x27, x26 + 1, x25, x24, x23, x22 + 1, x21, x20 + 1, x19, x18 + 1, x17, x16, x15 + 1, x14, x13, x12, x11, x10 + 1, x9 + 1, x8, x7 + 1, x6 + 1, x5, x4 + 1, x3, x2, x1, x0 + 1, Z, Y + 1, X, W, V + 1, U, T + 1, S, R + 1, Q + 1, P, O + 1, N + 1, M, L + 1, K, J, I, H, G + 1, F, E + 1, D, C + 1, B + 1, A + 1, z + 1, y + 1, x, w + 1, v + 1, u + 1, t + 1, s + 1, r + 1, q + 1, p, o, n + 1, m + 1, l, k + 1, j + 1, i, h, g, f, e + 1, d + 1, c + 1, b + 1, a}
+Cpu time: .0048003 minutes
+
+number of variables = 75
+number of terms = 2
+max number of variables per term = 2
+random functions generated are: 
+{1, s*L + L, x16, 0, O*X + 1, 2, z + 1, R*x4 + R, 2, s, y + 1, D*L, c, 0, B + K, J + 1, n*o + o, 0, 1, J + Q, U, x15*x18 + x18, A, S, W, b*x18 + x18, x0, x8, I, m*x22, q*H + H, 1, K + 1, I, Y, x4*x12 + x4, 1, b + F, w*N + 1, x1, c*H + H, D, b*L, 2, a, s*W, X + 1, h*p, 0, Y, J*x4 + J, K, d*z + z, x8, j, x20, H*X + H, c, V + 1, p*x7, x0, a*x18 + 1, T + 1, A + 1, P*x11 + x11, 2, c, Q, x22, Z + 1, q*Y, x4, a*G, E*x5 + E, 1}
+running getGB on F with option Algorithm => Sugarless
+Groebner basis is: 
+{x22 + 1, x21, x20, x19, x18, x17, x16 + 1, x15, x14 + 1, x13, x12, x11 + 1, x10 + 1, x9 + 1, x8, x6 + 1, x5 + 1, x4, x3, x2 + 1, x1, x0, Z + 1, Y, X, W, V, U + 1, T, S + 1, R, Q, P + 1, O, N, M + 1, L + 1, K + 1, J, I, H, G, F + 1, E, D + 1, C, B, A, z, y, x + 1, w, v, u + 1, t, s + 1, r, q + 1, p + 1, o + 1, n, m + 1, l + 1, k + 1, j + 1, i, h, g + 1, f, e + 1, d, c + 1, b, a + 1}
+Cpu time: .00186678 minutes
+
+number of variables = 53
+number of terms = 9
+max number of variables per term = 2
+random functions generated are: 
+{1, c*q + q, e + n + 1, p*G + p, j, m*G + m + G, F, B*K + 1, q*C + q, v*D + v + 1, c + 1, i*U + U, b + l, k*x + k, F + 1, f, D, y*S, 1, o + 1, U + 1, 0, E, f*p + f, u*V + V + 1, c*s + s + 1, a*K + K, o + 1, A + H, w*T + T + 1, V + 1, X + 1, l*q + l + q, s*Q, 1, Z, u, d + o, g*x0 + 1, i*m, 1, x*F + x + F, u + D + 1, 1, k + Z + 1, i*N + N + 1, 1, I*Z + 1, 1, 0, X, c*w + 1, n}
+running getGB on F with option Algorithm => Sugarless
+Groebner basis is: 
+{1}
+Cpu time: .000533366 minutes
+
+number of variables = 57
+number of terms = 8
+max number of variables per term = 2
+random functions generated are: 
+{d + q, l*Z, h*Z + h, k*J + J + 1, 0, a, x*N, x*W + x, i + 1, Z, M + 1, 1, e*V + 1, 2, M, c, 1, k + 1, o*W + o + W, r*x2 + 1, B*W + W, d, N, O, l + s + 1, N*x2 + x2, 1, h*n + h, X, i*A + A, A*Z + Z, i + n + 1, x, w*D + 1, W + 1, t + N, w*T + T, e*x0 + x0, i*K + K, 1, g, N, 1, Y, g*F, h*J, M, v + 1, P + 1, c*x0 + c, h + 1, F, t + w + 1, V + 1, 1, h*x1, 1}
+running getGB on F with option Algorithm => Sugarless
+Groebner basis is: 
+{1}
+Cpu time: .0000666832 minutes
+
+number of variables = 92
+number of terms = 6
+max number of variables per term = 2
+random functions generated are: 
+{b*L + 1, w, r + x11 + 1, R*x0 + x0 + 1, L*x21 + 1, S*x12 + S + x12, 0, Q*x34, m*H + H + 1, D, g, M*x6, 1, x13 + x25, x4*x26 + x4 + x26 + 1, h + 1, 2, T + 1, L, Y*x20 + x20, O, k*v + k + v + 1, w, x25*x38 + x25 + x38, X + 1, x25 + 1, x4 + 1, C*x36, J + W, W*x15, P + Y, o, c*U + c + U + 1, s*G + 1, Y*x24 + Y + 1, O, 0, a*x34 + 1, x30*x36 + x36, x20*x37 + 1, x13 + x36, d*g + g, x*x9 + x + x9 + 1, S, t*B + t + B, O*V + O + V + 1, z, C*I + 1, x13, 3, x31*x36 + 1, n + 1, 1, x10, U + x15, 1, j*E + j, x0, j, q, F*x35 + 1, H*x6 + 1, x23 + 1, b*o, 1, x7 + x10, z*x10, f + x23 + 1, D*Y + D + Y, O*x19 + O + x19, h, 0, h*x35, M*x11 + M + 1, r + x18, x1*x20 + x20, y, x19, j*x0 + x0, E*x34, 1, g + x0 + 1, 0, l*x25 + x25, n*x29 + x29 + 1, h*r + h, x26 + x32, Y*x25 + Y, 0, r*O + r + 1, y*x2 + y + x2, s*x11 + x11 + 1}
+running getGB on F with option Algorithm => Sugarless
+Groebner basis is: 
+{1}
+Cpu time: .00373357 minutes
+
+number of variables = 71
+number of terms = 9
+max number of variables per term = 2
+random functions generated are: 
+{j*I + j + I, w*x5, b + x15, G, j*r, U, 1, b*v + b + v + 1, 0, x1, m*H + 1, X*x7 + 1, n*P + n + 1, g + 1, x1 + 1, g*C + g + 1, i*R, w, k*W + k + 1, a + 1, x18 + 1, i*o, h*u + h + 1, 1, 1, u, x6*x13, 0, d + 1, M, r*P, f*x13 + x13 + 1, m*Y + Y, r + H + 1, 1, Z + 1, x14 + 1, b*c + b + 1, B*x7 + B, x7*x12 + x12 + 1, d + 1, I, m + G + 1, y, X + 1, k*n + k + n, R*T + R, t*P, 0, Z, 1, o*G, h, 1, d*N + N, H*x10 + 1, t + v + 1, H + P + 1, m, f*M, g*B + 1, E + 1, x*y + y, 1, 0, y*R + y, d*P + d, W*x10 + x10, x14, k*V + V, y*A}
+running getGB on F with option Algorithm => Sugarless
+Groebner basis is: 
+{x18, x17, x16, x15, x14, x13, x12, x11 + 1, x10, x9, x8 + 1, x7, x6 + 1, x4 + 1, x3 + 1, x2 + 1, x1 + 1, x0 + x5 + 1, Z, Y + 1, X, W, V, U + x5, T + x5 + 1, S + 1, R + 1, Q, P + 1, O + 1, N + 1, M, L + 1, K + 1, J + 1, I + 1, H + x5, G, F + 1, E + 1, D, C + 1, B, A, z + 1, y + 1, x + 1, w + 1, v, u + 1, t, s + x5, r + 1, q, p + 1, o, n, m + 1, l + 1, k + x5 + 1, j + 1, i, h + x5 + 1, g + 1, f + x5, e + 1, d, c + x5, b + x5, a + 1}
+Cpu time: .00260017 minutes
+
+number of variables = 97
+number of terms = 9
+max number of variables per term = 2
+random functions generated are: 
+{1, 1, K + 1, 1, K*x33 + K + x33 + 1, m, 1, i*x + i + x + 1, i*x5, x, l + V + 1, F + O, c, k + 1, x9, p + 1, j + x30, W + 1, 2, 0, u*x38 + x38, O*x24 + x24 + 1, 0, R*x12 + 1, 0, k, s*x21 + s + x21, F + 1, x36, m*n + m, x12*x39 + x12, p*H, k*l + k + 1, d*x32 + x32, d*x, G*x41 + G + x41, K*x1 + 1, N*x19 + x19, G*x38, f*x23 + f + x23, M*x29, U, i*x22 + i + x22, s, P*x7 + x7, m + 1, K*x2, I, N*x29 + N, x13, 0, x41 + 1, c*x39 + c, J*T + J + T, r + 1, E*x7 + E + x7, i + x37 + 1, 1, z*x33, u + Q, 1, x22 + x36, x*K + 1, H, t, h*x20 + h, T*x2 + 1, x8*x15 + x15, w, x14, o*x5 + o, x33 + x41, o, y*x40, k*x38 + 1, x17, o + 1, d + W + 1, D*N + N, a + x13, j*N + j + 1, b*x + x, b, 1, q*x32 + 1, x5*x22 + x5, o, U*x0 + U + 1, x7*x41 + x7 + 1, u, x23 + 1, x3*x7 + x3, y, F + H + 1, C*x5 + C, x43, 1}
+running getGB on F with option Algorithm => Sugarless
+Groebner basis is: 
+{1}
+Cpu time: 0 minutes
+
+number of variables = 69
+number of terms = 1
+max number of variables per term = 2
+random functions generated are: 
+{i, g*o, 1, E*x12, v, o*x16, J, v*x16, t, x16, P, v, d, U*V, 1, 1, 1, t*F, 1, e, C, n, l, 1, 1, 1, x8, k*x7, f*x4, G, J*U, M, s, Z, g*x10, r*x13, L*x4, B*Z, 1, r*N, x1*x5, 1, f*B, z, r*B, E, m, r, j*r, h*H, F*x11, V, 1, 1, c, x6, x12, 1, 1, S*Z, x13, x15, u*x11, x7, b, n, j, x13, o*x12}
+running getGB on F with option Algorithm => Sugarless
+Groebner basis is: 
+{x15 + x16, x14 + x16, x13 + x16, x12 + x16, x10 + x11, x9 + x16, x8 + x16, x7 + x11, x6 + 1, x5 + 1, x4 + x16, x3 + 1, x2 + 1, x1 + 1, x0 + 1, Z + x16, Y + x11, X + x16, W + x16, V + x16, U + x16, T + x16, S + x11, R + 1, Q + x11, P + 1, O + 1, M + 1, L + x11, K + x11, J + x16, I + x11, H + x16, G + 1, F + 1, E + x16, D + 1, C + x16, B + x11, A + x16, z + 1, y + 1, x + 1, w + x16, v + x16, u + x16, t + x16, s + 1, r + x16, q + 1, p + 1, o + 1, n + x16, m + x16, l + x16, k + 1, j + x16, i + x16, h + x16, g + x16, f + x16, e + x16, d + x16, c + 1, b + x16, a + x16, x11*x16 + x11, N*x16 + N}
+Cpu time: .0020668 minutes
+
+number of variables = 81
+number of terms = 2
+max number of variables per term = 2
+random functions generated are: 
+{o*x23 + 1, D*x28, x14, 2, d, Y, 0, v*x4, v*x19 + v, Q + x17, f, q + J, e*x0 + e, 1, o, x0, e*i, 1, 1, 2, 1, h*s + h, z, 0, g + 1, m*N + m, K, 1, K*x6 + K, 1, 0, 0, x14*x26 + 1, E*x7, 1, 0, c, x14, J + K, B*E, U*x20 + 1, x12, 0, S, v, f, 0, u, c*x2 + 1, M*x13, S, 0, A*M, G + 1, 0, x3*x9 + x9, 1, L, x10, z*x2, 0, C*x25, x11, o + 1, r*x13 + r, f + y, x11, x2, Q, m, x11, x3 + 1, x21 + 1, x19 + 1, j*Q, z*x4 + z, P, z*K + z, f + x13, R*x22, E*M}
+running getGB on F with option Algorithm => Sugarless
+Groebner basis is: 
+{x28, x27, x26 + 1, x25, x24, x23, x22, x21, x20 + 1, x19 + 1, x17, x16, x15, x14 + x18, x13 + 1, x12, x11 + x18, x10 + x18, x9, x8, x7, x6 + x18, x5 + x18, x4 + 1, x3, x2, x1 + x18, x0 + x18, Z, Y, X + x18, W + 1, V + 1, U, T, S, R, Q, P, O + 1, N, M + x18, L + x18, K + x18, J, I + 1, H, G + x18 + 1, F, E, D + 1, C, B + 1, A + x18, z, y + 1, x, w, v, u + 1, t, s + 1, r + 1, q, p + x18, o + x18 + 1, n + 1, m, l, k, j, i, h, g, f, e, d, c + x18, b, a + 1}
+Cpu time: .00260017 minutes
+
+number of variables = 86
+number of terms = 8
+max number of variables per term = 2
+random functions generated are: 
+{Q*x31 + 1, x22 + 1, 2, n*x17 + x17, 2, l + x26, x25, 1, 2, e*P + 1, 0, x24, H*x12, Y, C + 1, x19, o, x2 + x7, E + 1, x10 + 1, k*x25 + 1, I + x22, m*B, x10, 1, x15 + 1, l + x18 + 1, D*x8 + 1, I*x21, 0, q*x17, x22 + 1, 0, x12, x9 + x11 + 1, l + 1, x10*x33, m, u + F + 1, s, F + S, E*S + E + S, x28 + 1, W*x9, G + 1, z*x8 + x8, F + 1, r*x17 + x17 + 1, 2, 1, 2, C*x18 + x18, K*x27 + K + x27 + 1, B + 1, x22, x2*x27 + 1, o*x8 + 1, x27, 0, s*G + 1, c*x15 + x15 + 1, g*x11 + 1, 0, v + 1, 0, 0, H*N + N + 1, 0, A + 1, x, x8*x21 + x8 + 1, x12 + 1, u*K + u + K + 1, U + 1, T, k + t, A*x17 + 1, x1*x8 + x1 + 1, e*H + e + H + 1, s + x22 + 1, L + 1, x24 + 1, l*x19, x32, 0, 1}
+running getGB on F with option Algorithm => Sugarless
+Groebner basis is: 
+{x33 + 1, x32, x31, x30 + 1, x29, x28 + 1, x27, x26 + 1, x25 + 1, x24 + 1, x23 + 1, x22, x21 + 1, x20, x19 + 1, x18 + 1, x17, x16, x15, x14, x13, x12, x11 + 1, x10, x9, x8 + 1, x7 + 1, x6, x5, x4, x3 + 1, x2, x1, x0 + 1, Z + 1, Y, X + 1, W, V + 1, U, T, S + 1, R, Q, P + 1, O, N + 1, M + 1, L, K, J, I, H, G, F + 1, E, D, C, B + 1, A + 1, z + 1, y + 1, x, w, v, u + 1, t + 1, s + 1, r + 1, q + 1, p + 1, o + 1, n, m, l + 1, k, j + 1, i, h + 1, g + 1, f, e, d, c, b + 1, a + 1}
+Cpu time: .0048003 minutes
+
+number of variables = 81
+number of terms = 9
+max number of variables per term = 2
+random functions generated are: 
+{s*F + F, j*t, t + x + 1, 1, O*x1 + x1, x17 + 1, L + 1, 1, x18, x27, J, n*x6, K*T + K + T + 1, a + U, I*Q + Q + 1, 0, K*x9 + x9 + 1, L*T + T, x16*x18 + 1, 0, J, 0, x13 + x28, I, x11, u*x28 + x28, q + z + 1, x12, y*x10 + y + x10 + 1, e*x18, m + 1, P*x17 + x17 + 1, x3*x22 + x22, P + 1, K + 1, i, F + 1, l*x20 + x20, y, S*x28 + S + x28, K + x7 + 1, Z + 1, o*x6 + 1, y*x1 + y + x1 + 1, r*x17 + r + 1, E + 1, g, N + x8 + 1, x10 + 1, 1, P, E, W, 0, L, g + 1, x24, N*x20 + 1, 0, J + x27 + 1, N, x10, D + x19, f, a, 1, 1, C*x4 + C + 1, r + M + 1, x1*x28 + x1 + x28 + 1, 1, x0 + 1, f*A, i, I, 1, v, l + J, o*q + o + q + 1, x4 + 1, d*q + d + q}
+running getGB on F with option Algorithm => Sugarless
+Groebner basis is: 
+{1}
+Cpu time: .00286685 minutes
+
+number of variables = 89
+number of terms = 6
+max number of variables per term = 2
+random functions generated are: 
+{W, x4*x35 + x35, M*U + U, x19, x7*x28 + x28, H*P + H + 1, X, K, r*T + T + 1, 0, 1, p + D + 1, Y*x25 + Y + x25 + 1, z + x2, d*r, 0, b*r + b, 2, 0, A*x36 + x36, z*X, z*Y + Y, e, x16 + x28, 2, 0, n, 1, 1, x16 + 1, 2, x27*x35 + x35, 0, B*x36 + x36, X + 1, 1, x25*x33 + x25, n*x16 + x16 + 1, k + 1, P + Z, x9*x14 + x9, s*x36, h*T + T, d, N*x34, j, x4*x20 + x4, 1, h*U + U + 1, B + x1, x*x13 + 1, 1, C + x23, 0, J*x28, D + 1, 1, s*x30 + x30, B*x2 + B, j*V, 1, 1, N*R + N, 0, Y*x28, 1, C + x28 + 1, 0, B*x34 + 1, L + 1, 1, s*x22 + s + x22 + 1, g*l, 1, c*n, B*x32 + 1, L, 0, N*x1 + x1, N + 1, g*x22 + g + 1, W, O + W, x11 + x20, w + 1, x5 + 1, d*x32 + x32 + 1, 0, v}
+running getGB on F with option Algorithm => Sugarless
+Groebner basis is: 
+{x35, x34 + 1, x33 + x36 + 1, x32 + x36, x31, x30 + x36, x29, x28 + x36 + 1, x27, x26, x25, x24 + 1, x23 + x36 + 1, x22 + x36 + 1, x21 + 1, x20, x19 + x36, x18 + 1, x17, x16, x15, x14 + x36 + 1, x13 + 1, x12, x11, x10 + x36 + 1, x9 + 1, x8 + 1, x7, x6 + x36, x5 + x36, x4 + 1, x3, x2 + x36 + 1, x1, x0 + x36, Z + 1, Y + x36, X + 1, W, V + 1, U + 1, T, S + 1, R + x36, Q, P, O + x36, N + 1, M, L + 1, K, J + 1, I, H, G, F, E, D + 1, C + 1, B + 1, A + x36 + 1, z, y, x + x36 + 1, w + x36 + 1, v + x36, u, t + x36, s, r, q, p, o, n + x36 + 1, m + x36 + 1, l, k + 1, j, i + 1, h, g + 1, f + 1, e + x36 + 1, d + x36, c + 1, b, a}
+Cpu time: .00533367 minutes
+
+number of variables = 90
+number of terms = 5
+max number of variables per term = 2
+random functions generated are: 
+{D*x7 + 1, N*x14, x26, F + x6 + 1, x4, b*x8, E + 1, x14, g*x20 + g + x20 + 1, x10, I*x13 + I + x13, G*x3, x5 + 1, a*h + h, x25 + 1, f + x20 + 1, b*x26 + 1, x36 + 1, H*x34, B + 1, 1, x20, k, l*O + O, v, g + X, 1, 1, 0, g*x13 + x13 + 1, x10, t + 1, x8*x24 + x24 + 1, U + 1, L*x26 + x26, 1, x21, 0, o*x22 + 1, x6*x36 + x36, M, w*C + w, x10, 1, w, b*x9 + b, x13*x16 + x13 + x16, 0, G + x23, H, s + x37 + 1, x24*x36, x1*x14 + x14 + 1, q + S, x7 + 1, 1, 1, P*X, 1, 1, x7*x19 + x19, R*x26 + x26, b + 1, I*T + I + T + 1, 0, E*J + E + J, S, L*x37, W*x18 + W + x18, q + 1, o + x, K*x10 + x10, c*U + c, q*x29 + q, x18, x1*x29 + x29, x2, x28 + 1, G*x37 + G + x37, k*x6 + k + 1, h, x19*x33, m, H*J + J, z*x29 + x29, x27 + 1, h*x5 + h, x0 + 1, 1, 1}
+running getGB on F with option Algorithm => Sugarless
+Groebner basis is: 
+{x37 + 1, x36 + 1, x35 + 1, x34 + 1, x33, x32, x31 + 1, x30 + 1, x29, x28 + 1, x27 + 1, x26 + 1, x25, x24, x23, x22 + 1, x21 + 1, x20, x19, x18 + 1, x17, x16 + 1, x15, x14 + 1, x13 + 1, x12, x11, x10 + 1, x9, x8, x7 + 1, x6 + 1, x5, x4 + 1, x3 + 1, x2, x1, x0, Z, Y, X, W + 1, V, U + 1, T, S + 1, R + 1, Q + 1, P + 1, O, N, M, L, K + 1, J + 1, I + 1, H, G + 1, F + 1, E + 1, D, C, B + 1, A + 1, z, y, x, w + 1, v, u + 1, t, s, r, q + 1, p + 1, o + 1, n, m + 1, l + 1, k + 1, j + 1, i + 1, h + 1, g, f, e + 1, d + 1, c + 1, b, a + 1}
+Cpu time: .00540035 minutes
+
+number of variables = 55
+number of terms = 3
+max number of variables per term = 2
+random functions generated are: 
+{0, D + 1, i + C, Q*X, t, n, P*W, q + t, x*x0 + x0 + 1, j*Z + Z + 1, l*O + 1, z + 1, 0, C + 1, e*N + N, f, B*Y + B, a*o + o, b + V, z*N, N, T, m, O, 1, 1, o*v + o, Z*x2, 1, M*S, V, t*Y, B, 1, o*D + o + D, N*Y + Y + 1, c*p, Z, v*x2, 1, n, g*Y + g, 1, q*T, 1, q*L + q + 1, 0, g*E, 1, W, 2, 1, F*X + F, c + 1, Q + 1}
+running getGB on F with option Algorithm => Sugarless
+Groebner basis is: 
+{x2, x1 + 1, x0, Z + 1, Y, X + 1, W + 1, U, T + 1, S + 1, R, Q + 1, O, N + 1, M, L + 1, K, J + 1, I, H + 1, G, F, E + V, D, C + 1, B, A, z + 1, y + 1, x, w, v + 1, u + 1, t + 1, s + V + 1, r, q, p, o, n, m, l, k + 1, i + 1, h + 1, g + P, f, e + 1, d + 1, c, b + 1, a, P*V + V}
+Cpu time: .000533367 minutes
+
+number of variables = 74
+number of terms = 2
+max number of variables per term = 2
+random functions generated are: 
+{x11 + 1, F, k*s, g*G, g + 1, E*x2, P*x18 + x18, X*x8 + x8, 1, C + 1, Q*S + 1, x4, V*x7 + V, X, 0, x0, R*x21 + R, f + 1, 0, p, q + 1, L, 0, m*x0 + m, H*Y + Y, x, Y, T*x0, g, d, x6 + 1, H*x13 + 1, L, x19, T, 1, 0, F + 1, m*X + 1, v + X, 1, r*x8 + x8, 0, y*x19 + x19, d*n + 1, 2, I, d, 1, x7 + 1, 1, s*E, 1, 0, 2, 1, Q, 0, x18, 1, d, s*x10 + 1, x19 + 1, 1, H*K + 1, m + 1, 1, 0, n + 1, S + 1, 0, 0, Y*x8, S*X + 1}
+running getGB on F with option Algorithm => Sugarless
+Groebner basis is: 
+{x21 + 1, x20, x19, x18, x17, x16 + 1, x15, x14 + 1, x13 + 1, x12 + 1, x11 + 1, x10 + 1, x9 + 1, x8, x7 + 1, x6, x5, x4, x3 + 1, x2, x1, x0 + 1, Z, Y + 1, X, W + 1, V, U, T, S + 1, R, Q, P, O + 1, N, M + 1, L, K, J + 1, I, H, G, F + 1, E + 1, D, C, B, A + 1, z, y + 1, x, w, v, u + 1, t + 1, s, r + 1, q, p + 1, o, n, m, l, k + 1, j + 1, i + 1, h, g, f, e + 1, d, c, b + 1, a}
+Cpu time: .00166678 minutes
+
+number of variables = 58
+number of terms = 5
+max number of variables per term = 2
+random functions generated are: 
+{n*K + K + 1, p*N + N, x1 + 1, c, 1, G*X + X, U, x5, P, k, P*Y + Y, C*X + 1, f*s + s, F, h*N, 0, N*W + N + W, E, v*x1 + x1, 2, 1, 4, 1, l*y + y + 1, d + z, u*Q + u + 1, H*J + H + 1, c*D + c + 1, 0, 1, s*S + s + 1, z*U, K*T, K*Y, W + x0, 2, Y, 0, e + 1, m + M + 1, g*k + 1, B + 1, 0, q*x, p*J, 1, k + Z, v + I + 1, n + T + 1, q*v + q + 1, K*S + K + S, m, V, x + 1, d + e, B*O + 1, C + x3 + 1, R + 1}
+running getGB on F with option Algorithm => Sugarless
+Groebner basis is: 
+{1}
+Cpu time: .000466699 minutes
+
+number of variables = 60
+number of terms = 7
+max number of variables per term = 2
+random functions generated are: 
+{z*J, l*K + l + 1, G, 0, c + x1, x2, w*B, k + x2 + 1, k + 1, v + 1, k*Q + k + 1, c*v, C, p + O + 1, t, v, d, J, M*V, S + x1 + 1, G*x5, G*V + G + 1, F + 1, r*v + r, R + x4, r + x7 + 1, K*R + R, z + O + 1, i + n, a*U, 1, 1, a, x*P + x + P, d*J + d + J, n + 1, T*V, c*h + c + h, y*x7, 1, I*S + S, k, C + x0, l*q + 1, Z, n*K, d*O + O, g, 2, G*R + G + 1, M + 1, Z*x1 + x1 + 1, Y, e*K, j*A + j, 0, n*T + 1, f + 1, c, s*U + U}
+running getGB on F with option Algorithm => Sugarless
+Groebner basis is: 
+{x7, x6, x5 + 1, x4 + 1, x3, x2, x1, x0 + 1, Z + 1, Y + 1, X + 1, W, V, U, T, S + 1, R + 1, Q + 1, P + 1, O, N + 1, M, L, K, J + 1, I + 1, H + 1, G, F + 1, E + 1, D, C, B + 1, A + 1, z, y, x, w, v + 1, u, t, s, r + 1, q, p + 1, o, n, m, l, k + 1, j, i, h, g, f, e, d, c, b + 1, a}
+Cpu time: .00140008 minutes
+
+number of variables = 92
+number of terms = 4
+max number of variables per term = 2
+random functions generated are: 
+{u + 1, V + x1, P, j*X + j, o*p + 1, x25, Z*x16 + Z, 1, 1, 0, 0, P, p + B + 1, E*x5 + 1, V + 1, x0, x, 0, e*C + C, C*x26 + 1, c + S, G*x24 + 1, o*x33 + x33, 1, h, p, x10 + x11, Z*x15 + Z, x16 + 1, C + F, E + x23, K, m*x2 + m, W + x9, 0, H, 0, r*F + 1, S*W + W + 1, x28*x32 + x32 + 1, k + u + 1, 1, x17 + 1, x7, 1, P, g*x15 + x15, a*s + a, 1, 1, O*x9 + O, 1, Y, v*x8 + 1, Y*x16 + x16, g, x32, 0, 0, 1, x6, 1, h*i + h, x*x33, j, R*x13 + R, 1, x8*x34, E*x32 + E + x32 + 1, z*C + C, 0, x11*x30 + x11 + 1, M*x9 + M, 0, I*T + 1, E + 1, j*T + j + T, t*A, x11 + x24 + 1, f*x24 + x24, g, p, x39 + 1, q*Y + Y, 0, 2, m*x9 + 1, h + p, C*M + 1, q, T + Z, w*x5 + x5}
+running getGB on F with option Algorithm => Sugarless
+Groebner basis is: 
+{1}
+Cpu time: .00246683 minutes
+
+number of variables = 81
+number of terms = 1
+max number of variables per term = 2
+random functions generated are: 
+{x14, 1, 1, j, 1, 1, t*W, x14*x24, 1, p, H*L, m, 1, x15, 1, j, x6, d*E, N*x2, x18, K, 1, i*N, x13, 1, U*W, 1, 1, 1, s*Y, x12, m*I, w*K, 1, e, x0, x11, n*p, p*x0, l*x13, W*x24, h, R*x23, m*V, 1, g, f*x12, x5, j*s, 1, x1, x17, z, m*w, x1, F, 1, x4*x22, u*x19, x22, J*x6, 1, J, V, z, e, U, Y, j, 1, 1, N, 1, c, v, x11*x23, S, x9, x17, m, 1}
+running getGB on F with option Algorithm => Sugarless
+Groebner basis is: 
+{x28 + 1, x27 + 1, x26 + 1, x25 + 1, x24 + 1, x22 + 1, x21 + 1, x20 + 1, x19 + 1, x18 + 1, x17 + 1, x15 + 1, x13 + 1, x12 + x14, x11 + 1, x10 + x14, x9 + 1, x8 + x14, x7 + 1, x6 + 1, x5 + 1, x4 + 1, x3 + 1, x2 + 1, x1 + 1, x0 + x14, Z + 1, Y + 1, X + 1, W + x16, V + 1, U + x14, T + x16, S + 1, R + 1, Q + x23, P + x14, O + x16, N + 1, M + x14, L + x16, K + 1, J + x14, I + 1, H + 1, G + 1, F + 1, E + x14, D + 1, C + 1, B + 1, A + 1, z + x14, y + 1, x + 1, w + 1, v + 1, u + 1, t + 1, s + 1, r + x14, q + 1, p + x16, o + 1, n + 1, m + 1, l + 1, k + x16, j + x16, i + 1, h + x14, g + x16, f + 1, e + 1, d + x16, c + 1, b + 1, a + x14, x14*x16 + x14}
+Cpu time: .0030002 minutes
+
+number of variables = 60
+number of terms = 9
+max number of variables per term = 2
+random functions generated are: 
+{Q, x0*x4, o*Z + 1, 1, t + 1, C, x*X, h*x1 + x1, 0, F, w*X + w, d*x0 + d + x0 + 1, k*P + P + 1, N, C*F + C + 1, d, 1, T + 1, E*x5 + x5, 0, u*U + 1, J*x7 + x7 + 1, f*X + f, n*U + U, x3 + 1, U + 1, k, j*u + j + u, p, n*s + n + s + 1, i, K + 1, 1, 1, m*X, s*S + S, y*H + H, 0, 1, S + 1, L, d*h + d, 1, i + C, t, M + 1, l, Q + W, y + x5, a, d*x5 + d + 1, w*E + w + 1, g*j + j, z*T + 1, 0, r*H + 1, G*R + R + 1, 1, S*Z + Z, U*X}
+running getGB on F with option Algorithm => Sugarless
+Groebner basis is: 
+{1}
+Cpu time: .000533367 minutes
+
+number of variables = 63
+number of terms = 7
+max number of variables per term = 2
+random functions generated are: 
+{o*p + o + p, l + 1, r + x3, f*x9, p, K*x4, 1, l*N + N, q + z, T*W + 1, m*t + 1, w + 1, b + r, v*z + z, o, f + J, a*o + o + 1, x1, I, a*g + a + 1, i*J + 1, Z, u*v + u, u + 1, L*O + L + 1, x*z + x, x10, d*T, 1, c*x8, i*J, X, 1, 1, u*C + 1, 0, a*x1 + x1 + 1, s + G, 0, d*r + r + 1, m, q*G + G, m + L + 1, h*x4, q*R + 1, B, q, 0, m*L + m + 1, I, C + T, 0, 0, K + 1, k + Z, x*x4 + x, 0, C + x10 + 1, 1, P, r*R, x2 + 1, h + x8}
+running getGB on F with option Algorithm => Sugarless
+Groebner basis is: 
+{x9 + x10, x8, x7, x6 + 1, x5 + x10, x4, x3, x2 + x10 + 1, x1 + x10 + 1, x0, Z, Y + 1, X, W + 1, V, U + 1, T, S + 1, R, Q + x10, P, O + x10, N + x10, M, L + 1, K + x10, J, I, H + 1, G + 1, F, E, D, C + 1, B, A + x10, z, y + x10, x, w + 1, v, u + 1, t + 1, s, r + x10 + 1, q + 1, p, n, m + x10, l, k + x10 + 1, j + 1, i + 1, h + x10, g + 1, f, e, d, c + x10 + 1, b + 1, a + o, o*x10 + o}
+Cpu time: .00260017 minutes
+
+number of variables = 57
+number of terms = 8
+max number of variables per term = 2
+random functions generated are: 
+{O*x3, k*M, d + v, j + 1, h + B + 1, g, 0, 1, g + 1, A + x3, 1, C*K + 1, x1 + 1, v + Y, D*x4 + D + x4 + 1, J*x1 + J, 1, i*U, F + 1, h*Q + 1, x3, w*O + w + O, I*N, J, o + w, 1, n*T + n + T + 1, l*K + 1, 1, Z, a*x2, S*x2, b, d + V, l*L + l + 1, m*K + K + 1, J*x0 + J + 1, a + s + 1, o + L, x + x0 + 1, j*N + N + 1, 1, V + 1, l, 1, 0, N, P + 1, a*D + a + D + 1, a, f + o, d + D, i + Z, D, u, i, g}
+running getGB on F with option Algorithm => Sugarless
+Groebner basis is: 
+{x4, x3 + 1, x2 + 1, x1 + 1, x0, Z + 1, Y, X + 1, W, V, T, S + 1, R + U + 1, Q + 1, P + 1, O + 1, N + U, M, L, K + U, J + U + 1, I + U, H, G, F + 1, E + 1, D + 1, C + 1, B + 1, A, z + 1, y + U, x + U + 1, w + U, v + 1, u + 1, t, s, r + U, q + 1, p, o, n + 1, m, l + U + 1, k + 1, j + 1, i + 1, h + 1, g, f, e + 1, d, c + 1, b, a + 1}
+Cpu time: .00080005 minutes
+
+number of variables = 54
+number of terms = 9
+max number of variables per term = 2
+random functions generated are: 
+{0, u, r*s + r + 1, M, F, b*V + b + 1, 0, m*T, R + 1, d*E, x*V + 1, t + 1, u*x + u, m*x0 + m + x0 + 1, G + N + 1, A + J, v*M + v, 0, 0, W, r + S + 1, j*H, K*Z + Z, 0, 1, 1, N, P*U + 1, o, B*K + K + 1, 1, j, F, 2, t*F + 1, C*F + F, 1, T, n*B + n, 0, H*S + H + 1, 1, m*M + m, o*U, 0, n*D, e*m + m, 1, 0, J*Z + J + Z + 1, 1, 0, r, T}
+running getGB on F with option Algorithm => Sugarless
+Groebner basis is: 
+{x1, x0, Z, Y + 1, X + 1, W, V + 1, U + 1, T, S, R + 1, Q + 1, P + 1, O + 1, N, M, L, K + 1, J, I + 1, H, G, F, E + 1, D, C + 1, B, A, z + 1, y + 1, x, w, v, u + 1, t, s, r, q, p, o + 1, n, m + 1, l + 1, k + 1, j, i, h, g, f + 1, e, d, c + 1, b + 1, a}
+Cpu time: .000733383 minutes
+
+number of variables = 88
+number of terms = 1
+max number of variables per term = 2
+random functions generated are: 
+{S, i*I, r*x26, M, x10, s, k*x32, d*M, Z, Z, O*x11, x29, x5, x18, a, x5, 1, w*W, t*x9, x9, c*x20, 1, k, 1, x24, c, 1, 1, u, t, U, n, F*T, x8, 1, F, 1, T*x27, x20, x9, u*w, T*U, F*x7, x5, F*x31, x11*x15, I*x2, G*x22, 1, c*W, L, 1, g, H, x11, f*x32, 1, x32, N*x21, V, U, 1, 1, 1, u*x8, w*C, V*x16, x33, G, 1, Q*x3, x1*x21, 1, 1, 1, 1, x7*x25, A, i, x15, x31, M*x14, h*E, h, H, T*x28, x15*x32, E}
+running getGB on F with option Algorithm => Sugarless
+Groebner basis is: 
+{x35 + 1, x33 + x34, x32 + 1, x31 + 1, x30 + 1, x28 + 1, x27 + x34, x26 + 1, x25 + 1, x24 + x29, x23 + 1, x22 + 1, x21 + 1, x20 + 1, x19 + 1, x18 + x29, x17 + 1, x16 + x29, x15 + x34, x14 + x29, x12 + x13, x11 + 1, x10 + 1, x9 + 1, x8 + 1, x7 + x29, x6 + 1, x5 + 1, x4 + 1, x3 + 1, x2 + 1, x1 + 1, x0 + x13, Z + 1, Y + x34, X + x13, W + 1, V + x29, U + 1, T + x34, S + x29, R + 1, Q + x29, P + x34, O + x13, N + 1, M + 1, L + x34, K + 1, J + x29, I + 1, H + 1, G + x29, F + x29, E + 1, D + 1, C + x13, B + 1, A + 1, z + x13, y + x29, x + 1, w + x13, v + 1, u + x13, t + 1, s + 1, r + x13, q + 1, p + 1, o + x29, n + x29, m + 1, l + x29, k + x13, j + 1, i + 1, h + 1, g + x13, f + 1, e + 1, d + 1, c + x13, b + 1, a + x29, x29*x34 + x29}
+Cpu time: .00553368 minutes
+
+number of variables = 98
+number of terms = 9
+max number of variables per term = 2
+random functions generated are: 
+{0, g*x39 + g, U + 1, E*x39 + 1, n*x3 + n + 1, x26, x39, V + 1, k*x44 + k + 1, x17*x45 + x45 + 1, B + x7, u, x7, m*x19 + 1, f + x40 + 1, I*x15 + I + 1, 0, x19 + x42 + 1, o, 1, B*x21 + 1, T, x27 + 1, R*x15 + R + x15, z, X, h*j + h, y + x37 + 1, s*T + s, j*x13 + 1, n*N + N + 1, x6*x41, U + 1, C*x1, x44, x12 + x38, b*t + b, 1, 0, v, x33*x37 + x37, f*U + 1, x19*x40 + x19 + 1, C + x37 + 1, x1*x23, p*x25 + x25, x14*x19 + 1, x42 + 1, x21 + 1, G*x39 + x39, o + x4 + 1, 0, Y*x26 + Y + x26 + 1, j*x43 + j, T, x16 + x42, y + 1, 0, x25 + 1, I*V, x21, v*F + v, 0, x17, x24, n*O, x18, c + B + 1, z*B + z, H*x20, 0, d*V + d + 1, 1, n*x0 + x0 + 1, x10*x39 + x39, x16, 1, f + 1, 2, l*Y + 1, 1, Z*x6 + 1, c, M + 1, l + 1, y + x43 + 1, F*x18, s, x34 + 1, l + W + 1, x18, x20, 2, N*x23 + N + x23 + 1, x27*x33 + x33, x3*x41 + x3 + x41, e*O + O + 1, x36}
+running getGB on F with option Algorithm => Sugarless
+Groebner basis is: 
+{x45 + 1, x44 + 1, x43, x42, x41, x40, x39 + 1, x38, x37 + 1, x36 + 1, x35 + 1, x34, x33, x32, x31 + 1, x30, x29 + 1, x28 + 1, x27 + 1, x26, x25 + 1, x24 + 1, x23, x22 + 1, x21, x20 + 1, x19 + 1, x18, x17, x16, x15, x14, x13, x12 + 1, x11, x10, x9 + 1, x8, x7 + 1, x6, x5, x4, x3, x2 + 1, x1, x0 + 1, Z, Y, X + 1, W + 1, V + 1, U + 1, T + 1, S, R, Q, P + 1, O + 1, N + 1, M, L + 1, K, J + 1, I + 1, H, G, F, E, D + 1, C, B + 1, A, z + 1, y + 1, x, w, v + 1, u + 1, t + 1, s + 1, r, q, p, o + 1, n, m + 1, l + 1, k, j, i + 1, h, g + 1, f, e + 1, d + 1, c, b, a}
+Cpu time: .00880055 minutes
+
+number of variables = 82
+number of terms = 4
+max number of variables per term = 2
+random functions generated are: 
+{g + x11, A + 1, l*I + I, x0 + 1, l, i + D + 1, W*x9 + W + 1, x27, A*x12, T*x3 + x3, h + o, p, 1, g, x*x9 + x + x9, B + x5 + 1, a*x27 + 1, P*x8 + P + x8, h*q, o*z + z + 1, c, x11, k*p + k + p + 1, x23, f*s + s + 1, R, t*x + x, l*Y + 1, x24 + 1, 0, x19 + x25 + 1, k*q + k + q + 1, R + 1, x22 + 1, 1, N*V + N + V + 1, c + G, x27, x2 + 1, m*x14 + m, b + x9, F + x6 + 1, z, x18*x21 + x21, d*s + s, 0, x0*x3, x27, x28 + 1, 0, l*x23 + 1, 2, S, s + x12, 0, o*M + o, 0, x26*x29 + x26, c*x1 + c + 1, 0, f, y + x0, g + 1, f*x26 + f, r*x26, x11, x10, x17 + 1, r + 1, x17, F + S + 1, x3, k*x8, j + 1, x0, 1, a*x10 + a + 1, u*x8 + u + x8, x28, V*x6 + x6 + 1, 0, 0}
+running getGB on F with option Algorithm => Sugarless
+Groebner basis is: 
+{x29, x28, x27 + 1, x26, x25 + 1, x24 + 1, x23 + 1, x22, x21 + 1, x20, x19, x18 + 1, x16, x15 + x17 + 1, x14, x13 + 1, x12, x11 + 1, x10, x9 + 1, x8 + 1, x7, x6 + 1, x5, x4, x3, x2, x1 + 1, x0, Z, Y + 1, X, W + 1, V + 1, U, T, S, R, Q, P, O, N + 1, M + 1, L + 1, K, J, I + 1, H + 1, G + 1, F, E, D, C, B + 1, A, z, y + 1, x + 1, w + 1, v + 1, u + 1, t + 1, s + 1, r + 1, q + 1, p, o + 1, n + 1, m + 1, l, k, j, i, h + 1, g + 1, f + 1, e, d + 1, c + 1, b + 1, a}
+Cpu time: .00326688 minutes
+
+number of variables = 80
+number of terms = 2
+max number of variables per term = 2
+random functions generated are: 
+{x22, y + 1, x24, J*x12 + x12, T*x15 + 1, 0, x4, x20, j, y*M + 1, U, H*L, x1, d, 1, K + x2, 1, x10*x24, W + 1, P, 0, 1, y, R, 1, y, Y*x4 + x4, x20 + 1, c, 0, o*x18 + o, x4, H, H*x19 + x19, w*y, c + I, M*x14, p*U, 1, c*m, S, U + x23, x4, 1, s + 1, 0, b, c, t, A + x22, Q*V, e*x, x13*x27, i*W, 0, 1, y*Q + 1, x19, H*O, x16, P, 0, x27, 1, g + x22, C*x6, x4, i, 2, Y + 1, g, X + x26, u*Y + u, F*x25 + 1, o + t, 1, x6, i*x19, r*x26 + r, e*C + 1}
+running getGB on F with option Algorithm => Sugarless
+Groebner basis is: 
+{1}
+Cpu time: .00186678 minutes
+
+number of variables = 94
+number of terms = 7
+max number of variables per term = 2
+random functions generated are: 
+{y*U, x6*x40 + x6, a, S, U, 0, j*x9 + 1, x4 + 1, 1, D*J + D + J, R*x0 + x0 + 1, x6*x23 + 1, 0, P, D + 1, e*x20 + e + x20, H, w*x23 + x23, x36, n*x11 + x11, 1, x5*x39 + x5 + x39, z*x17 + x17 + 1, E + x3 + 1, O*x37 + x37, 1, x9*x12, x1*x33 + x1 + 1, x40 + 1, x9*x37 + x9 + x37, z*x22, f*x6 + 1, 2, 1, p*B, x32 + 1, O, x35, O, 0, a, x25, v + Q + 1, E, M, x0 + x39, x22 + 1, 1, 1, J, x5, o*x36 + o + 1, x34, 0, 0, R, J, R, Q*x21 + x21, Z, 0, a*k, F*T, x9*x23 + x9 + 1, k + x30 + 1, P + 1, o*x25 + o + x25 + 1, x31*x33, 0, l, x23, x27*x31 + x31, x22*x28 + x22 + 1, x4, D*x13 + D + x13, D, p + 1, x, 2, e*f + f, x3, x7, x13, a, x33 + x40 + 1, m*x25 + m + 1, Y + 1, p*x20 + x20, x17 + 1, 2, x12*x37 + x37 + 1, y*x29 + x29 + 1, x18, x40}
+running getGB on F with option Algorithm => Sugarless
+Groebner basis is: 
+{x41, x40, x39 + 1, x38 + 1, x37, x36, x35, x34 + 1, x33 + 1, x32, x31, x30, x29, x28, x27, x26, x25 + 1, x24, x23, x22, x21 + 1, x20 + 1, x19, x18, x17 + 1, x16, x15, x14, x13, x12 + 1, x11 + 1, x10, x9, x8, x7, x5, x4 + 1, x3, x2, x1, x0 + 1, Z, Y, X + 1, W + 1, V + 1, U + 1, T, S, R, Q + x6 + 1, P + 1, O, N, M, L, K, J + 1, I + 1, H + 1, G, F + 1, E, D, C + 1, B + 1, A, z + 1, y, x + 1, w + 1, v + 1, u + 1, t, s, r, q + 1, p + 1, o + 1, n + 1, m, l + 1, k, j + 1, i + 1, h, g + 1, f, e + 1, d, c, b + x6, a}
+Cpu time: .00466695 minutes
+
+number of variables = 69
+number of terms = 5
+max number of variables per term = 2
+random functions generated are: 
+{M + x0 + 1, g*G + g, 1, f, y, e*J + J, a, f + x15 + 1, T + 1, 1, z*T, x4, e + z, g + 1, U, 1, h, Z*x0 + x0 + 1, p + 1, L + x10, h + 1, f, 0, 1, 1, 1, N*x14 + N + x14 + 1, W, M + 1, o*F + F, e, q, e*B, J, x5*x12 + x5 + x12 + 1, c*e + c, h*I + 1, e*u + e + 1, c*K + K + 1, H + x7 + 1, 0, x1*x16 + x1, x0*x6 + x6 + 1, L + 1, 1, P + 1, g*x3, B*K + B + 1, d*R, x5 + 1, x9 + 1, u*x16 + x16, x3*x7, r + 1, E, T + x9, I*U + U + 1, v, v*J, f*F + f + F, f*k + k + 1, 3, l*M, k*x1 + x1, 1, B*V + B + V, n + W, 0, C + 1}
+running getGB on F with option Algorithm => Sugarless
+Groebner basis is: 
+{x16 + 1, x15, x14 + 1, x13 + 1, x12 + 1, x11, x10 + 1, x9 + 1, x8, x7 + 1, x6, x5, x4 + 1, x3, x2 + 1, x1, x0, Z + 1, Y, X + 1, W, V + 1, U, T + 1, S + 1, R + 1, Q + 1, P, O, N, M + 1, L, K + 1, J, I, H, G, F + 1, E + 1, D + 1, C, B, A, z + 1, y + 1, x + 1, w, v, u, t + 1, s, r + 1, q + 1, p + 1, o, n + 1, m, l + 1, k + 1, j + 1, i, h + 1, g, f, e + 1, d, c + 1, b, a}
+Cpu time: .00193345 minutes
+
+number of variables = 60
+number of terms = 3
+max number of variables per term = 2
+random functions generated are: 
+{u, L*x4 + L, I*O + O, P, u*x1, 0, S*W + S + W, Q, 1, I*x7, W*x2, 1, d*S + d + S, o + s + 1, S*X + S + 1, 0, k*Q + Q, b*L + b, f*y + f, j*r + r, 1, w*x2 + w, 0, 1, x*L, g*F, 2, e*x7, f, a*u + a + 1, i*l, 0, 0, P + 1, h, x*F + 1, y, h, d*y + d, S*T + T + 1, r*O, k*H + k, 1, 1, t*u + u, f, 1, l*x2, x3, n*x5 + 1, M, h + q + 1, R*x1 + R, T + 1, e*Y, K*x7 + K + x7, z + 1, U, x7, d + 1}
+running getGB on F with option Algorithm => Sugarless
+Groebner basis is: 
+{x7 + 1, x6 + 1, x5 + 1, x4 + 1, x3 + 1, x2, x1 + 1, x0, Z + 1, Y, W + 1, V, U + 1, T, S + 1, R + 1, Q + 1, P, O, N + 1, M, L + 1, K + 1, J + 1, I + 1, H + 1, G, F, E + 1, D + 1, C, B + 1, A, z, y + 1, x + 1, w, v, u + 1, t, s, r, q + 1, p, o + X, n + X + 1, m + 1, l + 1, k, j + 1, i + 1, h + 1, g + 1, f, e + 1, d, c, b, a + 1}
+Cpu time: .000933401 minutes
+
+number of variables = 57
+number of terms = 4
+max number of variables per term = 2
+random functions generated are: 
+{u, 1, x2, J*Z + Z, F*x0 + F + x0 + 1, h, n*y + n, k, Y*x4, m + K, k*o, D + 1, O*x4 + O, 1, r*x3 + r + 1, z + 1, N, s + E, 1, H*x3 + x3, f*C + f + C + 1, f*m, k*Z + k, x2 + 1, m*x2 + m, 0, U, C*U, I, x + 1, z*O + z + 1, r + H + 1, k, d*x + d, o*q + 1, V + 1, 0, K, c*x1, 1, x*O + x + 1, r*H + r + H, o*N + o, g*z + g, 3, c*x2 + c + x2 + 1, j + 1, J + 1, s + Z, 1, r*x + r, 0, z*Y + z + Y, q*X + q, C, a*x0 + 1, E}
+running getGB on F with option Algorithm => Sugarless
+Groebner basis is: 
+{x4 + 1, x3 + 1, x2, x1, x0, Z, Y, X + 1, W + 1, U + 1, T + 1, S + 1, R + 1, Q, P, N + 1, M, L, K, J + V + 1, I, H, F + 1, E + 1, D, C, B, A + 1, z, y, x + 1, w + G, v, u + G + 1, t + 1, s + 1, r, q + 1, p + 1, o + 1, n + 1, m, l + 1, k + G, j, i, h + G, g + 1, f + G, e, d, c, b + 1, a + G + 1}
+Cpu time: .000866717 minutes
+
+number of variables = 56
+number of terms = 1
+max number of variables per term = 2
+random functions generated are: 
+{k, 1, 1, 1, K, 1, 1, c, 1, n*K, c*s, 1, C*x2, 1, l, f*Z, I, u*N, m, D, m*M, z, h*x1, i*x3, p*x3, q, h, 1, F, 1, 1, B, 1, p*w, u*L, 1, m, k, x, 1, e, 1, j, f*o, f*r, x2, g*k, M, w, x1, d, x, Z, K*P, H, G}
+running getGB on F with option Algorithm => Sugarless
+Groebner basis is: 
+{x3 + 1, x1 + x2, x0 + 1, Z + 1, Y + 1, X + x2, W + x2, V + 1, U + x2, T + x2, S + x2, R + 1, Q + x2, P + 1, O + x2, N + 1, M + 1, L + x2, K + x2, J + 1, I + x2, H + x2, G + 1, F + 1, E + 1, D + 1, C + 1, B + 1, A + 1, z + x2, y + 1, x + 1, w + x2, v + x2, u + x2, t + 1, s + x2, r + x2, q + x2, p + 1, o + 1, n + 1, m + x2, l + 1, k + x2, j + x2, i + 1, h + 1, g + 1, f + 1, e + x2, d + 1, c + 1, b + 1, a + x2}
+Cpu time: .000666717 minutes
+
+number of variables = 100
+number of terms = 9
+max number of variables per term = 2
+random functions generated are: 
+{x25*x36 + x36, x39, 1, x20*x35 + x20, A, r*N, c + x2, m*x29 + m + 1, x38, z + x38 + 1, F*x2 + F + x2, L*x6 + 1, b*L + 1, o*Z + Z, x7*x26 + 1, E, E*x33 + E + 1, Q, 0, x23*x33, x2 + x4, x18*x21 + x18 + x21 + 1, x6 + 1, 0, c + x2 + 1, x41 + 1, Q + 1, x2*x39, c + p, x20*x34, x37*x43 + x37 + x43, x23*x37, C + x2 + 1, x19*x22, 1, x3*x44 + 1, x16, k*T + T + 1, x24 + 1, i*x32 + i + x32 + 1, x21, 1, x11 + 1, w, r*x47 + x47 + 1, h*x22 + x22 + 1, 0, 0, n*x21, W*x37 + W, P + 1, B + x39, E + 1, d + x30, o*x47 + o + x47, 0, X + Z, 1, D + x0, s, y*x29 + x29, f*g + g, j, Y + 1, r, U*x16, x19, x9, e, q*H, m*y, i + t + 1, H*R + H + R, x34*x40, x35, A + x3, L*S, Q*x30, O*x37 + x37, x18*x26 + x18 + x26, x8*x46 + x8, K + X, y, s*x47, g*Q + 1, i, x22, m, x6*x19 + x6 + x19 + 1, Q, x23*x30 + x23 + x30 + 1, c*i + 1, x4, l*R + l + 1, x29*x40 + x29 + x40, l, x + x4, w*x3 + x3, A*x8 + 1, n + X}
+running getGB on F with option Algorithm => Sugarless
+Groebner basis is: 
+{x47, x46 + 1, x45, x44, x42 + 1, x41 + 1, x40, x39 + 1, x38, x37, x36, x35, x34, x33, x32 + 1, x31, x30 + 1, x29 + 1, x28, x27, x26, x25, x24 + 1, x23 + 1, x22, x21, x20 + x43, x19 + 1, x18, x17, x16 + 1, x15, x14 + 1, x13, x12, x11 + 1, x10 + 1, x9, x8, x7, x6 + x43 + 1, x5 + 1, x4, x3, x2 + 1, x1 + x43 + 1, x0 + x43 + 1, Z, Y, X, W, V, U, T + 1, S + 1, R + x43, Q, P + 1, O, N, M, L + 1, K + 1, J + 1, I + 1, H, G + x43 + 1, F, E + x43, D, C + x43 + 1, B + 1, A + 1, z, y + 1, x, w + x43, v + 1, u + 1, t, s, r, q + x43 + 1, p + x43, o + 1, n, m, l + x43, k + 1, j + 1, i, h + 1, g, f, e + 1, d + x43, c + 1, b + 1, a}
+Cpu time: .00666708 minutes
+
+number of variables = 65
+number of terms = 10
+max number of variables per term = 2
+random functions generated are: 
+{M*x2 + M + x2, 2, c*M + 1, o*H + o + H + 1, 1, x1, F*L + F, x*U + U + 1, P*x2 + 1, C*R + C + R, 2, r*I + I + 1, 0, p + 1, v + 1, Q + 1, h*F + h + F, v*R + 1, P*V + P + V, u, x*x11 + x + 1, l*x0 + l + x0 + 1, a*x10 + a + x10 + 1, E + 1, z*K, F, Q + 1, d*t, N, p + 1, l*S + l, 1, 0, c*x2 + 1, h + Q, 1, o*M + M, P*x6, j*q + j + q + 1, a*D + D, f*h + f, J*x2 + x2, 1, 0, Z, d*U + 1, 0, I*x6 + I, g, 1, p*V + p + V + 1, 1, y*P + y + P + 1, z*G + G, 0, y, b*h + 1, Z, x6 + 1, 1, E*N + E, a*x + a + 1, L + P, i*H + i + H + 1, J*T}
+running getGB on F with option Algorithm => Sugarless
+Groebner basis is: 
+{1}
+Cpu time: 0 minutes
+
+number of variables = 93
+number of terms = 8
+max number of variables per term = 2
+random functions generated are: 
+{x1 + 1, 0, l + 1, I*x39 + I + 1, x13, x19*x34 + x34 + 1, x20*x25 + 1, z*V + z, v*C + 1, 1, t*x19 + x19, Y + x16, b*h + h + 1, 1, 1, H*x30 + H + x30, G*x10 + x10, Y*x7 + Y + x7, x8 + 1, k, K + x10, W + 1, 1, B, 0, f*x34 + f + x34 + 1, z*x13 + z, x1*x17 + x1 + x17 + 1, x21, x16, X*x20 + x20 + 1, x30, 1, x36 + 1, 1, x6*x39 + x6, 3, l*W + W + 1, z*x14 + 1, 0, x24*x39 + x24 + 1, r*x19 + x19 + 1, 0, D, 4, 1, 0, n*N + N + 1, x9*x24 + x9, F, r*x39 + x39 + 1, V*x6 + x6 + 1, q*x14, z + D, G*x3, F, x12*x25 + x12 + x25, x7*x14 + x7 + x14 + 1, 1, q, K, X + 1, o + V + 1, x19*x28, y + x9, M + 1, x6*x34 + x34 + 1, f + x0, c + x24 + 1, D*x21 + D, H*x18 + x18, e*P + P + 1, n, G*X + G + X, x2*x21 + x21, f + x3, x0 + x5 + 1, 0, o*x15 + o + x15, e*N + e + 1, x30*x36 + x30, a, J*V + J + V + 1, c + 1, k, x19*x28 + x19 + 1, b*H + 1, x23 + 1, d*x14 + d + x14, 0, j*J, M*x6 + M + x6 + 1, c*x32}
+running getGB on F with option Algorithm => Sugarless
+Groebner basis is: 
+{x40, x39, x38 + 1, x37, x36 + 1, x35 + 1, x34 + 1, x33 + 1, x32, x30, x29 + x31, x28, x27 + 1, x26 + 1, x25, x24 + 1, x23, x22 + 1, x21 + 1, x20 + 1, x19, x17, x16 + x31 + 1, x15, x14 + 1, x13, x12 + 1, x11, x10 + 1, x9 + 1, x8 + 1, x7, x6 + 1, x5, x4 + 1, x3, x2, x1 + x31 + 1, x0, Z + 1, Y + 1, X, W, V + 1, U, T + 1, S, R + x31 + 1, Q, P + 1, O, N, M + 1, L + 1, K + 1, J + 1, I + 1, H, G + 1, F, E, D + x31 + 1, C + 1, B + x31, A, z, y, x + x31, w + 1, v + 1, u, t, s, r + 1, q, p, o + 1, n + 1, m + 1, l + x31, k, j + 1, i, h, g + 1, f, e, d, c + x31 + 1, b, a + x31}
+Cpu time: .005467 minutes
+
+number of variables = 79
+number of terms = 1
+max number of variables per term = 2
+random functions generated are: 
+{E, r, D, y, 1, V*W, e*M, j, N, s, M*x13, I, B*S, M*x1, h*x11, 1, o*x16, v, x5, b*Z, w*C, d, E, x18, i*q, x21, 1, p*K, 1, y*Q, x26, 1, C, x10, F*x25, 1, n*x24, 1, c*x21, x21, j*x6, H*L, 1, G*x13, x0*x5, M*x10, x19, 1, t, g*Y, x2*x14, G*x13, 1, x9, 1, Q*x17, i, r*B, n*D, a*V, x16, 1, x22, G*V, z*A, 1, r*N, b*c, N, h*H, 1, x21, v, s, R, b*x19, w, 1, x19}
+running getGB on F with option Algorithm => Sugarless
+Groebner basis is: 
+{x25 + 1, x24 + x26, x23 + x26, x22 + 1, x21 + x26, x20 + x26, x19 + x26, x18 + 1, x17 + x26, x16 + x26, x15 + x26, x14 + x26, x13 + 1, x12 + x26, x11 + 1, x10 + 1, x9 + 1, x8 + x26, x7 + x26, x6 + x26, x5 + x26, x4 + x26, x3 + x26, x2 + 1, x1 + 1, x0 + 1, Z + 1, Y + x26, X + x26, W + x26, V + 1, U + x26, T + x26, S + x26, R + 1, Q + 1, P + 1, O + x26, N + x26, M + x26, L + 1, K + x26, J + 1, I + 1, H + 1, G + 1, F + 1, E + x26, D + x26, C + 1, B + x26, A + 1, z + x26, y + x26, x + 1, w + x26, v + x26, u + x26, t + x26, s + x26, r + x26, q + x26, p + 1, o + x26, n + x26, m + x26, l + 1, k + x26, j + x26, i + x26, h + x26, g + x26, f + x26, e + 1, d + x26, c + x26, b + x26, a + x26}
+Cpu time: .00413358 minutes
+
+number of variables = 62
+number of terms = 2
+max number of variables per term = 2
+random functions generated are: 
+{l, 1, 0, h*X + 1, d + 1, x1, k + 1, f, w*Y + w, O*x1, e*Q + 1, 1, x6, u, 1, g, F + 1, L, N + 1, j*X + X, F + 1, m*Y + Y, x5 + 1, Y, b*H + 1, k*P + 1, 0, h*x3 + x3, S*V, x7 + 1, h + 1, I, x2*x3 + x2, 0, r, S, n*w + w, K*L + K, x1, l*x7, j*I, H, 1, 1, n*o + n, u, D*X + 1, q, x4, e*p, 0, u, b, 1, f*Q, u*x0, s, r*C, G + R, f*N, f*t, x4}
+running getGB on F with option Algorithm => Sugarless
+Groebner basis is: 
+{x7 + x9 + 1, x6 + 1, x5, x4 + x9, x3 + 1, x2 + 1, x1 + 1, x0 + 1, Z + 1, Y, X + x8, W + x9, V + 1, T + 1, S, R + 1, Q + 1, P, O, N + x9 + 1, M + 1, L, K, J, I, H, G, F, E, D + x9, C, B, A, z + 1, y + 1, x, w + 1, v, u + 1, t + x8, s + x9, r, q + 1, p + x8, o + 1, n + 1, m + 1, l + 1, k + x8 + 1, j, i + 1, h + 1, g + x8, f + 1, e + x8, d + x8 + 1, c, b + 1, a + 1, x8*x9 + U + 1, U*x9 + U + x9 + 1, U*x8 + U + x8 + 1}
+Cpu time: .00133342 minutes
+
+number of variables = 61
+number of terms = 5
+max number of variables per term = 2
+random functions generated are: 
+{x5, 1, p*x3, 0, d, 0, M*W + W, e*Q + 1, j + 1, r*K + r, P*U + P + U, y, t*J + t + J, c*k + 1, f + V + 1, b + j, i, s, D*E + E, a*d + d, l + 1, 1, x4, 0, e + x7 + 1, 1, z*M + M, U, 1, x7 + 1, 0, H, p, h, N + 1, 1, A, 1, t*U, 0, 3, F*Q, t, K, F + O, 0, l, x0*x4 + x4, U, x0 + 1, n*R, e*h, i, m*T + T, x0, V, l + 1, o*t + o + t, y, U + 1, J}
+running getGB on F with option Algorithm => Sugarless
+Groebner basis is: 
+{x8 + 1, x6 + x7 + 1, x5 + 1, x4 + x7, x3, x2 + 1, x1, x0 + 1, Z, Y, X, W + x7 + 1, V, U + x7 + 1, T, S, R, Q, P, O + 1, N, M, L + 1, K, J + 1, I + 1, H + 1, G + 1, F + 1, E, D + x7 + 1, C + 1, B + x7 + 1, A, z + 1, y + x7 + 1, x, w + x7, v + 1, u + x7, t, s, r, q + 1, p + 1, o + 1, n + 1, m + 1, l + x7 + 1, k + x7 + 1, j, i + 1, h + 1, g + x7 + 1, f, e, d, c, b + 1, a + 1}
+Cpu time: .000933385 minutes
+
+number of variables = 72
+number of terms = 1
+max number of variables per term = 2
+random functions generated are: 
+{b, A*V, I, P, v, p, O, l*S, x17, x8, 1, x4, 1, C*x15, I, 1, x0*x12, a, Q*x7, 1, x8, 1, U, x4, 1, X, 1, x2*x18, I*N, i, y*R, x2, 1, M, j, m, e*q, 1, b, l*x14, a, x3, 1, c*J, V, h, x5, x4*x11, E*M, 1, z*R, 1, U, T, q*x18, y, 1, H, n*A, F*x3, 1, x13, e, V*x7, 1, P, q, K, x9, n, 1, a*h}
+running getGB on F with option Algorithm => Sugarless
+Groebner basis is: 
+{x18 + 1, x17 + x19, x16 + 1, x15 + x19, x14 + x19, x13 + 1, x12 + 1, x11 + x19, x10 + 1, x9 + 1, x8 + 1, x7 + x19, x6 + x19, x5 + x19, x4 + 1, x3 + 1, x2 + x19, x1 + x19, x0 + x19, Z + 1, Y + 1, X + 1, W + x19, V + x19, U + x19, T + x19, S + x19, R + 1, Q + 1, P + 1, O + x19, N + x19, M + x19, L + 1, K + x19, J + 1, I + 1, H + x19, G + 1, F + x19, E + 1, D + x19, C + x19, B + x19, A + 1, z + 1, y + 1, x + 1, w + x19, v + 1, u + 1, t + 1, s + x19, r + x19, q + x19, p + 1, o + 1, n + x19, m + 1, l + 1, k + 1, j + 1, i + x19, h + x19, g + x19, f + 1, e + 1, d + 1, c + 1, b + x19, a + x19}
+Cpu time: .00186678 minutes
+
+number of variables = 66
+number of terms = 1
+max number of variables per term = 2
+random functions generated are: 
+{d, 1, T*V, o*K, k*x4, c*i, q*x9, m, 1, x4, x11, v, Q, d*D, n, E, x5, g*x3, r*W, k*x10, 1, 1, x1, 1, L, k*x9, k, g*E, D*J, q, u*B, R, 1, 1, 1, g*z, x2, M, O*Y, 1, x3, L, 1, 1, i*J, r*x7, l*s, O, D*x10, 1, w, 1, 1, T, i*G, 1, 1, B*x13, 1, r, O*x0, h, c, 1, r*Q, 1}
+running getGB on F with option Algorithm => Sugarless
+Groebner basis is: 
+{x13 + 1, x11 + 1, x10 + x12, x9 + 1, x8 + 1, x7 + x12, x6 + 1, x5 + x12, x4 + 1, x3 + 1, x2 + 1, x1 + x12, x0 + 1, Z + 1, Y + x12, X + 1, W + x12, V + 1, U + x12, T + x12, S + x12, R + 1, Q + 1, P + x12, O + 1, N + 1, M + x12, L + x12, K + 1, J + x12, I + 1, H + 1, G + 1, F + 1, E + x12, D + x12, C + x12, B + x12, A + 1, z + 1, y + x12, x + 1, w + x12, v + 1, u + 1, t + x12, s + x12, r + x12, q + x12, p + x12, n + o, m + 1, l + 1, k + 1, j + 1, i + 1, h + 1, g + x12, f + x12, e + 1, d + o, c + x12, b + 1, a + o, o*x12 + o}
+Cpu time: .00140008 minutes
+
+number of variables = 66
+number of terms = 8
+max number of variables per term = 2
+random functions generated are: 
+{1, d*A + 1, n + 1, P*U + U + 1, y, d*o + d + o, 0, W + 1, l*Y + 1, a*Z + Z + 1, D, U, i + 1, K, G*I + I + 1, F, d*J + J, u*x13 + u + x13 + 1, f*x + f, h*I, 0, G*S + G + S, c*V + c + V, f + 1, T + 1, j + 1, g*B + g, k, f + J, P, A*x6, d + u, x1 + x13 + 1, D + x2 + 1, g + A, G + U + 1, B*I + B + 1, 1, b*U + U + 1, H*x11 + H, 1, 1, z + P + 1, e + t, 0, j + 1, S*x1, w*N + w, m, t*C + t + C, e*z + z, 0, x3, 3, h*w + 1, x4, x1*x7 + x1 + 1, x8*x10 + 1, e + J, w, I, y + x7 + 1, 1, x3 + 1, G + N, r*Q + Q}
+running getGB on F with option Algorithm => Sugarless
+Groebner basis is: 
+{x13, x12, x11, x10 + 1, x9 + 1, x8, x7 + 1, x6, x5 + 1, x4 + 1, x3 + 1, x2, x1 + 1, x0 + 1, Z, Y, X, W, V + 1, U, T, S, R + 1, Q, P + 1, O + 1, N, M + 1, L + 1, K, J + 1, I, H, G, F + 1, E, D + 1, C, B + 1, A, z, y + 1, x, w + 1, v, u, t, s + 1, r + 1, q, p + 1, o + 1, n, m, l, k + 1, j + 1, i + 1, h + 1, g, f + 1, e + 1, d + 1, c + 1, b + 1, a + 1}
+Cpu time: .00146675 minutes
+
+number of variables = 94
+number of terms = 7
+max number of variables per term = 2
+random functions generated are: 
+{F*x23, Z*x40, D, 1, y + x33, P*x22 + x22, x11 + 1, 1, e*x24 + 1, v*x15 + 1, r*v + v + 1, x6*x41 + x6 + x41, k*x37 + k, x10*x30, x39, x2 + x3 + 1, C*x32, T*x4 + x4 + 1, H*x3 + H, T + 1, B*O + O + 1, 0, x18, d + x39, x24*x33, j, g*X, y + x25 + 1, s*x1 + x1, q*x13 + x13, C + O + 1, Q + 1, l*x31 + l + 1, m + x23, W*x34 + x34 + 1, x27 + 1, n, o, l + x9, l*x7 + 1, w*W + 1, a + x34 + 1, v + V + 1, E*x10 + E, 1, y*x6 + x6 + 1, b, i*Q + Q, x19, x3, x36, 0, 0, 0, o*O + o + 1, x9 + 1, e*Z + Z + 1, W + x35, 0, 0, t, x31*x37 + x31, x8 + 1, x12*x13 + x12 + 1, d*l + d, h*x4 + x4 + 1, 1, t, x27, r, g*x4 + x4 + 1, i*x25, x18*x24 + x18, 1, n*x7, 1, 0, x20*x30, N*Q + N + 1, D + 1, q + x7, o*w + o + w, 1, V*x0 + 1, x12, 0, x23, x14*x31 + x31, q + 1, i + 1, x7*x33 + 1, x17, L*x16, x29 + 1}
+running getGB on F with option Algorithm => Sugarless
+Groebner basis is: 
+{x41, x40, x39 + 1, x38 + 1, x37, x36 + 1, x35, x34 + 1, x33, x32 + 1, x31 + 1, x30 + 1, x29 + 1, x28, x27, x26 + 1, x25, x24, x23 + 1, x22, x21 + 1, x20, x19, x18, x17 + 1, x16, x15, x14 + 1, x13 + 1, x12 + 1, x11 + 1, x10 + 1, x9 + 1, x8, x7, x6, x5, x4 + 1, x3, x2 + 1, x1, x0, Z, Y + 1, X, W, V, U, T + 1, S + 1, R, Q + 1, P, O + 1, N + 1, M + 1, L + 1, K + 1, J + 1, I, H, G + 1, F, E, D + 1, C, B + 1, A, z + 1, y, x, w, v, u + 1, t, s, r + 1, q, p, o + 1, n + 1, m + 1, l, k + 1, j + 1, i + 1, h + 1, g, f, e, d + 1, c + 1, b, a}
+Cpu time: .00560035 minutes
+
+number of variables = 95
+number of terms = 4
+max number of variables per term = 2
+random functions generated are: 
+{A + X, a*x18 + a + x18 + 1, 1, r*X + 1, j*x25 + x25, x10 + 1, 1, v + 1, x10*x41 + 1, z*I + z, I*x3 + I + x3 + 1, S*x37 + 1, b*I + b + 1, B*x28 + B + x28 + 1, x20*x27 + 1, e, w*x39 + x39, 1, 0, 1, J*x32 + x32, x0*x17 + x17, L, x4, x30*x42 + x42, x2*x26 + x26, r*G + r + 1, P*x24 + P, x19, X + Y, Z + x7, 0, W*x11 + x11 + 1, w + 1, x7 + 1, a*Y + a + 1, u*x4 + x4 + 1, M, j, x35, A + 1, s*x40 + x40 + 1, o*w + 1, x24 + 1, Q*S + Q, R + 1, 0, X + x2, M, D + x26, x26*x32 + 1, p + x32, X + x35, 3, x15 + x20, x30 + 1, J*x22 + J, x13*x29 + 1, q*Y, 1, x0 + 1, 3, e + 1, 1, f*h, I*x22, V + 1, t*x34 + t + 1, x2*x36 + 1, I*x36 + 1, m + x28, s*x11 + s + x11 + 1, 1, 0, 0, x9*x20, x1 + x21, c*x + x, x36, x41, x36 + 1, 0, i + n, 0, x21 + x28, D*x33, x9*x12 + x9 + 1, 1, x34 + x41 + 1, S + 1, D*x30, v*U + v, x22*x40, x13 + 1, M*x31 + x31 + 1}
+running getGB on F with option Algorithm => Sugarless
+Groebner basis is: 
+{1}
+Cpu time: .00446695 minutes
+
+number of variables = 57
+number of terms = 8
+max number of variables per term = 2
+random functions generated are: 
+{F + 1, g*x0 + g + 1, 2, I + S + 1, g, a*x4 + a + x4 + 1, o, C + I, c*X + X, o, c + x3, I + 1, J + 1, u*N + 1, w*x3, h*s + h, g*x0 + g, 0, v*w + v, q + 1, a*j + a, B*G + B + 1, N + V, i*C, 3, 1, n + 1, C + M + 1, Q, f*B + f, g, 1, 1, k, J*Y + Y, 1, 0, x0 + 1, Z*x2 + 1, g + 1, g, f*v + f + v + 1, x4 + 1, b*s + b + s + 1, P + 1, l*V + l + 1, e*Y + 1, x4 + 1, d*X + d, 1, C*x2 + C + 1, B, z, 1, p + 1, P*x3 + x3 + 1, i + x2 + 1}
+running getGB on F with option Algorithm => Sugarless
+Groebner basis is: 
+{1}
+Cpu time: .00146675 minutes
+
+number of variables = 56
+number of terms = 4
+max number of variables per term = 2
+random functions generated are: 
+{C*R + C + R + 1, q, P + Q, T + 1, q*x0 + x0, 1, H + 1, z, G + 1, 0, m*x3, p*M + p + M + 1, 0, F*P + P, 1, b + 1, F, g*M + M, D + V, 1, H*K + K, n, J + 1, m*x0 + m, p*x3 + p, 1, w, a*T + 1, s + 1, L*x1, e*R + e, L + 1, r, i*x + i, A*F + A + F, 1, J*M, R + U + 1, g*C + 1, i*j + 1, d*Q + Q, x2, 1, m, i*W + i, L, f*O, k + N, 1, 1, P + 1, J*T + T, l, 1, L + 1, V}
+running getGB on F with option Algorithm => Sugarless
+Groebner basis is: 
+{1}
+Cpu time: .000466698 minutes
+done appending. closing file...

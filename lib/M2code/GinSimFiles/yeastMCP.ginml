@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE gxl SYSTEM "file://fr/univmrs/ibdm/GINsim/ressources/GINML_2_1.dtd">
+<gxl xmlns:xlink="http://www.w3.org/1999/xlink">
+	<graph id="MorphogenesisCheckPoint" class="regulatory" nodeorder="BUD SBF Swe1 Mih1 Clb2 MASS Mpk1 Hsl1">
+<node id="Hsl1" basevalue="0" maxvalue="1">
+  <parameter idActiveInteractions="BUD_Hsl1_0" val="1"/>
+  <annotation>
+    <comment>Activation depends on bud presence.
+
+Inhibits Swe1 (mecanism is unclear.)</comment>
+  </annotation>
+
+			<nodevisualsetting>
+				<ellipse x="181" y="222" width="60" height="30" backgroundColor="#99FFFF" foregroundColor="#000000"/>
+			</nodevisualsetting>
+</node>
+<node id="Clb2" basevalue="0" maxvalue="2">
+  <parameter idActiveInteractions="MASS_Clb2_0" val="2"/>
+  <parameter idActiveInteractions="MASS_Clb2_0 Mih1_Clb2_0" val="2"/>
+  <parameter idActiveInteractions="MASS_Clb2_0 Mih1_Clb2_1" val="2"/>
+  <parameter idActiveInteractions="MASS_Clb2_0 Mih1_Clb2_1 Swe1_Clb2_0" val="2"/>
+  <parameter idActiveInteractions="MASS_Clb2_0 Mih1_Clb2_1 Swe1_Clb2_1" val="2"/>
+  <parameter idActiveInteractions="MASS_Clb2_1" val="2"/>
+  <parameter idActiveInteractions="MASS_Clb2_1 Swe1_Clb2_0" val="2"/>
+  <parameter idActiveInteractions="MASS_Clb2_1 Mih1_Clb2_0" val="2"/>
+  <parameter idActiveInteractions="MASS_Clb2_1 Mih1_Clb2_0 Swe1_Clb2_0" val="2"/>
+  <parameter idActiveInteractions="MASS_Clb2_1 Mih1_Clb2_0 Swe1_Clb2_1" val="2"/>
+  <parameter idActiveInteractions="MASS_Clb2_1 Mih1_Clb2_1" val="2"/>
+  <parameter idActiveInteractions="MASS_Clb2_1 Mih1_Clb2_1 Swe1_Clb2_0" val="2"/>
+  <parameter idActiveInteractions="MASS_Clb2_1 Mih1_Clb2_1 Swe1_Clb2_1" val="2"/>
+  <parameter idActiveInteractions="MASS_Clb2_0 Swe1_Clb2_0" val="1"/>
+  <parameter idActiveInteractions="MASS_Clb2_0 Swe1_Clb2_1" val="1"/>
+  <parameter idActiveInteractions="MASS_Clb2_0 Mih1_Clb2_0 Swe1_Clb2_0" val="1"/>
+  <parameter idActiveInteractions="MASS_Clb2_0 Mih1_Clb2_0 Swe1_Clb2_1" val="1"/>
+  <parameter idActiveInteractions="MASS_Clb2_1 Swe1_Clb2_1" val="1"/>
+  <annotation>
+    <comment>B-type cyclin essential for mitosis, present in S/G2/M phase (represents both Clb1 and Clb2 in the model).</comment>
+  </annotation>
+
+			<nodevisualsetting>
+				<rect x="91" y="139" width="60" height="30" backgroundColor="#66FF66" foregroundColor="#000000"/>
+			</nodevisualsetting>
+</node>
+<node id="MASS" basevalue="0" maxvalue="2">
+  <parameter idActiveInteractions="MASS_MASS_1" val="2"/>
+  <parameter idActiveInteractions="MASS_MASS_0" val="1"/>
+  <annotation>
+    <comment>Represents the mass of the cell. Considered an input in this model.
+
+We assume that mass increase inpacts the cell cycle by increasing Cyclins concentration in the nucleus.
+
+In the wild-type, MASS has to cross the first threshold to initiate the cycle. 
+
+MASS has to cross the second threshold to overcome the morphogenesis checkpoint inhibition of Clb2.</comment>
+  </annotation>
+
+			<nodevisualsetting>
+				<rect x="6" y="30" width="60" height="30" backgroundColor="#000000" foregroundColor="#FFFFFF"/>
+			</nodevisualsetting>
+</node>
+<node id="SBF" basevalue="0" maxvalue="1">
+  <parameter idActiveInteractions="MASS_SBF_0" val="1"/>
+  <annotation>
+    <comment>Transcription factor, activated by the G1 cyclins, and thus indirectly by mass (cf yeast cell cycle core model)
+
+Activates the transcription of SBF activates the transcription of Swe1</comment>
+  </annotation>
+
+			<nodevisualsetting>
+				<ellipse x="6" y="178" width="60" height="30" backgroundColor="#CCFFCC" foregroundColor="#000000"/>
+			</nodevisualsetting>
+</node>
+<node id="Swe1" basevalue="0" maxvalue="2">
+  <parameter idActiveInteractions="SBF_Swe1_0" val="2"/>
+  <parameter idActiveInteractions="SBF_Swe1_0 Clb2_Swe1_0" val="1"/>
+  <parameter idActiveInteractions="Hsl1_Swe1_0 SBF_Swe1_0" val="1"/>
+  <annotation>
+    <comment>Kinase. Budding yeast homologue of Wee1.
+
+Activated by the MBF and inhibited by Hsl1 and Hsl7.
+
+Inhibits Clb2 activity by phosphorylating its Cdk partner Cdc28 on tyrosine-19.</comment>
+  </annotation>
+
+			<nodevisualsetting>
+				<rect x="87" y="221" width="60" height="30" backgroundColor="#99FFFF" foregroundColor="#000000"/>
+			</nodevisualsetting>
+</node>
+<node id="Mpk1" basevalue="1" maxvalue="1">
+  <annotation>
+    <comment>Kinase. Budding yeast homologue of Wee1.
+
+Activated by the MBF and inhibited by Hsl1 and Hsl7.
+
+Inhibits Clb2 activity by phosphorylating its Cdk partner Cdc28 on tyrosine-19.</comment>
+  </annotation>
+
+			<nodevisualsetting>
+				<ellipse x="192" y="62" width="60" height="30" backgroundColor="#99FFFF" foregroundColor="#000000"/>
+			</nodevisualsetting>
+</node>
+<node id="Mih1" basevalue="1" maxvalue="2">
+  <parameter idActiveInteractions="Clb2_Mih1_0" val="2"/>
+  <parameter idActiveInteractions="Mpk1_Mih1_0 Clb2_Mih1_0" val="1"/>
+  <annotation>
+    <comment>Phosphatase.Budding yeast homologue of Cdc25.
+
+Activates Clb2 by removing an inhibitory phosphate from Cdc28 on tyrosine-19.</comment>
+  </annotation>
+
+			<nodevisualsetting>
+				<rect x="93" y="63" width="60" height="30" backgroundColor="#99FFFF" foregroundColor="#000000"/>
+			</nodevisualsetting>
+</node>
+<node id="BUD" basevalue="0" maxvalue="1">
+  <parameter idActiveInteractions="MASS_BUD_0" val="1"/>
+  <annotation>
+    <comment>Mass acts indirectly on BUD, through Cln2, Cln3 and Clb5 which are not represented here for the sake of simplicity. In this model mass is thus required to activate BUD.
+
+Hsl1 and Hsl7 are recruited and activated at the bud neck, where they can inactivate Swe1.
+
+When BUD formation fails, a MAPK pathway is thought to inhibit Mih1.</comment>
+  </annotation>
+
+			<nodevisualsetting>
+				<ellipse x="246" y="142" width="60" height="30" backgroundColor="#000000" foregroundColor="#FFFFFF"/>
+			</nodevisualsetting>
+</node>
+		<edge id="Hsl1_Swe1_0" from="Hsl1" to="Swe1" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="211,237 117,236" line_style="straight" line_color="#FF0000" line_width="4" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="Clb2_Swe1_0" from="Clb2" to="Swe1" minvalue="2" sign="negative">
+			<edgevisualsetting>
+				<polyline points="121,154 110,194 117,236" line_style="straight" line_color="#FF0000" line_width="4" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="Clb2_SBF_0" from="Clb2" to="SBF" minvalue="2" sign="negative">
+			<edgevisualsetting>
+				<polyline points="121,154 110,196 36,193" line_style="straight" line_color="#FF0000" line_width="4" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="Clb2_Mih1_0" from="Clb2" to="Mih1" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="121,154 134,116 123,78" line_style="straight" line_color="#00CC00" line_width="4" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="MASS_Clb2_0" from="MASS" to="Clb2" minvalue="1" maxvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="36,45 37,150 121,154" line_style="straight" line_color="#00CC00" line_width="4" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="MASS_Clb2_1" from="MASS" to="Clb2" minvalue="2" sign="positive">
+			<edgevisualsetting>
+				<polyline points="36,45 37,150 121,154" line_style="straight" line_color="#00CC00" line_width="4" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="MASS_SBF_0" from="MASS" to="SBF" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="36,45 36,193" line_style="straight" line_color="#00CC00" line_width="4" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="MASS_MASS_0" from="MASS" to="MASS" minvalue="1" maxvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="36,45 26,13 36,9 46,13 36,45" line_style="straight" line_color="#00CC00" line_width="4" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="MASS_MASS_1" from="MASS" to="MASS" minvalue="2" sign="positive">
+			<edgevisualsetting>
+				<polyline points="36,45 26,13 36,9 46,13 36,45" line_style="straight" line_color="#00CC00" line_width="4" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="MASS_BUD_0" from="MASS" to="BUD" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="36,45 282,43 276,157" line_style="straight" line_color="#00CC00" line_width="4" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="SBF_Swe1_0" from="SBF" to="Swe1" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="36,193 37,232 117,236" line_style="straight" line_color="#00CC00" line_width="4" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="Swe1_Clb2_0" from="Swe1" to="Clb2" minvalue="1" maxvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="117,236 135,198 121,154" line_style="straight" line_color="#FF0000" line_width="4" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="Swe1_Clb2_1" from="Swe1" to="Clb2" minvalue="2" sign="negative">
+			<edgevisualsetting>
+				<polyline points="117,236 135,198 121,154" line_style="straight" line_color="#FF0000" line_width="4" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="Mpk1_Mih1_0" from="Mpk1" to="Mih1" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="222,77 123,78" line_style="straight" line_color="#FF0000" line_width="4" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="Mih1_Clb2_0" from="Mih1" to="Clb2" minvalue="1" maxvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="123,78 109,116 121,154" line_style="straight" line_color="#00CC00" line_width="4" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="Mih1_Clb2_1" from="Mih1" to="Clb2" minvalue="2" sign="positive">
+<annotation>
+  <comment>1.1-&gt;1.2: Added 1 level to Mih1 to account for the difference between WT with checkpoint active (G2 block is overcome when mass=2) and mutant mih1-delta (active checkpoint) where the cell arrests in G2 (checkpoint can not be overcome. Cf ODE model, Mih retains 10% activity when checpoint is activated (sufficient to help overcoming the chekpoint when mass is high)</comment>
+</annotation>
+			<edgevisualsetting>
+				<polyline points="123,78 109,116 121,154" line_style="straight" line_color="#00CC00" line_width="4" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="BUD_Hsl1_0" from="BUD" to="Hsl1" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="276,157 211,158 211,237" line_style="straight" line_color="#00CC00" line_width="4" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="BUD_Mpk1_0" from="BUD" to="Mpk1" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="276,157 212,145 222,77" line_style="straight" line_color="#FF0000" line_width="4" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+<annotation>
+  <linklist>
+    <link xlink:href="http://www.ncbi.nlm.nih.gov/pubmed/14691135"/>
+    <link xlink:href="http://www.ncbi.nlm.nih.gov/pubmed/11283616"/>
+  </linklist>
+  <comment>Leaning on the differential model published by Ciliberto et al (2003), we have delineated a logical model for the regulatory network monitoring the formation of the bud (BUD), called the morphogenetic check-point (MCP). 
+This model accounts for the fact that the cell cycle is temporary blocked in G2 phase in case of budding defect. This G2 blocking can be bypassed in the presence of high Clb2 activity level, which correlates with the growth of the cell. Consequently, nuclear division occurs without cell division, thereby giving rise to dinucleate cells. To properly model this phenomenon, we have considered a second threshold for the MASS component, which denotes a mass large enough to bypass G2 arrest.
+This logical model recapitulates the wild-type and knockout phenotypes considered by Ciliberto et al (2003), as well as three additional knockout mutants described in Harrison et al (2001). As this model focuses on Clb2 activation depending on the mass of the cell, its dynamics is analysed in terms of stable states for each possible value of MASS.
+</comment>
+</annotation>
+	</graph>
+</gxl>

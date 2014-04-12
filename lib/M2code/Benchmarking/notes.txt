@@ -1,0 +1,72 @@
+In benchmarkGBboolean:
+    tests 50
+    between 10-20 variables, max variables per term range 2-6
+    all under .5 minutes
+    
+In benchmarkHighValence:
+   tests 46  (I feel like there were 50 of these and I miscounted..)
+   between 10-20 variable, max variables per term 10-15, num terms 5-9
+   using Sugarless
+   6 under 1 min, most under .05(I'm going with 44) ,one which took 6.1615 miuntes
+   
+   tests 8
+   20-30 vars, max vars per term 10-15, num terms 5-9
+   using Sugerless
+   all under .5 minutes
+
+In benchmarkManyTerms:
+   I just wrote there were a lot of terms, like on the order on 100-1,000,000
+   vars b/t 10-20, max vars per term 2-6
+   38 less than .5 minutes
+   5 under 6 minutes
+   1 took 10 minutes
+   1 took 23
+   1 took 30
+   1 took 63
+   (same here cause this doesn't add to 50. ugh.)
+
+In benchmarkMonomialNetwork:
+   vars 10-20, num terms = 1, max vars per term 2-6
+   50  less than .05
+   10 vars 20-30, same as before
+   5 vars 30-40, same
+   5 vars 40-50, all less that .5
+   Sugerless
+
+In benchmarkMonomial:
+   -basically the same as the previous... may look at later
+
+In benchmarkMoreThan50:
+   Sugarless
+   there are 50+ (50-100 maybe)vars, num terms b/t 1-5, max num vars per term 2-6
+   3 under 1 minute
+-the in died
+
+In benchmark:
+   -various benchmark test under diff conditions to test diff GB options
+
+In benchmarkValence5:
+   only 1 test before crash
+   80 vars, monomials, 5 vars per term, .14 minutes
+   Sugerless
+
+In benchmarkValence5:
+   Sugarless
+   2 vars per term, num terms 6-10, vars 50-100
+   all 50 under .05
+  
+In benchmarkValence5Vars40:
+   Sugarless
+   num vars 40-50, num terms 1-8, max num vars per term = 5
+   7 under .5 min
+   1 under 1 min
+   1 took 10 minutes
+   1 took 132 minutes
+   1 took 1962 minutes
+
+In benchmarkValence6Vars40:
+   Sugarless
+   only 1 test ran, 48 vars, 9 terms, max num vars = 6
+   didn't even compute basis and time
+
+

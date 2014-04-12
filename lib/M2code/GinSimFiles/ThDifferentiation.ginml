@@ -1,0 +1,1731 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE gxl SYSTEM "file://fr/univmrs/ibdm/GINsim/ressources/GINML_2_1.dtd">
+<gxl xmlns:xlink="http://www.w3.org/1999/xlink">
+	<graph id="Th_differentiation" class="regulatory" nodeorder="APC IFNB_e IFNG_e IL2_e IL4_e IL6_e IL10_e IL12_e IL15_e IL21_e IL23_e IL27_e TGFB_e CD28 IFNBR IFNGR IL2R IL4R IL6R IL10R IL12R IL15R IL21R IL23R IL27R TCR TGFBR IFNGR1 IFNGR2 GP130 IL6RA IL12RB1 CGC IL12RB2 IL10RB IL10RA IL4RA IL15RA IL2RB IL2RA IL27RA IFNG IL2 IL4 IL10 IL21 IL23 TGFB TBET GATA3 FOXP3 NFAT STAT1 STAT3 STAT4 STAT5 STAT6 SMAD3 IRF1 RUNX3 proliferation NFKB IKB RORGT IL17">
+<node id="IL2R" basevalue="0" maxvalue="2">
+  <parameter idActiveInteractions="CGC_IL2R_0 IL2RB_IL2R_0 IL2_e_IL2R_0" val="1"/>
+  <parameter idActiveInteractions="CGC_IL2R_0 IL2RB_IL2R_0 IL2_IL2R_0" val="1"/>
+  <parameter idActiveInteractions="CGC_IL2R_0 IL2RB_IL2R_0 IL2_IL2R_0 IL2_e_IL2R_0" val="1"/>
+  <parameter idActiveInteractions="CGC_IL2R_0 IL2RB_IL2R_0 IL2RA_IL2R_0 IL2_e_IL2R_0" val="2"/>
+  <parameter idActiveInteractions="CGC_IL2R_0 IL2RB_IL2R_0 IL2RA_IL2R_0 IL2_IL2R_0" val="2"/>
+  <parameter idActiveInteractions="CGC_IL2R_0 IL2RB_IL2R_0 IL2RA_IL2R_0 IL2_IL2R_0 IL2_e_IL2R_0" val="2"/>
+  <annotation>
+    <linklist>
+      <link xlink:href="ref:Kim06"/>
+    </linklist>
+    <comment>The IL-2 receptor requires the CGC and IL2RB subchains, and activates STAT5 upon binding. 
+The IL2RA subchain is needed for the high affinity response.</comment>
+  </annotation>
+
+			<nodevisualsetting>
+				<rect x="1071" y="182" width="59" height="25" backgroundColor="#FFFFFF" foregroundColor="#000000"/>
+			</nodevisualsetting>
+</node>
+<node id="RUNX3" basevalue="0" maxvalue="1">
+  <parameter idActiveInteractions="TBET_RUNX3_0" val="1"/>
+  <annotation>
+    <linklist>
+      <link xlink:href="hugo:10473"/>
+      <link xlink:href="ref:Djuretic2007"/>
+    </linklist>
+    <comment>RUNX3 is activated by T-bet, with which it cooperates to activate IFN-gama and inhibit IL-4.</comment>
+  </annotation>
+
+			<nodevisualsetting>
+				<ellipse x="64" y="690" width="55" height="25" backgroundColor="#CCCCCC" foregroundColor="#000000"/>
+			</nodevisualsetting>
+</node>
+<node id="IL2" basevalue="0" maxvalue="1">
+  <parameter idActiveInteractions="NFAT_IL2_0 NFKB_IL2_0" val="1"/>
+  <parameter idActiveInteractions="NFAT_IL2_0 NFKB_IL2_0 STAT6_IL2_0" val="1"/>
+  <parameter idActiveInteractions="NFAT_IL2_0 STAT5_IL2_0 NFKB_IL2_0" val="1"/>
+  <parameter idActiveInteractions="NFAT_IL2_0" val="1"/>
+  <parameter idActiveInteractions="NFAT_IL2_0 STAT6_IL2_0" val="1"/>
+  <parameter idActiveInteractions="NFAT_IL2_0 TBET_IL2_0" val="1"/>
+  <parameter idActiveInteractions="NFAT_IL2_0 TBET_IL2_0 STAT6_IL2_0" val="1"/>
+  <parameter idActiveInteractions="STAT5_IL2_0 NFAT_IL2_0" val="1"/>
+  <parameter idActiveInteractions="STAT5_IL2_0 NFAT_IL2_0 TBET_IL2_0" val="1"/>
+  <parameter idActiveInteractions="NFKB_IL2_0" val="1"/>
+  <parameter idActiveInteractions="NFKB_IL2_0 STAT6_IL2_0" val="1"/>
+  <parameter idActiveInteractions="FOXP3_IL2_0 NFKB_IL2_0" val="1"/>
+  <parameter idActiveInteractions="FOXP3_IL2_0 NFKB_IL2_0 STAT6_IL2_0" val="1"/>
+  <parameter idActiveInteractions="NFAT_IL2_0 FOXP3_IL2_0 NFKB_IL2_0" val="1"/>
+  <parameter idActiveInteractions="NFAT_IL2_0 FOXP3_IL2_0 NFKB_IL2_0 STAT6_IL2_0" val="1"/>
+  <parameter idActiveInteractions="STAT5_IL2_0 NFKB_IL2_0" val="1"/>
+  <parameter idActiveInteractions="STAT5_IL2_0 FOXP3_IL2_0 NFKB_IL2_0" val="1"/>
+  <parameter idActiveInteractions="STAT5_IL2_0 NFAT_IL2_0 FOXP3_IL2_0 NFKB_IL2_0" val="1"/>
+  <annotation>
+    <linklist>
+      <link xlink:href="hugo:6001"/>
+      <link xlink:href="ref:Villarino2007"/>
+      <link xlink:href="ref:Rudensky2006"/>
+      <link xlink:href="ref:Hwang2005"/>
+      <link xlink:href="ref:Kim06"/>
+      <link xlink:href="http://www.ncbi.nlm.nih.gov/pubmed/12646638"/>
+    </linklist>
+    <comment>Interleukine 2 is one of the most actively studied cytokines (for a review, see Kim et al, 2006). 
+Its production requires NFAT (blocked by FOXP3) but not proliferation (unlike assumed for other cytokines).
+According to (Villarino et al, 2007), STAT5 (activated by IL2/4/15) and STAT6 (activated by IL4) cooperate to inhibit IL2 production.
+RelA has been shown to induce IL-2 expression following transient overexpression (Rao et al, 2003). 
+According to (Hwang et al, 2005), Tbet cooperates with relA (a NFkB subunits to inhibit IL2.
+Hence, the interaction from NFKB onto  IL2  has a context-dependent sign.
+
+</comment>
+  </annotation>
+
+			<nodevisualsetting>
+				<ellipse x="1080" y="452" width="60" height="25" backgroundColor="#FFFFFF" foregroundColor="#000000"/>
+			</nodevisualsetting>
+</node>
+<node id="IL23" basevalue="0" maxvalue="1">
+  <parameter idActiveInteractions="STAT3_IL23_0 proliferation_IL23_0 NFAT_IL23_0" val="1"/>
+  <annotation>
+    <linklist>
+      <link xlink:href="hugo:15488"/>
+      <link xlink:href="ref:Zhou07"/>
+    </linklist>
+    <comment>Interleukines 21 and 23 are sequentially  activated by IL6 through STAT3 (see Zhou et al, 2007). 
+As for other cytokines, their production requires NFAT and proliferation.</comment>
+  </annotation>
+
+			<nodevisualsetting>
+				<ellipse x="558" y="448" width="50" height="25" backgroundColor="#FFFFFF" foregroundColor="#000000"/>
+			</nodevisualsetting>
+</node>
+<node id="IL4" basevalue="0" maxvalue="1">
+  <parameter idActiveInteractions="proliferation_IL4_0 GATA3_IL4_0 NFAT_IL4_0" val="1"/>
+  <parameter idActiveInteractions="proliferation_IL4_0 RUNX3_IL4_0 GATA3_IL4_0 NFAT_IL4_0" val="1"/>
+  <parameter idActiveInteractions="proliferation_IL4_0 TBET_IL4_0 GATA3_IL4_0 NFAT_IL4_0" val="1"/>
+  <annotation>
+    <linklist>
+      <link xlink:href="hugo:6014"/>
+      <link xlink:href="ref:Djuretic2007"/>
+      <link xlink:href="ref:Bettelli2005"/>
+      <link xlink:href="ref:Elser02"/>
+    </linklist>
+    <comment>IL4 is produced by Th2 cells. 
+Its production requires NFAT (blocked by FOXP3, see Bettelli et al, 2005), proliferation and GATA3. 
+it is inhibited by Tbet (cooperating with RUNX3, see Djuretic et al, 2007) and IRF1 (Elser et al, 2002).</comment>
+  </annotation>
+
+			<nodevisualsetting>
+				<ellipse x="918" y="452" width="59" height="25" backgroundColor="#FFFFFF" foregroundColor="#000000"/>
+			</nodevisualsetting>
+</node>
+<node id="STAT5" basevalue="0" maxvalue="2">
+  <parameter idActiveInteractions="IL2R_STAT5_1 IL4R_STAT5_0" val="2"/>
+  <parameter idActiveInteractions="IL2R_STAT5_1 IL15R_STAT5_0 IL4R_STAT5_0" val="2"/>
+  <parameter idActiveInteractions="IL4R_STAT5_0 IL15R_STAT5_0" val="1"/>
+  <parameter idActiveInteractions="IL2R_STAT5_0 IL4R_STAT5_0" val="1"/>
+  <parameter idActiveInteractions="IL2R_STAT5_0 IL4R_STAT5_0 IL15R_STAT5_0" val="1"/>
+  <parameter idActiveInteractions="IL15R_STAT5_0" val="1"/>
+  <parameter idActiveInteractions="IL4R_STAT5_0" val="1"/>
+  <parameter idActiveInteractions="IL2R_STAT5_0" val="1"/>
+  <parameter idActiveInteractions="IL2R_STAT5_0 IL15R_STAT5_0" val="1"/>
+  <parameter idActiveInteractions="IL4R_STAT5_1 IL2R_STAT5_1" val="2"/>
+  <parameter idActiveInteractions="IL15R_STAT5_0 IL4R_STAT5_1 IL2R_STAT5_1" val="2"/>
+  <parameter idActiveInteractions="IL2R_STAT5_1" val="2"/>
+  <parameter idActiveInteractions="IL15R_STAT5_0 IL2R_STAT5_1" val="2"/>
+  <parameter idActiveInteractions="IL4R_STAT5_1" val="2"/>
+  <parameter idActiveInteractions="IL4R_STAT5_1 IL2R_STAT5_0" val="2"/>
+  <parameter idActiveInteractions="IL15R_STAT5_0 IL4R_STAT5_1" val="2"/>
+  <parameter idActiveInteractions="IL15R_STAT5_0 IL4R_STAT5_1 IL2R_STAT5_0" val="2"/>
+  <annotation>
+    <linklist>
+      <link xlink:href="hugo:11366"/>
+      <link xlink:href="hugo:11367"/>
+      <link xlink:href="ref:Kim06"/>
+    </linklist>
+    <comment>STAT5 is activated by IL-4, IL-15 and IL-2 receptors.
+A high level of IL2R promotes a high level of STAT5, required to activate cell proliferation.</comment>
+  </annotation>
+
+			<nodevisualsetting>
+				<rect x="979" y="335" width="55" height="25" backgroundColor="#FFFFFF" foregroundColor="#000000"/>
+			</nodevisualsetting>
+</node>
+<node id="NFAT" name="NFAT" basevalue="0" maxvalue="1">
+  <parameter idActiveInteractions="TCR_NFAT_0 CD28_NFAT_0" val="1"/>
+  <annotation>
+    <linklist>
+      <link xlink:href="hugo:7775"/>
+      <link xlink:href="hugo:7776"/>
+      <link xlink:href="hugo:7777"/>
+      <link xlink:href="hugo:7778"/>
+    </linklist>
+    <comment>The Nuclear Factor of Activated T cells (NFAT) familly of transcription factors encompass 5 members. 
+The nucleus localisation of NFATc1 to NFATc4 depends on the presence of calcineurin (and thus of the TCR activation).
+This node represents the presence of NFAT (and AP1) in the nucleus.</comment>
+  </annotation>
+
+			<nodevisualsetting>
+				<ellipse x="1325" y="326" width="55" height="25" backgroundColor="#FFFFFF" foregroundColor="#000000"/>
+			</nodevisualsetting>
+</node>
+<node id="GATA3" basevalue="0" maxvalue="1">
+  <parameter idActiveInteractions="GATA3_GATA3_0" val="1"/>
+  <parameter idActiveInteractions="STAT6_GATA3_0 GATA3_GATA3_0" val="1"/>
+  <parameter idActiveInteractions="STAT6_GATA3_0" val="1"/>
+  <annotation>
+    <linklist>
+      <link xlink:href="hugo:4172"/>
+      <link xlink:href="ref:Mendoza06"/>
+    </linklist>
+    <comment>GATA3 is the main transcription factor of the Th2 lineage. 
+It is activated by STAT6, self-maintained and inhibited by Tbet.</comment>
+  </annotation>
+
+			<nodevisualsetting>
+				<ellipse x="437" y="694" width="64" height="25" backgroundColor="#FFFFFF" foregroundColor="#000000"/>
+			</nodevisualsetting>
+</node>
+<node id="IL6RA" basevalue="1" maxvalue="1">
+  <annotation>
+    <linklist>
+      <link xlink:href="hugo:6019"/>
+    </linklist>
+    <comment>IL-6 receptor alpha is a subchain of the IL-6 receptor.</comment>
+  </annotation>
+
+			<nodevisualsetting>
+				<ellipse x="350" y="128" width="55" height="25" backgroundColor="#CCCCCC" foregroundColor="#000000"/>
+			</nodevisualsetting>
+</node>
+<node id="IFNB_e" basevalue="0" maxvalue="1">
+  <annotation>
+    <linklist>
+      <link xlink:href="hugo:5434"/>
+    </linklist>
+    <comment>External source of interferon-beta.</comment>
+  </annotation>
+
+			<nodevisualsetting>
+				<ellipse x="131" y="4" width="55" height="25" backgroundColor="#000000" foregroundColor="#FFFFFF"/>
+			</nodevisualsetting>
+</node>
+<node id="IL10" basevalue="0" maxvalue="1">
+  <parameter idActiveInteractions="NFAT_IL10_0 proliferation_IL10_0 GATA3_IL10_0" val="1"/>
+  <parameter idActiveInteractions="GATA3_IL10_0 NFAT_IL10_0 proliferation_IL10_0 STAT3_IL10_0" val="1"/>
+  <parameter idActiveInteractions="NFAT_IL10_0 proliferation_IL10_0 STAT3_IL10_0" val="1"/>
+  <annotation>
+    <linklist>
+      <link xlink:href="hugo:5962"/>
+      <link xlink:href="ref:McGeachy07"/>
+      <link xlink:href="ref:Mendoza06a"/>
+    </linklist>
+    <comment>Interleukine-10 is activated by GATA3 and STAT3. 
+As for other cytokines, its production requires NFAT and proliferation.</comment>
+  </annotation>
+
+			<nodevisualsetting>
+				<ellipse x="638" y="450" width="50" height="25" backgroundColor="#FFFFFF" foregroundColor="#000000"/>
+			</nodevisualsetting>
+</node>
+<node id="IL4RA" basevalue="1" maxvalue="2">
+  <parameter idActiveInteractions="STAT5_IL4RA_0" val="2"/>
+  <annotation>
+    <linklist>
+      <link xlink:href="hugo:6015"/>
+      <link xlink:href="http://www.ncbi.nlm.nih.gov/pubmed/18820682"/>
+    </linklist>
+    <comment>IL-4 receptor alpha is a subchain of the IL-4 receptor.
+IL-2 upregulates IL4RA expression in a STAT5 dependent way and thereby promotes augmented IL-4RA expression and priming for responsiveness to IL4 (LIao et al, 2008).</comment>
+  </annotation>
+
+			<nodevisualsetting>
+				<rect x="937" y="122" width="55" height="25" backgroundColor="#CCCCCC" foregroundColor="#000000"/>
+			</nodevisualsetting>
+</node>
+<node id="IL10RB" basevalue="1" maxvalue="1">
+  <annotation>
+    <linklist>
+      <link xlink:href="hugo:5965"/>
+    </linklist>
+    <comment>IL10 receptor beta is a subchain of the IL-10 receptor.</comment>
+  </annotation>
+
+			<nodevisualsetting>
+				<ellipse x="675" y="146" width="55" height="22" backgroundColor="#CCCCCC" foregroundColor="#000000"/>
+			</nodevisualsetting>
+</node>
+<node id="IL27R" basevalue="0" maxvalue="1">
+  <parameter idActiveInteractions="GP130_IL27R_0 IL27_e_IL27R_0 IL27RA_IL27R_0" val="1"/>
+  <annotation>
+    <comment>The IL-27 receptor requires the IL27RA and GP130 subchains and activates STAT1 and STAT3 upon binding.</comment>
+  </annotation>
+
+			<nodevisualsetting>
+				<ellipse x="299" y="180" width="55" height="25" backgroundColor="#CCCCCC" foregroundColor="#000000"/>
+			</nodevisualsetting>
+</node>
+<node id="IL6_e" basevalue="0" maxvalue="1">
+  <annotation>
+    <linklist>
+      <link xlink:href="hugo:6018"/>
+    </linklist>
+    <comment>External source of interleukine-6.</comment>
+  </annotation>
+
+			<nodevisualsetting>
+				<ellipse x="381" y="3" width="55" height="25" backgroundColor="#000000" foregroundColor="#FFFFFF"/>
+			</nodevisualsetting>
+</node>
+<node id="SMAD3" basevalue="0" maxvalue="1">
+  <parameter idActiveInteractions="TGFBR_SMAD3_0" val="1"/>
+  <annotation>
+    <linklist>
+      <link xlink:href="hugo:6769"/>
+      <link xlink:href="ref:Kim06"/>
+    </linklist>
+    <comment>SMAD3 is activated by TGF- beta receptor and involved in the activation of IL2RA and FOXP3.</comment>
+  </annotation>
+
+			<nodevisualsetting>
+				<ellipse x="762" y="580" width="55" height="25" backgroundColor="#CCCCCC" foregroundColor="#000000"/>
+			</nodevisualsetting>
+</node>
+<node id="IL10R" basevalue="0" maxvalue="1">
+  <parameter idActiveInteractions="IL10RB_IL10R_0 IL10RA_IL10R_0 IL10_IL10R_0" val="1"/>
+  <parameter idActiveInteractions="IL10RB_IL10R_0 IL10RA_IL10R_0 IL10_e_IL10R_0" val="1"/>
+  <parameter idActiveInteractions="IL10RB_IL10R_0 IL10RA_IL10R_0 IL10_e_IL10R_0 IL10_IL10R_0" val="1"/>
+  <annotation>
+    <comment>The IL-10 receptor requires the IL10RA and IL10RB subchains, and activates STAT3 upon binding.</comment>
+  </annotation>
+
+			<nodevisualsetting>
+				<ellipse x="640" y="183" width="55" height="25" backgroundColor="#CCCCCC" foregroundColor="#000000"/>
+			</nodevisualsetting>
+</node>
+<node id="IFNGR1" basevalue="1" maxvalue="1">
+  <annotation>
+    <linklist>
+      <link xlink:href="hugo:5439"/>
+    </linklist>
+    <comment>IFNGR1 is a subchain of the IFN-gamma receptor.</comment>
+  </annotation>
+
+			<nodevisualsetting>
+				<ellipse x="166" y="124" width="55" height="25" backgroundColor="#CCCCCC" foregroundColor="#000000"/>
+			</nodevisualsetting>
+</node>
+<node id="CGC" name="common gamma chain" basevalue="1" maxvalue="1">
+  <annotation>
+    <comment>The Common Gamma Chain (IL2RG), is shared by several cytokine receptors (IL2R, IL4R, IL15R and IL21R).</comment>
+  </annotation>
+
+			<nodevisualsetting>
+				<ellipse x="850" y="53" width="55" height="25" backgroundColor="#CCCCCC" foregroundColor="#000000"/>
+			</nodevisualsetting>
+</node>
+<node id="IL10RA" basevalue="1" maxvalue="1">
+  <annotation>
+    <linklist>
+      <link xlink:href="hugo:5964"/>
+    </linklist>
+    <comment>IL10 receptor alpha is a subchain of the IL-10 receptor.</comment>
+  </annotation>
+
+			<nodevisualsetting>
+				<ellipse x="606" y="131" width="55" height="25" backgroundColor="#CCCCCC" foregroundColor="#000000"/>
+			</nodevisualsetting>
+</node>
+<node id="proliferation" basevalue="0" maxvalue="1">
+  <parameter idActiveInteractions="STAT5_proliferation_0" val="1"/>
+  <parameter idActiveInteractions="STAT5_proliferation_0 proliferation_proliferation_0" val="1"/>
+  <parameter idActiveInteractions="proliferation_proliferation_0" val="1"/>
+  <annotation>
+    <linklist>
+      <link xlink:href="ref:Moriggl99"/>
+      <link xlink:href="ref:Bird98"/>
+    </linklist>
+    <comment>This component denotes that the cell proliferation has been activated. 
+It is used as a switch required for the expression of most cytokines.
+It is activated by IL2 through STAT5 (see Moriggl et al, 1999).</comment>
+  </annotation>
+
+			<nodevisualsetting>
+				<ellipse x="1171" y="39" width="89" height="27" backgroundColor="#FFFFFF" foregroundColor="#000000"/>
+			</nodevisualsetting>
+</node>
+<node id="IL12RB1" basevalue="1" maxvalue="2">
+  <parameter idActiveInteractions="IRF1_IL12RB1_0" val="2"/>
+  <annotation>
+    <linklist>
+      <link xlink:href="hugo:5971"/>
+      <link xlink:href="ref:Kano2007"/>
+    </linklist>
+    <comment>IL-12 receptor beta 1 is a subchain of the IL-12 and IL-23 receptors.
+According to (Kano et al, 2007), IRF1 promotes higher level of IL12RB1, which is required for IL-12 signalling, but not for IL-23.</comment>
+  </annotation>
+
+			<nodevisualsetting>
+				<rect x="761" y="112" width="60" height="25" backgroundColor="#CCCCCC" foregroundColor="#000000"/>
+			</nodevisualsetting>
+</node>
+<node id="IL15RA" basevalue="1" maxvalue="1">
+  <annotation>
+    <linklist>
+      <link xlink:href="hugo:5978"/>
+    </linklist>
+    <comment>IL-15 receptor alpha is a subchain of the IL-15 receptor.</comment>
+  </annotation>
+
+			<nodevisualsetting>
+				<ellipse x="950" y="83" width="55" height="25" backgroundColor="#CCCCCC" foregroundColor="#000000"/>
+			</nodevisualsetting>
+</node>
+<node id="IFNBR" basevalue="0" maxvalue="1">
+  <parameter idActiveInteractions="IFNB_e_IFNBR_0" val="1"/>
+  <annotation>
+    <linklist>
+      <link xlink:href="hugo:5432"/>
+    </linklist>
+    <comment>Upon ligand binding, the IFN-beta receptor activates STAT1.</comment>
+  </annotation>
+
+			<nodevisualsetting>
+				<ellipse x="128" y="178" width="55" height="25" backgroundColor="#CCCCCC" foregroundColor="#000000"/>
+			</nodevisualsetting>
+</node>
+<node id="IL17" basevalue="0" maxvalue="1">
+  <parameter idActiveInteractions="NFKB_IL17_0 STAT3_IL17_0 RORGT_IL17_0 proliferation_IL17_0 NFAT_IL17_0" val="1"/>
+  <annotation>
+    <linklist>
+      <link xlink:href="hugo:5981"/>
+      <link xlink:href="ref:Zhou2008"/>
+    </linklist>
+    <comment>IL17 cytokines are produced by TGFb+IL6 induced Th17 cells when stimulated by IL23 and (IL18 or IL1b).
+STAT3 and RORGT activate IL17 cooperatively.
+The action of RORGT can be blocked by FOXP3 (Zhou et al, 2008).
+STAT3 and NFkB are required to activate IL17.
+IL2 inhibits IL17 through STAT5. STAT1, STAT5 and STAT6 can bind on the IL17 promoter. 
+An inhibitory effect for Tbet and IL4 has also been reported. 
+Coexpression of IL17 and IFNg has been observed, indicating that these inhibitions may be overcomed.</comment>
+  </annotation>
+
+			<nodevisualsetting>
+				<ellipse x="1197" y="449" width="45" height="25" backgroundColor="#FFFFFF" foregroundColor="#000000"/>
+			</nodevisualsetting>
+</node>
+<node id="IL2RB" basevalue="1" maxvalue="1">
+  <annotation>
+    <linklist>
+      <link xlink:href="hugo:6009"/>
+    </linklist>
+    <comment>IL-2 receptor beta is a subchain of the IL-2 and IL-15 receptors.</comment>
+  </annotation>
+
+			<nodevisualsetting>
+				<ellipse x="1032" y="124" width="55" height="22" backgroundColor="#CCCCCC" foregroundColor="#000000"/>
+			</nodevisualsetting>
+</node>
+<node id="IFNGR2" basevalue="1" maxvalue="1">
+  <annotation>
+    <linklist>
+      <link xlink:href="hugo:5440"/>
+    </linklist>
+    <comment>IFNGR2 is a subchain of the IFN-gamma receptor.</comment>
+  </annotation>
+
+			<nodevisualsetting>
+				<ellipse x="180" y="88" width="55" height="25" backgroundColor="#CCCCCC" foregroundColor="#000000"/>
+			</nodevisualsetting>
+</node>
+<node id="IL12_e" basevalue="0" maxvalue="1">
+  <annotation>
+    <linklist>
+      <link xlink:href="hugo:5969"/>
+      <link xlink:href="hugo:5970"/>
+    </linklist>
+    <comment>External source of interleukine-12.</comment>
+  </annotation>
+
+			<nodevisualsetting>
+				<ellipse x="798" y="4" width="55" height="25" backgroundColor="#000000" foregroundColor="#FFFFFF"/>
+			</nodevisualsetting>
+</node>
+<node id="IFNG_e" basevalue="0" maxvalue="1">
+  <annotation>
+    <linklist>
+      <link xlink:href="hugo:5438"/>
+    </linklist>
+    <comment>External source of interferon-gamma.</comment>
+  </annotation>
+
+			<nodevisualsetting>
+				<ellipse x="216" y="4" width="55" height="25" backgroundColor="#000000" foregroundColor="#FFFFFF"/>
+			</nodevisualsetting>
+</node>
+<node id="IL10_e" basevalue="0" maxvalue="1">
+  <annotation>
+    <linklist>
+      <link xlink:href="hugo:5962"/>
+    </linklist>
+    <comment>External source of interleukine-10.</comment>
+  </annotation>
+
+			<nodevisualsetting>
+				<ellipse x="636" y="3" width="55" height="25" backgroundColor="#000000" foregroundColor="#FFFFFF"/>
+			</nodevisualsetting>
+</node>
+<node id="IL12RB2" basevalue="1" maxvalue="1">
+  <annotation>
+    <linklist>
+      <link xlink:href="hugo:5972"/>
+      <link xlink:href="ref:Mendoza06"/>
+      <link xlink:href="ref:Szabo1997b"/>
+    </linklist>
+    <comment>IL-12 receptor beta 2 is a subchain of the IL-12 receptor.
+According to (Szabo et al, 1997), STAT6 blocks the IL12 pathway by inhibiting IL12RB2.</comment>
+  </annotation>
+
+			<nodevisualsetting>
+				<ellipse x="840" y="121" width="56" height="25" backgroundColor="#CCCCCC" foregroundColor="#000000"/>
+			</nodevisualsetting>
+</node>
+<node id="GP130" basevalue="1" maxvalue="1">
+  <annotation>
+    <linklist>
+      <link xlink:href="hugo:6021"/>
+    </linklist>
+    <comment>Glycoprotein 130 (IL-6 Signal Transducer) forms a complex with binded receptor of the IL-6 familly. 
+It is required for signal transduction of these receptors (IL6R, IL21R, IL23R and IL27R in this model).</comment>
+  </annotation>
+
+			<nodevisualsetting>
+				<ellipse x="423" y="100" width="55" height="25" backgroundColor="#CCCCCC" foregroundColor="#000000"/>
+			</nodevisualsetting>
+</node>
+<node id="IL4_e" basevalue="0" maxvalue="1">
+  <annotation>
+    <linklist>
+      <link xlink:href="hugo:6014"/>
+    </linklist>
+    <comment>External source of interleukine-4.</comment>
+  </annotation>
+
+			<nodevisualsetting>
+				<ellipse x="904" y="4" width="55" height="25" backgroundColor="#000000" foregroundColor="#FFFFFF"/>
+			</nodevisualsetting>
+</node>
+<node id="TBET" basevalue="0" maxvalue="1">
+  <parameter idActiveInteractions="TBET_TBET_0" val="1"/>
+  <parameter idActiveInteractions="TBET_TBET_0 STAT1_TBET_0" val="1"/>
+  <parameter idActiveInteractions="STAT1_TBET_0" val="1"/>
+  <annotation>
+    <linklist>
+      <link xlink:href="hugo:11599"/>
+      <link xlink:href="ref:Mendoza06"/>
+    </linklist>
+    <comment>T-bet (TBX21) is the main transcription factor of the Th1 lineage. 
+It is activated by STAT1, self-maintained and inhibited by GATA3.</comment>
+  </annotation>
+
+			<nodevisualsetting>
+				<ellipse x="153" y="691" width="56" height="25" backgroundColor="#FFFFFF" foregroundColor="#000000"/>
+			</nodevisualsetting>
+</node>
+<node id="STAT1" basevalue="0" maxvalue="1">
+  <parameter idActiveInteractions="IFNBR_STAT1_0" val="1"/>
+  <parameter idActiveInteractions="IFNBR_STAT1_0 IL27R_STAT1_0" val="1"/>
+  <parameter idActiveInteractions="IFNBR_STAT1_0 IFNGR_STAT1_0" val="1"/>
+  <parameter idActiveInteractions="IFNBR_STAT1_0 IFNGR_STAT1_0 IL27R_STAT1_0" val="1"/>
+  <parameter idActiveInteractions="IFNGR_STAT1_0" val="1"/>
+  <parameter idActiveInteractions="IFNGR_STAT1_0 IL27R_STAT1_0" val="1"/>
+  <parameter idActiveInteractions="IL27R_STAT1_0" val="1"/>
+  <annotation>
+    <linklist>
+      <link xlink:href="hugo:11362"/>
+      <link xlink:href="ref:Mendoza06"/>
+      <link xlink:href="ref:Weaver07"/>
+      <link xlink:href="ref:Kamiya2004"/>
+    </linklist>
+    <comment>STAT1 is activated by IL-27, IFN-beta and IFN-gamma receptors.</comment>
+  </annotation>
+
+			<nodevisualsetting>
+				<ellipse x="187" y="338" width="55" height="25" backgroundColor="#FFFFFF" foregroundColor="#000000"/>
+			</nodevisualsetting>
+</node>
+<node id="TGFB_e" basevalue="0" maxvalue="1">
+  <annotation>
+    <linklist>
+      <link xlink:href="hugo:11766"/>
+    </linklist>
+    <comment>External source of Transforming Growth Factor beta.</comment>
+  </annotation>
+
+			<nodevisualsetting>
+				<ellipse x="714" y="2" width="55" height="25" backgroundColor="#000000" foregroundColor="#FFFFFF"/>
+			</nodevisualsetting>
+</node>
+<node id="IRF1" basevalue="0" maxvalue="1">
+  <parameter idActiveInteractions="STAT1_IRF1_0" val="1"/>
+  <annotation>
+    <linklist>
+      <link xlink:href="hugo:6116"/>
+      <link xlink:href="ref:Kano2007"/>
+    </linklist>
+    <comment>IRF1 is required for the activation of IL12RB1 and for the inhibition of IL4 by STAT1.</comment>
+  </annotation>
+
+			<nodevisualsetting>
+				<ellipse x="323" y="644" width="55" height="25" backgroundColor="#CCCCCC" foregroundColor="#000000"/>
+			</nodevisualsetting>
+</node>
+<node id="IL15R" basevalue="0" maxvalue="2">
+  <parameter idActiveInteractions="CGC_IL15R_0 IL15RA_IL15R_0 IL2RB_IL15R_0 IL15_e_IL15R_0" val="1"/>
+  <annotation>
+    <comment>The IL-15 receptor requires the CGC, IL15RA and IL2RB subchains and activates STAT5 upon binding.</comment>
+  </annotation>
+
+			<nodevisualsetting>
+				<ellipse x="990" y="180" width="55" height="25" backgroundColor="#CCCCCC" foregroundColor="#000000"/>
+			</nodevisualsetting>
+</node>
+<node id="IL23_e" basevalue="0" maxvalue="1">
+  <annotation>
+    <linklist>
+      <link xlink:href="hugo:15488"/>
+    </linklist>
+    <comment>External source of interleukine-23.</comment>
+  </annotation>
+
+			<nodevisualsetting>
+				<ellipse x="555" y="2" width="55" height="25" backgroundColor="#000000" foregroundColor="#FFFFFF"/>
+			</nodevisualsetting>
+</node>
+<node id="IL27_e" basevalue="0" maxvalue="1">
+  <annotation>
+    <linklist>
+      <link xlink:href="hugo:19157"/>
+    </linklist>
+    <comment>External source of interleukine-27.</comment>
+  </annotation>
+
+			<nodevisualsetting>
+				<ellipse x="301" y="2" width="55" height="25" backgroundColor="#000000" foregroundColor="#FFFFFF"/>
+			</nodevisualsetting>
+</node>
+<node id="IL21_e" basevalue="0" maxvalue="1">
+  <annotation>
+    <linklist>
+      <link xlink:href="hugo:6005"/>
+    </linklist>
+    <comment>External source of interleukine-21.</comment>
+  </annotation>
+
+			<nodevisualsetting>
+				<ellipse x="466" y="2" width="55" height="25" backgroundColor="#000000" foregroundColor="#FFFFFF"/>
+			</nodevisualsetting>
+</node>
+<node id="APC" basevalue="0" maxvalue="1">
+  <annotation>
+    <comment>Antigen Presenting Cell. 
+This input node denotes proper presentation of an antigen recognised by the Th TCR.</comment>
+  </annotation>
+
+			<nodevisualsetting>
+				<ellipse x="1325" y="2" width="55" height="25" backgroundColor="#000000" foregroundColor="#FFFFFF"/>
+			</nodevisualsetting>
+</node>
+<node id="IL23R" basevalue="0" maxvalue="1">
+  <parameter idActiveInteractions="IL12RB1_IL23R_0 GP130_IL23R_0 IL23_e_IL23R_0 RORGT_IL23R_0 STAT3_IL23R_0" val="1"/>
+  <parameter idActiveInteractions="IL23_IL23R_0 IL12RB1_IL23R_0 GP130_IL23R_0 RORGT_IL23R_0 STAT3_IL23R_0" val="1"/>
+  <parameter idActiveInteractions="IL23_IL23R_0 IL12RB1_IL23R_0 GP130_IL23R_0 IL23_e_IL23R_0 RORGT_IL23R_0 STAT3_IL23R_0" val="1"/>
+  <annotation>
+    <linklist>
+      <link xlink:href="hugo:19100"/>
+      <link xlink:href="ref:Ivanov07"/>
+    </linklist>
+    <comment>The IL-23 receptor requires the GP130 and IL12RB1 subchains and activates STAT3 upon binding.
+According to (Ivanov et al, 2007), STAT3 and RORgt are needed for its expression (most likely for the expression of its subchains).</comment>
+  </annotation>
+
+			<nodevisualsetting>
+				<ellipse x="552" y="182" width="63" height="25" backgroundColor="#CCCCCC" foregroundColor="#000000"/>
+			</nodevisualsetting>
+</node>
+<node id="IL2RA" basevalue="0" maxvalue="1">
+  <parameter idActiveInteractions="SMAD3_IL2RA_0 NFAT_IL2RA_0" val="1"/>
+  <parameter idActiveInteractions="SMAD3_IL2RA_0 STAT5_IL2RA_0 NFAT_IL2RA_0" val="1"/>
+  <parameter idActiveInteractions="SMAD3_IL2RA_0 FOXP3_IL2RA_0 NFAT_IL2RA_0" val="1"/>
+  <parameter idActiveInteractions="SMAD3_IL2RA_0 FOXP3_IL2RA_0 STAT5_IL2RA_0 NFAT_IL2RA_0" val="1"/>
+  <parameter idActiveInteractions="SMAD3_IL2RA_0 NFKB_IL2RA_0 NFAT_IL2RA_0" val="1"/>
+  <parameter idActiveInteractions="SMAD3_IL2RA_0 NFKB_IL2RA_0 STAT5_IL2RA_0 NFAT_IL2RA_0" val="1"/>
+  <parameter idActiveInteractions="SMAD3_IL2RA_0 NFKB_IL2RA_0 FOXP3_IL2RA_0 NFAT_IL2RA_0" val="1"/>
+  <parameter idActiveInteractions="SMAD3_IL2RA_0 NFKB_IL2RA_0 FOXP3_IL2RA_0 STAT5_IL2RA_0 NFAT_IL2RA_0" val="1"/>
+  <parameter idActiveInteractions="FOXP3_IL2RA_0 NFAT_IL2RA_0" val="1"/>
+  <parameter idActiveInteractions="NFKB_IL2RA_0 FOXP3_IL2RA_0 NFAT_IL2RA_0" val="1"/>
+  <parameter idActiveInteractions="STAT5_IL2RA_0 NFAT_IL2RA_0" val="1"/>
+  <parameter idActiveInteractions="FOXP3_IL2RA_0 STAT5_IL2RA_0 NFAT_IL2RA_0" val="1"/>
+  <parameter idActiveInteractions="NFKB_IL2RA_0 STAT5_IL2RA_0 NFAT_IL2RA_0" val="1"/>
+  <parameter idActiveInteractions="NFKB_IL2RA_0 FOXP3_IL2RA_0 STAT5_IL2RA_0 NFAT_IL2RA_0" val="1"/>
+  <parameter idActiveInteractions="NFKB_IL2RA_0 NFAT_IL2RA_0" val="1"/>
+  <annotation>
+    <linklist>
+      <link xlink:href="hugo:6008"/>
+      <link xlink:href="ref:Kim06"/>
+    </linklist>
+    <comment>IL-2 receptor alpha (CD25) is the high affinity subchain of the IL-2 receptor. 
+According to (Kim et al, 2006), it is activated by NFAT, SMAD3, NFKB and STAT5. 
+It is also activated by FOXP3 in CD4+CD25+ Treg. 
+Its presence enables higher activation of the IL-2 receptor.</comment>
+  </annotation>
+
+			<nodevisualsetting>
+				<ellipse x="1117" y="102" width="55" height="25" backgroundColor="#FFFFFF" foregroundColor="#000000"/>
+			</nodevisualsetting>
+</node>
+<node id="IL12R" basevalue="0" maxvalue="1">
+  <parameter idActiveInteractions="IL12RB1_IL12R_0 IL12RB2_IL12R_0 IL12_e_IL12R_0" val="1"/>
+  <annotation>
+    <linklist>
+      <link xlink:href="ref:Kano2007"/>
+    </linklist>
+    <comment>The IL-12 receptor requires the IL12RB1 (at high level) and IL12RB2 subchains and activates STAT4 upon binding.</comment>
+  </annotation>
+
+			<nodevisualsetting>
+				<ellipse x="809" y="180" width="50" height="25" backgroundColor="#CCCCCC" foregroundColor="#000000"/>
+			</nodevisualsetting>
+</node>
+<node id="STAT6" basevalue="0" maxvalue="1">
+  <parameter idActiveInteractions="IL4R_STAT6_0" val="1"/>
+  <annotation>
+    <linklist>
+      <link xlink:href="hugo:11368"/>
+      <link xlink:href="ref:Mendoza06"/>
+    </linklist>
+    <comment>STAT6 is activated by IL-4 receptor.</comment>
+  </annotation>
+
+			<nodevisualsetting>
+				<ellipse x="874" y="337" width="60" height="25" backgroundColor="#FFFFFF" foregroundColor="#000000"/>
+			</nodevisualsetting>
+</node>
+<node id="IFNG" basevalue="0" maxvalue="1">
+  <parameter idActiveInteractions="proliferation_IFNG_0 TBET_IFNG_0 RUNX3_IFNG_0 NFAT_IFNG_0" val="1"/>
+  <parameter idActiveInteractions="proliferation_IFNG_0 STAT4_IFNG_0 TBET_IFNG_0 RUNX3_IFNG_0 NFAT_IFNG_0" val="1"/>
+  <parameter idActiveInteractions="NFAT_IFNG_0 proliferation_IFNG_0 STAT4_IFNG_0" val="1"/>
+  <parameter idActiveInteractions="RUNX3_IFNG_0 NFAT_IFNG_0 proliferation_IFNG_0 STAT4_IFNG_0" val="1"/>
+  <parameter idActiveInteractions="TBET_IFNG_0 NFAT_IFNG_0 proliferation_IFNG_0 STAT4_IFNG_0" val="1"/>
+  <annotation>
+    <linklist>
+      <link xlink:href="hugo:5438"/>
+      <link xlink:href="ref:Djuretic2007"/>
+      <link xlink:href="ref:Bettelli2005"/>
+      <link xlink:href="ref:Mendoza06"/>
+    </linklist>
+    <comment>The gamma interferon is produced by active Th1 cells. 
+Its production requires NFAT (blocked by FOXP3), cell proliferation, and either IL12 (through STAT4) or Tbet (in cooperation with RUNX3). 
+It is inhibited by STAT3.</comment>
+  </annotation>
+
+			<nodevisualsetting>
+				<ellipse x="264" y="455" width="55" height="25" backgroundColor="#FFFFFF" foregroundColor="#000000"/>
+			</nodevisualsetting>
+</node>
+<node id="IL21" basevalue="0" maxvalue="1">
+  <parameter idActiveInteractions="STAT3_IL21_0 proliferation_IL21_0 NFAT_IL21_0" val="1"/>
+  <annotation>
+    <linklist>
+      <link xlink:href="hugo:6005"/>
+      <link xlink:href="ref:Korn07"/>
+      <link xlink:href="ref:Zhou07"/>
+      <link xlink:href="ref:Brenne2002"/>
+    </linklist>
+    <comment>Interleukines 21 and 23 are sequentially  activated by IL6 through STAT3 (see Zhou et al, 2007). 
+As for other cytokines, their production requires NFAT and proliferation.</comment>
+  </annotation>
+
+			<nodevisualsetting>
+				<ellipse x="472" y="447" width="55" height="25" backgroundColor="#FFFFFF" foregroundColor="#000000"/>
+			</nodevisualsetting>
+</node>
+<node id="IL21R" basevalue="0" maxvalue="1">
+  <parameter idActiveInteractions="CGC_IL21R_0 GP130_IL21R_0 IL21_e_IL21R_0" val="1"/>
+  <parameter idActiveInteractions="CGC_IL21R_0 GP130_IL21R_0 IL21_IL21R_0" val="1"/>
+  <parameter idActiveInteractions="CGC_IL21R_0 GP130_IL21R_0 IL21_IL21R_0 IL21_e_IL21R_0" val="1"/>
+  <annotation>
+    <linklist>
+      <link xlink:href="hugo:6006"/>
+    </linklist>
+    <comment>The IL-21 receptor requires the GP130 and CGC subchains, and activates STAT3 upon binding.</comment>
+  </annotation>
+
+			<nodevisualsetting>
+				<ellipse x="467" y="182" width="55" height="25" backgroundColor="#CCCCCC" foregroundColor="#000000"/>
+			</nodevisualsetting>
+</node>
+<node id="CD28" basevalue="0" maxvalue="1">
+  <parameter idActiveInteractions="APC_CD28_0" val="1"/>
+  <annotation>
+    <linklist>
+      <link xlink:href="hugo:1653"/>
+    </linklist>
+    <comment>CD28 provides a co-stimulatory signal to the TCR, required for the activation of Th cells.</comment>
+  </annotation>
+
+			<nodevisualsetting>
+				<ellipse x="1294" y="177" width="50" height="25" backgroundColor="#CCCCCC" foregroundColor="#000000"/>
+			</nodevisualsetting>
+</node>
+<node id="IL6R" basevalue="0" maxvalue="1">
+  <parameter idActiveInteractions="GP130_IL6R_0 IL6RA_IL6R_0 IL6_e_IL6R_0" val="1"/>
+  <annotation>
+    <comment>The IL-6 receptor requires the IL6RA and GP130 subchains and activates STAT3 upon binding.</comment>
+  </annotation>
+
+			<nodevisualsetting>
+				<ellipse x="382" y="182" width="55" height="25" backgroundColor="#CCCCCC" foregroundColor="#000000"/>
+			</nodevisualsetting>
+</node>
+<node id="IFNGR" basevalue="0" maxvalue="1">
+  <parameter idActiveInteractions="IFNGR1_IFNGR_0 IFNGR2_IFNGR_0 IFNG_e_IFNGR_0" val="1"/>
+  <parameter idActiveInteractions="IFNG_IFNGR_0 IFNGR1_IFNGR_0 IFNGR2_IFNGR_0" val="1"/>
+  <parameter idActiveInteractions="IFNG_IFNGR_0 IFNGR1_IFNGR_0 IFNGR2_IFNGR_0 IFNG_e_IFNGR_0" val="1"/>
+  <annotation>
+    <comment>The IFN-gamma receptor requires the IFNGR1 and IFNGR2 subchains and activates STAT1 upon binding.</comment>
+  </annotation>
+
+			<nodevisualsetting>
+				<ellipse x="217" y="180" width="55" height="25" backgroundColor="#CCCCCC" foregroundColor="#000000"/>
+			</nodevisualsetting>
+</node>
+<node id="TCR" basevalue="0" maxvalue="1">
+  <parameter idActiveInteractions="APC_TCR_0" val="1"/>
+  <annotation>
+    <comment>T Cell Receptor, activated by antigen presentation.</comment>
+  </annotation>
+
+			<nodevisualsetting>
+				<ellipse x="1362" y="176" width="50" height="25" backgroundColor="#CCCCCC" foregroundColor="#000000"/>
+			</nodevisualsetting>
+</node>
+<node id="RORGT" basevalue="0" maxvalue="1">
+  <parameter idActiveInteractions="STAT3_RORGT_0 TGFBR_RORGT_0" val="1"/>
+  <parameter idActiveInteractions="RORGT_RORGT_0 TGFBR_RORGT_0" val="1"/>
+  <parameter idActiveInteractions="STAT3_RORGT_0 RORGT_RORGT_0" val="1"/>
+  <parameter idActiveInteractions="STAT3_RORGT_0 RORGT_RORGT_0 TGFBR_RORGT_0" val="1"/>
+  <annotation>
+    <linklist>
+      <link xlink:href="ref:Zhou07"/>
+      <link xlink:href="ref:Manel2008"/>
+    </linklist>
+    <comment>RORGT is a key actor in Th17 differentiation. 
+According to (Zhou et al, 2007), RORgt is activated by TGFb + STAT3 (activated by interleukines 6, 21 and 23).
+Here, we assume that RORgt is self-regulated (as the other master regulators).</comment>
+  </annotation>
+
+			<nodevisualsetting>
+				<ellipse x="537" y="694" width="55" height="25" backgroundColor="#FFFFFF" foregroundColor="#000000"/>
+			</nodevisualsetting>
+</node>
+<node id="IL15_e" basevalue="0" maxvalue="1">
+  <annotation>
+    <linklist>
+      <link xlink:href="hugo:5977"/>
+    </linklist>
+    <comment>External source of interleukine-15.</comment>
+  </annotation>
+
+			<nodevisualsetting>
+				<ellipse x="996" y="3" width="55" height="25" backgroundColor="#000000" foregroundColor="#FFFFFF"/>
+			</nodevisualsetting>
+</node>
+<node id="IL4R" basevalue="0" maxvalue="2">
+  <parameter idActiveInteractions="IL4_e_IL4R_0 CGC_IL4R_0 IL4RA_IL4R_0" val="1"/>
+  <parameter idActiveInteractions="IL4_IL4R_0 CGC_IL4R_0 IL4RA_IL4R_0" val="1"/>
+  <parameter idActiveInteractions="IL4_IL4R_0 IL4_e_IL4R_0 CGC_IL4R_0 IL4RA_IL4R_0" val="1"/>
+  <parameter idActiveInteractions="IL4_e_IL4R_0 CGC_IL4R_0 IL4RA_IL4R_1" val="2"/>
+  <parameter idActiveInteractions="IL4_IL4R_0 CGC_IL4R_0 IL4RA_IL4R_1" val="2"/>
+  <parameter idActiveInteractions="IL4_IL4R_0 IL4_e_IL4R_0 CGC_IL4R_0 IL4RA_IL4R_1" val="2"/>
+  <annotation>
+    <comment>The IL-4 receptor requires the CGC and IL4RA subchains and activates STAT6 and STAT5 upon binding.</comment>
+  </annotation>
+
+			<nodevisualsetting>
+				<rect x="901" y="182" width="55" height="25" backgroundColor="#CCCCCC" foregroundColor="#000000"/>
+			</nodevisualsetting>
+</node>
+<node id="TGFBR" basevalue="0" maxvalue="1">
+  <parameter idActiveInteractions="TGFB_TGFBR_0" val="1"/>
+  <parameter idActiveInteractions="TGFB_TGFBR_0 TGFB_e_TGFBR_0" val="1"/>
+  <parameter idActiveInteractions="TGFB_e_TGFBR_0" val="1"/>
+  <annotation>
+    <comment>Upon ligand binding, the TGF-beta receptor activates SMAD3.</comment>
+  </annotation>
+
+			<nodevisualsetting>
+				<ellipse x="717" y="181" width="55" height="25" backgroundColor="#CCCCCC" foregroundColor="#000000"/>
+			</nodevisualsetting>
+</node>
+<node id="NFKB" basevalue="1" maxvalue="1">
+  <annotation>
+    <linklist>
+      <link xlink:href="ref:Bettelli2005"/>
+      <link xlink:href="http://www.ncbi.nlm.nih.gov/pubmed/12646638"/>
+    </linklist>
+    <comment>NF-kappa B is inhibited by I-kappa B and Foxp3 (according to Bettelli et al, 2005).
+The NF-kB family is composed is composed of  NF-kB1, NF-kB2, RelA, RelB and c-Rel. c-Rel has been solidly implicated in the regulation of IL-2 transcription by chromatin remodelling accross the IL-2 gene (Rao et al, 2003). Other components such as RelA were shown to induce IL-2 expression following transient overexpression. 
+Hence, the interaction from NFKB onto  IL2  has a context-dependent sign.</comment>
+  </annotation>
+
+			<nodevisualsetting>
+				<ellipse x="1407" y="453" width="55" height="25" backgroundColor="#CCCCCC" foregroundColor="#000000"/>
+			</nodevisualsetting>
+</node>
+<node id="IKB" basevalue="1" maxvalue="1">
+  <annotation>
+    <comment>The  NF-kappa B inhibitor I-kappa B is inhibited by the TCR signal.</comment>
+  </annotation>
+
+			<nodevisualsetting>
+				<ellipse x="1408" y="389" width="55" height="25" backgroundColor="#CCCCCC" foregroundColor="#000000"/>
+			</nodevisualsetting>
+</node>
+<node id="IL2_e" basevalue="0" maxvalue="1">
+  <annotation>
+    <linklist>
+      <link xlink:href="hugo:6001"/>
+    </linklist>
+    <comment>External source of interleukine-2.</comment>
+  </annotation>
+
+			<nodevisualsetting>
+				<ellipse x="1079" y="4" width="55" height="25" backgroundColor="#000000" foregroundColor="#FFFFFF"/>
+			</nodevisualsetting>
+</node>
+<node id="STAT3" basevalue="0" maxvalue="1">
+  <parameter idActiveInteractions="IL6R_STAT3_0" val="1"/>
+  <parameter idActiveInteractions="IL6R_STAT3_0 IL21R_STAT3_0" val="1"/>
+  <parameter idActiveInteractions="IL6R_STAT3_0 IL27R_STAT3_0" val="1"/>
+  <parameter idActiveInteractions="IL6R_STAT3_0 IL27R_STAT3_0 IL21R_STAT3_0" val="1"/>
+  <parameter idActiveInteractions="IL6R_STAT3_0 IL23R_STAT3_0" val="1"/>
+  <parameter idActiveInteractions="IL6R_STAT3_0 IL23R_STAT3_0 IL21R_STAT3_0" val="1"/>
+  <parameter idActiveInteractions="IL6R_STAT3_0 IL23R_STAT3_0 IL27R_STAT3_0" val="1"/>
+  <parameter idActiveInteractions="IL6R_STAT3_0 IL23R_STAT3_0 IL27R_STAT3_0 IL21R_STAT3_0" val="1"/>
+  <parameter idActiveInteractions="IL6R_STAT3_0 IL10R_STAT3_0" val="1"/>
+  <parameter idActiveInteractions="IL6R_STAT3_0 IL10R_STAT3_0 IL21R_STAT3_0" val="1"/>
+  <parameter idActiveInteractions="IL6R_STAT3_0 IL10R_STAT3_0 IL27R_STAT3_0" val="1"/>
+  <parameter idActiveInteractions="IL6R_STAT3_0 IL10R_STAT3_0 IL27R_STAT3_0 IL21R_STAT3_0" val="1"/>
+  <parameter idActiveInteractions="IL6R_STAT3_0 IL10R_STAT3_0 IL23R_STAT3_0" val="1"/>
+  <parameter idActiveInteractions="IL6R_STAT3_0 IL10R_STAT3_0 IL23R_STAT3_0 IL21R_STAT3_0" val="1"/>
+  <parameter idActiveInteractions="IL6R_STAT3_0 IL10R_STAT3_0 IL23R_STAT3_0 IL27R_STAT3_0" val="1"/>
+  <parameter idActiveInteractions="IL6R_STAT3_0 IL10R_STAT3_0 IL23R_STAT3_0 IL27R_STAT3_0 IL21R_STAT3_0" val="1"/>
+  <parameter idActiveInteractions="IL10R_STAT3_0" val="1"/>
+  <parameter idActiveInteractions="IL10R_STAT3_0 IL21R_STAT3_0" val="1"/>
+  <parameter idActiveInteractions="IL10R_STAT3_0 IL27R_STAT3_0" val="1"/>
+  <parameter idActiveInteractions="IL10R_STAT3_0 IL27R_STAT3_0 IL21R_STAT3_0" val="1"/>
+  <parameter idActiveInteractions="IL10R_STAT3_0 IL23R_STAT3_0" val="1"/>
+  <parameter idActiveInteractions="IL10R_STAT3_0 IL23R_STAT3_0 IL21R_STAT3_0" val="1"/>
+  <parameter idActiveInteractions="IL10R_STAT3_0 IL23R_STAT3_0 IL27R_STAT3_0" val="1"/>
+  <parameter idActiveInteractions="IL10R_STAT3_0 IL23R_STAT3_0 IL27R_STAT3_0 IL21R_STAT3_0" val="1"/>
+  <parameter idActiveInteractions="IL21R_STAT3_0" val="1"/>
+  <parameter idActiveInteractions="IL27R_STAT3_0 IL21R_STAT3_0" val="1"/>
+  <parameter idActiveInteractions="IL23R_STAT3_0 IL21R_STAT3_0" val="1"/>
+  <parameter idActiveInteractions="IL23R_STAT3_0 IL27R_STAT3_0 IL21R_STAT3_0" val="1"/>
+  <parameter idActiveInteractions="IL23R_STAT3_0" val="1"/>
+  <parameter idActiveInteractions="IL23R_STAT3_0 IL27R_STAT3_0" val="1"/>
+  <parameter idActiveInteractions="IL27R_STAT3_0" val="1"/>
+  <annotation>
+    <linklist>
+      <link xlink:href="hugo:11364"/>
+      <link xlink:href="ref:Brenne2002"/>
+      <link xlink:href="ref:Mendoza06a"/>
+      <link xlink:href="ref:Weaver07"/>
+    </linklist>
+    <comment>STAT3 is activated by IL-6, IL-21, IL-23, IL-27 and IL-10 receptors.</comment>
+  </annotation>
+
+			<nodevisualsetting>
+				<ellipse x="505" y="338" width="67" height="25" backgroundColor="#FFFFFF" foregroundColor="#000000"/>
+			</nodevisualsetting>
+</node>
+<node id="TGFB" basevalue="0" maxvalue="1">
+  <parameter idActiveInteractions="FOXP3_TGFB_0 proliferation_TGFB_0 NFAT_TGFB_0" val="1"/>
+  <annotation>
+    <linklist>
+      <link xlink:href="hugo:11766"/>
+    </linklist>
+    <comment>TGF-beta is believed to be important in regulation of the immune system by Treg cells and apparently block the activation of lymphocytes and some phagocytes.
+The mechanism leading to its expression in Treg cells is unknown. 
+Here, we assume an activation by FOXP3.</comment>
+  </annotation>
+
+			<nodevisualsetting>
+				<ellipse x="725" y="449" width="50" height="25" backgroundColor="#FFFFFF" foregroundColor="#000000"/>
+			</nodevisualsetting>
+</node>
+<node id="STAT4" basevalue="0" maxvalue="1">
+  <parameter idActiveInteractions="IL12R_STAT4_0" val="1"/>
+  <annotation>
+    <linklist>
+      <link xlink:href="hugo:11365"/>
+      <link xlink:href="ref:Mendoza06a"/>
+    </linklist>
+    <comment>STAT4 is activated by IL-12 receptor and inhibited by GATA3.
+Mendoza et al (2006) proposed it as intermediate in IFN-gamma inhibition by GATA3.</comment>
+  </annotation>
+
+			<nodevisualsetting>
+				<ellipse x="808" y="337" width="60" height="25" backgroundColor="#FFFFFF" foregroundColor="#000000"/>
+			</nodevisualsetting>
+</node>
+<node id="IL27RA" basevalue="1" maxvalue="1">
+  <annotation>
+    <linklist>
+      <link xlink:href="hugo:17290"/>
+    </linklist>
+    <comment>IL-27 receptor alpha is a subchain of the IL-27 receptor.</comment>
+  </annotation>
+
+			<nodevisualsetting>
+				<ellipse x="266" y="129" width="55" height="25" backgroundColor="#CCCCCC" foregroundColor="#000000"/>
+			</nodevisualsetting>
+</node>
+<node id="FOXP3" basevalue="0" maxvalue="1">
+  <parameter idActiveInteractions="NFAT_FOXP3_0 SMAD3_FOXP3_0 STAT5_FOXP3_0" val="1"/>
+  <parameter idActiveInteractions="NFAT_FOXP3_0 SMAD3_FOXP3_0 STAT3_FOXP3_0 STAT5_FOXP3_0" val="1"/>
+  <parameter idActiveInteractions="NFAT_FOXP3_0 RORGT_FOXP3_0 SMAD3_FOXP3_0 STAT5_FOXP3_0" val="1"/>
+  <parameter idActiveInteractions="NFAT_FOXP3_0 SMAD3_FOXP3_0 STAT5_FOXP3_0 FOXP3_FOXP3_0" val="1"/>
+  <parameter idActiveInteractions="NFAT_FOXP3_0 SMAD3_FOXP3_0 STAT3_FOXP3_0 STAT5_FOXP3_0 FOXP3_FOXP3_0" val="1"/>
+  <parameter idActiveInteractions="NFAT_FOXP3_0 RORGT_FOXP3_0 SMAD3_FOXP3_0 STAT5_FOXP3_0 FOXP3_FOXP3_0" val="1"/>
+  <parameter idActiveInteractions="NFAT_FOXP3_0 STAT5_FOXP3_0 FOXP3_FOXP3_0" val="1"/>
+  <parameter idActiveInteractions="NFAT_FOXP3_0 STAT3_FOXP3_0 STAT5_FOXP3_0 FOXP3_FOXP3_0" val="1"/>
+  <parameter idActiveInteractions="NFAT_FOXP3_0 RORGT_FOXP3_0 STAT5_FOXP3_0 FOXP3_FOXP3_0" val="1"/>
+  <parameter idActiveInteractions="STAT3_FOXP3_0 FOXP3_FOXP3_0 RORGT_FOXP3_0 NFAT_FOXP3_0 STAT5_FOXP3_0" val="1"/>
+  <parameter idActiveInteractions="STAT3_FOXP3_0 FOXP3_FOXP3_0 RORGT_FOXP3_0 NFAT_FOXP3_0 STAT5_FOXP3_0 SMAD3_FOXP3_0" val="1"/>
+  <parameter idActiveInteractions="STAT1_FOXP3_0 FOXP3_FOXP3_0 NFAT_FOXP3_0 STAT5_FOXP3_0" val="1"/>
+  <parameter idActiveInteractions="STAT1_FOXP3_0 FOXP3_FOXP3_0 NFAT_FOXP3_0 STAT5_FOXP3_0 SMAD3_FOXP3_0" val="1"/>
+  <parameter idActiveInteractions="STAT1_FOXP3_0 FOXP3_FOXP3_0 RORGT_FOXP3_0 NFAT_FOXP3_0 STAT5_FOXP3_0" val="1"/>
+  <parameter idActiveInteractions="STAT1_FOXP3_0 FOXP3_FOXP3_0 RORGT_FOXP3_0 NFAT_FOXP3_0 STAT5_FOXP3_0 SMAD3_FOXP3_0" val="1"/>
+  <parameter idActiveInteractions="STAT1_FOXP3_0 STAT3_FOXP3_0 FOXP3_FOXP3_0 NFAT_FOXP3_0 STAT5_FOXP3_0" val="1"/>
+  <parameter idActiveInteractions="STAT1_FOXP3_0 STAT3_FOXP3_0 FOXP3_FOXP3_0 NFAT_FOXP3_0 STAT5_FOXP3_0 SMAD3_FOXP3_0" val="1"/>
+  <parameter idActiveInteractions="STAT1_FOXP3_0 STAT3_FOXP3_0 FOXP3_FOXP3_0 RORGT_FOXP3_0 NFAT_FOXP3_0 STAT5_FOXP3_0" val="1"/>
+  <parameter idActiveInteractions="STAT1_FOXP3_0 STAT3_FOXP3_0 FOXP3_FOXP3_0 RORGT_FOXP3_0 NFAT_FOXP3_0 STAT5_FOXP3_0 SMAD3_FOXP3_0" val="1"/>
+  <annotation>
+    <linklist>
+      <link xlink:href="hugo:6106"/>
+      <link xlink:href="ref:Pyzik07"/>
+      <link xlink:href="ref:Floess2007"/>
+      <link xlink:href="ref:Yao2007"/>
+      <link xlink:href="ref:Tone2008"/>
+    </linklist>
+    <comment>Foxp3 is the main known marker of regulatory T cells. 
+It is activated by NFAT, TGF-beta (through Smad3, see Tone et al, 2008) and STAT5 (see Yao et al, 2007). 
+It is inhibited by STAT1 (binding site observed in Floess et al, 2007), STAT3 (Yao et al, 2007) and RORgt.
+We asumme that Foxp3 can maintain its own expression (binding sites observed in Floess et al, 2007) in presence of NFAT and STAT5.
+We also assume that STAT3 and RORgt cooperate to inhibit Foxp3.</comment>
+  </annotation>
+
+			<nodevisualsetting>
+				<ellipse x="708" y="693" width="66" height="27" backgroundColor="#FFFFFF" foregroundColor="#000000"/>
+			</nodevisualsetting>
+</node>
+		<edge id="IL2R_STAT5_0" from="IL2R" to="STAT5" minvalue="1" maxvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="1100,194 1095,336 1006,347" line_style="straight" line_color="#006600" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="IL2R_STAT5_1" from="IL2R" to="STAT5" minvalue="2" sign="positive">
+			<edgevisualsetting>
+				<polyline points="1100,194 1095,336 1006,347" line_style="straight" line_color="#006600" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="RUNX3_IFNG_0" from="RUNX3" to="IFNG" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="91,702 111,464 291,467" line_style="straight" line_color="#006600" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="RUNX3_IL4_0" from="RUNX3" to="IL4" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="91,702 102,748 971,748 947,464" line_style="straight" line_color="#CC0000" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="IL2_IL2R_0" from="IL2" to="IL2R" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="1110,464 1119,313 1100,194" line_style="straight" line_color="#999999" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="IL23_IL23R_0" from="IL23" to="IL23R" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="583,460 590,307 583,194" line_style="straight" line_color="#999999" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="IL4_IL4R_0" from="IL4" to="IL4R" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="947,464 938,315 928,194" line_style="straight" line_color="#999999" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="STAT5_proliferation_0" from="STAT5" to="proliferation" minvalue="2" sign="positive">
+			<edgevisualsetting>
+				<polyline points="1006,347 1208,352 1215,52" line_style="straight" line_color="#006600" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="STAT5_IL17_0" from="STAT5" to="IL17" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="1006,347 1208,360 1219,461" line_style="straight" line_color="#CC0000" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="STAT5_IL2RA_0" from="STAT5" to="IL2RA" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="1006,347 1140,345 1144,114" line_style="straight" line_color="#006600" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="STAT5_IL2_0" from="STAT5" to="IL2" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="1006,347 1021,463 1110,464" line_style="straight" line_color="#CC0000" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="STAT5_FOXP3_0" from="STAT5" to="FOXP3" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="1006,347 1006,703 741,706" line_style="straight" line_color="#006600" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="STAT5_IL4RA_0" from="STAT5" to="IL4RA" minvalue="2" sign="positive">
+			<edgevisualsetting>
+				<polyline points="1006,347 980,254 964,134" line_style="straight" line_color="#006600" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="NFAT_IFNG_0" from="NFAT" to="IFNG" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="1352,338 1345,413 310,418 291,467" line_style="straight" line_color="#006600" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="NFAT_IL4_0" from="NFAT" to="IL4" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="1352,338 1346,414 962,414 947,464" line_style="straight" line_color="#006600" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="NFAT_IL10_0" from="NFAT" to="IL10" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="1352,338 1345,414 683,415 663,462" line_style="straight" line_color="#006600" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="NFAT_IL2_0" from="NFAT" to="IL2" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="1352,338 1344,412 1088,415 1110,464" line_style="straight" line_color="#006600" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="NFAT_FOXP3_0" from="NFAT" to="FOXP3" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="1352,338 1355,761 737,761 741,706" line_style="straight" line_color="#006600" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="NFAT_IL2RA_0" from="NFAT" to="IL2RA" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="1352,338 1162,341 1144,114" line_style="straight" line_color="#006600" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="NFAT_IL17_0" from="NFAT" to="IL17" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="1352,338 1345,413 1237,414 1219,461" line_style="straight" line_color="#006600" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="NFAT_TGFB_0" from="NFAT" to="TGFB" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="1352,338 1344,414 768,414 750,461" line_style="straight" line_color="#006600" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="NFAT_IL23_0" from="NFAT" to="IL23" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="1352,338 1343,414 596,416 583,460" line_style="straight" line_color="#006600" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="NFAT_IL21_0" from="NFAT" to="IL21" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="1352,338 1345,413 519,417 499,459" line_style="straight" line_color="#006600" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="GATA3_TBET_0" from="GATA3" to="TBET" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="469,706 323,697 181,703" line_style="straight" line_color="#CC0000" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="GATA3_GATA3_0" from="GATA3" to="GATA3" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="469,706 459,677 469,673 479,677 469,706" line_style="curve" line_color="#006600" line_width="2" routage="auto"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="GATA3_IL4_0" from="GATA3" to="IL4" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="469,706 498,562 922,562 947,464" line_style="straight" line_color="#006600" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="GATA3_STAT4_0" from="GATA3" to="STAT4" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="469,706 447,493 852,493 838,349" line_style="straight" line_color="#CC0000" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="GATA3_IL10_0" from="GATA3" to="IL10" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="469,706 456,510 660,510 663,462" line_style="straight" line_color="#006600" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="IL6RA_IL6R_0" from="IL6RA" to="IL6R" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="377,140 391,170 409,194" line_style="straight" line_color="#999999" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="IFNB_e_IFNBR_0" from="IFNB_e" to="IFNBR" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="158,16 156,88 155,190" line_style="straight" line_color="#999999" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="IL10_IL10R_0" from="IL10" to="IL10R" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="663,462 655,318 667,195" line_style="straight" line_color="#999999" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="IL4RA_IL4R_0" from="IL4RA" to="IL4R" minvalue="1" maxvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="964,134 949,152 928,194" line_style="straight" line_color="#999999" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="IL4RA_IL4R_1" from="IL4RA" to="IL4R" minvalue="2" sign="positive">
+			<edgevisualsetting>
+				<polyline points="964,134 949,152 928,194" line_style="straight" line_color="#999999" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="IL10RB_IL10R_0" from="IL10RB" to="IL10R" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="702,157 712,194 667,195" line_style="straight" line_color="#666666" line_width="1" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="IL27R_STAT1_0" from="IL27R" to="STAT1" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="326,192 305,349 214,350" line_style="straight" line_color="#006600" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="IL27R_STAT3_0" from="IL27R" to="STAT3" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="326,192 323,349 538,350" line_style="straight" line_color="#006600" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="IL6_e_IL6R_0" from="IL6_e" to="IL6R" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="408,15 411,95 409,194" line_style="straight" line_color="#999999" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="SMAD3_FOXP3_0" from="SMAD3" to="FOXP3" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="789,592 768,652 741,706" line_style="straight" line_color="#006600" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="SMAD3_IL2RA_0" from="SMAD3" to="IL2RA" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="789,592 1154,589 1144,114" line_style="straight" line_color="#006600" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="IL10R_STAT3_0" from="IL10R" to="STAT3" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="667,195 646,344 538,350" line_style="straight" line_color="#006600" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="IFNGR1_IFNGR_0" from="IFNGR1" to="IFNGR" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="193,136 194,194 244,192" line_style="straight" line_color="#999999" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="CGC_IL2R_0" from="CGC" to="IL2R" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="877,65 1095,65 1100,194" line_style="straight" line_color="#999999" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="CGC_IL15R_0" from="CGC" to="IL15R" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="877,65 1010,66 1017,192" line_style="straight" line_color="#999999" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="CGC_IL4R_0" from="CGC" to="IL4R" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="877,65 920,66 928,194" line_style="straight" line_color="#999999" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="CGC_IL21R_0" from="CGC" to="IL21R" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="877,65 515,65 494,194" line_style="straight" line_color="#999999" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="IL10RA_IL10R_0" from="IL10RA" to="IL10R" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="633,143 652,158 667,195" line_style="straight" line_color="#666666" line_width="1" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="proliferation_IL4_0" from="proliferation" to="IL4" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="1215,52 1221,398 950,399 947,464" line_style="straight" line_color="#000000" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="proliferation_IFNG_0" from="proliferation" to="IFNG" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="1215,52 1223,399 301,399 291,467" line_style="straight" line_color="#000000" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="proliferation_IL10_0" from="proliferation" to="IL10" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="1215,52 1223,399 665,400 663,462" line_style="straight" line_color="#000000" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="proliferation_proliferation_0" from="proliferation" to="proliferation" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="1215,52 1204,20 1215,16 1226,20 1215,52" line_style="curve" line_color="#000000" line_width="2" routage="auto"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="proliferation_IL17_0" from="proliferation" to="IL17" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="1215,52 1222,409 1219,461" line_style="straight" line_color="#000000" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="proliferation_TGFB_0" from="proliferation" to="TGFB" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="1215,52 1221,398 741,399 750,461" line_style="straight" line_color="#000000" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="proliferation_IL23_0" from="proliferation" to="IL23" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="1215,52 1222,399 581,399 583,460" line_style="straight" line_color="#000000" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="proliferation_IL21_0" from="proliferation" to="IL21" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="1215,52 1223,398 494,399 499,459" line_style="straight" line_color="#000000" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="IL12RB1_IL12R_0" from="IL12RB1" to="IL12R" minvalue="2" sign="positive">
+			<edgevisualsetting>
+				<polyline points="791,124 813,165 834,192" line_style="straight" line_color="#666666" line_width="1" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="IL12RB1_IL23R_0" from="IL12RB1" to="IL23R" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="791,124 597,118 583,194" line_style="straight" line_color="#999999" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="IL15RA_IL15R_0" from="IL15RA" to="IL15R" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="977,95 997,157 1017,192" line_style="straight" line_color="#999999" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="IFNBR_STAT1_0" from="IFNBR" to="STAT1" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="155,190 154,346 214,350" line_style="straight" line_color="#006600" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="IL2RB_IL2R_0" from="IL2RB" to="IL2R" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="1059,135 1079,171 1100,194" line_style="straight" line_color="#999999" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="IL2RB_IL15R_0" from="IL2RB" to="IL15R" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="1059,135 1036,166 1017,192" line_style="straight" line_color="#999999" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="IFNGR2_IFNGR_0" from="IFNGR2" to="IFNGR" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="207,100 225,150 244,192" line_style="straight" line_color="#999999" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="IL12_e_IL12R_0" from="IL12_e" to="IL12R" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="825,16 827,83 834,192" line_style="straight" line_color="#999999" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="IFNG_e_IFNGR_0" from="IFNG_e" to="IFNGR" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="243,16 241,98 244,192" line_style="straight" line_color="#999999" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="IL10_e_IL10R_0" from="IL10_e" to="IL10R" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="663,15 667,95 667,195" line_style="straight" line_color="#999999" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="IL12RB2_IL12R_0" from="IL12RB2" to="IL12R" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="868,133 852,164 834,192" line_style="straight" line_color="#999999" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="GP130_IL27R_0" from="GP130" to="IL27R" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="450,112 341,113 326,192" line_style="straight" line_color="#999999" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="GP130_IL6R_0" from="GP130" to="IL6R" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="450,112 433,166 409,194" line_style="straight" line_color="#999999" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="GP130_IL21R_0" from="GP130" to="IL21R" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="450,112 473,164 494,194" line_style="straight" line_color="#999999" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="GP130_IL23R_0" from="GP130" to="IL23R" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="450,112 558,113 583,194" line_style="straight" line_color="#666666" line_width="1" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="IL4_e_IL4R_0" from="IL4_e" to="IL4R" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="931,16 931,83 928,194" line_style="straight" line_color="#999999" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="TBET_RUNX3_0" from="TBET" to="RUNX3" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="181,703 138,705 91,702" line_style="straight" line_color="#006600" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="TBET_IFNG_0" from="TBET" to="IFNG" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="181,703 161,465 291,467" line_style="straight" line_color="#006600" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="TBET_IL4_0" from="TBET" to="IL4" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="181,703 201,748 970,748 947,464" line_style="straight" line_color="#CC0000" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="TBET_GATA3_0" from="TBET" to="GATA3" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="181,703 291,711 469,706" line_style="straight" line_color="#CC0000" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="TBET_TBET_0" from="TBET" to="TBET" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="181,703 171,674 181,670 191,674 181,703" line_style="curve" line_color="#006600" line_width="2" routage="auto"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="TBET_IL2_0" from="TBET" to="IL2" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="181,703 201,748 1109,747 1110,464" line_style="straight" line_color="#CC0000" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="STAT1_IRF1_0" from="STAT1" to="IRF1" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="214,350 218,656 350,656" line_style="straight" line_color="#006600" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="STAT1_TBET_0" from="STAT1" to="TBET" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="214,350 202,543 181,703" line_style="straight" line_color="#006600" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="STAT1_IL17_0" from="STAT1" to="IL17" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="214,350 231,543 1212,546 1219,461" line_style="straight" line_color="#CC0000" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="STAT1_FOXP3_0" from="STAT1" to="FOXP3" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="214,350 52,359 52,760 720,759 741,706" line_style="straight" line_color="#CC0000" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="TGFB_e_TGFBR_0" from="TGFB_e" to="TGFBR" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="741,14 741,89 744,193" line_style="straight" line_color="#999999" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="IRF1_IL12RB1_0" from="IRF1" to="IL12RB1" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="350,656 351,278 797,278 791,124" line_style="straight" line_color="#006600" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="IRF1_IL4_0" from="IRF1" to="IL4" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="350,656 935,657 947,464" line_style="straight" line_color="#CC0000" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="IL15R_STAT5_0" from="IL15R" to="STAT5" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="1017,192 1008,267 1006,347" line_style="straight" line_color="#006600" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="IL23_e_IL23R_0" from="IL23_e" to="IL23R" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="582,14 583,93 583,194" line_style="straight" line_color="#999999" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="IL27_e_IL27R_0" from="IL27_e" to="IL27R" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="328,14 327,93 326,192" line_style="straight" line_color="#999999" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="IL21_e_IL21R_0" from="IL21_e" to="IL21R" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="493,14 495,84 494,194" line_style="straight" line_color="#999999" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="APC_TCR_0" from="APC" to="TCR" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="1352,14 1392,14 1387,188" line_style="straight" line_color="#999999" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="APC_CD28_0" from="APC" to="CD28" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="1352,14 1310,15 1319,189" line_style="straight" line_color="#999999" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="IL23R_STAT3_0" from="IL23R" to="STAT3" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="583,194 570,287 538,350" line_style="straight" line_color="#006600" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="IL2RA_IL2R_0" from="IL2RA" to="IL2R" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="1144,114 1126,150 1100,194" line_style="straight" line_color="#999999" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="IL12R_STAT4_0" from="IL12R" to="STAT4" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="834,192 831,278 838,349" line_style="straight" line_color="#006600" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="STAT6_GATA3_0" from="STAT6" to="GATA3" minvalue="1" sign="positive">
+<annotation>
+  <comment>activated by STAT6 and self-maintained. Inhibited by Tbet</comment>
+</annotation>
+			<edgevisualsetting>
+				<polyline points="904,349 883,552 488,552 469,706" line_style="straight" line_color="#006600" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="STAT6_IL12RB2_0" from="STAT6" to="IL12RB2" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="904,349 882,196 868,133" line_style="straight" line_color="#CC0000" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="STAT6_IL2_0" from="STAT6" to="IL2" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="904,349 905,376 1107,377 1110,464" line_style="straight" line_color="#CC0000" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="STAT6_IL17_0" from="STAT6" to="IL17" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="904,349 904,377 1198,377 1219,461" line_style="straight" line_color="#CC0000" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="IFNG_IFNGR_0" from="IFNG" to="IFNGR" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="291,467 266,329 244,192" line_style="straight" line_color="#999999" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="IL21_IL21R_0" from="IL21" to="IL21R" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="499,459 480,318 494,194" line_style="straight" line_color="#999999" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="IL21R_STAT3_0" from="IL21R" to="STAT3" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="494,194 519,264 538,350" line_style="straight" line_color="#006600" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="CD28_NFAT_0" from="CD28" to="NFAT" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="1319,189 1336,254 1352,338" line_style="straight" line_color="#006600" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="IL6R_STAT3_0" from="IL6R" to="STAT3" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="409,194 405,340 538,350" line_style="straight" line_color="#006600" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="IFNGR_STAT1_0" from="IFNGR" to="STAT1" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="244,192 224,285 214,350" line_style="straight" line_color="#006600" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="TCR_NFAT_0" from="TCR" to="NFAT" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="1387,188 1370,275 1352,338" line_style="straight" line_color="#006600" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="TCR_IKB_0" from="TCR" to="IKB" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="1387,188 1434,192 1435,401" line_style="straight" line_color="#CC0000" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="RORGT_RORGT_0" from="RORGT" to="RORGT" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="564,706 554,677 564,673 574,677 564,706" line_style="curve" line_color="#006600" line_width="2" routage="auto"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="RORGT_IL17_0" from="RORGT" to="IL17" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="564,706 571,739 1241,739 1219,461" line_style="straight" line_color="#006600" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="RORGT_IL23R_0" from="RORGT" to="IL23R" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="564,706 608,699 583,194" line_style="straight" line_color="#006600" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="RORGT_FOXP3_0" from="RORGT" to="FOXP3" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="564,706 615,712 741,706" line_style="straight" line_color="#CC0000" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="IL15_e_IL15R_0" from="IL15_e" to="IL15R" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="1023,15 1022,102 1017,192" line_style="straight" line_color="#999999" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="IL4R_STAT6_0" from="IL4R" to="STAT6" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="928,194 920,289 904,349" line_style="straight" line_color="#006600" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="IL4R_STAT5_0" from="IL4R" to="STAT5" minvalue="1" maxvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="928,194 950,345 1006,347" line_style="straight" line_color="#006600" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="IL4R_STAT5_1" from="IL4R" to="STAT5" minvalue="2" sign="positive">
+			<edgevisualsetting>
+				<polyline points="928,194 950,345 1006,347" line_style="straight" line_color="#006600" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="TGFBR_SMAD3_0" from="TGFBR" to="SMAD3" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="744,193 783,192 789,592" line_style="straight" line_color="#006600" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="TGFBR_RORGT_0" from="TGFBR" to="RORGT" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="744,193 735,598 586,598 564,706" line_style="straight" line_color="#006600" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="NFKB_IL2_0" from="NFKB" to="IL2" minvalue="1" sign="unknown">
+			<edgevisualsetting>
+				<polyline points="1434,465 1422,517 1132,517 1110,464" line_style="straight" line_color="#0000FF" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="NFKB_IL2RA_0" from="NFKB" to="IL2RA" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="1434,465 1281,457 1281,108 1144,114" line_style="straight" line_color="#006600" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="NFKB_IL17_0" from="NFKB" to="IL17" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="1434,465 1337,467 1219,461" line_style="straight" line_color="#006600" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="IKB_NFKB_0" from="IKB" to="NFKB" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="1435,401 1434,465" line_style="straight" line_color="#CC0000" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="IL2_e_IL2R_0" from="IL2_e" to="IL2R" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="1106,16 1113,87 1100,194" line_style="straight" line_color="#999999" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="STAT3_RORGT_0" from="STAT3" to="RORGT" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="538,350 543,523 564,706" line_style="straight" line_color="#006600" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="STAT3_IFNG_0" from="STAT3" to="IFNG" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="538,350 279,359 291,467" line_style="straight" line_color="#CC0000" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="STAT3_IL17_0" from="STAT3" to="IL17" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="538,350 553,528 1199,528 1219,461" line_style="straight" line_color="#006600" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="STAT3_IL21_0" from="STAT3" to="IL21" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="538,350 509,394 499,459" line_style="straight" line_color="#006600" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="STAT3_IL23_0" from="STAT3" to="IL23" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="538,350 564,405 583,460" line_style="straight" line_color="#006600" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="STAT3_FOXP3_0" from="STAT3" to="FOXP3" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="538,350 616,362 616,698 741,706" line_style="straight" line_color="#CC0000" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="STAT3_IL23R_0" from="STAT3" to="IL23R" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="538,350 558,277 583,194" line_style="straight" line_color="#006600" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="STAT3_IL10_0" from="STAT3" to="IL10" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="538,350 646,355 663,462" line_style="straight" line_color="#006600" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="TGFB_TGFBR_0" from="TGFB" to="TGFBR" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="750,461 753,296 744,193" line_style="straight" line_color="#999999" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="STAT4_IFNG_0" from="STAT4" to="IFNG" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="838,349 829,386 289,386 291,467" line_style="straight" line_color="#006600" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="IL27RA_IL27R_0" from="IL27RA" to="IL27R" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="293,141 305,157 326,192" line_style="straight" line_color="#999999" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="FOXP3_IFNG_0" from="FOXP3" to="IFNG" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="741,706 716,605 294,605 291,467" line_style="straight" line_color="#CC0000" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="FOXP3_IL4_0" from="FOXP3" to="IL4" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="741,706 951,712 947,464" line_style="straight" line_color="#CC0000" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="FOXP3_IL2_0" from="FOXP3" to="IL2" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="741,706 1083,713 1110,464" line_style="straight" line_color="#CC0000" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="FOXP3_IL17_0" from="FOXP3" to="IL17" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="741,706 1225,714 1219,461" line_style="straight" line_color="#CC0000" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="FOXP3_IL2RA_0" from="FOXP3" to="IL2RA" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="741,706 1263,721 1264,121 1144,114" line_style="straight" line_color="#006600" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="FOXP3_TGFB_0" from="FOXP3" to="TGFB" minvalue="1" sign="positive">
+<annotation>
+  <comment>real link unknown</comment>
+</annotation>
+			<edgevisualsetting>
+				<polyline points="741,706 755,596 750,461" line_style="straight" line_color="#006600" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="FOXP3_NFKB_0" from="FOXP3" to="NFKB" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="741,706 1438,714 1434,465" line_style="straight" line_color="#CC0000" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="FOXP3_FOXP3_0" from="FOXP3" to="FOXP3" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="741,706 731,676 741,672 751,676 741,706" line_style="curve" line_color="#006600" line_width="2" routage="auto"/>
+			</edgevisualsetting>
+		</edge>
+<annotation>
+  <comment>This logical model integrates the documented cross-regulations between key transcription factors and the relevant signalling pathways controlling Th cell differentiation.
+Using a reduction method and other analysis tools, we could show that this model generate specific stable states corresponding to canonical Th1, Th2, Th17 and Treg subtypes, which coexist with other transient hybrid cell types that co-express combinations of Th1, Th2, Treg and Th17 markers in an environment-dependent fashion. 
+The dynamical analysis of this model thereby provides novel insights into the heterogeneity and plasticity of late Th cell lineages.  
+Furthermore, this model enables in silico investigation of the nature of Th subtypes, as well as of potentially novel differentiation or reprogrammation pathways.
+</comment>
+</annotation>
+	</graph>
+</gxl>

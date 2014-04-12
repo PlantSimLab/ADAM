@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE gxl SYSTEM "http://gin.univ-mrs.fr/GINsim/GINML_2_1.dtd">
+<gxl xmlns:xlink="http://www.w3.org/1999/xlink">
+	<graph id="phage4" class="regulatory" nodeorder="C1 Cro C2 N">
+<node id="N" basevalue="1" maxvalue="1">
+			<nodevisualsetting>
+				<ellipse x="360" y="201" width="55" height="25" backgroundColor="#666666" foregroundColor="#FFFFFF"/>
+			</nodevisualsetting>
+</node>
+<node id="Cro" basevalue="3" maxvalue="3">
+  <parameter idActiveInteractions="Cro_Cro_0" val="2"/>
+
+			<nodevisualsetting>
+				<rect x="359" y="78" width="55" height="25" backgroundColor="#666666" foregroundColor="#FFFFFF"/>
+			</nodevisualsetting>
+</node>
+<node id="C2" basevalue="0" maxvalue="1">
+  <parameter idActiveInteractions="N_C2_0" val="1"/>
+
+			<nodevisualsetting>
+				<ellipse x="190" y="200" width="55" height="25" backgroundColor="#666666" foregroundColor="#FFFFFF"/>
+			</nodevisualsetting>
+</node>
+<node id="C1" basevalue="2" maxvalue="2">
+  <parameter idActiveInteractions="C2_C1_0" val="2"/>
+  <parameter idActiveInteractions="C1_C1_0" val="2"/>
+  <parameter idActiveInteractions="C1_C1_0 C2_C1_0" val="2"/>
+
+			<nodevisualsetting>
+				<rect x="186" y="79" width="55" height="25" backgroundColor="#666666" foregroundColor="#FFFFFF"/>
+			</nodevisualsetting>
+</node>
+		<edge id="N_C2_0" from="N" to="C2" minvalue="1" maxvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="387,213 217,212" line_style="curve" line_color="#339900" line_width="2" routage="auto"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="Cro_Cro_0" from="Cro" to="Cro" minvalue="3" maxvalue="3" sign="negative">
+			<edgevisualsetting>
+				<polyline points="386,90 376,61 386,57 396,61 386,90" line_style="curve" line_color="#FF0033" line_width="2" routage="auto"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="Cro_C1_0" from="Cro" to="C1" minvalue="1" maxvalue="3" sign="negative">
+			<edgevisualsetting>
+				<polyline points="386,90 299,76 213,91" line_style="curve" line_color="#FF0033" line_width="2" routage="auto"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="Cro_N_0" from="Cro" to="N" minvalue="2" maxvalue="3" sign="negative">
+			<edgevisualsetting>
+				<polyline points="386,90 387,213" line_style="curve" line_color="#FF0033" line_width="2" routage="auto"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="Cro_C2_0" from="Cro" to="C2" minvalue="1" maxvalue="3" sign="negative">
+			<edgevisualsetting>
+				<polyline points="386,90 217,212" line_style="curve" line_color="#FF0033" line_width="2" routage="auto"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="C2_C1_0" from="C2" to="C1" minvalue="1" maxvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="217,212 230,151 213,91" line_style="curve" line_color="#339900" line_width="2" routage="auto"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="C1_C2_0" from="C1" to="C2" minvalue="2" maxvalue="2" sign="negative">
+			<edgevisualsetting>
+				<polyline points="213,91 200,152 217,212" line_style="curve" line_color="#FF0033" line_width="2" routage="auto"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="C1_N_0" from="C1" to="N" minvalue="1" maxvalue="2" sign="negative">
+			<edgevisualsetting>
+				<polyline points="213,91 387,213" line_style="curve" line_color="#FF0033" line_width="2" routage="auto"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="C1_Cro_0" from="C1" to="Cro" minvalue="2" maxvalue="2" sign="negative">
+			<edgevisualsetting>
+				<polyline points="213,91 300,105 386,90" line_style="curve" line_color="#FF0033" line_width="2" routage="auto"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="C1_C1_0" from="C1" to="C1" minvalue="2" maxvalue="2" sign="positive">
+			<edgevisualsetting>
+				<polyline points="213,91 203,62 213,58 223,62 213,91" line_style="curve" line_color="#339900" line_width="2" routage="auto"/>
+			</edgevisualsetting>
+		</edge>
+	</graph>
+</gxl>

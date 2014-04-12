@@ -1,0 +1,745 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE gxl SYSTEM "file://fr/univmrs/ibdm/GINsim/ressources/GINML_2_1.dtd">
+<gxl xmlns:xlink="http://www.w3.org/1999/xlink">
+	<graph id="Drosophila_Cell_Cycle_Variants" class="regulatory" nodeorder="CycD Rb E2F CycE CycA Rux Fzy Fzr CycB Wee1 Stg Notch Dap Ago">
+<node id="Fzy" name="Fizzy" basevalue="0" maxvalue="1">
+  <parameter idActiveInteractions="CycB_Fzy_0" val="1"/>
+  <annotation>
+    <linklist>
+      <link xlink:href="http://flybase.org/reports/FBgn0001086.html"/>
+      <link xlink:href="http://www.sdbonline.org/fly/newgene/fizzy1.htm"/>
+    </linklist>
+    <comment>Required for the acrivity of APC in mitosis. 
+Functions to target the mitotic cyclins A and B for destruction in the egg and drive anaphase progression during meiosis. </comment>
+  </annotation>
+
+			<nodevisualsetting>
+				<ellipse x="132" y="347" width="50" height="20" backgroundColor="#FF9933" foregroundColor="#000000"/>
+			</nodevisualsetting>
+</node>
+<node id="CycD" name="CycD/cdc" basevalue="0" maxvalue="1">
+  <annotation>
+    <linklist>
+      <link xlink:href="http://flybase.org/reports/FBgn0010315.html"/>
+      <link xlink:href="http://www.sdbonline.org/fly/newgene/cyclind.htm"/>
+    </linklist>
+    <comment>G1 cyclin. 
+Heterodimarizes with Cdc kinase. </comment>
+  </annotation>
+
+			<nodevisualsetting>
+				<ellipse x="50" y="150" width="50" height="20" backgroundColor="#CCFFFF" foregroundColor="#000000"/>
+			</nodevisualsetting>
+</node>
+<node id="Wee1" name="Wee1" basevalue="1" maxvalue="1">
+  <parameter idActiveInteractions="Rux_Wee1_0" val="1"/>
+  <parameter idActiveInteractions="CycB_Wee1_0 Rux_Wee1_0" val="1"/>
+  <annotation>
+    <linklist>
+      <link xlink:href="http://www.ncbi.nlm.nih.gov/pubmed/8573790"/>
+      <link xlink:href="http://flybase.org/reports/FBgn0011737.html"/>
+      <link xlink:href="http://www.sdbonline.org/fly/newgene/weekin1.htm"/>
+      <link xlink:href="http://www.uniprot.org/uniprot/P54350"/>
+    </linklist>
+    <comment>Protein kinase targetting Cdc2, thereby preventing premature activation of the mitotic program. 
+Drosophila Wee1 kinase rescues fission yeast from mitotic catastrophe and phosphorylates Drosophila Cdc2 in vitro. 
+[Campbell et al (1995) Mol Biol Cell 6(10):1333-47]
+</comment>
+  </annotation>
+
+			<nodevisualsetting>
+				<ellipse x="63" y="288" width="50" height="20" backgroundColor="#FF9999" foregroundColor="#000000"/>
+			</nodevisualsetting>
+</node>
+<node id="CycE" name="CycE/cdc2c" basevalue="0" maxvalue="1">
+  <parameter idActiveInteractions="E2F_CycE_0" val="1"/>
+  <parameter idActiveInteractions="E2F_CycE_0 Ago_CycE_0" val="1"/>
+  <parameter idActiveInteractions="E2F_CycE_0 Dap_CycE_0" val="1"/>
+  <annotation>
+    <linklist>
+      <link xlink:href="http://flybase.org/reports/FBgn0010382.html"/>
+      <link xlink:href="http://www.sdbonline.org/fly/newgene/cyclin-e.htm"/>
+      <link xlink:href="http://www.uniprot.org/uniprot/P54733"/>
+    </linklist>
+    <comment>CycE induces S phase. 
+Stable G1 quiescence requires the down-regulation of CycE. </comment>
+  </annotation>
+
+			<nodevisualsetting>
+				<ellipse x="123" y="80" width="50" height="20" backgroundColor="#33FFCC" foregroundColor="#000000"/>
+			</nodevisualsetting>
+</node>
+<node id="Rux" name="Roughex" basevalue="1" maxvalue="1">
+  <parameter idActiveInteractions="Rux_Rux_0" val="1"/>
+  <parameter idActiveInteractions="Rux_Rux_0 CycA_Rux_0" val="1"/>
+  <parameter idActiveInteractions="CycB_Rux_0 Rux_Rux_0" val="1"/>
+  <parameter idActiveInteractions="CycE_Rux_0" val="1"/>
+  <parameter idActiveInteractions="CycE_Rux_0 Rux_Rux_0" val="1"/>
+  <parameter idActiveInteractions="CycE_Rux_0 Rux_Rux_0 CycA_Rux_0" val="1"/>
+  <parameter idActiveInteractions="CycE_Rux_0 CycB_Rux_0 Rux_Rux_0" val="1"/>
+  <parameter idActiveInteractions="CycD_Rux_0" val="1"/>
+  <parameter idActiveInteractions="CycD_Rux_0 Rux_Rux_0" val="1"/>
+  <parameter idActiveInteractions="CycD_Rux_0 Rux_Rux_0 CycA_Rux_0" val="1"/>
+  <parameter idActiveInteractions="CycD_Rux_0 CycB_Rux_0 Rux_Rux_0" val="1"/>
+  <annotation>
+    <linklist>
+      <link xlink:href="http://www.ncbi.nlm.nih.gov/pubmed/10607563"/>
+      <link xlink:href="http://www.ncbi.nlm.nih.gov/pubmed/11231149"/>
+      <link xlink:href="http://flybase.org/reports/FBgn0003302.html"/>
+      <link xlink:href="http://www.sdbonline.org/fly/newgene/roughex1.htm"/>
+      <link xlink:href="http://www.uniprot.org/uniprot/P50445"/>
+    </linklist>
+    <comment>Rux is involved in the regulation of G1. 
+Mutations in Rux cause cells to circumvent G1 and all cells enter S phase
+Acts through Cyclin A during premiotic G2 to regulate meiosis. 
+Also a negative regulator of G1 in the developing eye. 
+Rux inhibits Cdk1-cyclin A kinase activity during metaphase, thereby contributing to exit from mitosis. 
+[Foley et al. (1999) Curr Biol 9(23):1392-402]
+[Foley &amp; Sprenger (2001) Curr Biol 11(3):151-60]</comment>
+  </annotation>
+
+			<nodevisualsetting>
+				<ellipse x="20" y="220" width="50" height="20" backgroundColor="#FFFF33" foregroundColor="#000000"/>
+			</nodevisualsetting>
+</node>
+<node id="Notch" name="Notch" basevalue="0" maxvalue="1">
+  <annotation>
+    <linklist>
+      <link xlink:href="http://www.ncbi.nlm.nih.gov/pubmed/15175253"/>
+      <link xlink:href="http://www.ncbi.nlm.nih.gov/pubmed/15062106"/>
+      <link xlink:href="http://flybase.org/reports/FBgn0004647.html"/>
+      <link xlink:href="http://www.sdbonline.org/fly/neural/notch1.htm"/>
+      <link xlink:href="http://www.uniprot.org/uniprot/P07207"/>
+    </linklist>
+    <comment>Notch executes the mitotic-to-endocycle switch by repressing String (blocking of M-phase), activating Fzr (allowing G1 progression) and repressing Dacapo (entry in S-phase). 
+[Scherbata et al (2004) Development 131: 3169-81]
+Notch-Dependent Fizzy-Related expression Is required for the mitotic-to-endocycle transition in drosophila follicle cells. 
+[Schaeffer et al (2004) Curr Biol 14: 630-6]</comment>
+  </annotation>
+
+			<nodevisualsetting>
+				<ellipse x="298" y="165" width="50" height="20" backgroundColor="#FFFFFF" foregroundColor="#000000"/>
+			</nodevisualsetting>
+</node>
+<node id="Fzr" name="Fizzy related" basevalue="1" maxvalue="1">
+  <parameter idActiveInteractions="Rux_Fzr_0" val="1"/>
+  <parameter idActiveInteractions="Rux_Fzr_0 CycA_Fzr_0" val="1"/>
+  <parameter idActiveInteractions="CycB_Fzr_0 Rux_Fzr_0" val="1"/>
+  <parameter idActiveInteractions="CycB_Fzr_0 Rux_Fzr_0 CycA_Fzr_0" val="1"/>
+  <parameter idActiveInteractions="Notch_Fzr_0" val="1"/>
+  <parameter idActiveInteractions="Notch_Fzr_0 Rux_Fzr_0" val="1"/>
+  <parameter idActiveInteractions="Notch_Fzr_0 Rux_Fzr_0 CycA_Fzr_0" val="1"/>
+  <parameter idActiveInteractions="Notch_Fzr_0 CycB_Fzr_0 Rux_Fzr_0" val="1"/>
+  <parameter idActiveInteractions="Notch_Fzr_0 CycB_Fzr_0 Rux_Fzr_0 CycA_Fzr_0" val="1"/>
+  <parameter idActiveInteractions="Notch_Fzr_0 CycE_Fzr_0" val="1"/>
+  <parameter idActiveInteractions="Notch_Fzr_0 CycE_Fzr_0 Rux_Fzr_0" val="1"/>
+  <parameter idActiveInteractions="Notch_Fzr_0 CycE_Fzr_0 Rux_Fzr_0 CycA_Fzr_0" val="1"/>
+  <parameter idActiveInteractions="Notch_Fzr_0 CycE_Fzr_0 CycB_Fzr_0 Rux_Fzr_0" val="1"/>
+  <parameter idActiveInteractions="Notch_Fzr_0 CycE_Fzr_0 CycB_Fzr_0 Rux_Fzr_0 CycA_Fzr_0" val="1"/>
+  <annotation>
+    <linklist>
+      <link xlink:href="http://www.ncbi.nlm.nih.gov/pubmed/15062106"/>
+      <link xlink:href="http://www.ncbi.nlm.nih.gov/pubmed/18321983"/>
+      <link xlink:href="http://flybase.org/reports/FBgn0003200.html"/>
+      <link xlink:href="http://www.sdbonline.org/fly/newgene/fizyrel1.htm"/>
+      <link xlink:href="http://www.ncbi.nlm.nih.gov/pubmed/9288747"/>
+    </linklist>
+    <comment>Fzr (synonym: rap) negatively regulates the levels of cyclins A and B, thus promoting mitosis. 
+Notch-Dependent Fizzy-Related expression Is required for the mitotic-to-endocycle transition in drosophila follicle cells.  
+[Schaeffer et al (2004) Curr Biol 14(7):630-6]
+APC/CFzr/Cdh1 promotes cell cycle progression during the Drosophila endocycle. 
+[Narbonne-Reveau et al (2008) Development 135(8):1451-61]
+
+
+
+Maternally derived fzr transcripts present at the onset of embryogenesis (Figure 2A) disappeared during the syncytial embryonic cycles (Figure 2B). Zygotic expression started in yolk nuclei after the thirteenth embryonic mitosis (during the stages where the nuclei at the egg periphery are cellularized) and was detectable during gastrulation (Figure 2C). In the newly formed cells at the egg periphery, we failed to detect signals above background during the stages of the embryonic division cycles 14 and 15 (Figure 2C, and data not shown). At stage 11, expression was observed in the salivary placodes and in the anterior and posterior midgut primordia at high levels (Figure 2D) followed by expression at lower levels apparently throughout the embryo (Figure 2F).
+Fzr negatively regulates cyclins A, B and B3.
+Loss of Fzr results in an extra cell cycle after mitosis 16 instead of G1 arrest in embryonic epidermis cell.
+Overexpression of Fzr arrests mitosis 16 in G2.
+Fzr is required for entry into endoreduplication in the salivary gland.
+Overexpression of Fzr transform mitotic cycles into endocycles in imaginal disc cells.
+CycE inhibits Fzr.
+[Sigrist &amp; Lehner (1997) Cell 90(4)671-81]</comment>
+  </annotation>
+
+			<nodevisualsetting>
+				<ellipse x="199" y="303" width="50" height="20" backgroundColor="#FF0000" foregroundColor="#000000"/>
+			</nodevisualsetting>
+</node>
+<node id="Ago" name="Ago" basevalue="0" maxvalue="1">
+  <annotation>
+    <linklist>
+      <link xlink:href="http://flybase.org/reports/FBgn0041171.html"/>
+      <link xlink:href="http://www.sdbonline.org/fly/sturtevant/archipelago1.htm"/>
+      <link xlink:href="http://www.uniprot.org/uniprot/Q9VZF4"/>
+    </linklist>
+    <comment> F box component of an SCF-ubiquitin ligase targeting cyclinE. 
+Antagonizes dMyc activity. </comment>
+  </annotation>
+
+			<nodevisualsetting>
+				<ellipse x="122" y="31" width="50" height="20" backgroundColor="#FFFFFF" foregroundColor="#000000"/>
+			</nodevisualsetting>
+</node>
+<node id="Stg" name="String" basevalue="0" maxvalue="1">
+  <parameter idActiveInteractions="E2F_Stg_0" val="1"/>
+  <parameter idActiveInteractions="E2F_Stg_0 Rux_Stg_0" val="1"/>
+  <parameter idActiveInteractions="E2F_Stg_0 CycB_Stg_0" val="1"/>
+  <parameter idActiveInteractions="E2F_Stg_0 CycB_Stg_0 Rux_Stg_0" val="1"/>
+  <parameter idActiveInteractions="CycB_Stg_0" val="1"/>
+  <parameter idActiveInteractions="CycB_Stg_0 Rb_Stg_0" val="1"/>
+  <parameter idActiveInteractions="E2F_Stg_0 CycB_Stg_0 Rb_Stg_0" val="1"/>
+  <annotation>
+    <linklist>
+      <link xlink:href="http://flybase.org/reports/FBgn0003525.html"/>
+      <link xlink:href="http://www.sdbonline.org/fly/newgene/string1.htm"/>
+      <link xlink:href="http://www.uniprot.org/uniprot/P20483"/>
+    </linklist>
+    <comment>Phosphatase ativator of CycB/cdc2 kinase. </comment>
+  </annotation>
+
+			<nodevisualsetting>
+				<ellipse x="282" y="251" width="50" height="20" backgroundColor="#FF99FF" foregroundColor="#000000"/>
+			</nodevisualsetting>
+</node>
+<node id="Rb" basevalue="1" maxvalue="1">
+  <parameter idActiveInteractions="Rux_Rb_0" val="1"/>
+  <parameter idActiveInteractions="Rux_Rb_0 CycA_Rb_0" val="1"/>
+  <parameter idActiveInteractions="CycB_Rb_0 Rux_Rb_0" val="1"/>
+  <parameter idActiveInteractions="CycB_Rb_0 Rux_Rb_0 CycA_Rb_0" val="1"/>
+  <annotation>
+    <linklist>
+      <link xlink:href="http://www.ncbi.nlm.nih.gov/pubmed/12881421"/>
+      <link xlink:href="http://flybase.org/reports/FBgn0015799.html"/>
+      <link xlink:href="http://www.sdbonline.org/fly/newgene/retnbls1.htm"/>
+      <link xlink:href="http://www.uniprot.org/uniprot/Q24472"/>
+    </linklist>
+    <comment>Transcription factor that negatively regulates members of the E2F family, thereby preventing entrance into mitosis.
+Rb binds to E2F and thereby inactivates it.
+Inactivation of Rb at the G1-S transition promotes entry into S phase.
+[Weng et al (2003) EMBO J 22(15): 3865-75]</comment>
+  </annotation>
+
+			<nodevisualsetting>
+				<ellipse x="146" y="143" width="50" height="20" backgroundColor="#FFFFFF" foregroundColor="#000000"/>
+			</nodevisualsetting>
+</node>
+<node id="CycA" name="CycA/cdc2" basevalue="0" maxvalue="1">
+  <parameter idActiveInteractions="E2F_CycA_0" val="1"/>
+  <annotation>
+    <linklist>
+      <link xlink:href="http://flybase.org/reports/FBgn0000404.html"/>
+      <link xlink:href="http://www.sdbonline.org/fly/newgene/cyclina1.htm"/>
+      <link xlink:href="http://www.uniprot.org/uniprot/P14785"/>
+    </linklist>
+    <comment>CycA is a G2 Cyclin. 
+Peaks in Prophase, then declines. 
+Heterodimarizes with Cdc kinase. 
+Degradation of CycA required for entry in mitosis. </comment>
+  </annotation>
+
+			<nodevisualsetting>
+				<ellipse x="230" y="165" width="58" height="20" backgroundColor="#99FF00" foregroundColor="#000000"/>
+			</nodevisualsetting>
+</node>
+<node id="CycB" name="CycB/cdc2" basevalue="1" maxvalue="1">
+  <parameter idActiveInteractions="Stg_CycB_0" val="1"/>
+  <parameter idActiveInteractions="Wee1_CycB_0 Stg_CycB_0" val="1"/>
+  <annotation>
+    <linklist>
+      <link xlink:href="http://flybase.org/reports/FBgn0000405.html"/>
+      <link xlink:href="http://www.sdbonline.org/fly/newgene/cyclinb1.htm"/>
+      <link xlink:href="http://www.uniprot.org/uniprot/P20439"/>
+    </linklist>
+    <comment>Cyc B is a G2 Cyclin. 
+Peaks in prophase until metaphase. 
+Heterodimarizes with Cdc kinase. 
+Degradation of CycB required for completion of mitosis. </comment>
+  </annotation>
+
+			<nodevisualsetting>
+				<ellipse x="138" y="252" width="58" height="20" backgroundColor="#00FF33" foregroundColor="#000000"/>
+			</nodevisualsetting>
+</node>
+<node id="Dap" name="CKI/Dap" basevalue="1" maxvalue="1">
+  <parameter idActiveInteractions="CycE_Dap_0" val="1"/>
+  <parameter idActiveInteractions="Notch_Dap_0 CycE_Dap_0" val="1"/>
+  <annotation>
+    <linklist>
+      <link xlink:href="http://www.ncbi.nlm.nih.gov/pubmed/15576927"/>
+      <link xlink:href="http://flybase.org/reports/FBgn0010316.html"/>
+      <link xlink:href="http://www.sdbonline.org/fly/newgene/dacapo1.htm"/>
+    </linklist>
+    <comment>Cyclin dependent kinase inhibitor of the Cip/kip family. 
+Dap levels oscillate in nurse cells along endocycles. 
+Dap expression requires Cyclin E function. 
+[Swanhart et al (2005)  Meth Mol Biol 296: 69-94]</comment>
+  </annotation>
+
+			<nodevisualsetting>
+				<ellipse x="278" y="80" width="50" height="20" backgroundColor="#FFFF33" foregroundColor="#000000"/>
+			</nodevisualsetting>
+</node>
+<node id="E2F" basevalue="1" maxvalue="1">
+  <parameter idActiveInteractions="Rux_E2F_0" val="1"/>
+  <parameter idActiveInteractions="Rux_E2F_0 CycA_E2F_0" val="1"/>
+  <parameter idActiveInteractions="CycB_E2F_0 Rux_E2F_0" val="1"/>
+  <parameter idActiveInteractions="CycB_E2F_0 Rux_E2F_0 CycA_E2F_0" val="1"/>
+  <annotation>
+    <linklist>
+      <link xlink:href="http://www.ncbi.nlm.nih.gov/pubmed/12881421"/>
+      <link xlink:href="http://flybase.org/reports/FBgn0011766.html"/>
+      <link xlink:href="http://www.sdbonline.org/fly/newgene/e2f.htm"/>
+      <link xlink:href="http://www.uniprot.org/uniprot/Q27368"/>
+    </linklist>
+    <comment>E2F factors regulate the genes involved into S phase. 
+Responsible for activation of S phase genes. 
+[Weng et al (2003) EMBO J 22(15): 3865-75]</comment>
+  </annotation>
+
+			<nodevisualsetting>
+				<ellipse x="96" y="188" width="50" height="20" backgroundColor="#00FFFF" foregroundColor="#000000"/>
+			</nodevisualsetting>
+</node>
+		<edge id="Fzy_CycB_0" from="Fzy" to="CycB" minvalue="1" sign="negative">
+<annotation>
+  <comment>This edge is negative
+This edge is negative
+</comment>
+</annotation>
+			<edgevisualsetting>
+				<polyline points="157,357 149,315 167,262" line_style="straight" line_color="#FF0000" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="Fzy_CycA_0" from="Fzy" to="CycA" minvalue="1" sign="negative">
+<annotation>
+  <comment>This edge is negative
+This edge is negative
+</comment>
+</annotation>
+			<edgevisualsetting>
+				<polyline points="157,357 263,363 259,175" line_style="straight" line_color="#FF0000" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="CycD_Rb_0" from="CycD" to="Rb" minvalue="1" sign="negative">
+<annotation>
+  <comment>This edge is negative
+This edge is negative
+</comment>
+</annotation>
+			<edgevisualsetting>
+				<polyline points="75,160 125,156 171,153" line_style="straight" line_color="#FF0000" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="CycD_Rux_0" from="CycD" to="Rux" minvalue="1" sign="negative">
+<annotation>
+  <comment>This edge is negative
+This edge is negative
+</comment>
+</annotation>
+			<edgevisualsetting>
+				<polyline points="75,160 65,172 45,230" line_style="straight" line_color="#FF0000" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="Wee1_CycB_0" from="Wee1" to="CycB" minvalue="1" sign="negative">
+<annotation>
+  <comment>This edge is non functional
+This edge is negative
+</comment>
+</annotation>
+			<edgevisualsetting>
+				<polyline points="88,298 139,298 167,262" line_style="straight" line_color="#FF0000" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="CycE_Rb_0" from="CycE" to="Rb" minvalue="1" sign="negative">
+<annotation>
+  <comment>This edge is negative
+This edge is negative
+</comment>
+</annotation>
+			<edgevisualsetting>
+				<polyline points="148,90 166,116 171,153" line_style="straight" line_color="#FF0000" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="CycE_Rux_0" from="CycE" to="Rux" minvalue="1" sign="negative">
+<annotation>
+  <comment>This edge is negative
+This edge is negative
+</comment>
+</annotation>
+			<edgevisualsetting>
+				<polyline points="148,90 36,100 45,230" line_style="straight" line_color="#FF0000" line_width="1" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="CycE_Dap_0" from="CycE" to="Dap" minvalue="1" sign="positive">
+<annotation>
+  <comment>Dap expression requires Cyclin E function
+[Swanhart et al (2003)  Meth Mol Biol 296: 69-94]This edge is positive
+This edge is positive
+</comment>
+</annotation>
+			<edgevisualsetting>
+				<polyline points="148,90 218,91 303,90" line_style="straight" line_color="#009900" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="CycE_Fzr_0" from="CycE" to="Fzr" minvalue="1" sign="negative">
+<annotation>
+  <comment>This edge is dual
+This edge is negative
+</comment>
+</annotation>
+			<edgevisualsetting>
+				<polyline points="148,90 214,98 224,313" line_style="straight" line_color="#FF0000" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="Rux_Rux_0" from="Rux" to="Rux" minvalue="1" sign="positive">
+<annotation>
+  <comment>This edge is non functional
+This edge is positive
+</comment>
+</annotation>
+			<edgevisualsetting>
+				<polyline points="45,230 35,203 45,199 55,203 45,230" line_style="straight" line_color="#009900" line_width="1" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="Rux_E2F_0" from="Rux" to="E2F" minvalue="1" sign="positive">
+<annotation>
+  <comment>This edge is positive
+This edge is positive
+</comment>
+</annotation>
+			<edgevisualsetting>
+				<polyline points="45,230 45,197 121,198" line_style="straight" line_color="#009900" line_width="1" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="Rux_Fzr_0" from="Rux" to="Fzr" minvalue="1" sign="positive">
+<annotation>
+  <comment>This edge is positive
+This edge is positive
+</comment>
+</annotation>
+			<edgevisualsetting>
+				<polyline points="45,230 38,315 224,313" line_style="straight" line_color="#009900" line_width="1" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="Rux_Rb_0" from="Rux" to="Rb" minvalue="1" sign="positive">
+<annotation>
+  <comment>This edge is positive
+This edge is positive
+</comment>
+</annotation>
+			<edgevisualsetting>
+				<polyline points="45,230 45,143 171,153" line_style="straight" line_color="#009900" line_width="1" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="Rux_Wee1_0" from="Rux" to="Wee1" minvalue="1" sign="positive">
+<annotation>
+  <comment>This edge is positive
+This edge is positive
+</comment>
+</annotation>
+			<edgevisualsetting>
+				<polyline points="45,230 39,299 88,298" line_style="straight" line_color="#009900" line_width="1" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="Rux_Fzy_0" from="Rux" to="Fzy" minvalue="1" sign="negative">
+<annotation>
+  <comment>This edge is negative
+This edge is negative
+</comment>
+</annotation>
+			<edgevisualsetting>
+				<polyline points="45,230 31,359 157,357" line_style="straight" line_color="#FF0000" line_width="1" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="Rux_Stg_0" from="Rux" to="Stg" minvalue="1" sign="negative">
+<annotation>
+  <comment>This edge is negative
+This edge is negative
+</comment>
+</annotation>
+			<edgevisualsetting>
+				<polyline points="45,230 287,237 307,261" line_style="straight" line_color="#FF0000" line_width="1" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="Notch_Fzr_0" from="Notch" to="Fzr" minvalue="1" sign="positive">
+<annotation>
+  <comment>This edge is positive
+This edge is positive
+</comment>
+</annotation>
+			<edgevisualsetting>
+				<polyline points="323,175 338,312 224,313" line_style="straight" line_color="#009900" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="Notch_Stg_0" from="Notch" to="Stg" minvalue="1" sign="negative">
+<annotation>
+  <comment>This edge is negative
+This edge is negative
+</comment>
+</annotation>
+			<edgevisualsetting>
+				<polyline points="323,175 320,200 307,261" line_style="straight" line_color="#FF0000" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="Notch_Dap_0" from="Notch" to="Dap" minvalue="1" sign="negative">
+<annotation>
+  <comment>This edge is non functional
+This edge is negative
+</comment>
+</annotation>
+			<edgevisualsetting>
+				<polyline points="323,175 305,134 303,90" line_style="straight" line_color="#FF0000" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="Fzr_CycB_0" from="Fzr" to="CycB" minvalue="1" sign="negative">
+<annotation>
+  <comment>This edge is negative
+This edge is negative
+</comment>
+</annotation>
+			<edgevisualsetting>
+				<polyline points="224,313 177,307 167,262" line_style="straight" line_color="#FF0000" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="Fzr_CycA_0" from="Fzr" to="CycA" minvalue="1" sign="negative">
+<annotation>
+  <comment>This edge is negative
+This edge is negative
+</comment>
+</annotation>
+			<edgevisualsetting>
+				<polyline points="224,313 248,245 259,175" line_style="straight" line_color="#FF0000" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="Ago_CycE_0" from="Ago" to="CycE" minvalue="1" sign="negative">
+<annotation>
+  <comment>This edge is negative
+This edge is negative
+</comment>
+</annotation>
+			<edgevisualsetting>
+				<polyline points="147,41 148,90" line_style="straight" line_color="#FF0000" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="Stg_CycB_0" from="Stg" to="CycB" minvalue="1" sign="positive">
+<annotation>
+  <comment>This edge is non functional
+This edge is positive
+</comment>
+</annotation>
+			<edgevisualsetting>
+				<polyline points="307,261 238,254 167,262" line_style="straight" line_color="#009900" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="Rb_CycE_0" from="Rb" to="CycE" minvalue="1" sign="negative">
+<annotation>
+  <comment>This edge is negative
+This edge is negative
+</comment>
+</annotation>
+			<edgevisualsetting>
+				<polyline points="171,153 154,118 148,90" line_style="straight" line_color="#FF0000" line_width="1" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="Rb_CycA_0" from="Rb" to="CycA" minvalue="1" sign="negative">
+<annotation>
+  <comment>This edge is negative
+This edge is negative
+</comment>
+</annotation>
+			<edgevisualsetting>
+				<polyline points="171,153 271,144 259,175" line_style="straight" line_color="#FF0000" line_width="1" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="Rb_E2F_0" from="Rb" to="E2F" minvalue="1" sign="negative">
+<annotation>
+  <comment>This edge is negative
+This edge is negative
+</comment>
+</annotation>
+			<edgevisualsetting>
+				<polyline points="171,153 112,162 121,198" line_style="straight" line_color="#FF0000" line_width="1" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="Rb_Stg_0" from="Rb" to="Stg" minvalue="1" sign="negative">
+<annotation>
+  <comment>This edge is negative
+</comment>
+</annotation>
+			<edgevisualsetting>
+				<polyline points="171,153 295,144 307,261" line_style="straight" line_color="#FF0000" line_width="1" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="CycA_Fzr_0" from="CycA" to="Fzr" minvalue="1" sign="negative">
+<annotation>
+  <comment>This edge is negative
+This edge is negative
+</comment>
+</annotation>
+			<edgevisualsetting>
+				<polyline points="259,175 234,257 224,313" line_style="straight" line_color="#FF0000" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="CycA_E2F_0" from="CycA" to="E2F" minvalue="1" sign="negative">
+<annotation>
+  <comment>This edge is negative
+This edge is negative
+</comment>
+</annotation>
+			<edgevisualsetting>
+				<polyline points="259,175 234,196 121,198" line_style="straight" line_color="#FF0000" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="CycA_Rb_0" from="CycA" to="Rb" minvalue="1" sign="negative">
+<annotation>
+  <comment>This edge is negative
+This edge is negative
+</comment>
+</annotation>
+			<edgevisualsetting>
+				<polyline points="259,175 246,156 171,153" line_style="straight" line_color="#FF0000" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="CycA_Rux_0" from="CycA" to="Rux" minvalue="1" sign="negative">
+<annotation>
+  <comment>This edge is negative
+This edge is negative
+</comment>
+</annotation>
+			<edgevisualsetting>
+				<polyline points="259,175 234,228 45,230" line_style="straight" line_color="#FF0000" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="CycB_Rb_0" from="CycB" to="Rb" minvalue="1" sign="negative">
+<annotation>
+  <comment>This edge is negative
+This edge is negative
+</comment>
+</annotation>
+			<edgevisualsetting>
+				<polyline points="167,262 185,209 171,153" line_style="straight" line_color="#FF0000" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="CycB_Rux_0" from="CycB" to="Rux" minvalue="1" sign="negative">
+<annotation>
+  <comment>This edge is negative
+This edge is negative
+</comment>
+</annotation>
+			<edgevisualsetting>
+				<polyline points="167,262 55,260 45,230" line_style="straight" line_color="#FF0000" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="CycB_Fzr_0" from="CycB" to="Fzr" minvalue="1" sign="negative">
+<annotation>
+  <comment>This edge is negative
+This edge is negative
+</comment>
+</annotation>
+			<edgevisualsetting>
+				<polyline points="167,262 204,266 224,313" line_style="straight" line_color="#FF0000" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="CycB_Fzy_0" from="CycB" to="Fzy" minvalue="1" sign="positive">
+<annotation>
+  <comment>This edge is positive
+This edge is positive
+</comment>
+</annotation>
+			<edgevisualsetting>
+				<polyline points="167,262 162,309 157,357" line_style="straight" line_color="#009900" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="CycB_E2F_0" from="CycB" to="E2F" minvalue="1" sign="negative">
+<annotation>
+  <comment>This edge is negative
+This edge is negative
+</comment>
+</annotation>
+			<edgevisualsetting>
+				<polyline points="167,262 119,259 121,198" line_style="straight" line_color="#FF0000" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="CycB_Stg_0" from="CycB" to="Stg" minvalue="1" sign="positive">
+<annotation>
+  <comment>This edge is positive
+This edge is positive
+</comment>
+</annotation>
+			<edgevisualsetting>
+				<polyline points="167,262 231,263 307,261" line_style="straight" line_color="#009900" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="CycB_Wee1_0" from="CycB" to="Wee1" minvalue="1" sign="negative">
+<annotation>
+  <comment>This edge is negative
+This edge is negative
+</comment>
+</annotation>
+			<edgevisualsetting>
+				<polyline points="167,262 85,260 88,298" line_style="straight" line_color="#FF0000" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="Dap_CycE_0" from="Dap" to="CycE" minvalue="1" sign="negative">
+<annotation>
+  <comment>This edge is negative
+This edge is negative
+</comment>
+</annotation>
+			<edgevisualsetting>
+				<polyline points="303,90 243,82 148,90" line_style="straight" line_color="#FF0000" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="E2F_CycA_0" from="E2F" to="CycA" minvalue="1" sign="positive">
+<annotation>
+  <comment>This edge is positive
+This edge is positive
+</comment>
+</annotation>
+			<edgevisualsetting>
+				<polyline points="121,198 129,182 259,175" line_style="straight" line_color="#009900" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="E2F_CycE_0" from="E2F" to="CycE" minvalue="1" sign="positive">
+<annotation>
+  <comment>This edge is positive
+This edge is positive
+</comment>
+</annotation>
+			<edgevisualsetting>
+				<polyline points="121,198 129,108 148,90" line_style="straight" line_color="#009900" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="E2F_Stg_0" from="E2F" to="Stg" minvalue="1" sign="positive">
+<annotation>
+  <comment>This edge is positive
+This edge is positive
+</comment>
+</annotation>
+			<edgevisualsetting>
+				<polyline points="121,198 305,209 307,261" line_style="straight" line_color="#009900" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+<annotation>
+  <linklist>
+    <link xlink:href="http://www.ncbi.nlm.nih.gov/pubmed/15576927"/>
+    <link xlink:href="http://www.ncbi.nlm.nih.gov/pubmed/15175253"/>
+    <link xlink:href="http://www.ncbi.nlm.nih.gov/pubmed/15062106"/>
+    <link xlink:href="http://www.ncbi.nlm.nih.gov/pubmed/11146648"/>
+  </linklist>
+  <comment>Model accounting for the control of three different variants of cell cycle in Drosophila: early embryonic syncytial cell cycles, endocycles (in larva and chorion cells), and canonical cell cycles (e.g. in imaginal discs).
+Syncytial cycles: oscillations of CycA/B complexes, Wee1, Fzy and Stg
+Endocycles: oscillations CycE/Cdc2c and repression of CycA andt CycB dependent activities 
+Pending question: is CycD activity required for endocycles?
+
+General references:
+[Swanhart et al (2005)  Meth Mol Biol 296: 69-94]
+[Shcherbata et al (2004) Development 131: 3169-81]
+[Schaeffer et al (2004) Curr Biol 14: 630-6]
+[Vidwans &amp; Su (2001) Nat Cell Biol 3(1): E35-9]
+
+</comment>
+</annotation>
+	</graph>
+</gxl>

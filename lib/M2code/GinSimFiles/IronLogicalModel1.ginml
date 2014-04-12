@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE gxl SYSTEM "file://fr/univmrs/ibdm/GINsim/ressources/GINML_2_1.dtd">
+<gxl xmlns:xlink="http://www.w3.org/1999/xlink">
+	<graph id="default_name" class="regulatory" nodeorder="LIP Fpn TfR1 Ft IRP">
+<node id="Fpn" basevalue="1" maxvalue="2">
+  <parameter idActiveInteractions="IRP_Fpn_0" val="1"/>
+
+			<nodevisualsetting>
+				<rect x="349" y="91" width="55" height="25" backgroundColor="#FF9900" foregroundColor="#FFFFFF"/>
+			</nodevisualsetting>
+</node>
+<node id="LIP" basevalue="0" maxvalue="2">
+  <parameter idActiveInteractions="TfR1_LIP_0 Fpn_LIP_0" val="1"/>
+  <parameter idActiveInteractions="TfR1_LIP_0 Ft_LIP_0" val="1"/>
+  <parameter idActiveInteractions="TfR1_LIP_0 Fpn_LIP_0 Ft_LIP_0" val="1"/>
+
+			<nodevisualsetting>
+				<rect x="180" y="56" width="55" height="25" backgroundColor="#FF9900" foregroundColor="#FFFFFF"/>
+			</nodevisualsetting>
+</node>
+<node id="Ft" basevalue="1" maxvalue="2">
+  <parameter idActiveInteractions="LIP_Ft_0 IRP_Ft_0" val="1"/>
+
+			<nodevisualsetting>
+				<rect x="214" y="183" width="55" height="25" backgroundColor="#FF9900" foregroundColor="#FFFFFF"/>
+			</nodevisualsetting>
+</node>
+<node id="TfR1" basevalue="1" maxvalue="2">
+  <parameter idActiveInteractions="IRP_TfR1_0" val="1"/>
+
+			<nodevisualsetting>
+				<rect x="62" y="180" width="55" height="23" backgroundColor="#FF9900" foregroundColor="#FFFFFF"/>
+			</nodevisualsetting>
+</node>
+<node id="IRP" basevalue="1" maxvalue="2">
+  <parameter idActiveInteractions="LIP_IRP_0" val="1"/>
+
+			<nodevisualsetting>
+				<rect x="362" y="311" width="55" height="25" backgroundColor="#FF9900" foregroundColor="#FFFFFF"/>
+			</nodevisualsetting>
+</node>
+		<edge id="Fpn_LIP_0" from="Fpn" to="LIP" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="376,103 207,68" line_style="curve" line_color="#3399FF" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="LIP_Ft_0" from="LIP" to="Ft" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="207,68 210,135 241,195" line_style="curve" line_color="#3399FF" line_width="2" routage="auto"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="LIP_IRP_0" from="LIP" to="IRP" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="207,68 389,323" line_style="curve" line_color="#3399FF" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="Ft_LIP_0" from="Ft" to="LIP" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="241,195 238,128 207,68" line_style="curve" line_color="#3399FF" line_width="2" routage="auto"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="TfR1_LIP_0" from="TfR1" to="LIP" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="89,191 207,68" line_style="curve" line_color="#3399FF" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="IRP_TfR1_0" from="IRP" to="TfR1" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="389,323 89,191" line_style="curve" line_color="#3399FF" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="IRP_Fpn_0" from="IRP" to="Fpn" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="389,323 376,103" line_style="curve" line_color="#3399FF" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="IRP_Ft_0" from="IRP" to="Ft" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="389,323 241,195" line_style="curve" line_color="#3399FF" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+	</graph>
+</gxl>

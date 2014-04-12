@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE gxl SYSTEM "http://gin.univ-mrs.fr/GINsim/GINML_2_1.dtd">
+<gxl xmlns:xlink="http://www.w3.org/1999/xlink">
+	<graph id="default_name" class="regulatory" nodeorder="Trpext Trp TrpE TrpR">
+<node id="TrpE" name="TrpE enzyme (active)" basevalue="1" maxvalue="1">
+			<nodevisualsetting>
+				<ellipse x="351" y="184" width="55" height="25" backgroundColor="#666666" foregroundColor="#FFFFFF"/>
+			</nodevisualsetting>
+</node>
+<node id="Trpext" name="external tryptophan" basevalue="0" maxvalue="2">
+  <parameter idActiveInteractions="Trpext_Trpext_0" val="1"/>
+  <parameter idActiveInteractions="Trpext_Trpext_1" val="2"/>
+
+			<nodevisualsetting>
+				<rect x="169" y="43" width="55" height="25" backgroundColor="#666666" foregroundColor="#FFFFFF"/>
+			</nodevisualsetting>
+</node>
+<node id="Trp" name="tryptophan (internal)" basevalue="0" maxvalue="2">
+  <parameter idActiveInteractions="Trpext_Trp_0" val="1"/>
+  <parameter idActiveInteractions="Trpext_Trp_1" val="2"/>
+  <parameter idActiveInteractions="TrpE_Trp_0" val="1"/>
+  <parameter idActiveInteractions="Trpext_Trp_0 TrpE_Trp_0" val="1"/>
+  <parameter idActiveInteractions="Trpext_Trp_1 TrpE_Trp_0" val="2"/>
+
+			<nodevisualsetting>
+				<rect x="169" y="182" width="55" height="25" backgroundColor="#666666" foregroundColor="#FFFFFF"/>
+			</nodevisualsetting>
+</node>
+<node id="TrpR" name="holorepressor (active)" basevalue="0" maxvalue="1">
+  <parameter idActiveInteractions="Trp_TrpR_0" val="1"/>
+
+			<nodevisualsetting>
+				<ellipse x="351" y="42" width="55" height="25" backgroundColor="#666666" foregroundColor="#FFFFFF"/>
+			</nodevisualsetting>
+</node>
+		<edge id="TrpE_Trp_0" from="TrpE" to="Trp" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="378,196 287,180 196,194" line_style="curve" line_color="#339900" line_width="2" routage="auto"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="Trpext_Trp_0" from="Trpext" to="Trp" minvalue="1" maxvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="196,55 196,194" line_style="curve" line_color="#339900" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="Trpext_Trp_1" from="Trpext" to="Trp" minvalue="2" sign="positive">
+			<edgevisualsetting>
+				<polyline points="196,55 196,194" line_style="curve" line_color="#339900" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="Trpext_Trpext_0" from="Trpext" to="Trpext" minvalue="1" maxvalue="1" sign="positive">
+<annotation>
+  <comment>This autoregulation is artificial to maintain the current level of the external Trp</comment>
+</annotation>
+			<edgevisualsetting>
+				<polyline points="196,55 186,26 196,22 206,26 196,55" line_style="curve" line_color="#000000" line_width="2" routage="auto"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="Trpext_Trpext_1" from="Trpext" to="Trpext" minvalue="2" sign="positive">
+			<edgevisualsetting>
+				<polyline points="196,55 186,26 196,22 206,26 196,55" line_style="curve" line_color="#000000" line_width="2" routage="auto"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="Trp_TrpR_0" from="Trp" to="TrpR" minvalue="2" sign="positive">
+			<edgevisualsetting>
+				<polyline points="196,194 378,54" line_style="curve" line_color="#339900" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="Trp_TrpE_0" from="Trp" to="TrpE" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="196,194 287,210 378,196" line_style="curve" line_color="#CC0000" line_width="2" routage="auto"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="TrpR_TrpE_0" from="TrpR" to="TrpE" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="378,54 378,196" line_style="curve" line_color="#CC0000" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+	</graph>
+</gxl>

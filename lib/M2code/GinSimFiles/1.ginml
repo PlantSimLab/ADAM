@@ -1,0 +1,766 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE gxl SYSTEM "http://gin.univ-mrs.fr/GINsim/GINML_2_1.dtd">
+<gxl xmlns:xlink="http://www.w3.org/1999/xlink">
+	<graph id="default_name" class="regulatory" nodeorder="G0 G1 G2 G3 G4 G5 G6 G7 G8 G9 G10 G11 G12 G13 G14 G15 G16 G17 G18 G19 G20 G21 G22 G23 G24 G25 G26 G27 G28 G29 G30 G31 G32 G33 G34 G35 G36 G40 G41 G42 G43 G44 G45 G46 G47 G48 G49 G50 G51 G52 G53 G54 G55 G56 G57 G58 G59 G60 G61 G62 G63 G64">
+<node id="G3" basevalue="0" maxvalue="1">
+			<nodevisualsetting>
+				<rect x="528" y="124" width="55" height="25" backgroundColor="#FF9900" foregroundColor="#FFFFFF"/>
+			</nodevisualsetting>
+</node>
+<node id="G53" basevalue="0" maxvalue="1">
+			<nodevisualsetting>
+				<rect x="1230" y="162" width="55" height="25" backgroundColor="#FF9900" foregroundColor="#FFFFFF"/>
+			</nodevisualsetting>
+</node>
+<node id="G11" basevalue="0" maxvalue="1">
+			<nodevisualsetting>
+				<rect x="192" y="264" width="55" height="25" backgroundColor="#FF9900" foregroundColor="#FFFFFF"/>
+			</nodevisualsetting>
+</node>
+<node id="G18" basevalue="0" maxvalue="1">
+			<nodevisualsetting>
+				<rect x="573" y="57" width="55" height="25" backgroundColor="#FF9900" foregroundColor="#FFFFFF"/>
+			</nodevisualsetting>
+</node>
+<node id="G55" basevalue="0" maxvalue="1">
+			<nodevisualsetting>
+				<rect x="1195" y="265" width="55" height="25" backgroundColor="#FF9900" foregroundColor="#FFFFFF"/>
+			</nodevisualsetting>
+</node>
+<node id="G27" basevalue="0" maxvalue="1">
+			<nodevisualsetting>
+				<rect x="354" y="294" width="55" height="25" backgroundColor="#FF9900" foregroundColor="#FFFFFF"/>
+			</nodevisualsetting>
+</node>
+<node id="G35" basevalue="0" maxvalue="1">
+			<nodevisualsetting>
+				<rect x="893" y="337" width="55" height="25" backgroundColor="#FF9900" foregroundColor="#FFFFFF"/>
+			</nodevisualsetting>
+</node>
+<node id="G1" basevalue="0" maxvalue="1">
+			<nodevisualsetting>
+				<rect x="255" y="109" width="55" height="25" backgroundColor="#FF9900" foregroundColor="#FFFFFF"/>
+			</nodevisualsetting>
+</node>
+<node id="G4" basevalue="0" maxvalue="1">
+			<nodevisualsetting>
+				<rect x="617" y="132" width="55" height="25" backgroundColor="#FF9900" foregroundColor="#FFFFFF"/>
+			</nodevisualsetting>
+</node>
+<node id="G48" basevalue="0" maxvalue="1">
+			<nodevisualsetting>
+				<rect x="712" y="400" width="55" height="25" backgroundColor="#FF9900" foregroundColor="#FFFFFF"/>
+			</nodevisualsetting>
+</node>
+<node id="G22" basevalue="0" maxvalue="1">
+			<nodevisualsetting>
+				<rect x="56" y="41" width="55" height="25" backgroundColor="#FF9900" foregroundColor="#FFFFFF"/>
+			</nodevisualsetting>
+</node>
+<node id="G62" basevalue="0" maxvalue="1">
+			<nodevisualsetting>
+				<rect x="327" y="410" width="55" height="25" backgroundColor="#FF9900" foregroundColor="#FFFFFF"/>
+			</nodevisualsetting>
+</node>
+<node id="G5" basevalue="0" maxvalue="1">
+			<nodevisualsetting>
+				<rect x="704" y="132" width="55" height="25" backgroundColor="#FF9900" foregroundColor="#FFFFFF"/>
+			</nodevisualsetting>
+</node>
+<node id="G10" basevalue="0" maxvalue="1">
+			<nodevisualsetting>
+				<rect x="495" y="242" width="55" height="25" backgroundColor="#FF9900" foregroundColor="#FFFFFF"/>
+			</nodevisualsetting>
+</node>
+<node id="G14" basevalue="0" maxvalue="1">
+			<nodevisualsetting>
+				<rect x="827" y="141" width="55" height="25" backgroundColor="#FF9900" foregroundColor="#FFFFFF"/>
+			</nodevisualsetting>
+</node>
+<node id="G0" basevalue="0" maxvalue="1">
+			<nodevisualsetting>
+				<rect x="129" y="100" width="55" height="25" backgroundColor="#FF9900" foregroundColor="#FFFFFF"/>
+			</nodevisualsetting>
+</node>
+<node id="G52" basevalue="0" maxvalue="1">
+			<nodevisualsetting>
+				<rect x="1229" y="103" width="55" height="25" backgroundColor="#FF9900" foregroundColor="#FFFFFF"/>
+			</nodevisualsetting>
+</node>
+<node id="G30" basevalue="0" maxvalue="1">
+			<nodevisualsetting>
+				<rect x="396" y="366" width="55" height="25" backgroundColor="#FF9900" foregroundColor="#FFFFFF"/>
+			</nodevisualsetting>
+</node>
+<node id="G9" basevalue="0" maxvalue="1">
+			<nodevisualsetting>
+				<rect x="380" y="237" width="55" height="25" backgroundColor="#FF9900" foregroundColor="#FFFFFF"/>
+			</nodevisualsetting>
+</node>
+<node id="G64" basevalue="0" maxvalue="1">
+			<nodevisualsetting>
+				<rect x="465" y="184" width="55" height="25" backgroundColor="#FF9900" foregroundColor="#FFFFFF"/>
+			</nodevisualsetting>
+</node>
+<node id="G31" basevalue="0" maxvalue="1">
+			<nodevisualsetting>
+				<rect x="519" y="359" width="55" height="25" backgroundColor="#FF9900" foregroundColor="#FFFFFF"/>
+			</nodevisualsetting>
+</node>
+<node id="G54" basevalue="0" maxvalue="1">
+			<nodevisualsetting>
+				<rect x="1215" y="211" width="55" height="25" backgroundColor="#FF9900" foregroundColor="#FFFFFF"/>
+			</nodevisualsetting>
+</node>
+<node id="G8" basevalue="0" maxvalue="1">
+			<nodevisualsetting>
+				<rect x="280" y="232" width="55" height="25" backgroundColor="#FF9900" foregroundColor="#FFFFFF"/>
+			</nodevisualsetting>
+</node>
+<node id="G57" basevalue="0" maxvalue="1">
+			<nodevisualsetting>
+				<rect x="1148" y="363" width="55" height="25" backgroundColor="#FF9900" foregroundColor="#FFFFFF"/>
+			</nodevisualsetting>
+</node>
+<node id="G32" basevalue="0" maxvalue="1">
+			<nodevisualsetting>
+				<rect x="991" y="60" width="55" height="25" backgroundColor="#FF9900" foregroundColor="#FFFFFF"/>
+			</nodevisualsetting>
+</node>
+<node id="G23" basevalue="0" maxvalue="1">
+			<nodevisualsetting>
+				<rect x="280" y="48" width="55" height="25" backgroundColor="#FF9900" foregroundColor="#FFFFFF"/>
+			</nodevisualsetting>
+</node>
+<node id="G19" basevalue="0" maxvalue="1">
+			<nodevisualsetting>
+				<rect x="692" y="54" width="55" height="25" backgroundColor="#FF9900" foregroundColor="#FFFFFF"/>
+			</nodevisualsetting>
+</node>
+<node id="G20" basevalue="0" maxvalue="1">
+			<nodevisualsetting>
+				<rect x="869" y="47" width="55" height="25" backgroundColor="#FF9900" foregroundColor="#FFFFFF"/>
+			</nodevisualsetting>
+</node>
+<node id="G12" basevalue="0" maxvalue="1">
+			<nodevisualsetting>
+				<rect x="638" y="255" width="55" height="25" backgroundColor="#FF9900" foregroundColor="#FFFFFF"/>
+			</nodevisualsetting>
+</node>
+<node id="G15" basevalue="0" maxvalue="1">
+			<nodevisualsetting>
+				<rect x="814" y="210" width="55" height="25" backgroundColor="#FF9900" foregroundColor="#FFFFFF"/>
+			</nodevisualsetting>
+</node>
+<node id="G24" basevalue="0" maxvalue="1">
+			<nodevisualsetting>
+				<rect x="93" y="282" width="55" height="25" backgroundColor="#FF9900" foregroundColor="#FFFFFF"/>
+			</nodevisualsetting>
+</node>
+<node id="G63" basevalue="0" maxvalue="1">
+			<nodevisualsetting>
+				<rect x="594" y="203" width="55" height="25" backgroundColor="#FF9900" foregroundColor="#FFFFFF"/>
+			</nodevisualsetting>
+</node>
+<node id="G46" basevalue="0" maxvalue="1">
+			<nodevisualsetting>
+				<rect x="1026" y="363" width="55" height="25" backgroundColor="#FF9900" foregroundColor="#FFFFFF"/>
+			</nodevisualsetting>
+</node>
+<node id="G51" basevalue="0" maxvalue="1">
+			<nodevisualsetting>
+				<rect x="1216" y="49" width="55" height="25" backgroundColor="#FF9900" foregroundColor="#FFFFFF"/>
+			</nodevisualsetting>
+</node>
+<node id="G25" basevalue="0" maxvalue="1">
+			<nodevisualsetting>
+				<rect x="115" y="370" width="55" height="25" backgroundColor="#FF9900" foregroundColor="#FFFFFF"/>
+			</nodevisualsetting>
+</node>
+<node id="G16" basevalue="0" maxvalue="1">
+			<nodevisualsetting>
+				<rect x="355" y="63" width="55" height="25" backgroundColor="#FF9900" foregroundColor="#FFFFFF"/>
+			</nodevisualsetting>
+</node>
+<node id="G47" basevalue="0" maxvalue="1">
+			<nodevisualsetting>
+				<rect x="615" y="403" width="55" height="25" backgroundColor="#FF9900" foregroundColor="#FFFFFF"/>
+			</nodevisualsetting>
+</node>
+<node id="G43" basevalue="0" maxvalue="1">
+			<nodevisualsetting>
+				<rect x="1106" y="204" width="55" height="25" backgroundColor="#FF9900" foregroundColor="#FFFFFF"/>
+			</nodevisualsetting>
+</node>
+<node id="G45" basevalue="0" maxvalue="1">
+			<nodevisualsetting>
+				<rect x="1075" y="305" width="55" height="25" backgroundColor="#FF9900" foregroundColor="#FFFFFF"/>
+			</nodevisualsetting>
+</node>
+<node id="G42" basevalue="0" maxvalue="1">
+			<nodevisualsetting>
+				<rect x="1113" y="150" width="55" height="25" backgroundColor="#FF9900" foregroundColor="#FFFFFF"/>
+			</nodevisualsetting>
+</node>
+<node id="G26" basevalue="0" maxvalue="1">
+			<nodevisualsetting>
+				<rect x="244" y="346" width="55" height="25" backgroundColor="#FF9900" foregroundColor="#FFFFFF"/>
+			</nodevisualsetting>
+</node>
+<node id="G2" basevalue="0" maxvalue="1">
+			<nodevisualsetting>
+				<rect x="372" y="112" width="55" height="25" backgroundColor="#FF9900" foregroundColor="#FFFFFF"/>
+			</nodevisualsetting>
+</node>
+<node id="G49" basevalue="0" maxvalue="1">
+			<nodevisualsetting>
+				<rect x="830" y="409" width="55" height="25" backgroundColor="#FF9900" foregroundColor="#FFFFFF"/>
+			</nodevisualsetting>
+</node>
+<node id="G41" basevalue="0" maxvalue="1">
+			<nodevisualsetting>
+				<rect x="1122" y="97" width="55" height="25" backgroundColor="#FF9900" foregroundColor="#FFFFFF"/>
+			</nodevisualsetting>
+</node>
+<node id="G40" basevalue="0" maxvalue="1">
+			<nodevisualsetting>
+				<rect x="1106" y="34" width="55" height="25" backgroundColor="#FF9900" foregroundColor="#FFFFFF"/>
+			</nodevisualsetting>
+</node>
+<node id="G50" basevalue="0" maxvalue="1">
+			<nodevisualsetting>
+				<rect x="939" y="414" width="55" height="25" backgroundColor="#FF9900" foregroundColor="#FFFFFF"/>
+			</nodevisualsetting>
+</node>
+<node id="G34" basevalue="0" maxvalue="1">
+			<nodevisualsetting>
+				<rect x="975" y="261" width="55" height="25" backgroundColor="#FF9900" foregroundColor="#FFFFFF"/>
+			</nodevisualsetting>
+</node>
+<node id="G61" basevalue="0" maxvalue="1">
+			<nodevisualsetting>
+				<rect x="40" y="350" width="55" height="25" backgroundColor="#FF9900" foregroundColor="#FFFFFF"/>
+			</nodevisualsetting>
+</node>
+<node id="G28" basevalue="0" maxvalue="1">
+			<nodevisualsetting>
+				<rect x="480" y="296" width="55" height="25" backgroundColor="#FF9900" foregroundColor="#FFFFFF"/>
+			</nodevisualsetting>
+</node>
+<node id="G44" basevalue="0" maxvalue="1">
+			<nodevisualsetting>
+				<rect x="1080" y="254" width="55" height="25" backgroundColor="#FF9900" foregroundColor="#FFFFFF"/>
+			</nodevisualsetting>
+</node>
+<node id="G36" basevalue="0" maxvalue="1">
+			<nodevisualsetting>
+				<rect x="165" y="317" width="55" height="25" backgroundColor="#FF9900" foregroundColor="#FFFFFF"/>
+			</nodevisualsetting>
+</node>
+<node id="G7" basevalue="0" maxvalue="1">
+			<nodevisualsetting>
+				<rect x="146" y="210" width="55" height="25" backgroundColor="#FF9900" foregroundColor="#FFFFFF"/>
+			</nodevisualsetting>
+</node>
+<node id="G13" basevalue="0" maxvalue="1">
+			<nodevisualsetting>
+				<rect x="775" y="288" width="55" height="25" backgroundColor="#FF9900" foregroundColor="#FFFFFF"/>
+			</nodevisualsetting>
+</node>
+<node id="G59" basevalue="0" maxvalue="1">
+			<nodevisualsetting>
+				<rect x="16" y="250" width="55" height="25" backgroundColor="#FF9900" foregroundColor="#FFFFFF"/>
+			</nodevisualsetting>
+</node>
+<node id="G60" basevalue="0" maxvalue="1">
+			<nodevisualsetting>
+				<rect x="64" y="118" width="55" height="25" backgroundColor="#FF9900" foregroundColor="#FFFFFF"/>
+			</nodevisualsetting>
+</node>
+<node id="G56" basevalue="0" maxvalue="1">
+			<nodevisualsetting>
+				<rect x="1209" y="318" width="55" height="25" backgroundColor="#FF9900" foregroundColor="#FFFFFF"/>
+			</nodevisualsetting>
+</node>
+<node id="G6" basevalue="0" maxvalue="1">
+			<nodevisualsetting>
+				<rect x="47" y="195" width="55" height="25" backgroundColor="#FF9900" foregroundColor="#FFFFFF"/>
+			</nodevisualsetting>
+</node>
+<node id="G17" basevalue="0" maxvalue="1">
+			<nodevisualsetting>
+				<rect x="468" y="71" width="55" height="25" backgroundColor="#FF9900" foregroundColor="#FFFFFF"/>
+			</nodevisualsetting>
+</node>
+<node id="G33" basevalue="0" maxvalue="1">
+			<nodevisualsetting>
+				<rect x="974" y="170" width="55" height="25" backgroundColor="#FF9900" foregroundColor="#FFFFFF"/>
+			</nodevisualsetting>
+</node>
+<node id="G58" basevalue="0" maxvalue="1">
+			<nodevisualsetting>
+				<rect x="1266" y="377" width="55" height="25" backgroundColor="#FF9900" foregroundColor="#FFFFFF"/>
+			</nodevisualsetting>
+</node>
+<node id="G21" basevalue="0" maxvalue="1">
+			<nodevisualsetting>
+				<rect x="168" y="32" width="55" height="25" backgroundColor="#FF9900" foregroundColor="#FFFFFF"/>
+			</nodevisualsetting>
+</node>
+<node id="G29" basevalue="0" maxvalue="1">
+			<nodevisualsetting>
+				<rect x="597" y="335" width="55" height="25" backgroundColor="#FF9900" foregroundColor="#FFFFFF"/>
+			</nodevisualsetting>
+</node>
+		<edge id="G3_G4_0" from="G3" to="G4" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="555,136 644,144" line_style="curve" line_color="#3399FF" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="G53_G42_0" from="G53" to="G42" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="1257,174 1140,162" line_style="curve" line_color="#3399FF" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="G53_G13_0" from="G53" to="G13" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="1257,174 802,300" line_style="curve" line_color="#3399FF" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="G11_G8_0" from="G11" to="G8" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="219,276 307,244" line_style="curve" line_color="#3399FF" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="G18_G17_0" from="G18" to="G17" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="600,69 495,83" line_style="curve" line_color="#3399FF" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="G55_G44_0" from="G55" to="G44" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="1222,277 1107,266" line_style="curve" line_color="#3399FF" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="G27_G30_0" from="G27" to="G30" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="381,306 423,378" line_style="curve" line_color="#3399FF" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="G35_G13_0" from="G35" to="G13" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="920,349 802,300" line_style="curve" line_color="#3399FF" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="G35_G20_0" from="G35" to="G20" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="920,349 896,59" line_style="curve" line_color="#3399FF" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="G35_G49_0" from="G35" to="G49" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="920,349 857,421" line_style="curve" line_color="#3399FF" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="G1_G2_0" from="G1" to="G2" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="282,121 399,124" line_style="curve" line_color="#3399FF" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="G4_G5_0" from="G4" to="G5" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="644,144 731,144" line_style="curve" line_color="#3399FF" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="G48_G29_0" from="G48" to="G29" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="739,412 624,347" line_style="curve" line_color="#3399FF" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="G48_G13_0" from="G48" to="G13" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="739,412 802,300" line_style="curve" line_color="#3399FF" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="G22_G0_0" from="G22" to="G0" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="83,53 156,112" line_style="curve" line_color="#3399FF" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="G62_G47_0" from="G62" to="G47" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="354,422 642,415" line_style="curve" line_color="#3399FF" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="G62_G21_0" from="G62" to="G21" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="354,422 195,44" line_style="curve" line_color="#3399FF" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="G5_G5_0" from="G5" to="G5" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="731,144 721,115 731,111 741,115 731,144" line_style="curve" line_color="#3399FF" line_width="2" routage="auto"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="G10_G0_0" from="G10" to="G0" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="522,254 156,112" line_style="curve" line_color="#3399FF" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="G14_G32_0" from="G14" to="G32" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="854,153 1018,72" line_style="curve" line_color="#3399FF" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="G0_G1_0" from="G0" to="G1" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="156,112 282,121" line_style="curve" line_color="#3399FF" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="G0_G6_0" from="G0" to="G6" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="156,112 74,207" line_style="curve" line_color="#3399FF" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="G0_G21_0" from="G0" to="G21" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="156,112 195,44" line_style="curve" line_color="#3399FF" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="G52_G41_0" from="G52" to="G41" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="1256,115 1149,109" line_style="curve" line_color="#3399FF" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="G30_G28_0" from="G30" to="G28" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="423,378 507,308" line_style="curve" line_color="#3399FF" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="G30_G9_0" from="G30" to="G9" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="423,378 407,249" line_style="curve" line_color="#3399FF" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="G9_G10_0" from="G9" to="G10" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="407,249 522,254" line_style="curve" line_color="#3399FF" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="G9_G64_0" from="G9" to="G64" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="407,249 492,196" line_style="curve" line_color="#3399FF" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="G64_G3_0" from="G64" to="G3" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="492,196 555,136" line_style="curve" line_color="#3399FF" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="G31_G12_0" from="G31" to="G12" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="546,371 665,267" line_style="curve" line_color="#3399FF" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="G54_G55_0" from="G54" to="G55" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="1242,223 1222,277" line_style="curve" line_color="#3399FF" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="G54_G53_0" from="G54" to="G53" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="1242,223 1257,174" line_style="curve" line_color="#3399FF" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="G8_G9_0" from="G8" to="G9" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="307,244 407,249" line_style="curve" line_color="#3399FF" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="G57_G58_0" from="G57" to="G58" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="1175,375 1293,389" line_style="curve" line_color="#3399FF" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="G32_G20_0" from="G32" to="G20" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="1018,72 896,59" line_style="curve" line_color="#3399FF" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="G23_G21_0" from="G23" to="G21" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="307,60 195,44" line_style="curve" line_color="#3399FF" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="G19_G18_0" from="G19" to="G18" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="719,66 600,69" line_style="curve" line_color="#3399FF" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="G20_G5_0" from="G20" to="G5" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="896,59 731,144" line_style="curve" line_color="#3399FF" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="G20_G19_0" from="G20" to="G19" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="896,59 719,66" line_style="curve" line_color="#3399FF" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="G12_G29_0" from="G12" to="G29" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="665,267 624,347" line_style="curve" line_color="#3399FF" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="G15_G33_0" from="G15" to="G33" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="841,222 1001,182" line_style="curve" line_color="#3399FF" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="G15_G10_0" from="G15" to="G10" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="841,222 522,254" line_style="curve" line_color="#3399FF" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="G24_G25_0" from="G24" to="G25" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="120,294 142,382" line_style="curve" line_color="#3399FF" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="G24_G11_0" from="G24" to="G11" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="120,294 219,276" line_style="curve" line_color="#3399FF" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="G63_G52_0" from="G63" to="G52" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="621,215 1256,115" line_style="curve" line_color="#3399FF" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="G63_G60_0" from="G63" to="G60" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="621,215 358,158 91,130" line_style="curve" line_color="#3399FF" line_width="2" routage="auto"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="G46_G57_0" from="G46" to="G57" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="1053,375 1175,375" line_style="curve" line_color="#3399FF" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="G51_G40_0" from="G51" to="G40" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="1243,61 1133,46" line_style="curve" line_color="#3399FF" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="G51_G52_0" from="G51" to="G52" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="1243,61 1256,115" line_style="curve" line_color="#3399FF" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="G51_G57_0" from="G51" to="G57" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="1243,61 1175,375" line_style="curve" line_color="#3399FF" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="G25_G36_0" from="G25" to="G36" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="142,382 192,329" line_style="curve" line_color="#3399FF" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="G16_G2_0" from="G16" to="G2" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="382,75 399,124" line_style="curve" line_color="#3399FF" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="G47_G48_0" from="G47" to="G48" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="642,415 739,412" line_style="curve" line_color="#3399FF" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="G43_G54_0" from="G43" to="G54" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="1133,216 1242,223" line_style="curve" line_color="#3399FF" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="G45_G44_0" from="G45" to="G44" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="1102,317 1107,266" line_style="curve" line_color="#3399FF" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="G45_G12_0" from="G45" to="G12" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="1102,317 665,267" line_style="curve" line_color="#3399FF" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="G42_G41_0" from="G42" to="G41" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="1140,162 1149,109" line_style="curve" line_color="#3399FF" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="G26_G27_0" from="G26" to="G27" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="271,358 381,306" line_style="curve" line_color="#3399FF" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="G26_G1_0" from="G26" to="G1" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="271,358 282,121" line_style="curve" line_color="#3399FF" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="G26_G62_0" from="G26" to="G62" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="271,358 354,422" line_style="curve" line_color="#3399FF" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="G2_G3_0" from="G2" to="G3" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="399,124 555,136" line_style="curve" line_color="#3399FF" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="G49_G49_0" from="G49" to="G49" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="857,421 847,392 857,388 867,392 857,421" line_style="curve" line_color="#3399FF" line_width="2" routage="auto"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="G41_G33_0" from="G41" to="G33" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="1149,109 1001,182" line_style="curve" line_color="#3399FF" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="G41_G18_0" from="G41" to="G18" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="1149,109 600,69" line_style="curve" line_color="#3399FF" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="G40_G32_0" from="G40" to="G32" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="1133,46 1018,72" line_style="curve" line_color="#3399FF" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="G50_G46_0" from="G50" to="G46" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="966,426 1053,375" line_style="curve" line_color="#3399FF" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="G34_G15_0" from="G34" to="G15" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="1002,273 841,222" line_style="curve" line_color="#3399FF" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="G34_G4_0" from="G34" to="G4" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="1002,273 644,144" line_style="curve" line_color="#3399FF" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="G34_G50_0" from="G34" to="G50" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="1002,273 966,426" line_style="curve" line_color="#3399FF" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="G61_G24_0" from="G61" to="G24" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="67,362 120,294" line_style="curve" line_color="#3399FF" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="G28_G31_0" from="G28" to="G31" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="507,308 546,371" line_style="curve" line_color="#3399FF" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="G44_G43_0" from="G44" to="G43" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="1107,266 1133,216" line_style="curve" line_color="#3399FF" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="G36_G26_0" from="G36" to="G26" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="192,329 271,358" line_style="curve" line_color="#3399FF" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="G36_G17_0" from="G36" to="G17" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="192,329 495,83" line_style="curve" line_color="#3399FF" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="G7_G11_0" from="G7" to="G11" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="173,222 219,276" line_style="curve" line_color="#3399FF" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="G13_G34_0" from="G13" to="G34" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="802,300 1002,273" line_style="curve" line_color="#3399FF" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="G59_G61_0" from="G59" to="G61" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="43,262 67,362" line_style="curve" line_color="#3399FF" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="G60_G22_0" from="G60" to="G22" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="91,130 83,53" line_style="curve" line_color="#3399FF" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="G60_G63_0" from="G60" to="G63" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="91,130 354,187 621,215" line_style="curve" line_color="#3399FF" line_width="2" routage="auto"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="G56_G45_0" from="G56" to="G45" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="1236,330 1102,317" line_style="curve" line_color="#3399FF" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="G56_G42_0" from="G56" to="G42" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="1236,330 1140,162" line_style="curve" line_color="#3399FF" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="G6_G7_0" from="G6" to="G7" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="74,207 173,222" line_style="curve" line_color="#3399FF" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="G6_G59_0" from="G6" to="G59" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="74,207 43,262" line_style="curve" line_color="#3399FF" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="G17_G23_0" from="G17" to="G23" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="495,83 307,60" line_style="curve" line_color="#3399FF" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="G17_G16_0" from="G17" to="G16" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="495,83 382,75" line_style="curve" line_color="#3399FF" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="G33_G14_0" from="G33" to="G14" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="1001,182 854,153" line_style="curve" line_color="#3399FF" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="G58_G56_0" from="G58" to="G56" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="1293,389 1236,330" line_style="curve" line_color="#3399FF" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="G21_G22_0" from="G21" to="G22" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="195,44 83,53" line_style="curve" line_color="#3399FF" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="G29_G35_0" from="G29" to="G35" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="624,347 920,349" line_style="curve" line_color="#3399FF" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="G29_G23_0" from="G29" to="G23" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="624,347 307,60" line_style="curve" line_color="#3399FF" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+	</graph>
+</gxl>

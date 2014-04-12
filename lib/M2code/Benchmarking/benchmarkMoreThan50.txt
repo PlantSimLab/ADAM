@@ -1,0 +1,37 @@
+starting to write...
+
+number of variables = 58
+number of terms = 1
+max number of variables per term = 3
+random functions generated are: 
+{p*X, j, P*X, b*Z, E*R, t*v, e, h*s, J*T*Y, d*f, p*G*W, Y, h*k, 1, J, i*N, I, B, 1, 1, l*z, e*E, 1, c*K, s*x0, 1, e, B, I*M, j*K, o*Q*T, S*V, a*Q, L*x4, K*L, d, v*V, z, n*Z, X, x, m, X, m*o, S*W, 1, a*T, 1, f*O, 1, x1, e*r, o*u*B, k*x1, i, 1, r, g*p}
+running getGB on F with option Algorithm => Sugarless
+Groebner basis is: 
+{x3 + 1, x2 + x5, x1 + x5, x0 + x5, Z + x5, Y + x5, X + 1, W + x5, V + 1, U + x5, T + 1, R + x5, Q + 1, P + x5, O + x5, N + 1, M + x5, L + 1, K + x5, J + x5, I + x5, H + x4, G + x5, F + S, E + x5, D + x5, C + x5, B + x4, A + x5, z + 1, y + x5, x + x5, w + 1, v + x5, u + x5, t + 1, s + 1, r + x4, q + x5, p + x5, o + x5, n + 1, m + x5, l + x5, k + x5, j + x5, i + x5, g + x5, f + x5, e + x5, d + x5, c + x5, b + x5, a + x5, x4*x5 + x5, S*x5 + S, h*x5 + x5, S*x4 + S, h*S + S}
+Cpu time: .00233348 minutes
+
+number of variables = 100
+number of terms = 3
+max number of variables per term = 3
+random functions generated are: 
+{L*x1 + x1*x27, x14 + 1, s*P, R*x21 + x21, z*W, W*Y + 1, A*Q, x8*x28*x42 + 1, K + 1, f*x + p + x, w*T + 1, 1, I*x26 + x26*x36, h*x17 + 1, J*x22 + J, x30, r + 1, y*S*x36 + y*S + y*x36, f*s + x43, m*x1*x4, j*x29, E*L, x1*x20 + x20, x11*x42 + x11*x43 + x11, I*x28 + I, x38, O*x1*x3 + O, o*x7*x17, I*x4, 0, I*x3, C, x16*x42 + 1, b + E + 1, B*Q, 0, 1, v*Y*x41 + v*Y, s, x6*x23 + f, S + x40, F*x14*x38 + x38 + 1, s + P, 1, 1, 0, y*N*x44 + N + x44, w*x9 + Q*x9, s*x3*x19 + x3, g*I, x17, x, 0, O*T + T, 1, V*x11 + x11, 0, j, d*v*x23 + v*x23, Y*x42 + x42 + 1, i*x0 + i, g*x33, K*W*x42, x3, o*S*x43, q*x45 + x45, O*x38 + x34, x18*x33 + 1, n*R + a, S*x11*x32 + x11, c + K + 1, j*x17 + j + 1, w*x26 + w, q*F*K, w*x5*x39, b + x22, L*X*x2, a*W*x22 + a*W + a, s*S*x8 + s*S + S, n*J + J, 0, x22, x8*x13 + 1, G*X*x11 + G*X + G, f*o, h*F*x15 + F*x15 + 1, x1, 1, g*x*x39 + x*x39, z*x32 + z + x32, V*x15 + v, f*j + 1, N*x11 + a, k*L*x18 + 1, x17*x35 + x35, x12, B*x26*x35 + x26*x35 + B, x27, h, x*x25 + x*x29 + x25*x29}
+running getGB on F with option Algorithm => Sugarless
+Groebner basis is: 
+{x47, x46 + 1, x45, x44, x43, x41 + 1, x40 + x42 + 1, x39, x37 + x38, x36, x35 + 1, x34, x33 + 1, x32, x31 + x42 + 1, x30 + 1, x29, x28, x27, x26, x25, x24, x23 + x38 + 1, x22, x21, x19 + x42 + 1, x18 + x38 + 1, x17 + x42 + 1, x16 + x42, x15 + x38, x14 + x38, x13, x12, x11 + x42 + 1, x10, x9 + x38, x8, x7 + x42 + 1, x6, x5 + 1, x4, x3 + x42 + 1, x2 + 1, x1, x0, Z + x42 + 1, Y + x42 + 1, X, W, V + x38, U + 1, T, S + 1, R + 1, Q + x38, P + x38 + 1, O + x42, N + 1, M + 1, L, K + 1, J, I, H + x38, G + x42 + 1, F, E, D, C, B, A + x42, z + x38, y, x + x42 + 1, w + x20, v, u, t, s + 1, r, q + 1, p + 1, o, n + x42, m, l + 1, k + 1, j + 1, i, h + 1, g + x38, f + 1, e, d, c + x38 + 1, b + x38 + 1, a, x38*x42 + x38, x20*x38}
+Cpu time: .0734046 minutes
+
+number of variables = 92
+number of terms = 8
+max number of variables per term = 3
+random functions generated are: 
+{k + x38 + 1, H, f*Y*x15 + f*Y, g*k + k*t + g + t, F*x10*x19 + F + 1, 1, K*O*x21 + K*x21, E + 1, q*r*x7 + q*r + q, x*R*x35 + R*x35, P*X*x9 + X*x9 + P + x9, h, e*x3*x27 + e*x3 + e*x27 + e + x3 + 1, U*x14, w*x23*x31 + w*x31, h*x37*x38 + h*x37 + x38, J, l*I*x6 + l*x6 + I*x6 + l + x6 + 1, x*x6*x10 + x*x6 + x*x10 + x6*x10 + x6, i*I + i*x8 + x8 + 1, W*Y, x28*x29*x31 + x28*x31 + x29*x31 + x31, l*q, A*I*x14 + A*I + A*x14, s*V*x22 + s*V + V*x22 + V + x22, t*x11*x36 + t*x36 + t + 1, x9*x28 + x28*x32 + x28, t*P + z*P + t + P + 1, A*X*x19 + A*X, 1, c*K + 1, g*P + V, L*Q*T, Q*x19*x21 + Q*x19 + Q*x21, P*R + P + x11, u + x9, F, H*x4 + Q*x4, w*x36 + 1, H*x38 + Y + x38, v*N*x12 + 1, 0, l*x35, p*G, 0, Q + S, s*G + C, y*x35 + 1, d*r*G + d + r + G, o*p*K + o, O*x30 + x39, u*F + u + F, x*Y*x9 + x + Y + x9 + 1, m*q*v + m*q + m + v, d*A + A + 1, 2, x5*x12 + C + x5, x7*x18 + x18 + 1, x*Q + Q, i*r*x25 + i*r + i*x25 + r*x25 + r + 1, R*x0*x16 + R*x0 + R*x16 + x0*x16 + R + x0, S*x39 + x39 + 1, w*G, c*x18 + c + x33 + 1, P + T + 1, F*x8*x35, x11, x32*x37 + E + x32, z*x23, v*x32 + x12*x32 + v, v*w*x22 + 1, a*d + a + x34, 1, n*x1*x22 + n*x1 + x1 + x22, J*R + R*x12 + 1, B*x39 + x27*x39, l*x1 + x9, e*x13 + 1, P*x9*x21 + P, C*x12*x20 + C*x12 + C*x20 + C, U*x13 + L + U, I*V + j + I + V, J*L + J*x15 + L + x15 + 1, x11*x17*x29 + x11*x29 + x17, Y*x0*x12, z*Q*x26 + z*Q + Q*x26 + z + Q, g*x6 + x6 + 1, e*x21, x25*x28 + 1, D, l, J*x1}
+running getGB on F with option Algorithm => Sugarless
+Groebner basis is: 
+{x39, x38 + 1, x37 + 1, x36 + 1, x35, x34 + 1, x33 + 1, x32 + 1, x31 + 1, x30 + 1, x29 + 1, x28, x27, x26, x25 + 1, x24 + 1, x23, x22 + 1, x21 + 1, x20 + 1, x19, x18 + 1, x17 + 1, x16, x15, x14, x13, x12 + 1, x11, x10, x9 + 1, x8 + 1, x7, x6, x5, x4, x3, x2 + 1, x1, x0 + 1, Z + 1, Y + 1, X, W, V + 1, U, T, S, R, Q, P, O + 1, N, M, L, K + 1, J + 1, I, H, G, F + 1, E, D + 1, C, B, A, z + 1, y + 1, x, w + 1, v, u, t + 1, s, r, q + 1, p + 1, o + 1, n, m + 1, l + 1, k + 1, j, i + 1, h + 1, g, f + 1, e, d, c + 1, b, a + 1}
+Cpu time: .583836 minutes
+
+number of variables = 62
+number of terms = 9
+max number of variables per term = 5
+random functions generated are: 
+{k*C*G*x9 + k*G + G*x9, l*B*J*O*Q + l*B*J + l*J*O + l*J*Q + B*O*Q + l + B + J + Q, L*x0 + b + x0, b*w*S + b, m*x*W + m*I*W + x*I + x + I, e*j*n + e*j*P + n, f*M*N*x1 + F*M*N*x1 + F*x1 + f, g*j*E*x0 + g*j*x0 + g*w*x0 + j*w + g*E + x0, o*t*T + g*t*x1 + t*T*x1 + o*T + t*x1 + g + x1, r*H*I*T + r*H*T + D*I*T + r*I + D + T + 1, D*M*x5 + D*M + g*x5 + D*x5 + t, m*A*G*x9 + h*A*x9 + m*G*x9 + h*m + G*x9, g*s*A*R + g*s*A + s*X + A*X + A, j*v*M*X, h*i*z + h*i*W + h*V*W + h*i, r + x1, B*M*U*x4 + B*Q*U*x4 + B*M*x4 + M*Q*x4 + M*U + Q, E*x0*x2 + E*x2, l + H, a*o*G + a*X*x1 + o*X*x1 + G*X*x1 + a*G + o*X + X + x1 + 1, a*p*u*x8 + a*u*S + p*u*x8 + a*S*x8 + p*u + u*x8 + S*x8, h*j*Q*R*T + h*j*R*T + h*Q*R*T + h*j*T + h*Q + j*Q + h + Q, d*v*E*F*x2 + d*v*F*x2 + d*E*x2 + v*x2 + E*x2 + v + x2 + 1, q*F*x9 + C*M*x9 + F*M*x9 + q*C + C, D*I + A*Q, h*O*P*x9 + h*O*P + h*P + w*x9 + O*x9 + P + x9 + 1, a*i*D*O + i*D*O + i*D + a*O + i + k, V*x4*x5 + V, h*C*E, n*E*H + n*D*x9 + n*H*x9 + E*H*x9 + n*E + D*H + E*H + n*x9 + E, H*I*J*Z*x7 + I*J*Z*x7 + J*Z*x7 + Z + 1, i*T + O*U + U*x5 + O + U + x5, r*E*M*x0 + E*M*x0 + E*M + O*x0, h*j*T*x3 + h*T*x4 + j*x3*x4 + T*x3*x4 + h*x3 + x3, y*Z + U*Z + 1, d, d*t*K*x4 + d*m*K + d*t*K + d*t*x4 + d*K*x4 + t*K*x4 + K*x4 + 1, g*P*X + g*t*x9 + g*X*x9 + t*P + g*X + P*x9 + P + x9 + 1, F*S*x8 + F*W + J*W, j*l*U*x2 + l*o*U*x2 + j*l*U + j*l*x2 + j + l + o, E*P + I*P + E + I, j*s*I + s*u*I + j*s + j*I + s + I + 1, h*t*z*T + T*x1 + x1, f + 1, g*n*q + f*n + n*q + q, d*n*U + n*v*U + d*v*x8 + v*U + d*x8 + v*x8 + x8, d*r*y*I + d*y*I*x0 + r*y*x0 + d*I + r*x0 + I*x0 + I, b*C*E*S + b*C*S*x1 + b*E + C*E + C*x1, x*S*x5 + x*T*x5, r*w*y*C + r*w*y + r*y*C + r*w*x8 + w*y*x8 + r*y, R, i*v*Y + v*M*Y + i*Y*x2 + v*M + v*Y + v + Y, I*K + I + V, h*B*G*L + h*l*B + l*B*G, H*W*X + o*X, t*z*Z + L*Z*x4 + L*x4, j*w + w*x3 + m*x5, x*y*U*X*x0 + x*y*X*x0 + x*U*X*x0 + X*x0 + x + y, e*x*A*K*N + x*N + N, x*A*K*O + x*A*R + A*K*R + x*O*R + A*K + A*O + R, d*n*x8 + u*N + d, j*s*Q + j*N*Q + N + X + 1}

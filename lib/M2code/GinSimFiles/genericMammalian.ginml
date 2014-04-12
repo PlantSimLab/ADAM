@@ -1,0 +1,433 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE gxl SYSTEM "http://gin.univ-mrs.fr/GINsim/GINML_2_1.dtd">
+<gxl xmlns:xlink="http://www.w3.org/1999/xlink">
+	<graph id="default_name" class="regulatory" nodeorder="CycD Rb E2F p27 CycE CycA CycB Cdc20 UbcH10 Cdh1">
+<node id="Rb" maxvalue="1">
+  <parameter val="1"/>
+  <parameter idActiveInteractions=" p27:Rb" val="1"/>
+  <parameter idActiveInteractions=" p27:Rb CycE:Rb" val="1"/>
+  <parameter idActiveInteractions=" p27:Rb CycA:Rb" val="1"/>
+  <parameter idActiveInteractions=" p27:Rb CycA:Rb CycE:Rb" val="1"/>
+  <annotation>
+    <linklist>
+      <link xlink:href="http://www.ncbi.nlm.nih.gov/pubmed/10702384"/>
+      <link xlink:href="http://www.ncbi.nlm.nih.gov/pubmed/15363676"/>
+      <link xlink:href="http://www.ncbi.nlm.nih.gov/pubmed/9020586"/>
+      <link xlink:href="http://www.ncbi.nlm.nih.gov/pubmed/12559756"/>
+    </linklist>
+    <comment>Rb is a key tumour suppressor, which is found mutated in a large variety of cancers. 
+Rb is inactivated by phosphorylation, and CycD is involved in the first step of this process (reviewed in Tamrakar et al, 2000). 
+However, in this simplified Boolean model, we consider that Rb inactivation by CycD is total.
+Rb is expressed in the absence of the cyclins, which inhibit it by phosphorylation (Novak and Tyson, 2004; Taya, 1997).
+Rb can be expressed in the presence of CycE or CycA if their 
+inhibitory activity is blocked by p27 (Coqueret, 2003).
+Rb forms a complex with members of the E2F family of transcription factors, turning them from transcriptional activators to repressors, in part through recruitment of chromatin remodelling complexes. 
+For this reason, we model the action of Rb by direct inhibitions of E2F targets (which include E2F itself). </comment>
+  </annotation>
+
+			<nodevisualsetting>
+				<ellipse x="25" y="150" width="59" height="20" backgroundColor="#ffffff" foregroundColor="#000000"/>
+			</nodevisualsetting>
+</node>
+<node id="E2F" maxvalue="1">
+  <parameter val="1"/>
+  <parameter idActiveInteractions=" p27:E2F" val="1"/>
+  <parameter idActiveInteractions=" p27:E2F CycA:E2F" val="1"/>
+  <annotation>
+    <linklist>
+      <link xlink:href="http://www.ncbi.nlm.nih.gov/pubmed/15838517"/>
+      <link xlink:href="http://www.ncbi.nlm.nih.gov/pubmed/15363676"/>
+      <link xlink:href="http://www.ncbi.nlm.nih.gov/pubmed/9020586"/>
+    </linklist>
+    <comment>E2F  factors form dimeric transcription factors,with members of the DP family. The E2F family is usually divided into activators E2Fs (E2F1, E2F2, E2F3a) and repressors E2Fs (E2F3b, E2F4, E2F5), plus the recently discovered E2F6, E2F7 and E2F8, whose structure, regulation and mode of action are slightly different from those of the regular E2Fs (Dimova and Dyson, 2005). 
+In our present model, E2F represents the activator members (together with their DP partners), the other E2Fs being implicit.
+E2F is active in the absence of Rb, that blocks E2F self-transcriptional activation (Helin, 1998), and in the absence of CycA and CycB, that inhibit E2F (Novak and Tyson, 2004).
+E2F can be active in presence of CycA when its inhibitory activity is blocked by p27 (Coqueret, 2003). 
+At the G1/S transition, E2F activates the transcription of Cyclin E, which in turns causes the inactivation of Rb. CycE also phosphorylates p27, eliciting its destruction. 
+Phosphorylated Rb dissociates from E2F, allowing more Cyclin E to be transcribed, further increasing the phosphorylation of Rb and the destruction of p27, in a positive feedback loop.</comment>
+  </annotation>
+
+			<nodevisualsetting>
+				<ellipse x="85" y="199" width="50" height="20" backgroundColor="#00ffff" foregroundColor="#000000"/>
+			</nodevisualsetting>
+</node>
+<node id="Cdc20" maxvalue="1">
+  <parameter idActiveInteractions=" CycB:Cdc20" val="1"/>
+  <parameter idActiveInteractions=" Cdh1:Cdc20 CycB:Cdc20" val="1"/>
+  <annotation>
+    <linklist>
+      <link xlink:href="http://www.ncbi.nlm.nih.gov/pubmed/12208841"/>
+    </linklist>
+    <comment>Cdc20 is one of the activator of the APC, which is an important E3 ubiquitin ligase that is activated in a cyclic fashion (reviewed in Harper et al, 2002) . 
+Cdc20 is responsible for the metaphase-to-anaphase transition: it activates separase through the destruction of its inhibitor securin; this activation elicits the cleavage of the cohesin complexes that maintain the cohesion between the sister chromatids, thus leading to their separation.
+Cdc20 also participates in degrading CycA, and indirectly activates Cdh1.
+CycB indirectly activates Cdc20 (Harper et al, 2002). </comment>
+  </annotation>
+
+			<nodevisualsetting>
+				<ellipse x="203" y="230" width="50" height="20" backgroundColor="#ff9933" foregroundColor="#000000"/>
+			</nodevisualsetting>
+</node>
+<node id="p27" maxvalue="1">
+  <parameter val="1"/>
+  <parameter idActiveInteractions=" p27:p27" val="1"/>
+  <parameter idActiveInteractions=" p27:p27 CycE:p27" val="1"/>
+  <parameter idActiveInteractions=" p27:p27 CycA:p27" val="1"/>
+  <annotation>
+    <linklist>
+      <link xlink:href="http://www.ncbi.nlm.nih.gov/pubmed/12559756"/>
+    </linklist>
+    <comment>p27 is a cdk inhibitor that sequesters cdk2/Cyclin E (CycE) and cdk2/Cyclin A (CycA) -which is represented here by arrows towards CycE and CycA's targets that inhibit the Cyclins activity-, preventing them from phosphorylating their targets (reviewed in Coqueret, 2003).
+p27 is inactivated by the cyclins.</comment>
+  </annotation>
+
+			<nodevisualsetting>
+				<ellipse x="306" y="168" width="68" height="20" backgroundColor="#ffff33" foregroundColor="#000000"/>
+			</nodevisualsetting>
+</node>
+<node id="CycB" maxvalue="1">
+  <parameter val="1"/>
+  <annotation>
+    <linklist>
+      <link xlink:href="http://www.ncbi.nlm.nih.gov/pubmed/12208841"/>
+    </linklist>
+    <comment>Stands for Cdk2/Cyclin B.
+During M phase, Cyclin B activates Cdc20, sowing the seeds of its own destruction, since CycB is a target of Cdc20. 
+CycB is active in the absence of both Cdc20 and Cdh1, which target CycB for destruction (Harper et al, 2002). </comment>
+  </annotation>
+
+			<nodevisualsetting>
+				<ellipse x="200" y="330" width="50" height="20" backgroundColor="#00ff33" foregroundColor="#000000"/>
+			</nodevisualsetting>
+</node>
+<node id="Cdh1" name="Cdh1" maxvalue="1">
+  <parameter idActiveInteractions=" Cdc20:Cdh1" val="1"/>
+  <parameter idActiveInteractions=" Cdc20:Cdh1 CycB:Cdh1" val="1"/>
+  <parameter idActiveInteractions=" CycA:Cdh1 Cdc20:Cdh1" val="1"/>
+  <parameter idActiveInteractions=" CycA:Cdh1 Cdc20:Cdh1 CycB:Cdh1" val="1"/>
+  <parameter idActiveInteractions=" p27:Cdh1 Cdc20:Cdh1" val="1"/>
+  <parameter idActiveInteractions=" p27:Cdh1 Cdc20:Cdh1 CycB:Cdh1" val="1"/>
+  <parameter idActiveInteractions=" p27:Cdh1 CycA:Cdh1 Cdc20:Cdh1" val="1"/>
+  <parameter idActiveInteractions=" p27:Cdh1 CycA:Cdh1 Cdc20:Cdh1 CycB:Cdh1" val="1"/>
+  <parameter val="1"/>
+  <parameter idActiveInteractions=" p27:Cdh1" val="1"/>
+  <parameter idActiveInteractions=" p27:Cdh1 CycA:Cdh1" val="1"/>
+  <annotation>
+    <linklist>
+      <link xlink:href="http://www.ncbi.nlm.nih.gov/pubmed/12208841"/>
+      <link xlink:href="http://www.ncbi.nlm.nih.gov/pubmed/15363676"/>
+    </linklist>
+    <comment>Cdh1 is one of the activator of the APC, which is an important E3 ubiquitin ligase that is activated in a cyclic fashion (reviewed in Harper et al, 2002) . 
+Around the G2-to-M-phase transition, CycA inactivates Cdh1, which switches the APC OFF, allowing Cyclin B to appear. 
+Cdh1 completes CycA and CycB inactivation, and inactivates Cdc20. 
+In absence of its inhibitors, E2F can be reactivated and a new cycle begins.
+The activity of Cdh1 requires the absence of CycB and CycA, which inhibit it by phosphorylation (Harper et al, 2002).
+Cdc20 further activates Cdh1 (Novak and Tyson, 2004).
+Cdh1 can be expressed in presence of CycA when p27 blocks its inhibitory activity. </comment>
+  </annotation>
+
+			<nodevisualsetting>
+				<ellipse x="269" y="272" width="50" height="20" backgroundColor="#ff0000" foregroundColor="#000000"/>
+			</nodevisualsetting>
+</node>
+<node id="CycE" maxvalue="1">
+  <parameter idActiveInteractions=" E2F:CycE" val="1"/>
+  <parameter idActiveInteractions=" CycE:CycE E2F:CycE" val="1"/>
+  <parameter idActiveInteractions=" CycA:CycE E2F:CycE" val="1"/>
+  <parameter idActiveInteractions=" CycA:CycE CycE:CycE E2F:CycE" val="1"/>
+  <parameter idActiveInteractions=" p27:CycE E2F:CycE" val="1"/>
+  <parameter idActiveInteractions=" p27:CycE CycE:CycE E2F:CycE" val="1"/>
+  <parameter idActiveInteractions=" p27:CycE CycA:CycE E2F:CycE" val="1"/>
+  <parameter idActiveInteractions=" p27:CycE CycA:CycE CycE:CycE E2F:CycE" val="1"/>
+  <annotation>
+    <linklist>
+      <link xlink:href="http://www.ncbi.nlm.nih.gov/pubmed/9529602"/>
+    </linklist>
+    <comment>CycE stands here for the whole cdk2-Cyclin E complex.
+At the G1/S transition, E2F activates the transcription of Cyclin E.
+CycE activity requires the presence of E2f and the absence of Rb (Helin, 1998).
+</comment>
+  </annotation>
+
+			<nodevisualsetting>
+				<ellipse x="148" y="82" width="50" height="26" backgroundColor="#33ffcc" foregroundColor="#000000"/>
+			</nodevisualsetting>
+</node>
+<node id="CycD" maxvalue="1">
+  <parameter idActiveInteractions=" CycD:CycD" val="1"/>
+  <annotation>
+    <comment>CycD stands here for the whole cdk4/6-Cyclin D complex.
+The positive signals or growth factors elicit the activation of Cyclin D in the cell.
+Here, Cyc D is considered as  a constant input, maintained through the positive loop.
+In our model, CycD is necessary for the inactivation of the retinoblastoma protein Rb, and for the sequestration of p27/Kip1.</comment>
+  </annotation>
+
+			<nodevisualsetting>
+				<ellipse x="133" y="30" width="50" height="20" backgroundColor="#ccffff" foregroundColor="#000000"/>
+			</nodevisualsetting>
+</node>
+<node id="CycA" maxvalue="1">
+  <parameter idActiveInteractions=" E2F:CycA" val="1"/>
+  <parameter idActiveInteractions=" UbcH10:CycA E2F:CycA" val="1"/>
+  <parameter idActiveInteractions=" Cdh1:CycA E2F:CycA" val="1"/>
+  <parameter idActiveInteractions=" CycA:CycA E2F:CycA" val="1"/>
+  <parameter idActiveInteractions=" CycA:CycA UbcH10:CycA E2F:CycA" val="1"/>
+  <parameter idActiveInteractions=" CycA:CycA Cdh1:CycA E2F:CycA" val="1"/>
+  <parameter idActiveInteractions=" CycA:CycA" val="1"/>
+  <parameter idActiveInteractions=" CycA:CycA UbcH10:CycA" val="1"/>
+  <parameter idActiveInteractions=" CycA:CycA Cdh1:CycA" val="1"/>
+  <annotation>
+    <linklist>
+      <link xlink:href="http://www.ncbi.nlm.nih.gov/pubmed/9529602"/>
+      <link xlink:href="http://www.ncbi.nlm.nih.gov/pubmed/10778858"/>
+      <link xlink:href="http://www.ncbi.nlm.nih.gov/pubmed/12208841"/>
+      <link xlink:href="http://www.ncbi.nlm.nih.gov/pubmed/15558010"/>
+    </linklist>
+    <comment>CycA stands here for the whole cdk2-Cyclin A complex.
+Cyclin A is a target of E2F, which is activated slightly after Cyclin E, when Rb is more completely inactivated (Zhang et al, 2000). 
+The action of CycA contributes to maintain Rb and p27 inhibition, inactivates E2F and CycE and most importantly, inactivates the Anaphase Promoting Complex (APC).
+The transcription of CycA is activated by E2F in the absence of Rb, which blocks this activation (Helin, 1998), in the absence of Cdc20, as well as of the pair formed by Cdh1 and UbcH10,  which both lead to the degradation of CycA (Harper et al, 2002; Rape and Kirschner, 2004).
+CycA is stable in the absence of its inhibitors Rb, Cdc20, and of the pair Cdh1 and UbcH10.</comment>
+  </annotation>
+
+			<nodevisualsetting>
+				<ellipse x="214" y="126" width="50" height="27" backgroundColor="#99ff00" foregroundColor="#000000"/>
+			</nodevisualsetting>
+</node>
+<node id="UbcH10" name="UbdH10" maxvalue="1">
+  <parameter val="1"/>
+  <parameter idActiveInteractions=" CycB:UbcH10" val="1"/>
+  <parameter idActiveInteractions=" UbcH10:UbcH10" val="1"/>
+  <parameter idActiveInteractions=" UbcH10:UbcH10 CycB:UbcH10" val="1"/>
+  <parameter idActiveInteractions=" Cdc20:UbcH10" val="1"/>
+  <parameter idActiveInteractions=" Cdc20:UbcH10 CycB:UbcH10" val="1"/>
+  <parameter idActiveInteractions=" Cdc20:UbcH10 UbcH10:UbcH10" val="1"/>
+  <parameter idActiveInteractions=" Cdc20:UbcH10 UbcH10:UbcH10 CycB:UbcH10" val="1"/>
+  <parameter idActiveInteractions=" CycA:UbcH10" val="1"/>
+  <parameter idActiveInteractions=" CycA:UbcH10 CycB:UbcH10" val="1"/>
+  <parameter idActiveInteractions=" CycA:UbcH10 UbcH10:UbcH10" val="1"/>
+  <parameter idActiveInteractions=" CycA:UbcH10 UbcH10:UbcH10 CycB:UbcH10" val="1"/>
+  <parameter idActiveInteractions=" CycA:UbcH10 Cdc20:UbcH10" val="1"/>
+  <parameter idActiveInteractions=" CycA:UbcH10 Cdc20:UbcH10 CycB:UbcH10" val="1"/>
+  <parameter idActiveInteractions=" CycA:UbcH10 Cdc20:UbcH10 UbcH10:UbcH10" val="1"/>
+  <parameter idActiveInteractions=" CycA:UbcH10 Cdc20:UbcH10 UbcH10:UbcH10 CycB:UbcH10" val="1"/>
+  <parameter idActiveInteractions=" Cdh1:UbcH10 UbcH10:UbcH10 CycB:UbcH10" val="1"/>
+  <parameter idActiveInteractions=" Cdc20:UbcH10 Cdh1:UbcH10 UbcH10:UbcH10" val="1"/>
+  <parameter idActiveInteractions=" Cdc20:UbcH10 Cdh1:UbcH10 UbcH10:UbcH10 CycB:UbcH10" val="1"/>
+  <parameter idActiveInteractions=" CycA:UbcH10 Cdh1:UbcH10 UbcH10:UbcH10" val="1"/>
+  <parameter idActiveInteractions=" CycA:UbcH10 Cdh1:UbcH10 UbcH10:UbcH10 CycB:UbcH10" val="1"/>
+  <parameter idActiveInteractions=" CycA:UbcH10 Cdc20:UbcH10 Cdh1:UbcH10 UbcH10:UbcH10" val="1"/>
+  <parameter idActiveInteractions=" CycA:UbcH10 Cdc20:UbcH10 Cdh1:UbcH10 UbcH10:UbcH10 CycB:UbcH10" val="1"/>
+  <annotation>
+    <linklist>
+      <link xlink:href="http://www.ncbi.nlm.nih.gov/pubmed/15558010"/>
+      <link xlink:href="http://www.ncbi.nlm.nih.gov/pubmed/11448992"/>
+    </linklist>
+    <comment>The E2 ubiquitin conjugating enzyme UbcH10 is necessary for Cdh1 dependent degradation of Cyclin A, but not of the other APC substrate (Rape &amp; Kirshner, 2004) .
+Once all of its substrates have been degraded, UbcH10 can ubiquitinate itself, preventing the APC from degrading Cyclin A, which can thus reappear.
+These findings make the activation of Cyclin A in S phase coherent with the observation that Cdh1 is still active at this point of the cycle (Huang et al, 2001).
+UbcH10 is active in the absence of Cdh1. 
+UbcH10 activity can be maintained in the presence of Cdh1 when at least one of its other targets is present (CycA, Cdc20, or CycB) (Rape and Kirschner, 2004). </comment>
+  </annotation>
+
+			<nodevisualsetting>
+				<ellipse x="127" y="273" width="50" height="20" backgroundColor="#ffffff" foregroundColor="#000000"/>
+			</nodevisualsetting>
+</node>
+		<edge id="Rb:E2F" from="Rb" to="E2F" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="54,160 98,170 110,209" line_style="straight" line_color="#ff3333" line_width="1" routage="auto"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="Rb:CycE" from="Rb" to="CycE" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="54,160 60,97 173,95" line_style="straight" line_color="#ff3333" line_width="1" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="Rb:CycA" from="Rb" to="CycA" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="54,160 220,170 239,139" line_style="straight" line_color="#ff3333" line_width="1" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="E2F:CycE" from="E2F" to="CycE" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="110,209 112,106 173,95" line_style="straight" line_color="#009900" line_width="2" routage="auto"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="E2F:CycA" from="E2F" to="CycA" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="110,209 235,204 239,139" line_style="straight" line_color="#009900" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="Cdc20:Cdh1" from="Cdc20" to="Cdh1" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="228,240 223,276 294,282" line_style="straight" line_color="#009900" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="Cdc20:UbcH10" from="Cdc20" to="UbcH10" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="228,240 223,276 152,283" line_style="straight" line_color="#009900" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="Cdc20:CycB" from="Cdc20" to="CycB" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="228,240 211,284 225,340" line_style="straight" line_color="#ff3333" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="Cdc20:CycA" from="Cdc20" to="CycA" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="228,240 252,184 239,139" line_style="straight" line_color="#ff3333" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="p27:p27" from="p27" to="p27" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="340,178 330,151 340,147 350,151 340,178" line_style="straight" line_color="#009900" line_width="1" routage="auto"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="p27:E2F" from="p27" to="E2F" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="340,178 319,215 110,209" line_style="straight" line_color="#009900" line_width="1" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="p27:CycE" from="p27" to="CycE" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="340,178 346,92 173,95" line_style="straight" line_color="#009900" line_width="1" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="p27:Cdh1" from="p27" to="Cdh1" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="340,178 319,241 294,282" line_style="straight" line_color="#009900" line_width="1" routage="auto"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="p27:Rb" from="p27" to="Rb" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="340,178 358,352 37,353 54,160" line_style="straight" line_color="#009900" line_width="1" routage="auto"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="CycB:p27" from="CycB" to="p27" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="225,340 343,339 340,178" line_style="straight" line_color="#ff3333" line_width="2" routage="auto"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="CycB:E2F" from="CycB" to="E2F" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="225,340 107,341 110,209" line_style="straight" line_color="#ff3333" line_width="2" routage="auto"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="CycB:Cdh1" from="CycB" to="Cdh1" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="225,340 302,340 294,282" line_style="straight" line_color="#ff3333" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="CycB:UbcH10" from="CycB" to="UbcH10" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="225,340 148,338 152,283" line_style="straight" line_color="#009900" line_width="2" routage="auto"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="CycB:Cdc20" from="CycB" to="Cdc20" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="225,340 234,292 228,240" line_style="straight" line_color="#009900" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="CycB:Rb" from="CycB" to="Rb" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="225,340 59,342 54,160" line_style="straight" line_color="#ff3333" line_width="2" routage="auto"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="Cdh1:UbcH10" from="Cdh1" to="UbcH10" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="294,282 241,290 152,283" line_style="straight" line_color="#ff3333" line_width="2" routage="auto"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="Cdh1:Cdc20" from="Cdh1" to="Cdc20" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="294,282 279,244 228,240" line_style="straight" line_color="#ff3333" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="Cdh1:CycB" from="Cdh1" to="CycB" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="294,282 283,333 225,340" line_style="straight" line_color="#ff3333" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="Cdh1:CycA" from="Cdh1" to="CycA" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="294,282 298,142 239,139" line_style="straight" line_color="#ff3333" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="CycE:p27" from="CycE" to="p27" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="173,95 330,98 340,178" line_style="straight" line_color="#ff3333" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="CycE:CycE" from="CycE" to="CycE" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="173,95 163,65 173,61 183,65 173,95" line_style="straight" line_color="#ff3333" line_width="2" routage="auto"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="CycE:Rb" from="CycE" to="Rb" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="173,95 47,87 54,160" line_style="straight" line_color="#ff3333" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="CycD:p27" from="CycD" to="p27" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="158,40 360,39 340,178" line_style="straight" line_color="#ff3333" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="CycD:CycD" from="CycD" to="CycD" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="158,40 148,13 158,9 168,13 158,40" line_style="straight" line_color="#009900" line_width="2" routage="auto"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="CycD:Rb" from="CycD" to="Rb" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="158,40 30,41 54,160" line_style="straight" line_color="#ff3333" line_width="2" routage="auto"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="CycA:p27" from="CycA" to="p27" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="239,139 312,130 340,178" line_style="straight" line_color="#ff3333" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="CycA:E2F" from="CycA" to="E2F" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="239,139 124,129 110,209" line_style="straight" line_color="#ff3333" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="CycA:CycE" from="CycA" to="CycE" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="239,139 174,129 173,95" line_style="straight" line_color="#ff3333" line_width="2" routage="auto"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="CycA:Cdh1" from="CycA" to="Cdh1" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="239,139 290,151 294,282" line_style="straight" line_color="#ff3333" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="CycA:UbcH10" from="CycA" to="UbcH10" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="239,139 153,136 152,283" line_style="straight" line_color="#009900" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="CycA:Rb" from="CycA" to="Rb" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="239,139 75,129 54,160" line_style="straight" line_color="#ff3333" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="CycA:CycA" from="CycA" to="CycA" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="239,139 229,109 239,105 249,109 239,139" line_style="straight" line_color="#009900" line_width="2" routage="auto"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="UbcH10:UbcH10" from="UbcH10" to="UbcH10" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="152,283 142,256 152,252 162,256 152,283" line_style="straight" line_color="#009900" line_width="2" routage="auto"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="UbcH10:CycA" from="UbcH10" to="CycA" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="152,283 168,148 239,139" line_style="straight" line_color="#ff3333" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+	</graph>
+</gxl>

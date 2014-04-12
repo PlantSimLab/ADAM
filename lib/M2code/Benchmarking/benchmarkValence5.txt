@@ -1,0 +1,12 @@
+starting to write...
+Benchmark test for valence = 5
+
+number of variables = 80
+number of terms = 1
+max number of variables per term = 5
+random functions generated are: 
+{L*T*x11, k*z*B*x4, f*w*x15, r*x6*x12, x4, i*L, c*e*x4, f*p*x23, s*O, F*S*x4, x3*x14, R*x25, y*N, m*x4, x19, d*f*h, N*P*X, S*x11, l*x1, k, Q, u*G*x24, B, x*I, a*t*C, a*y, V*x8, q*x, i*n*I*K*x7, x3*x7*x10, N, V*x21, x10*x14, A*E, K*x17, n*p*E*x13, 1, l*L*Z*x5, E*x2, f*y*R, n*P, T*x3*x25, O*P*U*x26, b*q*E*x15, H*U, a*x8*x16*x19, X*Y*x10, c*x17, C*J, m*o*y, C, E*x0*x14, Q*x8*x19, d*x25, x5*x9, C*x2*x7, a*x8*x12*x25, l*B, G*x5, a*w*M, f*M*x15*x23, t*x*Y, x4*x20*x24, L*U*x0*x11, l*W, E*M, m*D*M, b*k, g*K*x5, n*x22, x17, e*q, A*Q, x*B*I*x25*x27, k*F*V, J, R*x2, x*B*x2*x8, i*Q*x0, g*B*X}
+running getGB on F with option Algorithm => Sugarless
+Groebner basis is: 
+{x26 + x27, x25 + x27, x24 + x27, x23 + x27, x22 + x27, x21 + x27, x20 + x27, x19 + x27, x18 + x27, x17 + x27, x16 + x27, x15 + x27, x14 + x27, x13 + x27, x12 + x27, x11 + x27, x10 + x27, x9 + x27, x8 + x27, x7 + x27, x6 + x27, x5 + x27, x4 + x27, x3 + x27, x2 + x27, x1 + x27, x0 + x27, Z + x27, Y + x27, X + x27, W + x27, V + x27, U + x27, T + x27, S + x27, R + x27, Q + x27, P + x27, O + x27, N + x27, M + x27, L + x27, K + 1, J + x27, I + x27, H + x27, G + x27, F + x27, E + x27, D + x27, C + x27, B + x27, A + x27, z + x27, y + x27, x + x27, w + x27, v + x27, u + x27, t + x27, s + x27, r + x27, q + x27, p + x27, o + x27, n + x27, m + x27, l + x27, k + x27, j + x27, i + x27, h + x27, g + x27, f + x27, e + x27, d + x27, c + x27, b + x27, a + x27}
+Cpu time: .142142 minutes

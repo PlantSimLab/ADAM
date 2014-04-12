@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE gxl SYSTEM "http://gin.univ-mrs.fr/GINsim/GINML_2_1.dtd">
+<gxl xmlns:xlink="http://www.w3.org/1999/xlink">
+	<graph id="phage" class="regulatory" nodeorder="C1 Cro">
+<node id="Cro" basevalue="2" maxvalue="2">
+  <parameter idActiveInteractions="Cro_Cro_0" val="1"/>
+
+			<nodevisualsetting>
+				<rect x="435" y="104" width="55" height="25" backgroundColor="#666666" foregroundColor="#FFFFFF"/>
+			</nodevisualsetting>
+</node>
+<node id="C1" basevalue="1" maxvalue="1">
+			<nodevisualsetting>
+				<ellipse x="270" y="101" width="55" height="25" backgroundColor="#666666" foregroundColor="#FFFFFF"/>
+			</nodevisualsetting>
+</node>
+		<edge id="Cro_Cro_0" from="Cro" to="Cro" minvalue="2" maxvalue="2" sign="negative">
+			<edgevisualsetting>
+				<polyline points="462,116 452,87 462,83 472,87 462,116" line_style="curve" line_color="#FF0000" line_width="2" routage="auto"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="Cro_C1_0" from="Cro" to="C1" minvalue="1" maxvalue="2" sign="negative">
+			<edgevisualsetting>
+				<polyline points="462,116 380,100 297,113" line_style="curve" line_color="#FF0000" line_width="2" routage="auto"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="C1_Cro_0" from="C1" to="Cro" minvalue="1" maxvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="297,113 379,129 462,116" line_style="curve" line_color="#FF0000" line_width="2" routage="auto"/>
+			</edgevisualsetting>
+		</edge>
+	</graph>
+</gxl>
