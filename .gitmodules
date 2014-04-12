@@ -1,6 +1,0 @@
-[submodule "lib"]
-	path = lib
-	url = git@github.com:PlantSimLab/REU.git
-[submodule "controlM2"]
-	path = controlM2
-	url = git@github.com:PlantSimLab/controlM2.git
