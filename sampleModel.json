@@ -1,4 +1,4 @@
-model: {
+{"model": {
     "name": "Sample for testing",
     "description": "most basic file to get started with JSON between adam_largeNetworks.rb and M2 solver",
     "version": "1.0",
@@ -33,4 +33,4 @@ model: {
             "polynomialFunction": "x1+x2"
         }
     }
-}
+}}
