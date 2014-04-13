@@ -79,6 +79,43 @@ puts "Running analysis now ...<br>"
 
 modelFile = "/tmp/myModelFile.json"
 
+
+statesString = '['
+for i in 1..p_value do
+  statesString = statesString + '"' + i.to_s + '",' 
+end
+statesString = statesString.chop! + ']'
+
+jsonString = '"model": {
+    "name": "default PDS",
+    "variables": [
+'
+      
+for i in 1..n_nodes do 
+  jsonString = jsonString +  
+        '{
+            "id": "x' + i.to_s + '",
+            "states": ' + statesString + '
+        },'
+end
+
+jsonString = jsonString.chop! + '],
+    "updateRules": {
+        "x1": { 
+            "possibleInputVariables": ["x1","x2"],
+            "polynomialFunction": "x1*x2"
+        },
+        "x2": { 
+            "possibleInputVariables": ["x1","x2"],
+            "polynomialFunction": "x1+1"
+        },
+        "x3": { 
+            "possibleInputVariables": ["x1","x2"],
+            "polynomialFunction": "x1+x2"
+        }
+    }
+}
+
 FileUtils.cp "sampleModel.json", modelFile
 
 m2_result = `./lib/M2code/limitCycles.m2 #{modelFile} #{limCyc_length}`
