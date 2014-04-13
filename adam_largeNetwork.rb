@@ -44,44 +44,40 @@ if  functionHash.keys.sort != (1..n_nodes.to_i).to_a
   exit 1
 end
 
-def stateStringJSON(p_value)
-  strs = [*0..p_value.to_i-1].map { |i| '"' + i.to_s + '"' }
-  "[" + strs.join(",") + "]"
+def stateList(p)
+  [*0..p-1].map{ |i| i.to_s }
 end
 
-def polyToJSON(functionHash, i)
+def variableToHash(i, p)
+  var = "x" + i.to_s
+  {
+    "name" => var, 
+    "id" => var, 
+    "states" => stateList(p)
+  }
+end
+
+def polyToHash(functionHash, i)
   # functionHash: created above
   # i: an index
-  # output: a string of the form:
-  #      "x1": { 
-  #          "polynomialFunction": "x1*x2"
-  #      }
-  '"x' + i.to_s + '": {
-      "polynomialFunction": "' + functionHash[i][0].to_s + '"}'
+  function = functionHash[i][0]
+  { "polynomialFunction" => function }
 end
 
-def variableToJSON(i,p_value)
-  # i: an index
-  # output: a string of the form:
-  # { "id": "xi", "name": "xi", "states":stateString }
-  stateString = stateStringJSON(p_value)
-  '{ "id": "x' + i.to_s + '",
-            "states": ' + stateString + '
-        }'
-end
-
-def polysToJSON(functionHash, n_nodes)
-  # functionHash: created above
-  # n_nodes: number of nodes.  These are expected to be x1, x2, ....
-  strs = [*1..n_nodes.to_i].map { |i| polyToJSON(functionHash,i) }
-  "{" + strs.join(",") + "}"
-end
-
-def modelToJSON(functionHash, n_nodes, p_value)
-  varlist = [*1..n_nodes.to_i].map { |i| variableToJSON(i,p_value) }
-  vars = '"variables": [' + varlist.join(",") + ']'
-  updatestr = '"updateRules": ' + polysToJSON(functionHash, n_nodes)
-  '{ "model": {' + vars + ", " + updatestr + '} }' 
+def modelToHash(functionHash, n_nodes, p_value)
+  n = n_nodes.to_i
+  p = p_value.to_i
+  varList = [*1..n].map { |i| variableToHash(i, p) }
+  updatesHash = {}
+  for i in 1..n do 
+    var = "x" + i.to_s
+    updatesHash[var] = polyToHash(functionHash, i)
+  end
+  {"model" => {
+     "variables" => varList,
+     "updateRules" => updatesHash
+     }
+  }
 end
 
 #puts variableToJSON(3,p_value)
@@ -91,14 +87,10 @@ end
 
 puts "Running analysis now ...<br>"
 
-ourModel = modelToJSON(functionHash,n_nodes,p_value)
-model_hash = JSON.parse(ourModel)
-ourModel2 = JSON.pretty_generate(model_hash)
-
-#pp(ourModel2)
+ourModel = modelToHash(functionHash,n_nodes,p_value)
 
 modelFile = "/tmp/myModelFile.json"
-File.open(modelFile, 'w') { |file| file.write(ourModel2) }
+File.open(modelFile, 'w') { |file| file.write(JSON.pretty_generate(ourModel)) }
 
 m2_result = `./lib/M2code/limitCycles.m2 #{modelFile} #{limCyc_length}`
 
