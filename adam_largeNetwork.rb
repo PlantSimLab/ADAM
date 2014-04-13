@@ -3,6 +3,7 @@
 require './partial_input'
 require 'FileUtils'
 require 'pp'
+require 'json'
 
 # Takes input from dvd website and passes it to M2 to compute fixed points
 # returns 0 (no errors) or 1 (errors) 
@@ -34,13 +35,6 @@ functionHash = PartialInput.parse_into_hash s
 # this is the list that gives the number of functions per variable
 # if one variable has more than 1 function, the system is probabilistic
 numFunctions = functionHash.values.collect { |f| f.size }
-if false # numFunctions.max != 1 
-  if limCyc_length.to_i != 1
-    puts "Error, for a large probabilistic network, only fixed points can be calculated, no limit cycles of longer length. Exiting. <br>"
-    exit 1
-  end
-end
-
 
 # some error checking on fi
 if  functionHash.keys.sort != (1..n_nodes.to_i).to_a 
@@ -50,81 +44,67 @@ if  functionHash.keys.sort != (1..n_nodes.to_i).to_a
   exit 1
 end
 
+def stateStringJSON(p_value)
+  strs = [*0..p_value.to_i-1].map { |i| '"' + i.to_s + '"' }
+  "[" + strs.join(",") + "]"
+end
 
-# making a list in M2 format of equations
-m2_system =  "{{"
-functionHash.sort.each{ |index,functions|
-  functions.each{ |f|
-    m2_system = m2_system + f
-    m2_system =  m2_system + ","
+def polyToJSON(functionHash, i)
+  # functionHash: created above
+  # i: an index
+  # output: a string of the form:
+  #      "x1": { 
+  #          "polynomialFunction": "x1*x2"
+  #      }
+  '"x' + i.to_s + '": {
+      "polynomialFunction": "' + functionHash[i][0].to_s + '"}'
+end
 
-    varIndices = f.scan(/x+[0-9]+/)
-    varIndices = varIndices.collect{ |x| x.slice(1, x.length-1) }
-    for i in varIndices
-      if (i.to_i > n_nodes.to_i)
-        puts "Error. Index of x out of range in function f#{index}. Exiting. <br>"
-        exit 1
-      end
-    end
-  }
-}
-# remove last comma
-m2_system.chop!
-m2_system = m2_system + "}}"
+def variableToJSON(i,p_value)
+  # i: an index
+  # output: a string of the form:
+  # { "id": "xi", "name": "xi", "states":stateString }
+  stateString = stateStringJSON(p_value)
+  '{ "id": "x' + i.to_s + '",
+            "states": ' + stateString + '
+        }'
+end
 
-#puts "<br>"
-#puts m2_system
-#puts "<br>"
+def polysToJSON(functionHash, n_nodes)
+  # functionHash: created above
+  # n_nodes: number of nodes.  These are expected to be x1, x2, ....
+  strs = [*1..n_nodes.to_i].map { |i| polyToJSON(functionHash,i) }
+  "{" + strs.join(",") + "}"
+end
+
+def modelToJSON(functionHash, n_nodes, p_value)
+  varlist = [*1..n_nodes.to_i].map { |i| variableToJSON(i,p_value) }
+  vars = '"variables": [' + varlist.join(",") + ']'
+  updatestr = '"updateRules": ' + polysToJSON(functionHash, n_nodes)
+  '{ "model": {' + vars + ", " + updatestr + '} }' 
+end
+
+#puts variableToJSON(3,p_value)
+#puts polyToJSON(functionHash,2)
+#puts polysToJSON(functionHash, n_nodes)
+#puts modelToJSON(functionHash,n_nodes,p_value)
+
 puts "Running analysis now ...<br>"
 
+ourModel = modelToJSON(functionHash,n_nodes,p_value)
+model_hash = JSON.parse(ourModel)
+ourModel2 = JSON.pretty_generate(model_hash)
+
+#pp(ourModel2)
+
 modelFile = "/tmp/myModelFile.json"
-
-
-statesString = '['
-for i in 1..p_value do
-  statesString = statesString + '"' + i.to_s + '",' 
-end
-statesString = statesString.chop! + ']'
-
-jsonString = '"model": {
-    "name": "default PDS",
-    "variables": [
-'
-      
-for i in 1..n_nodes do 
-  jsonString = jsonString +  
-        '{
-            "id": "x' + i.to_s + '",
-            "states": ' + statesString + '
-        },'
-end
-
-jsonString = jsonString.chop! + '],
-    "updateRules": {
-        "x1": { 
-            "possibleInputVariables": ["x1","x2"],
-            "polynomialFunction": "x1*x2"
-        },
-        "x2": { 
-            "possibleInputVariables": ["x1","x2"],
-            "polynomialFunction": "x1+1"
-        },
-        "x3": { 
-            "possibleInputVariables": ["x1","x2"],
-            "polynomialFunction": "x1+x2"
-        }
-    }
-}
-
-FileUtils.cp "sampleModel.json", modelFile
+File.open(modelFile, 'w') { |file| file.write(ourModel2) }
 
 m2_result = `./lib/M2code/limitCycles.m2 #{modelFile} #{limCyc_length}`
 
-# m2_result = `cd lib/M2code/; M2 solvebyGB.m2 --stop --no-debug --silent -q -e 'QR = makeRing(#{n_nodes}, #{p_value}); ll = gbSolver( matrix(QR, #{m2_system}), #{limCyc_length}); stdio << length ll << "?" << gbTable ll; exit 0'`
-
-  temp = m2_result.split('?')
-  numCycles = temp.fetch(0)
-  table = temp.fetch(1)
+temp = m2_result.split('?')
+numCycles = temp.fetch(0)
+table = temp.fetch(1)
 if numCycles.chomp == "0"
   puts "There are no limit cycles of length #{limCyc_length}."
   puts "<br>"
@@ -136,10 +116,4 @@ else
   puts "<br>"
 end
 
-
 exit 0
-
-###
-
-##M2 solvebyGB.m2 --stop --no-debug --silent -q -e 'QR = booleanRing 2; ll = gbSolver( { a,a+b}, QR); exit 0'
-## M2 --stop --no-debug --silent -q -e 'loadPackage "solvebyGB"; QR = booleanRing 2; ll = gbSolver( { a,a+b}, QR); quit'

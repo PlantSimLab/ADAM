@@ -27,18 +27,21 @@ Model = new Type of HashTable
 
 --file = "sampleModel.json"
 --limitCycleLength = 1
+<< "about to read file" << endl
 fileContents = get fileName
+
+<< "able to read file!  Contents: " << endl << fileContents << endl;
 fileContents = replace(":", " => ", fileContents)
 fileContents = replace("\\{", " hashTable { ", fileContents)
-M = hashTable {value fileContents}
-M = new Model from M.model
+M = value fileContents
+M = new Model from M#"model"
 
 vars Model := (M) -> (
     -- returns a list of strings
-    M.variables/(x -> x#"id")//toList
+    M#"variables"/(x -> x#"id")//toList
     )
 char Model := (M) -> (
-    M.variables/(x -> #x.states)//max
+    M#"variables"/(x -> #x#"states")//max
     )
 ring Model := (M) -> (
     varnames := vars M;
@@ -50,7 +53,7 @@ ring Model := (M) -> (
 polynomials = method()
 polynomials(Model,Ring) := (M, R) -> (
     varnames := vars M;
-    for x in varnames list value M.updateRules#x.polynomialFunction
+    for x in varnames list value M#"updateRules"#x#"polynomialFunction"
     )
 
 R = ring M
