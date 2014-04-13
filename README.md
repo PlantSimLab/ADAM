@@ -23,17 +23,17 @@ adam.pl is the starting page
 adam.pl is calling perl scripts, ruby, or Macaulay2 scripts to analyze a given model. Output is vizualized with Graphviz dot tool. 
 
 ### Perl scripts
-*translator.pl - convert Boolean model to polynomials
-*dvd_stochastic_runner.pl - generate state space of deterministic or probabilistic polynomial dynamical system, uses DVDCore.pm
+* translator.pl - convert Boolean model to polynomials
+* dvd_stochastic_runner.pl - generate state space of deterministic or probabilistic polynomial dynamical system, uses DVDCore.pm
 
 ###Ruby scripts
-*adam_largeNetwork.rb - find steady states by solving system of equations, uses M2 code in solveGB.m2
-*ginSim_converter.rb - convert logical model to PDS, uses M2 code in convertToPDS.m2
-*petri-converter.rb - convert Petri net in Snoopy format to PDS, calls petri_parser.rb
-*petri_parser.rb - uses code in Snoopy.rb
-*snoopy.rb - uses M2 code in indicatorFunc.rb
-*transitionTables.rb - convert one transition table to a polynomials, uses indicatorFunc.m2
-*transitionTablesContinuous.rb convert one transition table to a continuous polynomials, uses indicatorFunc.m2
+* adam_largeNetwork.rb - find steady states by solving system of equations, uses M2 code in solveGB.m2
+* ginSim_converter.rb - convert logical model to PDS, uses M2 code in convertToPDS.m2
+* petri-converter.rb - convert Petri net in Snoopy format to PDS, calls petri_parser.rb
+* petri_parser.rb - uses code in Snoopy.rb
+* snoopy.rb - uses M2 code in indicatorFunc.rb
+* transitionTables.rb - convert one transition table to a polynomials, uses indicatorFunc.m2
+* transitionTablesContinuous.rb convert one transition table to a continuous polynomials, uses indicatorFunc.m2
 
 
 
