@@ -1,6 +1,7 @@
 #adam_largeNetwork $n_nodes $p_value $filename $limCyc_length
 
 require './partial_input'
+require 'FileUtils'
 require 'pp'
 
 # Takes input from dvd website and passes it to M2 to compute fixed points
@@ -78,9 +79,9 @@ puts "Running analysis now ...<br>"
 
 modelFile = "/tmp/myModelFile.json"
 
-FileUtils.cp("sampleModel.json", modelFile)
+FileUtils.cp "sampleModel.json", modelFile
 
-m2_result = `limitCycles.m2 #{modelFile} #{limitCyc_length}`
+m2_result = `./lib/M2code/limitCycles.m2 #{modelFile} #{limCyc_length}`
 
 # m2_result = `cd lib/M2code/; M2 solvebyGB.m2 --stop --no-debug --silent -q -e 'QR = makeRing(#{n_nodes}, #{p_value}); ll = gbSolver( matrix(QR, #{m2_system}), #{limCyc_length}); stdio << length ll << "?" << gbTable ll; exit 0'`
 

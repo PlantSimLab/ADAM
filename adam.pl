@@ -11,6 +11,7 @@ use CGI qw/:standard/;    # load CGI routines
 use Fcntl qw( :flock );
 print header;             # create the HTTP header
 
+$ENV{'PATH'}='/Applications/Macaulay2-1.6/bin:' . $ENV{'PATH'};
 
 $p_value          = param('p_value');
 $k_value          = param('k_bound');
