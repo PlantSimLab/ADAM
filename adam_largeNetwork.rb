@@ -5,6 +5,12 @@ require 'FileUtils'
 require 'pp'
 require 'json'
 
+def changeExtensionToJSON(originalFilename)
+  path = File.dirname(originalFilename)
+  basename = File.basename(originalFilename, ".txt")
+  path + '/' + basename + ".json"
+end
+
 # Takes input from dvd website and passes it to M2 to compute fixed points
 # returns 0 (no errors) or 1 (errors) 
 
@@ -80,17 +86,13 @@ def modelToHash(functionHash, n_nodes, p_value)
   }
 end
 
-#puts variableToJSON(3,p_value)
-#puts polyToJSON(functionHash,2)
-#puts polysToJSON(functionHash, n_nodes)
-#puts modelToJSON(functionHash,n_nodes,p_value)
-
 puts "Running analysis now ...<br>"
 
-ourModel = modelToHash(functionHash,n_nodes,p_value)
 
-modelFile = "/tmp/myModelFile.json"
-File.open(modelFile, 'w') { |file| file.write(JSON.pretty_generate(ourModel)) }
+model = modelToHash(functionHash,n_nodes,p_value)
+
+modelFile = changeExtensionToJSON(functionFile)
+File.open(modelFile, 'w') { |file| file.write(JSON.pretty_generate(model)) }
 
 m2_result = `./lib/M2code/limitCycles.m2 #{modelFile} #{limCyc_length}`
 
