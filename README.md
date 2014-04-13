@@ -7,7 +7,7 @@ ADAM uses a combination of simulation and mathematical algorithms to analyze the
  
 
 Development
-===
+----
 ADAM is currently still under development; if you spot any bugs or have any questions/comments, please e-mail us.
 Developers: Bonny Guang, Madison Brandon, Rustin McNeill, Paul Vines, Franziska Hinkelmann, Seda Arat
 
@@ -17,32 +17,23 @@ BMC Bioinformatics ADAM: Analysis of Discrete Models of Biological Systems Using
 Franziska Hinkelmann, Madison Brandon, Bonny Guang, Rustin McNeill, Paul Vines, Grigoriy Blekherman, Alan Veliz-Cuba, and Reinhard Laubenbacher
 
 Structure
-===
+----
 adam.pl is the starting page
 
 adam.pl is calling perl scripts, ruby, or Macaulay2 scripts to analyze a given model. Output is vizualized with Graphviz dot tool. 
 
-Perl scripts
-==
-translator.pl - convert Boolean model to polynomials
+### Perl scripts
+*translator.pl - convert Boolean model to polynomials
+*dvd_stochastic_runner.pl - generate state space of deterministic or probabilistic polynomial dynamical system, uses DVDCore.pm
 
-dvd_stochastic_runner.pl - generate state space of deterministic or probabilistic polynomial dynamical system, uses DVDCore.pm
-
-Ruby scripts
-==
-adam_largeNetwork.rb - find steady states by solving system of equations, uses M2 code in solveGB.m2
-
-ginSim_converter.rb - convert logical model to PDS, uses M2 code in convertToPDS.m2
-
-petri-converter.rb - convert Petri net in Snoopy format to PDS, calls petri_parser.rb
-
-petri_parser.rb - uses code in Snoopy.rb
-
-snoopy.rb - uses M2 code in indicatorFunc.rb
-
-transitionTables.rb - convert one transition table to a polynomials, uses indicatorFunc.m2
-
-transitionTablesContinuous.rb convert one transition table to a continuous polynomials, uses indicatorFunc.m2
+###Ruby scripts
+*adam_largeNetwork.rb - find steady states by solving system of equations, uses M2 code in solveGB.m2
+*ginSim_converter.rb - convert logical model to PDS, uses M2 code in convertToPDS.m2
+*petri-converter.rb - convert Petri net in Snoopy format to PDS, calls petri_parser.rb
+*petri_parser.rb - uses code in Snoopy.rb
+*snoopy.rb - uses M2 code in indicatorFunc.rb
+*transitionTables.rb - convert one transition table to a polynomials, uses indicatorFunc.m2
+*transitionTablesContinuous.rb convert one transition table to a continuous polynomials, uses indicatorFunc.m2
 
 
 
