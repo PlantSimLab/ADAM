@@ -22,20 +22,8 @@ if not fileExists fileName then (
     exit(2);
     )
 
-needsPackage "solvebyGB"
+-----------------------------------
 Model = new Type of HashTable
-
---file = "sampleModel.json"
---limitCycleLength = 1
-<< "about to read file" << endl
-fileContents = get fileName
-
-<< "able to read file!  Contents: " << endl << fileContents << endl;
-fileContents = replace(":", " => ", fileContents)
-fileContents = replace("\\{", " hashTable { ", fileContents)
-M = value fileContents
-M = new Model from M#"model"
-
 vars Model := (M) -> (
     -- returns a list of strings
     M#"variables"/(x -> x#"id")//toList
@@ -56,8 +44,63 @@ polynomials(Model,Ring) := (M, R) -> (
     for x in varnames list value M#"updateRules"#x#"polynomialFunction"
     )
 
+toJSON = method()
+toJSON String := (s) -> "\"" | s | "\""
+toJSON Number := (n) -> toString n
+toJSON List := (L) -> (
+    M := for a in L list toJSON a;
+    "[" | concatenate between(",",M) | "]"
+    )
+toJSON HashTable := (H) -> (
+    K := sort keys H;
+    L := for k in K list (
+        k1 := if instance(k, Number) then toJSON toString k else toJSON k;
+        k1 | ": " | toJSON (H#k)
+        );
+    L = between(",",L);
+    "{" | concatenate L | "}"
+    )
+
+limitCyclesToJSON = (limitCycles) -> (
+    C := limitCycles/(c -> new HashTable from {"steadyState" => c});
+    C1 := new HashTable from {"components" => C};
+    C2 := new HashTable from {"output" => C1};
+    toJSON C2
+    )
+--------------------------------
+
+needsPackage "solvebyGB"
+
+--file = "sampleModel.json"
+--limitCycleLength = 1
+fileContents = get fileName
+
+fileContents = replace(":", " => ", fileContents)
+fileContents = replace("\\{", " hashTable { ", fileContents)
+M = value fileContents
+M = new Model from M#"model"
+
 R = ring M
 PDS = matrix {polynomials(M,R)}
-LL = gbSolver(PDS, limitCycleLength)
-stdio << (length LL) | "?" | LL << endl;
+resultLimitCycles = gbSolver(PDS, limitCycleLength)
+print limitCyclesToJSON resultLimitCycles
 
+end
+
+stdio << (length resultLimitCycles) | "?" | toString resultLimitCycles << endl;
+
+-- output format is the following (as a string)
+egcycles = {{{0, 0, 0}}, {{0, 0, 1}}, {{1, 0, 0}}, {{1, 0, 1}}}
+limitCyclesToJSON egcycles
+toJSON oo
+resultLimitCycles = egcycles
+print limitCyclesToJSON resultLimitCycles
+{*
+{output: {
+        limitcycles: [
+            "1" : [ [[0,1,2]], ....],
+            "2" : [ [[0,1,2],[1,2,3]], ... ]
+            ]
+        }
+    }    
+*}

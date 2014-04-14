@@ -96,18 +96,26 @@ File.open(modelFile, 'w') { |file| file.write(JSON.pretty_generate(model)) }
 
 m2_result = `./lib/M2code/limitCycles.m2 #{modelFile} #{limCyc_length}`
 
-temp = m2_result.split('?')
-numCycles = temp.fetch(0)
-limitCycles = temp.fetch(1)
-table = `./lib/M2code/convertToHTMLTable.m2 #{limitCycles}`
-if numCycles.chomp == "0"
+#puts "result from m2: " + m2_result
+result = JSON.parse(m2_result)
+components = result["output"]["components"]
+numCycles = components.length()
+
+if numCycles == 0
   puts "There are no limit cycles of length #{limCyc_length}."
   puts "<br>"
   puts "<br>"
 else
-  puts "There are " + numCycles + " limit cycles of length #{limCyc_length}"
+  if numCycles == 1
+    puts "There is one limit cycle of length #{limCyc_length}"
+  else
+    puts "There are " + numCycles.to_s + " limit cycles of length #{limCyc_length}"
+  end
   puts " and they are: <br>"
-  puts table
+  components.each { |c| 
+    cycle = c["steadyState"]
+    puts cycle.to_s + "<br>"
+    }
   puts "<br>"
 end
 
