@@ -98,7 +98,8 @@ m2_result = `./lib/M2code/limitCycles.m2 #{modelFile} #{limCyc_length}`
 
 temp = m2_result.split('?')
 numCycles = temp.fetch(0)
-table = temp.fetch(1)
+limitCycles = temp.fetch(1)
+table = `./lib/M2code/convertToHTMLTable.m2 #{limitCycles}`
 if numCycles.chomp == "0"
   puts "There are no limit cycles of length #{limCyc_length}."
   puts "<br>"

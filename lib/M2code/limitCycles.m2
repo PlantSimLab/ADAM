@@ -59,5 +59,5 @@ polynomials(Model,Ring) := (M, R) -> (
 R = ring M
 PDS = matrix {polynomials(M,R)}
 LL = gbSolver(PDS, limitCycleLength)
-stdio << (length LL) | "?" | gbTable LL << endl;
+stdio << (length LL) | "?" | LL << endl;
 
