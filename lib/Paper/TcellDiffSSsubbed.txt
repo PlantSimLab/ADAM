@@ -1,7 +1,0 @@
-None
-x4, x12, x41, x10, x3 
-x6, x1, x14, x13, x2, x29, x37, x38, x5, x30, x39 
-
-s1: x4, x1, x14, x2, x38, x30 and x41 
-s2: x12, x1, x14, x2 and x39 
-s3: x6, x13, x29, x5, x41, x10 and x3
