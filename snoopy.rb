@@ -62,7 +62,7 @@ class Snoopy
       functionList = functionList + "\"" + function + "\","
     }
     functionList.chop!
-    ret = `M2 indicatorFunc.m2 --stop --no-debug --silent -q -e 'simplify( {#{functionList}}, #{@pValue}, #{@nNodes}); exit 0'`
+    ret = `cd lib/M2code; M2 indicatorFunc.m2 --stop --no-debug --silent -q -e 'simplify( {#{functionList}}, #{@pValue}, #{@nNodes}); exit 0'`
     ret.split( /\n/)
   end
 
@@ -126,7 +126,7 @@ class Snoopy
         nodeID = pair.first
         var = @variables[nodeID.to_i]
         multiplicity = pair.last
-        ret = `M2 indicatorFunc.m2 --stop --no-debug --silent -q -e 'indicatorF(#{multiplicity}, #{@pValue -1}, #{var}, #{@pValue}); exit 0'`
+        ret = `cd lib/M2code; M2 indicatorFunc.m2 --stop --no-debug --silent -q -e 'indicatorF(#{multiplicity}, #{@pValue -1}, #{var}, #{@pValue}); exit 0'`
         func = func + "(#{ret.chop})*"
       }
       func.chop!

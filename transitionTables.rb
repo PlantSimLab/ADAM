@@ -91,7 +91,7 @@ vals.chop!
 
 #interpolate (List, ZZ, List) := (L, p, vals) 
 #puts "M2 indicatorFunc.m2 --stop --no-debug --silent -q -e 'interpolate( {#{LL} }, #{p}, {#{vals}} ); exit 0'<br>"
-m2_result = `M2 indicatorFunc.m2 --stop --no-debug --silent -q -e 'interpolate( {#{LL} }, #{p}, {#{vals}} ); exit 0'`
+m2_result = `cd lib/M2code; M2 indicatorFunc.m2 --stop --no-debug --silent -q -e 'interpolate( {#{LL} }, #{p}, {#{vals}} ); exit 0'`
 
 puts "The following function interpolates the transition table: <br>"
 puts "f_#{outputName.gsub(/\(.*\)/, "")} = #{m2_result}<br><br>"
