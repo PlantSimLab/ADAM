@@ -615,8 +615,8 @@ if ( $anaysis_method eq "Conjunctive" ) {
       "<br><A href=\"$dpGraph.$DGformat\" target=\"_blank\"><font color=\"#226677\"><i>Click to view the dependency graph.</i></font></A><br>";
   }
   
-  #print "ruby adam_conjunctive.rb $n_nodes $p_value $dpGraph.dot<br>" ;
-  system("ruby adam_conjunctive.rb $n_nodes $p_value $dpGraph.dot");
+  #print "ruby conjunctiveNetwork.rb $n_nodes $p_value $dpGraph.dot<br>" ;
+  system("ruby conjunctiveNetwork.rb $n_nodes $p_value $dpGraph.dot");
 }
 elsif ( $anaysis_method eq "Algorithms" ) {
   $limCyc_length = 1;

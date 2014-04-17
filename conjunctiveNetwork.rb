@@ -1,11 +1,11 @@
-#adam_conjunctive $n_nodes $p_value $dpGraph
+#conjunctiveNetworks.rb $n_nodes $p_value $dpGraph
 
 # Takes input from dvd website and passes it to conjunctiveNetwork.m2 to
 # compute fixed points/limit cycles
 # returns 0 (no errors) or 1 (errors) 
 
 unless ARGV.size == 3
-  puts "Usage: ruby adam_conjunctive.rb n_nodes p_value dpGraph"
+  puts "Usage: ruby conjunctiveNetworks.rb n_nodes p_value dpGraph"
   exit 0
 end
 
