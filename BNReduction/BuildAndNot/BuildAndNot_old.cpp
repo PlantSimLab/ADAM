@@ -69,26 +69,26 @@ void destroy_tree(bNode *leaf)
 // Print the variable names 
 // '~' means negative regulator
 // otherwise positive regulator
-void printTree(  std::ofstream& OUT ,   bNode * root) {
+void printTree(bNode * root) {
    if ( root == NULL )
        return;
 
    if ( root->kind ==  VAR ){
        if (root -> nega ) 
-           OUT << "~";
-       OUT << root->name ;
+           cout << "~";
+       cout << root->name ;
        return;
    }
-   OUT <<"(";
-   printTree( OUT ,   root -> left ) ;
+   cout <<"(";
+   printTree(root -> left ) ;
 
    if (root -> kind == OR  )
-      OUT << " | ";
+      cout << " | ";
    else 
-      OUT << " & ";
+      cout << " & ";
 
-   printTree( OUT ,  root -> right ) ;
-   OUT <<")";
+   printTree(root -> right ) ;
+   cout <<")";
 }
 
 // Set an existing node to VAR kind
@@ -99,48 +99,6 @@ void settoVAR(bNode * leaf, string name, bool nega ) {
    leaf -> name = name;
    leaf -> kind = VAR;
 }
-
-bool CheckORonly( bNode*root ) {
-   if (root == NULL) return false ;
-
-   if (root->kind == OR ) {
-      bool left =  CheckORonly(root->left) ;
-      bool right =  CheckORonly(root->right) ;
-      return  ( left && right );
-
-   }
-   else if ( root->kind == AND ) {
-        return false;
-   }
-   else {
-       return true;
-   }
-
-}
-
-
-// Nagetae variables and change all OR to AND
-bool  NegateAllVar( bNode*root  ) {
-    if (root == NULL) return  false;
-
-    if (root->kind == OR  ) {
-        root->kind = AND;
-        bool Left = NegateAllVar( root->left  ) ;
-        bool Right = NegateAllVar( root->right ) ;
-        return  (Left && Right )  ;
-    }
-
-    else if (root->kind == AND  ) { return false; }
-
-    //if ( root -> kind == VAR) {
-
-    root -> nega = !(root->nega) ;
-         // create a new name 
-    //}
-    return true ;
-}
-
-
 
 bNode * CloneTree (BoolExpr<string> * expr){
 
@@ -185,8 +143,8 @@ bool convertAndNot2( bNode* Fi, bool isroot, vector<bNode*> &Functions, vector<s
 
     else if ( Fi->kind == AND ) {
 
-       bool testORl =  convertAndNot2(Fi->left, false, Functions, Names);
-       bool testORr = convertAndNot2(Fi->right, false, Functions, Names);
+       bool testORl =  convertAndNot(Fi->left, false, Functions, Names);
+       bool testORr = convertAndNot(Fi->right, false, Functions, Names);
        return (testORl || testORr) ;
       
 
@@ -203,10 +161,6 @@ bool convertAndNot2( bNode* Fi, bool isroot, vector<bNode*> &Functions, vector<s
 
           int N = Functions.size();
 
-          if ( ! NegateAllVar( Fi  ) )  {
-              cerr << " Probles in detecting  only ORs " << endl;
-          }
-              
           // create a new name 
           string newname;
           ostringstream convert;
@@ -359,6 +313,26 @@ bool convertAndNot( bNode* Fi, bool isroot, vector<bNode*> &Functions, vector<st
     }
 }
 
+bool CheckORonly( bNode*root ) {
+   if (root == NULL) return false ;
+
+   if (root->kind == OR ) {
+      bool left =  CheckORonly(root->left) ;
+      bool right =  CheckORonly(root->right) ;
+      return  ( left && right );
+
+   }
+   else if ( root->kind == AND ) {
+        return false;
+   }
+   else {
+       return true;
+   }
+
+}
+
+
+
 // Negate one variable
 void NegateVar(bNode*root , int index  ) {
     if (root == NULL) return ;
@@ -505,13 +479,6 @@ int main(int argc, char *argv[])
 //       exit(0);
 //    }
 
-    // trying to open the output file for writing
-    ofstream OUT( "BuildAndNot.log" ) ;
-    if (!OUT) {
-        cerr << "Error creating(opening) output file ...exiting" << endl;
-        exit(1) ;
-    }
-
     int counter = 0;
     while ( getline(cin,line) ) {
 	try {
@@ -552,7 +519,7 @@ int main(int argc, char *argv[])
     for (unsigned int i=0 ; i< Functions.size() ; ++i){
        bool ORtest = true;
        while (ORtest)
-           ORtest = convertAndNot2(Functions[i], true , Functions,Names);
+           ORtest = convertAndNot(Functions[i], true , Functions,Names);
 
     }
 
@@ -562,17 +529,11 @@ int main(int argc, char *argv[])
     for (unsigned int i=0 ; i< Functions.size() ; ++i){
         bNode * root = Functions[i];
         if ( root -> kind == OR ) {
-
-
-           //if (root->left->kind == VAR && root->right->kind == VAR){
-           //    root->kind = AND;
-           //    root->left->nega = !(root->left->nega);
-           //    root->right->nega = !(root->right->nega);
-           //    Negatives[i] = true ;
-          // }
-           if (  CheckORonly( root ) ) {
-              NegateAllVar(root) ;
-              Negatives[i] = true ;   
+           if (root->left->kind == VAR && root->right->kind == VAR){
+               root->kind = AND;
+               root->left->nega = !(root->left->nega);
+               root->right->nega = !(root->right->nega);
+               Negatives[i] = true ;
            }
            else {
               cerr << " Problems with the first stage " << endl;
@@ -629,18 +590,11 @@ int main(int argc, char *argv[])
     for (unsigned int i=0 ; i< Negatives.size() ; ++i){
        if ( Negatives[i] ) cout << i+1 << endl;      
     }
-
-    //cout << " TESSSTT " << endl;
-    for (unsigned int i=0 ; i< Functions.size() ; ++i){
-       printTree( OUT ,   Functions[i]  );
-       OUT  << endl;
-    }
-
          
     for (unsigned int i=0 ; i< Functions.size() ; ++i){
                  delete Functions[i] ;
     }
-    OUT.close(); 
+
     return EXIT_SUCCESS;
 }
 
