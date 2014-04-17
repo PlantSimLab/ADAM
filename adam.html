@@ -54,8 +54,7 @@ s.parentNode.insertBefore(ga, s);
     <td>
       <b>I want to</b><br>
       <input type="radio" name="choice_box" value="build">build a new model from experimental data;<br>
-      <input type="radio" name="choice_box" value="analyze" checked="checked">analyze an existing model;<br>
-      <input type="radio" name="choice_box" value="control">find optimal control for an existing model.
+      <input type="radio" name="choice_box" value="analyze" checked="checked">analyze an existing model;
     </td>
     <td>
     <div class="explain" id="explain_build">
@@ -63,9 +62,6 @@ s.parentNode.insertBefore(ga, s);
     </div>
     <div class="explain" id="explain_analyze">
       <b>Analyze existing model</b>: Enter an existing model here. You can then analyze it for its long term behavior, and for small enough models obtain a picture of the phase space.
-    </div>
-    <div class="explain" id="explain_control">
-      <b>Heuristic Control</b>: Experimental feature: find the optimal knock out strategy for a given network. You might first need to build your network from experimental data or convert a Petri net or logical model to a polynomial dynamical system.
     </div>
     </td>
   </tr>
@@ -99,13 +95,7 @@ s.parentNode.insertBefore(ga, s);
       <input type="radio"name="inputType"value="oSDDS">Open Stochastic Discrete Dynamical Systems (oSDDS)<br>	
 
     </div>
-    <div class="input" id="control">
-      Optimal control<br>
-      Please enter the desired steady state:<br>
-      <input type="text" name="dreamss" value="? ? ? ? ? ? ? 0 ? ? ? ? ? ? ? ? ? ? ? ?" label="Desired Steady State"><br>
-      Please Enter Weights for Each Node:<br>
-      <input type="text" name="weights" value="1 1 1 1 1 1 1 N 1 1 1 1 1 N 1 1 1 1 1 1" label="Weights"><br>
-    </div><br>
+
     <div class="input optionfield pvalue">
       Enter number of states per node: <input type="text" name="p_value" id="p_value" value="2" size="2" maxlength="2"><br>
     </div>
@@ -153,9 +143,7 @@ s.parentNode.insertBefore(ga, s);
     </div>
     
     </div>
-    <div class="explain" id="explain_mt_control">
-      Please enter the gene regulatory network as a polynomial dynamical system. ADAM will find the optimal combination of knockouts (that is those with the least cost where the cost is dependent on the inputted weights) using an adaptive genetic algorithm. Please enter the desired steady state and the weight for each respective gene (in numerical order e.g. the first entry would correspond to the first gene) separated by white space.
-    </div>
+
     <div class="input optionfield pvalue">
       <br>
       The <i>number of states</i> indicates the maximum number of different discrete values your variables can take on. This number must be a prime number. If it is not, please enter the next largest prime.<br>

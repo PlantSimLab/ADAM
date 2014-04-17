@@ -17,7 +17,7 @@ $p_value          = param('p_value');
 $k_value          = param('k_bound');
 $upload_file      = param('upload_file');
 $option_box       = "";
-$choice_box       = param('choice_box');         # build, analyze, control
+$choice_box       = param('choice_box');         # build, analyze
 $format_box       = param('inputType');
 $continuous       = param('continuous');
 $anaysis_method = param('anaysis_method');
@@ -363,13 +363,6 @@ if ($DEBUG) {
 
 given ($choice_box) {
 
-  when (/control/) {
-    print "We are implementing Heuristic $format_box <br>"
-      if ($DEBUG);
-    $result = `ruby parseGA.rb "$p_value" "$weights" "$dreamss" "$filename"`; #"ruby parseGA.rb \"$p_value\" \"$weights\" \"$dreamss\" \"$filename\""
-    print "ruby parseGA.rb \"$p_value\" \"$weights\" \"$dreamss\" \"$filename\"" if ($DEBUG);
-  }
-
   when (/build/) {
     
     #$DEBUG =1;
@@ -647,9 +640,6 @@ elsif ( $anaysis_method eq "Algorithms" ) {
 
   $result = `ruby adam_largeNetwork.rb $n_nodes $p_value $filename $limCyc_length`;
   print $result;
-}
-elsif ( $format_box eq "Control" ) {
-  # we do nothing
 }
 elsif ( $anaysis_method eq "Simulation" ) {
   if ( $p_value && $n_nodes ) {
