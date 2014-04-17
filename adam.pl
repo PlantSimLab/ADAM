@@ -636,9 +636,9 @@ elsif ( $anaysis_method eq "Algorithms" ) {
   }
   set_update_type();
 
-  print "ruby adam_largeNetwork.rb $n_nodes $p_value $filename $limCyc_length" if ($DEBUG);
+  print "ruby analysisByGroebnerBasis.rb $n_nodes $p_value $filename $limCyc_length" if ($DEBUG);
 
-  $result = `ruby adam_largeNetwork.rb $n_nodes $p_value $filename $limCyc_length`;
+  $result = `ruby analysisByGroebnerBasis.rb $n_nodes $p_value $filename $limCyc_length`;
   print $result;
 }
 elsif ( $anaysis_method eq "Simulation" ) {

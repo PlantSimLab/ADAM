@@ -1,4 +1,4 @@
-#adam_largeNetwork $n_nodes $p_value $filename $limCyc_length
+#analysisByGroebnerBasis.rb $n_nodes $p_value $filename $limCyc_length
 
 require './partial_input'
 require 'FileUtils'
@@ -15,7 +15,7 @@ end
 # returns 0 (no errors) or 1 (errors) 
 
 unless ARGV.size == 4
-  puts "Usage: ruby adam_largeNetwork.rb n_nodes p_value functionFile limCyc_length"
+  puts "Usage: ruby analysisByGroebnerBasis.rb n_nodes p_value functionFile limCyc_length"
   exit 0
 end
 
