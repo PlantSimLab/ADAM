@@ -17,18 +17,18 @@ require 'fileutils'
 
 class TestSnoopyPrime < Test::Unit::TestCase
   def testFindNextPrime
-    @pn = Snoopy.new("erk.spped", 2)
+    @pn = Snoopy.new("test/petriNetSampleFiles/erk.spped", 2)
     assert_equal( 2, @pn.pValue )
 
-    @pn = Snoopy.new("erk.spped", 4)
+    @pn = Snoopy.new("test/petriNetSampleFiles/erk.spped", 4)
     assert_equal( 5, @pn.pValue )
 
-    @pn = Snoopy.new("erk.spped", 8)
+    @pn = Snoopy.new("test/petriNetSampleFiles/erk.spped", 8)
     assert_equal( 11, @pn.pValue )
   end
 
   def testTooLargeBoundPrime
-    @pn = Snoopy.new("erk.spped", 101)
+    @pn = Snoopy.new("test/petriNetSampleFiles/erk.spped", 101)
     assert false
   end  
 
@@ -37,7 +37,7 @@ end
 
 class TestSnoopyOpenSystem < Test::Unit::TestCase
   def setup
-    @pn = Snoopy.new("pc_openSystem.spped", 2)
+    @pn = Snoopy.new("test/petriNetSampleFiles/pc_openSystem.spped", 2)
   end
 
   def testDummy 
@@ -47,7 +47,7 @@ end
 
 class TestSnoopyErkPathway< Test::Unit::TestCase
   def setup
-    @pn = Snoopy.new("erk.spped", 2)
+    @pn = Snoopy.new("test/petriNetSampleFiles/erk.spped", 2)
   end
 
   def testNames
@@ -81,7 +81,7 @@ end
 
 class TestSnoopyProducerConsumer < Test::Unit::TestCase
   def setup 
-    @pn = Snoopy.new("procon_bounded.spped", 2)
+    @pn = Snoopy.new("test/petriNetSampleFiles/procon_bounded.spped", 2)
   end
 
   def testTransitionNames
@@ -111,7 +111,7 @@ end
 class TestSnoopyNotStandard < Test::Unit::TestCase
   def testNotSupportedFile
     assert_raise(SystemExit) {
-      @pn = Snoopy.new("extended.spept", 3)
+      @pn = Snoopy.new("test/petriNetSampleFiles/extended.spept", 3)
     }
   end
 end
@@ -119,7 +119,7 @@ end
 
 class TestSnoopy2Transitions < Test::Unit::TestCase
   def setup
-    @pn = Snoopy.new("2trans.spped", 3)
+    @pn = Snoopy.new("test/petriNetSampleFiles/2trans.spped", 3)
   end
 
   def testPrintNames
@@ -149,7 +149,7 @@ end
 
 class TestSnoopyConstant < Test::Unit::TestCase
   def setup
-    @pn = Snoopy.new("simpleConstant.spped", 3)
+    @pn = Snoopy.new("test/petriNetSampleFiles/simpleConstant.spped", 3)
   end
 
   def testNumberOfPlaces 
@@ -174,7 +174,7 @@ end
 
 class TestSnoopy < Test::Unit::TestCase
   def setup
-    @pn = Snoopy.new("simple.spped", 3)
+    @pn = Snoopy.new("test/petriNetSampleFiles/simple.spped", 3)
   end
 
   def testPetriNetClass
@@ -182,12 +182,12 @@ class TestSnoopy < Test::Unit::TestCase
   end
   
   def testStripGraphics
-    assert( FileUtils.compare_file("stripTestControl.spped", @pn.strippedFile))
+    assert( FileUtils.compare_file("test/petriNetSampleFiles/stripTestControl.spped", @pn.strippedFile))
   end
 
   def testNewFilename
     f = @pn.stripGraphics
-    assert_equal( "simple.spped.new", f)
+    assert_equal( "test/petriNetSampleFiles/simple.spped.new", f)
     FileUtils.remove(f)
   end
 
