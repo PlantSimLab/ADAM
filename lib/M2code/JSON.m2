@@ -14,7 +14,98 @@ newPackage(
 -- (b) Macaulay2 object, which includes hash tables, lists, and basic elements
 -- (c) JSON format
 
-export {toJSON, fromJSON, toHashTable, fromHashTable, exampleJSON}
+export {parseJSON, toJSON, fromJSON, toHashTable, fromHashTable, exampleJSON}
+
+skipWS = method()
+skipWS(String, ZZ) := (str, startLoc) -> (
+    i := startLoc;
+    while i < #str and match("[[:space:]]", str#i) do i=i+1;
+    i
+    )
+
+parseJSON = method()
+-- takes a string, starting location, returns: JSON object, end location of parsed string
+parseJSON(String, ZZ) := (jsonString, startLoc) -> (
+    -- return (JSON, endLoc)
+    loc := skipWS(jsonString, startLoc); -- loc will be the first location >= startLoc with jsonString#loc not whitespace.
+    if loc == #jsonString then return null; -- look at the json spec.  Is this allowed?
+    ch := jsonString#loc;
+    if ch === "{" 
+      then parseJSONObject(jsonString, loc)
+    else if ch === "[" 
+      then parseJSONArray(jsonString, loc)
+    else if ch === "\""  -- " to fix syntax coloring!
+      then parseJSONString(jsonString, loc)
+    else if match("[[:digit:]]", ch) 
+      then parseJSONNumber(jsonString, loc)
+    else error("parse error in json formatted string, at location " | loc)
+    )
+
+parseJSONString = method()
+parseJSONString(String, ZZ) := (str, startLoc) -> (
+    if str#startLoc =!= "\"" -- "
+      then error "internal error: expected first character to be a quote.";
+    i := startLoc+1; -- this points to the char right after the quote
+    while i < #str and not match(///"///, str#i) do -- " 
+        i=i+1;
+    if i == #str then error ("mismatched quotes in string, no matching end quote for quote at location "|startLoc);
+    (substring(str, startLoc+1, i-startLoc-1), i+1)
+    )
+
+parseJSONNumber = method()
+parseJSONNumber(String, ZZ) := (str, startLoc) -> (
+    if not match("[[:digit:]]", str#startLoc) then error "internal error: expected digit";
+    i := startLoc; -- this points to the first char of the number
+    while i < #str and match("[[:digit:]]", str#i) do i=i+1;
+    (value substring(str, startLoc, i-startLoc), i)
+    )
+
+parseJSONArray = method()
+parseJSONArray(String, ZZ) := (str, startLoc) -> (
+    if str#startLoc =!= "[" then error "internal error: expected '['";
+    i := startLoc + 1;
+    result := [];
+    i = skipWS(str, i);
+    if str#i === "]" then return (result, i+1);
+    obj := null;
+    while i < #str do (
+        (obj, i) = parseJSON(str,i);
+        result = append(result, obj);
+        i = skipWS(str,i);
+        if str#i === "," then 
+            i = i+1
+        else if str#i === "]" then
+            return(result, i+1)
+        else error ("unexpected character "|str#i|" in array detected at location "|i);
+        );
+    error("expected terminating ']' for array starting at location "|startLoc);
+    )
+
+parseJSONObject = method()
+parseJSONObject(String, ZZ) := (str, startLoc) -> (
+    )
+
+TEST ///
+  restart
+  debug loadPackage "JSON"
+
+  assert(skipWS(" hi there",0) == 1)
+  assert(skipWS(" hi there",1) == 1)
+  assert(skipWS(" hi \n there",3) == 6)
+
+  assert(parseJSONString("\"hi\"", 0) == ("hi", 4))
+  assert(parseJSONString("\"hi\"blah blah", 0) == ("hi", 4))
+  assert try (parseJSONString("\"hi", 1); false) else true
+  assert try (parseJSONString("hi", 0); false) else true
+
+  parseJSONNumber("42", 0)
+  parseJSONNumber("43+53", 0)
+  parseJSONNumber("hi: 41", 4) 
+  
+  assert(parseJSONArray("[1,2,3]", 0) === ([1,2,3], 7))
+  assert(parseJSONArray(///["hi",324,[1,2]]///, 0) === (["hi", 324, [1,2]], 16))
+///
+    
 
 fromJSON = method()
 fromJSON String := (fileContents) -> (
