@@ -83,8 +83,52 @@ parseJSONArray(String, ZZ) := (str, startLoc) -> (
 
 parseJSONObject = method()
 parseJSONObject(String, ZZ) := (str, startLoc) -> (
+    if str#startLoc =!= "{" then error "internal error: expected '{'";
+    i := startLoc + 1;
+    result := {};
+    i = skipWS(str, i);
+    if str#i === "}" then return (new HashTable from result, i+1);
+    keyString := null;
+    obj := null;
+    while i < #str do (
+        i = skipWS(str,i);
+        if i == #str then break;
+        -- first get the key, which must be a string.
+        -- then check for ":"
+        -- then read the object
+        -- finally: expect a "," or "}", as for arrays.
+        (keyString, i) = parseJSONString(str, i);
+        i = skipWS(str,i);
+        if i === #str or str#i =!= ":" then 
+            error ("parse error in JSON: expected a ':' at location "
+            |i|" in string");
+        i = i+1;
+        i = skipWS(str,i);
+        if i == #str then break;            
+        (obj, i) = parseJSON(str,i);
+        result = append(result, keyString => obj);
+        i = skipWS(str,i);
+        if i == #str then break;
+        if str#i === "," then 
+            i = i+1
+        else if str#i === "}" then
+            return(new HashTable from result, i+1)
+        else error ("unexpected character "|str#i|" in json detected at location "|i);
+        );
+    error("expected terminating '}' for json object starting at location "|startLoc);
     )
 
+{*
+  parseJSON(///{"a":"b"}///, 0)
+  parseJSON(///{"a":   "b"}///, 0)
+  parseJSON(///{"a":   "b",    "c3d4"  :  [2,3,4] }///, 0)
+  parseJSON(///{"a":"b","c3d4":[2,3,4]}///, 0)
+  parseJSON(///{"a" :"b","c3d4":[2,3,4]}///, 0)  
+  parseJSON(///{"a": "b","c3d4":[2,3,4]}///, 0)
+  parseJSON(///{"a":"b" ,"c3d4":[2,3,4]}///, 0)
+  parseJSON(///{"a":
+          "b", "c3d4":[2,3 ,4]}///, 0)
+*}
 TEST ///
   restart
   debug loadPackage "JSON"
@@ -103,7 +147,10 @@ TEST ///
   parseJSONNumber("hi: 41", 4) 
   
   assert(parseJSONArray("[1,2,3]", 0) === ([1,2,3], 7))
-  assert(parseJSONArray(///["hi",324,[1,2]]///, 0) === (["hi", 324, [1,2]], 16))
+  assert(parseJSONArray("[\"hi\",324,[1,2]]", 0) === (["hi", 324, [1,2]], 16))
+  
+  assert(parseJSON("[2,3]",0) == ([2,3], 5))
+
 ///
     
 
