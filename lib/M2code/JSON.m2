@@ -223,26 +223,38 @@ toJSON HashTable := (H) -> (
 
 spaces = (n) -> concatenate(n:" ")
 
-{*
 prettyPrintJSON = method()
 ppJSON = method()
-ppJSON(Symbol, ZZ) := (a, nspaces) -> ppJSON(toString a, nspaces)
-ppJSON(String, ZZ) := (s, nspaces) -> (spaces nspaces) | "\"" | s | "\""
-ppJSON(Number, ZZ) := (n, nspaces) -> (spaces nspaces) | toString n
-ppJSON(BasicList, ZZ) := (L, nspaces) -> (
-    M := for a in L list ppJSON(a, 0);
-    (spaces nspaces) | "[" | concatenate between(",",M) | "]"
+ppJSON(Symbol, ZZ) := (a, nindent) -> ppJSON(toString a, nindent)
+ppJSON(String, ZZ) := (s, nindent) -> "\"" | s | "\""
+ppJSON(Number, ZZ) := (n, nindent) -> toString n
+ppJSON(BasicList, ZZ) := (L, nindent) -> (
+    M := for a in L list ((spaces (nindent+2)) | ppJSON(a, nindent+2));
+    Mstr := concatenate between(",\n",M);
+    --"[\n" | (spaces nindent) | concatenate between(",\n",M) | "]"
+    "[\n" | Mstr | "\n" | (spaces nindent) | "]" 
     )
-prettyPrintJSON HashTable := (H) -> (
+ppJSON(HashTable, ZZ) := (H, nindent) -> (
+    -- NEEDS TO BE REWRITTEN TO HANDLE INDENTATION (M + F)
     K := sort keys H;
     L := for k in K list (
-        k1 := if instance(k, Number) then prettyPrintJSON toString k else toJSON k;
+        k1 := if instance(k, Number) then ppJSON toString k else toJSON k;
         k1 | ": " | prettyPrintJSON (H#k)
         );
     L = between(",",L);
     "{" | concatenate L | "}"
     )
-*}
+
+TEST ///
+  restart
+  debug loadPackage "JSON"
+
+  H = [3, 4, "hi there", 6]
+  ppJSON(H, 4)
+  str = get "../../sampleJSON/sampleModelPrettyPrint.json"
+  H = parseJSON str
+  ppJSON(H, 0)  
+///
 
 toHashTable = method()
 toHashTable Thing := (s) -> s
