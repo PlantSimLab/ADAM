@@ -23,12 +23,26 @@ skipWS(String, ZZ) := (str, startLoc) -> (
     i
     )
 
+errorString = method()
+errorString String := (s) -> s
+
+noError = null
+
 parseJSON = method()
--- takes a string, starting location, returns: JSON object, end location of parsed string
+-- takes a string, starting location
+-- returns a triple:
+--   (object, errorString, endLoc)
+-- where either:
+--   (a) errorString == null and object is a valid object
+-- or
+--   (b) errorString is a string, and object is null
+-- Note: object == null is a valid output.
+-- All of the parseJSON* routines have this same return code
 parseJSON(String, ZZ) := (jsonString, startLoc) -> (
     -- return (JSON, endLoc)
     loc := skipWS(jsonString, startLoc); -- loc will be the first location >= startLoc with jsonString#loc not whitespace.
-    if loc == #jsonString then return null; -- look at the json spec.  Is this allowed?
+    if loc == #jsonString then 
+        return (null, errorString"no object found", loc); -- look at the json spec.  Is this allowed?
     ch := jsonString#loc;
     if ch === "{" 
       then parseJSONObject(jsonString, loc)
@@ -38,7 +52,9 @@ parseJSON(String, ZZ) := (jsonString, startLoc) -> (
       then parseJSONString(jsonString, loc)
     else if match("[[:digit:]]", ch) 
       then parseJSONNumber(jsonString, loc)
-    else error("parse error in json formatted string, at location " | loc)
+--    else if match("[tfn]", ch) -- true, false, null
+--      then parseJSONName(jsonString, loc)
+    else (null, errorString("unexpected character at location " | loc), loc)
     )
 
 parseJSONString = method()
@@ -48,8 +64,10 @@ parseJSONString(String, ZZ) := (str, startLoc) -> (
     i := startLoc+1; -- this points to the char right after the quote
     while i < #str and not match(///"///, str#i) do -- " 
         i=i+1;
-    if i == #str then error ("mismatched quotes in string, no matching end quote for quote at location "|startLoc);
-    (substring(str, startLoc+1, i-startLoc-1), i+1)
+    if i == #str then 
+        (null, errorString("mismatched quotes in string, no matching end quote for quote at location "|startLoc), i)
+    else
+        (substring(str, startLoc+1, i-startLoc-1), noError, i+1)
     )
 
 parseJSONNumber = method()
@@ -57,7 +75,7 @@ parseJSONNumber(String, ZZ) := (str, startLoc) -> (
     if not match("[[:digit:]]", str#startLoc) then error "internal error: expected digit";
     i := startLoc; -- this points to the first char of the number
     while i < #str and match("[[:digit:]]", str#i) do i=i+1;
-    (value substring(str, startLoc, i-startLoc), i)
+    (value substring(str, startLoc, i-startLoc), noError, i)
     )
 
 parseJSONArray = method()
@@ -66,19 +84,21 @@ parseJSONArray(String, ZZ) := (str, startLoc) -> (
     i := startLoc + 1;
     result := [];
     i = skipWS(str, i);
-    if str#i === "]" then return (result, i+1);
+    if str#i === "]" then return (result, noError, i+1);
     obj := null;
+    err := null;
     while i < #str do (
-        (obj, i) = parseJSON(str,i);
+        (obj, err, i) = parseJSON(str,i);
+        if instance(err, String) then return(null, err, i);
         result = append(result, obj);
         i = skipWS(str,i);
         if str#i === "," then 
             i = i+1
         else if str#i === "]" then
-            return(result, i+1)
-        else error ("unexpected character "|str#i|" in array detected at location "|i);
+            return(result, null, i+1)
+        else return(null, errorString ("unexpected character "|str#i|" in array detected at location "|i), i);
         );
-    error("expected terminating ']' for array starting at location "|startLoc);
+    (null, errorString("expected terminating ']' for array starting at location "|startLoc), i);
     )
 
 parseJSONObject = method()
@@ -87,9 +107,10 @@ parseJSONObject(String, ZZ) := (str, startLoc) -> (
     i := startLoc + 1;
     result := {};
     i = skipWS(str, i);
-    if str#i === "}" then return (new HashTable from result, i+1);
+    if str#i === "}" then return (new HashTable from result, noError, i+1);
     keyString := null;
     obj := null;
+    err := null;
     while i < #str do (
         i = skipWS(str,i);
         if i == #str then break;
@@ -97,25 +118,28 @@ parseJSONObject(String, ZZ) := (str, startLoc) -> (
         -- then check for ":"
         -- then read the object
         -- finally: expect a "," or "}", as for arrays.
-        (keyString, i) = parseJSONString(str, i);
+        (keyString, err, i) = parseJSONString(str, i);
+        if instance(err, String) then return (null, err, i);
         i = skipWS(str,i);
         if i === #str or str#i =!= ":" then 
-            error ("parse error in JSON: expected a ':' at location "
-            |i|" in string");
-        i = i+1;
-        i = skipWS(str,i);
-        if i == #str then break;            
-        (obj, i) = parseJSON(str,i);
+            return (null, 
+                    errorString ("parse error in JSON: expected a ':' at location "
+                                 |i|" in string"),
+                    i);
+        i = skipWS(str,i+1);
+        if i == #str then break;
+        (obj, err, i) = parseJSON(str,i);
+        if instance(err, String) then return (null, err, i);
         result = append(result, keyString => obj);
         i = skipWS(str,i);
         if i == #str then break;
         if str#i === "," then 
             i = i+1
         else if str#i === "}" then
-            return(new HashTable from result, i+1)
-        else error ("unexpected character "|str#i|" in json detected at location "|i);
+            return(new HashTable from result, noError, i+1)
+        else return (null, errorString ("unexpected character "|str#i|" in json detected at location "|i), i);
         );
-    error("expected terminating '}' for json object starting at location "|startLoc);
+    (null, errorString("expected terminating '}' for json object starting at location "|startLoc), i)
     )
 
 {*
@@ -128,6 +152,17 @@ parseJSONObject(String, ZZ) := (str, startLoc) -> (
   parseJSON(///{"a":"b" ,"c3d4":[2,3,4]}///, 0)
   parseJSON(///{"a":
           "b", "c3d4":[2,3 ,4]}///, 0)
+
+  -- some errors:
+  str = ///{"a":"b" ,"c3d4":[2,3,4}///
+  parseJSON(str, 0)
+
+  str = ///{"a":"b" ,"c3d4":[2,3,4]     a}///
+  parseJSON(str, 0)
+
+  str = ///{"a":"b" ,"c3d4":[2,3,4]     ///
+  parseJSON(str, 0)
+  
 *}
 TEST ///
   restart
@@ -137,22 +172,21 @@ TEST ///
   assert(skipWS(" hi there",1) == 1)
   assert(skipWS(" hi \n there",3) == 6)
 
-  assert(parseJSONString("\"hi\"", 0) == ("hi", 4))
-  assert(parseJSONString("\"hi\"blah blah", 0) == ("hi", 4))
-  assert try (parseJSONString("\"hi", 1); false) else true
+  assert(parseJSONString("\"hi\"", 0) == ("hi", null, 4))
+  assert(parseJSONString("\"hi\"blah blah", 0) == ("hi", null, 4))
+  assert try (parseJSONString("\"hi", 1); false) else true -- "
   assert try (parseJSONString("hi", 0); false) else true
 
   parseJSONNumber("42", 0)
   parseJSONNumber("43+53", 0)
   parseJSONNumber("hi: 41", 4) 
   
-  assert(parseJSONArray("[1,2,3]", 0) === ([1,2,3], 7))
-  assert(parseJSONArray("[\"hi\",324,[1,2]]", 0) === (["hi", 324, [1,2]], 16))
+  assert(parseJSONArray("[1,2,3]", 0) === ([1,2,3], ,7))
+  assert(parseJSONArray("[\"hi\",324,[1,2]]", 0) === (["hi", 324, [1,2]], ,16))
   
-  assert(parseJSON("[2,3]",0) == ([2,3], 5))
+  assert(parseJSON("[2,3]",0) == ([2,3],, 5))
 
 ///
-    
 
 fromJSON = method()
 fromJSON String := (fileContents) -> (
