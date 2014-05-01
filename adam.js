@@ -32,22 +32,22 @@ $(document).ready(function() {
         'folder': 'tmp/files',
         'auto': false,
         'multi': false,
-	'removeCompleted' : true,
+	    'removeCompleted' : true,
         'onSelect': function(event, ID, fileObj) {
             file = fileObj.name;
-            //alert('The file ' + fileObj.name + ' was added to the queue.');
+            console.log('The file ' + fileObj.name + ' was added to the queue for uploading.');
         },
         'onComplete': function() {
-            //alert('Complete');
+            console.log('Complete uploadify, posting ');
             postForm("&upload_file=" + file);
             file = "";
         },
         'onCancel': function() {
             file = "";
         }, 
-	'onError': function() {
-	    alert( "ERROR");
-	}
+    	'onError': function() {
+    	    alert( "There was a problem uploading the file.");
+    	}
     });
     
     $('button').click(function() {
@@ -65,7 +65,7 @@ $(document).ready(function() {
 function postForm(file) {
     var formdata = $("form").serialize();
     formdata = formdata + file;
-    //alert(formdata);
+    console.log("PostForm of file: " + file + " with " + formdata);
     $.post("adam.pl", formdata, function(data) {
         $("#result").html(data);
         //alert(data);
