@@ -2,9 +2,13 @@ newPackage(
     "JSON",
     Version => "0.1", 
     Date => "",
-    Authors => {{Name => "", 
+    Authors => {{Name => "Franziska Hinkelmann", 
             Email => "", 
-            HomePage => ""}},
+            HomePage => ""},
+        {Name => "Mike Stillman", 
+            Email => "", 
+            HomePage => ""}
+        },
     Headline => "",
     DebuggingMode => true
     )
@@ -14,7 +18,7 @@ newPackage(
 -- (b) Macaulay2 object, which includes hash tables, lists, and basic elements
 -- (c) JSON format
 
-export {parseJSON, toJSON, fromJSON, toHashTable, fromHashTable, exampleJSON}
+export {parseJSON, toJSON, toHashTable, fromHashTable, exampleJSON}
 
 skipWS = method()
 skipWS(String, ZZ) := (str, startLoc) -> (
@@ -23,26 +27,37 @@ skipWS(String, ZZ) := (str, startLoc) -> (
     i
     )
 
-errorString = method()
-errorString String := (s) -> s
+errorObject = method()
+errorObject String := (s) -> new HashTable from {"error" => s}
 
 noError = null
 
 parseJSON = method()
+parseJSONWorker = method()
+
+parseJSON String := (str) -> (
+    (returnObject, returnErrorObject, loc) := parseJSONWorker(str, 0);
+    if returnErrorObject === null then 
+        returnObject
+    else
+        returnErrorObject
+    )
+
 -- takes a string, starting location
 -- returns a triple:
---   (object, errorString, endLoc)
+--   (object, errorObject, endLoc)
 -- where either:
---   (a) errorString == null and object is a valid object
+--   (a) errorObject == null and object is a valid object
 -- or
---   (b) errorString is a string, and object is null
+--   (b) errorObject is a hashtable with the one key "error", whose value is a string,
+--       (and object is undefined))
 -- Note: object == null is a valid output.
 -- All of the parseJSON* routines have this same return code
-parseJSON(String, ZZ) := (jsonString, startLoc) -> (
+parseJSONWorker(String, ZZ) := (jsonString, startLoc) -> (
     -- return (JSON, endLoc)
     loc := skipWS(jsonString, startLoc); -- loc will be the first location >= startLoc with jsonString#loc not whitespace.
     if loc == #jsonString then 
-        return (null, errorString"no object found", loc); -- look at the json spec.  Is this allowed?
+        return (null, errorObject"no object found", loc); -- look at the json spec.  Is this allowed?
     ch := jsonString#loc;
     if ch === "{" 
       then parseJSONObject(jsonString, loc)
@@ -54,7 +69,7 @@ parseJSON(String, ZZ) := (jsonString, startLoc) -> (
       then parseJSONNumber(jsonString, loc)
 --    else if match("[tfn]", ch) -- true, false, null
 --      then parseJSONName(jsonString, loc)
-    else (null, errorString("unexpected character at location " | loc), loc)
+    else (null, errorObject("unexpected character at location " | loc), loc)
     )
 
 parseJSONString = method()
@@ -65,7 +80,7 @@ parseJSONString(String, ZZ) := (str, startLoc) -> (
     while i < #str and not match(///"///, str#i) do -- " 
         i=i+1;
     if i == #str then 
-        (null, errorString("mismatched quotes in string, no matching end quote for quote at location "|startLoc), i)
+        (null, errorObject("mismatched quotes in string, no matching end quote for quote at location "|startLoc), i)
     else
         (substring(str, startLoc+1, i-startLoc-1), noError, i+1)
     )
@@ -88,17 +103,17 @@ parseJSONArray(String, ZZ) := (str, startLoc) -> (
     obj := null;
     err := null;
     while i < #str do (
-        (obj, err, i) = parseJSON(str,i);
-        if instance(err, String) then return(null, err, i);
+        (obj, err, i) = parseJSONWorker(str,i);
+        if err =!= null then return(null, err, i);
         result = append(result, obj);
         i = skipWS(str,i);
         if str#i === "," then 
             i = i+1
         else if str#i === "]" then
             return(result, null, i+1)
-        else return(null, errorString ("unexpected character "|str#i|" in array detected at location "|i), i);
+        else return(null, errorObject ("unexpected character "|str#i|" in array detected at location "|i), i);
         );
-    (null, errorString("expected terminating ']' for array starting at location "|startLoc), i);
+    (null, errorObject("expected terminating ']' for array starting at location "|startLoc), i);
     )
 
 parseJSONObject = method()
@@ -119,17 +134,17 @@ parseJSONObject(String, ZZ) := (str, startLoc) -> (
         -- then read the object
         -- finally: expect a "," or "}", as for arrays.
         (keyString, err, i) = parseJSONString(str, i);
-        if instance(err, String) then return (null, err, i);
+        if err =!= null then return (null, err, i);
         i = skipWS(str,i);
         if i === #str or str#i =!= ":" then 
             return (null, 
-                    errorString ("parse error in JSON: expected a ':' at location "
+                    errorObject ("parse error in JSON: expected a ':' at location "
                                  |i|" in string"),
                     i);
         i = skipWS(str,i+1);
         if i == #str then break;
-        (obj, err, i) = parseJSON(str,i);
-        if instance(err, String) then return (null, err, i);
+        (obj, err, i) = parseJSONWorker(str,i);
+        if err =!= null then return (null, err, i);
         result = append(result, keyString => obj);
         i = skipWS(str,i);
         if i == #str then break;
@@ -137,33 +152,33 @@ parseJSONObject(String, ZZ) := (str, startLoc) -> (
             i = i+1
         else if str#i === "}" then
             return(new HashTable from result, noError, i+1)
-        else return (null, errorString ("unexpected character "|str#i|" in json detected at location "|i), i);
+        else return (null, errorObject ("unexpected character "|str#i|" in json detected at location "|i), i);
         );
-    (null, errorString("expected terminating '}' for json object starting at location "|startLoc), i)
+    (null, errorObject("expected terminating '}' for json object starting at location "|startLoc), i)
     )
 
 {*
-  parseJSON(///{"a":"b"}///, 0)
-  parseJSON(///{"a":   "b"}///, 0)
-  parseJSON(///{"a":   "b",    "c3d4"  :  [2,3,4] }///, 0)
-  parseJSON(///{"a":"b","c3d4":[2,3,4]}///, 0)
-  parseJSON(///{"a" :"b","c3d4":[2,3,4]}///, 0)  
-  parseJSON(///{"a": "b","c3d4":[2,3,4]}///, 0)
-  parseJSON(///{"a":"b" ,"c3d4":[2,3,4]}///, 0)
-  parseJSON(///{"a":
-          "b", "c3d4":[2,3 ,4]}///, 0)
+  parseJSON ///{"a":"b"}///
+  parseJSON ///{"a":   "b"}///
+  parseJSON ///{"a":   "b",    "c3d4"  :  [2,3,4] }///
+  parseJSON ///{"a":"b","c3d4":[2,3,4]}///
+  parseJSON ///{"a" :"b","c3d4":[2,3,4]}///
+  parseJSON ///{"a": "b","c3d4":[2,3,4]}///
+  parseJSON ///{"a":"b" ,"c3d4":[2,3,4]}///
+  parseJSON ///{"a":
+          "b", "c3d4":[2,3 ,4]}///
 
   -- some errors:
   str = ///{"a":"b" ,"c3d4":[2,3,4}///
-  parseJSON(str, 0)
+  parseJSON str
 
   str = ///{"a":"b" ,"c3d4":[2,3,4]     a}///
-  parseJSON(str, 0)
+  parseJSON str
 
   str = ///{"a":"b" ,"c3d4":[2,3,4]     ///
-  parseJSON(str, 0)
-  
+  parseJSON str
 *}
+
 TEST ///
   restart
   debug loadPackage "JSON"
@@ -184,18 +199,9 @@ TEST ///
   assert(parseJSONArray("[1,2,3]", 0) === ([1,2,3], ,7))
   assert(parseJSONArray("[\"hi\",324,[1,2]]", 0) === (["hi", 324, [1,2]], ,16))
   
-  assert(parseJSON("[2,3]",0) == ([2,3],, 5))
+  assert(parseJSONWorker("[2,3]",0) == ([2,3],, 5))
 
 ///
-
-fromJSON = method()
-fromJSON String := (fileContents) -> (
-    fileContents = replace(":", " => ", fileContents);
-    fileContents = replace("\\{", " hashTable { ", fileContents);
-    value fileContents)
---fromJSON String := (fileContents) -> (
---    fileContents = replace(":", " => ", fileContents);
---    value fileContents)
 
 toJSON = method()
 toJSON Symbol := (a) -> toJSON toString a
@@ -215,6 +221,28 @@ toJSON HashTable := (H) -> (
     "{" | concatenate L | "}"
     )
 
+spaces = (n) -> concatenate(n:" ")
+
+{*
+prettyPrintJSON = method()
+ppJSON = method()
+ppJSON(Symbol, ZZ) := (a, nspaces) -> ppJSON(toString a, nspaces)
+ppJSON(String, ZZ) := (s, nspaces) -> (spaces nspaces) | "\"" | s | "\""
+ppJSON(Number, ZZ) := (n, nspaces) -> (spaces nspaces) | toString n
+ppJSON(BasicList, ZZ) := (L, nspaces) -> (
+    M := for a in L list ppJSON(a, 0);
+    (spaces nspaces) | "[" | concatenate between(",",M) | "]"
+    )
+prettyPrintJSON HashTable := (H) -> (
+    K := sort keys H;
+    L := for k in K list (
+        k1 := if instance(k, Number) then prettyPrintJSON toString k else toJSON k;
+        k1 | ": " | prettyPrintJSON (H#k)
+        );
+    L = between(",",L);
+    "{" | concatenate L | "}"
+    )
+*}
 
 toHashTable = method()
 toHashTable Thing := (s) -> s
@@ -294,23 +322,25 @@ SeeAlso
 
 doc ///
 Key
-    fromJSON
+    parseJSON
 Headline
     translate a string containing JSON format to a Macaulay2 object
 Usage
-    H = fromJSON str
+    H = parseJSON str
 Inputs
     str:String
       The input containing the JSON data
 Outputs
     H:
       The resulting value.  This is either a string, number, list or hash table.
-      If an error occurs, then what should we do?
+      If an error occurs, then the result is a hash table of the form
+      { "error" => error-string }
 Description
   Text
   Example
 Caveat
-    Currently, the JSON is not checked strongly.
+    Currently, the JSON does not handle all forms of integers or string escape characters.
+    Also it does not handle values true, false, null.
 SeeAlso
     toJSON
 ///
@@ -318,9 +348,9 @@ SeeAlso
 TEST ///
 -- test code and assertions here
 -- may have as many TEST sections as needed
-  H = fromJSON exampleJSON#0
+  H = parseJSON exampleJSON#0
   J = toJSON H  
-  H1 = fromJSON J
+  H1 = parseJSON J
   assert(H === H1)
   L1 = fromHashTable H
   H3 = toHashTable L1
