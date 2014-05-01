@@ -18,7 +18,7 @@ newPackage(
 -- (b) Macaulay2 object, which includes hash tables, lists, and basic elements
 -- (c) JSON format
 
-export {parseJSON, toJSON, toHashTable, fromHashTable, exampleJSON}
+export {parseJSON, toJSON, prettyPrintJSON, toHashTable, fromHashTable, exampleJSON}
 
 skipWS = method()
 skipWS(String, ZZ) := (str, startLoc) -> (
@@ -180,8 +180,10 @@ parseJSONObject(String, ZZ) := (str, startLoc) -> (
 *}
 
 TEST ///
+{*
   restart
-  debug loadPackage "JSON"
+  *}
+  debug needsPackage "JSON"
 
   assert(skipWS(" hi there",0) == 1)
   assert(skipWS(" hi there",1) == 1)
@@ -224,6 +226,12 @@ toJSON HashTable := (H) -> (
 spaces = (n) -> concatenate(n:" ")
 
 prettyPrintJSON = method()
+prettyPrintJSON HashTable := 
+prettyPrintJSON BasicList := 
+prettyPrintJSON Symbol := 
+prettyPrintJSON String := 
+prettyPrintJSON Number := (H) -> ppJSON(H,0)
+
 ppJSON = method()
 ppJSON(Symbol, ZZ) := (a, nindent) -> ppJSON(toString a, nindent)
 ppJSON(String, ZZ) := (s, nindent) -> "\"" | s | "\""
@@ -231,18 +239,17 @@ ppJSON(Number, ZZ) := (n, nindent) -> toString n
 ppJSON(BasicList, ZZ) := (L, nindent) -> (
     M := for a in L list ((spaces (nindent+2)) | ppJSON(a, nindent+2));
     Mstr := concatenate between(",\n",M);
-    --"[\n" | (spaces nindent) | concatenate between(",\n",M) | "]"
     "[\n" | Mstr | "\n" | (spaces nindent) | "]" 
     )
 ppJSON(HashTable, ZZ) := (H, nindent) -> (
-    -- NEEDS TO BE REWRITTEN TO HANDLE INDENTATION (M + F)
     K := sort keys H;
     L := for k in K list (
-        k1 := if instance(k, Number) then ppJSON toString k else toJSON k;
-        k1 | ": " | prettyPrintJSON (H#k)
+        k1 := if instance(k, Number) then ppJSON(toString k, 0) else ppJSON(k, 0);
+        (spaces nindent) | k1 | ": " | ppJSON (H#k, nindent+2)
         );
-    L = between(",",L);
-    "{" | concatenate L | "}"
+    L = between(",\n",L);
+    Lstr := concatenate L;
+    "{\n" | Lstr | "\n" | (spaces nindent) | "}"
     )
 
 TEST ///
@@ -251,9 +258,14 @@ TEST ///
 
   H = [3, 4, "hi there", 6]
   ppJSON(H, 4)
+  H = toHashTable { "a" => "b" }
+
   str = get "../../sampleJSON/sampleModelPrettyPrint.json"
   H = parseJSON str
-  ppJSON(H, 0)  
+  str1 = prettyPrintJSON H
+  H1 = parseJSON str1
+  str2 = prettyPrintJSON H1
+  assert(str1 == str2)
 ///
 
 toHashTable = method()
