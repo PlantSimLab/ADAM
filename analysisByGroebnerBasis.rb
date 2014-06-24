@@ -94,11 +94,11 @@ model = modelToHash(functionHash,n_nodes,p_value)
 modelFile = changeExtensionToJSON(functionFile)
 File.open(modelFile, 'w') { |file| file.write(JSON.pretty_generate(model)) }
 
-m2_result = `./lib/M2code/limitCycles.m2 #{modelFile} #{limCyc_length}`
+m2_result = `./lib/M2code/limitCycles #{modelFile} #{limCyc_length}`
 
-#puts "result from m2: " + m2_result
+puts "result from m2: " + m2_result
 result = JSON.parse(m2_result)
-components = result["output"]["components"]
+components = result["output"]["limitcycles"]["#{limCyc_length}"]
 numCycles = components.length()
 
 if numCycles == 0
@@ -113,8 +113,8 @@ else
   end
   puts " and they are: <br>"
   components.each { |c| 
-    cycle = c["steadyState"]
-    puts cycle.to_s + "<br>"
+    #cycle = c["steadyState"]
+    puts c.to_s + "<br>"
     }
   puts "<br>"
 end
