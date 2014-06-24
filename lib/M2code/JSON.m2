@@ -97,7 +97,7 @@ parseJSONArray = method()
 parseJSONArray(String, ZZ) := (str, startLoc) -> (
     if str#startLoc =!= "[" then error "internal error: expected '['";
     i := startLoc + 1;
-    result := [];
+    result := {};
     i = skipWS(str, i);
     if str#i === "]" then return (result, noError, i+1);
     obj := null;
@@ -253,7 +253,9 @@ ppJSON(HashTable, ZZ) := (H, nindent) -> (
     )
 
 TEST ///
+{*
   restart
+*}
   debug loadPackage "JSON"
 
   H = [3, 4, "hi there", 6]
@@ -342,6 +344,10 @@ Headline
 Description
 Caveat
 SeeAlso
+  parseJSON
+  toJSON
+  prettyPrintJSON
+  fromHashTable  
 ///
 
 doc ///
@@ -378,7 +384,7 @@ TEST ///
   assert(H === H1)
   L1 = fromHashTable H
   H3 = toHashTable L1
-  H3 === H1 -- false
+  H3 === H1 -- ok now: we transfer JSON arrays with brackets, to M2 arrays with braces
 ///
 
 end
@@ -402,3 +408,10 @@ L2 === oo
 
 H = fromJSON exampleJSON#0
 toJSON oo
+
+restart
+needsPackage "Parsing"
+f = charAnalyzer ///{ "a" : "bcd" }///
+f()
+P = NNParser : charAnalyzer
+P "  12345  78"
