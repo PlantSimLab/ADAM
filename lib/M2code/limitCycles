@@ -4,8 +4,7 @@ path = prepend(currentDirectory()|"lib/M2code", path)
 needsPackage "ADAMModel"
 needsPackage "JSON"
 
-helpString = ///
-usage: limitCycles <json model file> <cycleLength1> <cycleLength2> ...
+helpString = ///usage: limitCycles <json model file> <cycleLength1> <cycleLength2> ...
 where
   json model file: a model file which includes polynomials 
       (not just transition tables)

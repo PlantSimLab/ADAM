@@ -1,14 +1,18 @@
 newPackage(
-        "ADAMModel",
-        Version => "0.1", 
-        Date => "",
-        Authors => {{Name => "", 
-                  Email => "", 
-                  HomePage => ""}},
-        Headline => "ADAM Model management",
-        PackageExports => {"solvebyGB"},
-        DebuggingMode => true
-        )
+    "ADAMModel",
+    Version => "0.1", 
+    Date => "",
+    Authors => {{Name => "Franziska Hinkelmann", 
+            Email => "", 
+            HomePage => ""},
+        {Name => "Mike Stillman", 
+            Email => "", 
+            HomePage => ""}
+        },
+    Headline => "ADAM Model management",
+    PackageExports => {"solvebyGB"},
+    DebuggingMode => true
+    )
 
 export {"Model", "polynomials", "findLimitCycles"}
 
@@ -18,7 +22,9 @@ vars Model := (M) -> (
     M#"variables"/(x -> x#"id")//toList
     )
 char Model := (M) -> (
-    M#"variables"/(x -> #x#"states")//max
+     p := M#"variables"/(x -> #x#"states")//max;
+     while not isPrime p do p = p+1;
+     p
     )
 ring Model := (M) -> (
     varnames := vars M;
@@ -61,11 +67,12 @@ TEST ///
   needsPackage "ADAMModel"
   needsPackage "JSON"
 
-  str = get "~/Sites/ADAM/sampleJSON/sampleModel.json"
+  str = exampleJSON#0
   M = parseJSON str
   M = new Model from M#"model"
-  findLimitCycles(M,{1,2,3})
-
+  result = findLimitCycles(M,{1,2,3})
+  ans = new HashTable from {1 => [[[0,1,1]]], 2 => [], 3 => []}
+  assert(result === ans)
 ///
 
 end
