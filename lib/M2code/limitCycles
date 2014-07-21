@@ -82,8 +82,7 @@ if not fileExists fileName then (
     )
 --------------------------------
 
-M = parseJSON get fileName
-M = new Model from M#"model"
+M = parseModel get fileName
 resultLimitCycles = findLimitCycles(M,limitCycleLengths)
 print toJSON toHashTable {"output" => {"limitcycles" => resultLimitCycles}}
 
@@ -91,5 +90,5 @@ end
 
 restart
 -- example:
-./limitCycles.m2 ~/Sites/ADAM/sampleJSON/sampleModel.json 1 2 3
+./limitCycles ~/Sites/ADAM/sampleJSON/sampleModel.json 1 2 3
 
