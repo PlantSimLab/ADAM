@@ -1,0 +1,95 @@
+#!/usr/bin/env M2 --script
+
+path = prepend(currentDirectory()|"lib/M2code", path)
+needsPackage "ADAMModel"
+needsPackage "JSON"
+
+helpString = ///usage: limitCycles <json model file> <cycleLength1> <cycleLength2> ...
+where
+  json model file: a model file which includes polynomials 
+      (not just transition tables)
+  <cycleLength i> a positive integer, 
+      one of the lengths of the limit cycles to find
+      (so the cycle length for limit points is 1).
+output: a JSON description of the limit cycles found, 
+  in the following form (no ...'s appear though!):
+  {"output": {
+        "limitcycles": {
+            "1" : [ [[0,1,2]], ....],
+            "2" : [ [[0,1,2],[1,2,3]], ... ]
+            }
+        }
+  }    
+example call:
+  ./limitCycles ~/Sites/ADAM/sampleJSON/sampleModel.json 1 2 3
+example input file:
+    {"model": {
+        "name": "Sample for testing",
+        "description": "a very simple model",
+        "version": "1.0",
+        "variables": [
+            {
+                "name": "variable1",
+                "id": "x1",
+                "states": ["0", "1"]
+            },
+            {
+                "name": "variable2",
+                "id": "x2",
+                "states": ["0", "1"]
+            },
+            {
+                "name": "variable3",
+                "id": "x3",
+                "states": ["0", "1"]
+            }
+        ],
+        "updateRules": {
+            "x1": { 
+                "possibleInputVariables": ["x1","x2"],
+                "polynomialFunction": "x1*x2"
+            },
+            "x2": { 
+                "possibleInputVariables": ["x1","x2"],
+                "polynomialFunction": "x1+1"
+            },
+            "x3": { 
+                "possibleInputVariables": ["x1","x2"],
+                "polynomialFunction": "x1+x2"
+            }
+        }
+    }}
+example output:
+  {"output": {"limitcycles": {"1": [[[0,1,1]]],"2": [],"3": []}}}
+///
+
+if #scriptCommandLine < 3 then (
+    stderr << helpString;
+    exit(1);
+    )
+
+fileName = scriptCommandLine#1
+limitCycleLengths = for i from 2 to #scriptCommandLine -1 list value scriptCommandLine#i
+
+if not all(limitCycleLengths, x -> instance(x, ZZ) and x >= 1) then (
+    stderr << "expected the limit cycle lengths to be positive integers" << endl;
+    exit(2);
+    )
+
+if not fileExists fileName then (
+    stderr << "internal error: cannot find input file: " << fileName << endl;
+    exit(2);
+    )
+--------------------------------
+
+M = parseJSON get fileName
+M = new Model from M#"model"
+resultLimitCycles = findLimitCycles(M,limitCycleLengths)
+print toJSON toHashTable {"output" => {"limitcycles" => resultLimitCycles}}
+
+end
+
+restart
+-- example:
+./limitCycles.m2 ~/Sites/ADAM/sampleJSON/sampleModel.json 1 2 3
+

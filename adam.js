@@ -32,22 +32,22 @@ $(document).ready(function() {
         'folder': 'tmp/files',
         'auto': false,
         'multi': false,
-	'removeCompleted' : true,
+	    'removeCompleted' : true,
         'onSelect': function(event, ID, fileObj) {
             file = fileObj.name;
-            //alert('The file ' + fileObj.name + ' was added to the queue.');
+            console.log('The file ' + fileObj.name + ' was added to the queue for uploading.');
         },
         'onComplete': function() {
-            //alert('Complete');
+            console.log('Complete uploadify, posting ');
             postForm("&upload_file=" + file);
             file = "";
         },
         'onCancel': function() {
             file = "";
         }, 
-	'onError': function() {
-	    alert( "ERROR");
-	}
+    	'onError': function() {
+    	    alert( "There was a problem uploading the file.");
+    	}
     });
     
     $('button').click(function() {
@@ -65,7 +65,7 @@ $(document).ready(function() {
 function postForm(file) {
     var formdata = $("form").serialize();
     formdata = formdata + file;
-    //alert(formdata);
+    console.log("PostForm of file: " + file + " with " + formdata);
     $.post("adam.pl", formdata, function(data) {
         $("#result").html(data);
         //alert(data);
@@ -98,10 +98,6 @@ function changeChoiceBox(choiceBox) {
         $('.option').show();
         var modelType = $("input[name='inputType']:checked").val();
         sampleInput = changeModelType(modelType);
-    } else if (choiceBox == "control") {
-        $('#control').show();
-        $('.pvalue').show();
-        sampleInput = 'f1 = x13*x15*x18*x19*x20+x13*x15*x18*x19+x13*x15*x18*x20+x13*x15*x19*x20+x13*x18*x19*x20+x15*x18*x19*x20+x13*x15*x18+x13*x15*x19+x13*x18*x19+x15*x18*x19+x13*x15*x20+x13*x18*x20+x15*x18*x20+x13*x19*x20+x15*x19*x20+x18*x19*x20+x13*x15+x13*x18+x15*x18+x13*x19+x15*x19+x18*x19+x13*x20+x15*x20+x18*x20+x19*x20+x13+x15+x18+x19+x20\nf2 =  x3*x4*x5+x3*x4+x4*x5+x4\nf3 = x2*x10*x12+x2*x10+x2*x12+x10*x12+x2+x10+x12+1\nf4 = x1*x9*x10*x12+x1*x9*x12+x9*x10*x12\nf5 = x2*x6*x10*x12+x2*x6*x10+x2*x6*x12+x2*x10*x12+x6*x10*x12+x2*x6+x2*x10+x6*x10+x2*x12+x6*x12+x10*x12+x2+x6+x10+x12+1\nf6 = x3*x5*x7+x3*x7+x5*x7+x7\nf7 = x12\nf8 = x2*x11\nf9 = x1*x10+x1+x10\nf10 = x13*x15*x18*x19*x20+x13*x15*x18*x19+x13*x15*x18*x20+x13*x15*x19*x20+x13*x18*x19*x20+x15*x18*x19*x20+x13*x15*x18+x13*x15*x19+x13*x18*x19+x15*x18*x19+x13*x15*x20+x13*x18*x20+x15*x18*x20+x13*x19*x20+x15*x19*x20+x18*x19*x20+x13*x15+x13*x18+x15*x18+x13*x19+x15*x19+x18*x19+x13*x20+x15*x20+x18*x20+x19*x20+x13+x15+x18+x19+x20\nf11 = x4\nf12 = x1*x9*x10+x1*x9+x1*x10+x9*x10+x1+x9+x10\nf13 = x9*x10*x18+x9*x10+x9*x18+x10*x18+x9+x10\nf14 = 1\nf15 = x14\nf16 = x14\nf17 = x14\nf18 = x16*x17\nf19 = x15*x16\nf20 = x15*x17';
     } else {
         jQuery.error = console.error;
         jquery.error("wrong choice");

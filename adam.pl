@@ -17,7 +17,7 @@ $p_value          = param('p_value');
 $k_value          = param('k_bound');
 $upload_file      = param('upload_file');
 $option_box       = "";
-$choice_box       = param('choice_box');         # build, analyze, control
+$choice_box       = param('choice_box');         # build, analyze
 $format_box       = param('inputType');
 $continuous       = param('continuous');
 $anaysis_method = param('anaysis_method');
@@ -363,13 +363,6 @@ if ($DEBUG) {
 
 given ($choice_box) {
 
-  when (/control/) {
-    print "We are implementing Heuristic $format_box <br>"
-      if ($DEBUG);
-    $result = `ruby parseGA.rb "$p_value" "$weights" "$dreamss" "$filename"`; #"ruby parseGA.rb \"$p_value\" \"$weights\" \"$dreamss\" \"$filename\""
-    print "ruby parseGA.rb \"$p_value\" \"$weights\" \"$dreamss\" \"$filename\"" if ($DEBUG);
-  }
-
   when (/build/) {
     
     #$DEBUG =1;
@@ -622,8 +615,8 @@ if ( $anaysis_method eq "Conjunctive" ) {
       "<br><A href=\"$dpGraph.$DGformat\" target=\"_blank\"><font color=\"#226677\"><i>Click to view the dependency graph.</i></font></A><br>";
   }
   
-  #print "ruby adam_conjunctive.rb $n_nodes $p_value $dpGraph.dot<br>" ;
-  system("ruby adam_conjunctive.rb $n_nodes $p_value $dpGraph.dot");
+  #print "ruby conjunctiveNetwork.rb $n_nodes $p_value $dpGraph.dot<br>" ;
+  system("ruby conjunctiveNetwork.rb $n_nodes $p_value $dpGraph.dot");
 }
 elsif ( $anaysis_method eq "Algorithms" ) {
   $limCyc_length = 1;
@@ -643,13 +636,10 @@ elsif ( $anaysis_method eq "Algorithms" ) {
   }
   set_update_type();
 
-  print "ruby adam_largeNetwork.rb $n_nodes $p_value $filename $limCyc_length" if ($DEBUG);
+  print "ruby analysisByGroebnerBasis.rb $n_nodes $p_value $filename $limCyc_length" if ($DEBUG);
 
-  $result = `ruby adam_largeNetwork.rb $n_nodes $p_value $filename $limCyc_length`;
+  $result = `ruby analysisByGroebnerBasis.rb $n_nodes $p_value $filename $limCyc_length`;
   print $result;
-}
-elsif ( $format_box eq "Control" ) {
-  # we do nothing
 }
 elsif ( $anaysis_method eq "Simulation" ) {
   if ( $p_value && $n_nodes ) {
