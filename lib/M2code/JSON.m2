@@ -217,7 +217,8 @@ toJSON BasicList := (L) -> (
     "[" | concatenate between(",",M) | "]"
     )
 toJSON HashTable := (H) -> (
-    K := sort keys H;
+    keysH := delete(symbol cache, keys H);
+    K := sort keysH;
     L := for k in K list (
         k1 := if instance(k, Number) then toJSON toString k else toJSON k;
         k1 | ": " | toJSON (H#k)
@@ -240,12 +241,21 @@ ppJSON(Symbol, ZZ) := (a, nindent) -> ppJSON(toString a, nindent)
 ppJSON(String, ZZ) := (s, nindent) -> "\"" | s | "\""
 ppJSON(Number, ZZ) := (n, nindent) -> toString n
 ppJSON(BasicList, ZZ) := (L, nindent) -> (
-    M := for a in L list ((spaces (nindent+2)) | ppJSON(a, nindent+2));
-    Mstr := concatenate between(",\n",M);
-    "[\n" | Mstr | "\n" | (spaces nindent) | "]" 
+    if all(L, a -> instance(a, Number) or instance(a, String)) then (
+        -- place this all on one line
+        M := for a in L list ppJSON(a, nindent+2);
+        Mstr := concatenate between(",",M);
+        "[" | Mstr | "]"
+        )
+    else (
+        M = for a in L list ((spaces (nindent+2)) | ppJSON(a, nindent+2));
+        Mstr = concatenate between(",\n",M);
+        "[\n" | Mstr | "\n" | (spaces nindent) | "]" 
+        )
     )
 ppJSON(HashTable, ZZ) := (H, nindent) -> (
-    K := sort keys H;
+    keysH := delete(symbol cache, keys H);
+    K := sort keysH;
     L := for k in K list (
         k1 := if instance(k, Number) then ppJSON(toString k, 0) else ppJSON(k, 0);
         (spaces nindent) | k1 | ": " | ppJSON (H#k, nindent+2)

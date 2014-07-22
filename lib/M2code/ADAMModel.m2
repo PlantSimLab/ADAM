@@ -14,9 +14,31 @@ newPackage(
     DebuggingMode => true
     )
 
-export {"Model", "polynomials", "findLimitCycles", "parseModel", "checkModel"}
+export {"Model", "model", "polynomials", "findLimitCycles", "parseModel", "checkModel",
+    "addPolynomials",
+    "polyFromTransitionTable"}
 
 Model = new Type of HashTable
+
+model = method(Options => {
+        "description" => "", 
+        "version" => "0.0",
+        "variables" => null,
+        "updateRules" => null
+        })
+model String := opts -> (name) -> (
+    model := new Model from {
+        {"name", name},
+        {"description", ""},
+        {"version", opts#"version"},
+        {"variables", opts#"variables"},
+        {"updateRules", opts#"updateRules"},
+        symbol cache => new CacheTable
+        };
+    checkModel model;
+    model.cache.ring = ring model;
+    model
+    )
 vars Model := (M) -> (
     -- returns a list of strings
     M#"variables"/(x -> x#"id")//toList
@@ -27,11 +49,13 @@ char Model := (M) -> (
      p
     )
 ring Model := (M) -> (
-    varnames := vars M;
-    p := char M;
-    R1 := ZZ/p[varnames];
-    I1 := ideal for x in gens R1 list x^p-x;
-    R1/I1
+    if not M.cache.?ring then M.cache.ring = (
+        varnames := vars M;
+        p := char M;
+        R1 := ZZ/p[varnames];
+        I1 := ideal for x in gens R1 list x^p-x;
+        R1/I1);
+    M.cache.ring
     )
 
 checkModel = method()
@@ -56,10 +80,16 @@ parseModel = method()
 parseModel String := (str) -> (
     M := parseJSON str;
     if not M#?"model" then error "error: string is not the JSON for a Model";
-    model := new Model from M#"model";
-    if not checkModel model then error "error: string has incorrect format for a Model";
-    model
+    mod := M#"model";
+    model(mod#"name", 
+        "description" => mod#"description",
+        "version" => mod#"version",
+        "variables" => mod#"variables",
+        "updateRules" => mod#"updateRules"
+        )
     )
+
+toJSON Model := (M) -> toJSON new HashTable from {("model", new HashTable from M)}
 
 polynomials = method()
 polynomials(Model,Ring) := (M, R) -> (
@@ -70,6 +100,7 @@ polynomials(Model,Ring) := (M, R) -> (
 polynomials(Model) := (M) -> (
     R := ring M;
     varnames := vars M;
+    use R;
     matrix(R, {for x in varnames list value M#"updateRules"#x#"polynomialFunction"})
     )
 
@@ -88,6 +119,59 @@ findLimitCycles(Model, List) := (M, limitCycleLengths) -> (
     hashTable H
     )
 
+polyFromTransitionTable = method()
+polyFromTransitionTable(List, List, Ring) := (inputvars, transitions, R) -> (
+    p := char R;
+    n := #inputvars;
+    X := set (0..p-1);
+    inputs := sort toList X^**n;
+    sum for t in transitions list (
+        input := t#0; -- a list
+        output := t#1; -- a value
+        output * product for i from 0 to n-1 list (
+            x := R_(inputvars#i);
+            1 - (x-input#i)^(p-1)
+        ))
+    )
+
+attachToUpdate = method()
+attachToUpdate(Model, Function) := (M, fcn) -> (
+    -- M is a model
+    -- fcn is a function which takes (M, xi, hashtable), and returns something of the form
+    --  "newFieldName" => String
+    -- for example: fcn might return "polynomialFunction" => "x2+x3*x4".
+    -- Action: a model M is returned, which for each variable, has its update table info modified by
+    --   adding in this field and value.
+    newUpdateRules := hashTable for xi in vars M list (
+        H := M#"updateRules"#xi;
+        newpair := fcn(M, xi, H);
+        xi => hashTable append(pairs H, newpair)
+        );
+    Mnew := model(M#"name", 
+        "description" => M#"description",
+        "version" => M#"version",
+        "variables" => M#"variables",
+        "updateRules" => newUpdateRules);
+    Mnew.cache.ring = ring M;
+    Mnew
+    )
+
+addstupid = (M) -> (
+    fcn := (M,xi,H) -> ("stupid" => xi);
+    attachToUpdate(M, fcn)
+    )
+    
+addPolynomials = method()
+addPolynomials Model := (M) -> (
+    fcn := (M,xi,H) -> (
+        g := polyFromTransitionTable(  
+            H#"possibleInputVariables",
+            H#"transitionTables",
+            ring M);
+        "polynomialFunction" => toString g
+        );
+    attachToUpdate(M, fcn)
+    )
 {*
 --L = {"x3", "x1"}
 --p = 2
@@ -120,9 +204,6 @@ TEST ///
 
   str = exampleJSON#0
 
-  M = parseJSON str
-  M = new Model from M#"model"
-  
   M = parseModel str
   result = findLimitCycles(M,{1,2,3})
   ans = new HashTable from {1 => [[[0,1,1]]], 2 => [], 3 => []}
@@ -189,6 +270,23 @@ TEST ///
 TEST ///
   debug needsPackage "ADAMModel"
   model = parseModel sample2
+///
+
+///
+  restart
+  debug needsPackage "ADAMModel"
+  str = get "../../exampleJSON/SecondVersion1-Model.json"
+  M = parseModel str
+  prettyPrintJSON M
+  M1 = addPolynomials M
+  prettyPrintJSON M1
+
+  findLimitCycles(M1, {1,2,3})
+  toJSON M1
+  polynomials M1
+  R = ring M
+  R === ring M
+
 ///
 end
 

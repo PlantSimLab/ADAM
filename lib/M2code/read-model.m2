@@ -109,6 +109,50 @@ readModelFile(String,String) := (prefix,filename) -> (
         ));
     V1
     )
+
+getVariables = method()
+getVariables List := (M) -> (
+    for v in M list (
+        states := v#"States";
+        nstates := states#0;
+        states = drop(states, 1);
+        if #states != nstates then error("number of states expected("|toString nstates|") is wrong, in "|toString states);
+        new HashTable from {
+            "name" => if v#?"AbrevName" then v#"AbrevName" else 
+                      if v#?"Name" then v#"Name" else
+                      if v#?"FullName" then v#"FullName" else error ("can't find name in "|toString v),
+            "id" => v#"ID",
+            "states" => states
+            }
+        )
+    )
+getUpdateRules = method()
+getUpdateRules List := (M) -> (
+    -- first, we need the list of ID's
+    idList := hashTable(M/(v -> v#"ID" => v));
+    hashTable for idv in keys idList list (
+        table := idList#idv#"Transition"#"TransitionTable";
+        tab := for v in entries table list [new Array from drop(v,-1), v#-1];
+        idv => 
+        new HashTable from {
+            -- the last entry in this list is the output variable, not the possible inputs
+            "possibleInputVariables" => drop(idList#idv#"Transition"#"InputIDs", -1),
+            "transitionTables" => tab
+            })
+    )
+
+needsPackage "ADAMModel"
+toADAMModel = method()
+toADAMModel(List, String, String) := (M, name, version) -> (
+    -- M is the output of "readModelFile"
+    -- first, make the "variables" list.  Each entry has 3 parts: "name", "id", "states"
+    model(name, 
+        "description" => "",
+        "version" => version,
+        "variables" => getVariables M,
+        "updateRules" => getUpdateRules M
+        )
+    )
 end
 
 restart
@@ -116,8 +160,15 @@ load "read-model.m2"
 pre = "~/src/reinhard/plantsimlab-sample-models/Models/"
 
 H = readModelFile(pre|"SecondVersion1/", "SecondVersion1.csv")
+  M = toADAMModel(H, "SecondVersion1", "1.0")
 H = readModelFile(pre|"SimplestVersion1/", "SimplestVersion1.csv")
+  M = toADAMModel(H, "SimplestVersion1", "1.0")
 H = readModelFile(pre|"ThirdVersion1/", "ThirdVersion1.csv")
+  M = toADAMModel(H, "ThirdVersion1", "1.0")
 H = readModelFile(pre|"demo/", "demo.csv")
+  M = toADAMModel(H, "demo", "1.0")
 H = readModelFile(pre|"lac_operon_reduced/", "lac_operon_reduced.csv")
+  M = toADAMModel(H, "lac_operon_reduced", "1.0")
 H = readModelFile(pre|"lac_operon_full/", "lac_operon_full.csv")
+  M = toADAMModel(H, "lac_operon_full", "1.0")
+
