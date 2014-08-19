@@ -65,7 +65,7 @@ parseJSONWorker(String, ZZ) := (jsonString, startLoc) -> (
       then parseJSONArray(jsonString, loc)
     else if ch === "\""  -- " to fix syntax coloring!
       then parseJSONString(jsonString, loc)
-    else if match("[[:digit:]]", ch) 
+    else if match("[-[:digit:]]", ch) 
       then parseJSONNumber(jsonString, loc)
 --    else if match("[tfn]", ch) -- true, false, null
 --      then parseJSONName(jsonString, loc)
@@ -87,17 +87,20 @@ parseJSONString(String, ZZ) := (str, startLoc) -> (
 
 parseJSONNumber = method()
 parseJSONNumber(String, ZZ) := (str, startLoc) -> (
+    neg := false;
+    if str#startLoc == "-" then (neg = true; startLoc = startLoc+1);
     if not match("[[:digit:]]", str#startLoc) then error "internal error: expected digit";
     i := startLoc; -- this points to the first char of the number
     while i < #str and match("[[:digit:]]", str#i) do i=i+1;
-    (value substring(str, startLoc, i-startLoc), noError, i)
+    num := value substring(str, startLoc, i-startLoc);
+    (if neg then -num else num, noError, i)
     )
 
 parseJSONArray = method()
 parseJSONArray(String, ZZ) := (str, startLoc) -> (
     if str#startLoc =!= "[" then error "internal error: expected '['";
     i := startLoc + 1;
-    result := {};
+    result := {}; -- if we want brace type lists...
     i = skipWS(str, i);
     if str#i === "]" then return (result, noError, i+1);
     obj := null;
@@ -198,10 +201,10 @@ TEST ///
   parseJSONNumber("43+53", 0)
   parseJSONNumber("hi: 41", 4) 
   
-  assert(parseJSONArray("[1,2,3]", 0) === ([1,2,3], ,7))
-  assert(parseJSONArray("[\"hi\",324,[1,2]]", 0) === (["hi", 324, [1,2]], ,16))
+  assert(parseJSONArray("[1,2,3]", 0) === ({1,2,3}, ,7))
+  assert(parseJSONArray("[\"hi\",324,[1,2]]", 0) === ({"hi", 324, {1,2}}, ,16))
   
-  assert(parseJSONWorker("[2,3]",0) == ([2,3],, 5))
+  assert(parseJSONWorker("[2,3]",0) == ({2,3},, 5))
 
 ///
 
@@ -214,7 +217,8 @@ toJSON BasicList := (L) -> (
     "[" | concatenate between(",",M) | "]"
     )
 toJSON HashTable := (H) -> (
-    K := sort keys H;
+    keysH := delete(symbol cache, keys H);
+    K := sort keysH;
     L := for k in K list (
         k1 := if instance(k, Number) then toJSON toString k else toJSON k;
         k1 | ": " | toJSON (H#k)
@@ -237,12 +241,21 @@ ppJSON(Symbol, ZZ) := (a, nindent) -> ppJSON(toString a, nindent)
 ppJSON(String, ZZ) := (s, nindent) -> "\"" | s | "\""
 ppJSON(Number, ZZ) := (n, nindent) -> toString n
 ppJSON(BasicList, ZZ) := (L, nindent) -> (
-    M := for a in L list ((spaces (nindent+2)) | ppJSON(a, nindent+2));
-    Mstr := concatenate between(",\n",M);
-    "[\n" | Mstr | "\n" | (spaces nindent) | "]" 
+    if all(L, a -> instance(a, Number) or instance(a, String)) then (
+        -- place this all on one line
+        M := for a in L list ppJSON(a, nindent+2);
+        Mstr := concatenate between(",",M);
+        "[" | Mstr | "]"
+        )
+    else (
+        M = for a in L list ((spaces (nindent+2)) | ppJSON(a, nindent+2));
+        Mstr = concatenate between(",\n",M);
+        "[\n" | Mstr | "\n" | (spaces nindent) | "]" 
+        )
     )
 ppJSON(HashTable, ZZ) := (H, nindent) -> (
-    K := sort keys H;
+    keysH := delete(symbol cache, keys H);
+    K := sort keysH;
     L := for k in K list (
         k1 := if instance(k, Number) then ppJSON(toString k, 0) else ppJSON(k, 0);
         (spaces nindent) | k1 | ": " | ppJSON (H#k, nindent+2)
@@ -256,13 +269,14 @@ TEST ///
 {*
   restart
 *}
-  debug loadPackage "JSON"
+  debug needsPackage "JSON"
 
   H = [3, 4, "hi there", 6]
   ppJSON(H, 4)
   H = toHashTable { "a" => "b" }
 
-  str = get "../../sampleJSON/sampleModelPrettyPrint.json"
+  str = exampleJSON#1;
+  --str = get (currentDirectory()|"JSON/sampleModelPrettyPrint.json");
   H = parseJSON str
   str1 = prettyPrintJSON H
   H1 = parseJSON str1
@@ -332,7 +346,65 @@ exampleJSON = {///
         }
     }
 }}
-///
+///,
+///{
+  "model": {
+    "name": "Sample for testing",
+    "description": "most basic file to get started with JSON between adam_largeNetworks.rb and M2 solver",
+    "version": "1.0",
+    "variables": [
+      {
+        "name": "variable1",
+        "id": "x1",
+        "states": [
+          "0",
+          "1"
+        ]
+      },
+      {
+        "name": "variable2",
+        "id": "x2",
+        "states": [
+          "0",
+          "1"
+        ]
+      },
+      {
+        "name": "variable3",
+        "id": "x3",
+        "states": [
+          "0",
+          "1"
+        ]
+      }
+    ],
+    "updateRules": {
+      "x1": {
+        "possibleInputVariables": [
+          "x1",
+          "x2"
+        ],
+        "polynomialFunction": "x1*x2"
+      },
+      "x2": {
+        "possibleInputVariables": [
+          "x1",
+          "x2"
+        ],
+        "polynomialFunction": "x1+1"
+      },
+      "x3": {
+        "possibleInputVariables": [
+          "x1",
+          "x2"
+        ],
+        "polynomialFunction": "x1+x2"
+      }
+    }
+  }
+}
+///,
+///{"nodes":[{"id":0,  "shortname":"CCC","fullname":"CCC_fullname","numstates":"4","color":"3","shape":"0","x":553,"y":316},{"id":1,"shortname":"BBB","fullname":"BBB_fullname","numstates":"3","color":"13","shape":"1","x":275,"y":318},{"id":2,"shortname": "AAA","fullname":"AAA_fullname","numstates":"2","color":"7","shape":"2","x":421,"y":95}],"edges":[{"edgeid":0,"edgename":"Activator","edgetype":1,"startnode":2,"endnode":1,"timescale":"normal"},{"edgeid":1,"edgename":"Inhibitor","edgetype":4,"startnode":0,"endnode":2,"timescale":"normal"},{"edgeid":2,"edgename":"","edgetype":1,"startnode":1,"endnode":0,"timescale":"normal"}],"nodeStates":[["low","low-med","med-high","high"],["low","med","high"],["low","high"]],"inEdgesOf":[[2],[0],[1]],"sourceNodesOf":[[1],[2],[0]],"options":{"stagePositionX":29,"stagePositionY":18},"eachTransitDiffArray":[{"0":[0,0,0,0],"1":[0,1,1,0],"2":[0,2,2,0],"3":[1,0,1,1],"4":[1,1,2,1],"5":[1,2,2,1],"maxrow":6},{"0":[0,0,0,0],"1":[0,1,1,0],"2":[1,0,0,-1],"3":[1,1,0,-1],"4":[2,0,0,-2],"5":[2,1,0,-2],"6":[3,0,0,-3],"7":[3,1,0,-3],"maxrow":8},{"0":[0,0,0,0],"1":[0,1,1,0],"2":[0,2,2,0],"3":[0,3,3,0],"4":[1,0,1,1],"5":[1,1,2,1],"6":[1,2,3,1],"7":[1,3,3,1],"8":[2,0,2,2],"9":[2,1,3,2],"10":[2,2,3,2],"11":[2,3,3,2],"maxrow":12}],"experiments":[]}///
 }
 beginDocumentation()
 
@@ -415,3 +487,11 @@ f = charAnalyzer ///{ "a" : "bcd" }///
 f()
 P = NNParser : charAnalyzer
 P "  12345  78"
+
+restart
+needsPackage "JSON"
+S = get "example.json"
+-- this one still doesn't parse:
+parseJSON exampleJSON#2
+
+parseJSON "[1,0,0,-1]"

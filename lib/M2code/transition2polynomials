@@ -1,0 +1,36 @@
+#!/usr/bin/env M2 --script
+
+path = prepend(currentDirectory()|"lib/M2code", path)
+debug needsPackage "ADAMModel"
+needsPackage "JSON"
+
+helpString = ///usage: transition2polynomials <json-model-file >output-model
+where the input is taken from stdin:
+  json-model-file: a model file which includes transition tables
+and the out is written to stdout:
+  output-model: the same model (in json format), 
+    with polynomials computed from the transition tables
+example call:
+  ./transition2polynomials <~/Sites/ADAM/sampleJSON/sampleModel.json 
+example input file:
+example output:
+///
+
+if #scriptCommandLine > 1 then (
+    stderr << helpString;
+    exit(1);
+    )
+
+--------------------------------
+
+M = parseModel get stdio
+-- CHECK: has transition tables
+M1 = addPolynomials M
+print prettyPrintJSON M1
+
+end
+
+restart
+-- example:
+./transition2polynomials <~/Sites/ADAM/exampleJSON/SecondVersion1-Model.json
+
