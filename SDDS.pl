@@ -1,16 +1,21 @@
 # Authors: David Murrugarra & Seda Arat
 # Name: Script for Stochastic Discrete Dynamical Systems (SDDS)
-# Revision Date: July 20, 2014
+# Revision Date: August 19, 2014
 
 #!/usr/bin/perl
 
 use strict;
 use warnings;
 
-# necessary modules to be installed before running the code
+############################################################
+###### REQUIRED PERL MODULES before running the code #######
+############################################################
+
 use Getopt::Euclid;
 use JSON::Parse;
 use Data::Dumper;
+
+############################################################
 
 =head1 NAME
 
@@ -50,7 +55,7 @@ network-file.type: readable
 
 =item -o[utput-matrix] <output-matrix>
 
-The tab delimited file containing the average trajectories of all variable (.txt).
+The JSON file containing the average trajectories of all variables.
 
 =for Euclid:
 
@@ -73,9 +78,6 @@ my $simulationFile = $ARGV{'-s'};
 
 # outputs
 my $outputMatrix = $ARGV{'-o'};
-
-# it is for random number generator
-srand (time | $$);
 
 # upper limits
 my $max_num_simulations = 10**6;
@@ -106,25 +108,26 @@ my $num_simulations = $simulation->{'simulation'}->{'numberofSimulations'};
 my $num_steps = $simulation->{'simulation'}->{'numberofTimeSteps'};
 
 # sets the initial states that the user has specified for simulations (array)
-my $initialStates = $simulation->{'simulation'}->{'initialStates'};
-my @initialState = split (/\s/, $initialStates->[0]);
-
-# print "@initialState \n";
+my $initialState = $simulation->{'simulation'}->{'initialState'};
 
 # sets the variables of interest that the user has specified for plots (array)
 my $interestingVariables = $simulation->{'simulation'}->{'variablesofInterest'};
 my $num_interestingVariables = scalar @$interestingVariables;
 
 # sets the propensities (hash);
-my $propensities = $simulation->{'simulation'}->{'propensities'};
+my $propensities = $simulation->{'simulation'}->{'propensities'}->[0];
 my $num_propensities = scalar values %$propensities;
 
 error_checking ();
-my $allTrajectories = get_allTrajectories ();
-print Dumper ($allTrajectories);
 
-# TO_DO:
-# my $averageTrajectories = get_averagetrajectories ();
+my $allTrajectories = get_allTrajectories ();
+my $averageTrajectories = get_averageTrajectories ();
+
+#print Dumper ($allTrajectories);
+#print ("\n*********************************\n");
+#print Dumper ($averageTrajectories);
+
+# TO-DO: print averagerajectories in JSON format
 # print_outputmatrix ();
 
 exit;
@@ -156,6 +159,11 @@ sub error_checking {
     exit;
   }
 
+  unless ($num_variables == scalar @$initialState) {
+     print ("<br>ERROR: There must be $num_variables variables in the initial state. Please check the initial state entry. <br>");
+    exit;
+  }
+
   # num_simulations
   if (isnot_number ($num_simulations) || $num_simulations < 1 || $num_simulations > $max_num_simulations) {
     print ("<br>ERROR: The number of simulations must be a number between 1 and $max_num_simulations. <br>");
@@ -170,13 +178,11 @@ sub error_checking {
 
   # propensities
   foreach my $v (values %$propensities) {
-
-    unless (($v->[0] >= 0) && ($v->[0] <= 1)) {
+    unless (($v->{"activation"} >= 0) && ($v->{"activation"} <= 1)) {
       print ("<br>ERROR: The activation propensities for stochastic simulations must be a number between 0 and 1. <br>");
       exit;
     }
-    
-    unless (($v->[1] >= 0) && ($v->[1] <= 1)) {
+    unless (($v->{"degradation"} >= 0) && ($v->{"degradation"} <= 1)) {
       print ("<br>ERROR: The degradation propensities for stochastic simulations must be a number between 0 and 1. <br>");
       exit;
     }
@@ -219,48 +225,27 @@ Returns a reference of the all trajectories hash.
 =cut
 
 sub get_allTrajectories {
-
   my %alltrajectories = ();
 
   for (my $i = 1; $i <= $num_simulations; $i++) {
+    my %table = ();
+    my @is = @$initialState;
 
-    my @temp = ();  # stores a single trajectory each time 
-    my $is = \@initialState;
-
-    push (@temp, convert_from_state_to_decimal ($is));
+    for (my $k = 1; $k <= $num_variables; $k++) {
+      push (@{$table{"x$k"}}, $is[$k - 1]);
+    }
     
     for (my $j = 1; $j <= $num_steps; $j++) {
-      my $ns = get_nextstate_stoch ($is);
-      push (@temp, convert_from_state_to_decimal ($ns));
-      $is = $ns;
+      my @ns = @{get_nextstate_stoch (\@is)};
+      
+      for (my $r = 1; $r <= $num_variables; $r++) {
+	push (@{$table{"x$r"}}, $ns[$r - 1]);
+      }
+      @is = @ns;
     }
-
-    $alltrajectories{$i} = \@temp;
+    $alltrajectories{$i} = \%table;
   }
-
   return \%alltrajectories;
-}
-
-############################################################
-
-=pod
-
-convert_from_state_to_decimal ($state);
-
-Converts a given state to its base-10 representation and adds 1 for convenience.
-The input is a reference of a state array.
-Returns a number, which is the base-10 representation of the state array.
-
-=cut
-
-sub convert_from_state_to_decimal {
-  my $state = shift;
-  my $decimal_rep = 1;
-  
-  for (my $i = 0; $i < $num_variables; $i++) {
-    $decimal_rep += $$state[$num_variables - $i - 1] * ($num_states ** $i);
-  }
-  return $decimal_rep;
 }
 
 ############################################################
@@ -278,8 +263,6 @@ sub get_nextstate_stoch {
   my $state = shift;
   my $z = get_nextstate_det ($state);
 
-  print "state = @$state \t nextstate_det = @$z \n";
-
   my @nextsstateStoch;
   
   for (my $j = 0; $j < $num_variables; $j++) {
@@ -291,7 +274,7 @@ sub get_nextstate_stoch {
     # $prop->[1] is the degradation propensity
     
     if ($state->[$j] < $z->[$j]) {
-      if ($r < $prop->[0]) {
+      if ($r < $prop->{"activation"}) {
  	$nextsstateStoch[$j] = $z->[$j];
       }
       else{
@@ -299,7 +282,7 @@ sub get_nextstate_stoch {
       }
     }
     elsif ($state->[$j] > $z->[$j]) {
-      if ($r < $prop->[1]) {
+      if ($r < $prop->{"degradation"}) {
  	$nextsstateStoch[$j] = $z->[$j];
       }
       else{
@@ -310,8 +293,6 @@ sub get_nextstate_stoch {
       $nextsstateStoch[$j] = $state->[$j];
     }
   }
-
-  print "state = @$state \t nextstate_stoch = @nextsstateStoch \n";
 
   return \@nextsstateStoch;
  }
@@ -346,82 +327,30 @@ sub get_nextstate_det {
 
 ############################################################
 
-# =pod
+=pod
 
-# get_averagetrajectories();
+get_averageTrajectories ();
 
-# Stores average trajectories of all variables into an array.
-# The n-th element of the array is the average trajectory of the n-th variable.
-# Returns a reference of average trajectories array.
+Stores average trajectories of all variables into a hash.
+Returns a reference of average trajectory hash.
 
-# =cut
+=cut
 
-# sub get_averagetrajectories {
+sub get_averageTrajectories {
+  my %averagetrajectories = ();
 
-#   my @averagetrajectories = ();
-
-#   my $total_num_states = $num_states ** $num_variables;
-  
-#   for (my $i = 1; $i <= $num_steps + 1; $i++) {
-#     my @temp = ();  # keeps the values of i-th states in trajectories
-    
-#     for (my $j = 1; $j <= $num_simulations; $j++) {
+  for (my $v = 1; $v <= $num_variables; $v++) {
+    for (my $t = 0; $t <= $num_steps; $t++) {
+      my $sum = 0;
       
-#       my @traj = @{$allTrajectories->{$j}};
-#       my @value = convert_from_decimal_to_state ($traj[$i - 1]);
-#       push (@temp, @value);
-#     }
-    
-#     my @sum = ();
-#     for (my $k = 0; $k < $num_variables; $k++) {
-#       for (my $r = 0; $r < $num_simulations; $r++) {
-# 	my $w = ($r * $num_variables) + $k;
-# 	$sum[$k] += $temp[$w];
-#       } 
-      
-#       push (@averagetrajectories, $sum[$k] / $num_simulations);
-#     }
-#     print "index_timeSteps = $i \n";
-#   }
+      for (my $s = 1; $s <= $num_simulations; $s++) {
+	$sum += $allTrajectories->{$s}->{"x$v"}->[$t];
+      }
+      $averagetrajectories{"x$v"}[$t] = $sum / $num_simulations;
+    }
+  }
   
-#   return \@averagetrajectories;
-# }
-
-############################################################
-
-# =pod
-
-# convert_from_decimal_to_state ($n);
-
-# Converts the base-10 representation of a state to state itself.
-# The input is a number.
-# Returns a reference of state array.
-
-# =cut
-
-# sub convert_from_decimal_to_state {
-#   my $n = shift;
-#   my ($quotient, $remainder);
-#   my @state = ();
-#   $n--;
-  
-#   do {
-#     $quotient = int $n / $num_states;
-#     $remainder = $n % $num_states;
-#     push (@state, $remainder);
-#     $n = $quotient;
-#   } until ($quotient == 0);
-  
-#   my $dif = $num_variables - (scalar @state);
-  
-#   if ($dif) {
-#     for (my $i = 0; $i < $dif; $i++) {
-#       push (@state, 0);
-#     }
-#   }
-  
- #  @state = reverse @state;
-#   return @state;
-# }
+  return \%averagetrajectories;
+}
 
 ############################################################
