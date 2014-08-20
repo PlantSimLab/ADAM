@@ -91,7 +91,7 @@ my $model = JSON::Parse::json_file_to_perl ($modelFile);
 my $simulation = JSON::Parse::json_file_to_perl ($simulationFile);
 
 # sets the update rules/functions (hash)
-my $updateFunctions = $model->{'model'}->{'updateRules'}->[0];
+my $updateFunctions = $model->{'model'}->{'updateRules'};
 my $num_functions = scalar values %$updateFunctions;
 
 # sets the number of variables in the model (array)
@@ -115,7 +115,7 @@ my $interestingVariables = $simulation->{'simulation'}->{'variablesofInterest'};
 my $num_interestingVariables = scalar @$interestingVariables;
 
 # sets the propensities (hash);
-my $propensities = $simulation->{'simulation'}->{'propensities'}->[0];
+my $propensities = $simulation->{'simulation'}->{'propensities'};
 my $num_propensities = scalar values %$propensities;
 
 error_checking ();
@@ -123,9 +123,9 @@ error_checking ();
 my $allTrajectories = get_allTrajectories ();
 my $averageTrajectories = get_averageTrajectories ();
 
-#print Dumper ($allTrajectories);
-#print ("\n*********************************\n");
-#print Dumper ($averageTrajectories);
+print Dumper ($allTrajectories);
+print ("\n*********************************\n");
+print Dumper ($averageTrajectories);
 
 # TO-DO: print averagerajectories in JSON format
 # print_outputmatrix ();
