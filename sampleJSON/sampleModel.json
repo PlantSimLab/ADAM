@@ -20,8 +20,7 @@
             	"states": ["0", "1"]
             }
     	],
-    	"updateRules": [
-            {
+    	"updateRules": {
             	"x1": {
                     "possibleInputVariables": ["x1","x2"],
                     "polynomialFunction": "x1*x2"
@@ -35,6 +34,5 @@
                     "polynomialFunction": "x1+x2"
             	}
             }
-    	]
     }
 }
