@@ -1,0 +1,73 @@
+{
+"model": {
+  "description": "",
+  "name": "demo",
+  "updateRules": {
+    "x1": {
+      "possibleInputVariables": ["x1"],
+      "transitionTables": [
+          [
+            [0],
+            0
+          ],
+          [
+            [1],
+            0
+          ]
+        ]
+      },
+    "x2": {
+      "possibleInputVariables": ["x2"],
+      "transitionTables": [
+          [
+            [0],
+            0
+          ],
+          [
+            [1],
+            0
+          ]
+        ]
+      },
+    "x3": {
+      "possibleInputVariables": ["x2","x3"],
+      "transitionTables": [
+          [
+            [0,0],
+            0
+          ],
+          [
+            [0,1],
+            0
+          ],
+          [
+            [1,0],
+            0
+          ],
+          [
+            [1,1],
+            0
+          ]
+        ]
+      }
+    },
+  "variables": [
+      {
+      "id": "x1",
+      "name": "A",
+      "states": ["low","high"]
+      },
+      {
+      "id": "x2",
+      "name": "B",
+      "states": ["low","high"]
+      },
+      {
+      "id": "x3",
+      "name": "C",
+      "states": ["absent","present"]
+      }
+    ],
+  "version": "1.0"
+  }
+}

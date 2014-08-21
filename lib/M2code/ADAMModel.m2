@@ -14,9 +14,16 @@ newPackage(
     DebuggingMode => true
     )
 
-export {"Model", "model", "polynomials", "findLimitCycles", "parseModel", "checkModel",
+export {
+    "Model", 
+    "model", 
+    "polynomials", 
+    "findLimitCycles", 
+    "parseModel", 
+    "checkModel",
     "addPolynomials",
-    "polyFromTransitionTable"}
+    "polyFromTransitionTable"
+    }
 
 Model = new Type of HashTable
 
@@ -76,10 +83,13 @@ checkModel Model := (M) -> (
     result
     )
 
+-- parseModel: takes a string (usually the contents of a file), and returns
+-- a "Model", if everything works, or an ErrorPacket
 parseModel = method()
 parseModel String := (str) -> (
     M := parseJSON str;
-    if not M#?"model" then error "error: string is not the JSON for a Model";
+    if instance(M, ErrorPacket) then return M;
+    if not M#?"model" then return errorPacket "internal error: input is not a Model ot ErrorPacket";
     mod := M#"model";
     model(mod#"name", 
         "description" => mod#"description",
@@ -89,7 +99,12 @@ parseModel String := (str) -> (
         )
     )
 
+
 toJSON Model := (M) -> toJSON new HashTable from {("model", new HashTable from M)}
+
+prettyPrintJSON Model := (M) -> (
+    prettyPrintJSON new HashTable from {"model" => M}
+    )
 
 polynomials = method()
 polynomials(Model,Ring) := (M, R) -> (
@@ -145,7 +160,8 @@ attachToUpdate(Model, Function) := (M, fcn) -> (
     newUpdateRules := hashTable for xi in vars M list (
         H := M#"updateRules"#xi;
         newpair := fcn(M, xi, H);
-        xi => hashTable append(pairs H, newpair)
+        if newpair === null then xi => H
+        else xi => hashTable append(pairs H, newpair)
         );
     Mnew := model(M#"name", 
         "description" => M#"description",
@@ -164,6 +180,7 @@ addstupid = (M) -> (
 addPolynomials = method()
 addPolynomials Model := (M) -> (
     fcn := (M,xi,H) -> (
+        if H#?"polynomialFunction" then return null; -- already exists
         g := polyFromTransitionTable(  
             H#"possibleInputVariables",
             H#"transitionTables",

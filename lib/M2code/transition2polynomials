@@ -5,15 +5,15 @@ debug needsPackage "ADAMModel"
 needsPackage "JSON"
 
 helpString = ///usage: transition2polynomials <json-model-file >output-model
-where the input is taken from stdin:
-  json-model-file: a model file which includes transition tables
-and the out is written to stdout:
-  output-model: the same model (in json format), 
-    with polynomials computed from the transition tables
-example call:
-  ./transition2polynomials <~/Sites/ADAM/sampleJSON/sampleModel.json 
-example input file:
-example output:
+  where the input is taken from stdin:
+    json-model-file: a model file which includes transition tables
+  and the out is written to stdout:
+    output-model: the same model (in json format), 
+      with polynomials computed from the transition tables
+  example call:
+    ./transition2polynomials <~/Sites/ADAM/sampleJSON/sampleModel.json 
+  example input file:
+  example output:
 ///
 
 if #scriptCommandLine > 1 then (
@@ -24,8 +24,7 @@ if #scriptCommandLine > 1 then (
 --------------------------------
 
 M = parseModel get stdio
--- CHECK: has transition tables
-M1 = addPolynomials M
+M1 = if class M === Model then addPolynomials M else errorJSON M
 print prettyPrintJSON M1
 
 end
@@ -33,4 +32,33 @@ end
 restart
 -- example:
 ./transition2polynomials <~/Sites/ADAM/exampleJSON/SecondVersion1-Model.json
+./transition2polynomials <~/Sites/ADAM/exampleJSON/SimplestVersion1-Model.json
+./transition2polynomials <~/Sites/ADAM/exampleJSON/ThirdVersion1-Model.json
+./transition2polynomials <~/Sites/ADAM/exampleJSON/lac-operon-full-Model.json
+./transition2polynomials <~/Sites/ADAM/exampleJSON/lac-operon-reduced-Model.json
 
+-- this one fails...! Because it doesn't have transition functions?
+-- need check that input is OK
+./transition2polynomials <~/Sites/ADAM/sampleJSON/sampleModel2.json 
+./transition2polynomials <~/Sites/ADAM/sampleJSON/sampleModel.json 
+cat ~/Sites/ADAM/exampleJSON/lac-operon-reduced-Model.json | ./transition2polynomials
+
+restart
+path = prepend(currentDirectory()|"lib/M2code", path)
+debug needsPackage "ADAMModel"
+needsPackage "JSON"
+M = parseModel get "~/Sites/ADAM/sampleJSON/sampleModel2.json"
+-- CHECK: has transition tables
+M1 = addPolynomials M
+print prettyPrintJSON M1
+
+-- need the following filters/translators
+1. validate: input: Model, output: ModelOrError
+  variations: also give what features it should have?
+  2 versions, 1 in M2: takes a Model
+              1 in shell: takes a text file
+2. computePolynomials: Model --> ModelOrError
+  2 versions: 1 for Model.  Computes polynomials from either TT ot logical formulae
+              1 for text file
+3. computeTransitionTables
+4. computeLogicalExpressions

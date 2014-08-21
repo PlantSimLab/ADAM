@@ -18,7 +18,26 @@ newPackage(
 -- (b) Macaulay2 object, which includes hash tables, lists, and basic elements
 -- (c) JSON format
 
-export {parseJSON, toJSON, prettyPrintJSON, toHashTable, fromHashTable, exampleJSON}
+export {
+    "parseJSON", 
+    "toJSON", 
+    "prettyPrintJSON", 
+    "toHashTable", 
+    "fromHashTable", 
+    "exampleJSON",
+    "ErrorPacket", -- errors get passed around as packets
+    "errorPacket" -- create an error packet
+    }
+
+ErrorPacket = new Type of HashTable
+
+-- All errors are passed around as an "error packet".
+-- An error packet is a hash table with one key, "error", whose value is a String.
+-- All functions which take a "Model" will also take an error packet.  But, 
+-- such functions will just pass on the error packet.
+errorPacket = method()
+errorPacket String := (str) -> new ErrorPacket from {"error" => str}
+
 
 skipWS = method()
 skipWS(String, ZZ) := (str, startLoc) -> (
@@ -28,7 +47,7 @@ skipWS(String, ZZ) := (str, startLoc) -> (
     )
 
 errorObject = method()
-errorObject String := (s) -> new HashTable from {"error" => s}
+errorObject String := errorPacket -- (s) -> new HashTable from {"error" => s}
 
 noError = null
 
@@ -462,23 +481,23 @@ TEST ///
 end
 
 restart
-loadPackage "JSON"
-instance(fromJSON "3", ZZ)
-fromJSON "[4,3,3]"  == [4,3,3] -- do we want it to go to a list?
-fromJSON toJSON {4,3,3} == {4,3,3}
+debug needsPackage "JSON"
+instance(parseJSON "3", ZZ)
+parseJSON "[4,3,3]"  == {4,3,3} -- do we want it to go to a list?
+parseJSON toJSON {4,3,3} == {4,3,3}
 
 {a => {b => c, c => d, e => f}}
 H = toHashTable oo
 toJSON H
-fromJSON oo
-
+Ha = parseJSON oo
+Ha === H
 L1 = {"a" => {"b" => "c", "c" => "d", "e" => ["f", 3, 4]}}
 L2 = toHashTable L1
 str = toJSON L2
-toHashTable fromJSON str
+toHashTable parseJSON str
 L2 === oo
 
-H = fromJSON exampleJSON#0
+H = parseJSON exampleJSON#0
 toJSON oo
 
 restart
@@ -488,10 +507,3 @@ f()
 P = NNParser : charAnalyzer
 P "  12345  78"
 
-restart
-needsPackage "JSON"
-S = get "example.json"
--- this one still doesn't parse:
-parseJSON exampleJSON#2
-
-parseJSON "[1,0,0,-1]"

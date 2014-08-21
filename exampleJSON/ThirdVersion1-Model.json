@@ -1,0 +1,287 @@
+{
+"model": {
+  "description": "",
+  "name": "ThirdVersion1",
+  "updateRules": {
+    "x1": {
+      "possibleInputVariables": ["x1"],
+      "transitionTables": [
+          [
+            [0],
+            0
+          ],
+          [
+            [1],
+            1
+          ]
+        ]
+      },
+    "x2": {
+      "possibleInputVariables": ["x1","x2"],
+      "transitionTables": [
+          [
+            [0,0],
+            0
+          ],
+          [
+            [0,1],
+            0
+          ],
+          [
+            [1,0],
+            1
+          ],
+          [
+            [1,1],
+            1
+          ]
+        ]
+      },
+    "x3": {
+      "possibleInputVariables": ["x3"],
+      "transitionTables": [
+          [
+            [0],
+            0
+          ],
+          [
+            [1],
+            1
+          ]
+        ]
+      },
+    "x4": {
+      "possibleInputVariables": ["x2","x3","x4"],
+      "transitionTables": [
+          [
+            [0,0,0],
+            0
+          ],
+          [
+            [0,0,1],
+            0
+          ],
+          [
+            [0,1,0],
+            0
+          ],
+          [
+            [0,1,1],
+            0
+          ],
+          [
+            [1,0,0],
+            0
+          ],
+          [
+            [1,0,1],
+            0
+          ],
+          [
+            [1,1,0],
+            1
+          ],
+          [
+            [1,1,1],
+            1
+          ]
+        ]
+      },
+    "x5": {
+      "possibleInputVariables": ["x4","x5"],
+      "transitionTables": [
+          [
+            [0,0],
+            0
+          ],
+          [
+            [0,1],
+            0
+          ],
+          [
+            [1,0],
+            1
+          ],
+          [
+            [1,1],
+            1
+          ]
+        ]
+      },
+    "x6": {
+      "possibleInputVariables": ["x5","x6"],
+      "transitionTables": [
+          [
+            [0,0],
+            0
+          ],
+          [
+            [0,1],
+            0
+          ],
+          [
+            [1,0],
+            1
+          ],
+          [
+            [1,1],
+            1
+          ]
+        ]
+      },
+    "x7": {
+      "possibleInputVariables": ["x6","x7"],
+      "transitionTables": [
+          [
+            [0,0],
+            0
+          ],
+          [
+            [0,1],
+            0
+          ],
+          [
+            [1,0],
+            1
+          ],
+          [
+            [1,1],
+            1
+          ]
+        ]
+      },
+    "x8": {
+      "possibleInputVariables": ["x7","x8"],
+      "transitionTables": [
+          [
+            [0,0],
+            1
+          ],
+          [
+            [0,1],
+            1
+          ],
+          [
+            [1,0],
+            0
+          ],
+          [
+            [1,1],
+            0
+          ]
+        ]
+      },
+    "x9": {
+      "possibleInputVariables": ["x7","x9"],
+      "transitionTables": [
+          [
+            [0,0],
+            0
+          ],
+          [
+            [0,1],
+            0
+          ],
+          [
+            [1,0],
+            1
+          ],
+          [
+            [1,1],
+            1
+          ]
+        ]
+      },
+    "x10": {
+      "possibleInputVariables": ["x8","x9","x10"],
+      "transitionTables": [
+          [
+            [0,0,0],
+            0
+          ],
+          [
+            [0,0,1],
+            0
+          ],
+          [
+            [0,1,0],
+            0
+          ],
+          [
+            [0,1,1],
+            0
+          ],
+          [
+            [1,0,0],
+            1
+          ],
+          [
+            [1,0,1],
+            1
+          ],
+          [
+            [1,1,0],
+            0
+          ],
+          [
+            [1,1,1],
+            0
+          ]
+        ]
+      }
+    },
+  "variables": [
+      {
+      "id": "x1",
+      "name": "Psy",
+      "states": ["absent","present"]
+      },
+      {
+      "id": "x2",
+      "name": "cor",
+      "states": ["low","high"]
+      },
+      {
+      "id": "x3",
+      "name": "SCF",
+      "states": ["low","high"]
+      },
+      {
+      "id": "x4",
+      "name": "SCF-COR",
+      "states": ["low","high"]
+      },
+      {
+      "id": "x5",
+      "name": "degJAZ",
+      "states": ["low","high"]
+      },
+      {
+      "id": "x6",
+      "name": "MYC2",
+      "states": ["low","high"]
+      },
+      {
+      "id": "x7",
+      "name": "NACs",
+      "states": ["low","high"]
+      },
+      {
+      "id": "x8",
+      "name": "ICS1",
+      "states": ["low","high"]
+      },
+      {
+      "id": "x9",
+      "name": "BSMT1",
+      "states": ["low","high"]
+      },
+      {
+      "id": "x10",
+      "name": "SA",
+      "states": ["low","high"]
+      }
+    ],
+  "version": "1.0"
+  }
+}
