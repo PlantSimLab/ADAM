@@ -1,4 +1,4 @@
-# Authors: David Murrugarra & Seda Arat
+# Authors: Seda Arat & David Murrugarra
 # Name: Script for Stochastic Discrete Dynamical Systems (SDDS)
 # Revision Date: August 19, 2014
 
@@ -66,7 +66,7 @@ file.type: writable
 
 =head1 AUTHOR
 
-Seda Arat & David Murrugarra
+Seda Arat
 
 =cut
 
@@ -205,7 +205,7 @@ Returns true if the input is not a number, false otherwise
 =cut
 
 sub isnot_number {
-  my ($n) = @_;
+  my $n = shift;
 
   if ($n =~ m/\D/) {
     return 1;
@@ -273,9 +273,6 @@ sub get_nextstate_stoch {
     my $r = rand ();
     my $i = $j + 1;
     my $prop = $propensities->{"x$i"};
-    
-    # $prop->[0] is the activation propensity
-    # $prop->[1] is the degradation propensity
     
     if ($state->[$j] < $z->[$j]) {
       if ($r < $prop->{"activation"}) {
