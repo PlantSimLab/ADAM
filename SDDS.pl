@@ -13,7 +13,8 @@ use warnings;
 
 use Getopt::Euclid;
 use JSON::Parse;
-use Data::Dumper;
+use JSON;
+# use Data::Dumper;
 
 ############################################################
 
@@ -23,11 +24,11 @@ perl SDDS.pl - Simulate a stochastic model from a possible initialization.
 
 =head1 USAGE
 
-perl SDDS.pl -m <model-file> -s <simulation-file> -o <output-matrix>
+perl SDDS.pl -m <model-file> -s <simulation-file> -o <output-file>
 
 =head1 SYNOPSIS
 
-perl SDDS.pl -m <model-file> -s <simulation-file> -o <output-matrix>
+perl SDDS.pl -m <model-file> -s <simulation-file> -o <output-file>
 
 =head1 DESCRIPTION
 
@@ -53,7 +54,7 @@ The JSON file containing the simulation information that the user has been speci
 
 network-file.type: readable
 
-=item -o[utput-matrix] <output-matrix>
+=item -o[utput-file] <output-file>
 
 The JSON file containing the average trajectories of all variables.
 
@@ -76,8 +77,8 @@ srand ();
 my $modelFile = $ARGV{'-m'};
 my $simulationFile = $ARGV{'-s'};
 
-# outputs
-my $outputMatrix = $ARGV{'-o'};
+# output(s)
+my $outputFile = $ARGV{'-o'};
 
 # upper limits
 my $max_num_simulations = 10**6;
@@ -123,12 +124,15 @@ error_checking ();
 my $allTrajectories = get_allTrajectories ();
 my $averageTrajectories = get_averageTrajectories ();
 
-print Dumper ($allTrajectories);
-print ("\n*********************************\n");
-print Dumper ($averageTrajectories);
+# print Dumper ($allTrajectories);
+# print ("\n*********************************\n");
+# print Dumper ($averageTrajectories);
 
-# TO-DO: print averagerajectories in JSON format
-# print_outputmatrix ();
+my $json = JSON->new->indent ();
+
+open (OUT," > $outputFile") or die ("<br>ERROR: Cannot open the file for output. <br>");
+print OUT $json->encode ($averageTrajectories);
+close (OUT) or die ("<br>ERROR: Cannot close the file for output. <br>");
 
 exit;
 
