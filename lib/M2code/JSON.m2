@@ -9,7 +9,7 @@ newPackage(
             Email => "", 
             HomePage => ""}
         },
-    Headline => "",
+    Headline => "parse JSON format",
     DebuggingMode => true
     )
 
@@ -255,12 +255,21 @@ prettyPrintJSON Symbol :=
 prettyPrintJSON String := 
 prettyPrintJSON Number := (H) -> ppJSON(H,0)
 
+placeOnOneLine = (L) -> (
+    -- L is a BasicList
+    all(L, a -> instance(a, Number) or instance(a, String))
+    or 
+    -- a hack to get transition tables to print on one line
+    (#L == 2 and all(L#0, a -> instance(a, Number) or instance(a, String)) and 
+        (instance(L#1, Number) or instance(L#1, String)))
+    )
 ppJSON = method()
 ppJSON(Symbol, ZZ) := (a, nindent) -> ppJSON(toString a, nindent)
 ppJSON(String, ZZ) := (s, nindent) -> "\"" | s | "\""
 ppJSON(Number, ZZ) := (n, nindent) -> toString n
 ppJSON(BasicList, ZZ) := (L, nindent) -> (
-    if all(L, a -> instance(a, Number) or instance(a, String)) then (
+    if placeOnOneLine L then (
+    --if all(L, a -> instance(a, Number) or instance(a, String)) then (
         -- place this all on one line
         M := for a in L list ppJSON(a, nindent+2);
         Mstr := concatenate between(",",M);
@@ -291,6 +300,7 @@ TEST ///
   debug needsPackage "JSON"
 
   H = [3, 4, "hi there", 6]
+  H = [[[1,0,0],1], [[2,0,1],3]]
   ppJSON(H, 4)
   H = toHashTable { "a" => "b" }
 

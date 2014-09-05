@@ -36,7 +36,7 @@ model = method(Options => {
 model String := opts -> (name) -> (
     model := new Model from {
         {"name", name},
-        {"description", ""},
+        {"description", opts#"description"},
         {"version", opts#"version"},
         {"variables", opts#"variables"},
         {"updateRules", opts#"updateRules"},
@@ -149,6 +149,17 @@ polyFromTransitionTable(List, List, Ring) := (inputvars, transitions, R) -> (
         ))
     )
 
+changeUpdate = method()
+changeUpdate(Model, HashTable) := (M, newUpdateRules) -> (
+    Mnew := model(M#"name", 
+        "description" => M#"description",
+        "version" => M#"version",
+        "variables" => M#"variables",
+        "updateRules" => newUpdateRules);
+    Mnew.cache.ring = ring M;
+    Mnew
+    )
+
 attachToUpdate = method()
 attachToUpdate(Model, Function) := (M, fcn) -> (
     -- M is a model
@@ -163,13 +174,7 @@ attachToUpdate(Model, Function) := (M, fcn) -> (
         if newpair === null then xi => H
         else xi => hashTable append(pairs H, newpair)
         );
-    Mnew := model(M#"name", 
-        "description" => M#"description",
-        "version" => M#"version",
-        "variables" => M#"variables",
-        "updateRules" => newUpdateRules);
-    Mnew.cache.ring = ring M;
-    Mnew
+    changeUpdate(M, newUpdateRules)
     )
 
 addstupid = (M) -> (
@@ -178,6 +183,7 @@ addstupid = (M) -> (
     )
     
 addPolynomials = method()
+addPolynomials ErrorPacket := (M) -> M
 addPolynomials Model := (M) -> (
     fcn := (M,xi,H) -> (
         if H#?"polynomialFunction" then return null; -- already exists
@@ -189,6 +195,51 @@ addPolynomials Model := (M) -> (
         );
     attachToUpdate(M, fcn)
     )
+
+makeTT = method()
+makeTT(RingElement, List) := (F, varAndInputs) -> (
+    -- NOT WRITTEN YET!!
+    -- F is a polynomial in a poly ring with some large number of vars, possibly.
+    -- varAndInputs has the form:
+    -- {{x3, {0,1}}, {x7, {0,1,2}}, {x4, {1,3,4}}}
+    -- transition tables are created from this info.
+    vars := varAndInputs/first; -- these are each strings of form "xi"
+    varAndInputs/last/set
+    )
+transitionTableFromPolynomial = method()
+transitionTableFromPolynomial(Model, String) := (M, var) -> (
+    Fs := polynomials M;
+    inputvars := M#"updateRules"#var#"possibleInputVariables";
+    inputnums := M#"variables"#var#"possibleInputVariables";
+    F := M#"updateRules"#var#"polynomialFunction";
+    
+    -- Now make a list of all input values
+    )
+removePolynomials = method()
+removePolynomials ErrorPacket := (M) -> M
+removePolynomials Model := (M) -> (
+    rules := M#"updateRules";
+    newrules := hashTable for r in keys rules list (
+        H := new MutableHashTable from rules#r;
+        remove(H, "polynomialFunction");
+        r => new HashTable from H
+        );
+    changeUpdate(M, newrules)
+    )
+removeUpdate = method()
+removeUpdate(ErrorPacket, String) := (M, updateType) -> M
+removeUpdate(Model, String) := (M,str) -> (
+    if str =!= "polynomialFunction" and str =!= "transitionTables" and str =!= "logicalFormulas"
+    then return errorPacket ("internal error: unknown update type: "|str);
+    rules := M#"updateRules";
+    newrules := hashTable for r in keys rules list (
+        H := new MutableHashTable from rules#r;
+        remove(H, str);
+        r => new HashTable from H
+        );
+    changeUpdate(M, newrules)
+    )
+
 {*
 --L = {"x3", "x1"}
 --p = 2
@@ -260,9 +311,9 @@ TEST ///
          ],
          "updateRules": {
              "x1": { 
-                 "possibleInputVariables": ["x2","x3", "x5", "x1"],
-                 "transitionTables": [[0, 0, 0, 0], [0, 0, 1, 0], [0, 1, 0, 0], [0, 1, 1, 0], 
-                 [1, 0, 0, 1], [1, 0, 1, 1], [1, 1, 0, 0], [1, 1, 1, 0]]
+                 "possibleInputVariables": ["x2","x3", "x1"],
+                 "transitionTables": [[[0, 0, 0], 1], [[0, 0, 1], 0], [[0, 1, 0], 0], [[0, 1, 1], 0], 
+                 [[1, 0, 0], 1], [[1, 0, 1], 1], [[1, 1, 0], 0], [[1, 1, 1], 0]]
              },
              "x2": { 
                  "possibleInputVariables": ["x1","x2"],
@@ -285,8 +336,17 @@ TEST ///
     ///
    
 TEST ///
+{*
+  restart
+*}
   debug needsPackage "ADAMModel"
-  model = parseModel sample2
+  M = parseModel sample2
+  M = addPolynomials M
+  M = removeUpdate(M, "transitionTables")
+  FM = (ideal polynomials M)_*
+  R = ring FM_0
+  FM
+  makeTT(FM_0, {{"x2", {0,1}}, {"x3", {0,1}}, {"x1", {0,1}}})
 ///
 
 ///
