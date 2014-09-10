@@ -1,3 +1,13 @@
+--TODO today: (9/9/14)
+-- DONE --  1. add parameter values to limitCycles code
+--  2. allow specialization of a model with parameters?
+--DONE --  3. make sure "variables", "parameters" are lists, in the right order.
+--  4. work on checkModel: it should handle more things, including parameters.  And checking updateRules...
+--  5. polynomials: should call "addPolynomials" if needed?  NO...?
+--  6. speed up JSON input for the two large files?
+--  7. for going from TT to polys, do we need to add in ki^p-ki = 0?  Probably...
+
+
 newPackage(
     "ADAMModel",
     Version => "0.1", 
@@ -31,6 +41,7 @@ model = method(Options => {
         "description" => "", 
         "version" => "0.0",
         "variables" => null,
+        "parameters" => {},
         "updateRules" => null
         })
 model String := opts -> (name) -> (
@@ -39,12 +50,18 @@ model String := opts -> (name) -> (
         {"description", opts#"description"},
         {"version", opts#"version"},
         {"variables", opts#"variables"},
+        {"parameters", opts#"parameters"},
         {"updateRules", opts#"updateRules"},
         symbol cache => new CacheTable
         };
     checkModel model;
     model.cache.ring = ring model;
     model
+    )
+parameters = method()
+parameters Model := (M) -> (
+    -- returns a list of strings
+    M#"parameters"/(x -> x#"id")//toList
     )
 vars Model := (M) -> (
     -- returns a list of strings
@@ -57,9 +74,11 @@ char Model := (M) -> (
     )
 ring Model := (M) -> (
     if not M.cache.?ring then M.cache.ring = (
+        paramnames := parameters M;
         varnames := vars M;
         p := char M;
-        R1 := ZZ/p[varnames];
+        kk := if #paramnames == 0 then ZZ/p else ZZ/p[paramnames];
+        R1 := kk[varnames];
         I1 := ideal for x in gens R1 list x^p-x;
         R1/I1);
     M.cache.ring
@@ -95,6 +114,7 @@ parseModel String := (str) -> (
         "description" => mod#"description",
         "version" => mod#"version",
         "variables" => mod#"variables",
+        "parameters" => if mod#?"parameters" then mod#"parameters" else {},
         "updateRules" => mod#"updateRules"
         )
     )
@@ -111,12 +131,28 @@ polynomials(Model,Ring) := (M, R) -> (
     varnames := vars M;
     for x in varnames list value M#"updateRules"#x#"polynomialFunction"
     )
-
 polynomials(Model) := (M) -> (
     R := ring M;
     varnames := vars M;
     use R;
     matrix(R, {for x in varnames list value M#"updateRules"#x#"polynomialFunction"})
+    )
+polynomials(Model,List) := (M,parameterValues) -> (
+    R := ring M;
+    varnames := vars M;
+    use R;
+    m := matrix(R, {for x in varnames list value M#"updateRules"#x#"polynomialFunction"});
+    kk := coefficientRing R;
+    base := ring ideal kk;
+    if base =!= ZZ then (
+        p := char kk;
+        R1' := (coefficientRing kk)(monoid R);
+        I1' := ideal for x in gens R1' list x^p-x;
+        R1 := R1'/I1';
+        phi := map(R1, R, (generators R1) | parameterValues);
+        m = phi m;
+        );
+    m
     )
 
 toArray = method()
@@ -124,9 +160,10 @@ toArray List := (L) -> new Array from (L/toArray)
 toArray Thing := (L) -> L
 
 findLimitCycles = method()
-findLimitCycles(Model, ZZ) := (M, limitCycleLength) -> findLimitCycles(M, {limitCycleLength})
-findLimitCycles(Model, List) := (M, limitCycleLengths) -> (
-    PDS := polynomials M;
+findLimitCycles(Model, List, ZZ) := (M, parameterValues, limitCycleLength) -> 
+    findLimitCycles(M, parameterValues, {limitCycleLength})
+findLimitCycles(Model, List, List) := (M, parameterValues, limitCycleLengths) -> (
+    PDS := polynomials(M, parameterValues);
     H := for len in limitCycleLengths list (
         limitcycles := gbSolver(PDS, len);
         len => toArray limitcycles
@@ -136,6 +173,7 @@ findLimitCycles(Model, List) := (M, limitCycleLengths) -> (
 
 polyFromTransitionTable = method()
 polyFromTransitionTable(List, List, Ring) := (inputvars, transitions, R) -> (
+    << "starting interpolation: " << #inputvars << endl;
     p := char R;
     n := #inputvars;
     X := set (0..p-1);
@@ -143,7 +181,8 @@ polyFromTransitionTable(List, List, Ring) := (inputvars, transitions, R) -> (
     sum for t in transitions list (
         input := t#0; -- a list
         output := t#1; -- a value
-        output * product for i from 0 to n-1 list (
+        if output == 0 then 0_R else
+        time output * product for i from 0 to n-1 list (
             x := R_(inputvars#i);
             1 - (x-input#i)^(p-1)
         ))
@@ -177,11 +216,6 @@ attachToUpdate(Model, Function) := (M, fcn) -> (
     changeUpdate(M, newUpdateRules)
     )
 
-addstupid = (M) -> (
-    fcn := (M,xi,H) -> ("stupid" => xi);
-    attachToUpdate(M, fcn)
-    )
-    
 addPolynomials = method()
 addPolynomials ErrorPacket := (M) -> M
 addPolynomials Model := (M) -> (
@@ -189,7 +223,7 @@ addPolynomials Model := (M) -> (
         if H#?"polynomialFunction" then return null; -- already exists
         g := polyFromTransitionTable(  
             H#"possibleInputVariables",
-            H#"transitionTables",
+            H#"transitionTable",
             ring M);
         "polynomialFunction" => toString g
         );
@@ -229,7 +263,7 @@ removePolynomials Model := (M) -> (
 removeUpdate = method()
 removeUpdate(ErrorPacket, String) := (M, updateType) -> M
 removeUpdate(Model, String) := (M,str) -> (
-    if str =!= "polynomialFunction" and str =!= "transitionTables" and str =!= "logicalFormulas"
+    if str =!= "polynomialFunction" and str =!= "transitionTable" and str =!= "logicalFormulas"
     then return errorPacket ("internal error: unknown update type: "|str);
     rules := M#"updateRules";
     newrules := hashTable for r in keys rules list (
@@ -312,7 +346,7 @@ TEST ///
          "updateRules": {
              "x1": { 
                  "possibleInputVariables": ["x2","x3", "x1"],
-                 "transitionTables": [[[0, 0, 0], 1], [[0, 0, 1], 0], [[0, 1, 0], 0], [[0, 1, 1], 0], 
+                 "transitionTable": [[[0, 0, 0], 1], [[0, 0, 1], 0], [[0, 1, 0], 0], [[0, 1, 1], 0], 
                  [[1, 0, 0], 1], [[1, 0, 1], 1], [[1, 1, 0], 0], [[1, 1, 1], 0]]
              },
              "x2": { 
@@ -342,7 +376,7 @@ TEST ///
   debug needsPackage "ADAMModel"
   M = parseModel sample2
   M = addPolynomials M
-  M = removeUpdate(M, "transitionTables")
+  M = removeUpdate(M, "transitionTable")
   FM = (ideal polynomials M)_*
   R = ring FM_0
   FM

@@ -4,50 +4,50 @@
     "updateRules": {
         "x1": {
             "possibleInputVariables": ["x1"],
-            "transitionTables": [[[0],0],[[1],0]]
+            "transitionTable": [[[0],0],[[1],0]]
         },
         "x2": {
             "possibleInputVariables": ["x1","x2"],
-            "transitionTables": [[[0,0],0],[[0,1],0],[[1,0],1],[[1,1],1]]
+            "transitionTable": [[[0,0],0],[[0,1],0],[[1,0],1],[[1,1],1]]
         },
         "x3": {
             "possibleInputVariables": ["x3"],
-            "transitionTables": [[[0],0],[[1],0]]
+            "transitionTable": [[[0],0],[[1],0]]
         },
         "x4": {
             "possibleInputVariables": ["x7","x4"],
-            "transitionTables": [[[0,0],0],[[0,1],0],[[1,0],0],[[1,1],0]]
+            "transitionTable": [[[0,0],0],[[0,1],0],[[1,0],0],[[1,1],0]]
         },
         "x5": {
             "possibleInputVariables": ["x2","x5"],
-            "transitionTables": [[[0,0],0],[[0,1],0],[[1,0],1],[[1,1],1]]
+            "transitionTable": [[[0,0],0],[[0,1],0],[[1,0],1],[[1,1],1]]
         },
         "x6": {
             "possibleInputVariables": ["x3","x6"],
-            "transitionTables": [[[0,0],0],[[0,1],0],[[1,0],1],[[1,1],1]]
+            "transitionTable": [[[0,0],0],[[0,1],0],[[1,0],1],[[1,1],1]]
         },
         "x7": {
             "possibleInputVariables": ["x4","x7"],
-            "transitionTables": [[[0,0],0],[[0,1],0],[[1,0],1],[[1,1],1]]
+            "transitionTable": [[[0,0],0],[[0,1],0],[[1,0],1],[[1,1],1]]
         },
         "x8": {
             "possibleInputVariables": ["x4","x8"],
-            "transitionTables": [[[0,0],0],[[0,1],0],[[1,0],1],[[1,1],1]]
+            "transitionTable": [[[0,0],0],[[0,1],0],[[1,0],1],[[1,1],1]]
         },
         "x9": {
             "possibleInputVariables": ["x8","x9"],
-            "transitionTables": [[[0,0],0],[[0,1],0],[[1,0],1],[[1,1],1]]
+            "transitionTable": [[[0,0],0],[[0,1],0],[[1,0],1],[[1,1],1]]
         },
         "x10": {
             "possibleInputVariables": ["x9","x10"],
-            "transitionTables": [[[0,0],0],[[0,1],0],[[1,0],1],[[1,1],1]]
+            "transitionTable": [[[0,0],0],[[0,1],0],[[1,0],1],[[1,1],1]]
         },
         "x11": {
             "possibleInputVariables": ["x9","x11"],
-            "transitionTables": [[[0,0],0],[[0,1],0],[[1,0],0],[[1,1],0]]
+            "transitionTable": [[[0,0],0],[[0,1],0],[[1,0],0],[[1,1],0]]
         },"x12": {
             "possibleInputVariables": ["x11","x10","x12"],
-            "transitionTables": [[[0,0,0],0],[[0,0,1],0],[[0,1,0],0],[[0,1,1],0],
+            "transitionTable": [[[0,0,0],0],[[0,0,1],0],[[0,1,0],0],[[0,1,1],0],
                                  [[1,0,0],1],[[1,0,1],1],[[1,1,0],0],[[1,1,1],0]]
         }
     },

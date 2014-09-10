@@ -5,7 +5,7 @@
   "updateRules": {
     "x1": {
       "possibleInputVariables": ["x1"],
-      "transitionTables": [
+      "transitionTable": [
           [
             [0],
             0
@@ -18,7 +18,7 @@
       },
     "x2": {
       "possibleInputVariables": ["x3","x1","x5","x2"],
-      "transitionTables": [
+      "transitionTable": [
           [
             [0,0,0,0],
             0
@@ -87,7 +87,7 @@
       },
     "x3": {
       "possibleInputVariables": ["x2","x1","x4","x3"],
-      "transitionTables": [
+      "transitionTable": [
           [
             [0,0,0,0],
             0
@@ -156,7 +156,7 @@
       },
     "x4": {
       "possibleInputVariables": ["x4"],
-      "transitionTables": [
+      "transitionTable": [
           [
             [0],
             0
@@ -169,7 +169,7 @@
       },
     "x5": {
       "possibleInputVariables": ["x4","x1","x6","x2","x5"],
-      "transitionTables": [
+      "transitionTable": [
           [
             [0,0,0,0,0],
             0
@@ -302,7 +302,7 @@
       },
     "x6": {
       "possibleInputVariables": ["x6"],
-      "transitionTables": [
+      "transitionTable": [
           [
             [0],
             0

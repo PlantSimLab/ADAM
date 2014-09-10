@@ -29,6 +29,16 @@ makeTransitions List := (L) -> (
         );
     answer    
     )
+getInputVariables = (dirname) -> (
+    filenames := readDirectory dirname;
+    filenames = select(filenames, s -> match(".csv$", s));
+    varnames := sort for f in filenames list substring(f, 0, #f-4);
+    for f in varnames list f => (
+        contents := lines get(dirname|f|".csv");
+        possibles := separateRegexp(" ", contents#0);
+        possibles
+        )
+    )
 readCellCollective = method()
 readCellCollective(String, String, String) := (modelname, dirname, description) -> (
     -- The expected dir and file stucture:
@@ -42,17 +52,29 @@ readCellCollective(String, String, String) := (modelname, dirname, description) 
     -- Notes:
     --  (a) All of these models are boolean
     --  (b) There are mistakes in the files, at least I think so.
-    filenames := readDirectory dirname;
-    filenames = select(filenames, s -> match(".csv$", s));
-    varnames := sort for f in filenames list substring(f, 0, #f-4);
+    --remove--filenames := readDirectory dirname;
+    --remove--filenames = select(filenames, s -> match(".csv$", s));
+    --remove--varnames := sort for f in filenames list substring(f, 0, #f-4);
+    inputvarHash := hashTable getInputVariables dirname;
+    inputvarNamesA := inputvarHash//values/set//sum//toList//sort;
+    varnamesA := inputvarHash//keys//sort;
+    parameterNamesA := ((set inputvarNamesA) - (set varnamesA))//toList//sort;
+    << "vars = " << varnamesA << " and params = " << parameterNamesA << endl;
     this := 0;
-    varhash := hashTable for f in varnames list (this = this+1; f => ("x"|toString this));
-    variables := for f in varnames list new HashTable from {
+    varhash := hashTable for f in varnamesA list (this = this+1; f => ("x"|toString this));
+    this = 0;
+    paramhash := hashTable for f in parameterNamesA list (this = this+1; f => ("k"|toString this));
+    variables := for f in varnamesA list new HashTable from {
         "id" => varhash#f,
         "name" => f,
         "states" => [0, 1]
         };
-    updateRules = hashTable for f in varnames list (
+    params := for f in parameterNamesA list new HashTable from {
+        "id" => paramhash#f,
+        "name" => f,
+        "states" => [0, 1]
+        };
+    updateRules = hashTable for f in varnamesA list (
         xi := varhash#f;
         -- read the first line of the file, this tells us the possibleInputVariables
         << "reading " << f << endl;
@@ -63,31 +85,29 @@ readCellCollective(String, String, String) := (modelname, dirname, description) 
         --<< "  possibles = " << possibles << endl;
         lastInLine := possibles#-1;
         possibles = drop(possibles, -1);
+        possiblevarIDS := for g in possibles list 
+            if varhash#?g 
+            then varhash#g 
+            else if paramhash#?g 
+              then paramhash#g 
+              else error "internal error: variables should have occurred";
         if f =!= lastInLine then << "warning: inconsistent tt file:." << f << "." << lastInLine << "." << endl;
         xi => new HashTable from {
-            "possibleInputVariables" => possibles/(f -> varhash#f),
-            "transitionTables" => makeTransitions(contents)
+            "possibleInputVariables" => possiblevarIDS,
+            "transitionTable" => makeTransitions(contents)
             }
         );
+    print params;
     print description;
     model(modelname, 
         "description" => description,
         "version" => "1.0",
         "variables" => variables,
+        "parameters" => params,
         "updateRules" => updateRules
         )
     )
 
-getInputVariables = (dirname) -> (
-    filenames := readDirectory dirname;
-    filenames = select(filenames, s -> match(".csv$", s));
-    varnames := sort for f in filenames list substring(f, 0, #f-4);
-    for f in varnames list f => (
-        contents := lines get(dirname|f|".csv");
-        possibles := separateRegexp(" ", contents#0);
-        possibles
-        )
-    )
 descriptions = new MutableHashTable
 descriptions#"Apoptosis_Network" = "From the article: Mai Z, Liu H. Boolean network-based analysis of the apoptosis network: irreversible apoptosis and stable surviving. J Theor Biol. 2009 Aug 21;259(4):760-9. doi: 10.1016/j.jtbi.2009.04.024. Epub 2009 May 5."
 descriptions#"B_bronchiseptica_and_T_retortaeformis_coinfection" = "One of the three models published in Thakar J et. al. (2012) PLoS Comput Biol 8(1): e1002345. doi:10.1371/journal.pcbi.1002345"
@@ -137,6 +157,12 @@ M = readCellCollective(
     );
 prettyPrintJSON M
 
+-- Step 0.  These three variables are needed
+maindir = "/Users/mike/src/reinhard/cell-collective-models/"
+zipfiles0 = select(readDirectory maindir, f -> match(".zip$", f))
+names = for f in zipfiles0 list substring(f,3,#f-7)
+
+-- ONLY do this step once, after donwloading a model from the cell collective website.
 -- First, we need to change the names to be usable (they all start with "-"...!)
 -- Do this all in the following directory
 maindir = "/Users/mike/src/reinhard/cell-collective-models/"
@@ -144,6 +170,9 @@ zipfiles = select(readDirectory maindir, f -> match(".zip$", f))
 for f in zipfiles do (
     moveFile(maindir|f, maindir|substring(f, 1, #f-1))
     )
+
+-- Step 2 -- create directories
+-- ONLY do this step once, after donwloading a model from the cell collective website.
 -- Second, we unzip each file, but in a subdirectory
 f = zipfiles#0
 for f in drop(zipfiles,1) do (
@@ -151,32 +180,66 @@ for f in drop(zipfiles,1) do (
     makeDirectory nm;
     run ("cd " | nm | "; unzip ../"|f);
     )
+
+-- Step 3
 -- now we create the models.  This requires the description from each one.
 -- as well as some manual tweaking for some problems which arise.
-names = for f in zipfiles list substring(f,4,#f-8)
-break
-for nm in {names_4} do (
+jsonModels = "/Users/mike/src/reinhard/cell-collective-json/"
+for nm in names do (
+    if nm == names_12 then continue; -- this one isn't in the right format
     M = readCellCollective(
         nm,
         maindir|nm|"/tt/", 
         descriptions#nm
-        )
+        );
+    << "------ " << nm << " -----------------------" << endl;
+    fil := openOut(jsonModels|nm|".json");
+    fil << prettyPrintJSON M << endl;
+    close fil;
+    --<< prettyPrintJSON M << endl;
     )
-for nm in names do (
+-- Now, try reading these back in as models
+models = for nm in names list (
     if nm == names_12 then continue; -- this one isn't in the right format
-    << "--- " << nm << " ----" << endl;
-    H := hashTable getInputVariables(maindir|nm|"/tt/");
-    setA := set keys H;
-    setB := set flatten values H;
-    setAB := toList(setA - setB);
-    setBA := toList(setB - setA);
-    setBoth := toList(setA * setB);
-    print ((netList {setAB}) || (netList {setBA}) || (netList {setBoth}));
-    )
--- ones that work:
-names_3,5,7,8,13
--- ones that don't work out of the box:
-names_0,1,2,4,6,9,10,11,14,15,16,17,18,19
-names_12: wrong type
+    << "doing model " << nm << endl;
+    time parseModel get(jsonModels|nm|".json")
+    );
 
-names_4
+restart
+debug loadPackage "ADAMModel"
+maindir = "/Users/mike/src/reinhard/cell-collective-models/"
+zipfiles0 = select(readDirectory maindir, f -> match(".zip$", f))
+names = for f in zipfiles0 list substring(f,3,#f-7)
+jsonModels = "/Users/mike/src/reinhard/cell-collective-json/"
+--M = time parseModel get(jsonModels|"Apoptosis_Network"|".json")
+
+nm = names_11
+M = time parseModel get(jsonModels|nm|".json");
+length prettyPrintJSON M
+coefficientRing ring M
+time M = addPolynomials M;
+time M = removeUpdate(M, "transitionTables");
+length prettyPrintJSON M
+
+I1 = ideal polynomials M
+I2 = ideal polynomials(M, {0,1})
+I2 = ideal polynomials(M, {0})
+assert(gens sub(I1, {k1=>0, k2=>1}) - sub(gens I2, ring M) == 0)
+
+findLimitCycles(M, {0}, 1)
+findLimitCycles(M, {1}, 2)
+
+findLimitCycles(M, {0,1}, 1)
+findLimitCycles(M, {0,1}, 2)
+findLimitCycles(M, {0,1}, 3)
+findLimitCycles(M, {0,1}, 2)
+findLimitCycles(M, {0,1}, 3)
+
+F = gens I2
+R = ring oo
+time F2 = sub(F,F);
+time F3 = sub(F2,F);
+time F3 = sub(F,F2);
+time F4 = sub(F3,F);
+
+time F4 = sub(F2,F2);
