@@ -83,7 +83,7 @@ if not fileExists fileName then (
 --------------------------------
 
 M = parseModel get fileName
-resultLimitCycles = findLimitCycles(M,limitCycleLengths)
+resultLimitCycles = findLimitCycles(M,{},limitCycleLengths)
 print toJSON toHashTable {"output" => {"limitcycles" => resultLimitCycles}}
 
 end
