@@ -52,9 +52,6 @@ readCellCollective(String, String, String) := (modelname, dirname, description) 
     -- Notes:
     --  (a) All of these models are boolean
     --  (b) There are mistakes in the files, at least I think so.
-    --remove--filenames := readDirectory dirname;
-    --remove--filenames = select(filenames, s -> match(".csv$", s));
-    --remove--varnames := sort for f in filenames list substring(f, 0, #f-4);
     inputvarHash := hashTable getInputVariables dirname;
     inputvarNamesA := inputvarHash//values/set//sum//toList//sort;
     varnamesA := inputvarHash//keys//sort;
@@ -149,14 +146,6 @@ restart
 path = prepend("~/src/reinhard/ADAM/lib/M2code", path)
 load "read-cell-collective-model.m2"
 
--- for this network, had to change three files to get it to work!
-M = readCellCollective(
-    "Apoptosis_Network", 
-    "~/Downloads/_tmp_Apoptosis_Network/tt/", 
-    descriptions#"Apoptosis_Network"
-    );
-prettyPrintJSON M
-
 -- Step 0.  These three variables are needed
 maindir = "/Users/mike/src/reinhard/cell-collective-models/"
 zipfiles0 = select(readDirectory maindir, f -> match(".zip$", f))
@@ -214,12 +203,15 @@ jsonModels = "/Users/mike/src/reinhard/cell-collective-json/"
 --M = time parseModel get(jsonModels|"Apoptosis_Network"|".json")
 
 nm = names_11
+nm = names_1
 M = time parseModel get(jsonModels|nm|".json");
 length prettyPrintJSON M
 coefficientRing ring M
 time M = addPolynomials M;
-time M = removeUpdate(M, "transitionTables");
+time M = removeUpdate(M, "transitionTable");
 length prettyPrintJSON M
+(jsonModels|nm|"-poly.json") << prettyPrintJSON M << endl << close;
+M = time parseModel get(jsonModels|nm|"-poly.json");
 
 I1 = ideal polynomials M
 I2 = ideal polynomials(M, {0,1})

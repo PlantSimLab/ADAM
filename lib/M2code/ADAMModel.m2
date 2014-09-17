@@ -178,14 +178,15 @@ polyFromTransitionTable(List, List, Ring) := (inputvars, transitions, R) -> (
     n := #inputvars;
     X := set (0..p-1);
     inputs := sort toList X^**n;
-    sum for t in transitions list (
+    time result := sum for t in transitions list (
         input := t#0; -- a list
         output := t#1; -- a value
-        if output == 0 then 0_R else
-        time output * product for i from 0 to n-1 list (
+        if output == 0 then continue else
+        output * product for i from 0 to n-1 list (
             x := R_(inputvars#i);
             1 - (x-input#i)^(p-1)
-        ))
+        ));
+    if result == 0 then 0_R else result -- this is just being careful...
     )
 
 changeUpdate = method()
