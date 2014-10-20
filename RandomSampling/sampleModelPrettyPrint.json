@@ -1,0 +1,56 @@
+{
+  "model": {
+    "name": "Sample for testing",
+    "description": "most basic file to get started with JSON between adam_largeNetworks.rb and M2 solver",
+    "version": "1.0",
+    "variables": [
+      {
+        "name": "variable1",
+        "id": "x1",
+        "states": [
+          "0",
+          "1"
+        ]
+      },
+      {
+        "name": "variable2",
+        "id": "x2",
+        "states": [
+          "0",
+          "1"
+        ]
+      },
+      {
+        "name": "variable3",
+        "id": "x3",
+        "states": [
+          "0",
+          "1"
+        ]
+      }
+    ],
+    "updateRules": {
+      "x1": {
+        "possibleInputVariables": [
+          "x1",
+          "x2"
+        ],
+        "polynomialFunction": "x1*x2"
+      },
+      "x2": {
+        "possibleInputVariables": [
+          "x1",
+          "x2"
+        ],
+        "polynomialFunction": "x1+1"
+      },
+      "x3": {
+        "possibleInputVariables": [
+          "x1",
+          "x2"
+        ],
+        "polynomialFunction": "x1+x2"
+      }
+    }
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "sampling": {
+    "type": "random",
+    "description": "basic file to get started with JSON for random sampling",
+    "version": "1.0",
+    "numberofStates":3,
+    "samplingSize": 20
+  }
+}
